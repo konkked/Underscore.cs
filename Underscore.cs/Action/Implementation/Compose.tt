@@ -1,0 +1,149 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Linq;
+
+// This code has been automatically generated
+// if you want to make changes make them on 
+// the corresponding the text template file
+// Compose.tt
+namespace Underscore.Action
+{
+
+	public class ComposeComponent : IComposeComponent
+	{
+
+<#
+
+    const string argNames = "abcdefghijklmnopqrstuvwxyz";
+    var methodName = "Apply";
+
+
+    for (int i = 1; i < 17; i++)
+    {
+		var typeArgs = Enumerable.Range(1, i).Select(_ => "T").ToArray();
+        const string currTypeArgsString = "T";
+        var fnSig = string.Format("Action<{0}>", string.Join(", ",typeArgs));
+        const string retSig = "public void";
+
+        var currSigArgs = string.Format("{0} action , T[] arguments ",fnSig);
+        var applyArgs = Enumerable.Range(0, i).Select(j => "arguments[" + j + "]");
+        var callApplyString = "action( " + string.Join(" , ", applyArgs) + " ) ";
+
+
+		#>
+		
+        /// <summary>
+        /// Calls a function using the passed array of arguments
+        /// </summary>
+		<#=retSig#> <#=methodName#><<#=currTypeArgsString#>>( <#=currSigArgs#> )
+		{
+			<#=callApplyString#>;
+		}
+		
+		<#
+	}
+
+    methodName = "Call";
+	for (int i = 1; i < 17; i++)
+	{
+	    var typeArgs = Enumerable.Range(1, i).Select(j => "T" + j);
+	    var arr = typeArgs as string[] ?? typeArgs.ToArray();
+	    var memberArgs = arr.Zip(argNames, (l, r) => l + " " + r);
+        
+		typeArgs = typeArgs.ToArray();
+        var currTypeArgs = typeArgs.Take(i).ToArray();
+	    var currTypeArgsString = string.Join(", ", currTypeArgs);
+        var fnSig = string.Format("Action<{0}>", string.Join(", ",typeArgs));
+	    var argSig = string.Join(" ,", new[] {fnSig+" action"}.Concat(memberArgs));
+        const string retSig = "public void";
+
+	    var callSig = "action ( " + string.Join(", ", Enumerable.Range(0, i).Select(j => argNames[j].ToString())) + " ) ";
+		
+		#>
+		
+        /// <summary>
+        /// Calls the function passed with the given arguments as the parameters 
+        /// </summary>
+		<#=retSig#> <#=methodName#><<#=currTypeArgsString#>>( <#=argSig#> )
+		{
+			<#=callSig#>;
+		}
+		<#
+	}
+
+	methodName = "Compose";
+    const string startType = "TStart";
+    const string endType = "TEnd";
+    const string startVarName = "start";
+    const string endVarName = "end";
+    const string retvSig = "Action<TStart>";
+	for (int i = 0; i < 16; i++)
+	{
+	    string[] typeArgs;
+	    string[] currArgNames;
+
+	    switch (i)
+	    {
+	        case 0:
+	            typeArgs = new[] {startType,endType, endType};
+	            currArgNames = new[] {startVarName, endVarName};
+	            break;
+	        case 1:
+	            typeArgs = new[] {startType, "TMid",endType, endType};
+	            currArgNames = new[] {startVarName, "mid", endVarName};
+	            break;
+	        default:
+	            typeArgs =
+	                new[] {startType}.Concat(Enumerable.Range(1, i).Select(j => "TLink" + j))
+	                    .Concat(Enumerable.Range(0,2).Select(_=>endType))
+	                    .ToArray();
+	            currArgNames =
+	                new[] {startVarName}.Concat(Enumerable.Range(0, i).Select(j => argNames[j].ToString()))
+	                    .Concat(new[] {endVarName})
+	                    .ToArray();
+	            break;
+	    }
+
+	    var currArgsTypes =
+	            Enumerable.Range(1, typeArgs.Length - 1)
+	                .Select(j => j==typeArgs.Length-1 ? string.Format("Action<{0}>",typeArgs[j]) : string.Format("Func<{0},{1}>", typeArgs[j - 1], typeArgs[j]));
+	        string[] memberArgs = currArgNames.Zip(currArgsTypes, (l, r) =>r+" "+l).ToArray();
+
+	        var methodSig = string.Format("{0} {1}<{2}>({3})", retvSig, methodName, string.Join(", ", typeArgs.Take(typeArgs.Length-1)),
+	            string.Join(", ", memberArgs));
+
+	    var callSig = "seed =>"+currArgNames.Aggregate("seed",(curr, next) => next+" ( " + curr+ " ) ");
+		
+		#>
+		
+        /// <summary>
+        /// Transforms a chain of function with an ending action into a single action, 
+		/// each link in the chain will take the result from the previously invoked link
+		/// The returned action takes the parameter of the first function
+        /// </summary>
+		public <#=methodSig#>
+		{
+			return <#=callSig#>;
+		}
+		<#
+	}
+#>
+
+	    /// <summary>
+        /// Creates a composition of actions taking the same result and input parameter
+        /// </summary>
+        public Action<T> Compose<T>( params Action<T>[ ] actions )
+        {
+			if(actions == null ) return null;
+			
+            return t  => actions.Aggregate( t, ( curr, next ) => { next( curr ); return curr; } );
+        }
+
+	}
+
+}

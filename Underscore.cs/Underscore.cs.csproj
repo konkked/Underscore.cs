@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{946C4F0D-101A-46DB-8C41-C102D0947E99}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Underscore</RootNamespace>
+    <AssemblyName>Underscore.cs</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Action\Contract\Bind.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Bind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Action\Contract\Compose.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Compose.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Action\Contract\Convert.cs" />
+    <Compile Include="Action\Contract\Partial.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Partial.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Action\Contract\Synch.cs" />
+    <Compile Include="Action\Contract\Split.cs" />
+    <Compile Include="Action\Implementation\Bind.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Bind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Action\Implementation\Compose.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Compose.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Action\Implementation\Convert.cs" />
+    <Compile Include="Action\Implementation\Partial.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Partial.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Action\Implementation\Synch.cs" />
+    <Compile Include="Action\Implementation\Split.cs" />
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Collection\Contract\Creation.cs" />
+    <Compile Include="Collection\Contract\Partition.cs" />
+    <Compile Include="Collection\Implementation\Creation.cs" />
+    <Compile Include="Collection\Implementation\Partition.cs" />
+    <Compile Include="Function\Contract\Bind.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Bind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Function\Contract\Cache.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cache.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Function\Contract\Compose.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Compose.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Function\Contract\Convert.cs" />
+    <Compile Include="Function\Contract\Partial.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Partial.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Function\Contract\Synch.cs" />
+    <Compile Include="Function\Contract\Split.cs" />
+    <Compile Include="Function\Implementation\Bind.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Bind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Function\Implementation\Cache.cs" />
+    <Compile Include="Function\Implementation\Compose.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Compose.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Function\Implementation\Convert.cs" />
+    <Compile Include="Function\Implementation\Partial.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Partial.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Function\Implementation\Synch.cs" />
+    <Compile Include="Function\Implementation\Split.cs" />
+    <Compile Include="Setup\Action.cs" />
+    <Compile Include="Setup\Collection.cs" />
+    <Compile Include="Setup\Kernel.cs" />
+    <Compile Include="Setup\Function.cs" />
+    <Compile Include="Setup\IKernelModule.cs" />
+    <Compile Include="Setup\List.cs" />
+    <Compile Include="Setup\Object.cs" />
+    <Compile Include="Setup\Utility.cs" />
+    <Compile Include="List\Contract\Delegate.cs" />
+    <Compile Include="List\Contract\Manipulate.cs" />
+    <Compile Include="List\Contract\Partition.cs" />
+    <Compile Include="List\Implementation\Delegate.cs" />
+    <Compile Include="List\Implementation\Manipulate.cs" />
+    <Compile Include="List\Implementation\Partition.cs" />
+    <Compile Include="Module\Action.cs" />
+    <Compile Include="Module\Collection.cs" />
+    <Compile Include="Module\Function.cs" />
+    <Compile Include="Module\List.cs" />
+    <Compile Include="Module\Object.cs" />
+    <Compile Include="Module\Utility.cs" />
+    <Compile Include="Object\Reflection\Contract\Field.cs" />
+    <Compile Include="Object\Reflection\Contract\Method.cs" />
+    <Compile Include="Object\Reflection\Contract\Property.cs" />
+    <Compile Include="Object\Reflection\Implementation\Field.cs" />
+    <Compile Include="Object\Reflection\Implementation\Method.cs" />
+    <Compile Include="Object\Reflection\Implementation\Property.cs" />
+    <Compile Include="Object\Reflection\Members.cs" />
+    <Compile Include="Object\Reflection\MethodBase.cs" />
+    <Compile Include="Object\Transformation\Contract\TransposeComponent.cs" />
+    <Compile Include="Object\Transformation\Implementation\TransposeComponent.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Underscore.cs" />
+    <Compile Include="Utility\Contract\Function.cs" />
+    <Compile Include="Utility\Contract\Math.cs" />
+    <Compile Include="Utility\Contract\Object.cs" />
+    <Compile Include="Utility\Implementation\Function.cs" />
+    <Compile Include="Utility\Implementation\Math.cs" />
+    <Compile Include="Utility\Implementation\Object.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Action\Contract\Bind.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Bind.cs</LastGenOutput>
+    </None>
+    <None Include="Action\Contract\Compose.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Compose.cs</LastGenOutput>
+    </None>
+    <None Include="Action\Contract\Partial.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Partial.cs</LastGenOutput>
+    </None>
+    <None Include="Action\Implementation\Bind.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Bind.cs</LastGenOutput>
+    </None>
+    <None Include="Action\Implementation\Compose.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Compose.cs</LastGenOutput>
+    </None>
+    <None Include="Action\Implementation\Partial.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Partial.cs</LastGenOutput>
+    </None>
+    <None Include="Function\Contract\Bind.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Bind.cs</LastGenOutput>
+    </None>
+    <None Include="Function\Contract\Cache.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Cache.cs</LastGenOutput>
+    </None>
+    <None Include="Function\Contract\Compose.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Compose.cs</LastGenOutput>
+    </None>
+    <None Include="Function\Contract\Partial.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Partial.cs</LastGenOutput>
+    </None>
+    <None Include="Function\Implementation\Bind.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Bind.cs</LastGenOutput>
+    </None>
+    <None Include="Function\Implementation\Compose.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Compose.cs</LastGenOutput>
+    </None>
+    <None Include="Function\Implementation\Partial.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Partial.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
