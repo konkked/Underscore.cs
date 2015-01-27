@@ -87,7 +87,7 @@ Utility
 
 Contains the functionality I couldn't quite pin into a section easily.
 
-Here is a simple example of a time I have used the lib myself.
+Here is a simple example of using the libraries list chunking and random
 
 
 ```cs
