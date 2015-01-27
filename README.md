@@ -29,7 +29,7 @@ Object
 Utility
 -------
 ```cs
-            _chainOCommand = _approvers.Zip(
+            var chainOCommand = _approvers.Zip(
                 _.List.Chunk(_preparers,
                     _.Utility.Random(2, 3)
                     ),

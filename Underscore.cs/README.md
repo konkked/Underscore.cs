@@ -27,18 +27,20 @@ Object
 Utility
 -------
 ```cs
-            _chainOCommand = _approvers.Zip(
-                _.List.Chunk(_preparers,
-                    _.Utility.Random(2, 3)
+            var chainOCommand = _approvers.Zip(
+
+                    _.List.Chunk( _preparers,
+                        _.Utility.Random(2, 3)
                     ),
-                (approver, prepers) => new
-                {
-                    Approver = approver,
-                    Preparers = prepers
-                })
-                .ToDictionary(
-                    a => a.Approver, 
-                    a => a.Preparers
-             );
+
+                    (approver, prepers) => new {
+                        Approver = approver,
+                        Preparers = prepers
+                    })
+
+                    .ToDictionary(
+                        a => a.Approver, 
+                        a => a.Preparers
+                 );
 ```
 If you have any questions or suggestions they would be greatly apperciated 
