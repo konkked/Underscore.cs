@@ -9,9 +9,6 @@ namespace Underscore.Action
         /// Creates a new Debounced version of the passed action, which will delay its execution 
         /// until after the wait period has elapsed since the last call 
         /// </summary>
-        /// <param name="action">The action to debounce</param>
-        /// <param name="milliseconds">The action to debounce</param>
-        /// <returns></returns>
         Func<Task> Debounce( System.Action action, int milliseconds );
 
 

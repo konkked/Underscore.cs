@@ -18,7 +18,6 @@ namespace Underscore.Function
 
         /// <summary>
         /// Returns a debounced version of the passed function
-        /// string of calls
         /// </summary>
         public Func<Task<TResult>> Debounce<TResult>( Func<TResult> function, int milliseconds)
         {
@@ -244,7 +243,6 @@ namespace Underscore.Function
         {
             Task running  = null;
 
-            object lockingon = new object( );
 
 
             int settingUp = 0;
@@ -319,7 +317,6 @@ namespace Underscore.Function
         {
             Task running  = null;
 
-            object lockingon = new object( );
 
 
             int settingUp = 0;
@@ -1953,8 +1950,10 @@ namespace Underscore.Function
         }
 
 
-        
-        ///
+        /// <summary>
+        ///  Creates a version of the function that only runs once, 
+        ///  all subsequent runs will return the same value
+        /// </summary>
         public Func<TResult> Once<TResult>( Func<TResult> function )
         {
             int ran = 0;
@@ -2254,17 +2253,20 @@ namespace Underscore.Function
                 return result;
             };
         }
+        
         /**End Once**/
 
         /*Start After*/
 
         /// <summary>
+        /// 
         /// Returns a version of the passed function 
         /// that only invokes after being called 
         /// a certain number of times.
         /// 
         /// All previous calls will receive 
         /// the first invocation results
+        /// 
         /// </summary>
         public Func<Task<TResult>> After<TResult>( int count, Func<TResult> function)
         {
