@@ -34,10 +34,6 @@ namespace Underscore.Collection
         /// <summary>
         /// Breaks the collection into smaller chunks
         /// </summary>
-        /// <typeparam name="T">Type of Items in collection</typeparam>
-        /// <param name="collection">collection to be chunked</param>
-        /// <param name="size">size of the chunk</param>
-        /// <returns>An enumerable containing the chunked collections, will be size of passed variable, last is remainder of items not divided evenly</returns>
         public IEnumerable<IEnumerable<T>> Chunk<T>( IEnumerable<T> collection, int size )
         {
 
@@ -47,6 +43,7 @@ namespace Underscore.Collection
             {
                 while ( shouldContinue )
                 {
+                    //iteration of the enumerable is done in segment
                     var result = Segment( iter, size, out shouldContinue );
                     
                     if ( shouldContinue || result != null )
@@ -114,10 +111,6 @@ namespace Underscore.Collection
         /// <summary>
         /// Breaks collection into two seperate parts
         /// </summary>
-        /// <typeparam name="T">Type of items in collection</typeparam>
-        /// <param name="collection">collection to partition</param>
-        /// <param name="on">the index to partition on</param>
-        /// <returns>a Tuple containing the first partition in the first item, second partition in the second</returns>
         public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IEnumerable<T> collection, int on )
         {
             bool shouldContinue=true;
@@ -159,10 +152,6 @@ namespace Underscore.Collection
         /// <summary>
         /// Breaks collection into two seperate parts
         /// </summary>
-        /// <typeparam name="T">Type of items in collection</typeparam>
-        /// <param name="collection">collection to partition</param>
-        /// <param name="on">the condition to partition</param>
-        /// <returns>a Tuple containing the first partition in the first item, second partition in the second, the element partitioned will be the first element of the second partition </returns>
         public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IEnumerable<T> collection, Func<T, bool> on )
         {
             bool shouldContinue=true;
