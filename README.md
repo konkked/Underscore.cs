@@ -118,7 +118,7 @@ When I get a chance will open up the issue myself but basically having issues wi
 functionality, mainly because I opted to make the synchronization lockless
 
 
-Available on Nuget, can be installed with the following command
+NuGet Package is also available
 
 ```powershell
 Install-Package Underscore.cs
