@@ -111,4 +111,17 @@ And there is a setup section, where I implemented a very minimalist IoC Containe
 because I wanted to aviod having any outside dependencies, while still keeping the 
 code as well segemented as I could.
 
+Current Issues
+---------------
+
+When I get a chance will open up the issue myself but basically having issues with the debounce and other 
+functionality, mainly because I opted to make the synchronization lockless
+
+
+Available on Nuget, can be installed with the following command
+
+```powershell
+Install-Package Underscore.cs
+``` 
+
 If you have any questions or suggestions they would be greatly appreciated 
