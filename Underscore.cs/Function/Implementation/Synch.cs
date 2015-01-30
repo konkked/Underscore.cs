@@ -656,8 +656,7 @@ namespace Underscore.Function
 
                         if (delaying != null)
                             await delaying;
-                        else
-                            Console.WriteLine("Delaying is null");
+                        
 
                         // at this point the delay is done, we are cleaning up
                         Interlocked.CompareExchange(ref cleaningUp, 1, 0);
@@ -842,8 +841,7 @@ namespace Underscore.Function
 
                         if (delaying != null)
                             await delaying;
-                        else
-                            Console.WriteLine("Delaying is null");
+                        
 
                         // at this point the delay is done, we are cleaning up
                         Interlocked.CompareExchange(ref cleaningUp, 1, 0);
@@ -1027,8 +1025,7 @@ namespace Underscore.Function
 
                         if (delaying != null)
                             await delaying;
-                        else
-                            Console.WriteLine("Delaying is null");
+                        
 
                         // at this point the delay is done, we are cleaning up
                         Interlocked.CompareExchange(ref cleaningUp, 1, 0);
@@ -1214,8 +1211,7 @@ namespace Underscore.Function
 
                         if (delaying != null)
                             await delaying;
-                        else
-                            Console.WriteLine("Delaying is null");
+                        
 
                         // at this point the delay is done, we are cleaning up
                         Interlocked.CompareExchange(ref cleaningUp, 1, 0);
@@ -1402,8 +1398,7 @@ namespace Underscore.Function
 
                         if (delaying != null)
                             await delaying;
-                        else
-                            Console.WriteLine("Delaying is null");
+                        
 
                         // at this point the delay is done, we are cleaning up
                         Interlocked.CompareExchange(ref cleaningUp, 1, 0);
@@ -1591,8 +1586,7 @@ namespace Underscore.Function
 
                         if (delaying != null)
                             await delaying;
-                        else
-                            Console.WriteLine("Delaying is null");
+                        
 
                         // at this point the delay is done, we are cleaning up
                         Interlocked.CompareExchange(ref cleaningUp, 1, 0);
@@ -1781,8 +1775,6 @@ namespace Underscore.Function
 
                         if (delaying != null)
                             await delaying;
-                        else
-                            Console.WriteLine("Delaying is null");
 
                         // at this point the delay is done, we are cleaning up
                         Interlocked.CompareExchange(ref cleaningUp, 1, 0);
