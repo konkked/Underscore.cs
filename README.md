@@ -119,5 +119,3 @@ Solution is available as a NuGet package
 ```powershell
 Install-Package Underscore.cs
 ``` 
-
-If you have any questions or suggestions they would be greatly appreciated 
