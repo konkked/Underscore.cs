@@ -108,17 +108,13 @@ Here is a simple example of using the libraries list chunking and random
 
 
 And there is a setup section, where I implemented a very minimalist IoC Container
-because I wanted to aviod having any outside dependencies, while still keeping the 
-code as well segemented as I could.
+because I wanted to avoid having any outside dependencies, while still keeping the 
+code as well segmented as I could.
 
-Current Issues
----------------
+How to Install
+--------------
 
-When I get a chance will open up the issue myself but basically having issues with the debounce and other 
-functionality, mainly because I opted to make the synchronization lockless
-
-
-NuGet Package is also available
+Solution is available as a NuGet package
 
 ```powershell
 Install-Package Underscore.cs
