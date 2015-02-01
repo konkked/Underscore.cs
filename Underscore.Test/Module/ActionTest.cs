@@ -1,5 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Underscore.Action;
+using Underscore.Function;
+using BindingComponent = Underscore.Action.BindingComponent;
+using ComposeComponent = Underscore.Action.ComposeComponent;
+using ConvertComponent = Underscore.Action.ConvertComponent;
+using PartialComponent = Underscore.Action.PartialComponent;
+using SplitComponent = Underscore.Action.SplitComponent;
+using SynchComponent = Underscore.Action.SynchComponent;
 
 namespace Underscore.Test.Module
 {
@@ -14,7 +20,7 @@ namespace Underscore.Test.Module
             var split = new SplitComponent();
             var compose = new ComposeComponent();
 
-            var fnBind = new global::Underscore.Function.SynchComponent();
+            var fnBind = new global::Underscore.Function.SynchComponent( new CompactComponent(), new Underscore.Utility.CompactComponent());
             var fnSynch = new global::Underscore.Function.ConvertComponent();
             var actionCvt = new ConvertComponent();
 

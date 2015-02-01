@@ -1,0 +1,70 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Underscore.Function
+{
+    public interface ICompactComponent
+    {
+	
+<#
+
+    var argNames = "abcdefghijklmnopqrstuvwxyz";
+    var typeArgs = Enumerable.Range(1, 16).Select(i => "T" + i).ToArray();
+    var resultTypeArg = "TResult";
+
+
+    for (int i = 2; i < 17; i++)
+    {
+        var currTypeArgs = typeArgs.Take(i).ToArray();
+        var currTypeArgsString = string.Join(", ", currTypeArgs.Concat(new[] {resultTypeArg}));
+        var argSig = string.Format("Func<{0}> function", currTypeArgsString);
+        string retSig;
+        if (i < 8)
+        {
+            retSig = string.Format("Func<{0}>",
+                string.Join(", ",
+                    string.Format("Tuple<{0}>", string.Join(" , ", currTypeArgs)),
+                    resultTypeArg
+                    )
+                );
+
+
+        }
+        else
+        {
+            var chunkIndexMax = ( i/4 )+1;
+            retSig =
+				string.Format("Func<Tuple<{0}>, TResult>",
+					string.Join(", ",
+						Enumerable
+							.Range(0, chunkIndexMax-1)
+							.Select(idx => currTypeArgs.Skip(idx*4).Take(4).ToArray())
+							.Select(vals=>string.Format("Tuple<{0}>",String.Join(", ",vals)))
+							.Concat(currTypeArgs.Skip(4*(chunkIndexMax-1))
+					)
+				));
+
+        }
+
+		#>
+		
+		/// <summary>
+        ///  Creates a new Function with the parameters packed into a single object
+        /// </summary>
+		<#=retSig#> Pack<<#=currTypeArgsString #>>( <#=argSig#> );
+		
+		<#
+    }
+#>
+
+    }
+}

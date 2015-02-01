@@ -17,7 +17,7 @@ namespace Underscore.Action
 
         public Func<T1, object> ToFunction<T1>(Action<T1> action)
         {
-            return (a) =>
+            return a =>
             {
                 action(a);
                 return null;

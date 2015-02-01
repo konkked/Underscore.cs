@@ -34,7 +34,8 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>underscorecsskn.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -62,7 +63,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Partial.tt</DependentUpon>
     </Compile>
-    <Compile Include="Action\Contract\Synch.cs" />
+    <Compile Include="Action\Contract\Synch.cs">
+      <DependentUpon>Synch.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Action\Contract\Split.cs" />
     <Compile Include="Action\Implementation\Bind.cs">
       <AutoGen>True</AutoGen>
@@ -97,6 +102,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Cache.tt</DependentUpon>
     </Compile>
+    <Compile Include="Function\Contract\Compact.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Compact.tt</DependentUpon>
+    </Compile>
     <Compile Include="Function\Contract\Compose.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -108,7 +118,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Partial.tt</DependentUpon>
     </Compile>
-    <Compile Include="Function\Contract\Synch.cs" />
+    <Compile Include="Function\Contract\Synch.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Synch.tt</DependentUpon>
+    </Compile>
     <Compile Include="Function\Contract\Split.cs" />
     <Compile Include="Function\Implementation\Bind.cs">
       <AutoGen>True</AutoGen>
@@ -116,6 +130,11 @@
       <DependentUpon>Bind.tt</DependentUpon>
     </Compile>
     <Compile Include="Function\Implementation\Cache.cs" />
+    <Compile Include="Function\Implementation\Compact.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Compact.tt</DependentUpon>
+    </Compile>
     <Compile Include="Function\Implementation\Compose.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -127,13 +146,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Partial.tt</DependentUpon>
     </Compile>
-    <Compile Include="Function\Implementation\Synch.cs" />
+    <Compile Include="Function\Implementation\Synch.cs">
+      <DependentUpon>Synch.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Function\Implementation\Split.cs" />
     <Compile Include="Setup\Action.cs" />
     <Compile Include="Setup\Collection.cs" />
-    <Compile Include="Setup\Kernel.cs" />
+    <Compile Include="Setup\Liteioc\Kernel.cs" />
     <Compile Include="Setup\Function.cs" />
-    <Compile Include="Setup\IKernelModule.cs" />
+    <Compile Include="Setup\Liteioc\IKernelModule.cs" />
     <Compile Include="Setup\List.cs" />
     <Compile Include="Setup\Object.cs" />
     <Compile Include="Setup\Utility.cs" />
@@ -161,6 +184,16 @@
     <Compile Include="Object\Transformation\Implementation\TransposeComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Underscore.cs" />
+    <Compile Include="Utility\Contract\Compact.cs">
+      <DependentUpon>Compact.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Utility\Implementation\Compact.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Compact.tt</DependentUpon>
+    </Compile>
     <Compile Include="Utility\Contract\Function.cs" />
     <Compile Include="Utility\Contract\Math.cs" />
     <Compile Include="Utility\Contract\Object.cs" />
@@ -180,6 +213,10 @@
     <None Include="Action\Contract\Partial.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Partial.cs</LastGenOutput>
+    </None>
+    <None Include="Action\Contract\Synch.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Synch.cs</LastGenOutput>
     </None>
     <None Include="Action\Implementation\Bind.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -201,6 +238,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Cache.cs</LastGenOutput>
     </None>
+    <None Include="Function\Contract\Compact.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Compact.cs</LastGenOutput>
+    </None>
     <None Include="Function\Contract\Compose.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Compose.cs</LastGenOutput>
@@ -209,9 +250,17 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Partial.cs</LastGenOutput>
     </None>
+    <None Include="Function\Contract\Synch.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Synch.cs</LastGenOutput>
+    </None>
     <None Include="Function\Implementation\Bind.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Bind.cs</LastGenOutput>
+    </None>
+    <None Include="Function\Implementation\Compact.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Compact.cs</LastGenOutput>
     </None>
     <None Include="Function\Implementation\Compose.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -221,7 +270,18 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Partial.cs</LastGenOutput>
     </None>
-    <None Include="underscorecsskn.snk" />
+    <None Include="Function\Implementation\Synch.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Synch.cs</LastGenOutput>
+    </None>
+    <None Include="Utility\Contract\Compact.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Compact.cs</LastGenOutput>
+    </None>
+    <None Include="Utility\Implementation\Compact.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Compact.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

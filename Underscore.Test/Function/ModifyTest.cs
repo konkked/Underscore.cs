@@ -13,7 +13,7 @@ namespace Underscore.Test.Function
     [TestClass]
     public class ModifyTest
     {
-        public ISynchComponent ModifyComponent( ) { return new SynchComponent( ); }
+        public ISynchComponent ModifyComponent( ) { return new SynchComponent( new CompactComponent(), new Underscore.Utility.CompactComponent() ); }
 
         //TODO: Reimplement Debounce Test
         //Realized that the current implementation is flawed
@@ -211,7 +211,7 @@ namespace Underscore.Test.Function
 
             var testing = ModifyComponent( );
             var timer = new Stopwatch( );
-            int waiting = 500;
+            int waiting = 200;
 
             int cnt = 1;
 
@@ -346,7 +346,7 @@ namespace Underscore.Test.Function
         {
             var testing = ModifyComponent();
             var timer = new Stopwatch();
-            int waiting = 500;
+            const int waiting = 200;
 
             int cnt = 1;
 
@@ -1166,7 +1166,7 @@ namespace Underscore.Test.Function
 
                 int counter = 0;
                 var timer = new Stopwatch( );
-                var aftered = testing.After( 3, ( ) => ( counter++ ).ToString( ) );
+                var aftered = testing.After( ( ) => ( counter++ ).ToString( ),3 );
 
                 List<Task<string>> results = new List<Task<string>>( );
 
@@ -1215,7 +1215,7 @@ namespace Underscore.Test.Function
                     
                 } );
 
-                var aftered = testing.After( paramValue, aftering );
+                var aftered = testing.After( aftering , paramValue);
 
                 for ( int i=0 ; i < repeatCount ; i++ )
                 {
@@ -1258,7 +1258,7 @@ namespace Underscore.Test.Function
 
                 } );
 
-                var aftered = testing.After( paramValue, aftering );
+                var aftered = testing.After( aftering , paramValue);
 
                 for ( int i=0 ; i < repeatCount ; i++ )
                 {
@@ -1300,7 +1300,7 @@ namespace Underscore.Test.Function
 
                 } );
 
-                var aftered = testing.After( paramValue, aftering );
+                var aftered = testing.After( aftering , paramValue);
 
                 for ( int i=0 ; i < repeatCount ; i++ )
                 {
@@ -1343,7 +1343,7 @@ namespace Underscore.Test.Function
 
                 } );
 
-                var aftered = testing.After( paramValue, aftering );
+                var aftered = testing.After( aftering , paramValue);
 
                 for ( int i=0 ; i < repeatCount ; i++ )
                 {
@@ -1386,7 +1386,7 @@ namespace Underscore.Test.Function
 
                 } );
 
-                var aftered = testing.After( paramValue, aftering );
+                var aftered = testing.After( aftering , paramValue);
 
                 for ( int i=0 ; i < repeatCount ; i++ )
                 {
@@ -1429,7 +1429,7 @@ namespace Underscore.Test.Function
 
                 } );
 
-                var aftered = testing.After( paramValue, aftering );
+                var aftered = testing.After( aftering , paramValue);
 
                 for ( int i=0 ; i < repeatCount ; i++ )
                 {
@@ -1472,7 +1472,7 @@ namespace Underscore.Test.Function
 
                 } );
 
-                var aftered = testing.After( paramValue, aftering );
+                var aftered = testing.After( aftering , paramValue);
 
                 for ( int i=0 ; i < repeatCount ; i++ )
                 {
@@ -1517,7 +1517,7 @@ namespace Underscore.Test.Function
 
                 } );
 
-                var aftered = testing.After( paramValue, aftering );
+                var aftered = testing.After( aftering , paramValue);
 
                 for ( int i=0 ; i < repeatCount ; i++ )
                 {
@@ -1559,7 +1559,7 @@ namespace Underscore.Test.Function
 
                 } );
 
-                var aftered = testing.After( paramValue, aftering );
+                var aftered = testing.After( aftering , paramValue);
 
                 for ( int i=0 ; i < repeatCount ; i++ )
                 {
@@ -1602,7 +1602,7 @@ namespace Underscore.Test.Function
 
                 } );
 
-                var aftered = testing.After( paramValue, aftering );
+                var aftered = testing.After( aftering , paramValue);
 
                 for ( int i=0 ; i < repeatCount ; i++ )
                 {
@@ -1644,7 +1644,7 @@ namespace Underscore.Test.Function
 
                 } );
 
-                var aftered = testing.After( paramValue, aftering );
+                var aftered = testing.After( aftering , paramValue);
 
                 for ( int i=0 ; i < repeatCount ; i++ )
                 {
@@ -1687,7 +1687,7 @@ namespace Underscore.Test.Function
 
                 } );
 
-                var aftered = testing.After( paramValue, aftering );
+                var aftered = testing.After( aftering , paramValue);
 
                 for ( int i=0 ; i < repeatCount ; i++ )
                 {
@@ -1730,7 +1730,7 @@ namespace Underscore.Test.Function
 
                 } );
 
-                var aftered = testing.After( paramValue, aftering );
+                var aftered = testing.After( aftering , paramValue);
 
                 for ( int i=0 ; i < repeatCount ; i++ )
                 {
@@ -1774,7 +1774,7 @@ namespace Underscore.Test.Function
 
                 } );
 
-                var aftered = testing.After( paramValue, aftering );
+                var aftered = testing.After( aftering , paramValue);
 
                 for ( int i=0 ; i < repeatCount ; i++ )
                 {
@@ -1818,7 +1818,7 @@ namespace Underscore.Test.Function
 
                 } );
 
-                var aftered = testing.After( paramValue, aftering );
+                var aftered = testing.After( aftering , paramValue);
 
                 for ( int i=0 ; i < repeatCount ; i++ )
                 {
@@ -1861,7 +1861,7 @@ namespace Underscore.Test.Function
             {
 
                 int counter = 0;
-                var befored = testing.Before( 2, () =>(counter++));
+                var befored = testing.Before( () =>(counter++), 2);
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual( i, befored( ));
 
@@ -1882,7 +1882,7 @@ namespace Underscore.Test.Function
                     return string.Join( "", a, b, counter++ );
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual("ab"+i, fn.Apply( befored, arguments ));
@@ -1907,7 +1907,7 @@ namespace Underscore.Test.Function
                     return string.Join( "", a, b,c, counter++ );
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual( "abc" + i, fn.Apply( befored, arguments ) );
@@ -1932,7 +1932,7 @@ namespace Underscore.Test.Function
                     return string.Join( "", a, b, c, d,counter++ );
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual( "abcd" + i, fn.Apply( befored, arguments ) );
@@ -1957,7 +1957,7 @@ namespace Underscore.Test.Function
                     return string.Join( "", a, b, c,d,e, counter++ );
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual( "abcde" + i, fn.Apply( befored, arguments ) );
@@ -1982,7 +1982,7 @@ namespace Underscore.Test.Function
                     return string.Join( "", a, b, c,d,e,f, counter++ );
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual( "abcdef" + i, fn.Apply( befored, arguments ) );
@@ -2007,7 +2007,7 @@ namespace Underscore.Test.Function
                     return string.Join( "", a, b, c,d,e,f,g, counter++ );
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual( "abcdefg" + i, fn.Apply( befored, arguments ) );
@@ -2032,7 +2032,7 @@ namespace Underscore.Test.Function
                     return string.Join( "", a, b, c, d, e, f, g, counter++ );
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual( "abcdefg" + i, fn.Apply( befored, arguments ) );
@@ -2057,7 +2057,7 @@ namespace Underscore.Test.Function
                     return string.Join( "", a, b, c, d, e, f, g,h, counter++ );
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual( "abcdefgh" + i, fn.Apply( befored, arguments ) );
@@ -2082,7 +2082,7 @@ namespace Underscore.Test.Function
                     return string.Join( "", a, b, c, d, e, f, g, h, i, counter++ );
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual( "abcdefghi" + i, fn.Apply( befored, arguments ) );
@@ -2107,7 +2107,7 @@ namespace Underscore.Test.Function
                     return string.Join( "", a, b, c, d, e, f, g, h, i,j, counter++ );
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual( "abcdefghij" + i, fn.Apply( befored, arguments ) );
@@ -2132,7 +2132,7 @@ namespace Underscore.Test.Function
                     return string.Join( "", a, b, c, d, e, f, g, h, i, j,k, counter++ );
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual( "abcdefghijk" + i, fn.Apply( befored, arguments ) );
@@ -2157,7 +2157,7 @@ namespace Underscore.Test.Function
                     return string.Join( "", a, b, c, d, e, f, g, h, i, j, k,l, counter++ );
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual( "abcdefghijkl" + i, fn.Apply( befored, arguments ) );
@@ -2182,7 +2182,7 @@ namespace Underscore.Test.Function
                     return string.Join( "", a, b, c, d, e, f, g, h, i, j, k, l, m, counter++ );
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual( "abcdefghijklm" + i, fn.Apply( befored, arguments ) );
@@ -2207,7 +2207,7 @@ namespace Underscore.Test.Function
                     return string.Join( "", a, b, c, d, e, f, g, h, i, j, k, l, m, n , counter++ );
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual( "abcdefghijklmn" + i, fn.Apply( befored, arguments ) );
@@ -2232,7 +2232,7 @@ namespace Underscore.Test.Function
                     return string.Join( "", a, b, c, d, e, f, g, h, i, j, k, l, m, n ,o, counter++ );
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual( "abcdefghijklmno" + i, fn.Apply( befored, arguments ) );
@@ -2257,7 +2257,7 @@ namespace Underscore.Test.Function
                     return string.Join( "", a, b, c, d, e, f, g, h, i, j, k, l, m,n,o, p,counter++ );
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual( "abcdefghijklmnop" + i, fn.Apply( befored, arguments ) );
@@ -2282,7 +2282,7 @@ namespace Underscore.Test.Function
                     return string.Join( "", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o,p, counter++ );
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 2 ; i++ )
                     Assert.AreEqual( "abcdefghijklmnop" + i, fn.Apply( befored, arguments ) );

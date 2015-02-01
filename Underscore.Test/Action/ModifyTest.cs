@@ -14,7 +14,7 @@ namespace Underscore.Test.Action
     [TestClass]
     public class ModifyTest
     {
-        public ISynchComponent ManipulateDummy( ) { return new global::Underscore.Action.SynchComponent(new SynchComponent(), new ConvertComponent(), new global::Underscore.Function.ConvertComponent()); }
+        public ISynchComponent ManipulateDummy( ) { return new global::Underscore.Action.SynchComponent(new SynchComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()), new ConvertComponent(), new global::Underscore.Function.ConvertComponent()); }
 
         [TestMethod]
         public async Task ActionDebounce( )
@@ -25,7 +25,6 @@ namespace Underscore.Test.Action
              */
             var testing = ManipulateDummy( );
             var flag = false;
-            var locking = new object( );
 
             var callcount = 0;
 
@@ -1294,7 +1293,7 @@ namespace Underscore.Test.Action
                 string result = "";
                 int counter = 0;
                 var timer = new Stopwatch();
-                var aftered = testing.After(3, () => result = (counter++).ToString());
+                var aftered = testing.After(() => result = (counter++).ToString(), 3);
 
                 var tasks = new Task[10];
                 for (int i = 0; i < 10; i++)
@@ -1320,7 +1319,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var aftered = testing.After(3, aftering );
+                var aftered = testing.After( aftering ,3);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     arr[i] = fn.Apply( aftered, arguments );
@@ -1351,7 +1350,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var aftered = testing.After(3, aftering );
+                var aftered = testing.After( aftering ,3);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
@@ -1380,7 +1379,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var aftered = testing.After(3, aftering );
+                var aftered = testing.After( aftering ,3);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
@@ -1409,7 +1408,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var aftered = testing.After(3, aftering );
+                var aftered = testing.After( aftering ,3);
 
 
                 for ( int i=0 ; i < 4 ; i++ )
@@ -1438,7 +1437,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var aftered = testing.After(3, aftering );
+                var aftered = testing.After( aftering ,3);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
@@ -1467,7 +1466,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var aftered = testing.After(3, aftering );
+                var aftered = testing.After( aftering ,3);
 
 
                 for ( int i=0 ; i < 4 ; i++ )
@@ -1497,7 +1496,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var aftered = testing.After(3, aftering );
+                var aftered = testing.After( aftering ,3);
 
 
                 for ( int i=0 ; i < 4 ; i++ )
@@ -1527,7 +1526,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var aftered = testing.After(3, aftering );
+                var aftered = testing.After( aftering ,3);
 
 
                 for ( int i=0 ; i < 4 ; i++ )
@@ -1556,7 +1555,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var aftered = testing.After(3, aftering );
+                var aftered = testing.After( aftering ,3);
 
 
                 for ( int i=0 ; i < 4 ; i++ )
@@ -1586,7 +1585,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var aftered = testing.After(3, aftering );
+                var aftered = testing.After( aftering ,3);
 
 
                 for ( int i=0 ; i < 4 ; i++ )
@@ -1616,7 +1615,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var aftered = testing.After(3, aftering );
+                var aftered = testing.After( aftering ,3);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
@@ -1645,7 +1644,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var aftered = testing.After(3, aftering );
+                var aftered = testing.After( aftering ,3);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
@@ -1673,7 +1672,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var aftered = testing.After(3, aftering );
+                var aftered = testing.After( aftering ,3);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
@@ -1702,7 +1701,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var aftered = testing.After(3, aftering );
+                var aftered = testing.After( aftering ,3);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
@@ -1731,7 +1730,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var aftered = testing.After(3, aftering );
+                var aftered = testing.After( aftering ,3);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
@@ -1764,7 +1763,7 @@ namespace Underscore.Test.Action
                 string result = "";
                 int counter = 0;
                 var timer = new Stopwatch( );
-                var befored = testing.Before( 2, ( ) => result = ( counter++ ).ToString( ) );
+                var befored = testing.Before( ( ) => result = ( counter++ ).ToString( ) , 2);
                 for ( int i=0 ; i < 10 ; i++ )
                     befored( );
 
@@ -1786,7 +1785,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 4 ;i++ )
                     fn.Apply( befored, arguments );
@@ -1813,7 +1812,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
@@ -1840,7 +1839,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
@@ -1868,7 +1867,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
 
                 for ( int i=0 ; i < 4 ; i++ )
@@ -1896,7 +1895,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
                 
                 for ( int i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
@@ -1924,7 +1923,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
@@ -1952,7 +1951,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
@@ -1980,7 +1979,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
 
 
@@ -2008,7 +2007,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
 
                 for ( int i=0 ; i < 4 ; i++ )
@@ -2037,7 +2036,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
 
                 for ( int i=0 ; i < 4 ; i++ )
@@ -2066,7 +2065,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
@@ -2094,7 +2093,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
@@ -2121,7 +2120,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
@@ -2148,7 +2147,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
@@ -2175,7 +2174,7 @@ namespace Underscore.Test.Action
                     invoked = true;
                 } );
 
-                var befored = testing.Before( 2, beforing );
+                var befored = testing.Before( beforing , 2);
 
                 for ( int i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );

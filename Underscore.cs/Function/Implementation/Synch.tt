@@ -1,0 +1,794 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Threading.Tasks;
+using System.Threading;
+<#
+    const string className = "SynchComponent";
+#>
+namespace Underscore.Function
+{
+    public class <#=className#>: I<#=className#>
+    {
+	
+<#
+
+    var dependencies = new[]
+    {
+        new
+        {
+            Type = "ICompactComponent",
+            Name = "fnCompact",
+            TransformCall = "Pack"
+        },
+        new
+        {
+            Type = "Utility.ICompactComponent",
+            Name = "utilCompact",
+            TransformCall = "Pack"
+        }
+
+    };
+
+	
+    const string dependencyDecSigTemplate = @"
+		private readonly {0} _{1};";
+
+    string dependencyDec = string.Join("",
+        dependencies.Select(a => string.Format(dependencyDecSigTemplate, a.Type, a.Name)));
+	#>
+<#=dependencyDec#>
+	<#
+
+    const string assignDependencyTemplate = @"
+		_{0} = {0};
+	";
+
+	var dependencyAssignStmt = string.Join("",
+        dependencies.Select(a => string.Format(assignDependencyTemplate, a.Name)));
+
+    var ctorArgSig = string.Join(", ", 
+		dependencies.Select(a => a.Type+" "+a.Name)
+	);
+
+    const string ctorDecSigTemplate = @"
+		public {0}( {1} )
+		{{
+			{2}	
+		}}
+	";
+
+    var ctor = string.Format(ctorDecSigTemplate, className, ctorArgSig, dependencyAssignStmt);
+
+#>
+<#=ctor#>
+<#
+
+    var fnCompact = dependencies[0];
+    var utilCompact = dependencies[1];
+
+	var none = new[]
+    {
+		new
+		{
+			TargetType = "int",
+			Name = "count",
+			Optional = false,
+			Default = string.Empty
+		}
+	};
+
+    none[0] = null;
+ 
+    var scaffolding =
+        new[]
+        {
+            new
+            {
+                Name = "After",
+				Comments=@"
+        /// <summary>
+        ///  Returns a version of the passed function 
+        ///  that only invokes after being called 
+        ///  a certain number of times,
+        /// 
+        /// all previous calls will receive 
+        /// the first invocation results
+        /// </summary>",
+				AdditionalParameters=new[]
+				{
+					 new {
+						TargetType="int",
+						Name="count",
+						Optional=false,
+						Default=string.Empty	
+					 }
+
+				},
+				ReturnTypeIsTask = true,
+				ActualImplementation = @"
+        /// <summary>
+        /// Returns a version of the passed function 
+        /// that only invokes after being called 
+        /// a certain number of times,
+        /// 
+        /// all previous calls will receive 
+        /// the first invocation results
+        /// </summary>
+        public Func<T, Task<TResult>> After<T, TResult>( Func<T, TResult> function, int count )
+        {
+            int counter = count;
+
+            var first = default( TResult );
+            int doneChanging=0;
+
+            return (a) =>
+            {
+                try
+                {
+
+                    int thisTask;
+                    Thread.MemoryBarrier();
+                    if ((thisTask = Interlocked.Decrement(ref counter)) >= 0)
+                    {
+                        Thread.MemoryBarrier();
+
+                        if (thisTask == 0)
+                        {
+                            first = function(a);
+
+                            Thread.MemoryBarrier();
+                            try
+                            {
+                                return Task.Factory.StartNew(() => first);
+                            }
+                            finally
+                            {
+                                Thread.MemoryBarrier();
+                                Interlocked.Exchange(ref doneChanging, 1);
+                            }
+                        }
+
+                        return Task.Factory.StartNew(() =>
+                        {
+                            Thread.MemoryBarrier();
+
+
+                            while (doneChanging == 0)
+                            {
+                                if (doneChanging == 1)
+                                    break;
+
+                                Thread.MemoryBarrier();
+                            }
+
+                            return first;
+
+                        });
+
+                    }
+                    else
+                    {
+                        return Task.Factory.StartNew(()=>function(a));
+                    }
+                }
+                finally
+                {
+                    Thread.MemoryBarrier();
+                }
+            };
+        }
+"
+
+            },
+            new
+            {
+                Name = "Before",
+				Comments=@"
+        /// <summary>
+        /// Returns a version of the passed function 
+        /// that will only invoke a certain amount of times
+        /// 
+        /// All subsequent calls will receive the last invocation result
+        /// </summary>",
+				AdditionalParameters=new[]
+				{
+					 new {
+						TargetType="int",
+						Name="count",
+						Optional=false,
+						Default=string.Empty	
+					 }
+
+				},
+				ReturnTypeIsTask = false,
+				ActualImplementation=@"
+        /// <summary>
+        /// Returns a version of the passed function 
+        /// that will only invoke a certain amount of times
+        /// 
+        /// All subsequent calls will receive the last invocation result
+        /// </summary>
+        public Func<T, TResult> Before<T, TResult>( Func<T, TResult> function, int count )
+        {
+            int counter = count;
+            TResult tresult = default( TResult );
+
+            return ( a ) =>
+            {
+                if (Interlocked.Decrement(ref counter) >= 0)
+                    return tresult = function( a );
+
+                return tresult;
+            };
+        }"
+            },
+            new
+            {
+                Name = "Debounce",
+				Comments=@"
+        /// <summary>
+        /// Returns a debounced version of the passed function
+        /// </summary>",
+				AdditionalParameters=new[]
+				{
+					 new {
+						TargetType="int",
+						Name="milliseconds",
+						Optional=false,
+						Default=string.Empty	
+					 }
+
+				},
+				ReturnTypeIsTask = true,
+				ActualImplementation=@"
+        /// <summary>
+        /// Returns a debounced version of the passed function
+        /// </summary>
+        public Func<T, Task<TResult>> Debounce<T, TResult>( Func<T, TResult> function, int milliseconds )
+        {
+            Task running  = null;
+
+            object lockingon = new object( );
+
+
+            int settingUp = 0;
+            int setting = 0;
+            int isready = 0;
+            var retv = new { result = default( TResult ) };
+            var fn = function;
+            return async ( targ ) =>
+            {
+                Thread.MemoryBarrier( );
+
+                var curr = Task.Delay( milliseconds );
+
+                Thread.MemoryBarrier( );
+
+                if ( Interlocked.CompareExchange( ref settingUp, 1, 0 ) == 0 )
+                {
+                    Interlocked.Exchange( ref setting, 0 );
+                    Interlocked.Exchange( ref isready, 0 );
+                }
+
+                Interlocked.Exchange( ref running, curr );
+
+                Task result = null;
+
+                while ( true )
+                {
+                    Thread.MemoryBarrier( );
+
+                    Interlocked.Exchange( ref result, running );
+
+                    if ( result == null )
+                    {
+                        Thread.MemoryBarrier( );
+
+                        if ( Interlocked.CompareExchange( ref setting, 1, 0 ) == 0 )
+                        {
+                            Interlocked.Exchange( ref retv, new { result =  fn( targ ) } );
+                            Interlocked.CompareExchange( ref isready, 1, 0 );
+                            Interlocked.CompareExchange( ref settingUp, 0, 1 );
+                        }
+
+                        break;
+                    }
+
+                    await result;
+                    Interlocked.CompareExchange( ref running, null, curr );
+                }
+
+                while ( true )
+                {
+                    Thread.MemoryBarrier( );
+
+                    if ( isready == 1 )
+                        break;
+
+                    Thread.MemoryBarrier( );
+
+                    Thread.SpinWait( 32 );
+
+                }
+
+                return retv.result;
+            };
+        }"
+            },
+            new
+            {
+                Name = "Delay",
+				Comments=@"
+		/// <summary>
+        /// Creates a delayed version of passed function, delaying passed milliseconds value
+        /// before executing
+        /// </summary>",
+				AdditionalParameters=new[]
+				{
+					 new {
+						TargetType="int",
+						Name="milliseconds",
+						Optional=false,
+						Default=string.Empty	
+					 }
+
+				},
+				ReturnTypeIsTask = true,
+				ActualImplementation=@"
+        /// <summary>
+        /// Creates a delayed version of passed function, delaying passed milliseconds value
+        /// before executing
+        /// </summary>
+        public Func<T, Task<TResult>> Delay<T, TResult>( Func<T, TResult> function, int milliseconds )
+        {
+            return async ( t ) =>
+            {
+                await Task.Delay( milliseconds );
+                Thread.MemoryBarrier( );
+                return function( t );
+            };
+        }"
+            },
+            new
+            {
+                Name = "Once",
+				Comments=@"
+		/// <summary>
+        ///  Creates a version of the function that only runs once, 
+        ///  all subsequent runs will return the same value
+        /// </summary>",
+				AdditionalParameters = none,
+				ReturnTypeIsTask = false,
+				ActualImplementation=@"
+        /// <summary>
+        ///  Creates a version of the function that only runs once, 
+        ///  all subsequent runs will return the same value
+        /// </summary>
+        public Func<T, TResult> Once<T, TResult>( Func<T, TResult> function )
+        {
+            int ran = 0;
+            TResult result = default( TResult );
+
+            return ( targ ) =>
+            {
+                if ( Interlocked.CompareExchange( ref ran, 1, 0 ) == 0 )
+                    result = function( targ );
+                
+
+                return result;
+            };
+        }"
+            },
+            new
+            {
+                Name = "Throttle",
+				Comments=@"
+		/// <summary>
+        /// Returns a throttled version of the passed function
+        /// </summary>",
+				AdditionalParameters=new[]
+				{
+					 new {
+						TargetType="int",
+						Name="milliseconds",
+						Optional=false,
+						Default=string.Empty	
+					 },
+					 new {
+						TargetType="bool",
+						Name="leading",
+						Optional=true,
+						Default="true"	
+					 }
+
+				},
+				ReturnTypeIsTask = true,
+				ActualImplementation=@"
+        /// <summary>
+        /// Returns a throttled version of the passed function
+        /// </summary>
+        public Func<T, Task<TResult>> Throttle<T, TResult>( Func<T, TResult> function, int milliseconds, bool leading )
+        {
+            int firstTriggered = 0;
+            int waitTriggered = 0;
+            int cleaningUp = 0;
+            int setting = 0;
+            int doneSetting = 0;
+            object finalHandle = null;
+            int doneComparing = 0;
+
+            Task delaying = null;
+            
+            var returning = new {result = default(TResult)};
+            
+            //issues sometimes occur with mem in closures 
+            // (at least in previous .net versions they did)
+            // so copying local copy of values just in case
+            var fn = function;
+            var waitms = milliseconds;
+            var lead = leading;
+
+
+
+            return (_a) =>
+            {
+                //issue with a referencing different values at same call
+                Thread.MemoryBarrier();
+                var a = _a;
+                Thread.MemoryBarrier();
+                object localHandle = new object();
+                Thread.MemoryBarrier();
+
+
+                //if the current task enters into a bad state then want the task to continue from the top
+                //this would happen on fringes in between invocation strings
+                // example:
+                //  wait time is 500 ms, the cleanup process takes 1 ms, cleanup starts at 503 ms, call is made
+                //  502.9999 ms, the cleanup flag is not set but before the new task is generated the clean flag is 
+                //  set, if this occurs want this call to be counted in the next string of invocations
+                //  so start from the top
+                while (true)
+                {
+
+                    //when the reduction process is in effect do not allow other threads to invoke
+                    while (cleaningUp == 1) Thread.MemoryBarrier();
+
+
+
+                    if (Interlocked.CompareExchange(ref firstTriggered, 1, 0) == 0)
+                    {
+                        try
+                        {
+                            //setup current run string
+                            Thread.MemoryBarrier();
+
+
+                            if (lead)
+                            {
+                                var firstReturned = fn(a);
+                                return Task.Factory.StartNew(() => firstReturned);
+                            }
+                        }
+                        finally
+                        {
+                            Thread.MemoryBarrier();
+                            //set the delay
+                            Interlocked.Exchange(ref delaying, Task.Delay(waitms));
+                            //return the result value
+                            Interlocked.CompareExchange(ref waitTriggered, 1, 0);
+
+                            Interlocked.CompareExchange(ref doneSetting, 0, 1);
+                            Interlocked.CompareExchange(ref setting, 0, 1);
+                        }
+
+                    }
+
+                    Thread.MemoryBarrier();
+                    while (true)
+                        if (waitTriggered == 1) break;
+                        else
+                        {
+                            Thread.SpinWait(16);
+                            Thread.MemoryBarrier();
+                        }
+
+
+                    Task delayingLocalCopy = null;
+                    Interlocked.Exchange(ref delayingLocalCopy, delaying);
+
+                    //in a bad state, start from the top
+                    if (delayingLocalCopy == null || cleaningUp == 1)
+                        continue;
+                    Thread.MemoryBarrier();
+                    Interlocked.Exchange(ref returning, null);
+                    Thread.MemoryBarrier();
+                    Interlocked.Exchange(ref finalHandle, localHandle);
+                    Thread.MemoryBarrier();
+
+                    Func<object,T,Task<TResult>> toReturn = async (handle,ts) =>
+                    {
+                        var r = returning;
+                        Thread.MemoryBarrier();
+
+                        if (delaying != null)
+                            await delaying;
+                        
+
+                        // at this point the delay is done, we are cleaning up
+                        Interlocked.CompareExchange(ref cleaningUp, 1, 0);
+
+
+                        Thread.MemoryBarrier();
+                        while (finalHandle != null)
+                        {
+                            Thread.MemoryBarrier();
+                            
+                            await Task.Delay(1);
+
+                            if ( finalHandle == handle )
+                            {
+                                r = new { result = fn(ts) };
+                                Interlocked.Exchange(ref returning, r);
+
+                                Thread.MemoryBarrier();
+                                Interlocked.CompareExchange(ref doneComparing, 1, 0);
+                                Thread.MemoryBarrier();
+                                Interlocked.Exchange(ref finalHandle, null);
+                                return r.result;
+                            }
+
+                            Thread.MemoryBarrier();
+                            if (finalHandle == null) break;
+                        }
+
+                        while (doneComparing == 0) await Task.Delay(1) ;
+
+                        Interlocked.Exchange(ref r, returning);
+
+                        return r.result;
+                    };
+
+                    Thread.MemoryBarrier();
+
+                    Interlocked.Exchange(ref finalHandle, localHandle);
+                    
+                    Thread.MemoryBarrier();
+
+                    var local = toReturn(localHandle, a);
+                    
+                    Thread.MemoryBarrier();
+                    
+                    Thread.MemoryBarrier();
+                    local.ContinueWith(t =>
+                    {
+                        t.Wait(50);
+
+                        Thread.MemoryBarrier();
+
+                        //all of the tasks should have completed, 
+                        // so we can clean up
+                        Thread.MemoryBarrier();
+                        Interlocked.CompareExchange(ref firstTriggered, 0, 1);
+                        Interlocked.CompareExchange(ref waitTriggered, 0, 1);
+                        Interlocked.CompareExchange(ref cleaningUp, 0, 1);
+                        Thread.MemoryBarrier();
+                    });
+
+                    return local;
+
+                }
+
+            };
+        }"
+            }
+        };
+
+    const string trformArgName = "fn";
+    const string argNames = "abcdefghijklmnopqrstuvwxyz";
+    var retParamsWrapperTmplString = string.Format("_{0}.{1}( {{0}} )", utilCompact.Name, utilCompact.TransformCall); 
+    string taskRetValTemplate = string.Format("async ( {{0}} ) => await target({0})",retParamsWrapperTmplString);
+    string nontaskRetValTemplate = string.Format("( {{0}} ) => target( {0} )", retParamsWrapperTmplString);
+	    const string resultTypeArg = "TResult",
+        mainParameterTargetName = "function",
+        retTypeStringTemplate = "Func<{0}>";
+
+    var typeArgs = Enumerable.Range(1, 16).Select(i => "T" + i).ToArray();
+
+	// 0 => main parameter name
+	// Result Template:
+	// 0=> the return type of the currently executing function
+	// 1=> previously implemented overload of currently executing function
+	// 2=> passed parameters from the current exe ctx
+    string firstTransformTemplate = string.Format(@"
+            var origFn = {0};
+            var fn = new Func<object, {{0}}>(a => origFn());
+            var target = {{1}}({{2}});", mainParameterTargetName);
+    string firstRetValTask = "async()=>await target(null)";
+    string firstRetValNontask = "()=>target(null)";
+
+	//
+	// 0 => function transform component name
+	// 1 => function transform method to call name
+	// Result Template:
+	// 0 => Arguments from the call signature head (actual function, any additional arguments)
+	// 1 => Call to a previously implemented overload of current exe ctx
+    string transformTemplateTemplate = string.Format(@"
+            var origFn = {0};
+            var fn = _{1}.{2}(origFn);
+            var target = {{0}}({{1}});",
+        mainParameterTargetName, 
+		fnCompact.Name, fnCompact.TransformCall);
+
+
+    var paramCallStringTemplate = string.Format("Func<{{0}}> {0}", mainParameterTargetName);
+
+
+
+    foreach (var method in scaffolding)
+    {
+        for (int i = 0; i < 17; i++)
+        {
+            string[] currArgNames = null;
+            if (i != 0)
+                currArgNames = argNames.Take(i).Select(a => a.ToString()).ToArray();
+
+            var currTypeArgs = typeArgs.Take(i).ToArray();
+
+            var currTypeArgsString = string.Join(", ", currTypeArgs.Concat(new[] {resultTypeArg}));
+
+            string
+                retSigTmpl = i == 0 ? firstRetValNontask: nontaskRetValTemplate,
+				currResultTypeArg = resultTypeArg;
+
+            if (method.ReturnTypeIsTask)
+            {
+                retSigTmpl = i == 0 ? firstRetValTask : taskRetValTemplate;
+                currResultTypeArg = string.Format("Task<{0}>", resultTypeArg);
+            }
+
+
+            var retTypeArgsString = string.Join(", ", currTypeArgs.Concat(new[]{ currResultTypeArg }));
+
+            var rtType = string.Format(retTypeStringTemplate, retTypeArgsString);
+
+            var callSigFormat = string.Format(@"public {0} {1}<{2}>({{0}})",rtType, method.Name, currTypeArgsString);
+
+            var argSigs = new List<Tuple<string,List<string>>>
+            {
+                Tuple.Create(
+					string.Format(paramCallStringTemplate, currTypeArgsString),
+					new List<string>()
+				)
+            };
+
+            if (method.AdditionalParameters != none)
+            {
+                foreach (var methodArgParam in method.AdditionalParameters)
+                {
+                    var toAdd = methodArgParam.TargetType + " " + methodArgParam.Name;
+
+					for (int k = 0; k < argSigs.Count; k++)
+                    {
+                        var curr = argSigs[k];
+                        var nargLs = curr.Item2;
+                        nargLs.Add(methodArgParam.Name);
+                        argSigs[k] = Tuple.Create(curr.Item1 + ", " + toAdd, nargLs);
+                    }
+
+
+                    if (methodArgParam.Optional)
+                    {
+                        var a = argSigs.Last();
+						var nargValues = a.Item2.ToArray();
+                            nargValues[nargValues.Length-1]= methodArgParam.Default;
+                        argSigs.Add(Tuple.Create(a.Item1.Replace(", " + toAdd,""), new List<string>(nargValues)));
+							
+                    }
+                }
+            }
+            if (i == 0)
+            {
+                var firstEmptyImplementation = argSigs.FirstOrDefault();
+                var ffcallHead = string.Format(callSigFormat, firstEmptyImplementation.Item1);
+                var fftform = 
+				string.Format(
+					firstTransformTemplate, 
+					"TResult",
+					method.Name,
+                    string.Join(", ", new[]{"fn"}.Concat(firstEmptyImplementation.Item2))
+				);
+
+                var retSig = retSigTmpl;
+        #>
+		<#=method.Comments #>
+		<#=ffcallHead #>
+		{
+			<#=fftform#>
+			return <#=retSig#>;
+		}
+
+		<#
+				if (argSigs.Count > 1)
+				{
+				    foreach (var argSig in argSigs.Skip(1))
+				    {
+				        var callHead = string.Format(callSigFormat, argSig.Item1);
+				        var prevCall = method.Name + " ( " + string.Join(", ", new[] {mainParameterTargetName}.Concat(argSig.Item2)) +
+				                       " ) ";
+				        #>
+		<#=method.Comments #>
+		<#=callHead #>
+		{
+			return <#=prevCall #>;
+		}
+		<#
+				    }
+				}
+            } 
+			else if (i == 1)
+			{
+
+			    #>
+		<#=method.ActualImplementation #>
+		<#
+				if (argSigs.Count > 1)
+				    foreach (var argSig in argSigs.Skip(1))
+				    {
+				        var callHead = string.Format(callSigFormat, argSig.Item1);
+				        var prevCall = method.Name + " ( " + string.Join(", ", new[] {mainParameterTargetName}.Concat(argSig.Item2)) +
+				                       " ) ";
+				        #>
+		<#=method.Comments #>
+		<#=callHead #>
+		{
+			return <#=prevCall #>;
+		}
+		<#
+				    }
+			}
+            else
+            {
+			
+                var firsimpl = argSigs.FirstOrDefault();
+                var firstCallHead = string.Format(callSigFormat, firsimpl.Item1);
+                var transformTmpl = string.Format(transformTemplateTemplate, method.Name,
+                    string.Join(", ", new[]{"fn"}.Concat(firsimpl.Item2)));
+
+                var retSig = string.Format(retSigTmpl, string.Join(", ", currArgNames));
+        #>
+		<#=method.Comments #>
+		<#=firstCallHead #>
+		{
+			<#=transformTmpl#>
+			return <#=retSig#>;
+		}
+
+		<#
+				if (argSigs.Count > 1)
+				{
+				    foreach (var argSig in argSigs.Skip(1))
+				    {
+				        var callHead = string.Format(callSigFormat, argSig.Item1);
+				        var prevCall = method.Name + " ( " + string.Join(", ", new[] {mainParameterTargetName}.Concat(argSig.Item2)) +
+				                       " ) ";
+				        #>
+		<#=method.Comments #>
+		<#=callHead #>
+		{
+			return <#=prevCall #>;
+		}
+		<#
+				    }
+				}
+            }
+        } 
+    }
+#>
+
+    }
+}

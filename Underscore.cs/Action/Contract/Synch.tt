@@ -1,0 +1,222 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Threading.Tasks;
+
+namespace Underscore.Action
+{
+    public interface ISynchComponent
+    {
+	
+<#
+
+    var typeArgs = Enumerable.Range(1, 16).Select(i => "T" + i).ToArray();
+    const string resultTypeArg = "TResult",
+        mainParameterTargetName = "action";
+
+    var paramCallStringTemplate = string.Format("Action<{{0}}> {0}", mainParameterTargetName);
+
+	var none = new[]
+    {
+		new
+		{
+			TargetType = "int",
+			Name = "count",
+			Optional = false,
+			Default = string.Empty
+		}
+	};
+
+    none[0] = null;
+
+    var scaffolding =
+        new[]
+        {
+            new
+            {
+                Name = "After",
+				Comments=@"
+        /// <summary>
+        ///  Returns a version of the passed function 
+        ///  that only invokes after being called 
+        ///  a certain number of times,
+        /// 
+        /// all previous calls will receive 
+        /// the first invocation results
+        /// </summary>",
+				AdditionalParameters=new[]
+				{
+					 new {
+						TargetType="int",
+						Name="count",
+						Optional=false,
+						Default=string.Empty	
+					 }
+
+				},
+				ReturnTypeIsTask = true
+            },
+            new
+            {
+                Name = "Before",
+				Comments=@"
+        /// <summary>
+        /// Returns a version of the passed function 
+        /// that will only invoke a certain amount of times
+        /// 
+        /// All subsequent calls will receive the last invocation result
+        /// </summary>",
+				AdditionalParameters=new[]
+				{
+					 new {
+						TargetType="int",
+						Name="count",
+						Optional=false,
+						Default=string.Empty	
+					 }
+
+				},
+				ReturnTypeIsTask = false
+            },
+            new
+            {
+                Name = "Debounce",
+				Comments=@"
+        /// <summary>
+        /// Returns a debounced version of the passed function
+        /// </summary>",
+				AdditionalParameters=new[]
+				{
+					 new {
+						TargetType="int",
+						Name="milliseconds",
+						Optional=false,
+						Default=string.Empty	
+					 }
+
+				},
+				ReturnTypeIsTask = true
+            },
+            new
+            {
+                Name = "Delay",
+				Comments=@"
+		/// <summary>
+        /// Creates a delayed version of passed function, delaying passed milliseconds value
+        /// before executing
+        /// </summary>",
+				AdditionalParameters=new[]
+				{
+					 new {
+						TargetType="int",
+						Name="milliseconds",
+						Optional=false,
+						Default=string.Empty	
+					 }
+
+				},
+				ReturnTypeIsTask = true
+            },
+            new
+            {
+                Name = "Once",
+				Comments=@"
+		/// <summary>
+        ///  Creates a version of the function that only runs once, 
+        ///  all subsequent runs will return the same value
+        /// </summary>",
+				AdditionalParameters = none,
+				ReturnTypeIsTask = false
+            },
+            new
+            {
+                Name = "Throttle",
+				Comments=@"
+		/// <summary>
+        /// Returns a throttled version of the passed function
+        /// </summary>",
+				AdditionalParameters=new[]
+				{
+					 new {
+						TargetType="int",
+						Name="milliseconds",
+						Optional=false,
+						Default=string.Empty	
+					 },
+					 new {
+						TargetType="bool",
+						Name="leading",
+						Optional=true,
+						Default="true"	
+					 },
+
+				},
+				ReturnTypeIsTask = true
+            }
+        };
+    foreach (var method in scaffolding)
+    {
+        for (int i = 0; i < 17; i++)
+        {
+
+            var currTypeArgs = typeArgs.Take(i).ToArray();
+            
+			var currTypeArgsString = string.Join(", ", currTypeArgs );
+
+            string retTypeArgsString;
+
+            if (method.ReturnTypeIsTask)
+            {
+                retTypeArgsString = string.Format("Func<{0}>", string.Join(", ", currTypeArgs.Concat(new[] {"Task"})));
+            }
+            else
+            {
+                retTypeArgsString = "System.Action";
+                if (i != 0)
+                    retTypeArgsString += "<" + string.Join(", ", currTypeArgs) + "> ";
+            }
+
+
+			
+            var callSigFormat = string.Format( i != 0 ? @"{0} {1}<{2}>({{0}});":@"{0} {1}({{0}});", retTypeArgsString, method.Name,currTypeArgsString);
+
+            var argSigs = new List<string>
+            {
+                i != 0 ? string.Format("System.Action<{0}> action", currTypeArgsString) : "System.Action action"
+            };
+
+            if (method.AdditionalParameters != none)
+            {
+                foreach (var methodArgParam in method.AdditionalParameters)
+                {
+                    var toAdd = methodArgParam.TargetType + " " + methodArgParam.Name;
+                    if (methodArgParam.Optional)
+                    {
+                        argSigs.AddRange(argSigs.ToArray().Select(a=>a+", "+toAdd));
+                    }
+                    else
+                    {
+                        for (int k = 0; k < argSigs.Count; k++)
+                            argSigs[k] += ", " + toAdd;
+                    }
+                }
+            }
+
+            foreach (var argSig in argSigs)
+            {
+                var callHead = string.Format(callSigFormat, argSig);
+        #>
+		<#=method.Comments#>
+		<#=callHead#>
+		<#
+            }
+        }
+    }
+#>
+
+    }
+}

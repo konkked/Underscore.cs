@@ -66,10 +66,175 @@ namespace Underscore.Module
             return () => { if (ncount-- == 0) function(); };
         }
 
+        public Func<T1, Task> After<T1>(Action<T1> action, int count)
+        {
+            return _synch.After(action, count);
+        }
+
+        public Func<T1, T2, Task> After<T1, T2>(Action<T1, T2> action, int count)
+        {
+            return _synch.After(action, count);
+        }
+
+        public Func<T1, T2, T3, Task> After<T1, T2, T3>(Action<T1, T2, T3> action, int count)
+        {
+            return _synch.After(action, count);
+        }
+
+        public Func<T1, T2, T3, T4, Task> After<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action, int count)
+        {
+            return _synch.After(action, count);
+        }
+
+        public Func<T1, T2, T3, T4, T5, Task> After<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> action, int count)
+        {
+            return _synch.After(action, count);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, Task> After<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> action, int count)
+        {
+            return _synch.After(action, count);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, Task> After<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action, int count)
+        {
+            return _synch.After(action, count);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task> After<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> action, int count)
+        {
+            return _synch.After(action, count);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, int count)
+        {
+            return _synch.After(action, count);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, int count)
+        {
+            return _synch.After(action, count);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, int count)
+        {
+            return _synch.After(action, count);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, int count)
+        {
+            return _synch.After(action, count);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, int count)
+        {
+            return _synch.After(action, count);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, int count)
+        {
+            return _synch.After(action, count);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, int count)
+        {
+            return _synch.After(action, count);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, int count)
+        {
+            return _synch.After(action, count);
+        }
+
+        Func<Task> ISynchComponent.After(System.Action action, int count)
+        {
+            return _synch.After(action, count);
+        }
+
         public System.Action Before(System.Action function, int count)
         {
             var ncount = count;
             return () => { if (ncount-- >= 0) function(); };
+        }
+
+        public Action<T1> Before<T1>(Action<T1> action, int count)
+        {
+            return _synch.Before(action, count);
+        }
+
+        public Action<T1, T2> Before<T1, T2>(Action<T1, T2> action, int count)
+        {
+            return _synch.Before(action, count);
+        }
+
+        public Action<T1, T2, T3> Before<T1, T2, T3>(Action<T1, T2, T3> action, int count)
+        {
+            return _synch.Before(action, count);
+        }
+
+        public Action<T1, T2, T3, T4> Before<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action, int count)
+        {
+            return _synch.Before(action, count);
+        }
+
+        public Action<T1, T2, T3, T4, T5> Before<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> action, int count)
+        {
+            return _synch.Before(action, count);
+        }
+
+        public Action<T1, T2, T3, T4, T5, T6> Before<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> action, int count)
+        {
+            return _synch.Before(action, count);
+        }
+
+        public Action<T1, T2, T3, T4, T5, T6, T7> Before<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action, int count)
+        {
+            return _synch.Before(action, count);
+        }
+
+        public Action<T1, T2, T3, T4, T5, T6, T7, T8> Before<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> action, int count)
+        {
+            return _synch.Before(action, count);
+        }
+
+        public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, int count)
+        {
+            return _synch.Before(action, count);
+        }
+
+        public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, int count)
+        {
+            return _synch.Before(action, count);
+        }
+
+        public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, int count)
+        {
+            return _synch.Before(action, count);
+        }
+
+        public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, int count)
+        {
+            return _synch.Before(action, count);
+        }
+
+        public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, int count)
+        {
+            return _synch.Before(action, count);
+        }
+
+        public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, int count)
+        {
+            return _synch.Before(action, count);
+        }
+
+        public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, int count)
+        {
+            return _synch.Before(action, count);
+        }
+
+        public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, int count)
+        {
+            return _synch.Before(action, count);
         }
 
         public Func<Task> Debounce(System.Action action, int milliseconds)
@@ -109,9 +274,64 @@ namespace Underscore.Module
             return _synch.Debounce(action, milliseconds);
         }
 
+        public Func<T1, T2, T3, T4, T5, T6, T7, Task> Debounce<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action, int milliseconds)
+        {
+            return _synch.Debounce(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> action, int milliseconds)
+        {
+            return _synch.Debounce(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, int milliseconds)
+        {
+            return _synch.Debounce(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, int milliseconds)
+        {
+            return _synch.Debounce(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, int milliseconds)
+        {
+            return _synch.Debounce(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, int milliseconds)
+        {
+            return _synch.Debounce(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, int milliseconds)
+        {
+            return _synch.Debounce(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, int milliseconds)
+        {
+            return _synch.Debounce(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, int milliseconds)
+        {
+            return _synch.Debounce(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, int milliseconds)
+        {
+            return _synch.Debounce(action, milliseconds);
+        }
+
         public Func<Task> Throttle(System.Action action, int milliseconds)
         {
             return _synch.Throttle(action, milliseconds);
+        }
+
+        public Func<Task> Throttle(System.Action action, int milliseconds, bool leading)
+        {
+            return _synch.Throttle(action, milliseconds, leading);
         }
 
         public Func<T, Task> Throttle<T>(Action<T> action, int milliseconds)
@@ -179,6 +399,108 @@ namespace Underscore.Module
             return _synch.Throttle(action, milliseconds, leading);
         }
 
+        public Func<T1, T2, T3, T4, T5, T6, T7, Task> Throttle<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action, int milliseconds)
+        {
+            return _synch.Throttle(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, Task> Throttle<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action, int milliseconds, bool leading)
+        {
+            return _synch.Throttle(action, milliseconds, leading);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> action, int milliseconds)
+        {
+            return _synch.Throttle(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> action, int milliseconds, bool leading)
+        {
+            return _synch.Throttle(action, milliseconds, leading);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, int milliseconds)
+        {
+            return _synch.Throttle(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, int milliseconds, bool leading)
+        {
+            return _synch.Throttle(action, milliseconds, leading);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, int milliseconds)
+        {
+            return _synch.Throttle(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, int milliseconds, bool leading)
+        {
+            return _synch.Throttle(action, milliseconds, leading);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, int milliseconds)
+        {
+            return _synch.Throttle(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, int milliseconds, bool leading)
+        {
+            return _synch.Throttle(action, milliseconds, leading);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, int milliseconds)
+        {
+            return _synch.Throttle(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, int milliseconds, bool leading)
+        {
+            return _synch.Throttle(action, milliseconds, leading);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, int milliseconds)
+        {
+            return _synch.Throttle(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, int milliseconds, bool leading)
+        {
+            return _synch.Throttle(action, milliseconds, leading);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, int milliseconds)
+        {
+            return _synch.Throttle(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, int milliseconds, bool leading)
+        {
+            return _synch.Throttle(action, milliseconds, leading);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, int milliseconds)
+        {
+            return _synch.Throttle(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, int milliseconds,
+            bool leading)
+        {
+            return _synch.Throttle(action, milliseconds, leading);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, int milliseconds)
+        {
+            return _synch.Throttle(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, int milliseconds,
+            bool leading)
+        {
+            return _synch.Throttle(action, milliseconds, leading);
+        }
+
         public Func<Task> Delay(System.Action action, int milliseconds)
         {
             return _synch.Delay(action, milliseconds);
@@ -212,6 +534,56 @@ namespace Underscore.Module
 
         public Func<T1, T2, T3, T4, T5, T6, Task> Delay<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> action,
             int milliseconds)
+        {
+            return _synch.Delay(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, Task> Delay<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action, int milliseconds)
+        {
+            return _synch.Delay(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> action, int milliseconds)
+        {
+            return _synch.Delay(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, int milliseconds)
+        {
+            return _synch.Delay(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, int milliseconds)
+        {
+            return _synch.Delay(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, int milliseconds)
+        {
+            return _synch.Delay(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, int milliseconds)
+        {
+            return _synch.Delay(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, int milliseconds)
+        {
+            return _synch.Delay(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, int milliseconds)
+        {
+            return _synch.Delay(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, int milliseconds)
+        {
+            return _synch.Delay(action, milliseconds);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, int milliseconds)
         {
             return _synch.Delay(action, milliseconds);
         }
@@ -324,208 +696,6 @@ namespace Underscore.Module
             return _synch.Once(action);
         }
 
-        public Func<Task> After(int count, System.Action action)
-        {
-            return _synch.After(count, action);
-        }
-
-        public Func<T, Task> After<T>(int count, Action<T> action)
-        {
-            return _synch.After(count, action);
-        }
-
-        public Func<T1, T2, Task> After<T1, T2>(int count, Action<T1, T2> action)
-        {
-            return _synch.After(count, action);
-        }
-
-        public Func<T1, T2, T3, Task> After<T1, T2, T3>(int count, Action<T1, T2, T3> action)
-        {
-            return _synch.After(count, action);
-        }
-
-        public Func<T1, T2, T3, T4, Task> After<T1, T2, T3, T4>(int count, Action<T1, T2, T3, T4> action)
-        {
-            return _synch.After(count, action);
-        }
-
-        public Func<T1, T2, T3, T4, T5, Task> After<T1, T2, T3, T4, T5>(int count, Action<T1, T2, T3, T4, T5> action)
-        {
-            return _synch.After(count, action);
-        }
-
-        public Func<T1, T2, T3, T4, T5, T6, Task> After<T1, T2, T3, T4, T5, T6>(int count,
-            Action<T1, T2, T3, T4, T5, T6> action)
-        {
-            return _synch.After(count, action);
-        }
-
-        public Func<T1, T2, T3, T4, T5, T6, T7, Task> After<T1, T2, T3, T4, T5, T6, T7>(int count,
-            Action<T1, T2, T3, T4, T5, T6, T7> action)
-        {
-            return _synch.After(count, action);
-        }
-
-        public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task> After<T1, T2, T3, T4, T5, T6, T7, T8>(int count,
-            Action<T1, T2, T3, T4, T5, T6, T7, T8> action)
-        {
-            return _synch.After(count, action);
-        }
-
-        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9>(int count,
-            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action)
-        {
-            return _synch.After(count, action);
-        }
-
-        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
-            int count, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action)
-        {
-            return _synch.After(count, action);
-        }
-
-        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task> After
-            <T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(int count,
-                Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action)
-        {
-            return _synch.After(count, action);
-        }
-
-        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task> After
-            <T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(int count,
-                Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action)
-        {
-            return _synch.After(count, action);
-        }
-
-        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task> After
-            <T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(int count,
-                Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action)
-        {
-            return _synch.After(count, action);
-        }
-
-        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task> After
-            <T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(int count,
-                Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action)
-        {
-            return _synch.After(count, action);
-        }
-
-        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task> After
-            <T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(int count,
-                Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action)
-        {
-            return _synch.After(count, action);
-        }
-
-        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task> After
-            <T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(int count,
-                Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action)
-        {
-            return _synch.After(count, action);
-        }
-
-        public System.Action Before(int count, System.Action action)
-        {
-            return _synch.Before(count, action);
-        }
-
-        public Action<T> Before<T>(int count, Action<T> action)
-        {
-            return _synch.Before(count, action);
-        }
-
-        public Action<T1, T2> Before<T1, T2>(int count, Action<T1, T2> action)
-        {
-            return _synch.Before(count, action);
-        }
-
-        public Action<T1, T2, T3> Before<T1, T2, T3>(int count, Action<T1, T2, T3> action)
-        {
-            return _synch.Before(count, action);
-        }
-
-        public Action<T1, T2, T3, T4> Before<T1, T2, T3, T4>(int count, Action<T1, T2, T3, T4> action)
-        {
-            return _synch.Before(count, action);
-        }
-
-        public Action<T1, T2, T3, T4, T5> Before<T1, T2, T3, T4, T5>(int count, Action<T1, T2, T3, T4, T5> action)
-        {
-            return _synch.Before(count, action);
-        }
-
-        public Action<T1, T2, T3, T4, T5, T6> Before<T1, T2, T3, T4, T5, T6>(int count,
-            Action<T1, T2, T3, T4, T5, T6> action)
-        {
-            return _synch.Before(count, action);
-        }
-
-        public Action<T1, T2, T3, T4, T5, T6, T7> Before<T1, T2, T3, T4, T5, T6, T7>(int count,
-            Action<T1, T2, T3, T4, T5, T6, T7> action)
-        {
-            return _synch.Before(count, action);
-        }
-
-        public Action<T1, T2, T3, T4, T5, T6, T7, T8> Before<T1, T2, T3, T4, T5, T6, T7, T8>(int count,
-            Action<T1, T2, T3, T4, T5, T6, T7, T8> action)
-        {
-            return _synch.Before(count, action);
-        }
-
-        public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9>(int count,
-            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action)
-        {
-            return _synch.Before(count, action);
-        }
-
-        public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
-            int count, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action)
-        {
-            return _synch.Before(count, action);
-        }
-
-        public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>
-            (int count, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action)
-        {
-            return _synch.Before(count, action);
-        }
-
-        public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Before
-            <T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(int count,
-                Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action)
-        {
-            return _synch.Before(count, action);
-        }
-
-        public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Before
-            <T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(int count,
-                Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action)
-        {
-            return _synch.Before(count, action);
-        }
-
-        public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Before
-            <T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(int count,
-                Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action)
-        {
-            return _synch.Before(count, action);
-        }
-
-        public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Before
-            <T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(int count,
-                Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action)
-        {
-            return _synch.Before(count, action);
-        }
-
-        public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Before
-            <T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(int count,
-                Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action)
-        {
-            return _synch.Before(count, action);
-        }
 
 
         public Action<TStart> Compose
