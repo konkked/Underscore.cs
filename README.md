@@ -2,7 +2,8 @@ Underscore.cs
 =============
 
 Started out as a port of the open source JavaScript Library Underscore.js to C#,
-but now is really a library (or helper object) inspired by Underscore.js.
+but now is really a library (or helper object) inspired by [underscore.js]
+
 
 Currently the documentation is sparse because I am not sure how much of it is going 
 to change in the future so not worth investing heavily into it until things get a little
@@ -13,7 +14,7 @@ Currently is broken up into the following sections
 Delegate (Func & Action) Shared Components
 ------------------------------------
 
-***The implementations are in sperate locations but functionality is same in both ``` _.Action``` and ```_.Function```***
+***The implementations are in seperate locations but functionality is same in both ``` _.Action``` and ```_.Function```***
 
 Bind - takes a parameter and an action, 
 and returns an action that takes no parameters, 
@@ -117,4 +118,7 @@ Solution is available as a NuGet package
 Install-Package Underscore.cs
 ``` 
 
+
+
+[underscore.js]:http://underscorejs.org/
 
