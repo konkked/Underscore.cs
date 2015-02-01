@@ -10,7 +10,7 @@ namespace Underscore.Setup
             kernel.Register<IFieldComponent,FieldComponent>( );
             kernel.Register<IMethodComponent, MethodComponent>( );        
             kernel.Register<IPropertyComponent,PropertyComponent>();                
-            kernel.Register<ITransformComponent,TransformComponent>();
+            kernel.Register<ITransposeComponent,TransposeComponent>();
 
             kernel.Register<Module.Object>();
         }

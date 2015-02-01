@@ -9,7 +9,7 @@ namespace Underscore.Module
     public class Function : 
         ISplitComponent, 
         IPartialComponent,
-        IBindingComponent,
+        IBindComponent,
         IComposeComponent,
         ISynchComponent,
         IConvertComponent,
@@ -17,7 +17,7 @@ namespace Underscore.Module
     {
 
         private readonly IComposeComponent _compose;
-        private readonly IBindingComponent _bind;
+        private readonly IBindComponent _bind;
         private readonly IPartialComponent _partial;
         private readonly ISplitComponent _split;
         private readonly IConvertComponent _convert;
@@ -25,7 +25,7 @@ namespace Underscore.Module
         private readonly ICacheComponent _cache;
 
         public Function( 
-            IBindingComponent bind, 
+            IBindComponent bind, 
             IPartialComponent partial,
             ISplitComponent split,
             IComposeComponent compose,

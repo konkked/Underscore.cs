@@ -60,7 +60,7 @@ namespace Underscore.Test.Object.Transformation
 
 
 
-            var target = new TransformComponent( mkprop.Object );
+            var target = new TransposeComponent( mkprop.Object );
 
 
             string title = "Mr.",

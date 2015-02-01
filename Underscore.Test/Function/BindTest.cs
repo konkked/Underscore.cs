@@ -35,7 +35,7 @@ namespace Underscore.Test.Function
         [TestMethod]
         public async Task FunctionBind1( )
         {
-            var _module = new BindingComponent( );
+            var _module = new BindComponent( );
 
             await Util.Tasks.Start(
                 ( ) =>
@@ -71,7 +71,7 @@ namespace Underscore.Test.Function
         public async Task FunctionBind2( )
         {
 
-            var _module = new BindingComponent( );
+            var _module = new BindComponent( );
 
             //same type
             await Util.Tasks.Start(
@@ -99,7 +99,7 @@ namespace Underscore.Test.Function
         public async Task FunctionBind3( )
         {
 
-            var _module = new BindingComponent( );
+            var _module = new BindComponent( );
 
             await Util.Tasks.Start( ( ) =>
             {
@@ -128,7 +128,7 @@ namespace Underscore.Test.Function
         public async Task FunctionBind4( )
         {
 
-            var _module = new BindingComponent( );
+            var _module = new BindComponent( );
 
             var target = new object( );
 

@@ -6,11 +6,11 @@ using Underscore.Utility;
 
 namespace Underscore.Object
 {
-    public class TransformComponent : ITransformComponent
+    public class TransposeComponent : ITransposeComponent
     {
         private readonly IPropertyComponent _property;
 
-        public TransformComponent( IPropertyComponent property ) 
+        public TransposeComponent( IPropertyComponent property ) 
         {
             _property = property;
         }

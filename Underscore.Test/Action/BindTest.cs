@@ -103,7 +103,7 @@ namespace Underscore.Test.Action
         public async Task Bind_FourParameter_Action( )
         {
             var didRun = new bool[ 4 ];
-            var _module = new BindingComponent( );
+            var _module = new BindComponent( );
 
 
             //same
@@ -127,7 +127,7 @@ namespace Underscore.Test.Action
         {
 
             var didRun = new bool[ 3 ];
-            var _module = new BindingComponent( );
+            var _module = new BindComponent( );
 
             //same
             await Util.Tasks.Start(
@@ -148,7 +148,7 @@ namespace Underscore.Test.Action
         {
 
             var didRun = new bool[ 2 ];
-            var _module = new BindingComponent( );
+            var _module = new BindComponent( );
 
 
             //same type
@@ -168,7 +168,7 @@ namespace Underscore.Test.Action
         {
 
             var didRun = new bool[ 1 ];
-            var _module = new BindingComponent( );
+            var _module = new BindComponent( );
 
             //same type
             await Util.Tasks.Start(

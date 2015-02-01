@@ -1,6 +1,6 @@
 ﻿namespace Underscore.Object
 {
-    public interface ITransformComponent 
+    public interface ITransposeComponent 
     {
         /// <summary>
         /// Takes all of the properties 

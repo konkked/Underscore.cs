@@ -10,7 +10,7 @@ namespace Underscore.Test.Module
         public void FunctionModuleCreateTest( )
         {
             var testing = new global::Underscore.Module.Function(
-                 new BindingComponent( ),
+                 new BindComponent( ),
                  new PartialComponent( ),
                  new SplitComponent( ),
                  new ComposeComponent( ),

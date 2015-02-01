@@ -5,7 +5,7 @@ using Underscore.Action;
 namespace Underscore.Module
 {
     public class Action :
-        IBindingComponent,
+        IBindComponent,
         IPartialComponent,
         ISplitComponent,
         IComposeComponent,
@@ -13,7 +13,7 @@ namespace Underscore.Module
         IConvertComponent
     {
 
-        private readonly IBindingComponent _bind;
+        private readonly IBindComponent _bind;
         private readonly IPartialComponent _partial;
         private readonly ISplitComponent _split;
         private readonly IComposeComponent _compose;
@@ -21,7 +21,7 @@ namespace Underscore.Module
         private readonly IConvertComponent _convert;
 
         public Action(
-            IBindingComponent bind,
+            IBindComponent bind,
             IPartialComponent partial,
             ISplitComponent split,
             IComposeComponent compose,

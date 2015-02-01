@@ -11,14 +11,14 @@ namespace Underscore.Module
         private readonly IPropertyComponent _property;
         private readonly IMethodComponent _method;
         private readonly IFieldComponent _field;
-        private readonly ITransformComponent _transformation;
+        private readonly ITransposeComponent _transformation;
 
 
         public Object(
             IPropertyComponent property,
             IMethodComponent method,
             IFieldComponent field,
-            ITransformComponent transformation) 
+            ITransposeComponent transformation) 
         {
             _property = property;
             _field = field;
@@ -43,7 +43,7 @@ namespace Underscore.Module
         public IMethodComponent Method { get { return _method; } }
 
         //transformation
-        public ITransformComponent Transform { get { return _transformation; } }
+        public ITransposeComponent Transpose { get { return _transformation; } }
 
     }
 }

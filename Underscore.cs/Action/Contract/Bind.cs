@@ -7,7 +7,7 @@
 namespace Underscore.Action
 {
 
-	public interface IBindingComponent
+	public interface IBindComponent
 	{
 
 		

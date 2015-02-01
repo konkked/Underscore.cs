@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Underscore.Utility
 {
@@ -11,15 +13,16 @@ namespace Underscore.Utility
         /// one exception are strings 
         /// which return false if empty or null
         /// </summary>
-        /// <param name="target"></param>
-        /// <returns></returns>
         public bool IsTruthy( object target )
         {
-            if ( target is string )
+            var s = target as string;
+            
+            if ( s != null )
             {
-                return !string.IsNullOrWhiteSpace( ( string ) target );
+                return !string.IsNullOrWhiteSpace( s );
             }
-            else if (
+            
+            if (
                 ( target is int ) ||
                 ( target is uint ) ||
                 ( target is decimal ) ||
@@ -42,24 +45,28 @@ namespace Underscore.Utility
 
                 return intResult != 0;
             }
-            else if ( target is bool ) 
+            
+            if ( target is bool ) 
             {
                 return ( bool ) target;
             }
-            else
+
+            if (target is IEnumerable<object>)
             {
-                //if the type is a reference type then the default is null
-                //if is value type will pass with stmt
-                return target != null && 
-                    //otherwise is a value type or is a class type with a value
-                    (
-                        //if it is a class type, then done
-                        !target.GetType( ).IsValueType ||
-                        //otherwise check and see if the default for the value type is
-                        //the value of the passed object
-                        target != Activator.CreateInstance( target.GetType( ) )
-                    );
+                return ((IEnumerable<object>) target).Any();
             }
+
+            //if the type is a reference type then the default is null
+            //if is value type will pass with stmt
+            return target != null && 
+                //otherwise is a value type or is a class type with a value
+                (
+                    //if it is a class type, then done
+                    !target.GetType( ).IsValueType ||
+                    //otherwise check and see if the default for the value type is
+                    //the value of the passed object
+                    target != Activator.CreateInstance( target.GetType( ) )
+                );
         }
     }
 }

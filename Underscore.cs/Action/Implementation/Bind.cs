@@ -7,7 +7,7 @@
 namespace Underscore.Action
 {
 
-	public class BindingComponent : IBindingComponent
+	public class BindComponent : IBindComponent
 	{
 
 		

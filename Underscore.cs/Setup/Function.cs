@@ -8,7 +8,7 @@ namespace Underscore.Setup
         public void Load(Kernel kernel )
         {
             kernel.Register<IComposeComponent, ComposeComponent>();
-            kernel.Register<IBindingComponent, BindingComponent>();
+            kernel.Register<IBindComponent, BindComponent>();
             kernel.Register<ISplitComponent,SplitComponent>();
             kernel.Register<IPartialComponent,PartialComponent>();
             kernel.Register<IConvertComponent,ConvertComponent>();

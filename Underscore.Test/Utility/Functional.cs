@@ -67,21 +67,6 @@ namespace Underscore.Test.Utility
             } );
         }
 
-        [TestMethod]
-        public async Task UtilityReference( ) 
-        {
-            await Util.Tasks.Start( ( ) =>
-            {
-                var testing = new FunctionComponent( );
-
-                var value = "value";
-                var reference = testing.Reference( value );
-                Assert.AreEqual( value, reference.Item2( ) );
-                reference.Item1( "value1" );
-
-                Assert.AreEqual( "value1", reference.Item2( ) );
-            } );
-        }
 
         [TestMethod]
         public void UtilityNoop( ) 

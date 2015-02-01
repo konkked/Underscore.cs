@@ -21,11 +21,6 @@ namespace Underscore.Utility
             return _sharedUuidChecker.Add( uuid );
         }
 
-        private bool IsUnique( string uuid )
-        {
-            return _sharedUuidChecker.Add( uuid );
-        }
-
         /// <summary>
         /// Generates a unique id
         /// </summary>
@@ -96,8 +91,6 @@ namespace Underscore.Utility
             int mask = i >> _absValueIntMask;
             return ( i + mask ) ^ mask;
         }
-
-        private const int _minMaxIntMask =  ( sizeof( int ) * 8 ) - 1;
 
         /// <summary>
         /// Performantly calculates minimum of the passed ints

@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Underscore.Function;
-using BindingComponent = Underscore.Action.BindingComponent;
+using BindComponent = Underscore.Action.BindComponent;
 using ComposeComponent = Underscore.Action.ComposeComponent;
 using ConvertComponent = Underscore.Action.ConvertComponent;
 using PartialComponent = Underscore.Action.PartialComponent;
@@ -15,7 +15,7 @@ namespace Underscore.Test.Module
         [TestMethod]
         public void ActionCreate( )
         {
-            var binding = new BindingComponent();
+            var binding = new BindComponent();
             var partialComponent = new PartialComponent();
             var split = new SplitComponent();
             var compose = new ComposeComponent();
