@@ -13,6 +13,8 @@ Currently is broken up into the following sections
 Delegate (Func & Action) Shared Components
 ------------------------------------
 
+***The implementations are in sperate locations but functionality is same in both ``` _.Action``` and ```_.Function```***
+
 Bind - takes a parameter and an action, 
 and returns an action that takes no parameters, 
 bound to the passed parameters
@@ -107,15 +109,12 @@ Here is a simple example of using the libraries list chunking and random
 ```
 
 
-And there is a setup section, where I implemented a very minimalist IoC Container
-because I wanted to avoid having any outside dependencies, while still keeping the 
-code as well segmented as I could.
-
-How to Install
+Getting Started
 --------------
-
 Solution is available as a NuGet package
 
 ```powershell
 Install-Package Underscore.cs
 ``` 
+
+
