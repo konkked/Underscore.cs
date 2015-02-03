@@ -2,11 +2,13 @@
 using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
-using Underscore.Action;
 using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
+using Underscore.Function;
 using ComposeComponent = Underscore.Function.ComposeComponent;
+using ConvertComponent = Underscore.Action.ConvertComponent;
+using ISynchComponent = Underscore.Action.ISynchComponent;
 using SynchComponent = Underscore.Function.SynchComponent;
 
 namespace Underscore.Test.Action
@@ -14,7 +16,7 @@ namespace Underscore.Test.Action
     [TestClass]
     public class ModifyTest
     {
-        public ISynchComponent ManipulateDummy( ) { return new global::Underscore.Action.SynchComponent(new SynchComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()), new ConvertComponent(), new global::Underscore.Function.ConvertComponent()); }
+        public ISynchComponent ManipulateDummy( ) { return new Underscore.Action.SynchComponent(new SynchComponent( new CompactComponent(), new Underscore.Utility.CompactComponent()), new ConvertComponent(), new Underscore.Function.ConvertComponent()); }
 
         [TestMethod]
         public async Task ActionDebounce( )
@@ -40,7 +42,7 @@ namespace Underscore.Test.Action
             Assert.AreEqual( false, flag );
             Assert.AreEqual( 0, callcount );
             
-            for(int i=0;i<100;i++)
+            for(var i=0;i<100;i++)
                 tasksRunning.Add( debounced( ) );
            
             //crude but simple and with least amount of variables to screw things up
@@ -54,7 +56,7 @@ namespace Underscore.Test.Action
 
             flag = false;
 
-            for (int i = 0; i < 100; i++)
+            for (var i = 0; i < 100; i++)
                 tasksRunning.Add(debounced());
 
             Assert.IsFalse(flag);
@@ -74,9 +76,8 @@ namespace Underscore.Test.Action
              * will use same mechanism with bind functionality
              */
             var testing = ManipulateDummy( );
-            var flag = false;
             string result =  null;
-            int callCount = 0;
+            var callCount = 0;
 
             var target = testing.Debounce(new Action<string>((i) =>
             {
@@ -88,7 +89,7 @@ namespace Underscore.Test.Action
 
             var waitingfor = new List<Task>();
 
-            for (int i = 0; i < 100; i++)
+            for (var i = 0; i < 100; i++)
                 waitingfor.Add(target(i.ToString()));
 
 
@@ -113,13 +114,12 @@ namespace Underscore.Test.Action
              */
             var testing = ManipulateDummy( );
             var flag = false;
-            var locking = new object( );
-            var waitingFor = 50;
+            const int waitingFor = 50;
             var timer = new Stopwatch();
 
 
             var rslt = new[]{"",""};
-            int countCalling = 0;
+            var countCalling = 0;
             var debouncing  = new Action<string,string>( ( i,j ) =>
             {
                 flag = true;
@@ -137,16 +137,16 @@ namespace Underscore.Test.Action
             //crude but simple and with least amount of variables to screw things up
             Assert.IsFalse( flag );
             Assert.AreEqual( false, flag );
-            for ( int i=0 ; i < rslt.Length ; i++ )
+            for ( var i=0 ; i < rslt.Length ; i++ )
                 Assert.AreEqual( "", rslt[ i ] );
 
             timer.Start( );
-            for ( int i=0 ; i < 100 ; i++ )
+            for ( var i=0 ; i < 100 ; i++ )
                 tasksRunning.Add( debounced( i.ToString( ), (-i).ToString() ) );
 
             //crude but simple and with least amount of variables to screw things up
             Assert.IsFalse( flag );
-            for ( int i=0 ; i < rslt.Length ; i++ )
+            for ( var i=0 ; i < rslt.Length ; i++ )
                 Assert.AreEqual( "", rslt[ i ] );
 
             foreach ( var task in tasksRunning )
@@ -184,13 +184,12 @@ namespace Underscore.Test.Action
              */
             var testing = ManipulateDummy( );
             var flag = false;
-            var locking = new object( );
-            var waitingFor = 50;
+            const int waitingFor = 50;
             var timer = new Stopwatch( );
 
 
             var rslt = new[ ] { "", "" ,""};
-            int countCalling = 0;
+            var countCalling = 0;
             var debouncing  = new Action<string, string, string>( ( i, j,k ) =>
             {
                 flag = true;
@@ -209,17 +208,17 @@ namespace Underscore.Test.Action
             //crude but simple and with least amount of variables to screw things up
             Assert.IsFalse( flag );
             Assert.AreEqual( false, flag );
-            for ( int i=0 ; i < rslt.Length ; i++ )
-                Assert.AreEqual( "", rslt[ i ] );
+            foreach (var t in rslt)
+                Assert.AreEqual( "", t );
 
             timer.Start( );
-            for ( int i=0 ; i < 100 ; i++ )
+            for ( var i=0 ; i < 100 ; i++ )
                 tasksRunning.Add( debounced( i.ToString( ), ( -i ).ToString( ) , i.ToString() ) );
 
             //crude but simple and with least amount of variables to screw things up
             Assert.IsFalse( flag );
-            for ( int i=0 ; i < rslt.Length ; i++ )
-                Assert.AreEqual( "", rslt[ i ] );
+            foreach (string t in rslt)
+                Assert.AreEqual( "", t );
 
             foreach ( var task in tasksRunning )
                 await task;
@@ -258,13 +257,13 @@ namespace Underscore.Test.Action
              */
             var testing = ManipulateDummy( );
             var flag = false;
-            var locking = new object( );
-            var waitingFor = 50;
+            const int waitingFor = 50;
             var timer = new Stopwatch( );
 
 
-            var rslt = new[ ] { "", "","","" };
-            int countCalling = 0;
+            var rslt = new[] { "", "", "", "" };
+            var expected = new[] { "", "", "", ""};
+            var countCalling = 0;
             var debouncing  = new Action<string, string, string,string>( ( i, j, k,l ) =>
             {
                 flag = true;
@@ -284,16 +283,21 @@ namespace Underscore.Test.Action
             //crude but simple and with least amount of variables to screw things up
             Assert.IsFalse( flag );
             Assert.AreEqual( false, flag );
-            for ( int i=0 ; i < rslt.Length ; i++ )
+            for ( var i=0 ; i < rslt.Length ; i++ )
                 Assert.AreEqual( "", rslt[ i ] );
 
             timer.Start( );
-            for ( int i=0 ; i < 100 ; i++ )
-                tasksRunning.Add( debounced( i.ToString( ), ( -i ).ToString( ), i.ToString( ), (-i).ToString( ) ) );
-
+            for (var i = 0; i < 100; i++)
+            {
+                expected[0] = expected[2] = i.ToString();
+                expected[1] = expected[3] = (-i).ToString();
+                tasksRunning.Add(
+                    debounced(expected[0] , expected[1] , expected[2], expected[3] )
+                );
+            }
             //crude but simple and with least amount of variables to screw things up
             Assert.IsFalse( flag );
-            for ( int i=0 ; i < rslt.Length ; i++ )
+            for ( var i=0 ; i < rslt.Length ; i++ )
                 Assert.AreEqual( "", rslt[ i ] );
 
             foreach ( var task in tasksRunning )
@@ -302,15 +306,23 @@ namespace Underscore.Test.Action
 
             Assert.IsTrue( timer.ElapsedMilliseconds >= waitingFor );
             Assert.IsTrue( flag );
-            
-            Assert.AreEqual( "99", rslt[ 0 ] );
-            Assert.AreEqual( "-99", rslt[ 1 ] );
-            Assert.AreEqual( "99", rslt[ 2 ] );
-            Assert.AreEqual( "-99", rslt[ 3 ] );
+
+            Assert.AreEqual(expected[0], rslt[0]);
+            Assert.AreEqual(expected[1], rslt[1]);
+            Assert.AreEqual(expected[2], rslt[2]);
+            Assert.AreEqual(expected[3], rslt[3]);
 
             Assert.AreEqual( 1, countCalling );
 
+
+
             var secondCallResult = debounced( "a", "b", "c" ,"d");
+
+            expected[0] += "a";
+            expected[1] += "b";
+            expected[2] += "c";
+            expected[3] += "d";
+
             Assert.AreEqual( 1, countCalling );
 
             //after wait period time has expired 
@@ -319,10 +331,10 @@ namespace Underscore.Test.Action
 
             await secondCallResult;
 
-            Assert.AreEqual( "99a", rslt[ 0 ] );
-            Assert.AreEqual( "-99b", rslt[ 1 ] );
-            Assert.AreEqual( "99c", rslt[ 2 ] );
-            Assert.AreEqual( "-99d", rslt[ 3 ] );
+            Assert.AreEqual( expected[0], rslt[ 0 ] );
+            Assert.AreEqual( expected[1], rslt[ 1 ] );
+            Assert.AreEqual( expected[2], rslt[ 2 ] );
+            Assert.AreEqual( expected[3], rslt[ 3 ] );
             Assert.AreEqual( 2, countCalling );
 
         }
@@ -337,21 +349,22 @@ namespace Underscore.Test.Action
              */
             var testing = ManipulateDummy( );
             var flag = false;
-            var waitingFor = 50;
+            const int waitingFor = 50;
             var timer = new Stopwatch( );
 
 
             var rslt = new[ ] { "", "", "", "","" };
-            int countCalling = 0;
+            var expected = new[] {"", "", "", "", ""};
+            var countCalling = 0;
             var debouncing  = new Action<string, string, string, string,string>( ( i, j, k, l,m ) =>
             {
                 flag = true;
                 //should still only be the last called item
-                rslt[ 0 ] += i;
-                rslt[ 1 ] += j;
-                rslt[ 2 ] += k;
-                rslt[ 3 ] += l;
-                rslt[ 4 ] += m;
+                expected [0] = rslt[ 0 ] += i;
+                expected[1] = rslt[ 1 ] += j;
+                expected[2] = rslt[ 2 ] += k;
+                expected[3] = rslt[ 3 ] += l;
+                expected[4] = rslt[ 4 ] += m;
                 countCalling++;
             } );
 
@@ -363,16 +376,16 @@ namespace Underscore.Test.Action
             //crude but simple and with least amount of variables to screw things up
             Assert.IsFalse( flag );
             Assert.AreEqual( false, flag );
-            for ( int i=0 ; i < rslt.Length ; i++ )
+            for ( var i=0 ; i < rslt.Length ; i++ )
                 Assert.AreEqual( "", rslt[ i ] );
 
             timer.Start( );
-            for ( int i=0 ; i < 100 ; i++ )
+            for ( var i=0 ; i < 100 ; i++ )
                 tasksRunning.Add( debounced( i.ToString( ), ( -i ).ToString( ), i.ToString( ), ( -i ).ToString( ), (i).ToString() ) );
 
             //crude but simple and with least amount of variables to screw things up
             Assert.IsFalse( flag );
-            for ( int i=0 ; i < rslt.Length ; i++ )
+            for ( var i=0 ; i < rslt.Length ; i++ )
                 Assert.AreEqual( "", rslt[ i ] );
 
             foreach ( var task in tasksRunning )
@@ -382,11 +395,11 @@ namespace Underscore.Test.Action
             Assert.IsTrue( timer.ElapsedMilliseconds >= waitingFor );
             Assert.IsTrue( flag );
 
-            Assert.AreEqual( "99", rslt[ 0 ] );
-            Assert.AreEqual( "-99", rslt[ 1 ] );
-            Assert.AreEqual( "99", rslt[ 2 ] );
-            Assert.AreEqual( "-99", rslt[ 3 ] );
-            Assert.AreEqual( "99", rslt[ 4 ] );
+            Assert.AreEqual( expected[0], rslt[ 0 ] );
+            Assert.AreEqual( expected[1], rslt[ 1 ] );
+            Assert.AreEqual( expected[2], rslt[ 2 ] );
+            Assert.AreEqual( expected[3], rslt[ 3 ] );
+            Assert.AreEqual( expected[4], rslt[ 4 ] );
 
             Assert.AreEqual( 1, countCalling );
 
@@ -399,11 +412,11 @@ namespace Underscore.Test.Action
 
             await secondCallResult;
 
-            Assert.AreEqual( "99a", rslt[ 0 ] );
-            Assert.AreEqual( "-99b", rslt[ 1 ] );
-            Assert.AreEqual( "99c", rslt[ 2 ] );
-            Assert.AreEqual( "-99d", rslt[ 3 ] );
-            Assert.AreEqual( "99e", rslt[ 4 ] );
+            Assert.AreEqual(expected[0], rslt[0]);
+            Assert.AreEqual(expected[1], rslt[1]);
+            Assert.AreEqual(expected[2], rslt[2]);
+            Assert.AreEqual(expected[3], rslt[3]);
+            Assert.AreEqual(expected[4], rslt[4]);
             Assert.AreEqual( 2, countCalling );
 
         }
@@ -417,13 +430,12 @@ namespace Underscore.Test.Action
              */
             var testing = ManipulateDummy( );
             var flag = false;
-            var locking = new object( );
-            var waitingFor = 50;
+            const int waitingFor = 50;
             var timer = new Stopwatch( );
 
 
             var rslt = new[ ] { "", "", "", "", "","" };
-            int countCalling = 0;
+            var countCalling = 0;
             var debouncing  = new Action<string, string, string, string, string,string>( ( i, j, k, l, m,n ) =>
             {
                 flag = true;
@@ -445,16 +457,16 @@ namespace Underscore.Test.Action
             //crude but simple and with least amount of variables to screw things up
             Assert.IsFalse( flag );
             Assert.AreEqual( false, flag );
-            for ( int i=0 ; i < rslt.Length ; i++ )
+            for ( var i=0 ; i < rslt.Length ; i++ )
                 Assert.AreEqual( "", rslt[ i ] );
 
             timer.Start( );
-            for ( int i=0 ; i < 100 ; i++ )
+            for ( var i=0 ; i < 100 ; i++ )
                 tasksRunning.Add( debounced( i.ToString( ), ( -i ).ToString( ), i.ToString( ), ( -i ).ToString( ), ( i ).ToString( ),( -i ).ToString( ) ) );
 
             //crude but simple and with least amount of variables to screw things up
             Assert.IsFalse( flag );
-            for ( int i=0 ; i < rslt.Length ; i++ )
+            for ( var i=0 ; i < rslt.Length ; i++ )
                 Assert.AreEqual( "", rslt[ i ] );
 
             foreach ( var task in tasksRunning )
@@ -493,239 +505,320 @@ namespace Underscore.Test.Action
         }
 
         [TestMethod]
-        public async Task ActionThrottle( ) 
+        public async Task ActionThrottle7()
         {
+            
             var testing = ManipulateDummy();
 
-            string[][] results = Enumerable.Range( 0, 6 ).Select( a => Enumerable.Range(0,a+1).Select(b=>b.ToString()).ToArray( )).ToArray( );
+            var results = "";
 
-            await Util.Tasks.Start( ( ) =>
-            {
-                int result = 0;
-
-                var throttling = new System.Action( ( ) => result++);
-                Stack<Task> tasks = new Stack<Task>( );
-                var throttled = testing.Throttle( throttling, 500 );
-
-                Assert.AreEqual( 0, result );
-
-                for ( int i=0 ; i < 100 ; i++ )
-                    tasks.Push( throttled( ) );
-
-                Assert.AreEqual( 1, result );
-
-                while ( tasks.Count != 0 )
-                    tasks.Pop( ).Wait( );
-
-                Assert.AreEqual( 2, result );
-
-
-            }, ( ) =>
-            {
-                int index = 0;
-
-                int callCount = 0;
+                var callCount = 0;
 
                 var throttling = new Action<int>( ( i ) =>
                 {
-                    results[ index ][ 0 ] = ( i + 1 ).ToString( );
+                    results= ( i + 1 ).ToString( );
                     callCount++;
                 } );
-                Stack<Task> tasks = new Stack<Task>( );
-                var throttled = testing.Throttle( throttling, 500 );
 
-                for ( int i=0 ; i < 100 ; i++ )
+                var tasks = new Stack<Task>( );
+                var throttled = testing.Throttle( throttling, 20 );
+
+                for ( var i=0 ; i < 100 ; i++ )
                     tasks.Push( throttled( i ) );
 
                 Assert.AreEqual( 1, callCount );
-                Assert.AreEqual( "1", results[ index ][ 0 ] );
+                Assert.AreEqual( "1", results );
 
                 while ( tasks.Count != 0 )
-                    tasks.Pop( ).Wait( );
+                    await tasks.Pop( );
 
                 Assert.AreEqual( 2, callCount );
-                Assert.AreEqual( "100", results[ index ][ 0 ] );
+                Assert.AreEqual( "100", results );
+        }
 
-            }, ( ) =>
-            {
-                int index = 1;
+        [TestMethod]
+        public async Task ActionThrottle2()
+        {
+            
+            var testing = ManipulateDummy();
 
-                int callCount = 0;
+            var results = new string[2]; 
+
+                var callCount = 0;
 
                 var throttling = new Action<int, int>( ( i, j ) =>
                 {
-                    results[ index ][ 0 ] = ( i ).ToString( );
-                    results[ index ][ 1 ] = ( j ).ToString( );
+                    results[ 0 ] = ( i ).ToString( );
+                    results[ 1 ] = ( j ).ToString( );
                     callCount++;
                 } );
-                Stack<Task> tasks = new Stack<Task>( );
+                var tasks = new Stack<Task>( );
                 var throttled = testing.Throttle( throttling, 500 );
 
-                for ( int i=1 ; i <= 100 ; i++ )
+                for ( var i=1 ; i <= 100 ; i++ )
                     tasks.Push( throttled( i, -i ) );
 
-                Assert.AreEqual( "1", results[ index ][ 0 ] );
-                Assert.AreEqual( "-1", results[ index ][ 1 ] );
+                Assert.AreEqual( "1", results[ 0 ] );
+                Assert.AreEqual( "-1", results[ 1 ] );
                 Assert.AreEqual( 1, callCount );
 
                 while ( tasks.Count != 0 )
-                    tasks.Pop( ).Wait( );
+                    await tasks.Pop( );
 
-                Assert.AreEqual( "100", results[ index ][ 0 ] );
-                Assert.AreEqual( "-100", results[ index ][ 1 ] );
+                Assert.AreEqual( "100", results[ 0 ] );
+                Assert.AreEqual( "-100", results[ 1 ] );
                 Assert.AreEqual( 2, callCount );
 
+        }
 
-            }, ( ) =>
-            {
-                int index = 2;
 
-                int callCount = 0;
+        [TestMethod]
+        public async Task ActionThrottle3()
+        {
+            var testing = ManipulateDummy();
+
+            var results = new string[3];
+
+                var callCount = 0;
 
                 var throttling = new Action<int, int, int>( ( i, j, k ) =>
                 {
-                    results[ index ][ 0 ] = ( i ).ToString( );
-                    results[ index ][ 1 ] = ( j ).ToString( );
-                    results[ index ][ 2 ] = ( k ).ToString( );
+                    results[ 0 ] = ( i ).ToString( );
+                    results[ 1 ] = ( j ).ToString( );
+                    results[ 2 ] = ( k ).ToString( );
                     callCount++;
                 } );
-                Stack<Task> tasks = new Stack<Task>( );
+                var tasks = new Stack<Task>( );
                 var throttled = testing.Throttle( throttling, 500 );
 
-                for ( int i=1 ; i <= 100 ; i++ )
+                for ( var i=1 ; i <= 100 ; i++ )
                     tasks.Push( throttled( i, -i, i ) );
 
-                Assert.AreEqual( "1", results[ index ][ 0 ] );
-                Assert.AreEqual( "-1", results[ index ][ 1 ] );
-                Assert.AreEqual( "1", results[ index ][ 2 ] );
+                Assert.AreEqual( "1", results[ 0 ] );
+                Assert.AreEqual( "-1", results[ 1 ] );
+                Assert.AreEqual( "1", results[ 2 ] );
                 Assert.AreEqual( 1, callCount );
 
                 while ( tasks.Count != 0 )
-                    tasks.Pop( ).Wait( );
+                    await tasks.Pop( );
 
-                Assert.AreEqual( "100", results[ index ][ 0 ] );
-                Assert.AreEqual( "-100", results[ index ][ 1 ] );
-                Assert.AreEqual( "100", results[ index ][ 2 ] );
+                Assert.AreEqual( "100", results[ 0 ] );
+                Assert.AreEqual( "-100", results[ 1 ] );
+                Assert.AreEqual( "100", results[ 2 ] );
                 Assert.AreEqual( 2, callCount );
 
-            }, ( ) =>
-            {
-                int index = 3;
+                for (var i = 1; i <= 100; i++)
+                    tasks.Push(throttled(i, -i, i));
 
-                int callCount = 0;
+                Assert.AreEqual("1", results[0]);
+                Assert.AreEqual("-1", results[1]);
+                Assert.AreEqual("1", results[2]);
+                Assert.AreEqual(3, callCount);
+
+                while (tasks.Count != 0)
+                    await tasks.Pop();
+
+                Assert.AreEqual("100", results[0]);
+                Assert.AreEqual("-100", results[1]);
+                Assert.AreEqual("100", results[2]);
+                Assert.AreEqual(4, callCount);
+        }
+
+
+        [TestMethod]
+        public async Task ActionThrottle4()
+        {
+            var testing = ManipulateDummy();
+
+            var results = new string[4];
+
+                var callCount = 0;
 
                 var throttling = new Action<int, int, int, int>( ( i, j, k, l ) =>
                 {
-                    results[ index ][ 0 ] = ( i ).ToString( );
-                    results[ index ][ 1 ] = ( j ).ToString( );
-                    results[ index ][ 2 ] = ( k ).ToString( );
-                    results[ index ][ 3 ] = ( l ).ToString( );
+                    results[ 0 ] = ( i ).ToString( );
+                    results[ 1 ] = ( j ).ToString( );
+                    results[ 2 ] = ( k ).ToString( );
+                    results[ 3 ] = ( l ).ToString( );
                     callCount++;
                 } );
-                Stack<Task> tasks = new Stack<Task>( );
+                var tasks = new Stack<Task>( );
                 var throttled = testing.Throttle( throttling, 500 );
 
-                for ( int i=1 ; i <= 100 ; i++ )
+                for ( var i=1 ; i <= 100 ; i++ )
                     tasks.Push( throttled( i, -i, i, -i ) );
 
-                Assert.AreEqual( "1", results[ index ][ 0 ] );
-                Assert.AreEqual( "-1", results[ index ][ 1 ] );
-                Assert.AreEqual( "1", results[ index ][ 2 ] );
-                Assert.AreEqual( "-1", results[ index ][ 3 ] );
+                Assert.AreEqual( "1", results[ 0 ] );
+                Assert.AreEqual( "-1", results[ 1 ] );
+                Assert.AreEqual( "1", results[ 2 ] );
+                Assert.AreEqual( "-1", results[ 3 ] );
                 Assert.AreEqual( 1, callCount );
 
                 while ( tasks.Count != 0 )
                     tasks.Pop( ).Wait( );
 
-                Assert.AreEqual( "100", results[ index ][ 0 ] );
-                Assert.AreEqual( "-100", results[ index ][ 1 ] );
-                Assert.AreEqual( "100", results[ index ][ 2 ] );
-                Assert.AreEqual( "-100", results[ index ][ 3 ] );
+                Assert.AreEqual( "100", results[ 0 ] );
+                Assert.AreEqual( "-100", results[ 1 ] );
+                Assert.AreEqual( "100", results[ 2 ] );
+                Assert.AreEqual( "-100", results[ 3 ] );
                 Assert.AreEqual( 2, callCount );
 
-            }, ( ) =>
+
+                for (var i = 1; i <= 100; i++)
+                    tasks.Push(throttled(i, -i, i, -i));
+
+                Assert.AreEqual("1", results[0]);
+                Assert.AreEqual("-1", results[1]);
+                Assert.AreEqual("1", results[2]);
+                Assert.AreEqual("-1", results[3]);
+                Assert.AreEqual(3, callCount);
+
+                while (tasks.Count != 0)
+                    await tasks.Pop();
+
+                Assert.AreEqual("100", results[0]);
+                Assert.AreEqual("-100", results[1]);
+                Assert.AreEqual("100", results[2]);
+                Assert.AreEqual("-100", results[3]);
+                Assert.AreEqual(4, callCount);
+        }
+
+        [TestMethod]
+        public async Task ActionThrottle6()
+        {
+            var testing = ManipulateDummy();
+
+            var results = new string[6];
+
+
+            var callCount = 0;
+
+            var throttling = new Action<int, int, int, int, int, int>((i, j, k, l, m, n) =>
             {
-                int index = 4;
+                results[0] = (i).ToString();
+                results[1] = (j).ToString();
+                results[2] = (k).ToString();
+                results[3] = (l).ToString();
+                results[4] = (m).ToString();
+                results[5] = (n).ToString();
+                callCount++;
+            });
+
+            var tasks = new Stack<Task>();
+            var throttled = testing.Throttle(throttling, 500);
+
+            for (var i = 1; i <= 100; i++)
+                tasks.Push(throttled(i, -i, i, -i, i, -i));
+
+            Assert.AreEqual("1", results[0]);
+            Assert.AreEqual("-1", results[1]);
+            Assert.AreEqual("1", results[2]);
+            Assert.AreEqual("-1", results[3]);
+            Assert.AreEqual("1", results[4]);
+            Assert.AreEqual("-1", results[5]);
+            Assert.AreEqual(1, callCount);
+
+            while (tasks.Count != 0)
+                await tasks.Pop();
+
+            Assert.AreEqual("100", results[0]);
+            Assert.AreEqual("-100", results[1]);
+            Assert.AreEqual("100", results[2]);
+            Assert.AreEqual("-100", results[3]);
+            Assert.AreEqual("100", results[4]);
+            Assert.AreEqual("-100", results[5]);
+            Assert.AreEqual(2, callCount);
+
+            for (var i = 1; i <= 100; i++)
+                tasks.Push(throttled(i, -i, i, -i, i, -i));
+
+            Assert.AreEqual("1", results[0]);
+            Assert.AreEqual("-1", results[1]);
+            Assert.AreEqual("1", results[2]);
+            Assert.AreEqual("-1", results[3]);
+            Assert.AreEqual("1", results[4]);
+            Assert.AreEqual("-1", results[5]);
+            Assert.AreEqual(3, callCount);
+
+            while (tasks.Count != 0)
+                await tasks.Pop();
+
+            Assert.AreEqual("100", results[0]);
+            Assert.AreEqual("-100", results[1]);
+            Assert.AreEqual("100", results[2]);
+            Assert.AreEqual("-100", results[3]);
+            Assert.AreEqual("100", results[4]);
+            Assert.AreEqual("-100", results[5]);
+            Assert.AreEqual(4, callCount);
+
+        }
+
+        [TestMethod]
+        public async Task ActionThrottle5()
+        {
+            var testing = ManipulateDummy();
+
+            var results = new string[5];
 
 
-                int callCount = 0;
+                var callCount = 0;
 
                 var throttling = new Action<int, int, int, int, int>( ( i, j, k, l, m ) =>
                 {
-                    results[ index ][ 0 ] = ( i ).ToString( );
-                    results[ index ][ 1 ] = ( j ).ToString( );
-                    results[ index ][ 2 ] = ( k ).ToString( );
-                    results[ index ][ 3 ] = ( l ).ToString( );
-                    results[ index ][ 4 ] = ( m ).ToString( );
+                    results[ 0 ] = ( i ).ToString( );
+                    results[ 1 ] = ( j ).ToString( );
+                    results[ 2 ] = ( k ).ToString( );
+                    results[ 3 ] = ( l ).ToString( );
+                    results[ 4 ] = ( m ).ToString( );
                     callCount++;
                 } );
-                Stack<Task> tasks = new Stack<Task>( );
+                var tasks = new Stack<Task>( );
                 var throttled = testing.Throttle( throttling, 500 );
 
-                for ( int i=1 ; i <= 100 ; i++ )
+                for ( var i=1 ; i <= 100 ; i++ )
                     tasks.Push( throttled( i, -i, i, -i, i ) );
 
-                Assert.AreEqual( "1", results[ index ][ 0 ] );
-                Assert.AreEqual( "-1", results[ index ][ 1 ] );
-                Assert.AreEqual( "1", results[ index ][ 2 ] );
-                Assert.AreEqual( "-1", results[ index ][ 3 ] );
-                Assert.AreEqual( "1", results[ index ][ 4 ] );
+                Assert.AreEqual( "1", results[ 0 ] );
+                Assert.AreEqual( "-1", results[ 1 ] );
+                Assert.AreEqual( "1", results[ 2 ] );
+                Assert.AreEqual( "-1", results[ 3 ] );
+                Assert.AreEqual( "1", results[ 4 ] );
                 Assert.AreEqual( 1, callCount );
 
                 while ( tasks.Count != 0 )
-                    tasks.Pop( ).Wait( );
+                    await tasks.Pop( );
 
-                Assert.AreEqual( "100", results[ index ][ 0 ] );
-                Assert.AreEqual( "-100", results[ index ][ 1 ] );
-                Assert.AreEqual( "100", results[ index ][ 2 ] );
-                Assert.AreEqual( "-100", results[ index ][ 3 ] );
-                Assert.AreEqual( "100", results[ index ][ 4 ] );
+                Assert.AreEqual( "100", results[ 0 ] );
+                Assert.AreEqual( "-100", results[ 1 ] );
+                Assert.AreEqual( "100", results[ 2 ] );
+                Assert.AreEqual( "-100", results[ 3 ] );
+                Assert.AreEqual( "100", results[ 4 ] );
                 Assert.AreEqual( 2, callCount );
+        }
 
+        [TestMethod]
+        public async Task ActionThrottle1( ) 
+        {
+            var testing = ManipulateDummy();
 
-            }, ( ) => {
-                int index = 5;
+            var result = 0;
 
+            var throttling = new System.Action(() => result++);
+            var tasks = new Stack<Task>();
+            var throttled = testing.Throttle(throttling, 25);
 
-                int callCount = 0;
+            Assert.AreEqual(0, result);
 
-                var throttling = new Action< int, int, int, int, int, int >( ( i, j, k, l, m,n ) =>
-                {
-                    results[ index ][ 0 ] = ( i ).ToString( );
-                    results[ index ][ 1 ] = ( j ).ToString( );
-                    results[ index ][ 2 ] = ( k ).ToString( );
-                    results[ index ][ 3 ] = ( l ).ToString( );
-                    results[ index ][ 4 ] = ( m ).ToString( );
-                    results[ index ][ 5 ] = ( n ).ToString( );
-                    callCount++;
-                } );
+            for (var i = 0; i < 100; i++)
+                tasks.Push(throttled());
 
-                Stack<Task> tasks = new Stack<Task>( );
-                var throttled = testing.Throttle( throttling, 500 );
+            Assert.AreEqual(1, result);
 
-                for ( int i=1 ; i <= 100 ; i++ )
-                    tasks.Push( throttled( i, -i, i, -i,  i , -i ) );
+            while (tasks.Count != 0)
+                tasks.Pop().Wait();
 
-                Assert.AreEqual( "1", results[ index ][ 0 ] );
-                Assert.AreEqual( "-1", results[ index ][ 1 ] );
-                Assert.AreEqual( "1", results[ index ][ 2 ] );
-                Assert.AreEqual( "-1", results[ index ][ 3 ] );
-                Assert.AreEqual( "1", results[ index ][ 4 ] );
-                Assert.AreEqual( "-1", results[ index ][ 5 ] );
-                Assert.AreEqual( 1, callCount );
-
-                while ( tasks.Count != 0 )
-                    tasks.Pop( ).Wait( );
-
-                Assert.AreEqual( "100", results[ index ][ 0 ] );
-                Assert.AreEqual( "-100", results[ index ][ 1 ] );
-                Assert.AreEqual( "100", results[ index ][ 2 ] );
-                Assert.AreEqual( "-100", results[ index ][ 3 ] );
-                Assert.AreEqual( "100", results[ index ][ 4 ] );
-                Assert.AreEqual( "-100", results[ index ][ 5 ] );
-                Assert.AreEqual( 2, callCount );
-
-            } );
+            Assert.AreEqual(2, result);
+               
         }
 
         [TestMethod]
@@ -735,7 +828,7 @@ namespace Underscore.Test.Action
             var fn = new ComposeComponent( );
             var testing = ManipulateDummy();
 
-            string[] arguments = new[ ] { "a", "b", "c", "d", "e", "f"};
+            string[] arguments = { "a", "b", "c", "d", "e", "f"};
 
 
             Action<int, Task> TestDelay = ( waitTime, delayed ) =>
@@ -753,7 +846,7 @@ namespace Underscore.Test.Action
             await Util.Tasks.Start(() =>
             {
 
-                string result = "";
+                var result = "";
                 var timer = new Stopwatch();
                 var delayed = testing.Delay(() => result = "worked", 100);
                 var taskResult = delayed();
@@ -897,18 +990,18 @@ namespace Underscore.Test.Action
         public async Task ActionOnce( ) 
         {
             //if I didn't use this I would lose my mind
-            var fn = new global::Underscore.Action.ComposeComponent( );
+            var fn = new Underscore.Action.ComposeComponent( );
             var testing = ManipulateDummy( );
 
-            string[] arguments = new[ ] { "a", "b", "c", "d", "e", "f","g","h","i","j","k","l","m","n" ,"o","p"};
+            string[] arguments = { "a", "b", "c", "d", "e", "f","g","h","i","j","k","l","m","n" ,"o","p"};
 
             await Util.Tasks.Start(()=>{ 
             
-                string result = "";
-                int counter = 0;
+                var result = "";
+                var counter = 0;
                 var timer = new Stopwatch();
                 var onced = testing.Once(()=>result=(counter++).ToString());
-                for ( int i=0 ; i < 10 ; i++ )
+                for ( var i=0 ; i < 10 ; i++ )
                     onced( );
 
                 Assert.AreEqual( "0", result );
@@ -919,7 +1012,7 @@ namespace Underscore.Test.Action
                 var invoked = false;
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var oncing = new Action<string,string>( ( a , b ) =>
                 {
@@ -930,7 +1023,7 @@ namespace Underscore.Test.Action
                     
                 var onced = testing.Once( oncing  );
 
-                for ( int i=0 ; i < 100 ; i++ )
+                for ( var i=0 ; i < 100 ; i++ )
                     fn.Apply( onced, arguments );
 
                 Assert.AreEqual( "ab1", result );
@@ -943,7 +1036,7 @@ namespace Underscore.Test.Action
                 var invoked = false;
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var oncing = new Action<string, string,string >( ( a, b , c ) =>
                 {
@@ -954,7 +1047,7 @@ namespace Underscore.Test.Action
 
                 var onced = testing.Once( oncing );
 
-                for ( int i=0 ; i < 100 ; i++ )
+                for ( var i=0 ; i < 100 ; i++ )
                     fn.Apply( onced, arguments );
 
                 Assert.AreEqual( "abc1", result );
@@ -967,7 +1060,7 @@ namespace Underscore.Test.Action
                 var invoked = false;
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var oncing = new Action<string, string,string,string>( ( a, b, c,d ) =>
                 {
@@ -978,7 +1071,7 @@ namespace Underscore.Test.Action
 
                 var onced = testing.Once( oncing );
 
-                for ( int i=0 ; i < 100 ; i++ )
+                for ( var i=0 ; i < 100 ; i++ )
                     fn.Apply( onced, arguments );
 
                 Assert.AreEqual( "abcd1", result );
@@ -991,7 +1084,7 @@ namespace Underscore.Test.Action
                 var invoked = false;
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var oncing = new Action<string, string,string,string>( ( a, b, c, d ) =>
                 {
@@ -1002,7 +1095,7 @@ namespace Underscore.Test.Action
 
                 var onced = testing.Once( oncing );
 
-                for ( int i=0 ; i < 100 ; i++ )
+                for ( var i=0 ; i < 100 ; i++ )
                     fn.Apply( onced, arguments );
 
                 Assert.AreEqual( "abcd1", result );
@@ -1015,7 +1108,7 @@ namespace Underscore.Test.Action
                 var invoked = false;
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var oncing = new Action<string, string, string, string,string>( ( a, b, c, d,e ) =>
                 {
@@ -1026,7 +1119,7 @@ namespace Underscore.Test.Action
 
                 var onced = testing.Once( oncing );
 
-                for ( int i=0 ; i < 100 ; i++ )
+                for ( var i=0 ; i < 100 ; i++ )
                     fn.Apply( onced, arguments );
 
                 Assert.AreEqual( "abcde1", result );
@@ -1039,7 +1132,7 @@ namespace Underscore.Test.Action
                 var invoked = false;
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var oncing = new Action<string, string, string, string, string,string>( ( a, b, c, d, e, f ) =>
                 {
@@ -1050,7 +1143,7 @@ namespace Underscore.Test.Action
 
                 var onced = testing.Once( oncing );
 
-                for ( int i=0 ; i < 100 ; i++ )
+                for ( var i=0 ; i < 100 ; i++ )
                     fn.Apply( onced, arguments );
 
                 Assert.AreEqual( "abcdef1", result );
@@ -1063,7 +1156,7 @@ namespace Underscore.Test.Action
                 var invoked = false;
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var oncing = new Action<string, string, string, string, string,string,string>( ( a, b, c, d, e, f,g ) =>
                 {
@@ -1074,7 +1167,7 @@ namespace Underscore.Test.Action
 
                 var onced = testing.Once( oncing );
 
-                for ( int i=0 ; i < 100 ; i++ )
+                for ( var i=0 ; i < 100 ; i++ )
                     fn.Apply( onced, arguments );
 
                 Assert.AreEqual( "abcdefg1", result );
@@ -1087,7 +1180,7 @@ namespace Underscore.Test.Action
                 var invoked = false;
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var oncing = new Action<string, string, string, string, string, string, string,string>( ( a, b, c, d, e, f, g, h ) =>
                 {
@@ -1098,7 +1191,7 @@ namespace Underscore.Test.Action
 
                 var onced = testing.Once( oncing );
 
-                for ( int i=0 ; i < 100 ; i++ )
+                for ( var i=0 ; i < 100 ; i++ )
                     fn.Apply( onced, arguments );
 
                 Assert.AreEqual( "abcdefgh1", result );
@@ -1111,7 +1204,7 @@ namespace Underscore.Test.Action
                 var invoked = false;
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var oncing = new Action<string, string, string, string, string, string, string, string,string>( ( a, b, c, d, e, f, g, h, i ) =>
                 {
@@ -1122,7 +1215,7 @@ namespace Underscore.Test.Action
 
                 var onced = testing.Once( oncing );
 
-                for ( int i=0 ; i < 100 ; i++ )
+                for ( var i=0 ; i < 100 ; i++ )
                     fn.Apply( onced, arguments );
 
                 Assert.AreEqual( "abcdefghi1", result );
@@ -1135,7 +1228,7 @@ namespace Underscore.Test.Action
                 var invoked = false;
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var oncing = new Action<string, string, string, string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g, h, i, j ) =>
                 {
@@ -1146,7 +1239,7 @@ namespace Underscore.Test.Action
 
                 var onced = testing.Once( oncing );
 
-                for ( int i=0 ; i < 100 ; i++ )
+                for ( var i=0 ; i < 100 ; i++ )
                     fn.Apply( onced, arguments );
 
                 Assert.AreEqual( "abcdefghij1", result );
@@ -1159,7 +1252,7 @@ namespace Underscore.Test.Action
                 var invoked = false;
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var oncing = new Action<string, string, string, string, string, string, string, string,string,string,string>( ( a, b, c, d, e, f, g, h, i, j, k ) =>
                 {
@@ -1170,7 +1263,7 @@ namespace Underscore.Test.Action
 
                 var onced = testing.Once( oncing );
 
-                for ( int i=0 ; i < 100 ; i++ )
+                for ( var i=0 ; i < 100 ; i++ )
                     fn.Apply( onced, arguments );
 
                 Assert.AreEqual( "abcdefghijk1", result );
@@ -1183,7 +1276,7 @@ namespace Underscore.Test.Action
                 var invoked = false;
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var oncing = new Action<string, string, string, string, string, string, string, string,string,string,string,string>( ( a, b, c, d, e, f, g, h, i, j, k,l ) =>
                 {
@@ -1194,7 +1287,7 @@ namespace Underscore.Test.Action
 
                 var onced = testing.Once( oncing );
 
-                for ( int i=0 ; i < 100 ; i++ )
+                for ( var i=0 ; i < 100 ; i++ )
                     fn.Apply( onced, arguments );
 
                 Assert.AreEqual( "abcdefghijkl1", result );
@@ -1207,7 +1300,7 @@ namespace Underscore.Test.Action
                 var invoked = false;
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string >( ( a, b, c, d, e, f, g, h, i, j, k, l, m ) =>
                 {
@@ -1218,7 +1311,7 @@ namespace Underscore.Test.Action
 
                 var onced = testing.Once( oncing );
 
-                for ( int i=0 ; i < 100 ; i++ )
+                for ( var i=0 ; i < 100 ; i++ )
                     fn.Apply( onced, arguments );
 
                 Assert.AreEqual( "abcdefghijklm1", result );
@@ -1231,7 +1324,7 @@ namespace Underscore.Test.Action
                 var invoked = false;
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string >( ( a, b, c, d, e, f, g, h, i, j, k, l, m, n ) =>
                 {
@@ -1242,7 +1335,7 @@ namespace Underscore.Test.Action
 
                 var onced = testing.Once( oncing );
 
-                for ( int i=0 ; i < 100 ; i++ )
+                for ( var i=0 ; i < 100 ; i++ )
                     fn.Apply( onced, arguments );
 
                 Assert.AreEqual( "abcdefghijklmn1", result );
@@ -1255,7 +1348,7 @@ namespace Underscore.Test.Action
                 var invoked = false;
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string,string>( ( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o ) =>
                 {
@@ -1266,7 +1359,7 @@ namespace Underscore.Test.Action
 
                 var onced = testing.Once( oncing );
 
-                for ( int i=0 ; i < 100 ; i++ )
+                for ( var i=0 ; i < 100 ; i++ )
                     fn.Apply( onced, arguments );
 
                 Assert.AreEqual( "abcdefghijklmno1", result );
@@ -1286,20 +1379,20 @@ namespace Underscore.Test.Action
             var fn = new ComposeComponent( );
             var testing = ManipulateDummy( );
 
-            string[] arguments = new[ ] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n" ,"o","p"};
+            string[] arguments = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n" ,"o","p"};
 
             await Util.Tasks.Start(()=>
             {
-                string result = "";
-                int counter = 0;
+                var result = "";
+                var counter = 0;
                 var timer = new Stopwatch();
                 var aftered = testing.After(() => result = (counter++).ToString(), 3);
 
                 var tasks = new Task[10];
-                for (int i = 0; i < 10; i++)
+                for (var i = 0; i < 10; i++)
                     tasks[i] = aftered();
 
-                for (int i = 0; i < 10; i++)
+                for (var i = 0; i < 10; i++)
                     tasks[i].Wait();
 
                 Assert.AreEqual("7", result);
@@ -1310,7 +1403,7 @@ namespace Underscore.Test.Action
                 var arr = new Task[ 4 ];
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var aftering = new Action<string, string>( ( a, b ) =>
                 {
@@ -1321,10 +1414,10 @@ namespace Underscore.Test.Action
 
                 var aftered = testing.After( aftering ,3);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[i] = fn.Apply( aftered, arguments );
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ].Wait( );
 
                 
@@ -1341,7 +1434,7 @@ namespace Underscore.Test.Action
                 var arr = new Task[ 4 ];
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var aftering = new Action<string, string, string>( ( a, b, c ) =>
                 {
@@ -1352,10 +1445,10 @@ namespace Underscore.Test.Action
 
                 var aftered = testing.After( aftering ,3);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ].Wait( );
 
                 Assert.AreEqual( "abc1abc2", result );
@@ -1370,7 +1463,7 @@ namespace Underscore.Test.Action
                 var arr = new Task[ 4 ];
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var aftering = new Action<string, string, string, string>( ( a, b, c, d ) =>
                 {
@@ -1381,10 +1474,10 @@ namespace Underscore.Test.Action
 
                 var aftered = testing.After( aftering ,3);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ].Wait( );
 
                 Assert.AreEqual( "abcd1abcd2", result );
@@ -1399,7 +1492,7 @@ namespace Underscore.Test.Action
                 var arr = new Task[ 4 ];
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var aftering = new Action<string, string, string, string>( ( a, b, c, d ) =>
                 {
@@ -1411,10 +1504,10 @@ namespace Underscore.Test.Action
                 var aftered = testing.After( aftering ,3);
 
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ].Wait( );
 
                 Assert.AreEqual( "abcd1abcd2", result );
@@ -1428,7 +1521,7 @@ namespace Underscore.Test.Action
                 var arr = new Task[ 4 ];
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var aftering = new Action<string, string, string, string, string>( ( a, b, c, d, e ) =>
                 {
@@ -1439,10 +1532,10 @@ namespace Underscore.Test.Action
 
                 var aftered = testing.After( aftering ,3);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ].Wait( );
 
                 Assert.AreEqual( "abcde1abcde2", result );
@@ -1457,7 +1550,7 @@ namespace Underscore.Test.Action
                 var arr = new Task[ 4 ];
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var aftering = new Action<string, string, string, string, string, string>( ( a, b, c, d, e, f ) =>
                 {
@@ -1469,10 +1562,10 @@ namespace Underscore.Test.Action
                 var aftered = testing.After( aftering ,3);
 
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ].Wait( );
 
                 Assert.AreEqual( "abcdef1abcdef2", result );
@@ -1487,7 +1580,7 @@ namespace Underscore.Test.Action
                 var arr = new Task[ 4 ];
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var aftering = new Action<string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g ) =>
                 {
@@ -1499,10 +1592,10 @@ namespace Underscore.Test.Action
                 var aftered = testing.After( aftering ,3);
 
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ].Wait( );
 
                 Assert.AreEqual( "abcdefg1abcdefg2", result );
@@ -1517,7 +1610,7 @@ namespace Underscore.Test.Action
                 var arr = new Task[ 4 ];
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var aftering = new Action<string, string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g, h ) =>
                 {
@@ -1529,10 +1622,10 @@ namespace Underscore.Test.Action
                 var aftered = testing.After( aftering ,3);
 
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ].Wait( );
 
                 Assert.AreEqual( "abcdefgh1abcdefgh2", result );
@@ -1546,7 +1639,7 @@ namespace Underscore.Test.Action
                 var arr = new Task[ 4 ];
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var aftering = new Action<string, string, string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g, h, i ) =>
                 {
@@ -1558,10 +1651,10 @@ namespace Underscore.Test.Action
                 var aftered = testing.After( aftering ,3);
 
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ].Wait( );
 
                 Assert.AreEqual( "abcdefghi1abcdefghi2", result );
@@ -1576,7 +1669,7 @@ namespace Underscore.Test.Action
                 var arr = new Task[ 4 ];
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var aftering = new Action<string, string, string, string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g, h, i, j ) =>
                 {
@@ -1588,10 +1681,10 @@ namespace Underscore.Test.Action
                 var aftered = testing.After( aftering ,3);
 
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ].Wait( );
 
                 Assert.AreEqual( "abcdefghij1abcdefghij2", result );
@@ -1606,7 +1699,7 @@ namespace Underscore.Test.Action
                 var arr = new Task[ 4 ];
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var aftering = new Action<string, string, string, string, string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g, h, i, j, k ) =>
                 {
@@ -1617,10 +1710,10 @@ namespace Underscore.Test.Action
 
                 var aftered = testing.After( aftering ,3);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ].Wait( );
 
                 Assert.AreEqual( "abcdefghijk1abcdefghijk2", result );
@@ -1635,7 +1728,7 @@ namespace Underscore.Test.Action
                 var arr = new Task[ 4 ];
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var aftering = new Action<string, string, string, string, string, string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g, h, i, j, k, l ) =>
                 {
@@ -1646,10 +1739,10 @@ namespace Underscore.Test.Action
 
                 var aftered = testing.After( aftering ,3);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ].Wait( );
 
                 Assert.AreEqual( "abcdefghijkl1abcdefghijkl2", result );
@@ -1663,7 +1756,7 @@ namespace Underscore.Test.Action
                 var arr = new Task[ 4 ];
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var aftering = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g, h, i, j, k, l, m ) =>
                 {
@@ -1674,10 +1767,10 @@ namespace Underscore.Test.Action
 
                 var aftered = testing.After( aftering ,3);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ].Wait( );
 
                 Assert.AreEqual("abcdefghijklm1abcdefghijklm2", result);
@@ -1692,7 +1785,7 @@ namespace Underscore.Test.Action
                 var arr = new Task[ 4 ];
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var aftering = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g, h, i, j, k, l, m, n ) =>
                 {
@@ -1703,10 +1796,10 @@ namespace Underscore.Test.Action
 
                 var aftered = testing.After( aftering ,3);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ].Wait( );
 
                 Assert.AreEqual( "abcdefghijklmn1abcdefghijklmn2", result );
@@ -1721,7 +1814,7 @@ namespace Underscore.Test.Action
                 var arr = new Task[ 4 ];
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var aftering = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o ) =>
                 {
@@ -1732,10 +1825,10 @@ namespace Underscore.Test.Action
 
                 var aftered = testing.After( aftering ,3);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ] = fn.Apply( aftered, arguments );
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     arr[ i ].Wait( );
 
                 Assert.AreEqual( "abcdefghijklmno1abcdefghijklmno2", result );
@@ -1752,19 +1845,19 @@ namespace Underscore.Test.Action
         public async Task ActionBefore( )
         {
             //if I didn't use this I would lose my mind
-            var fn = new global::Underscore.Action.ComposeComponent( );
+            var fn = new Underscore.Action.ComposeComponent( );
             var testing = ManipulateDummy( );
 
-            string[] arguments = new[ ] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n" ,"o","p"};
+            string[] arguments = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n" ,"o","p"};
 
             await Util.Tasks.Start( ( ) =>
             {
 
-                string result = "";
-                int counter = 0;
+                var result = "";
+                var counter = 0;
                 var timer = new Stopwatch( );
                 var befored = testing.Before( ( ) => result = ( counter++ ).ToString( ) , 2);
-                for ( int i=0 ; i < 10 ; i++ )
+                for ( var i=0 ; i < 10 ; i++ )
                     befored( );
 
                 Assert.AreEqual( "1", result );
@@ -1776,7 +1869,7 @@ namespace Underscore.Test.Action
                    
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var beforing = new Action<string, string>( ( a, b ) =>
                 {
@@ -1787,7 +1880,7 @@ namespace Underscore.Test.Action
 
                 var befored = testing.Before( beforing , 2);
 
-                for ( int i=0 ; i < 4 ;i++ )
+                for ( var i=0 ; i < 4 ;i++ )
                     fn.Apply( befored, arguments );
 
                 Assert.AreEqual( "ab1ab2", result );
@@ -1803,7 +1896,7 @@ namespace Underscore.Test.Action
                    
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var beforing = new Action<string, string, string>( ( a, b, c ) =>
                 {
@@ -1814,7 +1907,7 @@ namespace Underscore.Test.Action
 
                 var befored = testing.Before( beforing , 2);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
 
 
@@ -1830,7 +1923,7 @@ namespace Underscore.Test.Action
                    
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var beforing = new Action<string, string, string, string>( ( a, b, c, d ) =>
                 {
@@ -1841,7 +1934,7 @@ namespace Underscore.Test.Action
 
                 var befored = testing.Before( beforing , 2);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
 
                       
@@ -1858,7 +1951,7 @@ namespace Underscore.Test.Action
                    
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var beforing = new Action<string, string, string, string>( ( a, b, c, d ) =>
                 {
@@ -1870,7 +1963,7 @@ namespace Underscore.Test.Action
                 var befored = testing.Before( beforing , 2);
 
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
 
                       
@@ -1886,7 +1979,7 @@ namespace Underscore.Test.Action
                    
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var beforing = new Action<string, string, string, string, string>( ( a, b, c, d, e ) =>
                 {
@@ -1897,7 +1990,7 @@ namespace Underscore.Test.Action
 
                 var befored = testing.Before( beforing , 2);
                 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
 
                       
@@ -1914,7 +2007,7 @@ namespace Underscore.Test.Action
                    
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var beforing = new Action<string, string, string, string, string, string>( ( a, b, c, d, e, f ) =>
                 {
@@ -1925,7 +2018,7 @@ namespace Underscore.Test.Action
 
                 var befored = testing.Before( beforing , 2);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
 
                       
@@ -1942,7 +2035,7 @@ namespace Underscore.Test.Action
                    
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var beforing = new Action<string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g ) =>
                 {
@@ -1953,7 +2046,7 @@ namespace Underscore.Test.Action
 
                 var befored = testing.Before( beforing , 2);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
 
                       
@@ -1970,7 +2063,7 @@ namespace Underscore.Test.Action
                    
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var beforing = new Action<string, string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g, h ) =>
                 {
@@ -1983,7 +2076,7 @@ namespace Underscore.Test.Action
 
 
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
 
 
@@ -1998,7 +2091,7 @@ namespace Underscore.Test.Action
                    
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var beforing = new Action<string, string, string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g, h, i ) =>
                 {
@@ -2010,7 +2103,7 @@ namespace Underscore.Test.Action
                 var befored = testing.Before( beforing , 2);
 
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
 
                       
@@ -2027,7 +2120,7 @@ namespace Underscore.Test.Action
                    
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var beforing = new Action<string, string, string, string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g, h, i, j ) =>
                 {
@@ -2039,7 +2132,7 @@ namespace Underscore.Test.Action
                 var befored = testing.Before( beforing , 2);
 
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
 
                       
@@ -2056,7 +2149,7 @@ namespace Underscore.Test.Action
                    
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var beforing = new Action<string, string, string, string, string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g, h, i, j, k ) =>
                 {
@@ -2067,7 +2160,7 @@ namespace Underscore.Test.Action
 
                 var befored = testing.Before( beforing , 2);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
 
                       
@@ -2084,7 +2177,7 @@ namespace Underscore.Test.Action
                    
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var beforing = new Action<string, string, string, string, string, string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g, h, i, j, k, l ) =>
                 {
@@ -2095,7 +2188,7 @@ namespace Underscore.Test.Action
 
                 var befored = testing.Before( beforing , 2);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
 
                       
@@ -2111,7 +2204,7 @@ namespace Underscore.Test.Action
                    
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var beforing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g, h, i, j, k, l, m ) =>
                 {
@@ -2122,7 +2215,7 @@ namespace Underscore.Test.Action
 
                 var befored = testing.Before( beforing , 2);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
          
 
@@ -2138,7 +2231,7 @@ namespace Underscore.Test.Action
                    
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var beforing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g, h, i, j, k, l, m, n ) =>
                 {
@@ -2149,7 +2242,7 @@ namespace Underscore.Test.Action
 
                 var befored = testing.Before( beforing , 2);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
         
 
@@ -2165,7 +2258,7 @@ namespace Underscore.Test.Action
                    
 
                 var counter = 0;
-                string result = "";
+                var result = "";
 
                 var beforing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>( ( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o ) =>
                 {
@@ -2176,7 +2269,7 @@ namespace Underscore.Test.Action
 
                 var befored = testing.Before( beforing , 2);
 
-                for ( int i=0 ; i < 4 ; i++ )
+                for ( var i=0 ; i < 4 ; i++ )
                     fn.Apply( befored, arguments );
 
  

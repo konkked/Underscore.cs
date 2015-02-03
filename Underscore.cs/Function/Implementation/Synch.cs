@@ -669,15 +669,12 @@ namespace Underscore.Function
 			return async()=>await target(null);
 		}
 
-				
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
         public Func<T, Task<TResult>> Debounce<T, TResult>( Func<T, TResult> function, int milliseconds )
         {
             Task running  = null;
-
-            object lockingon = new object( );
 
 
             int settingUp = 0;
@@ -687,16 +684,12 @@ namespace Underscore.Function
             var fn = function;
             return async ( targ ) =>
             {
-                Thread.MemoryBarrier( );
-
                 var curr = Task.Delay( milliseconds );
-
-                Thread.MemoryBarrier( );
 
                 if ( Interlocked.CompareExchange( ref settingUp, 1, 0 ) == 0 )
                 {
-                    Interlocked.Exchange( ref setting, 0 );
-                    Interlocked.Exchange( ref isready, 0 );
+                    Interlocked.Exchange(ref isready, 0);
+                    Interlocked.Exchange(ref setting, 0);
                 }
 
                 Interlocked.Exchange( ref running, curr );
@@ -705,40 +698,24 @@ namespace Underscore.Function
 
                 while ( true )
                 {
-                    Thread.MemoryBarrier( );
 
                     Interlocked.Exchange( ref result, running );
-
-                    if ( result == null )
-                    {
-                        Thread.MemoryBarrier( );
-
-                        if ( Interlocked.CompareExchange( ref setting, 1, 0 ) == 0 )
-                        {
-                            Interlocked.Exchange( ref retv, new { result =  fn( targ ) } );
-                            Interlocked.CompareExchange( ref isready, 1, 0 );
-                            Interlocked.CompareExchange( ref settingUp, 0, 1 );
-                        }
-
+                    if (result == null)
                         break;
-                    }
 
                     await result;
-                    Interlocked.CompareExchange( ref running, null, curr );
+                    if (Interlocked.CompareExchange(ref running, null, curr) != curr) continue;
+                    if ( Interlocked.CompareExchange( ref setting, 1, 0 ) == 0)
+                    {
+                        Interlocked.Exchange(ref retv, new { result = fn(targ) });
+                        Interlocked.CompareExchange(ref settingUp, 0, 1);
+                        Interlocked.CompareExchange( ref isready, 1, 0 );
+                    }
+
+                    break;
                 }
 
-                while ( true )
-                {
-                    Thread.MemoryBarrier( );
-
-                    if ( isready == 1 )
-                        break;
-
-                    Thread.MemoryBarrier( );
-
-                    Thread.SpinWait( 32 );
-
-                }
+                while (isready == 0) await Task.Delay(1);
 
                 return retv.result;
             };
@@ -1432,20 +1409,9 @@ namespace Underscore.Function
 			return async()=>await target(null);
 		}
 
-				
-		/// <summary>
-        /// Returns a throttled version of the passed function
-        /// </summary>
-		public Func<Task<TResult>> Throttle<TResult>(Func<TResult> function, int milliseconds)
-		{
-			return Throttle ( function, milliseconds, true ) ;
-		}
-				
-        /// <summary>
-        /// Returns a throttled version of the passed function
-        /// </summary>
-        public Func<T, Task<TResult>> Throttle<T, TResult>( Func<T, TResult> function, int milliseconds, bool leading )
+        private Func<T, Task<TResult>> LocklessThrottle<T, TResult>(Func<T, TResult> function, int milliseconds, bool leading)
         {
+            
             int firstTriggered = 0;
             int waitTriggered = 0;
             int cleaningUp = 0;
@@ -1520,14 +1486,10 @@ namespace Underscore.Function
 
                     }
 
-                    Thread.MemoryBarrier();
                     while (true)
                         if (waitTriggered == 1) break;
                         else
-                        {
                             Thread.SpinWait(16);
-                            Thread.MemoryBarrier();
-                        }
 
 
                     Task delayingLocalCopy = null;
@@ -1536,12 +1498,10 @@ namespace Underscore.Function
                     //in a bad state, start from the top
                     if (delayingLocalCopy == null || cleaningUp == 1)
                         continue;
-                    Thread.MemoryBarrier();
-                    Interlocked.Exchange(ref returning, null);
-                    Thread.MemoryBarrier();
-                    Interlocked.Exchange(ref finalHandle, localHandle);
-                    Thread.MemoryBarrier();
 
+                    Interlocked.Exchange(ref returning, null);
+                    Interlocked.Exchange(ref finalHandle, localHandle);
+                    
                     Func<object,T,Task<TResult>> toReturn = async (handle,ts) =>
                     {
                         var r = returning;
@@ -1562,53 +1522,40 @@ namespace Underscore.Function
                             
                             await Task.Delay(1);
 
-                            if ( finalHandle == handle )
+
+                            if (finalHandle == null) break;
+
+                            if ( Interlocked.CompareExchange(ref finalHandle, null, handle) == handle )
                             {
                                 r = new { result = fn(ts) };
                                 Interlocked.Exchange(ref returning, r);
-
-                                Thread.MemoryBarrier();
                                 Interlocked.CompareExchange(ref doneComparing, 1, 0);
-                                Thread.MemoryBarrier();
-                                Interlocked.Exchange(ref finalHandle, null);
                                 return r.result;
                             }
-
-                            Thread.MemoryBarrier();
-                            if (finalHandle == null) break;
                         }
 
                         while (doneComparing == 0) await Task.Delay(1) ;
-
-                        Interlocked.Exchange(ref r, returning);
-
-                        return r.result;
+                        while (true)
+                        {
+                            Interlocked.Exchange(ref r, returning);
+                            if (r != null)
+                                return r.result;
+                        }
                     };
 
-                    Thread.MemoryBarrier();
-
+                    
                     Interlocked.Exchange(ref finalHandle, localHandle);
                     
-                    Thread.MemoryBarrier();
-
                     var local = toReturn(localHandle, a);
-                    
-                    Thread.MemoryBarrier();
-                    
-                    Thread.MemoryBarrier();
                     local.ContinueWith(t =>
                     {
-                        t.Wait(50);
 
-                        Thread.MemoryBarrier();
-
+                        
                         //all of the tasks should have completed, 
                         // so we can clean up
-                        Thread.MemoryBarrier();
                         Interlocked.CompareExchange(ref firstTriggered, 0, 1);
                         Interlocked.CompareExchange(ref waitTriggered, 0, 1);
                         Interlocked.CompareExchange(ref cleaningUp, 0, 1);
-                        Thread.MemoryBarrier();
                     });
 
                     return local;
@@ -1616,6 +1563,107 @@ namespace Underscore.Function
                 }
 
             };
+        }
+
+
+        private Func<T, Task<TResult>> LockedThrottle<T, TResult>(Func<T, TResult> function, int milliseconds,
+            bool leading)
+        {
+
+            var wait = milliseconds;
+            var fn = function;
+            var midThrottle = false;
+            var locking = new object();
+            var returning = new {result = default(TResult)};
+            var usingArg = new {arg = default(T)};
+            int inThrottle = 0;
+            bool cleaningUp = false;
+
+            Task waitingOn = null;
+
+            return async targ =>
+            {
+                lock (locking)
+                {
+                    if (cleaningUp)
+                        Monitor.Wait(locking, wait);
+
+                    if (!midThrottle)
+                    {
+                        midThrottle = true;
+                        new Timer(o =>
+                        {
+                            lock (locking)
+                            {
+                                var localArg = usingArg;
+                                Interlocked.Exchange(ref localArg, usingArg);
+                                Interlocked.Exchange(ref returning, new {result = fn(localArg.arg)});
+                                
+                                if (inThrottle != 0)
+                                    cleaningUp = true;
+
+                                midThrottle = false;
+                                Monitor.PulseAll(locking);
+
+                                while (inThrottle != 0)
+                                    Monitor.Wait(locking);
+
+                                Interlocked.Exchange(ref waitingOn, null);
+                                cleaningUp = false;
+
+                                Monitor.PulseAll(locking);
+                            }
+
+                        }, null, wait, Timeout.Infinite);
+
+                        Interlocked.Exchange(ref waitingOn, Task.Delay(wait));
+                        Monitor.PulseAll(locking);
+
+                        if (leading)
+                            return fn(targ);
+
+                    }
+                }
+
+                lock (locking)
+                {
+                    Interlocked.Increment(ref inThrottle);
+                    Interlocked.Exchange(ref usingArg, new {arg = targ});
+                }
+
+
+                if ( waitingOn != null )
+                    await waitingOn;
+
+                while (midThrottle);
+
+                var localRetCopy = new {result = default(TResult)};
+                
+                Interlocked.Exchange(ref localRetCopy, returning);
+                
+                if(Interlocked.Decrement(ref inThrottle)==0)
+                    lock (locking)
+                        Monitor.PulseAll(locking);
+
+                return localRetCopy.result;
+            };
+
+        }
+
+        /// <summary>
+        /// Returns a throttled version of the passed function
+        /// </summary>
+		public Func<Task<TResult>> Throttle<TResult>(Func<TResult> function, int milliseconds)
+		{
+			return Throttle ( function, milliseconds, true ) ;
+		}
+				
+        /// <summary>
+        /// Returns a throttled version of the passed function
+        /// </summary>
+        public Func<T, Task<TResult>> Throttle<T, TResult>( Func<T, TResult> function, int milliseconds, bool leading )
+        {
+            return LockedThrottle(function, milliseconds, leading);
         }
 				
 		/// <summary>

@@ -502,7 +502,7 @@ namespace Underscore.Test.Function
 
                     var reference = new[ ] { false };
 
-                    var result = splitter.Splay(
+                    var result = splitter.Curry(
                         CreateSplitterTest(
                             reference, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" )
                     );
@@ -515,7 +515,7 @@ namespace Underscore.Test.Function
 
                     var reference = new[ ] { false };
 
-                    var result = splitter.Splay(
+                    var result = splitter.Curry(
                         CreateSplitterTest(
                             reference, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" )
                     );
@@ -528,7 +528,7 @@ namespace Underscore.Test.Function
 
                     var reference = new[ ] { false };
 
-                    var result = splitter.Splay(
+                    var result = splitter.Curry(
                         CreateSplitterTest(
                             reference, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n" )
                     );
@@ -541,7 +541,7 @@ namespace Underscore.Test.Function
 
                     var reference = new[ ] { false };
 
-                    var result = splitter.Splay(
+                    var result = splitter.Curry(
                         CreateSplitterTest(
                             reference, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m" )
                     );
@@ -555,7 +555,7 @@ namespace Underscore.Test.Function
 
                     var reference = new[ ] { false };
 
-                    var result = splitter.Splay(
+                    var result = splitter.Curry(
                         CreateSplitterTest(
                             reference, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l" )
                     );
@@ -568,7 +568,7 @@ namespace Underscore.Test.Function
 
                     var reference = new[ ] { false };
 
-                    var result = splitter.Splay(
+                    var result = splitter.Curry(
                         CreateSplitterTest(
                             reference, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k" )
                     );
@@ -581,7 +581,7 @@ namespace Underscore.Test.Function
 
                     var reference = new[ ] { false };
 
-                    var result = splitter.Splay(
+                    var result = splitter.Curry(
                         CreateSplitterTest(
                             reference, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" )
                     );
@@ -594,7 +594,7 @@ namespace Underscore.Test.Function
 
                     var reference = new[ ] { false };
 
-                    var result = splitter.Splay(
+                    var result = splitter.Curry(
                         CreateSplitterTest(
                             reference, "a", "b", "c", "d", "e", "f", "g", "h", "i" )
                     );
@@ -607,7 +607,7 @@ namespace Underscore.Test.Function
 
                     var reference = new[ ] { false };
 
-                    var result = splitter.Splay(
+                    var result = splitter.Curry(
                         CreateSplitterTest(
                             reference, "a", "b", "c", "d", "e", "f", "g", "h" )
                     );
@@ -622,7 +622,7 @@ namespace Underscore.Test.Function
 
                     var reference = new[ ] { false };
 
-                    var result = splitter.Splay(
+                    var result = splitter.Curry(
                         CreateSplitterTest(
                             reference, "a", "b", "c", "d", "e", "f", "g" )
                     );
@@ -637,7 +637,7 @@ namespace Underscore.Test.Function
 
                     var reference = new[ ] { false };
 
-                    var result = splitter.Splay(
+                    var result = splitter.Curry(
                         CreateSplitterTest(
                             reference, "a", "b", "c", "d", "e", "f" )
                     );
@@ -653,7 +653,7 @@ namespace Underscore.Test.Function
 
                     var reference = new[ ] { false };
 
-                    var result = splitter.Splay(
+                    var result = splitter.Curry(
                         CreateSplitterTest(
                             reference, "a", "b", "c", "d", "e" )
                     );
@@ -670,7 +670,7 @@ namespace Underscore.Test.Function
 
                     var reference = new[ ] { false };
 
-                    var result = splitter.Splay(
+                    var result = splitter.Curry(
                         CreateSplitterTest(
                             reference, "a", "b", "c", "d" )
                     );
@@ -683,7 +683,7 @@ namespace Underscore.Test.Function
 
                     var reference = new[ ] { false };
 
-                    var result = splitter.Splay(
+                    var result = splitter.Curry(
                         CreateSplitterTest(
                             reference, "a", "b", "c" )
                     );
@@ -696,7 +696,7 @@ namespace Underscore.Test.Function
 
                     var reference = new[ ] { false };
 
-                    var result = splitter.Splay(
+                    var result = splitter.Curry(
                         CreateSplitterTest(
                             reference, "a", "b" )
                     );

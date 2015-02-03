@@ -259,7 +259,7 @@ namespace Underscore.Test.Action
 
                 var reference = new[] {false};
 
-                var result = splitter.Splay(
+                var result = splitter.Curry(
                     CreateSplitterTest(
                         reference, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p")
                     );
@@ -277,7 +277,7 @@ namespace Underscore.Test.Action
 
             var reference = new[] {false};
 
-            var result = splitter.Splay(
+            var result = splitter.Curry(
                 CreateSplitterTest(
                     reference, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o")
                 );
@@ -293,7 +293,7 @@ namespace Underscore.Test.Action
             var splitter = new SplitComponent();
             var reference = new[] {false};
 
-            var result = splitter.Splay(
+            var result = splitter.Curry(
                 CreateSplitterTest(
                     reference, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m")
                 );
@@ -309,7 +309,7 @@ namespace Underscore.Test.Action
             var splitter = new SplitComponent();
             var reference = new[] {false};
 
-            var result = splitter.Splay(
+            var result = splitter.Curry(
                 CreateSplitterTest(
                     reference, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l")
                 );
@@ -325,7 +325,7 @@ namespace Underscore.Test.Action
             var splitter = new SplitComponent();
             var reference = new[] {false};
 
-            var result = splitter.Splay(
+            var result = splitter.Curry(
                 CreateSplitterTest(
                     reference, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k")
                 );
@@ -341,7 +341,7 @@ namespace Underscore.Test.Action
             var splitter = new SplitComponent();
             var reference = new[] {false};
 
-            var result = splitter.Splay(
+            var result = splitter.Curry(
                 CreateSplitterTest(
                     reference, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
                 );
@@ -357,7 +357,7 @@ namespace Underscore.Test.Action
             var splitter = new SplitComponent();
             var reference = new[] {false};
 
-            var result = splitter.Splay(
+            var result = splitter.Curry(
                 CreateSplitterTest(
                     reference, "a", "b", "c", "d", "e", "f", "g", "h", "i")
                 );
@@ -373,7 +373,7 @@ namespace Underscore.Test.Action
             var splitter = new SplitComponent();
             var reference = new[] {false};
 
-            var result = splitter.Splay(
+            var result = splitter.Curry(
                 CreateSplitterTest(
                     reference, "a", "b", "c", "d", "e", "f", "g", "h")
                 );
@@ -389,7 +389,7 @@ namespace Underscore.Test.Action
             var splitter = new SplitComponent();
             var reference = new[] {false};
 
-            var result = splitter.Splay(
+            var result = splitter.Curry(
                 CreateSplitterTest(
                     reference, "a", "b", "c", "d", "e", "f", "g")
                 );
@@ -405,7 +405,7 @@ namespace Underscore.Test.Action
             var splitter = new SplitComponent();
             var reference = new[] {false};
 
-            var result = splitter.Splay(
+            var result = splitter.Curry(
                 CreateSplitterTest(
                     reference, "a", "b", "c", "d", "e", "f")
                 );
@@ -421,7 +421,7 @@ namespace Underscore.Test.Action
             var splitter = new SplitComponent();
             var reference = new[] {false};
 
-            var result = splitter.Splay(
+            var result = splitter.Curry(
                 CreateSplitterTest(
                     reference, "a", "b", "c", "d", "e")
                 );
@@ -437,7 +437,7 @@ namespace Underscore.Test.Action
 
             var reference = new[] {false};
 
-            var result = splitter.Splay(
+            var result = splitter.Curry(
                 CreateSplitterTest(
                     reference, "a", "b", "c", "d")
                 );
@@ -453,7 +453,7 @@ namespace Underscore.Test.Action
             var splitter = new SplitComponent();
             var reference = new[] {false};
 
-            var result = splitter.Splay(
+            var result = splitter.Curry(
                 CreateSplitterTest(
                     reference, "a", "b", "c")
                 );
@@ -469,7 +469,7 @@ namespace Underscore.Test.Action
             var splitter = new SplitComponent();
             var reference = new[] {false};
 
-            var result = splitter.Splay(
+            var result = splitter.Curry(
                 CreateSplitterTest(
                     reference, "a", "b")
                 );
@@ -485,7 +485,7 @@ namespace Underscore.Test.Action
             var splitter = new SplitComponent();
             var reference = new[] { false };
 
-            var result = splitter.Splay(
+            var result = splitter.Curry(
                 CreateSplitterTest(
                     reference, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n")
                 );

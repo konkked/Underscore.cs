@@ -5,9 +5,9 @@ namespace Underscore.Action
 {
     public class SynchComponent : ISynchComponent
     {
-        private Function.ISynchComponent _fnSynch;
-        private IConvertComponent _atnConvert;
-        private Function.IConvertComponent _fnConvert;
+        private readonly Function.ISynchComponent _fnSynch;
+        private readonly IConvertComponent _atnConvert;
+        private readonly Function.IConvertComponent _fnConvert;
 
         public SynchComponent(Function.ISynchComponent fnSynch, IConvertComponent actionConvert, Function.IConvertComponent fnConvert)
         {

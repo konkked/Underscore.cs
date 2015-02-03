@@ -63,12 +63,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Partial.tt</DependentUpon>
     </Compile>
-    <Compile Include="Action\Contract\Synch.cs">
-      <DependentUpon>Synch.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Action\Contract\Split.cs" />
+    <Compile Include="Action\Contract\Synch.cs" />
     <Compile Include="Action\Implementation\Bind.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -118,12 +114,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Partial.tt</DependentUpon>
     </Compile>
-    <Compile Include="Function\Contract\Synch.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Synch.tt</DependentUpon>
-    </Compile>
     <Compile Include="Function\Contract\Split.cs" />
+    <Compile Include="Function\Contract\Synch.cs" />
     <Compile Include="Function\Implementation\Bind.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -146,12 +138,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Partial.tt</DependentUpon>
     </Compile>
-    <Compile Include="Function\Implementation\Synch.cs">
-      <DependentUpon>Synch.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Function\Implementation\Split.cs" />
+    <Compile Include="Function\Implementation\Synch.cs" />
     <Compile Include="Setup\Action.cs" />
     <Compile Include="Setup\Collection.cs" />
     <Compile Include="Setup\Liteioc\Kernel.cs" />
@@ -214,10 +202,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Partial.cs</LastGenOutput>
     </None>
-    <None Include="Action\Contract\Synch.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Synch.cs</LastGenOutput>
-    </None>
     <None Include="Action\Implementation\Bind.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Bind.cs</LastGenOutput>
@@ -250,10 +234,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Partial.cs</LastGenOutput>
     </None>
-    <None Include="Function\Contract\Synch.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Synch.cs</LastGenOutput>
-    </None>
     <None Include="Function\Implementation\Bind.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Bind.cs</LastGenOutput>
@@ -269,10 +249,6 @@
     <None Include="Function\Implementation\Partial.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Partial.cs</LastGenOutput>
-    </None>
-    <None Include="Function\Implementation\Synch.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Synch.cs</LastGenOutput>
     </None>
     <None Include="Utility\Contract\Compact.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

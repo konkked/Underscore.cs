@@ -1063,54 +1063,19 @@ namespace Underscore.Module
                                                                                                                                     >
                                                                                                                             >
                                                                                                                     >>>>
-                                                                                    >>>>>>>>> Splay
+                                                                                    >>>>>>>>> Curry
             <T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(
             Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> target)
         {
-            return _split.Splay(target);
+            return _split.Curry(target);
         }
 
-        public
-            Func
-                <T0,
-                    Func
-                        <T1,
-                            Func
-                                <T2,
-                                    Func
-                                        <T3,
-                                            Func
-                                                <T4,
-                                                    Func
-                                                        <T5,
-                                                            Func
-                                                                <T6,
-                                                                    Func
-                                                                        <T7,
-                                                                            Func
-                                                                                <T8,
-                                                                                    Func
-                                                                                        <T9,
-                                                                                            Func
-                                                                                                <T10,
-                                                                                                    Func
-                                                                                                        <T11,
-                                                                                                            Func
-                                                                                                                <T12,
-                                                                                                                    Func
-                                                                                                                        <
-                                                                                                                            T13,
-                                                                                                                            Action
-                                                                                                                                <
-                                                                                                                                    T14
-                                                                                                                                    >
-                                                                                                                            >
-                                                                                                                    >>>>
-                                                                                    >>>>>>>>> Splay
+        public Func<T0,Func<T1,Func<T2,Func<T3,Func<T4,Func<T5,Func<T6,Func<T7,Func<T8,Func<T9,Func<T10,Func<T11,Func<T12,Func<T13,Action<T14>>>>>>>>>>>>>>> 
+            Curry
             <T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
             Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> target)
         {
-            return _split.Splay(target);
+            return _split.Curry(target);
         }
 
         public
@@ -1145,11 +1110,11 @@ namespace Underscore.Module
                                                                                                                             T13
                                                                                                                             >
                                                                                                                     >>>>
-                                                                                    >>>>>>>>> Splay
+                                                                                    >>>>>>>>> Curry
             <T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
             Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> target)
         {
-            return _split.Splay(target);
+            return _split.Curry(target);
         }
 
         public
@@ -1178,11 +1143,11 @@ namespace Underscore.Module
                                                                                                     Func
                                                                                                         <T11,
                                                                                                             Action<T12>>
-                                                                                                    >>>>>>>>>>> Splay
+                                                                                                    >>>>>>>>>>> Curry
             <T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
             Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> target)
         {
-            return _split.Splay(target);
+            return _split.Curry(target);
         }
 
         public
@@ -1201,11 +1166,11 @@ namespace Underscore.Module
                                                             Func
                                                                 <T6,
                                                                     Func<T7, Func<T8, Func<T9, Func<T10, Action<T11>>>>>
-                                                                    >>>>>>> Splay
+                                                                    >>>>>>> Curry
             <T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
             Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> target)
         {
-            return _split.Splay(target);
+            return _split.Curry(target);
         }
 
         public
@@ -1213,61 +1178,136 @@ namespace Underscore.Module
                 <T0,
                     Func
                         <T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Action<T10>>>>>>>>>
-                            >> Splay<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
+                            >> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
             Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> target)
         {
-            return _split.Splay(target);
+            return _split.Curry(target);
         }
 
         public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Action<T9>>>>>>>>>>
-            Splay<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> target)
+            Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> target)
         {
-            return _split.Splay(target);
+            return _split.Curry(target);
         }
 
-        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Action<T8>>>>>>>>> Splay
+        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Action<T8>>>>>>>>> Curry
             <T0, T1, T2, T3, T4, T5, T6, T7, T8>(Action<T0, T1, T2, T3, T4, T5, T6, T7, T8> target)
         {
-            return _split.Splay(target);
+            return _split.Curry(target);
         }
 
-        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Action<T7>>>>>>>> Splay
+        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Action<T7>>>>>>>> Curry
             <T0, T1, T2, T3, T4, T5, T6, T7>(Action<T0, T1, T2, T3, T4, T5, T6, T7> target)
         {
-            return _split.Splay(target);
+            return _split.Curry(target);
         }
 
-        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Action<T6>>>>>>> Splay<T0, T1, T2, T3, T4, T5, T6>(
+        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Action<T6>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6>(
             Action<T0, T1, T2, T3, T4, T5, T6> target)
         {
-            return _split.Splay(target);
+            return _split.Curry(target);
         }
 
-        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Action<T5>>>>>> Splay<T0, T1, T2, T3, T4, T5>(
+        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Action<T5>>>>>> Curry<T0, T1, T2, T3, T4, T5>(
             Action<T0, T1, T2, T3, T4, T5> target)
         {
-            return _split.Splay(target);
+            return _split.Curry(target);
         }
 
-        public Func<T0, Func<T1, Func<T2, Func<T3, Action<T4>>>>> Splay<T0, T1, T2, T3, T4>(
+        public Func<T0, Func<T1, Func<T2, Func<T3, Action<T4>>>>> Curry<T0, T1, T2, T3, T4>(
             Action<T0, T1, T2, T3, T4> target)
         {
-            return _split.Splay(target);
+            return _split.Curry(target);
         }
 
-        public Func<T0, Func<T1, Func<T2, Action<T3>>>> Splay<T0, T1, T2, T3>(Action<T0, T1, T2, T3> target)
+        public Func<T0, Func<T1, Func<T2, Action<T3>>>> Curry<T0, T1, T2, T3>(Action<T0, T1, T2, T3> target)
         {
-            return _split.Splay(target);
+            return _split.Curry(target);
         }
 
-        public Func<T0, Func<T1, Action<T2>>> Splay<T0, T1, T2>(Action<T0, T1, T2> target)
+        public Func<T0, Func<T1, Action<T2>>> Curry<T0, T1, T2>(Action<T0, T1, T2> target)
         {
-            return _split.Splay(target);
+            return _split.Curry(target);
         }
 
-        public Func<T0, Action<T1>> Splay<T0, T1>(Action<T0, T1> target)
+        public Func<T0, Action<T1>> Curry<T0, T1>(Action<T0, T1> target)
         {
-            return _split.Splay(target);
+            return _split.Curry(target);
+        }
+
+        public Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, Action<T15>>>>>>>>>>>>>>>> action)
+        {
+            return _split.Uncurry(action);
+        }
+
+        public Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Action<T14>>>>>>>>>>>>>>> action)
+        {
+            return _split.Uncurry(action);
+        }
+
+        public Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Action<T13>>>>>>>>>>>>>> action)
+        {
+            return _split.Uncurry(action);
+        }
+
+        public Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Action<T12>>>>>>>>>>>>> action)
+        {
+            return _split.Uncurry(action);
+        }
+
+        public Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Action<T11>>>>>>>>>>>> action)
+        {
+            return _split.Uncurry(action);
+        }
+
+        public Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Action<T10>>>>>>>>>>> action)
+        {
+            return _split.Uncurry(action);
+        }
+
+        public Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Action<T9>>>>>>>>>> action)
+        {
+            return _split.Uncurry(action);
+        }
+
+        public Action<T0, T1, T2, T3, T4, T5, T6, T7, T8> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Action<T8>>>>>>>>> action)
+        {
+            return _split.Uncurry(action);
+        }
+
+        public Action<T0, T1, T2, T3, T4, T5, T6, T7> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Action<T7>>>>>>>> action)
+        {
+            return _split.Uncurry(action);
+        }
+
+        public Action<T0, T1, T2, T3, T4, T5, T6> Uncurry<T0, T1, T2, T3, T4, T5, T6>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Action<T6>>>>>>> action)
+        {
+            return _split.Uncurry(action);
+        }
+
+        public Action<T0, T1, T2, T3, T4, T5> Uncurry<T0, T1, T2, T3, T4, T5>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Action<T5>>>>>> action)
+        {
+            return _split.Uncurry(action);
+        }
+
+        public Action<T0, T1, T2, T3, T4> Uncurry<T0, T1, T2, T3, T4>(Func<T0, Func<T1, Func<T2, Func<T3, Action<T4>>>>> action)
+        {
+            return _split.Uncurry(action);
+        }
+
+        public Action<T0, T1, T2, T3> Uncurry<T0, T1, T2, T3>(Func<T0, Func<T1, Func<T2, Action<T3>>>> action)
+        {
+            return _split.Uncurry(action);
+        }
+
+        public Action<T0, T1, T2> Uncurry<T0, T1, T2>(Func<T0, Func<T1, Action<T2>>> action)
+        {
+            return _split.Uncurry(action);
+        }
+
+        public Action<T0, T1> Uncurry<T0, T1>(Func<T0, Action<T1>> action)
+        {
+            return _split.Uncurry(action);
         }
 
         public Func<object> ToFunction(System.Action action)

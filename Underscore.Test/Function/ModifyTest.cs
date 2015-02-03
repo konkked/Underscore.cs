@@ -80,9 +80,10 @@ namespace Underscore.Test.Function
 
             var testing = ModifyComponent( );
             var timer = new Stopwatch( );
-            int waiting = 500;
+            int waiting = 25;
 
             int cnt = 1;
+            string expecting = "";
 
             var targeting = new Func<string,string>( ( a ) =>
             {
@@ -116,7 +117,7 @@ namespace Underscore.Test.Function
             Thread.MemoryBarrier( );
 
             Assert.AreEqual( 2, cnt );
-            Assert.IsTrue( timer.ElapsedMilliseconds > waiting );
+            Assert.IsTrue( timer.ElapsedMilliseconds >= waiting );
         }
 
         [TestMethod]
@@ -125,7 +126,7 @@ namespace Underscore.Test.Function
 
             var testing = ModifyComponent( );
             var timer = new Stopwatch( );
-            int waiting = 1000;
+            int waiting = 100;
 
             int cnt = 1;
 
@@ -160,7 +161,7 @@ namespace Underscore.Test.Function
             timer.Stop( );
 
             Assert.AreEqual( 2, cnt );
-            Assert.IsTrue( timer.ElapsedMilliseconds > waiting );
+            Assert.IsTrue( timer.ElapsedMilliseconds >= waiting );
         }
 
         [TestMethod]
@@ -202,7 +203,7 @@ namespace Underscore.Test.Function
             timer.Stop( );
 
             Assert.AreEqual( 2, cnt );
-            Assert.IsTrue( timer.ElapsedMilliseconds > waiting );
+            Assert.IsTrue( timer.ElapsedMilliseconds >= waiting );
         }
 
         [TestMethod]
@@ -246,7 +247,7 @@ namespace Underscore.Test.Function
             Thread.MemoryBarrier( );
 
             Assert.AreEqual( 2, cnt );
-            Assert.IsTrue( timer.ElapsedMilliseconds > waiting );
+            Assert.IsTrue( timer.ElapsedMilliseconds >= waiting );
         }
 
         [TestMethod]
@@ -255,7 +256,7 @@ namespace Underscore.Test.Function
 
             var testing = ModifyComponent( );
             var timer = new Stopwatch( );
-            int waiting = 500;
+            int waiting = 25;
 
             int cnt = 1;
 
@@ -288,7 +289,7 @@ namespace Underscore.Test.Function
             timer.Stop( );
 
             Assert.AreEqual( 2, cnt );
-            Assert.IsTrue( timer.ElapsedMilliseconds > waiting );
+            Assert.IsTrue( timer.ElapsedMilliseconds >= waiting );
         }
 
         [TestMethod]
@@ -297,7 +298,7 @@ namespace Underscore.Test.Function
 
             var testing = ModifyComponent( );
             var timer = new Stopwatch( );
-            int waiting = 700;
+            int waiting = 25;
 
             int cnt = 1;
 
@@ -338,7 +339,154 @@ namespace Underscore.Test.Function
             timer.Stop( );
 
             Assert.AreEqual( 2, cnt );
-            Assert.IsTrue( timer.ElapsedMilliseconds > waiting );
+            Assert.IsTrue( timer.ElapsedMilliseconds >= waiting );
+        }
+
+        [TestMethod]
+        public async Task FunctionThrottle3()
+        {
+            
+            var testing = ModifyComponent();
+            var timer = new Stopwatch();
+            int waiting = 25;
+
+            int cnt = 0;
+
+            timer.Start();
+
+            var targeting = new Func<string, string, string, string, string, string, string>((s1, s2, s3, s4, s5, s6) =>
+            {
+                cnt++;
+                var returning = string.Join(" ", s1, s2, s3, s4, s5, s6);
+                return returning;
+            });
+
+            var target = testing.Throttle(targeting, waiting);
+
+            var continuing = new List<Task>();
+
+
+            for (int i = 0; i < 99; i++)
+            {
+                Assert.AreEqual(i == 0 ? 0 : 1, cnt);
+
+                var j = i + 1;
+
+
+                if (i == 0)
+                {
+                    continuing.Add(
+                        target(
+                            (j).ToString(),
+                            (-j).ToString(),
+                            (j).ToString(),
+                            (-j).ToString(),
+                            (j).ToString(),
+                            (-j).ToString()
+                            ).ContinueWith(a => Assert.AreEqual("1 -1 1 -1 1 -1", a.Result))
+                        );
+                }
+                else
+                {
+                    continuing.Add(
+                        target(
+                            (j).ToString(),
+                            (-j).ToString(),
+                            (j).ToString(),
+                            (-j).ToString(),
+                            (j).ToString(),
+                            (-j).ToString()
+                            )
+                            .ContinueWith(
+                                a => Assert.AreEqual("99 -99 99 -99 99 -99", a.Result))
+                        );
+                }
+            }
+
+            Assert.AreEqual(1, cnt);
+
+
+            for (int i = 0; i < 99; i++)
+                await continuing[i];
+
+            timer.Stop();
+
+            Assert.AreEqual(2, cnt);
+
+            Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
+
+
+        }
+
+        [TestMethod]
+        public async Task FunctionThrottle2()
+        {
+
+            var testing = ModifyComponent();
+            var timer = new System.Diagnostics.Stopwatch();
+            int waiting = 10;
+
+            int cnt = 0;
+
+            var targeting = new Func<string, string, string, string, string, string, string>((s1, s2, s3, s4, s5, s6) =>
+            {
+                cnt++;
+                var returning = string.Join(" ", s1, s2, s3, s4, s5, s6);
+                return returning;
+            });
+
+            var target = testing.Throttle(targeting, waiting);
+
+            var continuing = new List<Task>();
+
+            timer.Start();
+
+
+            for (int i = 0; i < 99; i++)
+            {
+                Assert.AreEqual(i == 0 ? 0 : 1, cnt);
+
+                var j = i + 1;
+
+
+                if (i == 0)
+                {
+                    continuing.Add(
+                        target(
+                            (j).ToString(),
+                            (-j).ToString(),
+                            (j).ToString(),
+                            (-j).ToString(),
+                            (j).ToString(),
+                            (-j).ToString()
+                            ).ContinueWith(a => Assert.AreEqual("1 -1 1 -1 1 -1", a.Result))
+                        );
+                }
+                else
+                {
+                    continuing.Add(
+                        target(
+                            (j).ToString(),
+                            (-j).ToString(),
+                            (j).ToString(),
+                            (-j).ToString(),
+                            (j).ToString(),
+                            (-j).ToString()
+                            )
+                            .ContinueWith(
+                                a => Assert.AreEqual("99 -99 99 -99 99 -99", a.Result))
+                        );
+                }
+            }
+
+            foreach (var v in continuing)
+                await v;
+
+            timer.Stop();
+            Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
+
+
+            Assert.AreEqual(2, cnt);
         }
 
         [TestMethod]
@@ -346,7 +494,7 @@ namespace Underscore.Test.Function
         {
             var testing = ModifyComponent();
             var timer = new Stopwatch();
-            const int waiting = 200;
+            const int waiting = 10;
 
             int cnt = 1;
 
@@ -385,7 +533,7 @@ namespace Underscore.Test.Function
             timer.Stop();
 
             Assert.AreEqual(3, cnt);
-            Assert.IsTrue(timer.ElapsedMilliseconds > waiting);
+            Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 
             continuing.Clear();
             timer.Reset();
@@ -409,139 +557,10 @@ namespace Underscore.Test.Function
             }
         
             timer.Stop();
+            Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
+
 
             Assert.AreEqual(5, cnt);
-            Assert.IsTrue(timer.ElapsedMilliseconds > waiting);
-
-
-            //var testing = ModifyComponent( );
-            //var timer = new System.Diagnostics.Stopwatch( );
-            //int waiting = 1000;
-
-            //int cnt = 0;
-
-            //var targeting = new Func<string, string, string, string, string, string, string>( ( s1, s2, s3, s4, s5, s6 ) =>
-            //{
-            //    cnt++;
-            //    var returning = string.Join( " ", s1, s2, s3, s4, s5, s6 );
-            //    return returning;
-            //} );
-
-            //var target = testing.Throttle( targeting, waiting );
-
-            //var continuing = new List<Task>( );
-
-            //timer.Start( );
-
-
-            //for (int i = 0; i < 99; i++)
-            //{
-            //    Assert.AreEqual(i == 0 ? 0 : 1, cnt);
-
-            //    var j = i+1;
-
-
-            //    if (i == 0)
-            //    {
-            //        continuing.Add(
-            //            target(
-            //                (j).ToString(),
-            //                (-j).ToString(),
-            //                (j).ToString(),
-            //                (-j).ToString(),
-            //                (j).ToString(),
-            //                (-j).ToString()
-            //                ).ContinueWith(a => Assert.AreEqual("1 -1 1 -1 1 -1", a.Result))
-            //            );
-            //    }
-            //    else
-            //    {
-            //        continuing.Add(
-            //            target(
-            //                (j).ToString(),
-            //                (-j).ToString(),
-            //                (j).ToString(),
-            //                (-j).ToString(),
-            //                (j).ToString(),
-            //                (-j).ToString()
-            //                )
-            //                .ContinueWith(
-            //                    a => Assert.AreEqual("99 -99 99 -99 99 -99", a.Result))
-            //            );
-            //    }
-            //}
-
-            //Assert.AreEqual(1, cnt);
-
-
-            //for (int i = 0; i < 99; i++)
-            //    await continuing[i];
-
-
-            //Assert.AreEqual( 2, cnt );
-
-            //timer.Stop();
-
-            //Assert.IsTrue( timer.ElapsedMilliseconds > waiting, string.Format("Expected wait time lower limit: {0} , actual : {1}",waiting, timer.ElapsedMilliseconds));
-
-            //timer.Restart();
-            
-            //continuing = new List<Task>();
-
-
-            //for (int i = 0; i < 99; i++)
-            //{
-            //    Assert.AreEqual(i == 0 ? 2 : 3, cnt);
-
-            //    var j = i + 1;
-
-
-            //    if (i == 0)
-            //    {
-            //        continuing.Add(
-            //            target(
-            //                (j).ToString(),
-            //                (-j).ToString(),
-            //                (j).ToString(),
-            //                (-j).ToString(),
-            //                (j).ToString(),
-            //                (-j).ToString()
-            //                ).ContinueWith(a => Assert.AreEqual("1 -1 1 -1 1 -1", a.Result))
-            //            );
-            //    }
-            //    else
-            //    {
-            //        continuing.Add(
-            //            target(
-            //                (j).ToString(),
-            //                (-j).ToString(),
-            //                (j).ToString(),
-            //                (-j).ToString(),
-            //                (j).ToString(),
-            //                (-j).ToString()
-            //                )
-            //                .ContinueWith(
-            //                    a => Assert.AreEqual("99 -99 99 -99 99 -99", a.Result))
-            //            );
-            //    }
-            //}
-
-            //Assert.AreEqual(3, cnt);
-
-
-            //for (int i = 0; i < 99; i++)
-            //    await continuing[i];
-
-            //timer.Stop();
-
-            //Assert.AreEqual(4, cnt);
-
-            //Assert.IsTrue(timer.ElapsedMilliseconds > waiting);
-
-
-
-
-
         }
 
         [TestMethod]
@@ -582,7 +601,7 @@ namespace Underscore.Test.Function
                 timer.Stop( );
 
                 Assert.AreEqual( "worked", taskResult.Result );
-                Assert.IsTrue( timer.ElapsedMilliseconds > 100 );
+                Assert.IsTrue( timer.ElapsedMilliseconds >= 100 );
 
             }, ( ) =>
             {
