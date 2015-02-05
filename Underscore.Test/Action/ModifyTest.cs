@@ -655,7 +655,7 @@ namespace Underscore.Test.Action
                 Assert.AreEqual( 1, callCount );
 
                 while ( tasks.Count != 0 )
-                    tasks.Pop( ).Wait( );
+                    await tasks.Pop( );
 
                 Assert.AreEqual( "100", results[ 0 ] );
                 Assert.AreEqual( "-100", results[ 1 ] );
@@ -707,8 +707,14 @@ namespace Underscore.Test.Action
             var tasks = new Stack<Task>();
             var throttled = testing.Throttle(throttling, 500);
 
+            var first = throttled(1,-1 , 1, -1, 1 , -1);
+
+            Assert.AreEqual(1, callCount);
+
             for (var i = 1; i <= 100; i++)
                 tasks.Push(throttled(i, -i, i, -i, i, -i));
+
+            await first;
 
             Assert.AreEqual("1", results[0]);
             Assert.AreEqual("-1", results[1]);
@@ -729,8 +735,12 @@ namespace Underscore.Test.Action
             Assert.AreEqual("-100", results[5]);
             Assert.AreEqual(2, callCount);
 
+            first = throttled(1, -1, 1, -1, 1, -1);
+
             for (var i = 1; i <= 100; i++)
                 tasks.Push(throttled(i, -i, i, -i, i, -i));
+
+            await first;
 
             Assert.AreEqual("1", results[0]);
             Assert.AreEqual("-1", results[1]);
@@ -805,7 +815,7 @@ namespace Underscore.Test.Action
 
             var throttling = new System.Action(() => result++);
             var tasks = new Stack<Task>();
-            var throttled = testing.Throttle(throttling, 25);
+            var throttled = testing.Throttle(throttling, 50);
 
             Assert.AreEqual(0, result);
 
@@ -815,7 +825,7 @@ namespace Underscore.Test.Action
             Assert.AreEqual(1, result);
 
             while (tasks.Count != 0)
-                tasks.Pop().Wait();
+                await tasks.Pop();
 
             Assert.AreEqual(2, result);
                
