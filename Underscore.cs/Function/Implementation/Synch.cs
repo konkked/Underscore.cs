@@ -704,7 +704,7 @@ namespace Underscore.Function
                         break;
 
                     await result;
-                    if (Interlocked.CompareExchange(ref running, null, curr) != curr) continue;
+                    if ( Interlocked.CompareExchange( ref running, null, curr ) != curr ) continue;
                     if ( Interlocked.CompareExchange( ref setting, 1, 0 ) == 0)
                     {
                         Interlocked.Exchange(ref retv, new { result = fn(targ) });
@@ -1570,83 +1570,146 @@ namespace Underscore.Function
             bool leading)
         {
 
-            var wait = milliseconds;
             var fn = function;
-            var midThrottle = false;
-            var locking = new object();
-            var returning = new {result = default(TResult)};
-            var usingArg = new {arg = default(T)};
+            int invocationStrDone = 0;
+            int doneSettingValue = 0;
+            object locking = new object();
+            Timer previous = null;
             int inThrottle = 0;
-            bool cleaningUp = false;
+            int doneSetting = 0;
 
-            Task waitingOn = null;
+            Task currentWaitingOn = null;
 
+            var returning = new {retv = default(TResult)};
+            var args = new {args = default(T)};
+
+            int wait = milliseconds;
             return async targ =>
             {
-                lock (locking)
+                Task myWaitingOn = null;
+                while (invocationStrDone == 1) await Task.Delay(1);
+
+                Monitor.Enter(locking);
+                try
                 {
-                    if (cleaningUp)
-                        Monitor.Wait(locking, wait);
+                    Interlocked.Increment(ref inThrottle);
 
-                    if (!midThrottle)
+                    if (inThrottle == 1)
                     {
-                        midThrottle = true;
-                        new Timer(o =>
+                        if (previous != null)
                         {
-                            lock (locking)
+                            previous.Dispose();
+                            previous = null;
+                        }
+                        
+                        currentWaitingOn = Task.Delay(wait);
+
+                        Timer t = null;
+                        t = new Timer(o =>
+                        {
+
+                            Monitor.Enter(locking);
+                            try
                             {
-                                var localArg = usingArg;
-                                Interlocked.Exchange(ref localArg, usingArg);
-                                Interlocked.Exchange(ref returning, new {result = fn(localArg.arg)});
-                                
-                                if (inThrottle != 0)
-                                    cleaningUp = true;
-
-                                midThrottle = false;
+                                Interlocked.Exchange(ref invocationStrDone, 1);
+                                Interlocked.Exchange(ref doneSettingValue, 0);
                                 Monitor.PulseAll(locking);
+                                if (inThrottle > 1)
+                                {
+                                    var largs = args;
 
-                                while (inThrottle != 0)
-                                    Monitor.Wait(locking);
+                                    Interlocked.Exchange(ref largs, args);
+                                    Interlocked.Exchange(ref returning, new {retv = fn(largs.args)});
+                                    Interlocked.Increment(ref doneSettingValue);
 
-                                Interlocked.Exchange(ref waitingOn, null);
-                                cleaningUp = false;
 
-                                Monitor.PulseAll(locking);
+                                    while (doneSetting != inThrottle - 1)
+                                    {
+                                        Monitor.Exit(locking);
+                                        Thread.SpinWait(32);
+                                        Monitor.Enter(locking);
+                                    }
+
+                                    Interlocked.Exchange(ref inThrottle, 0);
+                                    Interlocked.Exchange(ref doneSetting, 0);
+                                    Interlocked.Exchange(ref currentWaitingOn, null);
+
+                                }
+                                Interlocked.Exchange(ref invocationStrDone, 0);
                             }
+                            finally
+                            {
+
+                                previous = t;
+                                t = null;
+                                
+                                if (Monitor.IsEntered(locking))
+                                    Monitor.Exit(locking);
+                            }
+
 
                         }, null, wait, Timeout.Infinite);
 
-                        Interlocked.Exchange(ref waitingOn, Task.Delay(wait));
-                        Monitor.PulseAll(locking);
-
-                        if (leading)
-                            return fn(targ);
+                        try
+                        {
+                            if (leading)
+                                return fn(targ);
+                        }
+                        finally
+                        {
+                            doneSetting = 1;
+                        }
 
                     }
-                }
 
-                lock (locking)
+                    if (invocationStrDone == 0)
+                    {
+                        Interlocked.Exchange(ref args, new {args = targ});
+
+                        while (doneSetting == 0)
+                        {
+                            Monitor.Exit(locking);
+                            await Task.Delay(1);
+                            Monitor.Enter(locking);
+                        }
+
+                        Interlocked.Exchange(ref myWaitingOn, currentWaitingOn);
+                    }
+                }
+                finally
                 {
-                    Interlocked.Increment(ref inThrottle);
-                    Interlocked.Exchange(ref usingArg, new {arg = targ});
+                    if (Monitor.IsEntered(locking)) Monitor.Exit(locking);
                 }
 
+                if ( myWaitingOn!=null ) await myWaitingOn;
 
-                if ( waitingOn != null )
-                    await waitingOn;
+                var myresult = returning;
 
-                while (midThrottle);
-
-                var localRetCopy = new {result = default(TResult)};
+                Monitor.Enter(locking);
+                try
+                {
+                    while (doneSettingValue == 0)
+                    {
+                        Monitor.Exit(locking);
+                        await Task.Delay(1);
+                        Monitor.Enter(locking);
+                    }
                 
-                Interlocked.Exchange(ref localRetCopy, returning);
-                
-                if(Interlocked.Decrement(ref inThrottle)==0)
-                    lock (locking)
-                        Monitor.PulseAll(locking);
+                    Interlocked.Exchange(ref myresult, returning);
+                    Interlocked.Increment(ref doneSetting);
+                    Monitor.PulseAll(locking);
+                }
+                finally
+                {
+                    if(Monitor.IsEntered(locking)) Monitor.Exit(locking);
+                }
 
-                return localRetCopy.result;
+                return myresult.retv;
+
+
+
             };
+
 
         }
 
