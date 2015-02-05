@@ -14,7 +14,7 @@ using SynchComponent = Underscore.Function.SynchComponent;
 namespace Underscore.Test.Action
 {
     [TestClass]
-    public class ModifyTest
+    public class SynchTest
     {
         public ISynchComponent ManipulateDummy( ) { return new Underscore.Action.SynchComponent(new SynchComponent( new CompactComponent(), new Underscore.Utility.CompactComponent()), new ConvertComponent(), new Underscore.Function.ConvertComponent()); }
 

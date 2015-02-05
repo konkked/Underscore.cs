@@ -11,7 +11,7 @@ namespace Underscore.Test.Function
 {
 
     [TestClass]
-    public class ModifyTest
+    public class SynchTest
     {
         public ISynchComponent ModifyComponent( ) { return new SynchComponent( new CompactComponent(), new Underscore.Utility.CompactComponent() ); }
 

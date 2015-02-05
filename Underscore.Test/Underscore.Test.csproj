@@ -56,7 +56,7 @@
   <ItemGroup>
     <Compile Include="Action\BindTest.cs" />
     <Compile Include="Action\ComposeTest.cs" />
-    <Compile Include="Action\ModifyTest.cs" />
+    <Compile Include="Action\SynchTest.cs" />
     <Compile Include="Action\PartialTest.cs" />
     <Compile Include="Action\SplitTest.cs" />
     <Compile Include="BootstrapperTest.cs" />
@@ -65,7 +65,7 @@
     <Compile Include="Collection\PartitionTest.cs" />
     <Compile Include="Function\BindTest.cs" />
     <Compile Include="Function\ComposeTest.cs" />
-    <Compile Include="Function\ModifyTest.cs" />
+    <Compile Include="Function\SynchTest.cs" />
     <Compile Include="Function\PartialTest.cs" />
     <Compile Include="Function\SplitTest.cs" />
     <Compile Include="List\AggregateTest.cs" />

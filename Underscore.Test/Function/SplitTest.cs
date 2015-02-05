@@ -493,7 +493,7 @@ namespace Underscore.Test.Function
             }
 
             [TestMethod]
-            public async Task FunctionSplay( )
+            public async Task FunctionCurry( )
             {
                 var splitter = new SplitComponent( );
 

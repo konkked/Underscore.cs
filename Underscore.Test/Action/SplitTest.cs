@@ -225,6 +225,7 @@ namespace Underscore.Test.Action
         }
 
 
+        //TODO: make some tests for uncurry
 
         [TestMethod]
         public void ActionSplit()
@@ -250,7 +251,7 @@ namespace Underscore.Test.Action
         }
 
         [TestMethod]
-        public async Task ActionSplay1()
+        public async Task ActionCurry1()
         {
             var splitter = new SplitComponent();
 
@@ -270,7 +271,7 @@ namespace Underscore.Test.Action
         }
 
         [TestMethod]
-        public void ActionSplay2()
+        public void ActionCurry2()
         {
 
             var splitter = new SplitComponent();
@@ -288,7 +289,7 @@ namespace Underscore.Test.Action
 
 
         [TestMethod]
-        public void ActionSplay3()
+        public void ActionCurry3()
         {
             var splitter = new SplitComponent();
             var reference = new[] {false};
@@ -303,7 +304,7 @@ namespace Underscore.Test.Action
         }
 
         [TestMethod]
-        public void ActionSplay4()
+        public void ActionCurry4()
         {
 
             var splitter = new SplitComponent();
@@ -319,7 +320,7 @@ namespace Underscore.Test.Action
         }
 
         [TestMethod]
-        public void ActionSplay5()
+        public void ActionCurry5()
         {
 
             var splitter = new SplitComponent();
@@ -335,7 +336,7 @@ namespace Underscore.Test.Action
         }
 
         [TestMethod]
-        public void ActionSplay6()
+        public void ActionCurry6()
         {
 
             var splitter = new SplitComponent();
@@ -351,7 +352,7 @@ namespace Underscore.Test.Action
         }
 
         [TestMethod]
-        public void ActionSplay7()
+        public void ActionCurry7()
         {
 
             var splitter = new SplitComponent();
@@ -367,7 +368,7 @@ namespace Underscore.Test.Action
         }
 
         [TestMethod]
-        public void ActionSplay8()
+        public void ActionCurry8()
         {
 
             var splitter = new SplitComponent();
@@ -383,7 +384,7 @@ namespace Underscore.Test.Action
         }
 
         [TestMethod]
-        public void ActionSplay9()
+        public void ActionCurry9()
         {
 
             var splitter = new SplitComponent();
@@ -399,7 +400,7 @@ namespace Underscore.Test.Action
         }
 
         [TestMethod]
-        public void ActionSplay10()
+        public void ActionCurry10()
         {
 
             var splitter = new SplitComponent();
@@ -415,7 +416,7 @@ namespace Underscore.Test.Action
         }
 
         [TestMethod]
-        public void ActionSplay11()
+        public void ActionCurry11()
         {
 
             var splitter = new SplitComponent();
@@ -431,7 +432,7 @@ namespace Underscore.Test.Action
         }
 
         [TestMethod]
-        public void ActionSplay12()
+        public void ActionCurry12()
         {
             var splitter = new SplitComponent();
 
@@ -447,7 +448,7 @@ namespace Underscore.Test.Action
         }
 
         [TestMethod]
-        public void ActionSplay13()
+        public void ActionCurry13()
         {
 
             var splitter = new SplitComponent();
@@ -463,7 +464,7 @@ namespace Underscore.Test.Action
         }
 
         [TestMethod]
-        public void ActionSplay14()
+        public void ActionCurry14()
         {
 
             var splitter = new SplitComponent();
@@ -480,7 +481,7 @@ namespace Underscore.Test.Action
 
 
         [TestMethod]
-        public void ActionSplay15()
+        public void ActionCurry15()
         {
             var splitter = new SplitComponent();
             var reference = new[] { false };
