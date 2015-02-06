@@ -9,22 +9,32 @@ namespace Underscore.Object.Reflection
     public class PropertyComponent : IPropertyComponent
     {
         private readonly Func<Type, IEnumerable<PropertyInfo>> _getValidProperties;
-        private readonly Func<Type,Type, IEnumerable<PropertyInfo>> _propertiesByType;
-
+        private readonly Func<Type,Type, BindingFlags,IEnumerable<PropertyInfo>> _propertiesByType;
+        private readonly Func<Type, BindingFlags, IEnumerable<PropertyInfo>> _getValidPropertiesWithBindingFlags;
+        private const BindingFlags defaultFlags = BindingFlags.Public | BindingFlags.Instance ;
 
         public PropertyComponent( ICacheComponent cacher )
         {
-            ICacheComponent cacher1 = cacher; 
 
-            _getValidProperties = cacher1.Memoize( new Func<Type, IEnumerable<PropertyInfo>>(
-                t  => t.GetProperties(BindingFlags.Public | BindingFlags.Instance) .Where( a => a.GetGetMethod( ) != null
-                    && a.GetIndexParameters( ).FirstOrDefault( ) == null
-                ) ) );
 
-            _propertiesByType = cacher1.Memoize(
-               new Func<Type, Type, IEnumerable<PropertyInfo>>(
-                   ( t1, t2 ) => All( t1 ).Where( a => a.PropertyType == t2 ) )
-           );
+
+            var tmpValidProps = _getValidPropertiesWithBindingFlags = (
+                (t, f) => t.GetProperties(f).Where(a => a.GetGetMethod() != null
+                    && a.GetIndexParameters().FirstOrDefault() == null
+                ));
+
+            _getValidPropertiesWithBindingFlags = cacher.Memoize(tmpValidProps);
+            _getValidProperties = t => _getValidPropertiesWithBindingFlags(t, defaultFlags);
+            _propertiesByType =
+                (tme, tprop, flags) =>
+                    _getValidPropertiesWithBindingFlags(tme, flags).Where(a => a.PropertyType == tprop);
+
+        }
+
+
+        private IEnumerable<PropertyInfo> Enumerate(Type type, BindingFlags flags)
+        {
+            return _getValidPropertiesWithBindingFlags(type, flags);
         }
 
         private IEnumerable<PropertyInfo> Enumerate( Type target )
@@ -40,14 +50,44 @@ namespace Underscore.Object.Reflection
             return Enumerate( target.GetType( ) );
         }
 
+        public IEnumerable<PropertyInfo> All(Type type)
+        {
+            return Enumerate(type).ToList();
+        }
+
+        public IEnumerable<PropertyInfo> All(object target, BindingFlags flags)
+        {
+            return Enumerate(target.GetType(), flags);
+        }
+
+        public IEnumerable<PropertyInfo> All(Type type, BindingFlags flags)
+        {
+            return Enumerate(type, flags);
+        }
+
+
+        public void SetValue<T>(object target, string name, T value, bool caseSensitive, BindingFlags flags)
+        {
+            if (!caseSensitive)
+                name = name.ToLower();
+
+            var possible = OfType(target, typeof (T), flags);
+            if (possible.Any())
+            {
+                var assigning = possible.FirstOrDefault(a => (caseSensitive ? a.Name : a.Name.ToLower()) == name);
+
+                if (assigning != null)
+                    assigning.SetValue(target, value);
+
+            }
+        }
 
         /// <summary>
         /// Iterates overeach of the properties of the target item
         /// </summary>
         public void Each( object target, Action<object> iter )
         {
-            foreach ( var pr in Enumerate( target.GetType( ) ) )
-                iter( pr.GetGetMethod( ).Invoke( target, null ) );
+            Each(target, (o, s, a) => iter(o), defaultFlags );
         }
 
 
@@ -56,8 +96,7 @@ namespace Underscore.Object.Reflection
         /// </summary>
         public void Each( object target, Action<object, string> iter )
         {
-            foreach ( var pr in Enumerate( target.GetType( ) ) )
-                iter( pr.GetGetMethod( ).Invoke( target, null ), pr.Name );
+            Each(target, (o, s, a) => iter(o,s), defaultFlags);
         }
 
 
@@ -66,18 +105,7 @@ namespace Underscore.Object.Reflection
         /// </summary>
         public void Each( object target, Action<object, string, Action<object>> iter )
         {
-
-            foreach ( var pr in Enumerate( target.GetType( ) ) )
-            {
-                var pr1 = pr;
-                iter(
-                        pr.GetGetMethod( ).Invoke( target, null ),
-                        pr.Name,
-                        pr.GetSetMethod( ) == null ?
-                            null as Action<object> :
-                            ( o ) => pr1.GetSetMethod( ).Invoke( target, new[ ] { o } )
-                    );
-            }
+            Each(target, iter, defaultFlags);
         }
 
         /// <summary>
@@ -85,10 +113,8 @@ namespace Underscore.Object.Reflection
         /// </summary>
         public void Each<T>( object target, Action<T> iter )
         {
-            if ( target != null )
-                foreach ( var pr in Enumerate( target.GetType( ) ).Where( i => i.PropertyType == typeof(T) ) )
-                            iter( ( T ) pr.GetValue( target ) );
-            
+            Each(target, new Action<T,string,Action<T>> ( (o,s,a) => iter(o)));
+
         }
 
 
@@ -97,10 +123,7 @@ namespace Underscore.Object.Reflection
         /// </summary>
         public void Each<T>( object target, Action<T, string> iter )
         {
-
-            if ( target != null )
-                foreach ( var pr in Enumerate( target.GetType() ).Where( i => i.PropertyType == typeof( T ) ) )
-                    iter( ( T ) pr.GetGetMethod( ).Invoke( target, null ), pr.Name );
+            Each(target, new Action<T, string, Action<T>>((o, s, a) => iter(o, s)));
         }
 
         /// <summary>
@@ -108,17 +131,57 @@ namespace Underscore.Object.Reflection
         /// </summary>
         public void Each<T>( object target, Action<T, string, Action<T>> iter )
         {
-            if ( target != null )
-                foreach ( var pr in Enumerate( target.GetType() ).Where( i => i.PropertyType == typeof( T ) ) )
+            Each(target,  iter, defaultFlags);
+        }
+
+        public void Each(object target, Action<object> iter, BindingFlags flags)
+        {
+            Each(target, (o,s,a)=>iter(o), defaultFlags);
+        }
+
+        public void Each<T>(object target, Action<T> iter, BindingFlags flags)
+        {
+            Each(target, new Action<T, string, Action<T>>((o,s,a)=>iter(o)), defaultFlags);
+        }
+
+        public void Each(object target, Action<object, string> iter, BindingFlags flags)
+        {
+            Each(target,((o, s, a) => iter(o, s)), defaultFlags);
+        }
+
+        public void Each<T>(object target, Action<T, string> iter, BindingFlags flags)
+        {
+            Each(target, new Action<T, string, Action<T>>((o, s, a) => iter(o,s)), defaultFlags);
+        }
+
+        public void Each(object target, Action<object, string, Action<object>> iter, BindingFlags flags)
+        {
+            foreach (var pr in Enumerate(target.GetType(),flags))
+            {
+                var pr1 = pr;
+                iter(
+                        pr.GetGetMethod().Invoke(target, null),
+                        pr.Name,
+                        pr.GetSetMethod() == null ?
+                            null as Action<object> :
+                            (o) => pr1.GetSetMethod().Invoke(target, new[] { o })
+                    );
+            }
+        }
+
+        public void Each<T>(object target, Action<T, string, Action<T>> iter, BindingFlags flags)
+        {
+            if (target != null)
+                foreach (var pr in Enumerate(target.GetType()).Where(i => i.PropertyType == typeof(T)))
                 {
                     var pr1 = pr;
                     iter(
-                        ( T ) pr.GetValue( target ),
+                        (T)pr.GetValue(target),
                         pr.Name,
-                        pr.GetSetMethod( ) == null || !pr.CanWrite ?
+                        pr.GetSetMethod() == null || !pr.CanWrite ?
                             null :
                             new Action<T>(
-                                ( o ) => pr1.SetValue( target, o )
+                                (o) => pr1.SetValue(target, o)
                                 )
                         );
                 }
@@ -132,45 +195,75 @@ namespace Underscore.Object.Reflection
             return  Enumerate(target.GetType()).Where(a => a.PropertyType == type );
         }
 
+        public IEnumerable<PropertyInfo> OfType(object target, Type type, BindingFlags flags)
+        {
+            return _propertiesByType(target.GetType(), type, flags);
+        }
 
-        private PropertyInfo PropertyCaseInsensitive<T>( object target, string name ) 
+        public IEnumerable<object> Values(object target)
+        {
+            return Values(target, defaultFlags);
+        }
+
+        public IEnumerable<object> Values(object target, BindingFlags flags)
+        {
+            return All(target, flags).Where(a => a.CanRead).Select(a => a.GetValue(target));
+        }
+
+        public IEnumerable<TPropertyValue> Values<TPropertyValue>(object target)
+        {
+            return Values<TPropertyValue>(target,defaultFlags);
+        }
+
+        public IEnumerable<TPropertyValue> Values<TPropertyValue>(object target, BindingFlags flags)
+        {
+            return OfType(target, typeof(TPropertyValue),flags).Select(a => (TPropertyValue)a.GetValue(target));
+        }
+
+
+        private PropertyInfo PropertyCaseInsensitive<T>(object target, string name, BindingFlags flags = defaultFlags) 
         {
             var proplc = name.ToLower( );
 
-            return OfType( target, typeof( T ) ).FirstOrDefault( a => a.Name.ToLower( ) == proplc ) ;
+            return OfType( target, typeof( T ),flags ).FirstOrDefault( a => a.Name.ToLower( ) == proplc ) ;
         }
 
-        private PropertyInfo PropertyCaseSensitive<T>( object target, string name ) 
+        private PropertyInfo PropertyCaseSensitive<T>(object target, string name, BindingFlags flags = defaultFlags) 
         {
-            return OfType( target, typeof( T ) ).FirstOrDefault( a => a.Name == name );
+            return OfType( target, typeof( T ), flags ).FirstOrDefault( a => a.Name == name );
         }
 
-        private PropertyInfo PropertyCaseInsensitive( object target, string name ) 
+
+        private PropertyInfo PropertyCaseInsensitive(object target, string name, BindingFlags flags = defaultFlags)
         {
-            var proplc = name.ToLower( );
+            var proplc = name.ToLower();
 
-            return All( target ).FirstOrDefault( a => a.Name.ToLower( ) == proplc ) ;
+            return All(target,flags).FirstOrDefault(a => a.Name.ToLower() == proplc);
         }
 
-        private PropertyInfo PropertyCaseSensitive( object target, string name ) 
+
+        private PropertyInfo PropertyCaseSensitive(object target, string name, BindingFlags flags = defaultFlags)
         {
-            return All( target ).FirstOrDefault( a => a.Name == name );
+
+            return All(target, flags).FirstOrDefault(a => a.Name == name);
         }
 
-        private PropertyInfo GetProperty( object target, string name, bool caseSensitive )
-        {
-            if ( caseSensitive )
-                return PropertyCaseSensitive( target, name );
-            else
-                return PropertyCaseInsensitive( target, name );
-        }
 
-        private PropertyInfo GetProperty<T>( object target, string name, bool caseSensitive )
+
+        private PropertyInfo GetProperty(object target, string name, bool caseSensitive, BindingFlags flags = defaultFlags)
         {
             if ( caseSensitive )
-                return PropertyCaseSensitive<T>( target, name );
+                return PropertyCaseSensitive( target, name,flags );
             else
-                return PropertyCaseInsensitive<T>( target, name );
+                return PropertyCaseInsensitive( target, name, flags );
+        }
+
+        private PropertyInfo GetProperty<T>(object target, string name, bool caseSensitive, BindingFlags flags = defaultFlags)
+        {
+            if ( caseSensitive )
+                return PropertyCaseSensitive<T>( target, name ,flags);
+            else
+                return PropertyCaseInsensitive<T>( target, name , flags);
         }
 
         /// <summary>
@@ -178,7 +271,51 @@ namespace Underscore.Object.Reflection
         /// </summary>
         public bool Has( object target, string name, bool caseSensitive )
         {
-            return GetProperty( target, name, caseSensitive ) != null;
+            return GetProperty(target, name, caseSensitive) != null;
+        }
+
+        public bool Has(object target, string name, BindingFlags flags)
+        {
+
+            return GetProperty(target, name, true, flags) != null;
+        }
+
+        public bool Has(object target, string name, bool caseSensitive, BindingFlags flags)
+        {
+            return GetProperty(target, name, caseSensitive,flags) != null;
+        }
+
+        public object GetValue(object target, string name, BindingFlags flags)
+        {
+            return GetValue(target, name, true, flags);
+        }
+
+        public object GetValue(object target, string name, bool caseSensitive)
+        {
+            return GetValue(target, name, caseSensitive, defaultFlags);
+        }
+
+
+        public T GetValue<T>(object target, string name, BindingFlags flags)
+        {
+            return GetValue<T>(target, name, true, flags);
+        }
+
+        public T GetValue<T>(object target, string name, bool caseSensitive, BindingFlags flags)
+        {
+            var result = GetProperty<T>(target, name, caseSensitive,flags);
+
+
+            if (result == null)
+                throw new ArgumentException(
+                    string.Format(
+                        "property with name {0} and type {1} does not match any properties in given target",
+                        name,
+                        typeof(T)
+                    )
+                );
+
+            return (T)result.GetValue(target);
         }
 
         /// <summary>
@@ -189,23 +326,25 @@ namespace Underscore.Object.Reflection
             return Has( target, name, true );
         }
 
-        /// <summary>
-        /// Gets the value of the specified property
-        /// </summary>
-        public object GetValue( object target, string name, bool caseSensitive ) 
+
+        public object GetValue(object target, string name,bool caseSensitive, BindingFlags flags)
         {
-            var result = GetProperty( target, name, caseSensitive );
-            
-            if ( result == null )
-                throw new ArgumentException( 
+            var result = GetProperty(target, name, caseSensitive, flags);
+
+            if (result == null)
+                throw new ArgumentException(
                     string.Format(
                         "property with name {0} does not match any properties in given target",
                         name
                     )
                 );
 
-            return result.GetValue( target );
+            return result.GetValue(target);
+        }
 
+        public PropertyInfo Find(object target, string name, bool caseSensitive, BindingFlags flags)
+        {
+            return GetProperty(target, name, caseSensitive, flags);
         }
 
         /// <summary>
@@ -219,22 +358,9 @@ namespace Underscore.Object.Reflection
         /// <summary>
         /// Gets the value of the specified property
         /// </summary>
-        public T GetValue<T>( object target, string name, bool caseSensitive ) 
+        public T GetValue<T>( object target, string name, bool caseSensitive )
         {
-            var result = GetProperty<T>( target, name, caseSensitive );
-            
-            
-            if ( result == null )
-                throw new ArgumentException(
-                    string.Format(
-                        "property with name {0} and type {1} does not match any properties in given target",
-                        name,
-                        typeof(T)
-                    )
-                );
-
-            return (T)result.GetValue( target );
-
+            return GetValue<T>(target, name, caseSensitive, defaultFlags);
         }
 
         /// <summary>
@@ -252,16 +378,40 @@ namespace Underscore.Object.Reflection
                         name
                     )
                 );
-            else if ( !( ( value == null && !result.PropertyType.IsValueType ) || ( result.PropertyType.IsAssignableFrom( value.GetType( ) ) ) ) )
+
+            if ( !( ( value == null && !result.PropertyType.IsValueType ) || ( result.PropertyType.IsAssignableFrom( value.GetType( ) ) ) ) )
             {
                 throw new ArgumentException( "passed value is an invalid type" );
             }
-            else 
+
+            result.SetValue( target, value );
+        }
+
+        public void SetValue(object target, string name, object value, BindingFlags flags)
+        {
+            SetValue(target, name, value, true, flags);
+        }
+
+        public void SetValue(object target, string name, object value, bool caseSensitive, BindingFlags flags)
+        {
+
+            var result = GetProperty(target, name, caseSensitive);
+
+
+            if (result == null)
+                throw new ArgumentException(
+                    string.Format(
+                        "property with name {0} does not match any properties in given target",
+                        name
+                    )
+                );
+
+            if (!((value == null && !result.PropertyType.IsValueType) || (result.PropertyType.IsInstanceOfType(value))))
             {
-                result.SetValue( target, value );
+                throw new ArgumentException("passed value is an invalid type");
             }
 
-
+            result.SetValue(target, value);
         }
 
         /// <summary>
@@ -310,6 +460,11 @@ namespace Underscore.Object.Reflection
 
         }
 
+        public void SetValue<T>(object target, string name, T value, BindingFlags flags)
+        {
+            SetValue<T>(target, name, value, true, flags);
+        }
+
         /// <summary>
         /// Sets the value of the specified property
         /// </summary>
@@ -324,6 +479,12 @@ namespace Underscore.Object.Reflection
         public PropertyInfo Find( object target, string name, bool caseSensitive )
         {
             return GetProperty( target, name, caseSensitive );
+        }
+
+        public PropertyInfo Find(object target, string name, BindingFlags flags)
+        {
+
+            return GetProperty(target, name, true,flags);
         }
 
         /// <summary>

@@ -80,6 +80,8 @@
     <Compile Include="Function\Implementation\Partial.cs" />
     <Compile Include="Function\Implementation\Split.cs" />
     <Compile Include="Function\Implementation\Synch.cs" />
+    <Compile Include="Object\Reflection\Contract\Constructor.cs" />
+    <Compile Include="Object\Reflection\QueryFlags.cs" />
     <Compile Include="Setup\Action.cs" />
     <Compile Include="Setup\Collection.cs" />
     <Compile Include="Setup\Liteioc\Kernel.cs" />
