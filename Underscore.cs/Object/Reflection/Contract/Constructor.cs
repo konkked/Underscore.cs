@@ -12,9 +12,6 @@ namespace Underscore.Object.Reflection
         bool HasParameterless(object target);
         bool HasParameterless(object target, BindingFlags flags);
 
-        bool HasParameterless<T>();
-        bool HasParamterless<T>(BindingFlags flags);
-
         bool HasParameterless(Type target);
         bool HasParameterless(Type target, BindingFlags flags);
 
@@ -23,37 +20,30 @@ namespace Underscore.Object.Reflection
         IEnumerable<ConstructorInfo> Parameterless(object target);
         IEnumerable<ConstructorInfo> Parameterless(object target, BindingFlags flags);
 
-
-        IEnumerable<ConstructorInfo> Parameterless<T>();
-        IEnumerable<ConstructorInfo> Parameterless<T>(BindingFlags flags);
-
-
         IEnumerable<ConstructorInfo> Parameterless(Type target);
         IEnumerable<ConstructorInfo> Parameterless(Type target, BindingFlags flags);
 
-        IEnumerable<ConstructorInfo> Find(Type target, object query);
-        IEnumerable<ConstructorInfo> Find(Type target, object query, QueryFlags flags);
+        ConstructorInfo Find(Type target, object query);
         
 
-        IEnumerable<ConstructorInfo> Find(Type target, object query, BindingFlags flags);
-        IEnumerable<ConstructorInfo> Find(Type target, object query, BindingFlags flags, QueryFlags queryFlags);
+        ConstructorInfo Find(Type target, object query, BindingFlags flags);
 
 
-        IEnumerable<ConstructorInfo> Find(object target, object query);
-        IEnumerable<ConstructorInfo> Find(object target, object query, QueryFlags flags);
+        ConstructorInfo Find(object target, object query);
 
-        IEnumerable<ConstructorInfo> Find(object target, object query, BindingFlags flags);
-        IEnumerable<ConstructorInfo> Find(object target, object query, BindingFlags bindingFlags, QueryFlags queryFlags);
-
-        IEnumerable<ConstructorInfo> Find<T>(object query);
-        IEnumerable<ConstructorInfo> Find<T>(object query, QueryFlags flags);
-
-        IEnumerable<ConstructorInfo> Find<T>(object query, BindingFlags flags);
-        IEnumerable<ConstructorInfo> Find<T>(object query, BindingFlags bindingFlags, QueryFlags queryFlags);
+        ConstructorInfo Find(object target, object query, BindingFlags flags);
 
 
-        IEnumerable<ConstructorInfo> All<T>();
-        IEnumerable<ConstructorInfo> All<T>(BindingFlags flags);
+        IEnumerable<ConstructorInfo> Query(Type target, object query);
+
+        IEnumerable<ConstructorInfo> Query(Type target, object query, BindingFlags flags);
+
+
+        IEnumerable<ConstructorInfo> Query(object target, object query);
+
+        IEnumerable<ConstructorInfo> Query(object target, object query, BindingFlags flags);
+
+
 
 
         IEnumerable<ConstructorInfo> All(Type target);

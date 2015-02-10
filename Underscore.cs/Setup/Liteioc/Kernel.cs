@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Underscore.Setup
+namespace Underscore.Setup.Liteioc
 {
     //simple di injection container 
-    //to aviod dependence on outside resources
+    //to avoid dependence on outside resources
     public sealed class Kernel
     {
         private readonly Dictionary<Type, Type> _resolver;

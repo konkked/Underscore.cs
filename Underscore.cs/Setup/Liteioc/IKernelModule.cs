@@ -1,4 +1,4 @@
-﻿namespace Underscore.Setup
+﻿namespace Underscore.Setup.Liteioc
 {
     public interface IKernelModule
     {

@@ -177,7 +177,35 @@ namespace Underscore.Object.Reflection
         /// </summary>
         public IEnumerable<T> Query(object target, object query, BindingFlags flags)
         {
-            return _queryStore(target.GetType(), query);
+            return _flaggedQueryStore(target.GetType(), query,flags);
+        }
+
+
+
+        /// <summary>
+        /// Queries methods from target matching the query request 
+        /// 
+        /// query pattern is in this form {argname = TypeOfArgument,...}
+        /// Special Cases:
+        /// @return - matches on return type match
+        /// </summary>
+        public IEnumerable<T> Query(Type target, object query)
+        {
+            return _queryStore(target, query);
+        }
+
+
+
+        /// <summary>
+        /// Queries methods from target matching the query request 
+        /// 
+        /// query pattern is in this form {argname = TypeOfArgument,...}
+        /// Special Cases:
+        /// @return - matches on return type match
+        /// </summary>
+        public IEnumerable<T> Query(Type target, object query, BindingFlags flags)
+        {
+            return _flaggedQueryStore(target, query,flags);
         }
 
 
