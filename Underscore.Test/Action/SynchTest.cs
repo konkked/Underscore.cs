@@ -632,55 +632,61 @@ namespace Underscore.Test.Action
 
             var results = new string[4];
 
-                var callCount = 0;
+            var callCount = 0;
 
-                var throttling = new Action<int, int, int, int>( ( i, j, k, l ) =>
-                {
-                    results[ 0 ] = ( i ).ToString( );
-                    results[ 1 ] = ( j ).ToString( );
-                    results[ 2 ] = ( k ).ToString( );
-                    results[ 3 ] = ( l ).ToString( );
-                    callCount++;
-                } );
-                var tasks = new Stack<Task>( );
-                var throttled = testing.Throttle( throttling, 500 );
+            var throttling = new Action<int, int, int, int>((i, j, k, l) =>
+            {
+                results[0] = (i).ToString();
+                results[1] = (j).ToString();
+                results[2] = (k).ToString();
+                results[3] = (l).ToString();
+                callCount++;
+            });
+            var tasks = new Stack<Task>();
+            var throttled = testing.Throttle(throttling, 500);
 
-                for ( var i=1 ; i <= 100 ; i++ )
-                    tasks.Push( throttled( i, -i, i, -i ) );
+            for (var i = 1; i <= 100; i++)
+                tasks.Push(throttled(i, -i, i, -i));
 
-                Assert.AreEqual( "1", results[ 0 ] );
-                Assert.AreEqual( "-1", results[ 1 ] );
-                Assert.AreEqual( "1", results[ 2 ] );
-                Assert.AreEqual( "-1", results[ 3 ] );
-                Assert.AreEqual( 1, callCount );
+            Assert.AreEqual("1", results[0]);
+            Assert.AreEqual("-1", results[1]);
+            Assert.AreEqual("1", results[2]);
+            Assert.AreEqual("-1", results[3]);
+            Assert.AreEqual(1, callCount);
 
-                while ( tasks.Count != 0 )
-                    await tasks.Pop( );
+            while (tasks.Count != 0)
+                await tasks.Pop();
 
-                Assert.AreEqual( "100", results[ 0 ] );
-                Assert.AreEqual( "-100", results[ 1 ] );
-                Assert.AreEqual( "100", results[ 2 ] );
-                Assert.AreEqual( "-100", results[ 3 ] );
-                Assert.AreEqual( 2, callCount );
+            Assert.AreEqual("100", results[0]);
+            Assert.AreEqual("-100", results[1]);
+            Assert.AreEqual("100", results[2]);
+            Assert.AreEqual("-100", results[3]);
+            Assert.AreEqual(2, callCount);
+
+            await Task.Delay(1);
+
+            var first = throttled(0, 0, 0, 0);
+            await first;
+
+            Assert.AreEqual("0", results[0]);
+            Assert.AreEqual("0", results[1]);
+            Assert.AreEqual("0", results[2]);
+            Assert.AreEqual("0", results[3]);
+            Assert.AreEqual(3, callCount);
 
 
-                for (var i = 1; i <= 100; i++)
-                    tasks.Push(throttled(i, -i, i, -i));
+            for (var i = 1; i <= 100; i++)
+                tasks.Push(throttled(i, -i, i, -i));
 
-                Assert.AreEqual("1", results[0]);
-                Assert.AreEqual("-1", results[1]);
-                Assert.AreEqual("1", results[2]);
-                Assert.AreEqual("-1", results[3]);
-                Assert.AreEqual(3, callCount);
 
-                while (tasks.Count != 0)
-                    await tasks.Pop();
+            while (tasks.Count != 0)
+                await tasks.Pop();
 
-                Assert.AreEqual("100", results[0]);
-                Assert.AreEqual("-100", results[1]);
-                Assert.AreEqual("100", results[2]);
-                Assert.AreEqual("-100", results[3]);
-                Assert.AreEqual(4, callCount);
+            Assert.AreEqual("100", results[0]);
+            Assert.AreEqual("-100", results[1]);
+            Assert.AreEqual("100", results[2]);
+            Assert.AreEqual("-100", results[3]);
+            Assert.AreEqual(4, callCount);
         }
 
         [TestMethod]

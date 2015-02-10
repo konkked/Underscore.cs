@@ -71,9 +71,9 @@ namespace Underscore.Module
             return _manipulator.Sample( list, size, unique );
         }
 
-        public IList<T> Slice<T>( IList<T> list, int start, int count )
+        public IList<T> Slice<T>( IList<T> list, int start, int end )
         {
-            return _partitioner.Slice( list, start, count );
+            return _partitioner.Slice( list, start, end );
         }
 
         public Tuple<IList<T>, IList<T>> Split<T>( IList<T> list )

@@ -53,6 +53,30 @@ namespace Underscore.Object.Reflection
 
 
 
+        /// <summary>
+        /// Finds the corresponding property info from the targeted object
+        /// </summary>
+        PropertyInfo Find(Type target, string name);
+
+        /// <summary>
+        /// Finds the corresponding property info from the targeted object
+        /// </summary>
+        PropertyInfo Find(Type target, string name, bool caseSensitive);
+
+
+        /// <summary>
+        /// Finds the corresponding property info from the targeted object
+        /// </summary>
+        PropertyInfo Find(Type target, string name, BindingFlags flags);
+
+        /// <summary>
+        /// Finds the corresponding property info from the targeted object
+        /// </summary>
+        PropertyInfo Find(Type target, string name, bool caseSensitive, BindingFlags flags);
+
+
+
+
 
         /// <summary>
         /// Gets the value of the specified property
@@ -75,6 +99,8 @@ namespace Underscore.Object.Reflection
         /// </summary>
         /// <returns>Returns the value of the property</returns>
         object GetValue(object target, string name, bool caseSensitive, BindingFlags flags);
+        
+
 
 
         /// <summary>
@@ -121,6 +147,28 @@ namespace Underscore.Object.Reflection
         /// </summary>
         bool Has(object target, string name, bool caseSensitive, BindingFlags flags);
 
+
+
+        /// <summary>
+        /// Determines if an object has a property
+        /// </summary>
+        bool Has(Type target, string name);
+
+        /// <summary>
+        /// Determines if an object has a property
+        /// </summary>
+        bool Has(Type target, string name, bool caseSensitive);
+
+
+        /// <summary>
+        /// Determines if an object has a property
+        /// </summary>
+        bool Has(Type target, string name, BindingFlags flags);
+
+        /// <summary>
+        /// Determines if an object has a property
+        /// </summary>
+        bool Has(Type target, string name, bool caseSensitive, BindingFlags flags);
 
 
         /// <summary>

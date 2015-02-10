@@ -32,9 +32,24 @@ namespace Underscore.Object.Reflection
 
         //TODO : break up into some sort of oop based special case rule object
 
+        public override IEnumerable<MethodInfo> All(Type target)
+        {
+            return _collection.All(target);
+        }
+
+        public override IEnumerable<MethodInfo> All(object target, BindingFlags flags)
+        {
+            return _collection.All(target, flags);
+        }
+
+        public override IEnumerable<MethodInfo> All(Type target, BindingFlags flags)
+        {
+            return _collection.All(target, flags);
+        }
+
         public override IEnumerable<MethodInfo> All( object target )
         {
-            return base._collection.All( target );
+            return _collection.All( target );
         }
 
         protected override bool IsSpecialCase( string name )
@@ -160,6 +175,155 @@ namespace Underscore.Object.Reflection
             return Find( target, name,true ) != null;
         }
 
+        public bool Has(Type target, string name, object query)
+        {
+            return Find(target, name, query) != null;
+        }
+
+        public bool Has(Type target, object query)
+        {
+            return Find(target,  query) != null;
+        }
+
+        public bool Has(Type target, string name)
+        {
+            return Find(target, name) != null;
+        }
+
+        public bool Has(object target, string name, object query, BindingFlags flags)
+        {
+            return Find(target, name, query, flags) != null;
+        }
+
+        public bool Has(object target, object query, BindingFlags flags)
+        {
+            return Find(target, query, flags) != null;
+        }
+
+        public bool Has(object target, string name, BindingFlags flags)
+        {
+            return Find(target, name, flags) != null;
+        }
+
+        public bool Has(Type target, string name, object query, BindingFlags flags)
+        {
+            return Find(target, name, query, flags) != null;
+        }
+
+        public bool Has(Type target, object query, BindingFlags flags)
+        {
+            return Find(target, query, flags) != null;
+        }
+
+        public bool Has(Type target, string name, BindingFlags flags)
+        {
+            return Find(target, name, flags) != null;
+        }
+
+        public IEnumerable<MethodInfo> Query(Type target, object query)
+        {
+            return base.Query(target, query);
+        }
+
+        public IEnumerable<MethodInfo> Query(Type target, object query, BindingFlags flags)
+        {
+            return base.Query(target, query);
+        }
+
+        public IEnumerable<MethodInfo> Query(object target, object query, string name, bool caseSenstive)
+        {
+            return Query(target.GetType(), query, name);
+        }
+
+        public IEnumerable<MethodInfo> Query(Type target, object query, string name, bool caseSenstive)
+        {
+            var lcname = name.ToLower();
+            return caseSenstive
+                ? base.Query(target, query).Where(a => a.Name == name)
+                : base.Query(target, query).Where(a => a.Name.ToLower() == lcname);
+        }
+
+        public IEnumerable<MethodInfo> Query(object target, object query, string name, bool caseSenstive, BindingFlags flags)
+        {
+            return Query(target.GetType(), query, name, caseSenstive, flags);
+        }
+
+        public IEnumerable<MethodInfo> Query(Type target, object query, string name, bool caseSenstive, BindingFlags flags)
+        {
+            var lcname = name.ToLower();
+            return caseSenstive
+                ? base.Query(target, query, flags).Where(a => a.Name == name)
+                : base.Query(target, query, flags).Where(a => a.Name.ToLower() == lcname);
+        }
+
+        public IEnumerable<MethodInfo> Query(object target, object query, string name)
+        {
+            return Query(target.GetType(), query, name);
+        }
+
+        public IEnumerable<MethodInfo> Query(Type target, object query, string name)
+        {
+            return base.Query(target, query).Where(a => a.Name == name);
+        }
+
+        public IEnumerable<MethodInfo> Query(object target, object query, string name, BindingFlags flags)
+        {
+            return Query(target.GetType(), query, name, flags);
+        }
+
+        public IEnumerable<MethodInfo> Query(Type target, object query, string name, BindingFlags flags)
+        {
+            return base.Query(target, query, flags).Where(a => a.Name == name);
+        }
+
+
+        public MethodInfo Find(Type target, object query)
+        {
+            return Query(target, query).FirstOrDefault();
+        }
+
+        public MethodInfo Find(object target, string name, bool caseSensitive, BindingFlags flags)
+        {
+            return Find(target.GetType(), name, caseSensitive, flags);
+        }
+
+        public MethodInfo Find(object target, string name, object query, BindingFlags flags)
+        {
+            return Find(target.GetType(),name, query, flags);
+        }
+
+        public MethodInfo Find(object target, string name, BindingFlags flags)
+        {
+            return Find(target.GetType(), name, flags);
+        }
+
+        public MethodInfo Find(object target, object query, BindingFlags flags)
+        {
+            return Find(target.GetType(), query, flags);
+        }
+
+        public MethodInfo Find(Type target, string name, bool caseSensitive, BindingFlags flags)
+        {
+            var lcname = name.ToLower();
+            return caseSensitive
+                ? All(target, flags).FirstOrDefault(a => a.Name == name)
+                : All(target, flags).FirstOrDefault(a => a.Name.ToLower() == lcname);
+        }
+
+        public MethodInfo Find(Type target, string name, object query, BindingFlags flags)
+        {
+            return base.Query(target, query, flags).FirstOrDefault(a => a.Name == name);
+        }
+
+        public MethodInfo Find(Type target, string name, BindingFlags flags)
+        {
+            return All(target, flags).FirstOrDefault(a => a.Name == name);
+        }
+
+        public MethodInfo Find(Type target, object query, BindingFlags flags)
+        {
+            return base.Query(target, query, flags).FirstOrDefault();
+        }
 
         /// <summary>
         /// Determines the if the target object has a matching method 
@@ -194,6 +358,24 @@ namespace Underscore.Object.Reflection
         public MethodInfo Find( object target, object query )
         {
             return Query( target, query ).FirstOrDefault();
+        }
+
+        public MethodInfo Find(Type target, string name, bool caseSensitive)
+        {
+            var lcname = name.ToLower();
+            return (caseSensitive
+                ? All(target).Where(a => a.Name == name)
+                : All(target).Where(a => a.Name.ToLower() == lcname)).FirstOrDefault();
+        }
+
+        public MethodInfo Find(Type target, string name, object query)
+        {
+            return base.Query(target, query).FirstOrDefault(a => a.Name == name);
+        }
+
+        public MethodInfo Find(Type target, string name)
+        {
+            return All(target).FirstOrDefault(a => a.Name == name);
         }
     }
 }

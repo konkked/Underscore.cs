@@ -250,20 +250,20 @@ namespace Underscore.Object.Reflection
 
 
 
+        private PropertyInfo GetProperty(Type target, string name, bool caseSensitive, BindingFlags flags = defaultFlags)
+        {
+            return caseSensitive ? PropertyCaseSensitive( target, name,flags ) : PropertyCaseInsensitive( target, name, flags );
+        }
+
+
         private PropertyInfo GetProperty(object target, string name, bool caseSensitive, BindingFlags flags = defaultFlags)
         {
-            if ( caseSensitive )
-                return PropertyCaseSensitive( target, name,flags );
-            else
-                return PropertyCaseInsensitive( target, name, flags );
+            return caseSensitive ? PropertyCaseSensitive(target, name, flags) : PropertyCaseInsensitive(target, name, flags);
         }
 
         private PropertyInfo GetProperty<T>(object target, string name, bool caseSensitive, BindingFlags flags = defaultFlags)
         {
-            if ( caseSensitive )
-                return PropertyCaseSensitive<T>( target, name ,flags);
-            else
-                return PropertyCaseInsensitive<T>( target, name , flags);
+            return caseSensitive ? PropertyCaseSensitive<T>(target, name, flags) : PropertyCaseInsensitive<T>(target, name, flags);
         }
 
         /// <summary>
@@ -283,6 +283,26 @@ namespace Underscore.Object.Reflection
         public bool Has(object target, string name, bool caseSensitive, BindingFlags flags)
         {
             return GetProperty(target, name, caseSensitive,flags) != null;
+        }
+
+        public bool Has(Type target, string name)
+        {
+            return GetProperty(target, name,true) != null;
+        }
+
+        public bool Has(Type target, string name, bool caseSensitive)
+        {
+            return GetProperty(target, name, caseSensitive) != null;
+        }
+
+        public bool Has(Type target, string name, BindingFlags flags)
+        {
+            return GetProperty(target, name, true,flags) != null;
+        }
+
+        public bool Has(Type target, string name, bool caseSensitive, BindingFlags flags)
+        {
+            return GetProperty(target, name, caseSensitive, flags) != null;
         }
 
         public object GetValue(object target, string name, BindingFlags flags)
@@ -343,6 +363,26 @@ namespace Underscore.Object.Reflection
         }
 
         public PropertyInfo Find(object target, string name, bool caseSensitive, BindingFlags flags)
+        {
+            return GetProperty(target, name, caseSensitive, flags);
+        }
+
+        public PropertyInfo Find(Type target, string name)
+        {
+            return GetProperty(target, name, true);
+        }
+
+        public PropertyInfo Find(Type target, string name, bool caseSensitive)
+        {
+            return GetProperty(target, name, caseSensitive);
+        }
+
+        public PropertyInfo Find(Type target, string name, BindingFlags flags)
+        {
+            return GetProperty(target, name, true, flags);
+        }
+
+        public PropertyInfo Find(Type target, string name, bool caseSensitive, BindingFlags flags)
         {
             return GetProperty(target, name, caseSensitive, flags);
         }
