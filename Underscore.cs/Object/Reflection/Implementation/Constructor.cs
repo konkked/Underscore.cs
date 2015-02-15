@@ -10,7 +10,8 @@ namespace Underscore.Object.Reflection
 {
     public class ConstructorComponent: MethodsBaseComponent<ConstructorInfo>, IConstructorComponent
     {
-        public ConstructorComponent(ICacheComponent cacher, IPropertyComponent properties, Members<ConstructorInfo> collection) : base(cacher, properties, collection)
+        public ConstructorComponent(ICacheComponent cacher, IPropertyComponent properties)
+            : base(cacher, properties, new Members<ConstructorInfo>(cacher, null, BindingFlags.Instance | BindingFlags.Public))
         {
         }
 
@@ -49,42 +50,42 @@ namespace Underscore.Object.Reflection
 
         public bool HasParameterless(object target)
         {
-            return Parameterless(target).FirstOrDefault() != null;
+            return Parameterless(target)  != null;
         }
 
         public bool HasParameterless(object target, BindingFlags flags)
         {
-            return Parameterless(target,flags).FirstOrDefault() != null;
+            return Parameterless(target,flags) != null;
         }
 
         public bool HasParameterless(Type target)
         {
-            return Parameterless(target).FirstOrDefault() != null;
+            return Parameterless(target)  != null;
         }
 
         public bool HasParameterless(Type target, BindingFlags flags)
         {
-            return Parameterless(target,flags).FirstOrDefault() != null;
+            return Parameterless(target,flags) != null;
         }
 
-        public IEnumerable<ConstructorInfo> Parameterless(object target)
+        public ConstructorInfo Parameterless(object target)
         {
-            return All(target).Where(a => !a.GetParameters().Any());
+            return All(target).FirstOrDefault(a => !a.GetParameters().Any());
         }
 
-        public IEnumerable<ConstructorInfo> Parameterless(object target, BindingFlags flags)
+        public ConstructorInfo Parameterless(object target, BindingFlags flags)
         {
-            return All(target,flags).Where(a => !a.GetParameters().Any());
+            return All(target,flags).FirstOrDefault(a => !a.GetParameters().Any());
         }
 
-        public IEnumerable<ConstructorInfo> Parameterless(Type target)
+        public ConstructorInfo Parameterless(Type target)
         {
-            return All(target).Where(a => !a.GetParameters().Any());
+            return All(target).FirstOrDefault(a => !a.GetParameters().Any());
         }
 
-        public IEnumerable<ConstructorInfo> Parameterless(Type target, BindingFlags flags)
+        public ConstructorInfo Parameterless(Type target, BindingFlags flags)
         {
-            return All(target, flags).Where(a => !a.GetParameters().Any());
+            return All(target, flags).FirstOrDefault(a => !a.GetParameters().Any());
         }
 
         public ConstructorInfo Find(Type target, object query)

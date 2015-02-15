@@ -20,12 +20,14 @@ namespace Underscore.Test.Module
                 var property = new PropertyComponent( cacher );
                 var methods = new MethodComponent( cacher, property);
                 var field = new FieldComponent( cacher );
+                var ctor = new ConstructorComponent(cacher, property);
                 var transformation = new TransposeComponent(property);
 
                 var example = new Underscore.Module.Object (
                     property,
                     methods,
                     field,
+                    ctor,
                     transformation
                 ) ;
 

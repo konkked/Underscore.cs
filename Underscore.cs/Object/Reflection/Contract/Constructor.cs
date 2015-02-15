@@ -17,11 +17,11 @@ namespace Underscore.Object.Reflection
 
 
 
-        IEnumerable<ConstructorInfo> Parameterless(object target);
-        IEnumerable<ConstructorInfo> Parameterless(object target, BindingFlags flags);
+        ConstructorInfo Parameterless(object target);
+        ConstructorInfo Parameterless(object target, BindingFlags flags);
 
-        IEnumerable<ConstructorInfo> Parameterless(Type target);
-        IEnumerable<ConstructorInfo> Parameterless(Type target, BindingFlags flags);
+        ConstructorInfo Parameterless(Type target);
+        ConstructorInfo Parameterless(Type target, BindingFlags flags);
 
         ConstructorInfo Find(Type target, object query);
         

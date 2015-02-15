@@ -4,26 +4,27 @@ using Underscore.Object.Reflection;
 namespace Underscore.Module
 {
 
-    //should only be public for testing and debugging purposes
-
     public class Object 
     {
         private readonly IPropertyComponent _property;
         private readonly IMethodComponent _method;
         private readonly IFieldComponent _field;
         private readonly ITransposeComponent _transformation;
+        private readonly IConstructorComponent _constructor;
 
 
         public Object(
             IPropertyComponent property,
             IMethodComponent method,
             IFieldComponent field,
+            IConstructorComponent constructor,
             ITransposeComponent transformation) 
         {
             _property = property;
             _field = field;
             _method = method;
             _transformation = transformation;
+            _constructor = constructor;
         }
 
  
@@ -44,6 +45,8 @@ namespace Underscore.Module
 
         //transformation
         public ITransposeComponent Transpose { get { return _transformation; } }
+
+        public IConstructorComponent Constructor { get { return _constructor; } }
 
     }
 }

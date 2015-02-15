@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Underscore.Function;
 using Underscore.Object.Reflection;
@@ -12,12 +13,226 @@ namespace Underscore.Test.Object.Reflection
     [TestClass]
     public class ConstructorComponentTest
     {
+
+        [TestMethod]
+        public void FunctionalCtorTest5()
+        {
+            var strBuilder = new StringBuilder();
+
+            
+            object[] paramQueryArgs =
+            {
+                new[] {typeof (string), typeof (int), typeof (int), typeof (int)},
+                new[] {"value", "startIndex", "length", "capacity"},
+                new {capacity = typeof (int), value = typeof (string), length = typeof (int), startIndex = typeof (int)}
+            };
+
+            const BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
+
+            DoFunctionalConstructorTest(strBuilder, a =>
+            {
+                var ls = a.GetParameters().ToArray();
+                return ls.Length == 4
+                    && ls.Any(b => b.Name == "capacity" && b.ParameterType == typeof(int))
+                    && ls.Any(b => b.Name == "value" && b.ParameterType == typeof(string))
+                    && ls.Any(b => b.Name == "startIndex" && b.ParameterType == typeof(int))
+                    && ls.Any(b => b.Name == "length" && b.ParameterType == typeof(int));
+            }, paramQueryArgs, flags);
+
+
+        }
+
+        [TestMethod]
+        public void FunctionalCtorTest4()
+        {
+
+            var strBuilder = new StringBuilder();
+            
+            object[] paramQueryArgs =
+            {
+                new[] {typeof (string), typeof (int)}, 
+                new[] {"value", "capacity"},
+                new {capacity = typeof (int), value = typeof (string)}
+            };
+
+            const BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
+
+
+            DoFunctionalConstructorTest(strBuilder, a =>
+            {
+                var ls = a.GetParameters().ToArray();
+                return ls.Length >= 2
+                    && ls.Any(b => b.Name == "capacity" && b.ParameterType == typeof(int))
+                    && ls.Any(b => b.Name == "value" && b.ParameterType == typeof(string));
+            }, paramQueryArgs, flags);
+        }
+
+        [TestMethod]
+        public void FunctionalCtorTest3()
+        {
+            var strBuilder = new StringBuilder();
+            object[] paramQueryArgs =
+            {
+                new[] {typeof (int), typeof (int)}, 
+                new[] {"capacity", "maxCapacity"},
+                new {capacity = typeof (int), maxCapacity = typeof (int)}
+            };
+
+            const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public;
+
+            DoFunctionalConstructorTest(strBuilder, a =>
+            {
+                var ls = a.GetParameters().ToArray();
+                return ls.Length >= 2
+                    && ls.Any(b => b.Name == "capacity" && b.ParameterType == typeof(int))
+                    && ls.Any(b => b.Name == "maxCapacity" && b.ParameterType == typeof(int));
+            }, paramQueryArgs, flags);
+
+        }
+
+        [TestMethod]
+        public void FunctionalCtorTest2()
+        {
+
+
+            var strBuilder = new StringBuilder();
+
+
+            const BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
+
+            object[] paramQueryArgs =
+            {
+                typeof(string), 
+                new[] { typeof(string) }, 
+                "value", 
+                new[]{"value"}, 
+                new { value= typeof(string) }
+            };
+
+            Func<ConstructorInfo, bool> filter = a =>
+            {
+                var ls = a.GetParameters().ToArray();
+                return ls.Length >= 1 && ls.Any(b => b.Name == "value" && b.ParameterType == typeof (string));
+            };
+
+
+            DoFunctionalConstructorTest(strBuilder, filter, paramQueryArgs,flags);
+        }
+
+        private static void DoFunctionalConstructorTest<T>(T instance, Func<ConstructorInfo, bool> filter, object[] paramQueryArgs,BindingFlags flags)
+        {
+            var cacheComponent = new CacheComponent();
+            var propComponent = new PropertyComponent(cacheComponent);
+            var ctorComponent = new ConstructorComponent(cacheComponent, propComponent);
+
+
+            var expectedToHave = new HashSet<ConstructorInfo>(typeof (T).GetConstructors(flags).Where(filter));
+
+
+            var testingqtypenf = _.Function.Partial<Type, object, IEnumerable<ConstructorInfo>>(
+                ctorComponent.Query,
+                typeof (T)
+                );
+
+            var testingqtypewf =
+                _.Function.Partial<Type, object, BindingFlags, IEnumerable<ConstructorInfo>>(
+                    ctorComponent.Query,
+                    typeof (T)
+                    );
+
+            var testingqobjnf = _.Function.Partial<object, object, IEnumerable<ConstructorInfo>>(ctorComponent.Query, instance);
+            var testingqobjwf =
+                _.Function.Partial<object, object, BindingFlags, IEnumerable<ConstructorInfo>>(ctorComponent.Query, instance);
+
+
+            var resultSet =
+                paramQueryArgs.Select(testingqtypenf)
+                    .Concat(paramQueryArgs.Select(a => testingqtypewf(a, flags)))
+                    .Concat(paramQueryArgs.Select(testingqobjnf))
+                    .Concat(paramQueryArgs.Select(a => testingqobjwf(a, flags)));
+
+            int i = 0;
+            foreach (var result in resultSet)
+            {
+                Assert.IsTrue(result.All(expectedToHave.Contains), string.Join(", ", result.Select(a=>"("+string.Join(" , ",a.GetParameters().Select(b=>b.Name+":"+b.ParameterType.Name))+")")) + " Invocation "+i);
+                i++;
+            }
+        }
+
+
+        public void FunctionalCtorTest7()
+        {
+
+
+            var strBuilder = new StringBuilder();
+            Func<ConstructorInfo, bool> filter = a =>
+            {
+                var ls = a.GetParameters().ToArray();
+                return ls.Length >= 1 && ls.Any(b => b.Name == "capacity" && b.ParameterType == typeof (int));
+            };
+
+
+            const BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
+            object[] paramQueryArgs = { typeof(int), new[] { typeof(int) }, "capacity", new { capacity = typeof(int) } };
+
+            DoFunctionalConstructorTest(strBuilder, filter, paramQueryArgs, flags);
+
+        }
+
+        [TestMethod]
+        public void FunctionalCtorTestParameterless()
+        {
+            
+            var cacheComponent = new CacheComponent();
+            var propComponent = new PropertyComponent(cacheComponent);
+            var ctorComponent = new ConstructorComponent(cacheComponent, propComponent);
+
+            //get the ctor for string builder
+            //empty ctor var strBuilder = new StringBuilder();
+
+            var strBuilder = new StringBuilder();
+
+            const BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
+
+            var expecting = from i in typeof(StringBuilder).GetConstructors(flags) 
+                            where !i.GetParameters().Any()
+                            select i;
+
+
+            var resultsSet = new IList<ConstructorInfo>[]
+            {
+                ctorComponent.Query(typeof (StringBuilder), new {}, flags).ToList(),
+                ctorComponent.Query(typeof (StringBuilder), new {}).ToList(),
+                ctorComponent.Query(strBuilder, new {}, flags).ToList(),
+                ctorComponent.Query(strBuilder, new {}).ToList(),
+                new[]{ctorComponent.Parameterless(typeof (StringBuilder))},
+                new[]{ctorComponent.Parameterless(strBuilder)},
+                new[]{ctorComponent.Parameterless(typeof (StringBuilder), flags)},
+                new[]{ctorComponent.Parameterless(strBuilder, flags)},
+            };
+            //expecting should only be one 
+
+            foreach (var results in resultsSet)
+            {
+
+                Assert.AreEqual(1, results.Count());
+                Assert.AreEqual(expecting.First(), results.First());
+
+            }
+
+            Assert.IsTrue(ctorComponent.HasParameterless(strBuilder));
+            Assert.IsTrue(ctorComponent.HasParameterless(strBuilder,flags));
+
+
+
+        }
+
         private static IConstructorComponent CreateTestTarget()
         {
             var cacher = new CacheComponent();
             var props = new PropertyComponent(cacher);
 
-            return new ConstructorComponent(cacher, props, new Members<ConstructorInfo>(cacher,(c)=>true,BindingFlags.Public | BindingFlags.Instance));
+            return new ConstructorComponent(cacher, props);
         }
 
         public class CtorParamlessTestClass

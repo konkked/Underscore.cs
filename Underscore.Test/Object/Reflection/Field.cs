@@ -194,6 +194,152 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
+        public class FieldValuesTest
+        {
+            public string Value1 = "Value1",
+                Value2 = "Value2",
+                Value3 = "Value3";
+
+            private string PrivateValue1 = "PrivateValue1",
+                PrivateValue2 = "PrivateValue2",
+                PrivateValue3 = "PrivateValue3";
+
+            public int IntValue1 = 1;
+            private int PrivateIntValue1=-1;
+
+            public static int IntValueStatic = 12;
+            private static int IntValuePrivateStatic = 122;
+
+
+        }
+
+        [TestMethod]
+        public void FieldValuesPublicStr()
+        {
+            var testing = new FieldComponent(new CacheComponent());
+            
+            
+            var instance = new FieldValuesTest();
+
+            var testingSets = new[]
+            {
+                testing.Values<string>(instance).ToList(),
+                testing.Values<string>(instance, BindingFlags.Instance | BindingFlags.Public).ToList(),
+
+            };
+
+
+            foreach (var pblStrResultLs in testingSets)
+            {
+                var pblStrResult = new HashSet<string>(pblStrResultLs);
+                Assert.AreEqual(3, pblStrResult.Count);
+
+                Assert.IsTrue(pblStrResult.Contains("Value1"));
+                Assert.IsTrue(pblStrResult.Contains("Value2"));
+                Assert.IsTrue(pblStrResult.Contains("Value3"));
+
+
+                Assert.IsFalse(pblStrResult.Contains("PrivateValue1"));
+                Assert.IsFalse(pblStrResult.Contains("PrivateValue2"));
+                Assert.IsFalse(pblStrResult.Contains("PrivateValue3"));
+
+                Assert.AreEqual("Value1Value2Value3", string.Join("", pblStrResultLs));
+
+            }
+
+
+
+        }
+
+
+        [TestMethod]
+        public void FieldValuesPrivateStr()
+        {
+            var testing = new FieldComponent(new CacheComponent());
+
+            var instance = new FieldValuesTest();
+            var resultLs = testing.Values<string>(instance, BindingFlags.NonPublic | BindingFlags.Instance).ToList();
+            var resultSet = new HashSet<string>(resultLs);
+            Assert.AreEqual(3, resultSet.Count);
+
+
+            Assert.IsTrue(resultSet.Contains("PrivateValue1"));
+            Assert.IsTrue(resultSet.Contains("PrivateValue2"));
+            Assert.IsTrue(resultSet.Contains("PrivateValue3"));
+
+
+            Assert.IsFalse(resultSet.Contains("Value1"));
+            Assert.IsFalse(resultSet.Contains("Value2"));
+            Assert.IsFalse(resultSet.Contains("Value3"));
+
+
+            Assert.AreEqual("PrivateValue1PrivateValue2PrivateValue3", string.Join("", resultLs));
+
+
+        }
+
+
+        [TestMethod]
+        public void FieldValuesPublicInt()
+        {
+            var testing = new FieldComponent(new CacheComponent());
+
+            var instance = new FieldValuesTest();
+            var resultLs = testing.Values<int>(instance).ToList();
+            var resultSt = new HashSet<int>(resultLs);
+            Assert.AreEqual(1, resultSt.Count);
+
+            Assert.IsTrue(resultSt.Contains(1));
+
+        }
+
+
+        [TestMethod]
+        public void FieldValuesPrivateInt()
+        {
+            var testing = new FieldComponent(new CacheComponent());
+
+            var instance = new FieldValuesTest();
+            var resultLs = testing.Values<int>(instance, BindingFlags.NonPublic | BindingFlags.Instance).ToList();
+            var resultSt = new HashSet<int>(resultLs);
+            Assert.AreEqual(1, resultSt.Count);
+
+            Assert.IsTrue(resultSt.Contains(-1));
+
+        }
+
+
+
+        [TestMethod]
+        public void FieldValuesStaticInt()
+        {
+            var testing = new FieldComponent(new CacheComponent());
+
+            var instance = new FieldValuesTest();
+            var resultls = testing.Values<int>(instance, BindingFlags.Public | BindingFlags.Static).ToList();
+            var resultSet = new HashSet<int>(resultls);
+            Assert.AreEqual(1, resultSet.Count);
+
+            Assert.IsTrue(resultSet.Contains(12));
+
+        }
+
+
+        [TestMethod]
+        public void FieldValuesPrivateStaticInt()
+        {
+            var testing = new FieldComponent(new CacheComponent());
+
+            var instance = new FieldValuesTest();
+            var resultLs = testing.Values<int>(instance, BindingFlags.NonPublic | BindingFlags.Static).ToList();
+            var resultSet = new HashSet<int>(resultLs);
+            Assert.AreEqual(1, resultSet.Count);
+
+            Assert.IsTrue(resultSet.Contains(122));
+
+        }
+
+
 
 
     }

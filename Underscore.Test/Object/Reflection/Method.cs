@@ -9,6 +9,7 @@ using System.Linq;
 using Underscore.Function;
 using Underscore.Object.Reflection;
 using System.Linq.Expressions;
+using System.Text;
 
 namespace Underscore.Test.Object.Reflection
 {
@@ -861,6 +862,14 @@ namespace Underscore.Test.Object.Reflection
 
             return new MethodComponent(new MockUtilFunctionComponent(), mk);
 
+
+
+        }
+
+
+        [TestMethod]
+        public void FunctionalMethodsTest()
+        {
 
 
         }

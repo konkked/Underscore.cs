@@ -539,6 +539,8 @@ namespace Underscore.Test.Function
             timer.Reset();
             timer.Start();
 
+            await Task.Delay(2);
+
             first = target("101");
             firstResult = await first;
             Assert.AreEqual(4, cnt);
