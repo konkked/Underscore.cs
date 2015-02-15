@@ -35,7 +35,7 @@ namespace Underscore.Test.Action
                 {
                     flag = true;
                     callcount++;
-                }, 5 );
+                }, 15 );
 
             var tasksRunning = new List<Task>( );
 
