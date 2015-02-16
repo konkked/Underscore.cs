@@ -1454,11 +1454,14 @@ namespace Underscore.Function
                 {
 
                     //when the reduction process is in effect do not allow other threads to invoke
-                    while (cleaningUp == 1) Thread.MemoryBarrier();
+                    while (cleaningUp == 1)
+                    {
+                        Thread.MemoryBarrier();
+                    }
+                
 
 
-
-                    if (Interlocked.CompareExchange(ref firstTriggered, 1, 0) == 0)
+                if (Interlocked.CompareExchange(ref firstTriggered, 1, 0) == 0)
                     {
                         try
                         {
@@ -1540,6 +1543,8 @@ namespace Underscore.Function
                             Interlocked.Exchange(ref r, returning);
                             if (r != null)
                                 return r.result;
+
+                            await Task.Delay(1);
                         }
                     };
 

@@ -14,8 +14,7 @@ namespace Underscore.Test.Module
         {
             await Util.Tasks.Start(() =>
             {
-                var cacher = new global::Underscore.Function.CacheComponent();
-                var util = new global::Underscore.Utility.FunctionComponent();
+                var cacher = new Underscore.Function.CacheComponent();
 
                 var property = new PropertyComponent( cacher );
                 var methods = new MethodComponent( cacher, property);
