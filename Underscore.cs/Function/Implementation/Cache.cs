@@ -5,6 +5,15 @@ namespace Underscore.Function
 {
     public class CacheComponent : ICacheComponent
     {
+        private readonly ICompactComponent _fncompactor;
+        private readonly Utility.ICompactComponent _paramCompactor;
+
+        public CacheComponent(ICompactComponent fncompactor, Utility.ICompactComponent paramCompactor)
+        {
+            _fncompactor = fncompactor;
+            _paramCompactor = paramCompactor;
+        }
+
         /// <summary>
         /// Creates a memoized version of the passed function
         /// </summary>
@@ -15,12 +24,16 @@ namespace Underscore.Function
         public Func<TArg, TResult> Memoize<TArg, TResult>(Func<TArg, TResult> function)
         {
             var localStore = new Dictionary<TArg, TResult>();
+            var locking = new object();
             var fn = function;
             return (a) =>
             {
                 if (!localStore.ContainsKey(a))
-                    localStore.Add(a, fn(a));
-
+                    lock (locking)
+                    {
+                        if (!localStore.ContainsKey(a))
+                            localStore.Add(a, fn(a));
+                    }
                 return localStore[a];
             };
         }
@@ -37,15 +50,8 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2>, TResult>();
             var fn = function;
-            return (a, b) =>
-            {
-                var key = Tuple.Create(a, b);
-
-                if (!localStore.ContainsKey(key))
-                    localStore.Add(key, fn(a, b));
-
-                return localStore[key];
-            };
+            var packedTarget = Memoize(_fncompactor.Pack(function));
+            return (a, b) => packedTarget(_paramCompactor.Pack(a, b));
         }
 
         /// <summary>
@@ -61,15 +67,8 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3>, TResult>();
             var fn = function;
-            return (a, b, c) =>
-            {
-                var key = Tuple.Create(a, b, c);
-
-                if (!localStore.ContainsKey(key))
-                    localStore.Add(key, fn(a, b, c));
-
-                return localStore[key];
-            };
+            var packedTarget = Memoize(_fncompactor.Pack(function));
+            return (a, b,c) => packedTarget(_paramCompactor.Pack(a, b, c));
         }
 
         /// <summary>
@@ -86,15 +85,8 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4>, TResult>();
             var fn = function;
-            return (a, b, c, d) =>
-            {
-                var key = Tuple.Create(a, b, c, d);
-
-                if (!localStore.ContainsKey(key))
-                    localStore.Add(key, fn(a, b, c, d));
-
-                return localStore[key];
-            };
+            var packedTarget = Memoize(_fncompactor.Pack(function));
+            return (a, b, c,d) => packedTarget(_paramCompactor.Pack(a, b, c,d));
         }
 
         /// <summary>
@@ -112,15 +104,8 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5>, TResult>();
             var fn = function;
-            return (a, b, c, d, e) =>
-            {
-                var key = Tuple.Create(a, b, c, d, e);
-
-                if (!localStore.ContainsKey(key))
-                    localStore.Add(key, fn(a, b, c, d, e));
-
-                return localStore[key];
-            };
+            var packedTarget = Memoize(_fncompactor.Pack(function));
+            return (a, b, c, d,e) => packedTarget(_paramCompactor.Pack(a, b, c, d,e));
         }
 
         /// <summary>
@@ -139,90 +124,48 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6>, TResult>();
             var fn = function;
-            return (a, b, c, d, e, f) =>
-            {
-                var key = Tuple.Create(a, b, c, d, e, f);
-
-                if (!localStore.ContainsKey(key))
-                    localStore.Add(key, fn(a, b, c, d, e, f));
-
-                return localStore[key];
-            };
+            var packedTarget = Memoize(_fncompactor.Pack(function));
+            return (a, b, c, d, e,f) => packedTarget(_paramCompactor.Pack(a, b, c, d, e,f));
         }
 
         public Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TResult> Memoize<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TResult> function)
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6,TArg7>, TResult>();
             var fn = function;
-            return (a, b, c, d, e, f,g) =>
-            {
-                var key = Tuple.Create(a, b, c, d, e, f,g);
-
-                if (!localStore.ContainsKey(key))
-                    localStore.Add(key, fn(a, b, c, d, e, f,g));
-
-                return localStore[key];
-            };
+            var packedTarget = Memoize(_fncompactor.Pack(function));
+            return (a, b, c, d, e, f,g) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f,g));
         }
 
         public Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TResult> Memoize<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TResult> function)
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7,Tuple<TArg8>>, TResult>();
             var fn = function;
-            return (a, b, c, d, e, f, g,h) =>
-            {
-                var key = Tuple.Create(a, b, c, d, e, f, g,h);
-
-                if (!localStore.ContainsKey(key))
-                    localStore.Add(key, fn(a, b, c, d, e, f, g,h));
-
-                return localStore[key];
-            };
+            var packedTarget = Memoize(_fncompactor.Pack(function));
+            return (a, b, c, d, e, f, g, h) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h));
         }
 
         public Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TResult> Memoize<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TResult> function)
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8,TArg9>>, TResult>();
             var fn = function;
-            return (a, b, c, d, e, f, g, h,i) =>
-            {
-                var key = new Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8,TArg9>>(a, b, c, d, e, f,g, Tuple.Create(h,i));
-
-                if (!localStore.ContainsKey(key))
-                    localStore.Add(key, fn(a, b, c, d, e, f, g, h,i));
-
-                return localStore[key];
-            };
+            var packedTarget = Memoize(_fncompactor.Pack(function));
+            return (a, b, c, d, e, f, g, h,i) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h,i));
         }
 
         public Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TResult> Memoize<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TResult> function)
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9,TArg10>>, TResult>();
             var fn = function;
-            return (a, b, c, d, e, f, g, h, i,j) =>
-            {
-                var key = new Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9,TArg10>>(a, b, c, d, e, f, g, Tuple.Create(h, i,j));
-
-                if (!localStore.ContainsKey(key))
-                    localStore.Add(key, fn(a, b, c, d, e, f, g, h, i,j));
-
-                return localStore[key];
-            };
+            var packedTarget = Memoize(_fncompactor.Pack(function));
+            return (a, b, c, d, e, f, g, h, i,j) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h, i,j));
         }
 
         public Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TResult> Memoize<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TResult> function)
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10,TArg11>>, TResult>();
             var fn = function;
-            return (a, b, c, d, e, f, g, h, i, j,k) =>
-            {
-                var key = new Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10,TArg11>>(a, b, c, d, e, f, g, Tuple.Create(h, i, j,k));
-
-                if (!localStore.ContainsKey(key))
-                    localStore.Add(key, fn(a, b, c, d, e, f, g, h, i, j,k));
-
-                return localStore[key];
-            };
+            var packedTarget = Memoize(_fncompactor.Pack(function));
+            return (a, b, c, d, e, f, g, h, i, j,k) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h, i, j,k));
         }
 
         public Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TResult> Memoize<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TResult>(
@@ -230,15 +173,8 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10, TArg11,TArg12>>, TResult>();
             var fn = function;
-            return (a, b, c, d, e, f, g, h, i, j, k,l) =>
-            {
-                var key = new Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10, TArg11,TArg12>>(a, b, c, d, e, f, g, Tuple.Create(h, i, j, k,l));
-
-                if (!localStore.ContainsKey(key))
-                    localStore.Add(key, fn(a, b, c, d, e, f, g, h, i, j, k,l));
-
-                return localStore[key];
-            };
+            var packedTarget = Memoize(_fncompactor.Pack(function));
+            return (a, b, c, d, e, f, g, h, i, j, k,l) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h, i, j, k,l));
         }
 
         public Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TResult> Memoize<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TResult>(
@@ -246,15 +182,8 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10, TArg11, TArg12,TArg13>>, TResult>();
             var fn = function;
-            return (a, b, c, d, e, f, g, h, i, j, k, l,m) =>
-            {
-                var key = new Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10, TArg11, TArg12,TArg13>>(a, b, c, d, e, f, g, Tuple.Create(h, i, j, k, l,m));
-
-                if (!localStore.ContainsKey(key))
-                    localStore.Add(key, fn(a, b, c, d, e, f, g, h, i, j, k, l,m));
-
-                return localStore[key];
-            };
+            var packedTarget = Memoize(_fncompactor.Pack(function));
+            return (a, b, c, d, e, f, g, h, i, j, k, l,m) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h, i, j, k, l,m));
         }
 
         public Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TResult> Memoize
@@ -263,15 +192,8 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10, TArg11, TArg12, TArg13,TArg14>>, TResult>();
             var fn = function;
-            return (a, b, c, d, e, f, g, h, i, j, k, l, m,n) =>
-            {
-                var key = new Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10, TArg11, TArg12, TArg13,TArg14>>(a, b, c, d, e, f, g, Tuple.Create(h, i, j, k, l, m,n));
-
-                if (!localStore.ContainsKey(key))
-                    localStore.Add(key, fn(a, b, c, d, e, f, g, h, i, j, k, l, m,n));
-
-                return localStore[key];
-            };
+            var packedTarget = Memoize(_fncompactor.Pack(function));
+            return (a, b, c, d, e, f, g, h, i, j, k, l, m,n) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m,n));
         }
 
         public Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TResult> Memoize
@@ -280,15 +202,8 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, Tuple<TArg14,TArg15>>>, TResult>();
             var fn = function;
-            return (a, b, c, d, e, f, g, h, i, j, k, l, m, n,o) =>
-            {
-                var key = new Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, Tuple<TArg14,TArg15>>>(a, b, c, d, e, f, g, Tuple.Create(h, i, j, k, l, m, Tuple.Create(n,o)));
-
-                if (!localStore.ContainsKey(key))
-                    localStore.Add(key, fn(a, b, c, d, e, f, g, h, i, j, k, l, m, n,o));
-
-                return localStore[key];
-            };
+            var packedTarget = Memoize(_fncompactor.Pack(function));
+            return (a, b, c, d, e, f, g, h, i, j, k, l, m, n,o) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n,o));
         }
 
         public Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TArg16, TResult> Memoize
@@ -297,15 +212,8 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, Tuple<TArg14, TArg15,TArg16>>>, TResult>();
             var fn = function;
-            return (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o,p) =>
-            {
-                var key = new Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, Tuple<TArg14, TArg15,TArg16>>>(a, b, c, d, e, f, g, Tuple.Create(h, i, j, k, l, m, Tuple.Create(n, o,p)));
-
-                if (!localStore.ContainsKey(key))
-                    localStore.Add(key, fn(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o,p));
-
-                return localStore[key];
-            };
+            var packedTarget = Memoize(_fncompactor.Pack(function));
+            return (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o,p) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o,p));
         }
     }
 }

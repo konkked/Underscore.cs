@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
+using Underscore.Function;
 using Underscore.Utility;
 
 namespace Underscore.Test.Utility
@@ -32,17 +33,18 @@ namespace Underscore.Test.Utility
         [TestMethod]
         public async Task UtilityMemo( )
         {
-            var callcount = 0;
-
-            Func<string,string> testFn = ( a ) => {
-                callcount++;
-                return a;
-            };
-
             await Util.Tasks.Start( ( ) =>
             {
 
-                var testing = new global::Underscore.Function.CacheComponent( );
+                var callcount = 0;
+
+                Func<string, string> testFn = a =>
+                {
+                    callcount++;
+                    return a;
+                };
+
+                var testing = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());;
 
                 var memoized = testing.Memoize( testFn );
 

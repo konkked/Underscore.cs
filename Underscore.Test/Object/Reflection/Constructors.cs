@@ -121,7 +121,7 @@ namespace Underscore.Test.Object.Reflection
 
         private static void DoFunctionalConstructorTest<T>(T instance, Func<ConstructorInfo, bool> filter, object[] paramQueryArgs,BindingFlags flags)
         {
-            var cacheComponent = new CacheComponent();
+            var cacheComponent = new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
             var propComponent = new PropertyComponent(cacheComponent);
             var ctorComponent = new ConstructorComponent(cacheComponent, propComponent);
 
@@ -182,8 +182,8 @@ namespace Underscore.Test.Object.Reflection
         [TestMethod]
         public void FunctionalCtorTestParameterless()
         {
-            
-            var cacheComponent = new CacheComponent();
+
+            var cacheComponent = new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()); 
             var propComponent = new PropertyComponent(cacheComponent);
             var ctorComponent = new ConstructorComponent(cacheComponent, propComponent);
 
@@ -229,7 +229,7 @@ namespace Underscore.Test.Object.Reflection
 
         private static IConstructorComponent CreateTestTarget()
         {
-            var cacher = new CacheComponent();
+            var cacher = new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
             var props = new PropertyComponent(cacher);
 
             return new ConstructorComponent(cacher, props);

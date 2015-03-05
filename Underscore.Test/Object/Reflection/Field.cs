@@ -73,7 +73,7 @@ namespace Underscore.Test.Object.Reflection
 
 
 
-            var testing = new FieldComponent(new CacheComponent());
+            var testing = new FieldComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
 
 
             await Util.Tasks.Start( ( ) =>
@@ -129,7 +129,7 @@ namespace Underscore.Test.Object.Reflection
 
 
 
-            var testing = new FieldComponent( new CacheComponent() );
+            var testing = new FieldComponent( new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
 
 
             await Util.Tasks.Start( ( ) =>
@@ -216,7 +216,7 @@ namespace Underscore.Test.Object.Reflection
         [TestMethod]
         public void FieldValuesPublicStr()
         {
-            var testing = new FieldComponent(new CacheComponent());
+            var testing = new FieldComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
             
             
             var instance = new FieldValuesTest();
@@ -255,7 +255,7 @@ namespace Underscore.Test.Object.Reflection
         [TestMethod]
         public void FieldValuesPrivateStr()
         {
-            var testing = new FieldComponent(new CacheComponent());
+            var testing = new FieldComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
 
             var instance = new FieldValuesTest();
             var resultLs = testing.Values<string>(instance, BindingFlags.NonPublic | BindingFlags.Instance).ToList();
@@ -282,7 +282,7 @@ namespace Underscore.Test.Object.Reflection
         [TestMethod]
         public void FieldValuesPublicInt()
         {
-            var testing = new FieldComponent(new CacheComponent());
+            var testing = new FieldComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
 
             var instance = new FieldValuesTest();
             var resultLs = testing.Values<int>(instance).ToList();
@@ -297,7 +297,7 @@ namespace Underscore.Test.Object.Reflection
         [TestMethod]
         public void FieldValuesPrivateInt()
         {
-            var testing = new FieldComponent(new CacheComponent());
+            var testing = new FieldComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
 
             var instance = new FieldValuesTest();
             var resultLs = testing.Values<int>(instance, BindingFlags.NonPublic | BindingFlags.Instance).ToList();
@@ -313,7 +313,7 @@ namespace Underscore.Test.Object.Reflection
         [TestMethod]
         public void FieldValuesStaticInt()
         {
-            var testing = new FieldComponent(new CacheComponent());
+            var testing = new FieldComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
 
             var instance = new FieldValuesTest();
             var resultls = testing.Values<int>(instance, BindingFlags.Public | BindingFlags.Static).ToList();
@@ -328,7 +328,7 @@ namespace Underscore.Test.Object.Reflection
         [TestMethod]
         public void FieldValuesPrivateStaticInt()
         {
-            var testing = new FieldComponent(new CacheComponent());
+            var testing = new FieldComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
 
             var instance = new FieldValuesTest();
             var resultLs = testing.Values<int>(instance, BindingFlags.NonPublic | BindingFlags.Static).ToList();

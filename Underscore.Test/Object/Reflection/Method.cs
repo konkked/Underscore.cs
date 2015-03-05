@@ -400,7 +400,7 @@ namespace Underscore.Test.Object.Reflection
             await Util.Tasks.Start(
                 ( ) =>
                 {
-                    var cacher = new CacheComponent();
+                    var cacher = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
                     var testing = new MethodComponent(cacher, new PropertyComponent(cacher) );
 
                     var expecting = typeof( MethodMethodsTestClass )
@@ -445,7 +445,7 @@ namespace Underscore.Test.Object.Reflection
                                 && a.GetParameters( ).First().ParameterType == typeof(string) 
                                 && a.GetParameters().First().Name == "arg");
 
-                    var cacher = new CacheComponent();
+                    var cacher = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
                     var testing = new MethodComponent(cacher, new PropertyComponent(cacher));
 
                     var results = new[]{
@@ -490,7 +490,7 @@ namespace Underscore.Test.Object.Reflection
                                 && a.GetParameters().Skip(1).First().Name == "arg2"
                                 && a.Name == "ShouldShowNoReturnValue");
 
-                    var cacher = new CacheComponent();
+                    var cacher = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
                     var testing = new MethodComponent(cacher, new PropertyComponent(cacher));
 
                     var results = new[]{
@@ -545,7 +545,7 @@ namespace Underscore.Test.Object.Reflection
                 },
                 ( ) =>
                 {
-                    var cacher = new CacheComponent();
+                    var cacher = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
                     var testing = new MethodComponent(cacher, new PropertyComponent(cacher));
 
                     Assert.IsNull( testing.Find( target, "get_PublicPropertyShouldNotShow" ) );
@@ -578,7 +578,7 @@ namespace Underscore.Test.Object.Reflection
             await Util.Tasks.Start(
                 ( ) =>
                 {
-                    var cacher = new CacheComponent();
+                    var cacher = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
                     var testing = new MethodComponent(cacher, new PropertyComponent(cacher));
 
                     Assert.IsTrue( testing.Has( target, "ShouldShowNoReturnValue" ) );
@@ -616,7 +616,7 @@ namespace Underscore.Test.Object.Reflection
                 {
 
 
-                    var cacher = new CacheComponent();
+                    var cacher = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
                     var testing = new MethodComponent(cacher, new PropertyComponent(cacher));
 
                     Assert.IsTrue( testing.Has( target, "ShouldShowNoReturnValue", new { arg = typeof( string ) } ) );
@@ -657,7 +657,7 @@ namespace Underscore.Test.Object.Reflection
                 ( ) =>
                 {
 
-                    var cacher = new CacheComponent();
+                    var cacher = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
                     var testing = new MethodComponent(cacher, new PropertyComponent(cacher));
 
                     Assert.IsTrue( testing.Has( target, "ShouldShowNoReturnValue", new { arg1 = typeof( string ), arg2 = typeof( string ) } ) );
@@ -689,7 +689,7 @@ namespace Underscore.Test.Object.Reflection
                 },
                 ( ) =>
                 {
-                    var cacher = new CacheComponent();
+                    var cacher = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
                     var testing = new MethodComponent(cacher, new PropertyComponent(cacher));
 
                     Assert.IsFalse( testing.Has( target, "get_PublicPropertyShouldNotShow" ) );

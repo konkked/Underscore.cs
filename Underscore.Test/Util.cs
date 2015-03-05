@@ -156,8 +156,13 @@ namespace Underscore.Test
 
         public static class Tasks 
         {
-            public static async Task Start(params System.Action[] actions) 
+            public static async Task Start(params System.Action[] actions)
             {
+                var tasks = new Task[actions.Length];
+
+                for (int i = 0; i < actions.Length; i++)
+                    tasks[i] = Task.Factory.StartNew(actions[i]);
+
                 foreach (var action in actions)
                     await Task.Factory.StartNew(action);
                 
@@ -165,10 +170,14 @@ namespace Underscore.Test
 
             public static async Task<T[]> Start<T>(params Func<T>[] functions) 
             {
+                var tasks = new Task<T>[functions.Length];
                 var results = new T[functions.Length];
 
                 for (int i = 0; i < functions.Length; i++)
-                    results[i] = await Task.Factory.StartNew(functions[i]);
+                    tasks[i] = Task.Factory.StartNew(functions[i]);
+
+                for (int i = 0; i < functions.Length; i++)
+                    results[i] = await tasks[i];
 
                 return results;
             }

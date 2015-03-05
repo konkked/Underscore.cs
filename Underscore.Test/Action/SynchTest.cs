@@ -536,11 +536,30 @@ namespace Underscore.Test.Action
                 Assert.AreEqual( "100", results );
         }
 
+        private static async Task SafeAwait(Task t, int timeout)
+        {
+            var to = Task.Delay(timeout*1000);
+            while (true)
+            {
+                if (to.IsCompleted) Assert.Fail("Failed to end in time, deadlock occurred");
+                else if (t.IsCompleted) return;
+
+                await Task.Delay(1);
+            }
+        }
+
+        private static async Task<T> SafeAwait<T>(Task<T> t, int timeout)
+        {
+            await SafeAwait(t as Task, timeout);
+            return await t;
+        }
+
         [TestMethod]
         public async Task ActionThrottle2()
         {
             
             var testing = ManipulateDummy();
+            var failOnSignificantDelay = Task.Delay(10000);
 
             var results = new string[2]; 
 
@@ -557,7 +576,7 @@ namespace Underscore.Test.Action
 
 
             var firstResult = throttled(1, -1);
-            await firstResult;
+            await SafeAwait(firstResult,4);
 
             Assert.AreEqual("1", results[0]);
             Assert.AreEqual("-1", results[1]);
@@ -568,7 +587,7 @@ namespace Underscore.Test.Action
                 tasks.Push( throttled( i, -i ) );
 
             while ( tasks.Count != 0 )
-                await tasks.Pop( );
+                await SafeAwait(tasks.Pop( ),10);
 
             Assert.AreEqual( "100", results[ 0 ] );
             Assert.AreEqual( "-100", results[ 1 ] );
@@ -579,7 +598,7 @@ namespace Underscore.Test.Action
             {
 
                 firstResult = throttled(1, -1);
-                await firstResult;
+                await SafeAwait(firstResult,1);
 
                 Assert.AreEqual("1", results[0]);
                 Assert.AreEqual("-1", results[1]);
@@ -589,7 +608,7 @@ namespace Underscore.Test.Action
                     tasks.Push(throttled(i, -i));
 
                 while (tasks.Count != 0)
-                    await tasks.Pop();
+                    await SafeAwait(tasks.Pop(), 4);
 
                 Assert.AreEqual("100", results[0]);
                 Assert.AreEqual("-100", results[1]);

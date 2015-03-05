@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Moq;
 using System.Reflection;
 using System.Linq;
+using Underscore.Function;
 using Underscore.Object.Reflection;
 
 
@@ -48,7 +49,7 @@ namespace Underscore.Test.Object.Reflection
 
 
 
-            var _prop = new PropertyComponent(new Underscore.Function.CacheComponent());
+            var _prop = new PropertyComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
 
             Assert.IsTrue( _prop.Has( person, "FirstName" ) );
             Assert.IsFalse( _prop.Has( person, "DoesNotHave" ) );
@@ -64,7 +65,7 @@ namespace Underscore.Test.Object.Reflection
             var person = new Person( );
 
 
-            var _prop = new PropertyComponent( new Underscore.Function.CacheComponent());
+            var _prop = new PropertyComponent( new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
 
             var expecting = properties.First( a => a.Name == "FirstName" );
             var result = _prop.Find( person, "FirstName" );
@@ -89,7 +90,7 @@ namespace Underscore.Test.Object.Reflection
         public async Task ObjectPropertyGetSet( ) 
         {
 
-            var _prop = new PropertyComponent(new Underscore.Function.CacheComponent());
+            var _prop = new PropertyComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
 
             await Util.Tasks.Start( ( ) =>
             {
@@ -300,7 +301,7 @@ namespace Underscore.Test.Object.Reflection
         [TestMethod]
         public void PropertyGetValues()
         {
-            var testing = new PropertyComponent(new Underscore.Function.CacheComponent());
+            var testing = new PropertyComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
             var testTarget = new Person
             {
                 FirstName = "FirstName",
@@ -598,6 +599,19 @@ namespace Underscore.Test.Object.Reflection
                 NumberOfKids = 3
             };
 
+
+
+            var personprime = new OtherPerson2(25)
+            {
+                FirstName = "FirstName",
+                LastName = "LastName",
+                MiddleName = "MiddleName",
+                NickName = "NickName",
+                Suffix = "Suffix",
+                Title = "Title",
+                NumberOfKids = 3
+            };
+
             var person2 = new OtherPerson2(30)
             {
                 FirstName = "FirstName",
@@ -608,6 +622,7 @@ namespace Underscore.Test.Object.Reflection
                 Title = "Title",
                 NumberOfKids = 3
             };
+
 
             /*
              * General Notes:
@@ -705,8 +720,8 @@ namespace Underscore.Test.Object.Reflection
                 //type in this instance is always string, so just set to empty string
                 assigner(string.Empty);
 
-                Assert.AreNotEqual(
-                        orig,
+                Assert.AreEqual(
+                        string.Empty,
                         propertiesSettableDict[name].Item1(),
                         "expected value change from {0} to {1}", orig, "[ string.Empty ]"
                     );
@@ -720,18 +735,21 @@ namespace Underscore.Test.Object.Reflection
                 //should not break the assigner method
                 assigner(string.Empty);
 
-                Assert.AreNotEqual(
-                        orig,
+                Assert.AreEqual(
+                        string.Empty,
                         propertiesSettableDict[name].Item1(),
                         "expected value change from {0} to {1}", orig, "[ string.Empty ]"
                     );
 
             };
             var testing = SetupPropertiesTarget();
+            var test1 = oneParamAction;
+            var test2 = twoParamAction;
+            var test3 = threeParamAction;
             await Util.Tasks.Start(
-                () => testing.Each(person, oneParamAction),
-                () => testing.Each(person, twoParamAction),
-                () => testing.Each(person2, threeParamAction)
+                () => testing.Each(person, test1),
+                () => testing.Each(personprime, test2),
+                () => testing.Each(person2, test3)
             );
 
         }

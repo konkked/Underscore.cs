@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
+using Underscore.Function;
 using Underscore.Object;
 using Underscore.Object.Reflection;
 
@@ -14,7 +15,7 @@ namespace Underscore.Test.Module
         {
             await Util.Tasks.Start(() =>
             {
-                var cacher = new Underscore.Function.CacheComponent();
+                var cacher = new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
 
                 var property = new PropertyComponent( cacher );
                 var methods = new MethodComponent( cacher, property);

@@ -603,7 +603,7 @@ namespace Underscore.Test.Function
                 timer.Stop( );
 
                 Assert.AreEqual( "worked", taskResult.Result );
-                Assert.IsTrue( timer.ElapsedMilliseconds >= 100 );
+                Assert.IsTrue( timer.ElapsedMilliseconds >= 100 , string.Format("Expecting at least {0} got {1}", 100,timer.ElapsedMilliseconds));
 
             }, ( ) =>
             {
