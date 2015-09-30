@@ -105,23 +105,23 @@ namespace Underscore.Test.Object.Transformation
             decimal employeeToPersonSalary=10000m;
             var employeeToPerson = new Employee { FirstName = shouldbehere, LastName = null, Salary = employeeToPersonSalary };
 
-            target.Transpose( employeeWithNoInfo, person );
-            target.Transpose( employeeWithExistingInfo, person );
-            target.Transpose( employeeWithOnlySalary, person );
+            target.Transpose( person  , employeeWithNoInfo);
+            target.Transpose( person  , employeeWithExistingInfo);
+            target.Transpose( person  , employeeWithOnlySalary );
 
-            Assert.AreEqual( employeeWithExistingInfo.FirstName, person.FirstName );
-            Assert.AreEqual( employeeWithExistingInfo.LastName, person.LastName );
-            Assert.AreEqual( employeeWithExistingInfo.Salary, 60000m );
-
-
-            Assert.AreEqual( employeeWithNoInfo.FirstName, person.FirstName );
-            Assert.AreEqual( employeeWithNoInfo.LastName, person.LastName );
-            Assert.AreEqual( employeeWithNoInfo.Salary, default( decimal ) );
+            Assert.AreEqual( person.FirstName , employeeWithExistingInfo.FirstName );
+            Assert.AreEqual( person.LastName , employeeWithExistingInfo.LastName );
+            Assert.AreEqual( 60000m  , employeeWithExistingInfo.Salary );
 
 
-            Assert.AreEqual( employeeWithOnlySalary.FirstName, person.FirstName );
-            Assert.AreEqual( employeeWithOnlySalary.LastName, person.LastName );
-            Assert.AreEqual( employeeWithOnlySalary.Salary, 60000m );
+            Assert.AreEqual( person.FirstName  , employeeWithNoInfo.FirstName);
+            Assert.AreEqual( person.LastName  , employeeWithNoInfo.LastName );
+            Assert.AreEqual( default( decimal )  , employeeWithNoInfo.Salary);
+
+
+            Assert.AreEqual( person.FirstName  , employeeWithOnlySalary.FirstName);
+            Assert.AreEqual( person.LastName  , employeeWithOnlySalary.LastName);
+            Assert.AreEqual( 60000m  , employeeWithOnlySalary.Salary );
 
             target.Transpose( person, employeeToPerson );
 

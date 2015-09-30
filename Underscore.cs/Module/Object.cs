@@ -43,8 +43,10 @@ namespace Underscore.Module
 
         public IMethodComponent Method { get { return _method; } }
 
-        //transformation
-        public ITransposeComponent Transpose { get { return _transformation; } }
+        public void Transpose(object source, object destination)
+        {
+            _transformation.Transpose( source , destination );
+        }
 
         public IConstructorComponent Constructor { get { return _constructor; } }
 

@@ -161,7 +161,7 @@ namespace Underscore.Object.Reflection
         /// Special Cases:
         /// @return - matches on return type match
         /// </summary>
-        public IEnumerable<T> Query( object target, object query )
+        public virtual IEnumerable<T> Query( object target, object query )
         {
             return _queryStore( target.GetType(), query );
         }
@@ -175,7 +175,7 @@ namespace Underscore.Object.Reflection
         /// Special Cases:
         /// @return - matches on return type match
         /// </summary>
-        public IEnumerable<T> Query(object target, object query, BindingFlags flags)
+        public virtual IEnumerable<T> Query( object target , object query , BindingFlags flags )
         {
             return _flaggedQueryStore(target.GetType(), query,flags);
         }
@@ -189,7 +189,7 @@ namespace Underscore.Object.Reflection
         /// Special Cases:
         /// @return - matches on return type match
         /// </summary>
-        public IEnumerable<T> Query(Type target, object query)
+        public virtual IEnumerable<T> Query( Type target , object query )
         {
             return _queryStore(target, query);
         }
@@ -203,7 +203,7 @@ namespace Underscore.Object.Reflection
         /// Special Cases:
         /// @return - matches on return type match
         /// </summary>
-        public IEnumerable<T> Query(Type target, object query, BindingFlags flags)
+        public virtual IEnumerable<T> Query( Type target , object query , BindingFlags flags )
         {
             return _flaggedQueryStore(target, query,flags);
         }

@@ -513,6 +513,8 @@ namespace Underscore.Test.Function
             var first = target("0");
             var firstResult = await first;
 
+            Thread.MemoryBarrier( );
+
             Assert.AreEqual(2, cnt);
             Assert.AreEqual("00", firstResult);
 
@@ -530,16 +532,19 @@ namespace Underscore.Test.Function
                 Assert.AreEqual("100100", result);
             }
 
-            timer.Stop();
-
+            timer.Stop( );
+            Thread.MemoryBarrier( );
             Assert.AreEqual(3, cnt);
             Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
+            Thread.MemoryBarrier( );
 
             continuing.Clear();
             timer.Reset();
             timer.Start();
 
             await Task.Delay(2);
+
+            Thread.MemoryBarrier( );
 
             first = target("101");
             firstResult = await first;

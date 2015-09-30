@@ -669,6 +669,8 @@ namespace Underscore.Function
 			return async()=>await target(null);
 		}
 
+
+#pragma warning disable 4014
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
@@ -720,7 +722,8 @@ namespace Underscore.Function
                 return retv.result;
             };
         }
-				
+#pragma warning restore 4014
+
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
@@ -1409,167 +1412,8 @@ namespace Underscore.Function
 			return async()=>await target(null);
 		}
 
-        private Func<T, Task<TResult>> LocklessThrottle<T, TResult>(Func<T, TResult> function, int milliseconds, bool leading)
-        {
-            
-            int firstTriggered = 0;
-            int waitTriggered = 0;
-            int cleaningUp = 0;
-            int setting = 0;
-            int doneSetting = 0;
-            object finalHandle = null;
-            int doneComparing = 0;
 
-            Task delaying = null;
-            
-            var returning = new {result = default(TResult)};
-            
-            //issues sometimes occur with mem in closures 
-            // (at least in previous .net versions they did)
-            // so copying local copy of values just in case
-            var fn = function;
-            var waitms = milliseconds;
-            var lead = leading;
-
-
-
-            return (_a) =>
-            {
-                //issue with a referencing different values at same call
-                Thread.MemoryBarrier();
-                var a = _a;
-                Thread.MemoryBarrier();
-                object localHandle = new object();
-                Thread.MemoryBarrier();
-
-
-                //if the current task enters into a bad state then want the task to continue from the top
-                //this would happen on fringes in between invocation strings
-                // example:
-                //  wait time is 500 ms, the cleanup process takes 1 ms, cleanup starts at 503 ms, call is made
-                //  502.9999 ms, the cleanup flag is not set but before the new task is generated the clean flag is 
-                //  set, if this occurs want this call to be counted in the next string of invocations
-                //  so start from the top
-                while (true)
-                {
-
-                    //when the reduction process is in effect do not allow other threads to invoke
-                    while (cleaningUp == 1)
-                    {
-                        Thread.MemoryBarrier();
-                    }
-                
-
-
-                if (Interlocked.CompareExchange(ref firstTriggered, 1, 0) == 0)
-                    {
-                        try
-                        {
-                            //setup current run string
-                            Thread.MemoryBarrier();
-
-
-                            if (lead)
-                            {
-                                var firstReturned = fn(a);
-                                return Task.Factory.StartNew(() => firstReturned);
-                            }
-                        }
-                        finally
-                        {
-                            Thread.MemoryBarrier();
-                            //set the delay
-                            Interlocked.Exchange(ref delaying, Task.Delay(waitms));
-                            //return the result value
-                            Interlocked.CompareExchange(ref waitTriggered, 1, 0);
-
-                            Interlocked.CompareExchange(ref doneSetting, 0, 1);
-                            Interlocked.CompareExchange(ref setting, 0, 1);
-                        }
-
-                    }
-
-                    while (true)
-                        if (waitTriggered == 1) break;
-                        else
-                            Thread.SpinWait(16);
-
-
-                    Task delayingLocalCopy = null;
-                    Interlocked.Exchange(ref delayingLocalCopy, delaying);
-
-                    //in a bad state, start from the top
-                    if (delayingLocalCopy == null || cleaningUp == 1)
-                        continue;
-
-                    Interlocked.Exchange(ref returning, null);
-                    Interlocked.Exchange(ref finalHandle, localHandle);
-                    
-                    Func<object,T,Task<TResult>> toReturn = async (handle,ts) =>
-                    {
-                        var r = returning;
-                        Thread.MemoryBarrier();
-
-                        if (delaying != null)
-                            await delaying;
-                        
-
-                        // at this point the delay is done, we are cleaning up
-                        Interlocked.CompareExchange(ref cleaningUp, 1, 0);
-
-
-                        Thread.MemoryBarrier();
-                        while (finalHandle != null)
-                        {
-                            Thread.MemoryBarrier();
-                            
-                            await Task.Delay(1);
-
-
-                            if (finalHandle == null) break;
-
-                            if ( Interlocked.CompareExchange(ref finalHandle, null, handle) == handle )
-                            {
-                                r = new { result = fn(ts) };
-                                Interlocked.Exchange(ref returning, r);
-                                Interlocked.CompareExchange(ref doneComparing, 1, 0);
-                                return r.result;
-                            }
-                        }
-
-                        while (doneComparing == 0) await Task.Delay(1) ;
-                        while (true)
-                        {
-                            Interlocked.Exchange(ref r, returning);
-                            if (r != null)
-                                return r.result;
-
-                            await Task.Delay(1);
-                        }
-                    };
-
-                    
-                    Interlocked.Exchange(ref finalHandle, localHandle);
-                    
-                    var local = toReturn(localHandle, a);
-                    local.ContinueWith(t =>
-                    {
-
-                        
-                        //all of the tasks should have completed, 
-                        // so we can clean up
-                        Interlocked.CompareExchange(ref firstTriggered, 0, 1);
-                        Interlocked.CompareExchange(ref waitTriggered, 0, 1);
-                        Interlocked.CompareExchange(ref cleaningUp, 0, 1);
-                    });
-
-                    return local;
-
-                }
-
-            };
-        }
-
+#pragma warning disable 4014
 
         private Func<T, Task<TResult>> LockedThrottle<T, TResult>(Func<T, TResult> function, int milliseconds,
             bool leading)
@@ -1671,12 +1515,17 @@ namespace Underscore.Function
                     {
                         Interlocked.Exchange(ref args, new {args = targ});
 
+                        Thread.MemoryBarrier( );
+
                         while (doneSetting == 0)
                         {
+                            Thread.MemoryBarrier( );
                             Monitor.Exit(locking);
                             await Task.Delay(1);
                             Monitor.Enter(locking);
                         }
+                        
+                        Thread.MemoryBarrier( );
 
                         Interlocked.Exchange(ref myWaitingOn, currentWaitingOn);
                     }
@@ -1718,6 +1567,8 @@ namespace Underscore.Function
 
         }
 
+
+#pragma warning restore 4014
         /// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>

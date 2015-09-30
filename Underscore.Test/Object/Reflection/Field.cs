@@ -13,7 +13,7 @@ namespace Underscore.Test.Object.Reflection
     [TestClass]
     public class FieldTest
     {
-
+#pragma warning disable 0649, 0169
         private class FieldMethodsTestClass
         {
             public string ShouldShowString;
@@ -27,6 +27,8 @@ namespace Underscore.Test.Object.Reflection
 
             public void ShouldNotShow() { }
         }
+
+#pragma warning restore 0649, 0169
 
         [TestMethod]
         public async Task ObjectFields()
@@ -194,6 +196,8 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
+#pragma warning disable 0414
+
         public class FieldValuesTest
         {
             public string Value1 = "Value1",
@@ -212,6 +216,8 @@ namespace Underscore.Test.Object.Reflection
 
 
         }
+
+#pragma warning restore 0414
 
         [TestMethod]
         public void FieldValuesPublicStr()

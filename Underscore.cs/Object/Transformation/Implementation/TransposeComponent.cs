@@ -42,7 +42,7 @@ namespace Underscore.Object
         /// from the source object and 
         /// puts them to the destination
         /// </summary>
-        public void Transpose( object destination, object source )
+        public void Transpose( object source , object destination )
         {
             var dst = _property.All( destination );
             var src = _property.All( source );

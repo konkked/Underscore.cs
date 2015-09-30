@@ -220,12 +220,12 @@ namespace Underscore.Object.Reflection
             return Find(target, name, flags) != null;
         }
 
-        public IEnumerable<MethodInfo> Query(Type target, object query)
+        public override IEnumerable<MethodInfo> Query( Type target , object query )
         {
             return base.Query(target, query);
         }
 
-        public IEnumerable<MethodInfo> Query(Type target, object query, BindingFlags flags)
+        public override IEnumerable<MethodInfo> Query( Type target , object query , BindingFlags flags )
         {
             return base.Query(target, query);
         }

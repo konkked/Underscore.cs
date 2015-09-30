@@ -22,6 +22,9 @@ build/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+# Custom Build Folder
+Build/
+
 *_i.c
 *_p.c
 *.ilk

@@ -576,11 +576,11 @@ namespace Underscore.Test.Action
 
 
             var firstResult = throttled(1, -1);
-            await SafeAwait(firstResult,4);
+            await SafeAwait(firstResult,5);
 
-            Assert.AreEqual("1", results[0]);
-            Assert.AreEqual("-1", results[1]);
-            Assert.AreEqual(1, callCount);
+            Assert.AreEqual ( "1"  , results[0]  );
+            Assert.AreEqual ( "-1" , results[1] );
+            Assert.AreEqual ( 1    ,    callCount  );
 
 
             for ( var i=1 ; i <= 100 ; i++ )
@@ -589,6 +589,7 @@ namespace Underscore.Test.Action
             while ( tasks.Count != 0 )
                 await SafeAwait(tasks.Pop( ),10);
 
+            Thread.MemoryBarrier( );
             Assert.AreEqual( "100", results[ 0 ] );
             Assert.AreEqual( "-100", results[ 1 ] );
             Assert.AreEqual( 2, callCount );
@@ -598,18 +599,20 @@ namespace Underscore.Test.Action
             {
 
                 firstResult = throttled(1, -1);
-                await SafeAwait(firstResult,1);
-
+                await SafeAwait(firstResult,10);
+                Thread.MemoryBarrier( );
                 Assert.AreEqual("1", results[0]);
                 Assert.AreEqual("-1", results[1]);
                 Assert.AreEqual(3+(2*j), callCount);
+                Thread.MemoryBarrier( );
 
                 for (var i = 1; i <= 100; i++)
                     tasks.Push(throttled(i, -i));
 
                 while (tasks.Count != 0)
                     await SafeAwait(tasks.Pop(), 4);
-
+                
+                Thread.MemoryBarrier( );
                 Assert.AreEqual("100", results[0]);
                 Assert.AreEqual("-100", results[1]);
                 Assert.AreEqual(4+(2*j), callCount);
@@ -639,21 +642,31 @@ namespace Underscore.Test.Action
                 for ( var i=1 ; i <= 100 ; i++ )
                     tasks.Push( throttled( i, -i, i ) );
 
+                Thread.MemoryBarrier( );
+
                 Assert.AreEqual( "1", results[ 0 ] );
                 Assert.AreEqual( "-1", results[ 1 ] );
                 Assert.AreEqual( "1", results[ 2 ] );
                 Assert.AreEqual( 1, callCount );
 
+                Thread.MemoryBarrier( );
+
                 while ( tasks.Count != 0 )
                     await tasks.Pop( );
+
+                Thread.MemoryBarrier( );
 
                 Assert.AreEqual( "100", results[ 0 ] );
                 Assert.AreEqual( "-100", results[ 1 ] );
                 Assert.AreEqual( "100", results[ 2 ] );
                 Assert.AreEqual( 2, callCount );
 
+                Thread.MemoryBarrier( );
+
                 for (var i = 1; i <= 100; i++)
                     tasks.Push(throttled(i, -i, i));
+
+                Thread.MemoryBarrier( );
 
                 Assert.AreEqual("1", results[0]);
                 Assert.AreEqual("-1", results[1]);
@@ -662,6 +675,8 @@ namespace Underscore.Test.Action
 
                 while (tasks.Count != 0)
                     await tasks.Pop();
+
+                Thread.MemoryBarrier( );
 
                 Assert.AreEqual("100", results[0]);
                 Assert.AreEqual("-100", results[1]);
@@ -1455,7 +1470,7 @@ namespace Underscore.Test.Action
 
                 for (var i = 0; i < 10; i++)
                     tasks[i].Wait();
-
+                Thread.MemoryBarrier( );
                 Assert.AreEqual("7", result);
             }, ( ) =>
             {
