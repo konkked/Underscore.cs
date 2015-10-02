@@ -13,6 +13,7 @@ namespace Underscore.Setup
             kernel.Register<IPropertyComponent,PropertyComponent>();                
             kernel.Register<ITransposeComponent,TransposeComponent>();
             kernel.Register<IConstructorComponent, ConstructorComponent>();
+            kernel.Register<IAttributeComponent , AttributeComponent>( );
 
             kernel.Register<Module.Object>();
         }

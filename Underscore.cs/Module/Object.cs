@@ -11,6 +11,7 @@ namespace Underscore.Module
         private readonly IFieldComponent _field;
         private readonly ITransposeComponent _transformation;
         private readonly IConstructorComponent _constructor;
+        private readonly IAttributeComponent _attribute;
 
 
         public Object(
@@ -18,13 +19,15 @@ namespace Underscore.Module
             IMethodComponent method,
             IFieldComponent field,
             IConstructorComponent constructor,
-            ITransposeComponent transformation) 
+            ITransposeComponent transformation,
+            IAttributeComponent attribute) 
         {
             _property = property;
             _field = field;
             _method = method;
             _transformation = transformation;
             _constructor = constructor;
+            _attribute = attribute;
         }
 
  
@@ -47,6 +50,8 @@ namespace Underscore.Module
         {
             _transformation.Transpose( source , destination );
         }
+
+        public IAttributeComponent Attribute { get { return _attribute;  } }
 
         public IConstructorComponent Constructor { get { return _constructor; } }
 
