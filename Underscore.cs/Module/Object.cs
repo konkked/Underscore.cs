@@ -4,7 +4,7 @@ using Underscore.Object.Reflection;
 namespace Underscore.Module
 {
 
-    public class Object 
+    public class Object : ITransposeComponent
     {
         private readonly IPropertyComponent _property;
         private readonly IMethodComponent _method;
@@ -39,21 +39,30 @@ namespace Underscore.Module
             return null;
         }
 
-        
         public IPropertyComponent Property { get { return _property; } }
 
         public IFieldComponent Field { get { return _field; } }
 
         public IMethodComponent Method { get { return _method; } }
 
-        public void Transpose(object source, object destination)
-        {
-            _transformation.Transpose( source , destination );
-        }
-
         public IAttributeComponent Attribute { get { return _attribute;  } }
 
         public IConstructorComponent Constructor { get { return _constructor; } }
 
+
+        public void Transpose( object source , object destination )
+        {
+            _transformation.Transpose( source , destination );
+        }
+
+        public TFirst Coalesce<TFirst>( TFirst first , object second )
+        {
+            return _transformation.Coalesce( first , second );
+        }
+
+        public TFirst Coalesce<TFirst>( TFirst first , object second , bool newObject ) where TFirst : new( )
+        {
+            return _transformation.Coalesce( first , second , newObject );
+        }
     }
 }

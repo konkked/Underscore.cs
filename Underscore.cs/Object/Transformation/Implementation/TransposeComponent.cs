@@ -62,6 +62,37 @@ namespace Underscore.Object
             }
 
         }
-    
+
+
+        private void CoalesceImpl( object first , object second ) 
+        {
+            var allMatches = from d in _property.All( first ).Select( a => new { a.Name , Value = a.GetMethod.Invoke( first , null ) , a } ).Where( a => a.Value == null )
+                             join s in _property.All( second ).Select( a => new { a.Name , Value = a.GetMethod.Invoke( second , null ), a } ).Where( a => a.Value != null )
+                                on d.Name equals s.Name into matchGroups
+                             select new { Dest = d , PossibleMatches = matchGroups };
+
+            foreach ( var matches in allMatches ) 
+            {
+                var to = matches.Dest.a;
+                var from = FindBestPropertyReferenceMatch( to , matches.PossibleMatches.Select( a => a.a ) );
+
+                if ( from != null )
+                    to.SetMethod.Invoke( first , new object[ ] { from.GetMethod.Invoke( second , null ) } );
+            }
+
+
+        }
+
+        public TFirst Coalesce<TFirst>( TFirst first , object second )
+        {
+            CoalesceImpl( first , second );
+            return first;
+        }
+
+        public TFirst Coalesce<TFirst>( TFirst first , object second , bool newObject ) where TFirst : new( )
+        {
+            TFirst returning = newObject ? Coalesce( new TFirst( ) , first ) : first;
+            return Coalesce( returning , second );
+        }
     }
 }
