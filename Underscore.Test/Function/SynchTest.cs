@@ -13,7 +13,7 @@ namespace Underscore.Test.Function
     [TestClass]
     public class SynchTest
     {
-        public ISynchComponent ModifyComponent( ) { return new SynchComponent( new CompactComponent(), new Underscore.Utility.CompactComponent() ); }
+        public ISynchComponent ModifyComponent( ) { return new SynchComponent( new CompactComponent(), new Underscore.Utility.CompactComponent() , new Underscore.Utility.MathComponent() ); }
 
         //TODO: Reimplement Debounce Test
         //Realized that the current implementation is flawed
@@ -52,7 +52,7 @@ namespace Underscore.Test.Function
             timer.Stop( );
 
             Assert.AreEqual( 2, cnt );
-            Assert.IsTrue( timer.ElapsedMilliseconds > waiting );
+            Assert.IsTrue( timer.ElapsedMilliseconds >= waiting );
 
             continuing.Clear( );
             timer.Reset( );
@@ -483,6 +483,7 @@ namespace Underscore.Test.Function
                 await v;
 
             timer.Stop();
+            Thread.MemoryBarrier( );
             Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 
 
@@ -494,7 +495,7 @@ namespace Underscore.Test.Function
         {
             var testing = ModifyComponent();
             var timer = new Stopwatch();
-            const int waiting = 10;
+            const int waiting = 100;
 
             int cnt = 1;
 
@@ -535,7 +536,7 @@ namespace Underscore.Test.Function
             timer.Stop( );
             Thread.MemoryBarrier( );
             Assert.AreEqual(3, cnt);
-            Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
+            Assert.IsTrue(timer.ElapsedMilliseconds >= waiting, "Elapsed time : {0} < Waiting: {1}", timer.ElapsedMilliseconds, waiting);
             Thread.MemoryBarrier( );
 
             continuing.Clear();
@@ -607,6 +608,7 @@ namespace Underscore.Test.Function
                 taskResult.Wait( );
                 timer.Stop( );
 
+                Thread.MemoryBarrier( );
                 Assert.AreEqual( "worked", taskResult.Result );
                 Assert.IsTrue( timer.ElapsedMilliseconds >= 100 , string.Format("Expecting at least {0} got {1}", 100,timer.ElapsedMilliseconds));
 

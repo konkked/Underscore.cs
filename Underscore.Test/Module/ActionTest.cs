@@ -20,7 +20,7 @@ namespace Underscore.Test.Module
             var split = new SplitComponent();
             var compose = new ComposeComponent();
 
-            var fnBind = new global::Underscore.Function.SynchComponent( new CompactComponent(), new Underscore.Utility.CompactComponent());
+            var fnBind = new global::Underscore.Function.SynchComponent( new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent());
             var fnSynch = new global::Underscore.Function.ConvertComponent();
             var actionCvt = new ConvertComponent();
 

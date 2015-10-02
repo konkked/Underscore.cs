@@ -79,6 +79,7 @@
     <Compile Include="Module\UtilityTest.cs" />
     <Compile Include="Object\Reflection\Field.cs" />
     <Compile Include="Object\Reflection\Method.cs" />
+    <Compile Include="Object\Reflection\Attribute.cs" />
     <Compile Include="Object\Reflection\Property.cs" />
     <Compile Include="Object\Reflection\Constructors.cs" />
     <Compile Include="Object\Transformation\Transpose.cs" />

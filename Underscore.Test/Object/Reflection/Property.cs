@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Linq;
 using Underscore.Function;
 using Underscore.Object.Reflection;
+using System.Threading;
 
 
 namespace Underscore.Test.Object.Reflection
@@ -428,7 +429,7 @@ namespace Underscore.Test.Object.Reflection
 
         //TODO: Fix this crap... hurts my face when I read
         [TestMethod]
-        public async Task ObjectPropertyForeach()
+        public void ObjectPropertyForeach()
         {
             var person = new OtherPerson2(25)
             {
@@ -575,18 +576,16 @@ namespace Underscore.Test.Object.Reflection
 
             //var target = 
             var testing = SetupPropertiesTarget();
-            await Util.Tasks.Start(
-                () => testing.Each(person, oneParamAction),
-                () => testing.Each(person, twoParamAction),
-                () => testing.Each(person2, threeParamAction)
-            );
+            testing.Each(person, oneParamAction);
+            testing.Each(person, twoParamAction);
+            testing.Each(person2, threeParamAction);
 
 
 
         }
 
         [TestMethod]
-        public async Task PropertyForeachGeneric()
+        public void PropertyForeachGeneric()
         {
             var person = new OtherPerson2(25)
             {
@@ -746,11 +745,10 @@ namespace Underscore.Test.Object.Reflection
             var test1 = oneParamAction;
             var test2 = twoParamAction;
             var test3 = threeParamAction;
-            await Util.Tasks.Start(
-                () => testing.Each(person, test1),
-                () => testing.Each(personprime, test2),
-                () => testing.Each(person2, test3)
-            );
+
+            testing.Each( person , test1 );
+            testing.Each( personprime, test2);
+            testing.Each( person2, test3);
 
         }
     }

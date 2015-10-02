@@ -16,7 +16,7 @@ namespace Underscore.Test.Action
     [TestClass]
     public class SynchTest
     {
-        public ISynchComponent ManipulateDummy( ) { return new Underscore.Action.SynchComponent(new SynchComponent( new CompactComponent(), new Underscore.Utility.CompactComponent()), new ConvertComponent(), new Underscore.Function.ConvertComponent()); }
+        public ISynchComponent ManipulateDummy( ) { return new Underscore.Action.SynchComponent(new SynchComponent( new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()), new ConvertComponent(), new Underscore.Function.ConvertComponent()); }
 
         [TestMethod]
         public async Task ActionDebounce( )
@@ -559,7 +559,7 @@ namespace Underscore.Test.Action
         {
             
             var testing = ManipulateDummy();
-            var failOnSignificantDelay = Task.Delay(10000);
+            var failOnSignificantDelay = Task.Delay(1000);
 
             var results = new string[2]; 
 
@@ -572,11 +572,11 @@ namespace Underscore.Test.Action
                 callCount++;
             } );
             var tasks = new Stack<Task>( );
-            var throttled = testing.Throttle( throttling, 500 );
+            var throttled = testing.Throttle( throttling, 100 );
 
 
             var firstResult = throttled(1, -1);
-            await SafeAwait(firstResult,5);
+            await firstResult;
 
             Assert.AreEqual ( "1"  , results[0]  );
             Assert.AreEqual ( "-1" , results[1] );
@@ -586,8 +586,8 @@ namespace Underscore.Test.Action
             for ( var i=1 ; i <= 100 ; i++ )
                 tasks.Push( throttled( i, -i ) );
 
-            while ( tasks.Count != 0 )
-                await SafeAwait(tasks.Pop( ),10);
+                while ( tasks.Count != 0 )
+                    await tasks.Pop( );
 
             Thread.MemoryBarrier( );
             Assert.AreEqual( "100", results[ 0 ] );
@@ -599,7 +599,7 @@ namespace Underscore.Test.Action
             {
 
                 firstResult = throttled(1, -1);
-                await SafeAwait(firstResult,10);
+                await firstResult;
                 Thread.MemoryBarrier( );
                 Assert.AreEqual("1", results[0]);
                 Assert.AreEqual("-1", results[1]);
@@ -610,12 +610,13 @@ namespace Underscore.Test.Action
                     tasks.Push(throttled(i, -i));
 
                 while (tasks.Count != 0)
-                    await SafeAwait(tasks.Pop(), 4);
+                    await tasks.Pop();
                 
                 Thread.MemoryBarrier( );
                 Assert.AreEqual("100", results[0]);
                 Assert.AreEqual("-100", results[1]);
                 Assert.AreEqual(4+(2*j), callCount);
+                Thread.MemoryBarrier( );
             }
         }
 
@@ -726,7 +727,7 @@ namespace Underscore.Test.Action
             await Task.Delay(1);
 
             var first = throttled(0, 0, 0, 0);
-            await first;
+            await SafeAwait(first, 10);
 
             Assert.AreEqual("0", results[0]);
             Assert.AreEqual("0", results[1]);
@@ -740,7 +741,7 @@ namespace Underscore.Test.Action
 
 
             while (tasks.Count != 0)
-                await tasks.Pop();
+                await SafeAwait(tasks.Pop(),10);
 
             Assert.AreEqual("100", results[0]);
             Assert.AreEqual("-100", results[1]);
@@ -881,7 +882,7 @@ namespace Underscore.Test.Action
 
             var throttling = new System.Action(() => result++);
             var tasks = new Stack<Task>();
-            var throttled = testing.Throttle(throttling, 50);
+            var throttled = testing.Throttle(throttling, 100);
 
             Assert.AreEqual(0, result);
 
@@ -1470,6 +1471,7 @@ namespace Underscore.Test.Action
 
                 for (var i = 0; i < 10; i++)
                     tasks[i].Wait();
+
                 Thread.MemoryBarrier( );
                 Assert.AreEqual("7", result);
             }, ( ) =>

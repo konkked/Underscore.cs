@@ -121,12 +121,12 @@ namespace Underscore.Test
     {
         public static Task Start(this System.Action action) 
         {
-            return Task.Factory.StartNew(action);
+            return Task.Run(action);
         }
 
         public static Task<T> Start<T>(this Func<T> function) 
         {
-            return Task.Factory.StartNew(function);
+            return Task.Run(function);
         }
     }
 
@@ -161,10 +161,10 @@ namespace Underscore.Test
                 var tasks = new Task[actions.Length];
 
                 for (int i = 0; i < actions.Length; i++)
-                    tasks[i] = Task.Factory.StartNew(actions[i]);
+                    tasks[i] = Task.Run(actions[i]);
 
                 foreach (var action in actions)
-                    await Task.Factory.StartNew(action);
+                    await Task.Run(action);
                 
             }
 
@@ -174,7 +174,7 @@ namespace Underscore.Test
                 var results = new T[functions.Length];
 
                 for (int i = 0; i < functions.Length; i++)
-                    tasks[i] = Task.Factory.StartNew(functions[i]);
+                    tasks[i] = Task.Run(functions[i]);
 
                 for (int i = 0; i < functions.Length; i++)
                     results[i] = await tasks[i];

@@ -22,13 +22,15 @@ namespace Underscore.Test.Module
                 var field = new FieldComponent( cacher );
                 var ctor = new ConstructorComponent(cacher, property);
                 var transformation = new TransposeComponent(property);
+                var attribute = new AttributeComponent( cacher );
 
                 var example = new Underscore.Module.Object (
                     property,
                     methods,
                     field,
                     ctor,
-                    transformation
+                    transformation,
+                    attribute
                 ) ;
 
                 Assert.IsNotNull(example);
