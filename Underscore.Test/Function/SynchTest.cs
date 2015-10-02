@@ -228,7 +228,7 @@ namespace Underscore.Test.Function
             var continuing = new List<Task>( );
 
             timer.Start( );
-
+            Thread.MemoryBarrier( );
             for ( int i=0 ; i < 100 ; i++ )
             {
                 Assert.AreEqual( 1, cnt );
@@ -247,7 +247,7 @@ namespace Underscore.Test.Function
             Thread.MemoryBarrier( );
 
             Assert.AreEqual( 2, cnt );
-            Assert.IsTrue( timer.ElapsedMilliseconds >= waiting );
+            Assert.IsTrue( timer.ElapsedMilliseconds >= waiting, "Not {0} >= {1}", timer.ElapsedMilliseconds, waiting );
         }
 
         [TestMethod]
@@ -424,7 +424,7 @@ namespace Underscore.Test.Function
 
             var testing = ModifyComponent();
             var timer = new System.Diagnostics.Stopwatch();
-            int waiting = 10;
+            int waiting = 100;
 
             int cnt = 0;
 
@@ -441,7 +441,7 @@ namespace Underscore.Test.Function
 
             timer.Start();
 
-
+            Thread.MemoryBarrier( );
             for (int i = 0; i < 99; i++)
             {
                 Assert.AreEqual(i == 0 ? 0 : 1, cnt);
@@ -495,7 +495,7 @@ namespace Underscore.Test.Function
         {
             var testing = ModifyComponent();
             var timer = new Stopwatch();
-            const int waiting = 100;
+            const int waiting = 1000;
 
             int cnt = 1;
 
@@ -600,7 +600,7 @@ namespace Underscore.Test.Function
                 var delayed = testing.Delay( ( ) => "worked", 100 );
                 
                 timer.Start( );
-                
+                Thread.MemoryBarrier( );
                 var taskResult = delayed( );
                 
                 Thread.MemoryBarrier( );
@@ -610,7 +610,7 @@ namespace Underscore.Test.Function
 
                 Thread.MemoryBarrier( );
                 Assert.AreEqual( "worked", taskResult.Result );
-                Assert.IsTrue( timer.ElapsedMilliseconds >= 100 , string.Format("Expecting at least {0} got {1}", 100,timer.ElapsedMilliseconds));
+                Assert.IsTrue( timer.ElapsedMilliseconds >= 100 - 10 , string.Format("Expecting at least {0} got {1}", 100,timer.ElapsedMilliseconds));
 
             }, ( ) =>
             {
@@ -725,7 +725,8 @@ namespace Underscore.Test.Function
 
                 Assert.IsTrue( invoked );
                 timer.Stop( );
-                Assert.IsTrue( timer.ElapsedMilliseconds >= 100 );
+                Thread.MemoryBarrier();
+                Assert.IsTrue( timer.ElapsedMilliseconds >= 100, "Not {0} >= {1} ", timer.Elapsed, 100  );
 
             }, ( ) =>
             {

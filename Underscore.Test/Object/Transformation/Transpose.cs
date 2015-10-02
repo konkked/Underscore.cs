@@ -139,5 +139,110 @@ namespace Underscore.Test.Object.Transformation
         }
 
 
+        [TestMethod]
+        public void Coalesce( )
+        {
+            string middleName = "Henry";
+            var coalscing = new { MiddleName = middleName , FirstName = "ShouldNotBeHere" , LastName = "ShouldBeHere" };
+            var coalscingType = coalscing.GetType( );
+
+            var mkprop = new Mock<IPropertyComponent>( );
+
+            mkprop.Setup( a => a.All( typeof( Person ) ) )
+                .Returns( typeof( Person ).GetProperties( BindingFlags.Instance | BindingFlags.Public ) );
+
+            mkprop.Setup( a => a.All( typeof( Employee ) ) )
+                .Returns( typeof( Employee ).GetProperties( BindingFlags.Instance | BindingFlags.Public ) );
+
+
+            mkprop.Setup( a => a.All( coalscingType  ) )
+                .Returns( coalscingType.GetProperties( BindingFlags.Instance | BindingFlags.Public ) );
+
+
+
+            mkprop.Setup( a => a.All( It.IsAny<Person>( ) ) )
+                .Returns( typeof( Person ).GetProperties( BindingFlags.Instance | BindingFlags.Public ) );
+
+            mkprop.Setup( a => a.All( It.IsAny<Employee>( ) ) )
+                .Returns( typeof( Employee ).GetProperties( BindingFlags.Instance | BindingFlags.Public ) );
+
+            mkprop.Setup( a => a.All( coalscing ) )
+                .Returns( coalscingType.GetProperties( BindingFlags.Instance | BindingFlags.Public ) );
+
+
+
+
+
+
+            var target = new TransposeComponent( mkprop.Object );
+
+
+            string title = "Mr." ,
+                firstName = "Charles" ,
+                lastName = "Keyser" ,
+                suffix = "IV" ,
+                nickName = "Chip";
+
+            int age = 24;
+
+            var person = new Person
+            {
+                Title = title ,
+                FirstName = firstName ,
+                Suffix = suffix ,
+                NickName = nickName ,
+                Age = age ,
+            };
+
+            string shouldbehere = "ShouldBeHere";
+            decimal defaultedSalary = 60000m;
+
+            var employeeWithExistingInfo = new Employee
+            {
+                FirstName = shouldbehere ,
+                LastName = shouldbehere ,
+                Salary = defaultedSalary
+            };
+
+            var employeeWithNoInfo = new Employee { };
+
+            var employeeWithOnlySalary = new Employee
+            {
+                Salary = 60000m
+            };
+
+            var result = target.Coalesce( employeeWithExistingInfo , person );
+
+            Assert.AreEqual( employeeWithExistingInfo , result );
+            Assert.AreEqual( defaultedSalary , result.Salary );
+            Assert.AreEqual( shouldbehere , result.FirstName );
+            Assert.AreEqual( shouldbehere , result.LastName );
+
+
+            var dm = default( decimal );
+            var ml = new Employee{};
+            var result3 = target.Coalesce( ml , new { Salary = 1000m } );
+            
+            // the salary should not be replaced because
+            Assert.AreEqual( result3 , ml );
+            Assert.AreEqual( dm , ml.Salary );
+
+            var result2 = target.Coalesce( person , coalscing );
+            Assert.AreEqual    ( person , result2  );
+            Assert.AreNotEqual ( "ShouldNotBeHere" , result2.FirstName );
+            Assert.AreEqual( "ShouldBeHere" , result2.LastName );
+            Assert.AreEqual( "Henry" , result2.MiddleName );
+            Assert.AreEqual( "IV" , result2.Suffix );
+
+            var result4 = target.Coalesce( person , coalscing, true );
+            Assert.AreNotEqual( person , result4 );
+            Assert.AreNotEqual( "ShouldNotBeHere" , result2.FirstName );
+            Assert.AreEqual( "ShouldBeHere" , result2.LastName );
+            Assert.AreEqual( "Henry" , result2.MiddleName );
+            Assert.AreEqual( "IV" , result2.Suffix );
+
+
+        }
+
     }
 }
