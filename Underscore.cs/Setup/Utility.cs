@@ -8,11 +8,11 @@ namespace Underscore.Setup
         public void Load( Kernel kernel)
         {
         
-            kernel.Register<IFunctionComponent,FunctionComponent>( );
-            kernel.Register<IMathComponent,MathComponent>( );
-            kernel.Register<IObjectComponent,ObjectComponent>( );
-            kernel.Register<ICompactComponent, CompactComponent>();
-            kernel.Register<Module.Utility>();
+            kernel.Register<IFunctionComponent , FunctionComponent>( );
+            kernel.Register<IMathComponent     ,     MathComponent>( );
+            kernel.Register<IObjectComponent   ,   ObjectComponent>( );
+            kernel.Register<ICompactComponent  ,  CompactComponent>( );
+            kernel.Register<Module.Utility>( );
         
         }
     }

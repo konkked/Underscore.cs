@@ -57,10 +57,12 @@ namespace Underscore.Test
             var target = new TestingMethods( );
 
             var query = _.Object.Method.Query( target, new { 
-                @return = typeof(string),
-                arg1 = typeof( string ), 
-                arg2 = typeof( string ), 
-                arg3 = typeof( string ) 
+            
+                @return = typeof( string ) ,
+                arg1    = typeof( string ) , 
+                arg2    = typeof( string ) , 
+                arg3    = typeof( string ) 
+            
             } );
 
             Assert.AreEqual( 1, query.Count( ) );
@@ -114,8 +116,6 @@ namespace Underscore.Test
             Assert.IsFalse( utility.IsTruthy( 0.0 ) );
             Assert.IsFalse( utility.IsTruthy( 0.0m ) );
             Assert.IsFalse( utility.IsTruthy( null ) );
-
-
 
         }
 

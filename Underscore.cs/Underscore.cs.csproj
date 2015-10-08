@@ -84,6 +84,8 @@
     <Compile Include="Object\Reflection\Contract\Constructor.cs" />
     <Compile Include="Object\Reflection\Implementation\Attribute.cs" />
     <Compile Include="Object\Reflection\Implementation\Constructor.cs" />
+    <Compile Include="Object\Transformation\Contract\Dynamic.cs" />
+    <Compile Include="Object\Transformation\Implementation\Dynamic.cs" />
     <Compile Include="Setup\Action.cs" />
     <Compile Include="Setup\Collection.cs" />
     <Compile Include="Setup\Liteioc\Kernel.cs" />
@@ -112,8 +114,8 @@
     <Compile Include="Object\Reflection\Implementation\Property.cs" />
     <Compile Include="Object\Reflection\Members.cs" />
     <Compile Include="Object\Reflection\MethodBase.cs" />
-    <Compile Include="Object\Transformation\Contract\TransposeComponent.cs" />
-    <Compile Include="Object\Transformation\Implementation\TransposeComponent.cs" />
+    <Compile Include="Object\Transformation\Contract\Transpose.cs" />
+    <Compile Include="Object\Transformation\Implementation\Transpose.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Underscore.cs" />
     <Compile Include="Utility\Contract\Compact.cs" />

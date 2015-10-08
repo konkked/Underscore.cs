@@ -4,7 +4,7 @@ using Underscore.Object.Reflection;
 namespace Underscore.Module
 {
 
-    public class Object : ITransposeComponent
+    public class Object : ITransposeComponent, IDynamicComponent
     {
         private readonly IPropertyComponent _property;
         private readonly IMethodComponent _method;
@@ -12,6 +12,7 @@ namespace Underscore.Module
         private readonly ITransposeComponent _transformation;
         private readonly IConstructorComponent _constructor;
         private readonly IAttributeComponent _attribute;
+        private readonly IDynamicComponent _dynamic;
 
 
         public Object(
@@ -20,7 +21,8 @@ namespace Underscore.Module
             IFieldComponent field,
             IConstructorComponent constructor,
             ITransposeComponent transformation,
-            IAttributeComponent attribute) 
+            IAttributeComponent attribute,
+            IDynamicComponent dynamicComponent) 
         {
             _property = property;
             _field = field;
@@ -28,6 +30,7 @@ namespace Underscore.Module
             _transformation = transformation;
             _constructor = constructor;
             _attribute = attribute;
+            _dynamic = dynamicComponent;
         }
 
  
@@ -63,6 +66,11 @@ namespace Underscore.Module
         public TFirst Coalesce<TFirst>( TFirst first , object second , bool newObject ) where TFirst : new( )
         {
             return _transformation.Coalesce( first , second , newObject );
+        }
+
+        public dynamic ToDynamic( object target )
+        {
+            return _dynamic.ToDynamic( target );
         }
     }
 }

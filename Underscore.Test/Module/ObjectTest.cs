@@ -23,6 +23,7 @@ namespace Underscore.Test.Module
                 var ctor = new ConstructorComponent(cacher, property);
                 var transformation = new TransposeComponent(property);
                 var attribute = new AttributeComponent( cacher );
+                var dynamicComponent = new DynamicComponent( property );
 
                 var example = new Underscore.Module.Object (
                     property,
@@ -30,7 +31,8 @@ namespace Underscore.Test.Module
                     field,
                     ctor,
                     transformation,
-                    attribute
+                    attribute, 
+                    dynamicComponent
                 ) ;
 
                 Assert.IsNotNull(example);
