@@ -7,6 +7,7 @@ using Underscore.Function;
 using Underscore.Object.Reflection;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace Underscore.Test.Object.Reflection
 {
@@ -906,6 +907,90 @@ namespace Underscore.Test.Object.Reflection
                 foreach (var objResult in result.Item5)
                     if (hasOverlap |= expect.Contains(objResult)) break;
             }
+        }
+
+        private void CtorSimplestTestInstanceBase( IConstructorComponent testing, object instance, BindingFlags flags ) 
+        {
+            var expecting = instance.GetType().GetConstructors( flags ).OrderBy( a => a.GetParameters( ).Count( ) ).FirstOrDefault( );
+            
+            var actual = testing.Simplest( instance , flags );
+
+            Assert.AreEqual( expecting , actual );
+        }
+
+        [TestMethod]
+        public async Task CtorTestSimplestMultiConstructorsFromInstance( ) 
+        {
+            var testing = CreateTestTarget( );
+
+            var instances = new object[ ]{ 
+                                new CtorDoubleAndSingle("a","a"),
+                                new CtorDoubleAndParamless(),
+                                new CtorDoubleAndSingleAndParamless(),
+                                new CtorDoubleParamOnly("a","a"),
+                                new CtorSingleParamOnly("a") };
+            var bindingFlags = new BindingFlags[ ]{
+                                    BindingFlags.Instance | BindingFlags.Public,
+                                    BindingFlags.Instance | BindingFlags.NonPublic,
+                                    BindingFlags.Static | BindingFlags.Public
+                                };
+
+            var arguments = from x in instances
+                          from y in bindingFlags
+                          select new { x , y };
+
+            List<Task> tasks = new List<Task>( );
+
+            foreach ( var argumentSet in arguments ) 
+            {
+                tasks.Add( Task.Run( ( ) =>CtorSimplestTestInstanceBase(testing, argumentSet.x , argumentSet.y ) ) );
+            }
+
+            foreach ( var testTask in tasks )
+                await testTask;
+
+        }
+
+        private void CtorSimplestTestTypeBase( IConstructorComponent testing, Type t , BindingFlags flags) 
+        {
+
+            var expecting = t.GetConstructors(flags).OrderBy( a => a.GetParameters( ).Count( ) ).FirstOrDefault( );
+            
+            var actual = testing.Simplest( t, flags );
+
+            Assert.AreEqual( expecting , actual, string.Format("Failed on {0} , {1}", t.Name, flags.ToString() ));
+        }
+
+        [TestMethod]
+        public async Task CtorTestSimplestMultiConstructorsFromType( )
+        {
+            var testing = CreateTestTarget( );
+
+            var instances = new [ ]{ 
+                                typeof(CtorDoubleAndSingle),
+                                typeof(CtorDoubleAndParamless),
+                                typeof(CtorDoubleAndSingleAndParamless),
+                                typeof(CtorDoubleParamOnly),
+                                typeof(CtorSingleParamOnly) };
+            var bindingFlags = new BindingFlags[ ]{
+                                    BindingFlags.Instance | BindingFlags.Public,
+                                    BindingFlags.Instance | BindingFlags.NonPublic,
+                                    BindingFlags.Static   | BindingFlags.Public
+                                };
+
+            var arguments = from x in instances
+                          from y in bindingFlags
+                          select new { x , y };
+
+            List<Task> tasks = new List<Task>( );
+
+            foreach ( var argumentSet in arguments ) 
+            {
+                tasks.Add( Task.Run( ( ) =>CtorSimplestTestTypeBase(testing, argumentSet.x , argumentSet.y ) ) );
+            }
+
+            foreach ( var testTask in tasks )
+                await testTask;
         }
     }
 }

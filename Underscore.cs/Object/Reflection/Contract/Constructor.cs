@@ -23,6 +23,12 @@ namespace Underscore.Object.Reflection
         ConstructorInfo Parameterless(Type target);
         ConstructorInfo Parameterless(Type target, BindingFlags flags);
 
+        ConstructorInfo Simplest( Type target );
+        ConstructorInfo Simplest( object target );
+
+        ConstructorInfo Simplest( Type target , BindingFlags flags );
+        ConstructorInfo Simplest( object target , BindingFlags flags );
+
         ConstructorInfo Find(Type target, object query);
         
 

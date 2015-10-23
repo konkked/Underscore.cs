@@ -88,6 +88,28 @@ namespace Underscore.Object.Reflection
             return All(target, flags).FirstOrDefault(a => !a.GetParameters().Any());
         }
 
+        public ConstructorInfo Simplest( object target ) 
+        {
+            return Simplest( target.GetType( ) );
+        }
+
+        public ConstructorInfo Simplest( Type target ) 
+        {
+            return All( target ).OrderBy( a => a.GetParameters( ).Count( ) ).FirstOrDefault( );
+        }
+
+        public ConstructorInfo Simplest(Type target, BindingFlags flags)
+        {
+            return All( target , flags )
+                        .OrderBy( a => a.GetParameters().Count() )
+                        .FirstOrDefault();
+        }
+
+        public ConstructorInfo Simplest( object target , BindingFlags flags ) 
+        {
+            return Simplest( target.GetType( ) , flags );
+        }
+
         public ConstructorInfo Find(Type target, object query)
         {
             return Query(target, query).FirstOrDefault();
