@@ -536,7 +536,7 @@ namespace Underscore.Test.Function
             timer.Stop( );
             Thread.MemoryBarrier( );
             Assert.AreEqual(3, cnt);
-            Assert.IsTrue(timer.ElapsedMilliseconds >= waiting, "Elapsed time : {0} < Waiting: {1}", timer.ElapsedMilliseconds, waiting);
+            Assert.IsTrue(Math.Abs( timer.ElapsedMilliseconds - waiting ) < 5, "Elapsed time : {0} < Waiting: {1}", timer.ElapsedMilliseconds, waiting);
             Thread.MemoryBarrier( );
 
             continuing.Clear();

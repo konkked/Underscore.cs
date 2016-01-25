@@ -8,6 +8,12 @@ namespace Underscore.Collection
 
     public class PartitionComponent : IPartitionComponent
     {
+        private readonly List.IPartitionComponent _partitionComponent; 
+
+        public PartitionComponent(List.IPartitionComponent partitionComponent)
+        {
+            _partitionComponent = partitionComponent;
+        }
 
         private IEnumerable<T> Segment<T>( IEnumerator<T> iter, int size, out bool cont )
         {
@@ -55,25 +61,6 @@ namespace Underscore.Collection
 
         }
 
-        private IEnumerable<T> Segment<T>( IEnumerator<T> iter, Func<T, bool> on, out bool cont )
-        {
-            var ret = new List<T>( );
-            cont = true;
-
-            while ( iter.MoveNext( ) )
-            {
-                if ( on( iter.Current ) )
-                    return ret;
-                else
-                    ret.Add( iter.Current );
-
-                return ret;
-            }
-
-            cont = false;
-            return ret;
-        }
-
         /// <summary>
         /// Breaks the collection into smaller chunks
         /// </summary>
@@ -90,8 +77,7 @@ namespace Underscore.Collection
                     if ( on( iter.Current ) && retv.Count!=0)
                     {
                         yield return retv;
-                        retv = new List<T>( );
-                        retv.Add( iter.Current );
+                        retv = new List<T> {iter.Current};
                     }
                     else 
                     {
@@ -144,8 +130,8 @@ namespace Underscore.Collection
             }
 
             return Tuple.Create(
-                left as IEnumerable<T>,
-                right as IEnumerable<T>
+                (IEnumerable<T>) left,
+                (IEnumerable<T>) right
             );
         }
 
@@ -190,6 +176,16 @@ namespace Underscore.Collection
                 left as IEnumerable<T>,
                 right as IEnumerable<T>
             );
+        }
+
+
+
+
+        public IEnumerable<IEnumerable<T>> Combinations<T>(IEnumerable<T> collection)
+        {
+            if(collection == null) throw new ArgumentNullException("collection");
+            var ls = collection as IList<T> ?? collection.ToList();
+            return _partitionComponent.Combinations(ls);
         }
 
     }

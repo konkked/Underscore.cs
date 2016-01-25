@@ -26,6 +26,7 @@ namespace Underscore.Module
         {
             return _creator.Snapshot( collection );
         }
+        
 
         public IEnumerable<IEnumerable<T>> Chunk<T>( IEnumerable<T> collection, int size )
         {
@@ -46,6 +47,11 @@ namespace Underscore.Module
         public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IEnumerable<T> collection, Func<T, bool> on )
         {
             return _partitioner.Partition( collection, on );
+        }
+
+        public IEnumerable<IEnumerable<T>> Combinations<T>(IEnumerable<T> collection)
+        {
+            return _partitioner.Combinations(collection);
         }
     }
 }

@@ -81,6 +81,11 @@ namespace Underscore.Module
             return _partitioner.Split( list );
         }
 
+        public IEnumerable<IEnumerable<T>> Combinations<T>(IList<T> list)
+        {
+            return _partitioner.Combinations(list);
+        }
+
         public IEnumerable<IEnumerable<T>> Chunk<T>( IList<T> list, int size )
         {
             return _partitioner.Chunk( list, size );

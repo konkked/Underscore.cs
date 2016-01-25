@@ -47,7 +47,14 @@ namespace Underscore.List
         /// </summary>
         Tuple<IList<T>, IList<T>> Split<T>( IList<T> list );
 
-        
+        /// <summary>
+        /// Returns a 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="applying"></param>
+        /// <returns></returns>
+        IEnumerable<IEnumerable<T>> Combinations<T>(IList<T> list);
 
 
 

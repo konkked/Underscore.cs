@@ -9,6 +9,7 @@ namespace Underscore.Setup
         {
             kernel.Register<ICreationComponent,CreationComponent>();
             kernel.Register<IPartitionComponent, PartitionComponent>();
+            kernel.Register<List.IPartitionComponent,List.PartitionComponent>();
             kernel.Register<Module.Collection>();
         }
     }

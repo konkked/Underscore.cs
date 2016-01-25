@@ -180,5 +180,28 @@ namespace Underscore.List
             );
         }
 
+        public IEnumerable<IEnumerable<T>> Combinations<T>(IList<T> list)
+        {
+            if(list== null) throw new ArgumentNullException("list");
+
+            yield return new T[] {};
+
+            foreach (var value in NonEmptyPermutate(list))
+                yield return value;
+        }
+
+
+        private IEnumerable<IEnumerable<T>> NonEmptyPermutate<T>(IList<T> collection, int index = -1)
+        {
+            if (index <= -1)
+                index = collection.Count - 1;
+
+            if (index == 0)
+                return new List<IEnumerable<T>> { new[] { collection[0] } };
+
+            var permutations = NonEmptyPermutate(collection, index - 1).ToList();
+            return permutations.Concat(permutations.Select(a => a.Concat(new[] { collection[index] })).Concat(new[] { new[] { collection[index] } }));
+        }
+
     }
 }

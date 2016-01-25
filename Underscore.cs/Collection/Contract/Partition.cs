@@ -25,6 +25,14 @@ namespace Underscore.Collection
         /// Breaks collection into two seperate parts
         /// </summary>
         Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IEnumerable<T> collection, Func<T,bool> on );
+
+        /// <summary>
+        /// Returns all combinations of the collection being passed 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <returns></returns>
+        IEnumerable<IEnumerable<T>> Combinations<T>(IEnumerable<T> collection);
     }
 
 }
