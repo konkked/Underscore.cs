@@ -11,6 +11,9 @@ namespace Underscore.Collection
         /// </summary>
         Func<IEnumerable<T>> Snapshot<T>( IEnumerable<T> collection );
 
+        IEnumerable<T> Extend<T>(IEnumerable<T> collection, int length);
 
+
+        IEnumerable<T> Infinite<T>(IEnumerable<T> collection);
     }
 }

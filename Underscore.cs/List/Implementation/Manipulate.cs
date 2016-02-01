@@ -158,6 +158,20 @@ namespace Underscore.List
             return retv;
         }
 
+        public IEnumerable<T> Extend<T>(IList<T> list, int size)
+        {
+            for (int i = 0; i < size; i++)
+                yield return list[i%list.Count];
+        }
+
+        public IEnumerable<T> Infinite<T>(IList<T> list)
+        {
+            for(int i=0;;i++)
+            {
+                yield return list[i%list.Count];
+            }
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)

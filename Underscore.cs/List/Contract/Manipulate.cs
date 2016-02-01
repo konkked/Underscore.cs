@@ -40,5 +40,9 @@ namespace Underscore.List
         /// Generates a random sample of items from the passed list
         /// </summary>
         IList<T> Sample<T>( IList<T> list, int size, bool unique );
+
+        IEnumerable<T> Extend<T>(IList<T> list, int size);
+
+        IEnumerable<T> Infinite<T>(IList<T> list);
     }
 }

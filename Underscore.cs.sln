@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Underscore.cs", "Underscore.cs\Underscore.cs.csproj", "{946C4F0D-101A-46DB-8C41-C102D0947E99}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Underscore.Test", "Underscore.Test\Underscore.Test.csproj", "{D8C013CF-12B1-4743-9044-D92903510970}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreformanceTest", "PreformanceTest\PreformanceTest.csproj", "{B34E3068-1596-4F2D-B1BA-39074E0B2661}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D8C013CF-12B1-4743-9044-D92903510970}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8C013CF-12B1-4743-9044-D92903510970}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8C013CF-12B1-4743-9044-D92903510970}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B34E3068-1596-4F2D-B1BA-39074E0B2661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B34E3068-1596-4F2D-B1BA-39074E0B2661}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B34E3068-1596-4F2D-B1BA-39074E0B2661}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B34E3068-1596-4F2D-B1BA-39074E0B2661}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

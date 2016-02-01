@@ -26,7 +26,17 @@ namespace Underscore.Module
         {
             return _creator.Snapshot( collection );
         }
-        
+
+        public IEnumerable<T> Extend<T>(IEnumerable<T> collection, int length)
+        {
+            return _creator.Extend(collection, length);
+        }
+
+        public IEnumerable<T> Infinite<T>(IEnumerable<T> collection)
+        {
+            return _creator.Infinite(collection);
+        }
+
 
         public IEnumerable<IEnumerable<T>> Chunk<T>( IEnumerable<T> collection, int size )
         {

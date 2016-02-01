@@ -1,0 +1,96 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ output extension=".cs" #>
+using System;
+using System.Linq;
+
+// This code has been automatically generated
+// if you want to make changes make them on 
+// the corresponding the text template file
+// Boolean.tt
+namespace Underscore.Function
+{
+
+	public class BooleanComponent : IBooleanComponent
+	{
+	
+<#
+
+    const string argNames = "abcdefghijklmnopqrstuvwxyz";
+    var typeArgs = Enumerable.Range(1, 16).Select(i => "T" + i).ToArray();
+
+
+    for (int i = 1; i < 18; i++)
+    {
+        var currTypeArgs = typeArgs.Take(i-1).ToArray();
+        var currTypeArgsString = string.Join(", ", currTypeArgs);
+        var fnRetType = string.Join(", ", currTypeArgs.Concat(new[]{"bool"}));
+        var callStr = string.Join(",", argNames.Take(i-1).Select(a => a.ToString()));
+        if (!string.IsNullOrEmpty(currTypeArgsString)) currTypeArgsString = "<" + currTypeArgsString + ">";
+
+        #>
+		
+		/// <summary>
+		/// Negates the logic of the passed function
+		/// </summary>
+		public Func<<#=fnRetType#>> Negate<#=currTypeArgsString#>( Func<<#=fnRetType#>> fn)
+		{
+			return (<#=callStr#>)=>!fn(<#=callStr#>);
+		}
+		
+		<#
+	}
+
+
+	
+
+    for (int i = 1; i < 18; i++)
+    {
+        var currTypeArgs = typeArgs.Take(i-1).ToArray();
+        var currTypeArgsString = string.Join(", ", currTypeArgs);
+        var fnRetType = string.Join(", ", currTypeArgs.Concat(new[]{"bool"}));
+        var callStr = string.Join(",", argNames.Take(i-1).Select(a => a.ToString()));
+        if (!string.IsNullOrEmpty(currTypeArgsString)) currTypeArgsString = "<" + currTypeArgsString + ">";
+
+        #>
+		
+		/// <summary>
+		/// Creates an aggregate function that is a result of the passed functions being called and being 'or'ed together
+		/// </summary>
+		public Func<<#=fnRetType#>> Or<#=currTypeArgsString#>( params Func<<#=fnRetType#>>[] fns)
+		{
+			return (<#=callStr#>)=>fns.Aggregate(false,(prev,current)=>prev || current(<#=callStr#>));
+		}
+		
+		<#
+	}
+
+
+
+	
+    for (int i = 1; i < 18; i++)
+    {
+        var currTypeArgs = typeArgs.Take(i-1).ToArray();
+        var currTypeArgsString = string.Join(", ", currTypeArgs);
+        var fnRetType = string.Join(", ", currTypeArgs.Concat(new[]{"bool"}));
+        var callStr = string.Join(",", argNames.Take(i-1).Select(a => a.ToString()));
+        if (!string.IsNullOrEmpty(currTypeArgsString)) currTypeArgsString = "<" + currTypeArgsString + ">";
+
+        #>
+		
+		/// <summary>
+		/// Creates an aggregate function that is a result of the passed functions being called and being 'and'ed together
+		/// </summary>
+		public Func<<#=fnRetType#>> And<#=currTypeArgsString#>( params Func<<#=fnRetType#>>[] fns)
+		{
+			return (<#=callStr#>)=>fns.Aggregate(true,(prev,current)=>prev && current(<#=callStr#>));
+		}
+		
+		<#
+	}
+#>
+
+	}
+
+}

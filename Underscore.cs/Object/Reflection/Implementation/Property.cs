@@ -11,6 +11,7 @@ namespace Underscore.Object.Reflection
         private readonly Func<Type, IEnumerable<PropertyInfo>> _getValidProperties;
         private readonly Func<Type,Type, BindingFlags,IEnumerable<PropertyInfo>> _propertiesByType;
         private readonly Func<Type, BindingFlags, IEnumerable<PropertyInfo>> _getValidPropertiesWithBindingFlags;
+        private readonly Func<Type, string, BindingFlags,PropertyInfo> _getProperty; 
         private const BindingFlags defaultFlags = BindingFlags.Public | BindingFlags.Instance ;
 
         public PropertyComponent( ICacheComponent cacher )
@@ -28,6 +29,11 @@ namespace Underscore.Object.Reflection
             _propertiesByType =
                 (tme, tprop, flags) =>
                     _getValidPropertiesWithBindingFlags(tme, flags).Where(a => a.PropertyType == tprop);
+
+            var tmpProp = _getProperty = (t, n, bf) => t.GetProperty(n,bf);
+
+            _getProperty = cacher.Memoize(tmpProp);
+
 
         }
 
@@ -52,7 +58,7 @@ namespace Underscore.Object.Reflection
 
         public IEnumerable<PropertyInfo> All(Type type)
         {
-            return Enumerate(type).ToList();
+            return Enumerate(type);
         }
 
         public IEnumerable<PropertyInfo> All(object target, BindingFlags flags)
@@ -72,9 +78,10 @@ namespace Underscore.Object.Reflection
                 name = name.ToLower();
 
             var possible = OfType(target, typeof (T), flags);
-            if (possible.Any())
+            var propertyInfos = possible as PropertyInfo[] ?? possible.ToArray();
+            if (propertyInfos.Any())
             {
-                var assigning = possible.FirstOrDefault(a => (caseSensitive ? a.Name : a.Name.ToLower()) == name);
+                var assigning = propertyInfos.FirstOrDefault(a => (caseSensitive ? a.Name : a.Name.ToLower()) == name);
 
                 if (assigning != null)
                     assigning.SetValue(target, value);
@@ -245,7 +252,7 @@ namespace Underscore.Object.Reflection
         private PropertyInfo PropertyCaseSensitive(object target, string name, BindingFlags flags = defaultFlags)
         {
 
-            return All(target, flags).FirstOrDefault(a => a.Name == name);
+            return _getProperty(target.GetType(), name,flags);
         }
 
 

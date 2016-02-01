@@ -13,7 +13,8 @@ namespace Underscore.Module
         IComposeComponent,
         ISynchComponent,
         IConvertComponent,
-        ICacheComponent
+        ICacheComponent,
+        IBooleanComponent
     {
 
         private readonly IComposeComponent _compose;
@@ -23,6 +24,7 @@ namespace Underscore.Module
         private readonly IConvertComponent _convert;
         private readonly ISynchComponent _synch;
         private readonly ICacheComponent _cache;
+        private readonly IBooleanComponent _booleanComponent;
 
         public Function( 
             IBindComponent bind, 
@@ -31,7 +33,8 @@ namespace Underscore.Module
             IComposeComponent compose,
             IConvertComponent convert,
             ISynchComponent synch,
-            ICacheComponent cache) 
+            ICacheComponent cache,
+            IBooleanComponent boolComponent) 
         {
             _bind = bind;
             _partial = partial;
@@ -40,6 +43,7 @@ namespace Underscore.Module
             _synch = synch;
             _convert = convert;
             _cache = cache;
+            _booleanComponent = boolComponent;
         }
 
 
@@ -2005,6 +2009,261 @@ namespace Underscore.Module
                 TArg16, TResult>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, TArg14, TArg15, TArg16, TResult> function)
         {
             return _cache.Memoize(function);
+        }
+
+        public Func<bool> Negate(Func<bool> fn)
+        {
+            return _booleanComponent.Negate(fn);
+        }
+
+        public Func<T1, bool> Negate<T1>(Func<T1, bool> fn)
+        {
+            return _booleanComponent.Negate(fn);
+        }
+
+        public Func<T1, T2, bool> Negate<T1, T2>(Func<T1, T2, bool> fn)
+        {
+            return _booleanComponent.Negate(fn);
+        }
+
+        public Func<T1, T2, T3, bool> Negate<T1, T2, T3>(Func<T1, T2, T3, bool> fn)
+        {
+            return _booleanComponent.Negate(fn);
+        }
+
+        public Func<T1, T2, T3, T4, bool> Negate<T1, T2, T3, T4>(Func<T1, T2, T3, T4, bool> fn)
+        {
+            return _booleanComponent.Negate(fn);
+        }
+
+        public Func<T1, T2, T3, T4, T5, bool> Negate<T1, T2, T3, T4, T5>(Func<T1, T2, T3, T4, T5, bool> fn)
+        {
+            return _booleanComponent.Negate(fn);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, bool> Negate<T1, T2, T3, T4, T5, T6>(Func<T1, T2, T3, T4, T5, T6, bool> fn)
+        {
+            return _booleanComponent.Negate(fn);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, bool> Negate<T1, T2, T3, T4, T5, T6, T7>(Func<T1, T2, T3, T4, T5, T6, T7, bool> fn)
+        {
+            return _booleanComponent.Negate(fn);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8>(Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> fn)
+        {
+            return _booleanComponent.Negate(fn);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> fn)
+        {
+            return _booleanComponent.Negate(fn);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> fn)
+        {
+            return _booleanComponent.Negate(fn);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> fn)
+        {
+            return _booleanComponent.Negate(fn);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> fn)
+        {
+            return _booleanComponent.Negate(fn);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> fn)
+        {
+            return _booleanComponent.Negate(fn);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> fn)
+        {
+            return _booleanComponent.Negate(fn);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> fn)
+        {
+            return _booleanComponent.Negate(fn);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> fn)
+        {
+            return _booleanComponent.Negate(fn);
+        }
+
+        public Func<bool> Or(params Func<bool>[] fns)
+        {
+            return _booleanComponent.Or(fns);
+        }
+
+        public Func<T1, bool> Or<T1>(params Func<T1, bool>[] fns)
+        {
+            return _booleanComponent.Or(fns);
+        }
+
+        public Func<T1, T2, bool> Or<T1, T2>(params Func<T1, T2, bool>[] fns)
+        {
+            return _booleanComponent.Or(fns);
+        }
+
+        public Func<T1, T2, T3, bool> Or<T1, T2, T3>(params Func<T1, T2, T3, bool>[] fns)
+        {
+            return _booleanComponent.Or(fns);
+        }
+
+        public Func<T1, T2, T3, T4, bool> Or<T1, T2, T3, T4>(params Func<T1, T2, T3, T4, bool>[] fns)
+        {
+            return _booleanComponent.Or(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, bool> Or<T1, T2, T3, T4, T5>(params Func<T1, T2, T3, T4, T5, bool>[] fns)
+        {
+            return _booleanComponent.Or(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, bool> Or<T1, T2, T3, T4, T5, T6>(params Func<T1, T2, T3, T4, T5, T6, bool>[] fns)
+        {
+            return _booleanComponent.Or(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, bool> Or<T1, T2, T3, T4, T5, T6, T7>(params Func<T1, T2, T3, T4, T5, T6, T7, bool>[] fns)
+        {
+            return _booleanComponent.Or(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, bool>[] fns)
+        {
+            return _booleanComponent.Or(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8, T9>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool>[] fns)
+        {
+            return _booleanComponent.Or(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool>[] fns)
+        {
+            return _booleanComponent.Or(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool>[] fns)
+        {
+            return _booleanComponent.Or(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool>[] fns)
+        {
+            return _booleanComponent.Or(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool>[] fns)
+        {
+            return _booleanComponent.Or(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool>[] fns)
+        {
+            return _booleanComponent.Or(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool>[] fns)
+        {
+            return _booleanComponent.Or(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool>[] fns)
+        {
+            return _booleanComponent.Or(fns);
+        }
+
+        public Func<bool> And(params Func<bool>[] fns)
+        {
+            return _booleanComponent.And(fns);
+        }
+
+        public Func<T1, bool> And<T1>(params Func<T1, bool>[] fns)
+        {
+            return _booleanComponent.And(fns);
+        }
+
+        public Func<T1, T2, bool> And<T1, T2>(params Func<T1, T2, bool>[] fns)
+        {
+            return _booleanComponent.And(fns);
+        }
+
+        public Func<T1, T2, T3, bool> And<T1, T2, T3>(params Func<T1, T2, T3, bool>[] fns)
+        {
+            return _booleanComponent.And(fns);
+        }
+
+        public Func<T1, T2, T3, T4, bool> And<T1, T2, T3, T4>(params Func<T1, T2, T3, T4, bool>[] fns)
+        {
+            return _booleanComponent.And(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, bool> And<T1, T2, T3, T4, T5>(params Func<T1, T2, T3, T4, T5, bool>[] fns)
+        {
+            return _booleanComponent.And(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, bool> And<T1, T2, T3, T4, T5, T6>(params Func<T1, T2, T3, T4, T5, T6, bool>[] fns)
+        {
+            return _booleanComponent.And(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, bool> And<T1, T2, T3, T4, T5, T6, T7>(params Func<T1, T2, T3, T4, T5, T6, T7, bool>[] fns)
+        {
+            return _booleanComponent.And(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> And<T1, T2, T3, T4, T5, T6, T7, T8>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, bool>[] fns)
+        {
+            return _booleanComponent.And(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> And<T1, T2, T3, T4, T5, T6, T7, T8, T9>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool>[] fns)
+        {
+            return _booleanComponent.And(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> And<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool>[] fns)
+        {
+            return _booleanComponent.And(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> And<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool>[] fns)
+        {
+            return _booleanComponent.And(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> And<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool>[] fns)
+        {
+            return _booleanComponent.And(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> And<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool>[] fns)
+        {
+            return _booleanComponent.And(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> And<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool>[] fns)
+        {
+            return _booleanComponent.And(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> And<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool>[] fns)
+        {
+            return _booleanComponent.And(fns);
+        }
+
+        public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> And<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool>[] fns)
+        {
+            return _booleanComponent.And(fns);
         }
     }
 }

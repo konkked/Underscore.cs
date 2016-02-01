@@ -16,6 +16,7 @@ namespace Underscore.Setup
             kernel.Register<ISynchComponent,SynchComponent>();
             kernel.Register<ICacheComponent , CacheComponent>();
             kernel.Register<ICompactComponent, CompactComponent>();
+            kernel.Register<IBooleanComponent,BooleanComponent>();
             kernel.Register<Module.Function>();
         }
     }

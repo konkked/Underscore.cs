@@ -71,6 +71,16 @@ namespace Underscore.Module
             return _manipulator.Sample( list, size, unique );
         }
 
+        public IEnumerable<T> Extend<T>(IList<T> list, int size)
+        {
+            return _manipulator.Extend(list, size);
+        }
+
+        public IEnumerable<T> Infinite<T>(IList<T> list)
+        {
+            return _manipulator.Infinite(list);
+        }
+
         public IList<T> Slice<T>( IList<T> list, int start, int end )
         {
             return _partitioner.Slice( list, start, end );
