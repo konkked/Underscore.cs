@@ -316,6 +316,36 @@ namespace Underscore.Object.Reflection
         /// Returns an enumerable representing all the property values of a specific target obj
         /// </summary>
         IEnumerable<TPropertyValue> Values<TPropertyValue>(object target, BindingFlags flags);
+
+
+        /// <summary>
+        /// Finds all fields of a specific type from the targeted object
+        /// </summary>
+
+        IEnumerable<MemberPair<object>> Pairs(object target);
+
+        /// <summary>
+        /// Finds all fields of a specific type from the targeted object
+        /// </summary>
+
+        IEnumerable<MemberPair<object>> Pairs(object target, BindingFlags flags);
+
+        /// <summary>
+        /// Returns an enumerable representing all the property values of a specific target obj
+        /// </summary>
+
+        IEnumerable<MemberPair<TPropertyValue>> Pairs<TPropertyValue>(object target);
+
+
+        /// <summary>
+        /// Returns an enumerable representing all the property values of a specific target obj
+        /// </summary>
+        IEnumerable<MemberPair<TPropertyValue>> Pairs<TPropertyValue>(object target, BindingFlags flags);
     }
 
+    public class MemberPair<T>
+    {
+        public string Name { get; set; }
+        public T Value { get; set; }
+    }
 }

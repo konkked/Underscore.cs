@@ -584,6 +584,69 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
+
+        [TestMethod]
+        public void PropertyPairsGeneral()
+        {
+            var person = new OtherPerson2(25)
+            {
+                FirstName = "FirstNameValue",
+                LastName = "LastNameValue",
+                MiddleName = "MiddleNameValue",
+                NickName = "NickNameValue",
+                Suffix = "SuffixValue",
+                Title = "TitleValue",
+                NumberOfKids = 3
+            };
+
+            var testing = SetupPropertiesTarget();
+
+            var pairs = testing.Pairs(person);
+
+            Assert.IsTrue(pairs.Any(a => a.Name == "FirstName" && ((string) a.Value) == "FirstNameValue"));
+            Assert.IsTrue(pairs.Any(a => a.Name == "LastName" && ((string)a.Value) == "LastNameValue"));
+            Assert.IsTrue(pairs.Any(a => a.Name == "MiddleName" && ((string)a.Value) == "MiddleNameValue"));
+            Assert.IsTrue(pairs.Any(a => a.Name == "NickName" && ((string)a.Value) == "NickNameValue"));
+            Assert.IsTrue(pairs.Any(a => a.Name == "Suffix" && ((string)a.Value) == "SuffixValue"));
+            Assert.IsTrue(pairs.Any(a => a.Name == "Title" && ((string)a.Value) == "TitleValue"));
+            Assert.IsTrue(pairs.Any(a => a.Name == "NumberOfKids" && ((int)a.Value) == 3));
+            Assert.IsTrue(pairs.Any(a => a.Name == "Age" && ((int)a.Value) == 25));
+
+        }
+
+
+        [TestMethod]
+        public void PropertyPairsGeneric()
+        {
+            var person = new OtherPerson2(25)
+            {
+                FirstName = "FirstNameValue",
+                LastName = "LastNameValue",
+                MiddleName = "MiddleNameValue",
+                NickName = "NickNameValue",
+                Suffix = "SuffixValue",
+                Title = "TitleValue",
+                NumberOfKids = 3
+            };
+
+            var testing = SetupPropertiesTarget();
+
+            var pairs = testing.Pairs<string>(person);
+
+            Assert.IsTrue(pairs.Any(a => a.Name == "FirstName" && a.Value == "FirstNameValue"));
+            Assert.IsTrue(pairs.Any(a => a.Name == "LastName" && a.Value == "LastNameValue"));
+            Assert.IsTrue(pairs.Any(a => a.Name == "MiddleName" && a.Value == "MiddleNameValue"));
+            Assert.IsTrue(pairs.Any(a => a.Name == "NickName" && a.Value == "NickNameValue"));
+            Assert.IsTrue(pairs.Any(a => a.Name == "Suffix" && a.Value == "SuffixValue"));
+            Assert.IsTrue(pairs.Any(a => a.Name == "Title" && a.Value == "TitleValue"));
+
+            var pairs2 = testing.Pairs<int>(person);
+
+            Assert.IsTrue(pairs2.Any(a => a.Name == "NumberOfKids" && a.Value == 3));
+            Assert.IsTrue(pairs2.Any(a => a.Name == "Age" && a.Value == 25));
+
+        }
+
         [TestMethod]
         public void PropertyForeachGeneric()
         {

@@ -178,20 +178,21 @@ namespace Underscore.Object.Reflection
 
         public void Each<T>(object target, Action<T, string, Action<T>> iter, BindingFlags flags)
         {
-            if (target != null)
-                foreach (var pr in Enumerate(target.GetType()).Where(i => i.PropertyType == typeof(T)))
-                {
-                    var pr1 = pr;
-                    iter(
-                        (T)pr.GetValue(target),
-                        pr.Name,
-                        pr.GetSetMethod() == null || !pr.CanWrite ?
-                            null :
-                            new Action<T>(
-                                (o) => pr1.SetValue(target, o)
-                                )
-                        );
-                }
+            if (target == null) return;
+
+            foreach (var pr in Enumerate(target.GetType()).Where(i => i.PropertyType == typeof(T)))
+            {
+                var pr1 = pr;
+                iter(
+                    (T)pr.GetValue(target),
+                    pr.Name,
+                    pr.GetSetMethod() == null || !pr.CanWrite ?
+                        null :
+                        new Action<T>(
+                            (o) => pr1.SetValue(target, o)
+                            )
+                    );
+            }
         }
 
         /// <summary>
@@ -540,6 +541,26 @@ namespace Underscore.Object.Reflection
         public PropertyInfo Find( object target, string name )
         {
             return GetProperty( target, name, true );
+        }
+
+        public IEnumerable<MemberPair<object>> Pairs(object target)
+        {
+            return All(target).Select(a => new MemberPair<object> {Name = a.Name, Value = a.GetValue(target)});
+        }
+
+        public IEnumerable<MemberPair<object>> Pairs(object target, BindingFlags flags)
+        {
+            return All(target,flags).Select(a => new MemberPair<object> { Name = a.Name, Value = a.GetValue(target) });
+        }
+
+        public IEnumerable<MemberPair<TPropertyValue>> Pairs<TPropertyValue>(object target)
+        {
+            return OfType(target,typeof(TPropertyValue)).Select(a => new MemberPair<TPropertyValue> { Name = a.Name, Value = (TPropertyValue)a.GetValue(target) });
+        }
+
+        public IEnumerable<MemberPair<TPropertyValue>> Pairs<TPropertyValue>(object target, BindingFlags flags)
+        {
+            return OfType(target, typeof(TPropertyValue)).Select(a => new MemberPair<TPropertyValue> { Name = a.Name, Value = (TPropertyValue)a.GetValue(target) });
         }
     }
 }
