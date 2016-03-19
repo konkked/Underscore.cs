@@ -8,44 +8,17 @@ namespace Underscore.Object.Reflection
 {
     public class PropertyComponent : IPropertyComponent
     {
-        private readonly Func<Type, IEnumerable<PropertyInfo>> _getValidProperties;
-        private readonly Func<Type,Type, BindingFlags,IEnumerable<PropertyInfo>> _propertiesByType;
-        private readonly Func<Type, BindingFlags, IEnumerable<PropertyInfo>> _getValidPropertiesWithBindingFlags;
-        private readonly Func<Type, string, BindingFlags,PropertyInfo> _getProperty; 
         private const BindingFlags defaultFlags = BindingFlags.Public | BindingFlags.Instance ;
-
-        public PropertyComponent( ICacheComponent cacher )
-        {
-
-
-
-            var tmpValidProps = _getValidPropertiesWithBindingFlags = (
-                (t, f) => t.GetProperties(f).Where(a => a.GetGetMethod() != null
-                    && a.GetIndexParameters().FirstOrDefault() == null
-                ));
-
-            _getValidPropertiesWithBindingFlags = cacher.Memoize(tmpValidProps);
-            _getValidProperties = t => _getValidPropertiesWithBindingFlags(t, defaultFlags);
-            _propertiesByType =
-                (tme, tprop, flags) =>
-                    _getValidPropertiesWithBindingFlags(tme, flags).Where(a => a.PropertyType == tprop);
-
-            var tmpProp = _getProperty = (t, n, bf) => t.GetProperty(n,bf);
-
-            _getProperty = cacher.Memoize(tmpProp);
-
-
-        }
 
 
         private IEnumerable<PropertyInfo> Enumerate(Type type, BindingFlags flags)
         {
-            return _getValidPropertiesWithBindingFlags(type, flags);
+            return type.GetProperties(flags);// _getValidPropertiesWithBindingFlags(type, flags);
         }
 
         private IEnumerable<PropertyInfo> Enumerate( Type target )
         {
-            return _getValidProperties( target );
+            return target.GetProperties(defaultFlags);// _getValidProperties( target );
         }
 
         /// <summary>
@@ -205,7 +178,7 @@ namespace Underscore.Object.Reflection
 
         public IEnumerable<PropertyInfo> OfType(object target, Type type, BindingFlags flags)
         {
-            return _propertiesByType(target.GetType(), type, flags);
+            return target.GetType().GetProperties(flags).Where(a => a.PropertyType == type);
         }
 
         public IEnumerable<object> Values(object target)
@@ -252,8 +225,7 @@ namespace Underscore.Object.Reflection
 
         private PropertyInfo PropertyCaseSensitive(object target, string name, BindingFlags flags = defaultFlags)
         {
-
-            return _getProperty(target.GetType(), name,flags);
+            return target.GetType().GetProperty(name, flags); 
         }
 
 

@@ -7,13 +7,26 @@ namespace Underscore.Utility
     public class MathComponent : IMathComponent
     {
         private HashSet<string> _sharedUuidChecker;
-        private Random _random;
+        private static readonly object _randomLock = new object();
+        private static readonly Random _baseRandom = new Random();
+        [ThreadStatic] private static Random _threadInstance;
 
+        private Random InternalRandom
+        {
+            get
+            {
+                if (_threadInstance == null)
+                    lock (_randomLock)
+                        _threadInstance = new Random(_baseRandom.Next());
+
+                return _threadInstance;
+                
+            }
+        }
 
         public MathComponent( ) 
         {
             _sharedUuidChecker = new HashSet<string>( );
-            _random = new Random( );
         }
 
         private bool InternalIsUnique( string uuid )
@@ -28,7 +41,7 @@ namespace Underscore.Utility
         /// <returns></returns>
         public string UniqueId( string prefix )
         {
-            string retv = null;
+            string retv;
 
             do
             {
@@ -56,7 +69,7 @@ namespace Underscore.Utility
         /// <returns>A random number between <paramref name="min"/> and <paramref name="max"/></returns>
         public int Random( int min, int max )
         {
-            return _random.Next( min, max );
+            return InternalRandom.Next( min, max );
         }
 
         /// <summary>
@@ -66,7 +79,7 @@ namespace Underscore.Utility
         /// <returns>a random number</returns>
         public int Random( int max )
         {
-            return _random.Next( max );
+            return InternalRandom.Next( max );
         }
 
         /// <summary>
@@ -75,7 +88,7 @@ namespace Underscore.Utility
         /// <returns>a random number</returns>
         public int Random( )
         {
-            return _random.Next( );
+            return InternalRandom.Next( );
         }
 
         private const int _absValueIntMask = ( sizeof( int ) * 8 ) - 1;

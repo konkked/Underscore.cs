@@ -164,7 +164,7 @@ namespace Underscore.List
                 yield return list[i%list.Count];
         }
 
-        public IEnumerable<T> Infinite<T>(IList<T> list)
+        public IEnumerable<T> Cycle<T>(IList<T> list)
         {
             for(int i=0;;i++)
             {

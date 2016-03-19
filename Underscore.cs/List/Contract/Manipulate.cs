@@ -43,6 +43,6 @@ namespace Underscore.List
 
         IEnumerable<T> Extend<T>(IList<T> list, int size);
 
-        IEnumerable<T> Infinite<T>(IList<T> list);
+        IEnumerable<T> Cycle<T>(IList<T> list);
     }
 }

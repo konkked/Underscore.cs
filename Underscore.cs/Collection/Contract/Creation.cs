@@ -14,6 +14,6 @@ namespace Underscore.Collection
         IEnumerable<T> Extend<T>(IEnumerable<T> collection, int length);
 
 
-        IEnumerable<T> Infinite<T>(IEnumerable<T> collection);
+        IEnumerable<T> Cycle<T>(IEnumerable<T> collection);
     }
 }

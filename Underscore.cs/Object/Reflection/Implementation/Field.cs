@@ -13,7 +13,6 @@ namespace Underscore.Object.Reflection
         public FieldComponent(Function.ICacheComponent cacher)
         {
             _fields = new Members<FieldInfo>( 
-                cacher, 
                 null, 
                 BindingFlags.Public | BindingFlags.Instance
             );

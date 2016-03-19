@@ -32,9 +32,9 @@ namespace Underscore.Module
             return _creator.Extend(collection, length);
         }
 
-        public IEnumerable<T> Infinite<T>(IEnumerable<T> collection)
+        public IEnumerable<T> Cycle<T>(IEnumerable<T> collection)
         {
-            return _creator.Infinite(collection);
+            return _creator.Cycle(collection);
         }
 
 

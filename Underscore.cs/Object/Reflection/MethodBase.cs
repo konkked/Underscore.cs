@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Underscore.Function;
 using Underscore.Utility;
 
 namespace Underscore.Object.Reflection
@@ -10,6 +11,25 @@ namespace Underscore.Object.Reflection
         where T: MethodBase
     {
 
+
+        protected IPropertyComponent _properties;
+        protected Members<T> _collection;
+        protected IFunctionComponent _util;
+
+        protected abstract bool IsSpecialCase(string name);
+        protected abstract IEnumerable<T> FilterSpecialCase(string name, object value, IEnumerable<T> current);
+
+        private readonly Func<Type, object, IEnumerable<T>> _queryStore;
+        private readonly Func<Type, object, BindingFlags, IEnumerable<T>> _flaggedQueryStore;
+
+        protected MethodsBaseComponent(ICacheComponent cacher,IPropertyComponent properties, Members<T> collection)
+        {
+            _properties = properties;
+            _collection = collection;
+            _queryStore = cacher.Memoize<Type, object, IEnumerable<T>>((o, a) => Query(this, o, a));
+            _flaggedQueryStore = cacher.Memoize<Type, object, BindingFlags, IEnumerable<T>>((o, a, f) => Query(this, o, a, f));
+
+        }
 
         private static IEnumerable<T> Query(MethodsBaseComponent<T> me, Type target, object query, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
         {
@@ -112,24 +132,7 @@ namespace Underscore.Object.Reflection
 
 
 
-        protected IPropertyComponent _properties;
-        protected Members<T> _collection;
-        protected IFunctionComponent _util;
 
-        protected abstract bool IsSpecialCase( string name );
-        protected abstract IEnumerable<T> FilterSpecialCase( string name, object value, IEnumerable<T> current );
-
-        private readonly Func<Type, object, IEnumerable<T>> _queryStore;
-        private readonly Func<Type, object, BindingFlags, IEnumerable<T>> _flaggedQueryStore;
-
-        protected MethodsBaseComponent(Function.ICacheComponent cacher, IPropertyComponent properties , Members<T> collection )
-        {
-            _properties = properties;
-            _collection = collection;
-            _queryStore = cacher.Memoize<Type, object, IEnumerable<T>>((o, a) => Query(this, o, a));
-            _flaggedQueryStore = cacher.Memoize<Type, object, BindingFlags, IEnumerable<T>>((o, a,f) => Query(this, o, a,f));
-
-        }
 
 
         /// <summary>

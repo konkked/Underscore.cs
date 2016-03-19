@@ -123,7 +123,7 @@ namespace Underscore.Test.Object.Reflection
         private static void DoFunctionalConstructorTest<T>(T instance, Func<ConstructorInfo, bool> filter, object[] paramQueryArgs,BindingFlags flags)
         {
             var cacheComponent = new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
-            var propComponent = new PropertyComponent(cacheComponent);
+            var propComponent = new PropertyComponent();
             var ctorComponent = new ConstructorComponent(cacheComponent, propComponent);
 
 
@@ -185,7 +185,7 @@ namespace Underscore.Test.Object.Reflection
         {
 
             var cacheComponent = new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()); 
-            var propComponent = new PropertyComponent(cacheComponent);
+            var propComponent = new PropertyComponent();
             var ctorComponent = new ConstructorComponent(cacheComponent, propComponent);
 
             //get the ctor for string builder
@@ -231,7 +231,7 @@ namespace Underscore.Test.Object.Reflection
         private static IConstructorComponent CreateTestTarget()
         {
             var cacher = new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
-            var props = new PropertyComponent(cacher);
+            var props = new PropertyComponent();
 
             return new ConstructorComponent(cacher, props);
         }

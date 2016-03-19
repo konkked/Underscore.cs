@@ -11,7 +11,7 @@ namespace Underscore.Object.Reflection
     public class ConstructorComponent: MethodsBaseComponent<ConstructorInfo>, IConstructorComponent
     {
         public ConstructorComponent(ICacheComponent cacher, IPropertyComponent properties)
-            : base(cacher, properties, new Members<ConstructorInfo>(cacher, null, BindingFlags.Instance | BindingFlags.Public))
+            : base(cacher, properties, new Members<ConstructorInfo>( null, BindingFlags.Instance | BindingFlags.Public))
         {
         }
 

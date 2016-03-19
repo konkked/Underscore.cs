@@ -39,7 +39,7 @@ namespace Underscore.Collection
             }
         }
 
-        public IEnumerable<T> Infinite<T>(IEnumerable<T> collection)
+        public IEnumerable<T> Cycle<T>(IEnumerable<T> collection)
         {
             using (var enmr = collection.GetEnumerator())
             {

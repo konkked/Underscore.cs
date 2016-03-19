@@ -9,14 +9,12 @@ namespace Underscore.Object.Reflection
     {
 
         private readonly Func<T, bool> _filter;
-        private readonly Func<Type, BindingFlags, IEnumerable<T>> _enumerate;
         private readonly BindingFlags _flags;
 
-        public Members( Function.ICacheComponent util , Func<T,bool> filter, BindingFlags flags )
+        public Members( Func<T,bool> filter, BindingFlags flags )
         {
             _filter = filter ?? (a => true);
             _flags = flags;
-            _enumerate = util.Memoize<Type,BindingFlags,IEnumerable<T>>( Enumerate );
         }
 
         private IEnumerable<T> Enumerate( Type type, BindingFlags flags )
@@ -29,7 +27,7 @@ namespace Underscore.Object.Reflection
         /// </summary>
         public IEnumerable<T> All( Type target, BindingFlags flags ) 
         {
-            return _enumerate( target, flags );
+            return target.GetMembers( flags ).OfType<T>().Where(_filter);
         }
 
         /// <summary>

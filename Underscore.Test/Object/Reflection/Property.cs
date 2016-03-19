@@ -50,7 +50,7 @@ namespace Underscore.Test.Object.Reflection
 
 
 
-            var _prop = new PropertyComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
+            var _prop = new PropertyComponent();
 
             Assert.IsTrue( _prop.Has( person, "FirstName" ) );
             Assert.IsFalse( _prop.Has( person, "DoesNotHave" ) );
@@ -66,7 +66,7 @@ namespace Underscore.Test.Object.Reflection
             var person = new Person( );
 
 
-            var _prop = new PropertyComponent( new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
+            var _prop = new PropertyComponent( );
 
             var expecting = properties.First( a => a.Name == "FirstName" );
             var result = _prop.Find( person, "FirstName" );
@@ -91,7 +91,7 @@ namespace Underscore.Test.Object.Reflection
         public async Task ObjectPropertyGetSet( ) 
         {
 
-            var _prop = new PropertyComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
+            var _prop = new PropertyComponent();
 
             await Util.Tasks.Start( ( ) =>
             {
@@ -302,7 +302,7 @@ namespace Underscore.Test.Object.Reflection
         [TestMethod]
         public void PropertyGetValues()
         {
-            var testing = new PropertyComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
+            var testing = new PropertyComponent();
             var testTarget = new Person
             {
                 FirstName = "FirstName",
@@ -397,7 +397,7 @@ namespace Underscore.Test.Object.Reflection
 
         private static PropertyComponent SetupPropertiesTarget()
         {
-            var testing = new PropertyComponent(new MockUtilFunctionComponent());
+            var testing = new PropertyComponent();
             return testing;
         }
 

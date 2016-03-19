@@ -76,9 +76,9 @@ namespace Underscore.Module
             return _manipulator.Extend(list, size);
         }
 
-        public IEnumerable<T> Infinite<T>(IList<T> list)
+        public IEnumerable<T> Cycle<T>(IList<T> list)
         {
-            return _manipulator.Infinite(list);
+            return _manipulator.Cycle(list);
         }
 
         public IList<T> Slice<T>( IList<T> list, int start, int end )

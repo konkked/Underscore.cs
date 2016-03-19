@@ -17,7 +17,7 @@ namespace Underscore.Test.Module
             {
                 var cacher = new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
 
-                var property = new PropertyComponent( cacher );
+                var property = new PropertyComponent( );
                 var methods = new MethodComponent( cacher, property);
                 var field = new FieldComponent( cacher );
                 var ctor = new ConstructorComponent(cacher, property);

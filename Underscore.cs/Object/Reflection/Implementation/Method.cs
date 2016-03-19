@@ -21,7 +21,6 @@ namespace Underscore.Object.Reflection
         public MethodComponent( Function.ICacheComponent cacher , IPropertyComponent property )
             : base(cacher, property,
                 new Members<MethodInfo>(
-                    cacher,
                     a=>!a.IsConstructor && !a.IsSpecialName , 
                     BindingFlags.DeclaredOnly |BindingFlags.Public | BindingFlags.Instance 
                 )
