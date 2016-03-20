@@ -31,7 +31,7 @@ namespace Underscore.Test.Collection
         }
 
         [TestMethod]
-        public void Invoke()
+        public void CollectionInvoke()
         {
             var testingItems = new[] {new TestObj(), new TestObj(), new TestObj(), new TestObj()};
 
