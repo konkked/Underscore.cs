@@ -17,12 +17,11 @@ namespace Underscore.Object.Reflection
             s_specialRules = new HashSet<string> {"return"};
         }
 
-
         public MethodComponent( Function.ICacheComponent cacher , IPropertyComponent property )
             : base(cacher, property,
                 new Members<MethodInfo>(
                     a=>!a.IsConstructor && !a.IsSpecialName , 
-                    BindingFlags.DeclaredOnly |BindingFlags.Public | BindingFlags.Instance 
+                    BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance 
                 )
             )
         {
@@ -275,6 +274,142 @@ namespace Underscore.Object.Reflection
             return base.Query(target, query, flags).Where(a => a.Name == name);
         }
 
+        public object Invoke(object target, string name, BindingFlags flags)
+        {
+            var method = Find(target,name,new {}, flags);
+
+            if (method != null)
+                return method.Invoke(target, null);
+
+            return null;
+        }
+
+        public object Invoke(object target, string name)
+        {
+            var method = Find(target, name, new { });
+
+            if (method != null)
+                return method.Invoke(target, null);
+
+            return null;
+        }
+
+        public T Invoke<T>(object target, string name, BindingFlags flags)
+        {
+            var method = Query(target, new { }, name, flags).FirstOrDefault(a=>a.ReturnType == typeof(T));
+
+            if (method != null)
+                return (T)method.Invoke(target, null);
+
+            return default(T);
+        }
+
+        public T Invoke<T>(object target, string name)
+        {
+            var method = Query(target, new { }, name).FirstOrDefault(a => a.ReturnType == typeof(T));
+
+            if (method != null)
+                return (T)method.Invoke(target, null);
+
+            return default(T);
+        }
+
+        public object Invoke(object target, string name, BindingFlags flags, params object[] arguments)
+        {
+            var typeArrayPassing = arguments.Select(a => a != null ? a.GetType() : null).ToArray();
+
+            var method = Find(target, name, typeArrayPassing, flags);
+
+            if (method != null)
+                return method.Invoke(target, arguments);
+
+            return null;
+        }
+
+        public object Invoke(object target, string name, params object[] arguments)
+        {
+            var typeArrayPassing = arguments.Select(a => a != null ? a.GetType() : null).ToArray();
+
+            var method = Find(target, name, typeArrayPassing);
+
+            if (method != null)
+                return method.Invoke(target, arguments);
+
+            return null;
+        }
+        
+
+        public T Invoke<T>(object target, string name, BindingFlags flags, params object[] arguments)
+        {
+            var typeArrayPassing = arguments.Select(a => a != null ? a.GetType() : null).ToArray();
+
+            var method = Query(target, typeArrayPassing, name, flags).FirstOrDefault(a => a.ReturnType == typeof(T));
+
+            if (method != null)
+                return (T)method.Invoke(target, arguments);
+
+            return default(T);
+        }
+
+        public T Invoke<T>(object target, string name, params object[] arguments)
+        {
+            var typeArrayPassing = arguments.Select(a => a != null ? a.GetType() : null).ToArray();
+
+            var method = Query(target, typeArrayPassing, name).FirstOrDefault(a => a.ReturnType == typeof(T));
+
+            if (method != null)
+                return (T)method.Invoke(target, arguments);
+
+            return default(T);
+        }
+
+        public IEnumerable<object> InvokeForAll(object target, string name, BindingFlags flags, object[][] argumentSets)
+        {
+            return InvokeForAll(target, name, flags, argumentSets, false);
+        }
+
+        public IEnumerable<object> InvokeForAll(object target, string name, object[][] argumentSets)
+        {
+            return InvokeForAll(target, name,argumentSets, false);
+        }
+
+        public IEnumerable<T> InvokeForAll<T>(object target, string name, BindingFlags flags, object[][] argumentSets)
+        {
+            return InvokeForAll<T>(target, name, flags, argumentSets, false);
+        }
+
+        public IEnumerable<T> InvokeForAll<T>(object target, string name, object[][] argumentSets)
+        {
+            return InvokeForAll<T>(target, name, argumentSets, false);
+        }
+
+        public IEnumerable<object> InvokeForAll(object target, string name, BindingFlags flags, object[][] argumentSets, bool greedy)
+        {
+            var returning =  argumentSets.Select(argumentSet => Invoke(target, name, flags, argumentSet));
+
+            return greedy ? returning.ToList() : returning;
+        }
+
+        public IEnumerable<object> InvokeForAll(object target, string name, object[][] argumentSets, bool greedy)
+        {
+            var returning = argumentSets.Select(argumentSet => Invoke(target, name, argumentSet));
+
+            return greedy ? returning.ToList() : returning;
+        }
+
+        public IEnumerable<T> InvokeForAll<T>(object target, string name, BindingFlags flags, object[][] argumentSets, bool greedy)
+        {
+            var returning = argumentSets.Select(argumentSet => Invoke<T>(target, name, flags, argumentSet));
+
+            return greedy ? returning.ToList() : returning;
+        }
+
+        public IEnumerable<T> InvokeForAll<T>(object target, string name, object[][] argumentSets, bool greedy)
+        {
+            var returning = argumentSets.Select(argumentSet => Invoke<T>(target, name, argumentSet));
+
+            return greedy ? returning.ToList() : returning;
+        }
 
         public MethodInfo Find(Type target, object query)
         {

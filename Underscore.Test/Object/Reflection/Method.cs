@@ -17,6 +17,348 @@ namespace Underscore.Test.Object.Reflection
     public class Method
     {
 
+        public class MethodInvokeTestTargetObject
+        {
+
+
+            public bool InvokeWithParametersAndReturnValueWasCalled { get; private set; }
+            public string InvokeWithParametersAndReturnValueParameter1 { get; private set; }
+            public string InvokeWithParametersAndReturnValueParameter2 { get; private set; }
+            public List<string> InvokeWithParameterWithReturnValueParameter1History { get; } = new List<string>();
+            public List<string> InvokeWithParameterWithReturnValueParameter2History { get; } = new List<string>();
+
+            public string InvokeWithParametersAndReturnValue(string parameter1, string parameter2)
+            {
+                InvokeWithParametersAndReturnValueParameter1 = parameter1;
+                InvokeWithParameterWithReturnValueParameter1History.Add(parameter1);
+                InvokeWithParametersAndReturnValueParameter2 = parameter2;
+                InvokeWithParameterWithReturnValueParameter2History.Add(parameter2);
+                InvokeWithParametersAndReturnValueWasCalled = true;
+
+                return parameter1 + " " + parameter2;
+            }
+
+            public bool InvokeWithParameterWithoutReturnValueWasCalled { get; private set; }
+            public string InvokeWithParameterWithoutReturnValueParameter1 { get; private set; }
+            public string InvokeWithParameterWithoutReturnValueParameter2 { get; private set; }
+            public List<string> InvokeWithParameterWithoutReturnValueParameter1History { get; } = new List<string>();
+            public List<string> InvokeWithParameterWithoutReturnValueParameter2History { get; } = new List<string>();
+
+            public void InvokeWithParameterWithoutReturnValue(string parameter1, string parameter2)
+            {
+                InvokeWithParameterWithoutReturnValueWasCalled = true;
+                InvokeWithParameterWithoutReturnValueParameter1 = parameter1;
+                InvokeWithParameterWithoutReturnValueParameter1History.Add(parameter1);
+                InvokeWithParameterWithoutReturnValueParameter2 = parameter2;
+                InvokeWithParameterWithoutReturnValueParameter2History.Add(parameter2);
+            }
+
+            public bool InvokeWithoutParameterAndWithReturnValueWasCalled { get; private set; }
+
+            private int _invokeWithoutParameterAndWithReturnValueCounter = 1;
+            public string InvokeWithoutParameterAndWithReturnValue()
+            {
+                InvokeWithoutParameterAndWithReturnValueWasCalled = true;
+                return ( _invokeWithoutParameterAndWithReturnValueCounter++ ).ToString( );
+            }
+
+            public bool InvokeWithoutParameterAndWithoutReturnValueWasCalled { get; private set; }
+            
+            public void InvokeWithoutParameterAndWithoutReturnValue()
+            {
+                InvokeWithoutParameterAndWithoutReturnValueWasCalled = true;
+            }
+        }
+
+        [TestMethod]
+        public void MethodInvokeWithoutParameterAndWithoutReturnValue()
+        {
+            var testingTarget = new MethodInvokeTestTargetObject();
+            var testing = SetupMethodsComponent();
+
+            var result = testing.Invoke(testingTarget, "InvokeWithoutParameterAndWithoutReturnValue");
+
+            Assert.IsTrue(testingTarget.InvokeWithoutParameterAndWithoutReturnValueWasCalled);
+            // when the method is a void just returns null;
+            Assert.IsNull(result);
+        }
+
+
+        [TestMethod]
+        public void MethodInvokeWithoutParameterWithReturnValue()
+        {
+            var testingTarget = new MethodInvokeTestTargetObject();
+            var testing = SetupMethodsComponent();
+
+            string result  = (string)testing.Invoke(testingTarget, "InvokeWithoutParameterAndWithReturnValue");
+
+            Assert.IsTrue(testingTarget.InvokeWithoutParameterAndWithReturnValueWasCalled);
+            Assert.AreEqual("1",result);
+
+            result = (string)testing.Invoke(testingTarget, "InvokeWithoutParameterAndWithReturnValue");
+            Assert.AreEqual("2", result);
+
+        }
+
+        [TestMethod]
+        public void MethodInvokeWithoutParameterWithReturnValueGeneric()
+        {
+            var testingTarget = new MethodInvokeTestTargetObject();
+            var testing = SetupMethodsComponent();
+
+            string result = testing.Invoke<string>(testingTarget, "InvokeWithoutParameterAndWithReturnValue");
+
+            Assert.IsTrue(testingTarget.InvokeWithoutParameterAndWithReturnValueWasCalled);
+            Assert.AreEqual("1", result);
+
+            result = testing.Invoke<string>(testingTarget, "InvokeWithoutParameterAndWithReturnValue");
+            Assert.AreEqual("2", result);
+        }
+
+
+        [TestMethod]
+        public void MethodInvokeWithParameterWithoutReturnValue()
+        {
+            var testingTarget = new MethodInvokeTestTargetObject();
+            var testing = SetupMethodsComponent();
+
+            object result = testing.Invoke(testingTarget, "InvokeWithParameterWithoutReturnValue","a","b");
+
+            Assert.IsTrue(testingTarget.InvokeWithParameterWithoutReturnValueWasCalled);
+            Assert.IsNull(result);
+            Assert.AreEqual("a",testingTarget.InvokeWithParameterWithoutReturnValueParameter1);
+            Assert.AreEqual("b", testingTarget.InvokeWithParameterWithoutReturnValueParameter2);
+        }
+
+        [TestMethod]
+        public void MethodInvokeWithParameterWithReturnValueNonGeneric()
+        {
+            var testingTarget = new MethodInvokeTestTargetObject();
+            var testing = SetupMethodsComponent();
+
+            string result = (string)testing.Invoke(testingTarget, "InvokeWithParametersAndReturnValue", "a", "b");
+
+            Assert.IsTrue(testingTarget.InvokeWithParametersAndReturnValueWasCalled);
+            Assert.AreEqual("a b" , result);
+            Assert.AreEqual("a", testingTarget.InvokeWithParametersAndReturnValueParameter1);
+            Assert.AreEqual("b", testingTarget.InvokeWithParametersAndReturnValueParameter2);
+        }
+
+        [TestMethod]
+        public void MethodInvokeWithParameterWithReturnValueGeneric()
+        {
+            var testingTarget = new MethodInvokeTestTargetObject();
+            var testing = SetupMethodsComponent();
+
+            string result = testing.Invoke<string>(testingTarget, "InvokeWithParametersAndReturnValue", "a", "b");
+
+            Assert.IsTrue(testingTarget.InvokeWithParametersAndReturnValueWasCalled);
+            Assert.AreEqual("a b", result);
+            Assert.AreEqual("a", testingTarget.InvokeWithParametersAndReturnValueParameter1);
+            Assert.AreEqual("b", testingTarget.InvokeWithParametersAndReturnValueParameter2);
+        }
+
+
+
+        [TestMethod]
+        public void MethodInvokeForAllWithParameterWithoutReturnValueLazy()
+        {
+            var testingTarget = new MethodInvokeTestTargetObject();
+            var testing = SetupMethodsComponent();
+
+            var result = testing.InvokeForAll(testingTarget, "InvokeWithParameterWithoutReturnValue",
+                new[] {new object[] {"a", "b"}, new object[] {"c", "d"}, new object[] {"e", "f"}});
+
+            //At first is false because no methods have actually been called yet
+            Assert.IsFalse(testingTarget.InvokeWithParameterWithoutReturnValueWasCalled);
+
+            foreach (var value in result)
+                Assert.IsNull(value);
+
+            //Now will be true
+            Assert.IsTrue(testingTarget.InvokeWithParameterWithoutReturnValueWasCalled);
+
+
+            Assert.AreEqual("a", testingTarget.InvokeWithParameterWithoutReturnValueParameter1History[0]);
+            Assert.AreEqual("b", testingTarget.InvokeWithParameterWithoutReturnValueParameter2History[0]);
+
+
+            Assert.AreEqual("c", testingTarget.InvokeWithParameterWithoutReturnValueParameter1History[1]);
+            Assert.AreEqual("d", testingTarget.InvokeWithParameterWithoutReturnValueParameter2History[1]);
+
+            Assert.AreEqual("e", testingTarget.InvokeWithParameterWithoutReturnValueParameter1History[2]);
+            Assert.AreEqual("f", testingTarget.InvokeWithParameterWithoutReturnValueParameter2History[2]);
+
+            Assert.AreEqual(3,testingTarget.InvokeWithParameterWithoutReturnValueParameter1History.Count);
+            Assert.AreEqual(3, testingTarget.InvokeWithParameterWithoutReturnValueParameter2History.Count);
+
+        }
+
+
+        [TestMethod]
+        public void MethodInvokeForAllWithParameterWithoutReturnValueGreedy()
+        {
+            var testingTarget = new MethodInvokeTestTargetObject();
+            var testing = SetupMethodsComponent();
+
+            var result = testing.InvokeForAll(testingTarget, "InvokeWithParameterWithoutReturnValue",
+                new[] { new object[] { "a", "b" }, new object[] { "c", "d" }, new object[] { "e", "f" } },true);
+
+
+            //Should be invoked right away, so in this test case the first pull will be true
+            Assert.IsTrue(testingTarget.InvokeWithParameterWithoutReturnValueWasCalled);
+
+            foreach (var value in result)
+                Assert.IsNull(value);
+
+            Assert.AreEqual("a", testingTarget.InvokeWithParameterWithoutReturnValueParameter1History[0]);
+            Assert.AreEqual("b", testingTarget.InvokeWithParameterWithoutReturnValueParameter2History[0]);
+
+
+            Assert.AreEqual("c", testingTarget.InvokeWithParameterWithoutReturnValueParameter1History[1]);
+            Assert.AreEqual("d", testingTarget.InvokeWithParameterWithoutReturnValueParameter2History[1]);
+
+            Assert.AreEqual("e", testingTarget.InvokeWithParameterWithoutReturnValueParameter1History[2]);
+            Assert.AreEqual("f", testingTarget.InvokeWithParameterWithoutReturnValueParameter2History[2]);
+
+            Assert.AreEqual(3, testingTarget.InvokeWithParameterWithoutReturnValueParameter1History.Count);
+            Assert.AreEqual(3, testingTarget.InvokeWithParameterWithoutReturnValueParameter2History.Count);
+
+        }
+
+        [TestMethod]
+        public void MethodInvokeForAllWithParameterWithReturnValueLazy()
+        {
+            var testingTarget = new MethodInvokeTestTargetObject();
+            var testing = SetupMethodsComponent();
+
+            var tresult =
+                testing.InvokeForAll(testingTarget, "InvokeWithParametersAndReturnValue",
+                    new[] {new object[] {"a", "b"}, new object[] {"c", "d"}, new object[] {"e", "f"}});
+
+            Assert.IsFalse(testingTarget.InvokeWithParametersAndReturnValueWasCalled);
+            var result = tresult.OfType<string>().ToArray();
+            Assert.IsTrue(testingTarget.InvokeWithParametersAndReturnValueWasCalled);
+
+            Assert.AreEqual("a b", result[0]);
+            Assert.AreEqual("c d", result[1]);
+            Assert.AreEqual("e f", result[2]);
+
+            Assert.AreEqual("a", testingTarget.InvokeWithParameterWithReturnValueParameter1History[0]);
+            Assert.AreEqual("b", testingTarget.InvokeWithParameterWithReturnValueParameter2History[0]);
+
+
+            Assert.AreEqual("c", testingTarget.InvokeWithParameterWithReturnValueParameter1History[1]);
+            Assert.AreEqual("d", testingTarget.InvokeWithParameterWithReturnValueParameter2History[1]);
+
+            Assert.AreEqual("e", testingTarget.InvokeWithParameterWithReturnValueParameter1History[2]);
+            Assert.AreEqual("f", testingTarget.InvokeWithParameterWithReturnValueParameter2History[2]);
+
+            Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter1History.Count);
+            Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter2History.Count);
+        }
+
+        [TestMethod]
+        public void MethodInvokeForAllWithParameterWithReturnValueGreedy()
+        {
+            var testingTarget = new MethodInvokeTestTargetObject();
+            var testing = SetupMethodsComponent();
+
+            var tresult =
+                testing.InvokeForAll(testingTarget, "InvokeWithParametersAndReturnValue",
+                    new[] { new object[] { "a", "b" }, new object[] { "c", "d" }, new object[] { "e", "f" } },true);
+
+            Assert.IsTrue(testingTarget.InvokeWithParametersAndReturnValueWasCalled);
+            var result = tresult.OfType<string>().ToArray();
+            
+            Assert.AreEqual("a b", result[0]);
+            Assert.AreEqual("c d", result[1]);
+            Assert.AreEqual("e f", result[2]);
+
+            Assert.AreEqual("a", testingTarget.InvokeWithParameterWithReturnValueParameter1History[0]);
+            Assert.AreEqual("b", testingTarget.InvokeWithParameterWithReturnValueParameter2History[0]);
+
+
+            Assert.AreEqual("c", testingTarget.InvokeWithParameterWithReturnValueParameter1History[1]);
+            Assert.AreEqual("d", testingTarget.InvokeWithParameterWithReturnValueParameter2History[1]);
+
+            Assert.AreEqual("e", testingTarget.InvokeWithParameterWithReturnValueParameter1History[2]);
+            Assert.AreEqual("f", testingTarget.InvokeWithParameterWithReturnValueParameter2History[2]);
+
+            Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter1History.Count);
+            Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter2History.Count);
+        }
+
+
+
+        [TestMethod]
+        public void MethodInvokeForAllWithParameterWithReturnValueGenericLazy()
+        {
+            var testingTarget = new MethodInvokeTestTargetObject();
+            var testing = SetupMethodsComponent();
+
+            var tresult =
+                testing.InvokeForAll<string>(testingTarget, "InvokeWithParametersAndReturnValue",
+                    new[] { new object[] { "a", "b" }, new object[] { "c", "d" }, new object[] { "e", "f" } });
+
+            Assert.IsFalse(testingTarget.InvokeWithParametersAndReturnValueWasCalled);
+
+            var result = tresult.ToArray();
+
+            Assert.IsTrue(testingTarget.InvokeWithParametersAndReturnValueWasCalled);
+
+            Assert.AreEqual("a b", result[0]);
+            Assert.AreEqual("c d", result[1]);
+            Assert.AreEqual("e f", result[2]);
+
+            Assert.AreEqual("a", testingTarget.InvokeWithParameterWithReturnValueParameter1History[0]);
+            Assert.AreEqual("b", testingTarget.InvokeWithParameterWithReturnValueParameter2History[0]);
+
+
+            Assert.AreEqual("c", testingTarget.InvokeWithParameterWithReturnValueParameter1History[1]);
+            Assert.AreEqual("d", testingTarget.InvokeWithParameterWithReturnValueParameter2History[1]);
+
+            Assert.AreEqual("e", testingTarget.InvokeWithParameterWithReturnValueParameter1History[2]);
+            Assert.AreEqual("f", testingTarget.InvokeWithParameterWithReturnValueParameter2History[2]);
+
+            Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter1History.Count);
+            Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter2History.Count);
+        }
+
+
+        [TestMethod]
+        public void MethodInvokeForAllWithParameterWithReturnGenericGreedy()
+        {
+            var testingTarget = new MethodInvokeTestTargetObject();
+            var testing = SetupMethodsComponent();
+
+            var tresult =
+                testing.InvokeForAll<string>(testingTarget, "InvokeWithParametersAndReturnValue",
+                    new[] { new object[] { "a", "b" }, new object[] { "c", "d" }, new object[] { "e", "f" } },true);
+
+            Assert.IsTrue(testingTarget.InvokeWithParametersAndReturnValueWasCalled);
+
+            var result = tresult.ToArray();
+
+            Assert.AreEqual("a b", result[0]);
+            Assert.AreEqual("c d", result[1]);
+            Assert.AreEqual("e f", result[2]);
+
+            Assert.AreEqual("a", testingTarget.InvokeWithParameterWithReturnValueParameter1History[0]);
+            Assert.AreEqual("b", testingTarget.InvokeWithParameterWithReturnValueParameter2History[0]);
+
+
+            Assert.AreEqual("c", testingTarget.InvokeWithParameterWithReturnValueParameter1History[1]);
+            Assert.AreEqual("d", testingTarget.InvokeWithParameterWithReturnValueParameter2History[1]);
+
+            Assert.AreEqual("e", testingTarget.InvokeWithParameterWithReturnValueParameter1History[2]);
+            Assert.AreEqual("f", testingTarget.InvokeWithParameterWithReturnValueParameter2History[2]);
+
+            Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter1History.Count);
+            Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter2History.Count);
+        }
+
+
         [TestMethod]
         public void MethodsAll1()
         {

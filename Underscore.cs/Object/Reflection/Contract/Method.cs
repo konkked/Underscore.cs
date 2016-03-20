@@ -346,8 +346,171 @@ namespace Underscore.Object.Reflection
         /// </summary>
         IEnumerable<MethodInfo> Query(Type target, object query, string name, BindingFlags flags);
 
+        /// <summary>
+        /// Invokes method for object if it has one, if it does not then it will do nothing
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="name"></param>
+        /// <param name="flags"></param>
+        /// <returns></returns>
+        object Invoke(object target, string name, BindingFlags flags);
 
 
+
+        /// <summary>
+        /// Invokes method for object if it has one, if it does not then it will do nothing
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        object Invoke(object target, string name);
+
+
+
+        /// <summary>
+        /// Invokes method for object if it has one, if it does not then it will do nothing
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="name"></param>
+        /// <param name="flags"></param>
+        /// <param name="arguments"></param>
+        /// <returns></returns>
+        object Invoke(object target, string name, BindingFlags flags, params object[] arguments);
+
+        /// <summary>
+        /// Invokes method for object if it has one, if it does not then it will do nothing
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="name"></param>
+        /// <param name="arguments"></param>
+        /// <returns></returns>
+        object Invoke(object target, string name,  params object[] arguments);
+
+
+
+        /// <summary>
+        /// Invokes method for object if it has one, if it does not then it will do nothing
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="name"></param>
+        /// <param name="flags"></param>
+        /// <returns></returns>
+        T Invoke<T>(object target, string name, BindingFlags flags);
+
+
+
+        /// <summary>
+        /// Invokes method for object if it has one, if it does not then it will do nothing
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        T Invoke<T>(object target, string name);
+
+
+
+        /// <summary>
+        /// Invokes method for object if it has one, if it does not then it will do nothing
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="name"></param>
+        /// <param name="flags"></param>
+        /// <param name="arguments"></param>
+        /// <returns></returns>
+        T Invoke<T>(object target, string name, BindingFlags flags, params object[] arguments);
+
+        /// <summary>
+        /// Invokes method for object if it has one, if it does not then it will do nothing
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="name"></param>
+        /// <param name="arguments"></param>
+        /// <returns></returns>
+        T Invoke<T>(object target, string name, params object[] arguments);
+
+
+        /// <summary>
+        /// Invokes method for object if it has one, if it does not then it will do nothing
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="name"></param>
+        /// <param name="flags"></param>
+        /// <param name="argumentSets"></param>
+        /// <returns></returns>
+        IEnumerable<object> InvokeForAll(object target, string name, BindingFlags flags, object[][] argumentSets);
+
+
+        /// <summary>
+        /// Invokes method for object if it has one, if it does not then it will do nothing
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="name"></param>
+        /// <param name="argumentSets"></param>
+        /// <returns></returns>
+        IEnumerable<object> InvokeForAll(object target, string name, object[][] argumentSets);
+
+        /// <summary>
+        /// Invokes method for object if it has one, if it does not then it will do nothing
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="name"></param>
+        /// <param name="argumentSets"></param>
+        /// <returns></returns>
+        IEnumerable<T> InvokeForAll<T>(object target, string name, object[][] argumentSets);
+
+        /// <summary>
+        /// Invokes method for object if it has one, if it does not then it will do nothing
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="name"></param>
+        /// <param name="flags"></param>
+        /// <param name="argumentSets"></param>
+        /// <returns></returns>
+        IEnumerable<T> InvokeForAll<T>(object target, string name, BindingFlags flags, object[][] argumentSets);
+
+
+        /// <summary>
+        /// Invokes method for object if it has one, if it does not then it will do nothing
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="name"></param>
+        /// <param name="flags"></param>
+        /// <param name="argumentSets"></param>
+        /// <param name="greedy"></param>
+        /// <returns></returns>
+        IEnumerable<object> InvokeForAll(object target, string name, BindingFlags flags, object[][] argumentSets, bool greedy);
+
+
+        /// <summary>
+        /// Invokes method for object if it has one, if it does not then it will do nothing
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="name"></param>
+        /// <param name="argumentSets"></param>
+        /// <param name="greedy"></param>
+        /// <returns></returns>
+        IEnumerable<object> InvokeForAll(object target, string name, object[][] argumentSets, bool greedy);
+
+        /// <summary>
+        /// Invokes method for object if it has one, if it does not then it will do nothing
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="name"></param>
+        /// <param name="argumentSets"></param>
+        /// <param name="greedy"></param>
+        /// <returns></returns>
+        IEnumerable<T> InvokeForAll<T>(object target, string name, object[][] argumentSets, bool greedy);
+
+        /// <summary>
+        /// Invokes method for object if it has one, if it does not then it will do nothing
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="name"></param>
+        /// <param name="flags"></param>
+        /// <param name="argumentSets"></param>
+        /// <param name="greedy"></param>
+        /// <returns></returns>
+        IEnumerable<T> InvokeForAll<T>(object target, string name, BindingFlags flags, object[][] argumentSets,bool greedy);
 
 
     }

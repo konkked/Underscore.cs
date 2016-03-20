@@ -10,6 +10,7 @@ namespace Underscore.Setup
             kernel.Register<ICreationComponent,CreationComponent>();
             kernel.Register<IPartitionComponent, PartitionComponent>();
             kernel.Register<List.IPartitionComponent,List.PartitionComponent>();
+            kernel.Register<IDelegationComponent,DelegationComponent>();
             kernel.Register<Module.Collection>();
         }
     }

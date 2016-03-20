@@ -41,8 +41,14 @@ namespace Underscore.List
         /// </summary>
         IList<T> Sample<T>( IList<T> list, int size, bool unique );
 
+        /// <summary>
+        /// Creates an enumerable extending the collection by cycling through the items for the extra items being added for the specified length
+        /// </summary>
         IEnumerable<T> Extend<T>(IList<T> list, int size);
 
+        /// <summary>
+        /// Creates a cycle from the list
+        /// </summary>
         IEnumerable<T> Cycle<T>(IList<T> list);
     }
 }

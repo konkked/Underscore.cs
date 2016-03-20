@@ -61,8 +61,10 @@
     <Compile Include="Action\Implementation\Split.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Collection\Contract\Creation.cs" />
+    <Compile Include="Collection\Contract\Delegation.cs" />
     <Compile Include="Collection\Contract\Partition.cs" />
     <Compile Include="Collection\Implementation\Creation.cs" />
+    <Compile Include="Collection\Implementation\Delegation.cs" />
     <Compile Include="Collection\Implementation\Partition.cs" />
     <Compile Include="Function\Contract\Bind.cs" />
     <Compile Include="Function\Contract\Boolean.cs">

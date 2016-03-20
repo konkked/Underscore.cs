@@ -65,6 +65,7 @@
     <Compile Include="BootstrapperTest.cs" />
     <Compile Include="Collection\AggregateTest.cs" />
     <Compile Include="Collection\CreationTest.cs" />
+    <Compile Include="Collection\Delegation.cs" />
     <Compile Include="Collection\PartitionTest.cs" />
     <Compile Include="Function\BindTest.cs" />
     <Compile Include="Function\ComposeTest.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="List\ManipulateTest.cs" />
     <Compile Include="List\PartitionTest.cs" />
     <Compile Include="Module\ActionTest.cs" />
+    <Compile Include="Module\CollectionTest.cs" />
     <Compile Include="Module\FunctionTest.cs" />
     <Compile Include="Module\ListTest.cs" />
     <Compile Include="Module\ObjectTest.cs" />

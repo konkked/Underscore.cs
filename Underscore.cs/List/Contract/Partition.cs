@@ -23,15 +23,19 @@ namespace Underscore.List
         /// Breaks list into two seperate parts
         /// </summary>
         /// <typeparam name="T">Type of items elements in list</typeparam>
-        /// <param name="collection">list to partition</param>
-        /// <param name="on">the index to partition on</param>
+        /// <param name="list">list to partition</param>
+        /// <param name="index">the index to partition on</param>
         /// <returns>a Tuple containing the first partition in the first item, second partition in the second</returns>
         Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IList<T> list, int index );
 
 
         /// <summary>
-        /// Breaks collection into two seperate parts
+        /// Breaks list into two seperate parts
         /// </summary>
+        /// <typeparam name="T">Type of items elements in list</typeparam>
+        /// <param name="list">list to partition</param>
+        /// <param name="on">the predicate to partition on</param>
+        /// <returns>a Tuple containing the first partition in the first item, second partition in the second</returns>
         Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IList<T> list, Func<T, bool> on );
 
         /// <summary>
@@ -48,12 +52,8 @@ namespace Underscore.List
         Tuple<IList<T>, IList<T>> Split<T>( IList<T> list );
 
         /// <summary>
-        /// Returns a 
+        /// Returns an enumerable of all the possible combinations of the passed items
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="list"></param>
-        /// <param name="applying"></param>
-        /// <returns></returns>
         IEnumerable<IEnumerable<T>> Combinations<T>(IList<T> list);
 
 
