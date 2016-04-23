@@ -22,13 +22,13 @@ namespace Underscore.Module
         {
 
             if (creator == null)
-                throw new ArgumentNullException(nameof(creator));
+                throw new ArgumentNullException("creator");
 
             if (partitioner == null)
-                throw new ArgumentNullException(nameof(partitioner));
+                throw new ArgumentNullException("partitioner");
 
             if (delegation == null)
-                throw new ArgumentNullException(nameof(delegation));
+                throw new ArgumentNullException("delegation");
 
             _creator = creator;
             _partitioner = partitioner;

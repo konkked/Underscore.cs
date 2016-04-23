@@ -1,4 +1,5 @@
 ﻿using Underscore.Object;
+using Underscore.Object.Comparison;
 using Underscore.Object.Reflection;
 using Underscore.Setup.Liteioc;
 
@@ -15,7 +16,7 @@ namespace Underscore.Setup
             kernel.Register<IDynamicComponent , DynamicComponent>( );
             kernel.Register<IConstructorComponent, ConstructorComponent>();
             kernel.Register<IAttributeComponent , AttributeComponent>( );
-
+            kernel.Register<IEqualityComponent,EqualityComponent>();
             kernel.Register<Module.Object>();
         }
     }

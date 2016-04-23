@@ -37,29 +37,29 @@ namespace Underscore.Module
             IBooleanComponent boolComponent) 
         {
             if (bind == null)
-                throw new ArgumentNullException(nameof(bind));
+                throw new ArgumentNullException("bind");
 
             if (partial == null)
-                throw new ArgumentNullException(nameof(partial));
+                throw new ArgumentNullException("partial");
 
             if (split == null)
-                throw new ArgumentNullException(nameof(split));
+                throw new ArgumentNullException("split");
 
             if (compose == null)
-                throw new ArgumentNullException(nameof(compose));
+                throw new ArgumentNullException("compose");
 
 
             if (convert == null)
-                throw new ArgumentNullException(nameof(convert));
+                throw new ArgumentNullException("convert");
 
             if (synch == null)
-                throw new ArgumentNullException(nameof(synch));
+                throw new ArgumentNullException("synch");
 
             if (cache == null)
-                throw new ArgumentNullException(nameof(cache));
+                throw new ArgumentNullException("cache");
 
             if (boolComponent == null)
-                throw new ArgumentNullException(nameof(boolComponent));
+                throw new ArgumentNullException("boolComponent");
 
             _bind = bind;
             _partial = partial;

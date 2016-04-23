@@ -83,6 +83,7 @@
     <Compile Include="Module\ListTest.cs" />
     <Compile Include="Module\ObjectTest.cs" />
     <Compile Include="Module\UtilityTest.cs" />
+    <Compile Include="Object\Comparison\EqualityTest.cs" />
     <Compile Include="Object\Reflection\Field.cs" />
     <Compile Include="Object\Reflection\Method.cs" />
     <Compile Include="Object\Reflection\Attribute.cs" />

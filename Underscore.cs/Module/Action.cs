@@ -30,22 +30,22 @@ namespace Underscore.Module
             )
         {
             if(bind == null)
-                throw new ArgumentNullException(nameof(bind));
+                throw new ArgumentNullException("bind");
             
             if (partial == null)
-                throw new ArgumentNullException(nameof(partial));
+                throw new ArgumentNullException("partial");
             
             if (split == null)
-                throw new ArgumentNullException(nameof(split));
+                throw new ArgumentNullException("split");
             
             if (compose == null)
-                throw new ArgumentNullException(nameof(compose));
+                throw new ArgumentNullException("compose");
             
             if (synch == null)
-                throw new ArgumentNullException(nameof(synch));
+                throw new ArgumentNullException("synch");
             
             if (convert == null)
-                throw new ArgumentNullException(nameof(convert));
+                throw new ArgumentNullException("convert");
 
             _bind = bind;
             _partial = partial;

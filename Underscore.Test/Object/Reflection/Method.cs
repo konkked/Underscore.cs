@@ -415,7 +415,7 @@ namespace Underscore.Test.Object.Reflection
                     && !targetMethod.GetParameters().Any()
                 );
 
-                Assert.AreEqual(4, methodInfos.Count());
+                Assert.AreEqual(5, methodInfos.Count());
 
                 //all methods with no params
                 methods = testing.Query(target, new { });
@@ -435,7 +435,7 @@ namespace Underscore.Test.Object.Reflection
                 var singleParamTypeString2 = testing.Query(target, new[] { typeof(string) });
 
             var paramTypeString1 = singleParamTypeString1 as MethodInfo[] ?? singleParamTypeString1.ToArray();
-            Assert.IsTrue(paramTypeString1.Count() == 1);
+            Assert.IsTrue(paramTypeString1.Count() == 2);
                 Assert.IsNotNull(paramTypeString1.FirstOrDefault());
 
                 var targetingSingleParam = paramTypeString1.FirstOrDefault();
@@ -549,6 +549,8 @@ namespace Underscore.Test.Object.Reflection
 
             public void ShouldShowNoReturnValue( string arg1, string arg2 ) { }
             private void ShouldntShowNoReturnValue( string arg, string arg2 ) { }
+
+            public void ReturnAsAParameter(string @return) { }
 
             public string ShouldShowStringReturnValue( ) { return String.Empty; }
             private string ShouldntShowStringReturnValue( ) { return String.Empty; }
@@ -731,184 +733,283 @@ namespace Underscore.Test.Object.Reflection
             mock.Setup( a => a.Query(It.IsAny<object>(), It.Is<object>(b=> b == null || !(b is string && ((string)b).Contains("Shouldnt") ) ) ) )
                 .Returns( forQueryEmpty );
         }
-
+        
 
         [TestMethod]
-        public async Task ObjectMethodFind( ) 
+        public async Task ObjectMethodFind_PrivateMethodsNotShownByDefault()
         {
-            var target = new MethodMethodsTestClass( );
+            var target = new MethodMethodsTestClass();
 
 
             await Util.Tasks.Start(
-                ( ) =>
+                () =>
                 {
-                    var cacher = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
-                    var testing = new MethodComponent(cacher, new PropertyComponent() );
-
-                    var expecting = typeof( MethodMethodsTestClass )
-                        .GetMethods( BindingFlags.Public | BindingFlags.Instance ).First(a => a.GetParameters( ).FirstOrDefault( ) == null);
-
-                    var results =  new[ ]{
-                        testing.Find( target, "ShouldShowNoReturnValue" ),
-                        testing.Find( target, "ShouldShowNoReturnValue", new { } ),
-                        testing.Find( target, "ShouldShowNoReturnValue", new object[ ] { } ),
-                        testing.Find( target, "ShouldShowNoReturnValue", null ) 
-                    };
-
-
-                    var allNotNull = !results.Aggregate( false, ( prev, curr ) => prev || curr == null );
-
-                    Assert.IsTrue( allNotNull, "One of the targeting Find results returned null when expecting corresponding method info" );
-
-
-                    var allEqual = results.Aggregate( expecting , ( prev, curr ) => prev == curr ? curr : null ) != null;
-
-                    Assert.IsTrue( allEqual, "One of the targeting Find results were not equal, all calls to empty find should be eqiv" );
-
-                    results = new[]{
-                        testing.Find( target, "ShouldntShowNoReturnValue" ) ,
-                        testing.Find( target, "ShouldntShowNoReturnValue", new { } ) ,
-                        testing.Find( target, "ShouldntShowNoReturnValue", new object[ ] { } ) , 
-                        testing.Find( target, "ShouldntShowNoReturnValue", null ) 
-                    };
-
-                    var allNull = results.Aggregate( true, ( prev, curr ) => prev && curr == null );
-
-                    Assert.IsTrue( allNull, "One of the invalid calls to Find found a method when expecting all to return null" );
-
-
-                },
-                ( ) =>
-                {
-
-                    var expecting = typeof( MethodMethodsTestClass )
-                        .GetMethods( BindingFlags.Public | BindingFlags.Instance )
-                            .First(a => a.GetParameters().Count() == 1
-                                && a.GetParameters( ).First().ParameterType == typeof(string) 
-                                && a.GetParameters().First().Name == "arg");
-
-                    var cacher = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
+                    var cacher = new CacheComponent(new Underscore.Function.CompactComponent(),
+                        new Underscore.Utility.CompactComponent());
                     var testing = new MethodComponent(cacher, new PropertyComponent());
 
-                    var results = new[]{
-                        testing.Find( target, "ShouldShowNoReturnValue", new { arg = typeof( string ) } ),
-                        testing.Find( target, "ShouldShowNoReturnValue", new[ ] { typeof( string ) } ) ,
-                        testing.Find( target, "ShouldShowNoReturnValue", typeof( string ) ) ,
-                        testing.Find( target, "ShouldShowNoReturnValue", new[ ] { "arg" } ) ,
-                        testing.Find( target, "ShouldShowNoReturnValue", "arg" ) 
+                    var expecting = typeof (MethodMethodsTestClass)
+                        .GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                        .First(a => a.GetParameters().FirstOrDefault() == null);
+
+                    var results = new[]
+                    {
+                        testing.Find(target, "ShouldShowNoReturnValue"),
+                        testing.Find(target, "ShouldShowNoReturnValue", new {}),
+                        testing.Find(target, "ShouldShowNoReturnValue", new object[] {}),
+                        testing.Find(target, "ShouldShowNoReturnValue", null)
                     };
 
-                    var allNotNull = !results.Aggregate( false, ( prev, curr ) => prev || curr == null );
 
-                    Assert.IsTrue( allNotNull, "One of the targeting Find results returned null when expecting corresponding method info" );
+                    var allNotNull = !results.Aggregate(false, (prev, curr) => prev || curr == null);
 
-
-                    var allEqual = results.Aggregate( expecting, ( prev, curr ) => prev == curr ? curr : null ) != null;
-
-                    Assert.IsTrue( allEqual, "One of the targeting Find results were not equal, all calls to empty find should be eqiv" );
+                    Assert.IsTrue(allNotNull,
+                        "One of the targeting Find results returned null when expecting corresponding method info");
 
 
-                    results = new[ ]{
-                       testing.Find( target, "ShouldntShowNoReturnValue", new { arg = typeof( string ) } ),
-                       testing.Find( target, "ShouldntShowNoReturnValue", new[ ] { typeof( string ) } ) ,
-                       testing.Find( target, "ShouldntShowNoReturnValue", typeof( string ) ) ,
-                       testing.Find( target, "ShouldntShowNoReturnValue", new[ ] { "arg" } ),
-                       testing.Find( target, "ShouldntShowNoReturnValue", "arg" )
-                   };
+                    var allEqual = results.Aggregate(expecting, (prev, curr) => prev == curr ? curr : null) != null;
 
-                    var allNull = results.Aggregate( true, ( prev, curr ) => prev && curr == null );
+                    Assert.IsTrue(allEqual,
+                        "One of the targeting Find results were not equal, all calls to empty find should be eqiv");
 
-                    Assert.IsTrue( allNull, "One of the invalid calls to Find found a method when expecting all to return null" );
+                    results = new[]
+                    {
+                        testing.Find(target, "ShouldntShowNoReturnValue"),
+                        testing.Find(target, "ShouldntShowNoReturnValue", new {}),
+                        testing.Find(target, "ShouldntShowNoReturnValue", new object[] {}),
+                        testing.Find(target, "ShouldntShowNoReturnValue", null)
+                    };
 
-                },
-                ( ) =>
+                    var allNull = results.Aggregate(true, (prev, curr) => prev && curr == null);
+
+                    Assert.IsTrue(allNull,
+                        "One of the invalid calls to Find found a method when expecting all to return null");
+
+
+                });
+        }
+
+
+
+        [TestMethod]
+        public async Task ObjectMethodFind_SingleParameter()
+        {
+            var target = new MethodMethodsTestClass();
+
+
+            await Util.Tasks.Start(
+                () =>
                 {
-                    var expecting = typeof( MethodMethodsTestClass )
-                        .GetMethods( BindingFlags.Public | BindingFlags.Instance )
-                            .First(a => a.GetParameters().Count() == 2 
-                                && a.GetParameters( ).First( ).ParameterType == typeof( string )
-                                && a.GetParameters( ).First( ).Name == "arg1"
-                                &&a.GetParameters().Skip(1).First( ).ParameterType == typeof(string)
-                                && a.GetParameters().Skip(1).First().Name == "arg2"
-                                && a.Name == "ShouldShowNoReturnValue");
 
-                    var cacher = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
+                    var expecting = typeof (MethodMethodsTestClass)
+                        .GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                        .First(a => a.GetParameters().Count() == 1
+                                    && a.GetParameters().First().ParameterType == typeof (string)
+                                    && a.GetParameters().First().Name == "arg");
+
+                    var cacher = new CacheComponent(new Underscore.Function.CompactComponent(),
+                        new Underscore.Utility.CompactComponent());
                     var testing = new MethodComponent(cacher, new PropertyComponent());
 
-                    var results = new[]{
-                        testing.Find( target, "ShouldShowNoReturnValue", new { arg1 = typeof( string ), arg2 = typeof( string ) } ) ,
-                        testing.Find( target, "ShouldShowNoReturnValue", new[ ] { typeof( string ), typeof( string ) } ),
-                        testing.Find( target, "ShouldShowNoReturnValue", new[ ] { "arg1", "arg2" } ) 
+                    var results = new[]
+                    {
+                        testing.Find(target, "ShouldShowNoReturnValue", new {arg = typeof (string)}),
+                        testing.Find(target, "ShouldShowNoReturnValue", new[] {typeof (string)}),
+                        testing.Find(target, "ShouldShowNoReturnValue", typeof (string)),
+                        testing.Find(target, "ShouldShowNoReturnValue", new[] {"arg"}),
+                        testing.Find(target, "ShouldShowNoReturnValue", "arg")
                     };
 
-                    var allNotNull = !results.Aggregate( false, ( prev, curr ) => prev || curr == null );
+                    var allNotNull = !results.Aggregate(false, (prev, curr) => prev || curr == null);
 
-                    Assert.IsTrue( allNotNull, "One of the targeting Find results returned null when expecting corresponding method info" );
-
-
-                    var allEqual = results.Aggregate( expecting, ( prev, curr ) => prev == curr ? curr : null ) != null;
-
-                    Assert.IsTrue( allEqual, "One of the targeting Find results were not equal, all calls to empty find should be eqiv" );
+                    Assert.IsTrue(allNotNull,
+                        "One of the targeting Find results returned null when expecting corresponding method info");
 
 
-                    results = new[]{
-                        testing.Find( target, "ShouldntShowNoReturnValue", new { arg1 = typeof( string ), arg2 = typeof( string ) } ) ,
-                        testing.Find( target, "ShouldntShowNoReturnValue", new[ ] { typeof( string ), typeof( string ) } ) ,
-                        testing.Find( target, "ShouldntShowNoReturnValue", new[ ] { "arg1", "arg2" } )
+                    var allEqual = results.Aggregate(expecting, (prev, curr) => prev == curr ? curr : null) != null;
+
+                    Assert.IsTrue(allEqual,
+                        "One of the targeting Find results were not equal, all calls to empty find should be eqiv");
+
+
+                    results = new[]
+                    {
+                        testing.Find(target, "ShouldntShowNoReturnValue", new {arg = typeof (string)}),
+                        testing.Find(target, "ShouldntShowNoReturnValue", new[] {typeof (string)}),
+                        testing.Find(target, "ShouldntShowNoReturnValue", typeof (string)),
+                        testing.Find(target, "ShouldntShowNoReturnValue", new[] {"arg"}),
+                        testing.Find(target, "ShouldntShowNoReturnValue", "arg")
                     };
 
-                    var allNull = results.Aggregate( true, ( prev, curr ) => prev && curr == null );
+                    var allNull = results.Aggregate(true, (prev, curr) => prev && curr == null);
 
-                    Assert.IsTrue( allNull, "One of the invalid calls to Find found a method when expecting all to return null" );
+                    Assert.IsTrue(allNull,
+                        "One of the invalid calls to Find found a method when expecting all to return null");
 
-
-                    results = new[]{ 
-                        testing.Find(target, "ShouldShowNoReturnValue", new { arg1 = typeof( string ), arg2 = typeof( string ) } ),
-                        testing.Find(target,"ShouldShowNoReturnValue",new []{ typeof(string), typeof(string)}),
-                        testing.Find(target,"ShouldShowNoReturnValue",new[]{"arg1","arg2"})
-                    };
+                });
+        }
 
 
-                    allNotNull = !results.Aggregate( false, ( prev, curr ) => prev || curr == null );
 
-                    Assert.IsTrue( allNotNull, "One of the targeting Find results returned null when expecting corresponding method info" );
+        [TestMethod]
+        public async Task ObjectMethodFind_TwoParameters()
+        {
+            var target = new MethodMethodsTestClass();
 
 
-                    allEqual = results.Aggregate( expecting, ( prev, curr ) => prev == curr ? curr : null ) != null;
-
-                    Assert.IsTrue( allEqual, "One of the targeting Find results were not equal, all calls to empty find should be eqiv" );
-
-                    results =  new[ ]{ 
-                        testing.Find( target, "ShouldntShowNoReturnValue", new { arg1 = typeof( string ), arg2 = typeof(string) } ),
-                        testing.Find(target,"ShouldntShowNoReturnValue",new []{ typeof(string),typeof(string)}),
-                        testing.Find(target,"ShouldntShowNoReturnValue",new[]{"arg1", "arg2"})
-                    };
-
-                },
-                ( ) =>
+            await Util.Tasks.Start(
+                () =>
                 {
-                    var cacher = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
+                    var expecting = typeof (MethodMethodsTestClass)
+                        .GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                        .First(a => a.GetParameters().Count() == 2
+                                    && a.GetParameters().First().ParameterType == typeof (string)
+                                    && a.GetParameters().First().Name == "arg1"
+                                    && a.GetParameters().Skip(1).First().ParameterType == typeof (string)
+                                    && a.GetParameters().Skip(1).First().Name == "arg2"
+                                    && a.Name == "ShouldShowNoReturnValue");
+
+                    var cacher = new CacheComponent(new Underscore.Function.CompactComponent(),
+                        new Underscore.Utility.CompactComponent());
                     var testing = new MethodComponent(cacher, new PropertyComponent());
 
-                    Assert.IsNull( testing.Find( target, "get_PublicPropertyShouldNotShow" ) );
-                    Assert.IsNull( testing.Find( target, "get_PrivatePropertyShouldNotShow" ) );
+                    var results = new[]
+                    {
+                        testing.Find(target, "ShouldShowNoReturnValue",
+                            new {arg1 = typeof (string), arg2 = typeof (string)}),
+                        testing.Find(target, "ShouldShowNoReturnValue", new[] {typeof (string), typeof (string)}),
+                        testing.Find(target, "ShouldShowNoReturnValue", new[] {"arg1", "arg2"})
+                    };
 
-                    Assert.IsNull( testing.Find( target, "set_PublicPropertyShouldNotShow", new { value = typeof( string ) } ) );
-                    Assert.IsNull( testing.Find( target, "set_PublicPropertyShouldNotShow", new[ ] { typeof( string ) } ) );
-                    Assert.IsNull( testing.Find( target, "set_PublicPropertyShouldNotShow", typeof( string ) ) );
-                    Assert.IsNull( testing.Find( target, "set_PublicPropertyShouldNotShow", new[ ] { "value" } ) );
-                    Assert.IsNull( testing.Find( target, "set_PublicPropertyShouldNotShow", "value" ) );
+                    var allNotNull = !results.Aggregate(false, (prev, curr) => prev || curr == null);
 
-                    Assert.IsNull( testing.Find( target, "set_PrivatePropertyShouldNotShow" ) );
-                    Assert.IsNull( testing.Find( target, "set_PrivatePropertyShouldNotShow", new { value = typeof( string ) } ) );
-                    Assert.IsNull( testing.Find( target, "set_PrivatePropertyShouldNotShow", new[ ] { typeof( string ) } ) );
-                    Assert.IsNull( testing.Find( target, "set_PrivatePropertyShouldNotShow", typeof( string ) ) );
-                    Assert.IsNull( testing.Find( target, "set_PrivatePropertyShouldNotShow", new[ ] { "value" } ) );
-                    Assert.IsNull( testing.Find( target, "set_PrivatePropertyShouldNotShow", "value" ) );
+                    Assert.IsTrue(allNotNull,
+                        "One of the targeting Find results returned null when expecting corresponding method info");
 
-                }
 
-            );
+                    var allEqual = results.Aggregate(expecting, (prev, curr) => prev == curr ? curr : null) != null;
+
+                    Assert.IsTrue(allEqual,
+                        "One of the targeting Find results were not equal, all calls to empty find should be eqiv");
+
+
+                    results = new[]
+                    {
+                        testing.Find(target, "ShouldntShowNoReturnValue",
+                            new {arg1 = typeof (string), arg2 = typeof (string)}),
+                        testing.Find(target, "ShouldntShowNoReturnValue", new[] {typeof (string), typeof (string)}),
+                        testing.Find(target, "ShouldntShowNoReturnValue", new[] {"arg1", "arg2"})
+                    };
+
+                    var allNull = results.Aggregate(true, (prev, curr) => prev && curr == null);
+
+                    Assert.IsTrue(allNull,
+                        "One of the invalid calls to Find found a method when expecting all to return null");
+
+
+                    results = new[]
+                    {
+                        testing.Find(target, "ShouldShowNoReturnValue",
+                            new {arg1 = typeof (string), arg2 = typeof (string)}),
+                        testing.Find(target, "ShouldShowNoReturnValue", new[] {typeof (string), typeof (string)}),
+                        testing.Find(target, "ShouldShowNoReturnValue", new[] {"arg1", "arg2"})
+                    };
+
+
+                    allNotNull = !results.Aggregate(false, (prev, curr) => prev || curr == null);
+
+                    Assert.IsTrue(allNotNull,
+                        "One of the targeting Find results returned null when expecting corresponding method info");
+
+
+                    allEqual = results.Aggregate(expecting, (prev, curr) => prev == curr ? curr : null) != null;
+
+                    Assert.IsTrue(allEqual,
+                        "One of the targeting Find results were not equal, all calls to empty find should be eqiv");
+
+                    results = new[]
+                    {
+                        testing.Find(target, "ShouldntShowNoReturnValue",
+                            new {arg1 = typeof (string), arg2 = typeof (string)}),
+                        testing.Find(target, "ShouldntShowNoReturnValue", new[] {typeof (string), typeof (string)}),
+                        testing.Find(target, "ShouldntShowNoReturnValue", new[] {"arg1", "arg2"})
+                    };
+
+                });
+        }
+
+
+        [TestMethod]
+        public async Task ObjectMethodFind_PropertyMethodsNotShown()
+        {
+            var target = new MethodMethodsTestClass();
+
+
+            await Util.Tasks.Start(
+                () =>
+                {
+                    var cacher = new CacheComponent(new Underscore.Function.CompactComponent(),
+                    new Underscore.Utility.CompactComponent());
+                    var testing = new MethodComponent(cacher, new PropertyComponent());
+
+                    Assert.IsNull(testing.Find(target, "get_PublicPropertyShouldNotShow"));
+                    Assert.IsNull(testing.Find(target, "get_PrivatePropertyShouldNotShow"));
+
+                    Assert.IsNull(testing.Find(target, "set_PublicPropertyShouldNotShow", new {value = typeof (string)}));
+                    Assert.IsNull(testing.Find(target, "set_PublicPropertyShouldNotShow", new[] {typeof (string)}));
+                    Assert.IsNull(testing.Find(target, "set_PublicPropertyShouldNotShow", typeof (string)));
+                    Assert.IsNull(testing.Find(target, "set_PublicPropertyShouldNotShow", new[] {"value"}));
+                    Assert.IsNull(testing.Find(target, "set_PublicPropertyShouldNotShow", "value"));
+
+                    Assert.IsNull(testing.Find(target, "set_PrivatePropertyShouldNotShow"));
+                    Assert.IsNull(testing.Find(target, "set_PrivatePropertyShouldNotShow", new {value = typeof (string)}));
+                    Assert.IsNull(testing.Find(target, "set_PrivatePropertyShouldNotShow", new[] {typeof (string)}));
+                    Assert.IsNull(testing.Find(target, "set_PrivatePropertyShouldNotShow", typeof (string)));
+                    Assert.IsNull(testing.Find(target, "set_PrivatePropertyShouldNotShow", new[] {"value"}));
+                    Assert.IsNull(testing.Find(target, "set_PrivatePropertyShouldNotShow", "value"));
+
+                });
+        }
+
+
+        [TestMethod]
+        public void ObjectMethodFind_ReturnParameterOverride()
+        {
+            var target = new MethodMethodsTestClass();
+
+
+            //ReturnAsAParameter
+            var cacher = new CacheComponent(new CompactComponent(), new Underscore.Utility.CompactComponent());
+            var testing = new MethodComponent(cacher, new PropertyComponent());
+
+            var result = testing.Find(target, new { @return = new { parameterType=typeof(string) } });
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result, testing.Find(target, "ReturnAsAParameter"));
+
+        }
+
+
+        [TestMethod]
+        public async Task ObjectMethodFind_SkippingArguments()
+        {
+            var target = new MethodMethodsTestClass();
+
+
+            await Util.Tasks.Start(
+                () =>
+                {
+                    //ReturnAsAParameter
+                    var cacher = new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
+                    var testing = new MethodComponent(cacher, new PropertyComponent());
+
+                    var expecting = typeof (MethodMethodsTestClass).GetMethods().FirstOrDefault(a=> a.Name == "ShouldShowNoReturnValue" &&  a.GetParameters().Length == 2);
+
+                    var result = testing.Find(target, new [] {null, typeof(string)});
+                    
+                    Assert.AreEqual(expecting,result);
+
+                });
         }
 
         [TestMethod]
@@ -1115,7 +1216,7 @@ namespace Underscore.Test.Object.Reflection
                     && !targetMethod.GetParameters().Any()
                     );
 
-                Assert.AreEqual(4, methodInfos.Count());
+                Assert.AreEqual(5, methodInfos.Count());
 
                 //all methods with no params
                 methods = testing.Query(target, new { });
@@ -1135,7 +1236,7 @@ namespace Underscore.Test.Object.Reflection
                 var singleParamTypeString2 = testing.Query(target, new[] { typeof(string) });
 
                 var singParamTypeArr = singleParamTypeString1 as MethodInfo[] ?? singleParamTypeString1.ToArray();
-                Assert.IsTrue(singParamTypeArr.Count() == 1);
+                Assert.IsTrue(singParamTypeArr.Count() == 2);
                 Assert.IsNotNull(singParamTypeArr.FirstOrDefault());
 
                 var targetingSingleParam = singParamTypeArr.FirstOrDefault();

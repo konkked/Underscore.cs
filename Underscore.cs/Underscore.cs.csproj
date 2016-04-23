@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Underscore</RootNamespace>
     <AssemblyName>Underscore.cs</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -92,6 +92,8 @@
     <Compile Include="Function\Implementation\Partial.cs" />
     <Compile Include="Function\Implementation\Split.cs" />
     <Compile Include="Function\Implementation\Synch.cs" />
+    <Compile Include="Object\Comparison\Contract\Equality.cs" />
+    <Compile Include="Object\Comparison\Implementation\Equality.cs" />
     <Compile Include="Object\Reflection\Contract\Attribute.cs" />
     <Compile Include="Object\Reflection\Contract\Constructor.cs" />
     <Compile Include="Object\Reflection\Implementation\Attribute.cs" />
@@ -152,6 +154,7 @@
       <LastGenOutput>Boolean.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

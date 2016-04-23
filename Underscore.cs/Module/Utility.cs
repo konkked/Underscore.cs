@@ -23,13 +23,13 @@ namespace Underscore.Module
             IObjectComponent obj )
         {
             if(function == null)
-                throw new ArgumentNullException(nameof(function));
+                throw new ArgumentNullException("function");
 
             if(math == null)
-                throw new ArgumentNullException(nameof(math));
+                throw new ArgumentNullException("math");
 
             if(obj == null)
-                throw new ArgumentNullException(nameof(obj));
+                throw new ArgumentNullException("obj");
 
             _math = math ;
             _function = function ;

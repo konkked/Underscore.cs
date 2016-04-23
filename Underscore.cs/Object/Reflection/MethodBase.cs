@@ -48,6 +48,8 @@ namespace Underscore.Object.Reflection
                     var instance = argsArr[i];
                     var index = i;
 
+                    if (instance == null) continue;
+
                     if (instance is string)
                     {
                         var matchName = (string)instance;
@@ -108,6 +110,7 @@ namespace Underscore.Object.Reflection
                         }
                         else
                         {
+
                             if (!(prop.Value is Type))
                                 throw new ArgumentException("for anonymous object query pattern is { [paramname] = [paramtype] }");
 

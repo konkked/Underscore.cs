@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Xml.Schema;
 
 namespace Underscore.Object.Reflection
 {
@@ -55,62 +56,39 @@ namespace Underscore.Object.Reflection
             return s_specialRules.Contains( name );
         }
 
-        protected override IEnumerable<MethodInfo> FilterSpecialCase( string name, object value, IEnumerable<MethodInfo> current )
+        protected override IEnumerable<MethodInfo> FilterSpecialCase(string name, object value,
+            IEnumerable<MethodInfo> current)
         {
-            
-            
-            if ( !IsSpecialCase( name ) )
-                throw new InvalidOperationException( "Not a special case query rule" );
 
-            if ( name == "return" ) 
+
+            if (!IsSpecialCase(name))
+                throw new InvalidOperationException("Not a special case query rule");
+
+            if (name == "return")
             {
-                if ( !( value is Type ) ) 
+                if (!(value is Type))
                 {
-                    const string doesNotHaveRequiredPropertyMsg ="Method query special case override requires a property with name '{0}' for the override object",
-                        doesNotHaveRequiredTypeForPropertyMsg = "Method query special case override object requires property with name '{0} to have type {1} for the override object";
-
-
-                    //check if is override
-                    var isOverrideProperty = _property.Find( value, "isOverride" );
-                    
-                    if(isOverrideProperty == null)
-                        throw new InvalidOperationException ( string.Format ( doesNotHaveRequiredPropertyMsg , "isOverride" ) ) ;
-
-                    object isOverrideObj = isOverrideProperty.GetValue( value );
-
-                    if(!( isOverrideObj is bool))
-                        throw new InvalidOperationException(string.Format( doesNotHaveRequiredTypeForPropertyMsg , "isOverride",typeof(bool)));
-                    
-                    var typeProperty = _property.Find(value,"type");
- 
-                    if(typeProperty == null)
-                        throw new InvalidOperationException(string.Format( doesNotHaveRequiredPropertyMsg,"type") );
-
-                    var typeObject = typeProperty.GetValue(value);
-
-                    if(!(typeObject is Type))
-                        throw new InvalidOperationException(string.Format(doesNotHaveRequiredTypeForPropertyMsg , "type" , typeof(Type)));
-
-                    Type type = (Type)typeObject;
-                    bool isOverride = (bool) isOverrideObj;
-                    
-                    if ( isOverride ) 
+                    //check for the property parameterType
+                    if (!_property.Has(value, "parameterType"))
                     {
-                        return current.Where(a=>a.GetParameters().FirstOrDefault(b=>b.Name == "@return" && b.ParameterType == type) != null);
+                        throw new InvalidOperationException(
+                            "@return is a special query property, if you need to override it, assign it an object with the property 'propertyType' containing the type of the parameter '@return' you're expecting a method / constructor to have to satisy");
                     }
-                    // not sure what to do in this case... 
-                    throw new InvalidOperationException("Method query special case override object had parameter isOverride set to false, which is not allowed");
+
+                    var ntype = _property.GetValue<Type>(value, "parameterType");
+                    return
+                        current.Where(
+                            a =>
+                                a.GetParameters().FirstOrDefault(b => b.Name == "return" && b.ParameterType == ntype) !=
+                                null);
                 }
-                    
-                var lookingFor = ( Type ) value;
-                return current.Where( a => a.ReturnType == lookingFor );
+
+                var lookingFor = (Type) value;
+                return current.Where(a => a.ReturnType == lookingFor);
 
             }
 
-            // This is an internal exception
-            // The special case was defined (otherwise this method wouldnt have been called) but was not implemented in this section
-            throw new NotImplementedException( "Internal Exception: special case was assigned but not implemented , property name : " + name );
-
+            return current;
         }
 
         private MethodInfo CaseSensitiveGetMethod( object target, string name )
@@ -216,11 +194,6 @@ namespace Underscore.Object.Reflection
         public bool Has(Type target, string name, BindingFlags flags)
         {
             return Find(target, name, flags) != null;
-        }
-
-        public override IEnumerable<MethodInfo> Query( Type target , object query )
-        {
-            return base.Query(target, query);
         }
 
         public override IEnumerable<MethodInfo> Query( Type target , object query , BindingFlags flags )

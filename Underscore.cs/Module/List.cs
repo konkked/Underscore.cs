@@ -22,13 +22,13 @@ namespace Underscore.Module
         ) 
         {
             if (delegator == null)
-                throw new ArgumentNullException(nameof(delegator));
+                throw new ArgumentNullException("delegator");
 
             if (manipulator == null)
-                throw new ArgumentNullException(nameof(manipulator));
+                throw new ArgumentNullException("manipulator");
 
             if (partitioner == null)
-                throw new ArgumentNullException(nameof(partitioner));
+                throw new ArgumentNullException("partitioner");
 
 
             _delegator = delegator;
