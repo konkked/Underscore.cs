@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Underscore.Object;
+using Underscore.Object.Comparison;
 using Underscore.Object.Reflection;
 
 namespace Underscore.Module
 {
 
-    public class Object : ITransposeComponent, IDynamicComponent
+    public class Object : ITransposeComponent, IDynamicComponent, IEqualityComponent
     {
         private readonly IPropertyComponent _property;
         private readonly IMethodComponent _method;
@@ -14,6 +17,7 @@ namespace Underscore.Module
         private readonly IConstructorComponent _constructor;
         private readonly IAttributeComponent _attribute;
         private readonly IDynamicComponent _dynamic;
+        private readonly IEqualityComponent _equality;
 
 
         public Object(
@@ -23,29 +27,34 @@ namespace Underscore.Module
             IConstructorComponent constructor,
             ITransposeComponent transformation,
             IAttributeComponent attribute,
-            IDynamicComponent dynamicComponent) 
+            IDynamicComponent dynamicComponent, 
+            IEqualityComponent equality) 
         {
-
+            
             if (property == null)
-                throw new ArgumentNullException(nameof(property));
+                throw new ArgumentNullException("property");
 
             if (method == null)
-                throw new ArgumentNullException(nameof(method));
+                throw new ArgumentNullException("method");
 
             if (field == null)
-                throw new ArgumentNullException(nameof(field));
+                throw new ArgumentNullException("field");
 
             if (constructor == null)
-                throw new ArgumentNullException(nameof(constructor));
+                throw new ArgumentNullException("constructor");
 
             if (transformation == null)
-                throw new ArgumentNullException(nameof(transformation));
+                throw new ArgumentNullException("transformation");
 
             if (attribute == null)
-                throw new ArgumentNullException(nameof(attribute));
+                throw new ArgumentNullException("attribute");
 
             if (dynamicComponent == null)
-                throw new ArgumentNullException(nameof(dynamicComponent));
+                throw new ArgumentNullException("dynamicComponent");
+
+            if (equality == null)
+                throw new ArgumentNullException("equality");
+
 
             _property = property;
             _field = field;
@@ -54,11 +63,12 @@ namespace Underscore.Module
             _constructor = constructor;
             _attribute = attribute;
             _dynamic = dynamicComponent;
+            _equality = equality;
         }
 
  
         /// <summary>
-        /// Returns null, useful for anonymous type declarations to avoid having to cast null to an object
+        /// Returns null, useful ft generor anonymous type declarations to avoid having to cast null to an object
         /// </summary>
         public T Null<T>() where T : class
         {
@@ -140,6 +150,66 @@ namespace Underscore.Module
         public dynamic ToDynamic( object target )
         {
             return _dynamic.ToDynamic( target );
+        }
+
+
+        /// <summary>
+        /// Creates a new generic type using the default constructor and the passed types as the generic type parameters
+        /// </summary>
+        /// <param name="genericTypeDefinition"></param>
+        /// <param name="genericTypeArguments"></param>
+        /// <returns></returns>
+        public object NewGenericFromDefinition(Type genericTypeDefinition, params Type[] genericTypeArguments)
+        {
+            if (!genericTypeDefinition.IsGenericTypeDefinition)
+                throw new ArgumentException("Must be a generic type definition", "genericTypeDefinition");
+
+                return Activator.CreateInstance(genericTypeDefinition.MakeGenericType(genericTypeArguments));
+        }
+
+        /// <summary>
+        /// Creates a new generic type using the best matched constructor and the passed types as the generic type parameters
+        /// and the passed objects as the parameters
+        /// </summary>
+        /// <param name="genericTypeDefinition"></param>
+        /// <param name="typeArguments"></param>
+        /// <param name="constructorParameter"></param>
+        /// <returns></returns>
+        public object NewGenericFromDefinition(Type genericTypeDefinition, IEnumerable<Type> typeArguments,
+            params object[] constructorParameter)
+        {
+            if (!genericTypeDefinition.IsGenericTypeDefinition)
+                throw new ArgumentException("Must be a generic type definition", "genericTypeDefinition");
+
+            
+            var typeArr =  typeArguments as Type[] ?? typeArguments.ToArray();
+                   
+    
+            var gtype = genericTypeDefinition.MakeGenericType(typeArr);
+
+            var queryObj = constructorParameter.Select(a => a == null ? null : a.GetType()).ToArray();
+
+            var constructor = _constructor.Find(gtype, queryObj);
+
+            if(constructor == null)
+                throw new ArgumentException("No constructors found matching the parameters passed as possible parameters");
+
+            return constructor.Invoke(constructorParameter);
+        }
+
+        public bool AreEquatable(object a, object b)
+        {
+            return _equality.AreEquatable(a, b);
+        }
+
+        public bool AreEquatable(object a, object b, bool typeSensitive)
+        {
+            return _equality.AreEquatable(a, b, typeSensitive);
+        }
+
+        public bool AreEquatable<T>(T a, T b)
+        {
+            return _equality.AreEquatable(a, b);
         }
     }
 }
