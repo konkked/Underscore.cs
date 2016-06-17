@@ -487,6 +487,136 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
+        [TestMethod]
+        public void MethodsTypeAll1()
+        {
+            // Test behave differently when they are called from another method
+            // even though it is a type get's treated like a general object
+            // which is why the tests are repeated
+            var target =  typeof(MethodMethodsTestClass);
+
+            IMethodComponent testing = SetupMethodsComponent();// = new Underscore.Object.Reflection.Methods()
+
+
+            var methods = testing.All(target);
+
+            var methodInfos = methods as MethodInfo[] ?? methods.ToArray();
+            var targetMethod = methodInfos.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue");
+            Assert.IsNotNull(targetMethod);
+
+            var results = methodInfos.Where(a => a.Name == "ShouldShowNoReturnValue");
+            var enumerable = results as MethodInfo[] ?? results.ToArray();
+            Assert.AreEqual(3, enumerable.Count(a => a.Name == "ShouldShowNoReturnValue"));
+            //no param
+            var noRetMethods = enumerable.Where(a => a.ReturnType == typeof(void));
+            var retMethods = noRetMethods as MethodInfo[] ?? noRetMethods.ToArray();
+            Assert.IsNotNull(retMethods.FirstOrDefault(), "Missing no parametered method");
+            //one param
+            Assert.AreEqual(1, (
+                from m in retMethods
+                let parameters = m.GetParameters()
+                where parameters.Count() == 1
+                    && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg") == 1
+                    && m.ReturnType == typeof(void)
+                select m
+                ).Count(),
+                "Missing single parametered method"
+            );
+            //two params
+            Assert.AreEqual(1, (
+                from m in retMethods
+                let parameters = m.GetParameters()
+                where parameters.Count() == 2
+                    && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg1") == 1
+                    && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg2") == 1
+                    && m.ReturnType == typeof(void)
+                select m
+                ).Count(),
+                "Missing double parametered method"
+            );
+
+            //no param string return type
+            targetMethod = methodInfos.FirstOrDefault(a => a.Name == "ShouldShowStringReturnValue");
+
+            Assert.IsNotNull(targetMethod);
+            Assert.AreEqual(1, methodInfos.Count(a => a.Name == "ShouldShowStringReturnValue"));
+            Assert.IsTrue(
+                targetMethod.ReturnType == typeof(string)
+                && !targetMethod.GetParameters().Any()
+            );
+
+            Assert.AreEqual(5, methodInfos.Count());
+
+            //all methods with no params
+            methods = testing.Query(target, new { });
+            var infos = methods as MethodInfo[] ?? methods.ToArray();
+            targetMethod = infos.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue");
+
+            Assert.AreEqual(2, infos.Count());
+
+            Assert.IsNotNull(infos.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue"));
+            Assert.AreEqual(1, infos.Count(a => a.Name == "ShouldShowNoReturnValue"));
+
+            Assert.IsNotNull(infos.FirstOrDefault(a => a.Name == "ShouldShowStringReturnValue"));
+            Assert.AreEqual(1, infos.Count(a => a.Name == "ShouldShowStringReturnValue"));
+
+
+            var singleParamTypeString1 = testing.Query(target, typeof(string));
+            var singleParamTypeString2 = testing.Query(target, new[] { typeof(string) });
+
+            var paramTypeString1 = singleParamTypeString1 as MethodInfo[] ?? singleParamTypeString1.ToArray();
+            Assert.IsTrue(paramTypeString1.Count() == 2);
+            Assert.IsNotNull(paramTypeString1.FirstOrDefault());
+
+            var targetingSingleParam = paramTypeString1.FirstOrDefault();
+            Assert.IsNotNull(targetingSingleParam);
+            Assert.IsTrue(targetingSingleParam.GetParameters().Count() == 1 && targetingSingleParam.GetParameters().Count(a => a.Name == "arg" && a.ParameterType == typeof(string)) == 1);
+
+            Assert.AreEqual(paramTypeString1.FirstOrDefault(), singleParamTypeString2.FirstOrDefault());
+
+            var singleParamName1 = testing.Query(target, "arg");
+            var singleParamName2 = testing.Query(target, new[] { "arg" });
+
+            var singParamName1Arr = singleParamName1 as MethodInfo[] ?? singleParamName1.ToArray();
+            Assert.IsTrue(singParamName1Arr.Count() == 1);
+            var sngParamName2Arr = singleParamName2 as MethodInfo[] ?? singleParamName2.ToArray();
+            Assert.IsTrue(sngParamName2Arr.Count() == 1);
+
+            Assert.IsTrue(
+                singParamName1Arr.Count(a => a.GetParameters().Count() == 1
+                && a.GetParameters().Count(b => b.ParameterType == typeof(string) && b.Name == "arg") == 1
+            ) == 1);
+
+            Assert.AreEqual(singParamName1Arr.FirstOrDefault(), sngParamName2Arr.FirstOrDefault());
+
+
+            var dblParamType = testing.Query(target, new[] { typeof(string), typeof(string) });
+
+            var dblParamTypeArr = dblParamType as MethodInfo[] ?? dblParamType.ToArray();
+            Assert.AreEqual(1, dblParamTypeArr.Count());
+            targetMethod = dblParamTypeArr.FirstOrDefault();
+
+            Assert.IsNotNull(targetMethod);
+            Assert.AreEqual(1, dblParamTypeArr.Count());
+            Assert.AreEqual(2, targetMethod.GetParameters().Count());
+
+            Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg1"));
+            Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg2"));
+
+            var dblParamName = testing.Query(target, new[] { "arg1", "arg2" });
+            var dblParamNameArr = dblParamName as MethodInfo[] ?? dblParamName.ToArray();
+            targetMethod = dblParamNameArr.FirstOrDefault();
+
+            Assert.IsNotNull(targetMethod);
+            Assert.AreEqual(1, dblParamNameArr.Count());
+            Assert.AreEqual(2, targetMethod.GetParameters().Count());
+
+            Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg1"));
+            Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg2"));
+
+
+        }
+
         private static Type Type<T>(T example)
         {
             return typeof(T);
@@ -620,9 +750,7 @@ namespace Underscore.Test.Object.Reflection
         
         
         }
-
-
-
+        
         private static void SetupSingleArgMock( Mock<IMethodComponent> mock )
         {
             //should return all methods with one param type string
@@ -1285,6 +1413,135 @@ namespace Underscore.Test.Object.Reflection
             });
         }
 
+
+
+        [TestMethod]
+        public async Task MethodsTypeAll2()
+        {
+
+            var target = typeof(MethodMethodsTestClass);
+
+            IMethodComponent testing = SetupMethodsComponent();// = new Underscore.Object.Reflection.Methods()
+
+
+            await Util.Tasks.Start(() =>
+            {
+                var methods = testing.All(target);
+
+                var methodInfos = methods as MethodInfo[] ?? methods.ToArray();
+                var targetMethod = methodInfos.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue");
+                Assert.IsNotNull(targetMethod);
+
+                var results = methodInfos.Where(a => a.Name == "ShouldShowNoReturnValue");
+                var resultArr = results as MethodInfo[] ?? results.ToArray();
+                Assert.AreEqual(3, resultArr.Count(a => a.Name == "ShouldShowNoReturnValue"));
+                //no param
+                var noRetMethods = resultArr.Where(a => a.ReturnType == typeof(void));
+                var noRetMethodsArr = noRetMethods as MethodInfo[] ?? noRetMethods.ToArray();
+                Assert.IsNotNull(noRetMethodsArr.FirstOrDefault(), "Missing no parametered method");
+                //one param
+                Assert.AreEqual(1, (
+                    from m in noRetMethodsArr
+                    let parameters = m.GetParameters()
+                    where parameters.Count() == 1
+                          && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg") == 1
+                          && m.ReturnType == typeof(void)
+                    select m
+                    ).Count(),
+                    "Missing single parametered method"
+                    );
+                //two params
+                Assert.AreEqual(1, (
+                    from m in noRetMethodsArr
+                    let parameters = m.GetParameters()
+                    where parameters.Count() == 2
+                          && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg1") == 1
+                          && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg2") == 1
+                          && m.ReturnType == typeof(void)
+                    select m
+                    ).Count(),
+                    "Missing double parametered method"
+                    );
+
+                //no param string return type
+                targetMethod = methodInfos.FirstOrDefault(a => a.Name == "ShouldShowStringReturnValue");
+
+                Assert.IsNotNull(targetMethod);
+                Assert.AreEqual(1, methodInfos.Count(a => a.Name == "ShouldShowStringReturnValue"));
+                Assert.IsTrue(
+                    targetMethod.ReturnType == typeof(string)
+                    && !targetMethod.GetParameters().Any()
+                    );
+
+                Assert.AreEqual(5, methodInfos.Count());
+
+                //all methods with no params
+                methods = testing.Query(target, new { });
+                var methodsArr = methods as MethodInfo[] ?? methods.ToArray();
+                targetMethod = methodsArr.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue");
+
+                Assert.AreEqual(2, methodsArr.Count());
+
+                Assert.IsNotNull(methodsArr.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue"));
+                Assert.AreEqual(1, methodsArr.Count(a => a.Name == "ShouldShowNoReturnValue"));
+
+                Assert.IsNotNull(methodsArr.FirstOrDefault(a => a.Name == "ShouldShowStringReturnValue"));
+                Assert.AreEqual(1, methodsArr.Count(a => a.Name == "ShouldShowStringReturnValue"));
+
+
+                var singleParamTypeString1 = testing.Query(target, typeof(string));
+                var singleParamTypeString2 = testing.Query(target, new[] { typeof(string) });
+
+                var singParamTypeArr = singleParamTypeString1 as MethodInfo[] ?? singleParamTypeString1.ToArray();
+                Assert.IsTrue(singParamTypeArr.Count() == 2);
+                Assert.IsNotNull(singParamTypeArr.FirstOrDefault());
+
+                var targetingSingleParam = singParamTypeArr.FirstOrDefault();
+                Assert.IsTrue(targetingSingleParam.GetParameters().Count() == 1 && targetingSingleParam.GetParameters().Count(a => a.Name == "arg" && a.ParameterType == typeof(string)) == 1);
+
+                Assert.AreEqual(singParamTypeArr.FirstOrDefault(), singleParamTypeString2.FirstOrDefault());
+
+                var singleParamName1 = testing.Query(target, "arg");
+                var singleParamName2 = testing.Query(target, new[] { "arg" });
+
+                Assert.IsTrue(singleParamName1.Count() == 1);
+                Assert.IsTrue(singleParamName2.Count() == 1);
+
+                Assert.IsTrue(
+                    singleParamName1.Count(a => a.GetParameters().Count() == 1
+                                                && a.GetParameters().Count(b => b.ParameterType == typeof(string) && b.Name == "arg") == 1
+                        ) == 1);
+
+                Assert.AreEqual(singleParamName1.FirstOrDefault(), singleParamName2.FirstOrDefault());
+
+
+                var dblParamType = testing.Query(target, new[] { typeof(string), typeof(string) });
+
+                Assert.AreEqual(1, dblParamType.Count());
+                targetMethod = dblParamType.FirstOrDefault();
+
+                Assert.IsNotNull(targetMethod);
+                Assert.AreEqual(1, dblParamType.Count());
+                Assert.AreEqual(2, targetMethod.GetParameters().Count());
+
+                Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg1"));
+                Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg2"));
+
+                var dblParamName = testing.Query(target, new[] { "arg1", "arg2" });
+                targetMethod = dblParamName.FirstOrDefault();
+
+                Assert.IsNotNull(targetMethod);
+                Assert.AreEqual(1, dblParamName.Count());
+                Assert.AreEqual(2, targetMethod.GetParameters().Count());
+
+                Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg1"));
+                Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg2"));
+
+
+
+            });
+        }
+
         private IMethodComponent SetupMethodsComponent()
         {
             // need to create an old school mock for this...might be an easier way 
@@ -1308,13 +1565,6 @@ namespace Underscore.Test.Object.Reflection
 
 
         }
-
-
-        [TestMethod]
-        public void FunctionalMethodsTest()
-        {
-
-
-        }
+        
     }
 }

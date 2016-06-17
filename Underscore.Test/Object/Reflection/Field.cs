@@ -196,6 +196,79 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
+        [TestMethod]
+        public async Task TypeField()
+        {
+
+            var target = typeof(FieldMethodsTestClass);
+
+
+
+            var testing = new FieldComponent(new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
+
+
+            await Util.Tasks.Start(() =>
+            {
+                //test true one public string field
+                //test no type
+                //test with type
+                //test not with wrong type
+                //test not private method
+
+                var showFieldNoArgs = testing.Find(target, "ShouldShowString");
+                var showFieldTypeArgs = testing.Find(target, "ShouldShowString", typeof(string));
+                var shouldNotShowFieldWrongArgs = testing.Find(target, "ShouldShowString", typeof(int));
+                var shouldntShowFieldPrivate = testing.Find(target, "ShoulntShowString");
+                var shouldntShowFieldPrivateWrongType = testing.Find(target, "ShoulntShowString", typeof(string));
+
+                Assert.IsNotNull(showFieldNoArgs);
+
+                foreach (var item in new[] { showFieldTypeArgs })
+                    Assert.AreEqual(showFieldNoArgs, item);
+
+                foreach (var item in new[] { shouldNotShowFieldWrongArgs, shouldntShowFieldPrivate, shouldntShowFieldPrivateWrongType })
+                    Assert.IsNull(item);
+
+            }, () =>
+            {
+
+                //test true one public int field
+                //test no type
+                //test with type
+                //test not with wrong type
+                //test not private method
+
+                var showFieldNoArgs = testing.Find(target, "ShouldShowInt");
+                var showFieldTypeArgs = testing.Find(target, "ShouldShowInt", typeof(int));
+                var shouldNotShowFieldWrongArgs = testing.Find(target, "ShouldntShowInt", typeof(string));
+                var shouldntShowFieldPrivate = testing.Find(target, "ShouldntShowInt");
+                var shouldntShowFieldPrivateWrongType = testing.Find(target, "ShouldintShowInt", typeof(string));
+
+                Assert.IsNotNull(showFieldNoArgs);
+
+                foreach (var item in new[] { showFieldTypeArgs })
+                    Assert.AreEqual(showFieldNoArgs, item);
+
+                foreach (var item in new[] { shouldNotShowFieldWrongArgs, shouldntShowFieldPrivate, shouldntShowFieldPrivateWrongType })
+                    Assert.IsNull(item);
+
+
+
+            }, () =>
+            {
+
+                //test true no properties picked up
+
+
+                //shouldnt show properties
+                Assert.IsNull(testing.Find(target, "ShouldNotShowProperty"));
+                Assert.IsNull(testing.Find(target, "ShouldNotShowProperty", typeof(int)));
+                Assert.IsNull(testing.Find(target, "ShouldNotShowProperty", typeof(string)));
+
+            });
+
+        }
+
 #pragma warning disable 0414
 
         public class FieldValuesTest

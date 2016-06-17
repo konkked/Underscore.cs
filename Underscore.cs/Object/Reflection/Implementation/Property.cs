@@ -171,14 +171,27 @@ namespace Underscore.Object.Reflection
         /// <summary>
         /// Gets all of the properties of the specified type
         /// </summary>
-        public IEnumerable<PropertyInfo> OfType( object target, Type type )
+        public IEnumerable<PropertyInfo> OfType( object target, Type propertyTypeTarget )
         {
-            return  Enumerate(target.GetType()).Where(a => a.PropertyType == type );
+            return  Enumerate(target.GetType()).Where(a => a.PropertyType == propertyTypeTarget );
         }
 
-        public IEnumerable<PropertyInfo> OfType(object target, Type type, BindingFlags flags)
+        public IEnumerable<PropertyInfo> OfType(object target, Type propertyTypeTarget, BindingFlags flags)
         {
-            return target.GetType().GetProperties(flags).Where(a => a.PropertyType == type);
+            return target.GetType().GetProperties(flags).Where(a => a.PropertyType == propertyTypeTarget);
+        }
+
+        /// <summary>
+        /// Gets all of the properties of the specified type
+        /// </summary>
+        public IEnumerable<PropertyInfo> OfType(Type target, Type propertyTypeTarget)
+        {
+            return Enumerate(target).Where(a => a.PropertyType == propertyTypeTarget);
+        }
+
+        public IEnumerable<PropertyInfo> OfType(Type target, Type propertyTypeTarget, BindingFlags flags)
+        {
+            return target.GetProperties(flags).Where(a => a.PropertyType == propertyTypeTarget);
         }
 
         public IEnumerable<object> Values(object target)
@@ -220,6 +233,19 @@ namespace Underscore.Object.Reflection
             var proplc = name.ToLower();
 
             return All(target,flags).FirstOrDefault(a => a.Name.ToLower() == proplc);
+        }
+
+        private PropertyInfo PropertyCaseSensitive(Type target, string name, BindingFlags flags = defaultFlags)
+        {
+            return All(target, flags).FirstOrDefault(a => a.Name == name);
+        }
+
+
+        private PropertyInfo PropertyCaseInsensitive(Type target, string name, BindingFlags flags = defaultFlags)
+        {
+            var proplc = name.ToLower();
+
+            return All(target, flags).FirstOrDefault(a => a.Name.ToLower() == proplc);
         }
 
 

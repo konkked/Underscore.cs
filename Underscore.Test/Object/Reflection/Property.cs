@@ -300,6 +300,64 @@ namespace Underscore.Test.Object.Reflection
 
 
         [TestMethod]
+        public void PropertyHasForTypeTarget()
+        {
+            var testing = new PropertyComponent();
+            
+            Assert.IsTrue(testing.Has(typeof(Person),"FirstName"));
+            Assert.IsTrue(testing.Has(typeof(Person), "LastName"));
+            Assert.IsTrue(testing.Has(typeof(Person), "MiddleName"));
+            Assert.IsTrue(testing.Has(typeof(Person), "Suffix"));
+            Assert.IsTrue(testing.Has(typeof(Person), "Title"));
+            Assert.IsTrue(testing.Has(typeof(Person), "Age"));
+
+        }
+
+
+        [TestMethod]
+        public void PropertGetForTypeTarget()
+        {
+            var testing = new PropertyComponent();
+
+            Assert.AreEqual(typeof(Person).GetProperty("FirstName"),testing.Find(typeof(Person), "FirstName"));
+            Assert.AreEqual(typeof(Person).GetProperty("LastName"), testing.Find(typeof(Person), "LastName"));
+            Assert.AreEqual(typeof(Person).GetProperty("MiddleName"), testing.Find(typeof(Person), "MiddleName"));
+            Assert.AreEqual(typeof(Person).GetProperty("Suffix"), testing.Find(typeof(Person), "Suffix"));
+            Assert.AreEqual(typeof(Person).GetProperty("Title"), testing.Find(typeof(Person), "Title"));
+            Assert.AreEqual(typeof(Person).GetProperty("Age"), testing.Find(typeof(Person), "Age"));
+
+        }
+
+
+        [TestMethod]
+        public void PropertGetForTypeTargetCaseInsensitive()
+        {
+            var testing = new PropertyComponent();
+
+            Assert.AreEqual(typeof(Person).GetProperty("FirstName"), testing.Find(typeof(Person), "firstname",false));
+            Assert.AreEqual(typeof(Person).GetProperty("LastName"), testing.Find(typeof(Person), "lastname", false));
+            Assert.AreEqual(typeof(Person).GetProperty("MiddleName"), testing.Find(typeof(Person), "middlename", false));
+            Assert.AreEqual(typeof(Person).GetProperty("Suffix"), testing.Find(typeof(Person), "suffix", false));
+            Assert.AreEqual(typeof(Person).GetProperty("Title"), testing.Find(typeof(Person), "title", false));
+            Assert.AreEqual(typeof(Person).GetProperty("Age"), testing.Find(typeof(Person), "age", false));
+            
+        }
+
+        [TestMethod]
+        public void PropertyOfTypeForType()
+        {
+            var testing = new PropertyComponent();
+
+            Assert.IsTrue(testing.OfType(typeof(Person), typeof(string)).Any(a => a.Name=="FirstName"));
+            Assert.IsTrue(testing.OfType(typeof(Person), typeof(string)).Any(a => a.Name == "LastName"));
+            Assert.IsTrue(testing.OfType(typeof(Person), typeof(string)).Any(a => a.Name == "MiddleName"));
+            Assert.IsTrue(testing.OfType(typeof(Person), typeof(string)).Any(a => a.Name == "Suffix"));
+            Assert.IsTrue(testing.OfType(typeof(Person), typeof(string)).Any(a => a.Name == "Title"));
+            Assert.IsTrue(testing.OfType(typeof(Person), typeof(int)).Any(a => a.Name == "Age"));
+
+        }
+
+        [TestMethod]
         public void PropertyGetValues()
         {
             var testing = new PropertyComponent();

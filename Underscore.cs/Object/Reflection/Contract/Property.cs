@@ -285,12 +285,22 @@ namespace Underscore.Object.Reflection
         /// <summary>
         /// Finds all fields of a specific type from the targeted object
         /// </summary>
-        IEnumerable<PropertyInfo> OfType(object target, Type type);
+        IEnumerable<PropertyInfo> OfType(object target, Type propertyTypeTarget);
 
         /// <summary>
         /// Finds all fields of a specific type from the targeted object
         /// </summary>
-        IEnumerable<PropertyInfo> OfType(object target, Type type, BindingFlags flags);
+        IEnumerable<PropertyInfo> OfType(object target, Type propertyTypeTarget, BindingFlags flags);
+
+        /// <summary>
+        /// Finds all fields of a specific type from the targeted object
+        /// </summary>
+        IEnumerable<PropertyInfo> OfType(Type target, Type propertyTypeTarget);
+
+        /// <summary>
+        /// Finds all fields of a specific type from the targeted object
+        /// </summary>
+        IEnumerable<PropertyInfo> OfType(Type target, Type propertyTypeTarget, BindingFlags flags);
 
 
         /// <summary>
