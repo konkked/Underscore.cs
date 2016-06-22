@@ -165,7 +165,7 @@ namespace Underscore.Test
 
                 foreach (var action in actions)
                     await Task.Run(action);
-                
+
             }
 
             public static async Task<T[]> Start<T>(params Func<T>[] functions) 

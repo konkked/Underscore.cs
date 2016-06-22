@@ -134,7 +134,12 @@ namespace Underscore.Module
             return _manipulator.Cycle(list);
         }
 
-        /// <summary>
+	    public Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>(IList<T> list, Func<T, Boolean> @on)
+	    {
+		    return _partitioner.PartitionMatches(list, on);
+	    }
+
+	    /// <summary>
         /// Takes a slice from a list, if start is greater then the end index
         /// the results are reversed, if the index is negative corresponds to the index
         /// from the back of the list, if the slice is larger than the size of the list

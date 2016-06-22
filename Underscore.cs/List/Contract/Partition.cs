@@ -38,6 +38,13 @@ namespace Underscore.List
         /// <returns>a Tuple containing the first partition in the first item, second partition in the second</returns>
         Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IList<T> list, Func<T, bool> on );
 
+		/// <summary>
+		/// Breaks list into two separate parts based on whether items match a given predicate
+		/// </summary>
+		/// <param name="on">the predicate to partition on</param>
+		/// <returns>A tuple containing matching items in Item1 and non-matching items in Item2</returns>
+	    Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>( IList<T> list, Func<T, bool> on );
+
         /// <summary>
         /// Takes a slice from a list, if start is greater then the end index
         /// the results are reversed, if the index is negative corresponds to the index

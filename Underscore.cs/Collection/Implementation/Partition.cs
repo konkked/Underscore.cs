@@ -182,7 +182,7 @@ namespace Underscore.Collection
 		/// Partition([1,2,3], n => n == 2) would return
 		/// Tuple([2],[1,3])
 		/// </summary>
-	    public Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>(IEnumerable<T> collection, Predicate<T> on)
+	    public Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>(IEnumerable<T> collection, Func<T, bool> on)
 	    {
 			var left = new List<T>();
 			var right = new List<T>();
