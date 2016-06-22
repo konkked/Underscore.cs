@@ -15,12 +15,16 @@ namespace Underscore.Collection
             _partitionComponent = partitionComponent;
         }
 
+		/// <summary>
+		/// this needs a comment
+		/// </summary>\
         private IEnumerable<T> Segment<T>( IEnumerator<T> iter, int size, out bool cont )
         {
-            var ret= new List<T>( );
+            var ret = new List<T>( );
             cont = true;
             bool hit = false;
-            for ( var i=0 ; i < size ; i++ )
+
+            for ( var i = 0 ; i < size ; i++ )
             {
                 if ( iter.MoveNext( ) )
                 {
@@ -43,7 +47,7 @@ namespace Underscore.Collection
         public IEnumerable<IEnumerable<T>> Chunk<T>( IEnumerable<T> collection, int size )
         {
 
-            bool shouldContinue = collection!=null && collection.Any();
+            bool shouldContinue = collection != null && collection.Any();
 
             using ( var iter = collection.GetEnumerator( ) )
             {
@@ -69,22 +73,19 @@ namespace Underscore.Collection
 
             using ( var iter = collection.GetEnumerator( ) )
             {
-                bool shouldContinue = iter.MoveNext();
                 var retv = new List<T>();
-                while ( shouldContinue ) 
+                while ( iter.MoveNext( ) ) 
                 {
-                    //dont include empty lists
-                    if ( on( iter.Current ) && retv.Count!=0)
+                    // don't include empty lists
+                    if ( on( iter.Current ) && retv.Count != 0)
                     {
                         yield return retv;
-                        retv = new List<T> {iter.Current};
+                        retv = new List<T> { iter.Current };
                     }
                     else 
                     {
                         retv.Add( iter.Current );
                     }
-
-                    shouldContinue = iter.MoveNext( );
                 }
 
                 if ( retv.Count != 0 )
@@ -96,38 +97,30 @@ namespace Underscore.Collection
 
         /// <summary>
         /// Breaks collection into two seperate parts
+		/// split into items before the given index
+		/// and items after the given index
+		/// 
+		/// e.g.
+		/// 
+		/// Partition([1,2,3,4,5], 2) would return
+		/// Tuple([1,2],[4,5])
         /// </summary>
-        public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IEnumerable<T> collection, int on )
+        public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IEnumerable<T> collection, int index )
         {
-            bool shouldContinue=true;
             var left = new List<T>( );
             var right = new List<T>( );
-            using ( var iter = collection.GetEnumerator( ) )
-            {
-                int i = 0;
 
-                while ( i != on )
-                {
-                    i++;
-                    if ( iter.MoveNext( ) )
-                    {
-                        left.Add( iter.Current );
-                    }
-                    else
-                    {
-                        shouldContinue = false;
-                        break;
-                    }
-                }
+	        int i = 0;
 
-                if ( shouldContinue )
-                {
-                    while ( iter.MoveNext( ) )
-                    {
-                        right.Add( iter.Current );
-                    }
-                }
-            }
+	        foreach (var value in collection)
+	        {
+		        if(i < index)
+					left.Add(value);
+				else if (i > index)
+					right.Add(value);
+
+		        i++;
+	        }
 
             return Tuple.Create(
                 (IEnumerable<T>) left,
@@ -136,50 +129,72 @@ namespace Underscore.Collection
         }
 
         /// <summary>
-        /// Breaks collection into two seperate parts
+        /// Breaks collection into two seperate parts,
+        /// split into items before an item matches the given predicate
+        /// and items after an item matches the given predicate
+        /// 
+        /// e.g.
+        /// 
+        /// Partition([1,2,3], n => n == 2) would return
+        /// Tuple([1],[3])
         /// </summary>
-        public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IEnumerable<T> collection, Func<T, bool> on )
+		public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>(IEnumerable<T> collection, Func<T, bool> on)
         {
-            bool shouldContinue=true;
             var left = new List<T>( );
             var right = new List<T>( );
-            using ( var iter = collection.GetEnumerator( ) )
-            {
-                while ( true )
-                {
-                    if ( iter.MoveNext( ) )
-                    {
-                        left.Add( iter.Current );
+	        bool hitPred = false;
 
-                        if ( on( iter.Current ) ) 
-                        {
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        shouldContinue = false;
-                        break;
-                    }
-                }
-
-                if ( shouldContinue )
-                {
-                    while ( iter.MoveNext( ) )
-                    {
-                        right.Add( iter.Current );
-                    }
-                }
-            }
+	        foreach (var value in collection)
+	        {
+		        if (hitPred)
+		        {
+			        right.Add(value);
+		        }
+		        else
+		        {
+					// if we haven't hit the predicate yet, 
+					// check if we're hitting it now
+			        if (on(value))
+				        hitPred = true;
+			        else
+						left.Add(value);
+		        }
+	        }
 
             return Tuple.Create(
-                left as IEnumerable<T>,
-                right as IEnumerable<T>
+                (IEnumerable<T>) left,
+				(IEnumerable<T>) right
             );
         }
 
+		/// <summary>
+		/// Breaks collection into two seperate parts,
+		/// split into items that match the predicate
+		/// and items that do not match the predicate
+		/// 
+		/// e.g.
+		/// 
+		/// Partition([1,2,3], n => n == 2) would return
+		/// Tuple([2],[1,3])
+		/// </summary>
+	    public Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>(IEnumerable<T> collection, Predicate<T> on)
+	    {
+			var left = new List<T>();
+			var right = new List<T>();
 
+			foreach (var value in collection)
+			{
+				if (on(value))
+					left.Add(value);
+				else
+					right.Add(value);
+			}
 
+			return Tuple.Create(
+				(IEnumerable<T>) left,
+				(IEnumerable<T>) right
+			);
+	    }
 
         public IEnumerable<IEnumerable<T>> Combinations<T>(IEnumerable<T> collection)
         {
@@ -187,6 +202,5 @@ namespace Underscore.Collection
             var ls = collection as IList<T> ?? collection.ToList();
             return _partitionComponent.Combinations(ls);
         }
-
     }
 }
