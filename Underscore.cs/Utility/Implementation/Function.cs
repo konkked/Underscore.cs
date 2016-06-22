@@ -4,8 +4,6 @@ namespace Underscore.Utility
 {
     public class FunctionComponent : IFunctionComponent
     {
-
-
         /// <summary>
         /// Returns a function that always returns the passed value
         /// </summary>

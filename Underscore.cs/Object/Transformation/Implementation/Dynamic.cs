@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Underscore.Object.Reflection;
 
 namespace Underscore.Object
@@ -25,7 +21,7 @@ namespace Underscore.Object
             foreach ( var property in _property.All( value ) )
                 expando.Add( property.Name , property.GetValue( value ) );
 
-            return expando as ExpandoObject;
+            return (ExpandoObject) expando;
         }
     }
 }
