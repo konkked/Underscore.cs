@@ -108,12 +108,31 @@ namespace Underscore.List
         {
             for ( int i=0 ; i < list.Count ; i++ )
                 if ( on( list[ i ] ) )
-                    return Partition<T>( list, i );
+                    return Partition( list, i );
 
             return Tuple.Create( new T[ ] { } as IEnumerable<T>, new List<T>( list ) as IEnumerable<T>);
         }
 
-        /// <summary>
+	    public Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>(IList<T> list, Func<T, bool> on)
+	    {
+			var left = new List<T>();
+		    var right = new List<T>();
+
+		    for (var i = 0; i < list.Count; i++)
+		    {
+			    if(on(list[i]))
+					left.Add(list[i]);
+			    else
+					right.Add(list[i]);
+		    }
+
+		    return Tuple.Create(
+			    (IEnumerable<T>) left,
+			    (IEnumerable<T>) right
+			);
+	    }
+
+	    /// <summary>
         /// Takes a slice from a list, if start is greater then the end index
         /// the results are reversed, if the index is negative corresponds to the index
         /// from the back of the list, if the slice is larger than the size of the list
