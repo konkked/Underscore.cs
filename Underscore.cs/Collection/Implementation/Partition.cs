@@ -103,7 +103,7 @@ namespace Underscore.Collection
 		/// e.g.
 		/// 
 		/// Partition([1,2,3,4,5], 2) would return
-		/// Tuple([1,2],[4,5])
+		/// Tuple([1,2],[3,4,5])
         /// </summary>
         public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IEnumerable<T> collection, int index )
         {
@@ -116,7 +116,7 @@ namespace Underscore.Collection
 	        {
 		        if(i < index)
 					left.Add(value);
-				else if (i > index)
+				else
 					right.Add(value);
 
 		        i++;
@@ -136,7 +136,7 @@ namespace Underscore.Collection
         /// e.g.
         /// 
         /// Partition([1,2,3], n => n == 2) would return
-        /// Tuple([1],[3])
+        /// Tuple([1],[2,3])
         /// </summary>
 		public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>(IEnumerable<T> collection, Func<T, bool> on)
         {
@@ -155,9 +155,14 @@ namespace Underscore.Collection
 					// if we haven't hit the predicate yet, 
 					// check if we're hitting it now
 			        if (on(value))
+			        {
 				        hitPred = true;
+				        right.Add(value);
+			        }
 			        else
+			        {
 						left.Add(value);
+			        }
 		        }
 	        }
 

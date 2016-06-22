@@ -24,8 +24,8 @@ namespace Underscore.Test.Object.Reflection
             public bool InvokeWithParametersAndReturnValueWasCalled { get; private set; }
             public string InvokeWithParametersAndReturnValueParameter1 { get; private set; }
             public string InvokeWithParametersAndReturnValueParameter2 { get; private set; }
-            public List<string> InvokeWithParameterWithReturnValueParameter1History { get; } = new List<string>();
-            public List<string> InvokeWithParameterWithReturnValueParameter2History { get; } = new List<string>();
+            public List<string> InvokeWithParameterWithReturnValueParameter1History = new List<string>();
+            public List<string> InvokeWithParameterWithReturnValueParameter2History = new List<string>();
 
             public string InvokeWithParametersAndReturnValue(string parameter1, string parameter2)
             {
@@ -41,8 +41,8 @@ namespace Underscore.Test.Object.Reflection
             public bool InvokeWithParameterWithoutReturnValueWasCalled { get; private set; }
             public string InvokeWithParameterWithoutReturnValueParameter1 { get; private set; }
             public string InvokeWithParameterWithoutReturnValueParameter2 { get; private set; }
-            public List<string> InvokeWithParameterWithoutReturnValueParameter1History { get; } = new List<string>();
-            public List<string> InvokeWithParameterWithoutReturnValueParameter2History { get; } = new List<string>();
+            public List<string> InvokeWithParameterWithoutReturnValueParameter1History = new List<string>();
+            public List<string> InvokeWithParameterWithoutReturnValueParameter2History = new List<string>();
 
             public void InvokeWithParameterWithoutReturnValue(string parameter1, string parameter2)
             {
