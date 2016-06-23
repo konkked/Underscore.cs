@@ -64,9 +64,8 @@
     <Compile Include="Action\PartialTest.cs" />
     <Compile Include="Action\SplitTest.cs" />
     <Compile Include="BootstrapperTest.cs" />
-    <Compile Include="Collection\AggregateTest.cs" />
     <Compile Include="Collection\CreationTest.cs" />
-    <Compile Include="Collection\Delegation.cs" />
+    <Compile Include="Collection\DelegationTest.cs" />
     <Compile Include="Collection\Partition\CombinationsTest.cs" />
     <Compile Include="Collection\Partition\ChunkTest.cs" />
     <Compile Include="Collection\Partition\PartitionTest.cs" />
