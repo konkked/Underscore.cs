@@ -69,7 +69,8 @@
     <Compile Include="Collection\Delegation.cs" />
     <Compile Include="Collection\PartitionTest.cs" />
     <Compile Include="Function\BindTest.cs" />
-    <Compile Include="Function\ComposeTest.cs" />
+    <Compile Include="Function\Compose\ComposeTest.cs" />
+    <Compile Include="Function\Compose\ApplyTest.cs" />
     <Compile Include="Function\SynchTest.cs" />
     <Compile Include="Function\PartialTest.cs" />
     <Compile Include="Function\SplitTest.cs" />
