@@ -67,7 +67,9 @@
     <Compile Include="Collection\AggregateTest.cs" />
     <Compile Include="Collection\CreationTest.cs" />
     <Compile Include="Collection\Delegation.cs" />
-    <Compile Include="Collection\PartitionTest.cs" />
+    <Compile Include="Collection\Partition\CombinationsTest.cs" />
+    <Compile Include="Collection\Partition\ChunkTest.cs" />
+    <Compile Include="Collection\Partition\PartitionTest.cs" />
     <Compile Include="Function\BindTest.cs" />
     <Compile Include="Function\Compose\ComposeTest.cs" />
     <Compile Include="Function\Compose\ApplyTest.cs" />
