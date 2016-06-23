@@ -14,193 +14,98 @@ namespace Underscore.Action
         /// <summary>
         /// Calls the passed action using the passed array of elements as it's parameters
         /// </summary>
-		void Apply<T>( Action<T> action , T[] arguments  );
+		void Apply<T>(Action<T> action , T[] arguments);
 		
 				
         /// <summary>
         /// Calls the passed action using the passed array of elements as it's parameters
         /// </summary>
-		void Apply<T>( Action<T, T> action , T[] arguments  );
+		void Apply<T>(Action<T, T> action , T[] arguments);
 		
 				
         /// <summary>
         /// Calls the passed action using the passed array of elements as it's parameters
         /// </summary>
-		void Apply<T>( Action<T, T, T> action , T[] arguments  );
+		void Apply<T>(Action<T, T, T> action , T[] arguments);
 		
 				
         /// <summary>
         /// Calls the passed action using the passed array of elements as it's parameters
         /// </summary>
-		void Apply<T>( Action<T, T, T, T> action , T[] arguments  );
+		void Apply<T>(Action<T, T, T, T> action , T[] arguments);
 		
 				
         /// <summary>
         /// Calls the passed action using the passed array of elements as it's parameters
         /// </summary>
-		void Apply<T>( Action<T, T, T, T, T> action , T[] arguments  );
+		void Apply<T>(Action<T, T, T, T, T> action , T[] arguments);
 		
 				
         /// <summary>
         /// Calls the passed action using the passed array of elements as it's parameters
         /// </summary>
-		void Apply<T>( Action<T, T, T, T, T, T> action , T[] arguments  );
+		void Apply<T>(Action<T, T, T, T, T, T> action , T[] arguments);
 		
 				
         /// <summary>
         /// Calls the passed action using the passed array of elements as it's parameters
         /// </summary>
-		void Apply<T>( Action<T, T, T, T, T, T, T> action , T[] arguments  );
+		void Apply<T>(Action<T, T, T, T, T, T, T> action , T[] arguments);
 		
 				
         /// <summary>
         /// Calls the passed action using the passed array of elements as it's parameters
         /// </summary>
-		void Apply<T>( Action<T, T, T, T, T, T, T, T> action , T[] arguments  );
+		void Apply<T>(Action<T, T, T, T, T, T, T, T> action , T[] arguments);
 		
 				
         /// <summary>
         /// Calls the passed action using the passed array of elements as it's parameters
         /// </summary>
-		void Apply<T>( Action<T, T, T, T, T, T, T, T, T> action , T[] arguments  );
+		void Apply<T>(Action<T, T, T, T, T, T, T, T, T> action , T[] arguments);
 		
 				
         /// <summary>
         /// Calls the passed action using the passed array of elements as it's parameters
         /// </summary>
-		void Apply<T>( Action<T, T, T, T, T, T, T, T, T, T> action , T[] arguments  );
+		void Apply<T>(Action<T, T, T, T, T, T, T, T, T, T> action , T[] arguments);
+	
+				
+        /// <summary>
+        /// Calls the passed action using the passed array of elements as it's parameters
+        /// </summary>
+		void Apply<T>(Action<T, T, T, T, T, T, T, T, T, T, T> action , T[] arguments);
 		
 				
         /// <summary>
         /// Calls the passed action using the passed array of elements as it's parameters
         /// </summary>
-		void Apply<T>( Action<T, T, T, T, T, T, T, T, T, T, T> action , T[] arguments  );
+		void Apply<T>(Action<T, T, T, T, T, T, T, T, T, T, T, T> action , T[] arguments);
 		
 				
         /// <summary>
         /// Calls the passed action using the passed array of elements as it's parameters
         /// </summary>
-		void Apply<T>( Action<T, T, T, T, T, T, T, T, T, T, T, T> action , T[] arguments  );
+		void Apply<T>(Action<T, T, T, T, T, T, T, T, T, T, T, T, T> action , T[] arguments);
 		
 				
         /// <summary>
         /// Calls the passed action using the passed array of elements as it's parameters
         /// </summary>
-		void Apply<T>( Action<T, T, T, T, T, T, T, T, T, T, T, T, T> action , T[] arguments  );
+		void Apply<T>(Action<T, T, T, T, T, T, T, T, T, T, T, T, T, T> action , T[] arguments);
 		
 				
         /// <summary>
         /// Calls the passed action using the passed array of elements as it's parameters
         /// </summary>
-		void Apply<T>( Action<T, T, T, T, T, T, T, T, T, T, T, T, T, T> action , T[] arguments  );
+		void Apply<T>(Action<T, T, T, T, T, T, T, T, T, T, T, T, T, T, T> action , T[] arguments);
 		
 				
         /// <summary>
         /// Calls the passed action using the passed array of elements as it's parameters
         /// </summary>
-		void Apply<T>( Action<T, T, T, T, T, T, T, T, T, T, T, T, T, T, T> action , T[] arguments  );
+		void Apply<T>(Action<T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T> action , T[] arguments);
 		
-				
-        /// <summary>
-        /// Calls the passed action using the passed array of elements as it's parameters
-        /// </summary>
-		void Apply<T>( Action<T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T> action , T[] arguments  );
-		
-				
-        /// <summary>
-        /// Calls the action passed with the given arguments as the parameters 
-        /// </summary>
-		void Call<T1>( Action<T1> action ,T1 a );
-		
-				
-        /// <summary>
-        /// Calls the action passed with the given arguments as the parameters 
-        /// </summary>
-		void Call<T1, T2>( Action<T1, T2> action ,T1 a ,T2 b );
-		
-				
-        /// <summary>
-        /// Calls the action passed with the given arguments as the parameters 
-        /// </summary>
-		void Call<T1, T2, T3>( Action<T1, T2, T3> action ,T1 a ,T2 b ,T3 c );
-		
-				
-        /// <summary>
-        /// Calls the action passed with the given arguments as the parameters 
-        /// </summary>
-		void Call<T1, T2, T3, T4>( Action<T1, T2, T3, T4> action ,T1 a ,T2 b ,T3 c ,T4 d );
-		
-				
-        /// <summary>
-        /// Calls the action passed with the given arguments as the parameters 
-        /// </summary>
-		void Call<T1, T2, T3, T4, T5>( Action<T1, T2, T3, T4, T5> action ,T1 a ,T2 b ,T3 c ,T4 d ,T5 e );
-		
-				
-        /// <summary>
-        /// Calls the action passed with the given arguments as the parameters 
-        /// </summary>
-		void Call<T1, T2, T3, T4, T5, T6>( Action<T1, T2, T3, T4, T5, T6> action ,T1 a ,T2 b ,T3 c ,T4 d ,T5 e ,T6 f );
-		
-				
-        /// <summary>
-        /// Calls the action passed with the given arguments as the parameters 
-        /// </summary>
-		void Call<T1, T2, T3, T4, T5, T6, T7>( Action<T1, T2, T3, T4, T5, T6, T7> action ,T1 a ,T2 b ,T3 c ,T4 d ,T5 e ,T6 f ,T7 g );
-		
-				
-        /// <summary>
-        /// Calls the action passed with the given arguments as the parameters 
-        /// </summary>
-		void Call<T1, T2, T3, T4, T5, T6, T7, T8>( Action<T1, T2, T3, T4, T5, T6, T7, T8> action ,T1 a ,T2 b ,T3 c ,T4 d ,T5 e ,T6 f ,T7 g ,T8 h );
-		
-				
-        /// <summary>
-        /// Calls the action passed with the given arguments as the parameters 
-        /// </summary>
-		void Call<T1, T2, T3, T4, T5, T6, T7, T8, T9>( Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action ,T1 a ,T2 b ,T3 c ,T4 d ,T5 e ,T6 f ,T7 g ,T8 h ,T9 i );
-		
-				
-        /// <summary>
-        /// Calls the action passed with the given arguments as the parameters 
-        /// </summary>
-		void Call<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>( Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action ,T1 a ,T2 b ,T3 c ,T4 d ,T5 e ,T6 f ,T7 g ,T8 h ,T9 i ,T10 j );
-		
-				
-        /// <summary>
-        /// Calls the action passed with the given arguments as the parameters 
-        /// </summary>
-		void Call<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>( Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action ,T1 a ,T2 b ,T3 c ,T4 d ,T5 e ,T6 f ,T7 g ,T8 h ,T9 i ,T10 j ,T11 k );
-		
-				
-        /// <summary>
-        /// Calls the action passed with the given arguments as the parameters 
-        /// </summary>
-		void Call<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>( Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action ,T1 a ,T2 b ,T3 c ,T4 d ,T5 e ,T6 f ,T7 g ,T8 h ,T9 i ,T10 j ,T11 k ,T12 l );
-		
-				
-        /// <summary>
-        /// Calls the action passed with the given arguments as the parameters 
-        /// </summary>
-		void Call<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>( Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action ,T1 a ,T2 b ,T3 c ,T4 d ,T5 e ,T6 f ,T7 g ,T8 h ,T9 i ,T10 j ,T11 k ,T12 l ,T13 m );
-		
-				
-        /// <summary>
-        /// Calls the action passed with the given arguments as the parameters 
-        /// </summary>
-		void Call<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>( Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action ,T1 a ,T2 b ,T3 c ,T4 d ,T5 e ,T6 f ,T7 g ,T8 h ,T9 i ,T10 j ,T11 k ,T12 l ,T13 m ,T14 n );
-		
-				
-        /// <summary>
-        /// Calls the action passed with the given arguments as the parameters 
-        /// </summary>
-		void Call<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>( Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action ,T1 a ,T2 b ,T3 c ,T4 d ,T5 e ,T6 f ,T7 g ,T8 h ,T9 i ,T10 j ,T11 k ,T12 l ,T13 m ,T14 n ,T15 o );
-		
-				
-        /// <summary>
-        /// Calls the action passed with the given arguments as the parameters 
-        /// </summary>
-		void Call<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>( Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action ,T1 a ,T2 b ,T3 c ,T4 d ,T5 e ,T6 f ,T7 g ,T8 h ,T9 i ,T10 j ,T11 k ,T12 l ,T13 m ,T14 n ,T15 o ,T16 p );
 
         /// <summary>
         /// Creates a sigle composite action from the passed functions
