@@ -1,6 +1,29 @@
 # Collection Module
 ## Creation
-### TODO
+### Func<IEnumerable<T>> Snapshot<T>(IEnumerable<T> collection)
+Creates a function that always returns a copy of the passed collection at the time it was called.
+```
+int[] myArray = { 1, 2, 3, 4 };
+Func<IEnumerable<int>> myArraySnapshot = _.Collection.Snapshot(myArray);
+
+int[] snapshotResult = myArraySnapshot(); // returns { 1, 2, 3, 4 }
+
+myArray[1] = 30; // myArray is now { 1, 30, 3, 4 }
+
+snapshotResult = myArraySnapshot(); // this still returns { 1, 2, 3, 4 }
+```
+
+### IEnumerable<T> Extend<T>(IEnumerable<T> collection, int length)
+Cycles through the given collection for "length" iterations.
+```
+_.Collection.Extend(new int[] {1, 2, 3}, 12) // returns {1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3}
+```
+
+### IEnumerable<T> Cycle<T>(IEnumerable<T> collection)
+Cycles through the given collection infinitely -- will continue cycling lazily as long as you iterate on it.
+```
+_.Collection.Cycle(new int[] {1, 2, 3}) // returns {1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3...}
+```
 
 ## Delegation
 ### TODO
