@@ -2,6 +2,9 @@
 ***This is an incomplete work. We're going to update it as we flesh out the coding standards we'd like to have as we go through the project rework/expansion***
 
 ## Writing Unit Tests
+### What do we use to write unit tests?
+Currently, the project uses Microsoft's unit testing framework that's built into Visual Studio, Microsoft.VisualStudio.TestTools.UnitTesting. Currently there's no way to run tests using the console or on OSX/Linux, which is a feature that's to be implemented Soon™.
+
 ### Naming Conventions
 When naming a test, the format should be Module_SubModule_Function_Description, where SubModule is optional depending on whether it applies.
 
