@@ -58,7 +58,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Action\BindTest.cs" />
-    <Compile Include="Action\ComposeTest.cs" />
+    <Compile Include="Action\Compose\ComposeTest.cs" />
+    <Compile Include="Action\Compose\ApplyTest.cs" />
     <Compile Include="Action\SynchTest.cs" />
     <Compile Include="Action\PartialTest.cs" />
     <Compile Include="Action\SplitTest.cs" />
