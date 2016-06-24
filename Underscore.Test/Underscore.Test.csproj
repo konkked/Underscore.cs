@@ -64,8 +64,13 @@
     <Compile Include="Action\Split\CurryTest.cs" />
     <Compile Include="Action\Split\SplitTest.cs" />
     <Compile Include="Action\Split\UncurryTest.cs" />
-    <Compile Include="Action\SynchTest.cs" />
     <Compile Include="Action\PartialTest.cs" />
+    <Compile Include="Action\Synch\AfterTest.cs" />
+    <Compile Include="Action\Synch\BeforeTest.cs" />
+    <Compile Include="Action\Synch\DebounceTest.cs" />
+    <Compile Include="Action\Synch\DelayTest.cs" />
+    <Compile Include="Action\Synch\OnceTest.cs" />
+    <Compile Include="Action\Synch\ThrottleTest.cs" />
     <Compile Include="BootstrapperTest.cs" />
     <Compile Include="Collection\CreationTest.cs" />
     <Compile Include="Collection\DelegationTest.cs" />
