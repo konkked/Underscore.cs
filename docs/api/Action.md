@@ -11,7 +11,7 @@ Action boundAction = _.Action.Bind(myAction, foo);
 boundAction(); // prints "Hello, World!" to console
 ```
 
-### Action<T2> Partial<T1, T2>( Action<T1, T2> action, T1 a )
+### Action\<T2\> Partial\<T1, T2\>(Action\<T1, T2\> action, T1 a)
 Partially binds the given parameters to action, from left to right. Works with any combination of Action parameter counts and number of parameters to partially bind (if you want to partially bind 11 parameters to a 14 parameter function, you can).
 ```
 Action<int, string> myAction = (i, s) => Console.WriteLine("{0} {1}", i, s);
@@ -19,4 +19,13 @@ Action<int, string> myAction = (i, s) => Console.WriteLine("{0} {1}", i, s);
 Action<string> boundAction = _.Action.Partial(myAction, 1);
 
 boundAction("foo"); // prints "1 foo"
+```
+
+## Convert
+### Func\<object\> ToFunction(Action action);
+Converts the given action into a function which performs the action then returns null. Useful for overloading functions to accept both Func and Action inputs.
+```
+Action myAction = () => Console.WriteLine("I'm hit!");
+
+object result = _.Action.ToFunction(myAction); // prints "I'm hit!" and result == null
 ```
