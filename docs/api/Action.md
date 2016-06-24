@@ -1,4 +1,6 @@
 # Action Module
+***Note that while these are separated into categories here based on behavior, they are all called from _.Action***
+
 ## Bind
 ### Action Bind\<T1\>(Action\<T1\> action, T1 a)
 Binds action to given variables. When called with more variables (and a action with a param list of matching size), binds all of the variables to the given action.
@@ -45,7 +47,7 @@ splitAction(1, 2)(3, 4); // prints "1 2 3 4
 Returns a function which takes a chain of function calls to use as arguments for action (see examples). Can be called with Actions that have up to 16 parameters.
 ```
 // with an action with a few parameters
-Action<int, int> smallAction = (a, b) => Console.WriteLine("{0} {1}");
+Action<int, int> smallAction = (a, b) => Console.WriteLine("{0} {1}", a, b);
 var smallCurriedAction = _.Curry(smallAction);
 
 smallCurriedAction(1)(2); // prints "1 2"
@@ -56,4 +58,18 @@ Action<int, int, int, int, int, int, int, int, int, int> bigAction = (a, b, c, d
 var bigCurriedAction = _.Curry(bigAction);
 
 bigCurriedAction(1)(2)(3)(4)(5)(6)(7)(8)(9)(10); // prints "1 2 3 4 5 6 7 8 9 10"
+```
+
+### Action\<T0, T1\> Uncurry\<T0, T1\>(Func\<T0, Action\<T1\>\> action)
+Returns an action which takes a set of arguments from a function that was curried (see example).
+```
+Action<int, int, int> action = (a, b, c) => Console.WriteLine("{0} {1} {2}", a, b, c);
+
+var curriedFunction = _.Curry(action);
+
+var uncurriedFunction = _.Uncurry(curriedFunction);
+
+action(1, 2, 3); // prints "1 2 3"
+curriedFunction(1)(2)(3); // prints "1 2 3"
+uncurriedFunction(1, 2, 3) // prints "1 2 3"
 ```
