@@ -73,3 +73,37 @@ action(1, 2, 3); // prints "1 2 3"
 curriedFunction(1)(2)(3); // prints "1 2 3"
 uncurriedFunction(1, 2, 3) // prints "1 2 3"
 ```
+
+## Synch
+### Before
+
+### Func\<Task\> After(Action action, int count)
+Returns a function which returns a task that only starts performing the given action after it is invoked count times.
+```
+// we'll use this to see how many times the function is invoked
+int counter = 0;
+
+// we'll use this to store the tasks produced by the aftered function
+Task[] tasks = new Task[6];
+
+Action action = () => counter++;
+
+Func<Task> aftered = _.Action.After(action, 3);
+
+// set up a list of aftered tasks to run
+for(int i = 0; i < tasks.Length; i++)
+    tasks[i] = aftered();
+
+for(int i = 0; i < tasks.Length; i++)
+    tasks[i].Wait();
+
+Console.WriteLine(counter); // prints 3
+```
+
+### Once
+
+### Debounce
+
+### Throttle
+
+### Delay

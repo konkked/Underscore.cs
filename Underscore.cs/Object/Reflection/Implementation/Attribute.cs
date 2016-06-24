@@ -8,12 +8,23 @@ namespace Underscore.Object.Reflection
 {
     public class AttributeComponent : IAttributeComponent
     {
-
         private readonly Func<object , IEnumerable<Attribute>> _getAttributes;
 
         private IEnumerable<Attribute> GetCustomAttributesImpl(object obj)
         {
             if(obj == null) return new Attribute[] {};
+
+            var typeOf = obj.GetType();
+
+            if (typeof(MemberInfo).IsAssignableFrom(typeOf))
+            {
+                return ((MemberInfo)obj).GetCustomAttributes(true).Select(a => (Attribute)a);
+            }
+
+            if (obj is Type)
+            {
+                return ((Type)obj).GetCustomAttributes(true).Select(a => (Attribute)a);
+            }
 
             return obj.GetType().GetCustomAttributes(true).Select(a => (Attribute)a);
         }
