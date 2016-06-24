@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
 using Underscore.Action;
 using System.Linq;
 
@@ -11,8 +10,24 @@ namespace Underscore.Test.Action
     {
         private static string Join( params string[ ] args )
         {
-            return string.Join( " ", values: ( args ).Where( trg => trg != null ) );
+	        return string.Join(" ", args.Where(trg => trg != null));
         }
+
+		private const string Arg1 = "a";
+		private const string Arg2 = "b";
+		private const string Arg3 = "c";
+		private const string Arg4 = "d";
+	    private const string Arg5 = "e";
+
+	    private PartialComponent component;
+		private string[] output;
+
+		[TestInitialize]
+	    public void Initialize()
+		{
+			component = new PartialComponent();
+			output = new string[1];
+		}
 
 
         #region BindPartialAction.Helpers
@@ -32,147 +47,159 @@ namespace Underscore.Test.Action
             return ( a, b, c ) => result[ 0 ] = fn( a, b, c );
         }
 
-        private static Action<string, string> BindPartialActionTarget( string[ ] result, Func<string, string, string> fn )
-        {
-            return ( a, b ) => result[ 0 ] = fn( a, b );
-        }
-
-        private static Action<string> BindPartialActionTarget( string[ ] result, Func<string, string> fn )
-        {
-            return ( a ) => result[ 0 ] = fn( a );
-        }
-
         #endregion
 
         #region BindPartialAction.Tests
 
-        [TestMethod]
-        public async Task BindPartial_Action( )
-        {
-            var a = "a";
-            var b = "b";
-            var c = "c";
-            var d = "d";
-            var e = "e";
+		[TestMethod]
+		public void Action_Bind_Partial_2Params1Given()
+		{
+			const string expected = "a b";
 
-            var expected = new[ ]{
-                "a b c d e",
-                "a b c d",
-                "a b c",
-                "a b"
-            };
+			Action<string, string> toBind = (a, b) => output[0] = Join(a, b);
 
-            var _module = new PartialComponent( );
+			var binding = component.Partial(toBind, Arg1);
+			binding(Arg2);
 
-            await Util.Tasks.Start( ( ) =>
-            {
+			var result = output[0];
 
-                var result = new string[ 1 ];
+			Assert.AreEqual(expected, result);
+		}
 
-                Func<string> getResult = ( ) => result[ 0 ];
+		[TestMethod]
+		public void Action_Bind_Partial_3Params1Given()
+		{
+			const string expected = "a b c";
 
-                var tobind = BindPartialActionTarget( result, ( _a, _b, _c, _d, _e ) => Join( _a, _b, _c, _d, _e ) );
+			Action<string, string, string> toBind = (a, b, c) => output[0] = Join(a, b, c);
 
-                var binding1 = _module.Partial( tobind, a );
-                var binding2 = _module.Partial( tobind, a, b );
-                var binding3 = _module.Partial( tobind, a, b, c );
-                var binding4 = _module.Partial( tobind, a, b, c, d );
+			var binding = component.Partial(toBind, Arg1);
+			binding(Arg2, Arg3);
 
-                binding1( b, c, d, e );
-                var result1 = getResult( );
+			var result = output[0];
 
-                binding2( c, d, e );
-                var result2 = getResult( );
+			Assert.AreEqual(expected, result);
+		}
 
-                binding3( d, e );
-                var result3 = getResult( );
+		[TestMethod]
+		public void Action_Bind_Partial_3Params2Given()
+		{
+			const string expected = "a b c";
 
-                binding4( e );
-                var result4 = getResult( );
+			Action<string, string, string> toBind = (a, b, c) => output[0] = Join(a, b, c);
 
-                var expecting = expected[ 0 ];
+			var binding = component.Partial(toBind, Arg1, Arg2);
+			binding(Arg3);
 
-                var results = new[ ] { result1, result2, result3, result4 };
+			var result = output[0];
 
-                foreach ( var r in results )
-                    Assert.AreEqual( expecting, r );
-            }, ( ) =>
-            {
+			Assert.AreEqual(expected, result);
+		}
 
-                var result = new string[ 1 ];
+		[TestMethod]
+		public void Action_Bind_Partial_4Params1Given()
+		{
+			const string expected = "a b c d";
 
-                Func<string> getResult = ( ) => result[ 0 ];
+			Action<string, string, string, string> toBind = (a, b, c, d) => output[0] = Join(a, b, c, d);
 
-                var tobind = BindPartialActionTarget( result, ( _a, _b, _c, _d ) => Join( _a, _b, _c, _d ) );
+			var binding = component.Partial(toBind, Arg1);
+			binding(Arg2, Arg3, Arg4);
 
-                var binding1 = _module.Partial( tobind, a );
-                var binding2 = _module.Partial( tobind, a, b );
-                var binding3 = _module.Partial( tobind, a, b, c );
+			var result = output[0];
 
-                binding1( b, c, d );
-                var result1 = getResult( );
+			Assert.AreEqual(expected, result);
+		}
 
-                binding2( c, d );
-                var result2 = getResult( );
+		[TestMethod]
+		public void Action_Bind_Partial_4Params2Given()
+		{
+			const string expected = "a b c d";
 
-                binding3( d );
-                var result3 = getResult( );
+			Action<string, string, string, string> toBind = (a, b, c, d) => output[0] = Join(a, b, c, d);
 
-                var expecting = expected[ 1 ];
+			var binding = component.Partial(toBind, Arg1, Arg2);
+			binding(Arg3, Arg4);
 
-                var results = new[ ] { result1, result2, result3 };
+			var result = output[0];
 
-                foreach ( var r in results )
-                    Assert.AreEqual( expecting, r );
+			Assert.AreEqual(expected, result);
+		}
 
-            }, ( ) =>
-            {
+		[TestMethod]
+		public void Action_Bind_Partial_4Params3Given()
+		{
+			const string expected = "a b c d";
 
-                var result = new string[ 1 ];
+			Action<string, string, string, string> toBind = (a, b, c, d) => output[0] = Join(a, b, c, d);
 
-                Func<string> getResult = ( ) => result[ 0 ];
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			binding(Arg4);
 
-                var tobind = BindPartialActionTarget( result, ( _a, _b, _c ) => Join( _a, _b, _c ) );
+			var result = output[0];
 
-                var binding1 = _module.Partial( tobind, a );
-                var binding2 = _module.Partial( tobind, a, b );
+			Assert.AreEqual(expected, result);
+		}
 
-                binding1( b, c );
-                var result1 = getResult( );
+		[TestMethod]
+	    public void Action_Bind_Partial_5Params1Given()
+	    {
+			const string expected = "a b c d e";
 
-                binding2( c );
-                var result2 = getResult( );
+			Action<string, string, string, string, string> toBind = (a, b, c, d, e) => output[0] = Join(a, b, c, d, e);
 
-                var expecting = expected[ 2 ];
+			var binding = component.Partial(toBind, Arg1);
+			binding(Arg2, Arg3, Arg4, Arg5);
 
-                var results = new[ ] { result1, result2 };
+			var result = output[0];
 
-                foreach ( var r in results )
-                    Assert.AreEqual( expecting, r );
-            }, ( ) =>
-            {
+			Assert.AreEqual(expected, result);
+	    }
 
+		[TestMethod]
+		public void Action_Bind_Partial_5Params2Given()
+		{
+			const string expected = "a b c d e";
 
-                var result = new string[ 1 ];
+			Action<string, string, string, string, string> toBind = (a, b, c, d, e) => output[0] = Join(a, b, c, d, e);
 
-                Func<string> getResult = ( ) => result[ 0 ];
+			var binding = component.Partial(toBind, Arg1, Arg2);
+			binding(Arg3, Arg4, Arg5);
 
-                var tobind = BindPartialActionTarget( result, ( _a, _b ) => Join( _a, _b ) );
+			var result = output[0];
 
-                var binding1 = _module.Partial( tobind, a );
+			Assert.AreEqual(expected, result);
+		}
 
-                binding1( b );
-                var result1 = getResult( );
+		[TestMethod]
+		public void Action_Bind_Partial_5Params3Given()
+		{
+			const string expected = "a b c d e";
 
-                var expecting = expected[ 3 ];
+			Action<string, string, string, string, string> toBind = (a, b, c, d, e) => output[0] = Join(a, b, c, d, e);
 
-                var results = new[ ] { result1 };
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			binding(Arg4, Arg5);
 
-                foreach ( var r in results )
-                    Assert.AreEqual( expecting, r );
-            } );
-        }
+			var result = output[0];
 
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Action_Bind_Partial_5Params4Given()
+		{
+			const string expected = "a b c d e";
+
+			Action<string, string, string, string, string> toBind = (a, b, c, d, e) => output[0] = Join(a, b, c, d, e);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			binding(Arg5);
+
+			var result = output[0];
+
+			Assert.AreEqual(expected, result);
+		}
         #endregion
     }
 }
