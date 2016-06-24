@@ -65,8 +65,10 @@ Returns an action which takes a set of arguments from a function that was currie
 ```
 Action<int, int, int> action = (a, b, c) => Console.WriteLine("{0} {1} {2}", a, b, c);
 
+// we need a curried function to uncurry
 var curriedFunction = _.Curry(action);
 
+// this is equivalent to our starting action
 var uncurriedFunction = _.Uncurry(curriedFunction);
 
 action(1, 2, 3); // prints "1 2 3"
@@ -75,7 +77,21 @@ uncurriedFunction(1, 2, 3) // prints "1 2 3"
 ```
 
 ## Synch
-### Before
+### Action Before(Action action, int count)
+Returns a version of the action which will only invoke a limited number of times. Any invocations past the given limit perform a no-op instead (do nothing).
+```
+// we'll use this to see how many times the function is invoked
+int counter = 0;
+
+Action action = () => counter++;
+
+Action befored = _.Action.Before(action, 3);
+
+for(int i = 0; i < 10; i++)
+    befored();
+
+Console.WriteLine(counter); // prints "3"
+```
 
 ### Func\<Task\> After(Action action, int count)
 Returns a function which returns a task that only starts performing the given action after it is invoked count times.
