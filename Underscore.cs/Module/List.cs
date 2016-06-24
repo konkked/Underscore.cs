@@ -47,17 +47,6 @@ namespace Underscore.Module
             return _delegator.Resolve( target );
         }
 
-        /// <summary>
-        /// Creates a list of functions that return 
-        /// an element from the passed list when invoked 
-        /// </summary>
-        /// <typeparam name="T">Type of the items in the list</typeparam>
-        /// <param name="list">list to create references to</param>
-        /// <returns>list of functions references list item at its index at the time of invocation</returns>
-        public IList<Func<T>> Delegate<T>( IList<T> target )
-        {
-            return _delegator.Delegate( target );
-        }
 
         /// <summary>
         /// Swaps the elements at the specified indexes
