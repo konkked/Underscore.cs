@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace Underscore.Collection
 {
-
-
     public class CreationComponent : ICreationComponent
     {
         /// <summary>
@@ -19,6 +14,9 @@ namespace Underscore.Collection
             return ( ) => new List<T>( tsnap );
         }
 
+		/// <summary>
+		/// cycles through collection for length iterations
+		/// </summary>
         public IEnumerable<T> Extend<T>(IEnumerable<T> collection, int length)
         {
             using (var enmr = collection.GetEnumerator())
@@ -34,11 +32,13 @@ namespace Underscore.Collection
                     }
 
                     yield return enmr.Current;
-
                 }
             }
         }
 
+		/// <summary>
+		/// cycles through collection infinitely
+		/// </summary>
         public IEnumerable<T> Cycle<T>(IEnumerable<T> collection)
         {
             using (var enmr = collection.GetEnumerator())
@@ -49,16 +49,13 @@ namespace Underscore.Collection
                 //make i = 1 instead of zero to account for the first return.
                 while(true)
                 {
-
                     if (!enmr.MoveNext()) { enmr.Reset();
                         enmr.MoveNext();
                     }
 
                     yield return enmr.Current;
-
                 }
             }
         }
-        
     }
 }

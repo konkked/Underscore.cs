@@ -58,17 +58,20 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Action\BindTest.cs" />
-    <Compile Include="Action\ComposeTest.cs" />
+    <Compile Include="Action\Compose\ComposeTest.cs" />
+    <Compile Include="Action\Compose\ApplyTest.cs" />
     <Compile Include="Action\SynchTest.cs" />
     <Compile Include="Action\PartialTest.cs" />
     <Compile Include="Action\SplitTest.cs" />
     <Compile Include="BootstrapperTest.cs" />
-    <Compile Include="Collection\AggregateTest.cs" />
     <Compile Include="Collection\CreationTest.cs" />
-    <Compile Include="Collection\Delegation.cs" />
-    <Compile Include="Collection\PartitionTest.cs" />
+    <Compile Include="Collection\DelegationTest.cs" />
+    <Compile Include="Collection\Partition\CombinationsTest.cs" />
+    <Compile Include="Collection\Partition\ChunkTest.cs" />
+    <Compile Include="Collection\Partition\PartitionTest.cs" />
     <Compile Include="Function\BindTest.cs" />
-    <Compile Include="Function\ComposeTest.cs" />
+    <Compile Include="Function\Compose\ComposeTest.cs" />
+    <Compile Include="Function\Compose\ApplyTest.cs" />
     <Compile Include="Function\SynchTest.cs" />
     <Compile Include="Function\PartialTest.cs" />
     <Compile Include="Function\SplitTest.cs" />

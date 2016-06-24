@@ -8,7 +8,7 @@ namespace Underscore.Collection
 
     public class PartitionComponent : IPartitionComponent
     {
-        private readonly List.IPartitionComponent _partitionComponent; 
+        private readonly List.IPartitionComponent _partitionComponent;
 
         public PartitionComponent(List.IPartitionComponent partitionComponent)
         {
@@ -18,18 +18,18 @@ namespace Underscore.Collection
 		/// <summary>
 		/// this needs a comment
 		/// </summary>\
-        private IEnumerable<T> Segment<T>( IEnumerator<T> iter, int size, out bool cont )
+        private IEnumerable<T> Segment<T>(IEnumerator<T> iter, int size, out bool cont)
         {
-            var ret = new List<T>( );
+            var ret = new List<T>();
             cont = true;
             bool hit = false;
 
-            for ( var i = 0 ; i < size ; i++ )
+            for (var i = 0; i < size; i++)
             {
-                if ( iter.MoveNext( ) )
+                if (iter.MoveNext())
                 {
                     hit = true;
-                    ret.Add( iter.Current );
+                    ret.Add(iter.Current);
                 }
                 else
                 {
@@ -44,51 +44,48 @@ namespace Underscore.Collection
         /// <summary>
         /// Breaks the collection into smaller chunks
         /// </summary>
-        public IEnumerable<IEnumerable<T>> Chunk<T>( IEnumerable<T> collection, int size )
+        public IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> collection, int size)
         {
-
             bool shouldContinue = collection != null && collection.Any();
 
-            using ( var iter = collection.GetEnumerator( ) )
+            using (var iter = collection.GetEnumerator())
             {
-                while ( shouldContinue )
+                while (shouldContinue)
                 {
                     //iteration of the enumerable is done in segment
-                    var result = Segment( iter, size, out shouldContinue );
-                    
-                    if ( shouldContinue || result != null )
+                    var result = Segment(iter, size, out shouldContinue);
+
+                    if (shouldContinue || result != null)
                         yield return result;
-                    
+
                     else yield break;
                 }
             }
-
         }
 
         /// <summary>
         /// Breaks the collection into smaller chunks
         /// </summary>
-        public IEnumerable<IEnumerable<T>> Chunk<T>( IEnumerable<T> collection, Func<T, bool> on )
+        public IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> collection, Func<T, bool> on)
         {
-
-            using ( var iter = collection.GetEnumerator( ) )
+            using (var iter = collection.GetEnumerator())
             {
                 var retv = new List<T>();
-                while ( iter.MoveNext( ) ) 
+                while (iter.MoveNext())
                 {
                     // don't include empty lists
-                    if ( on( iter.Current ) && retv.Count != 0)
+                    if (on(iter.Current) && retv.Count != 0)
                     {
                         yield return retv;
                         retv = new List<T> { iter.Current };
                     }
-                    else 
+                    else
                     {
-                        retv.Add( iter.Current );
+                        retv.Add(iter.Current);
                     }
                 }
 
-                if ( retv.Count != 0 )
+                if (retv.Count != 0)
                     yield return retv;
                 else
                     yield break;
@@ -99,16 +96,16 @@ namespace Underscore.Collection
         /// Breaks collection into two seperate parts
 		/// split into items before the given index
 		/// and items after the given index
-		/// 
+		///
 		/// e.g.
-		/// 
+		///
 		/// Partition([1,2,3,4,5], 2) would return
 		/// Tuple([1,2],[3,4,5])
         /// </summary>
-        public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IEnumerable<T> collection, int index )
+        public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>(IEnumerable<T> collection, int index)
         {
-            var left = new List<T>( );
-            var right = new List<T>( );
+            var left = new List<T>();
+            var right = new List<T>();
 
 	        int i = 0;
 
@@ -132,9 +129,9 @@ namespace Underscore.Collection
         /// Breaks collection into two seperate parts,
         /// split into items before an item matches the given predicate
         /// and items after an item matches the given predicate
-        /// 
+        ///
         /// e.g.
-        /// 
+        ///
         /// Partition([1,2,3], n => n == 2) would return
         /// Tuple([1],[2,3])
         /// </summary>
@@ -152,7 +149,7 @@ namespace Underscore.Collection
 		        }
 		        else
 		        {
-					// if we haven't hit the predicate yet, 
+					// if we haven't hit the predicate yet,
 					// check if we're hitting it now
 			        if (on(value))
 			        {
@@ -176,9 +173,9 @@ namespace Underscore.Collection
 		/// Breaks collection into two seperate parts,
 		/// split into items that match the predicate
 		/// and items that do not match the predicate
-		/// 
+		///
 		/// e.g.
-		/// 
+		///
 		/// Partition([1,2,3], n => n == 2) would return
 		/// Tuple([2],[1,3])
 		/// </summary>

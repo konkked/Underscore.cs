@@ -80,7 +80,6 @@ namespace Underscore.Object.Reflection
             }
             else
             {
-
                 var properties = me._properties.All(query).Select(a => new
                 {
                     Value = a.GetGetMethod().Invoke(query, null), a.Name
@@ -126,10 +125,7 @@ namespace Underscore.Object.Reflection
 
             }
 
-            if (!currMethods.Any())
-                return (new T[] { });
-            else
-                return currMethods.Select(a => a.Method);
+            return !currMethods.Any() ? (new T[] { }) : currMethods.Select(a => a.Method);
 
         }
 

@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Reflection;
 using Underscore.Object.Reflection;
-using Underscore.Utility;
 
 namespace Underscore.Object
 {
@@ -24,18 +23,41 @@ namespace Underscore.Object
                 if ( destination.PropertyType == possibleMatch.PropertyType )
                     return possibleMatch;
 
+	            var isAssignable = IsAssignableOneWay(destination, possibleMatch)
+	                                && IsAssignableToResult(result, possibleMatch);
+
                 //is assignable to
-                if ( destination.PropertyType.IsAssignableFrom( possibleMatch.PropertyType )
-                    && ( result == null || (
-                    result.PropertyType.IsAssignableFrom( possibleMatch.PropertyType )
-                    && !possibleMatch.PropertyType.IsAssignableFrom( result.PropertyType )
-                    ) )
-                )
+                if (isAssignable)
                     result = possibleMatch;
             }
 
             return result;
         }
+
+		/// <summary>
+		/// determines if possibleMatch can be assigned to destination
+		/// </summary>
+	    private bool IsAssignableOneWay(PropertyInfo destination, PropertyInfo possibleMatch)
+		{
+			return destination.PropertyType.IsAssignableFrom(possibleMatch.PropertyType);
+		}
+
+		/// <summary>
+		/// determines if the result is either null or only valid for a one-way assignment with possibleMatch
+		/// </summary>
+	    private bool IsAssignableToResult(PropertyInfo result, PropertyInfo possibleMatch)
+	    {
+		    return result == null || OnlyAssignableOneWay(result, possibleMatch);
+	    }
+
+		/// <summary>
+		/// determines if possibleMatch is assignable to result but not vice-versa
+		/// </summary>
+	    private bool OnlyAssignableOneWay(PropertyInfo destination, PropertyInfo possibleMatch)
+	    {
+			return IsAssignableOneWay(destination, possibleMatch) &&
+					!IsAssignableOneWay(possibleMatch, destination);
+	    }
 
         /// <summary>
         /// Takes all of the properties 
@@ -44,10 +66,10 @@ namespace Underscore.Object
         /// </summary>
         public void Transpose( object source , object destination )
         {
-            var dst = _property.All( destination );
+            var dest = _property.All( destination );
             var src = _property.All( source );
 
-            var allMatches = from d in dst
+            var allMatches = from d in dest
                              join s in src on d.Name equals s.Name into matchGroups
                              select new { Destination = d, PossibleMatches = matchGroups };
 
@@ -60,7 +82,6 @@ namespace Underscore.Object
                     destProp.SetValue( destination, srcProp.GetValue( source ) );
 
             }
-
         }
 
 
@@ -79,8 +100,6 @@ namespace Underscore.Object
                 if ( from != null )
                     to.SetMethod.Invoke( first , new object[ ] { from.GetMethod.Invoke( second , null ) } );
             }
-
-
         }
 
         public TFirst Coalesce<TFirst>( TFirst first , object second )
@@ -91,7 +110,7 @@ namespace Underscore.Object
 
         public TFirst Coalesce<TFirst>( TFirst first , object second , bool newObject ) where TFirst : new( )
         {
-            TFirst returning = newObject ? Coalesce( new TFirst( ) , first ) : first;
+            var returning = newObject ? Coalesce( new TFirst( ) , first ) : first;
             return Coalesce( returning , second );
         }
     }

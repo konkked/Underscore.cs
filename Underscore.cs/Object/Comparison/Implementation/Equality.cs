@@ -55,7 +55,7 @@ namespace Underscore.Object.Comparison
             return true;
         }
 
-        public bool AreEquatableTypeSensitiveImpl(object a, object b, bool mixed)
+        private bool AreEquatableTypeSensitiveImpl(object a, object b, bool mixed)
         {
             if (Equals(a, b))
                 return true;
@@ -64,13 +64,12 @@ namespace Underscore.Object.Comparison
             if (a == null ^ b == null)
                 return false;
 
-            //because know both match only check one to know both are null
+            // because we know both match only check one to know both are null
             if (a == null)
                 return true;
 
             if (a.GetType() != b.GetType())
                 return false;
-
 
             var joined = _property.Pairs(a)
                 .Join(_property.Pairs(b), l => l.Name, r => r.Name,
@@ -87,7 +86,7 @@ namespace Underscore.Object.Comparison
             if (typeSensitive)
             {
                 //in this case we want everything to be case sensitive all the way down
-                return AreEquatableTypeSensitiveImpl(a, b,false);
+                return AreEquatableTypeSensitiveImpl(a, b, false);
             }
 
             return AreEquatableTypeInsensitiveImpl(a, b);
