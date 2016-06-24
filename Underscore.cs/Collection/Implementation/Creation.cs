@@ -8,26 +8,28 @@ namespace Underscore.Collection
         /// <summary>
         /// creates a function that always returns a copy of the passed collection at the time it was called
         /// </summary>
-        public Func<IEnumerable<T>> Snapshot<T>( IEnumerable<T> collection )
+        public Func<IEnumerable<T>> Snapshot<T>(IEnumerable<T> collection)
         {
-            var tsnap = new List<T>( collection );
-            return ( ) => new List<T>( tsnap );
+            var tsnap = new List<T>(collection);
+            return () => new List<T>(tsnap);
         }
 
-		/// <summary>
-		/// cycles through collection for length iterations
-		/// </summary>
+        /// <summary>
+        /// cycles through collection for length iterations
+        /// </summary>
         public IEnumerable<T> Extend<T>(IEnumerable<T> collection, int length)
         {
             using (var enmr = collection.GetEnumerator())
             {
-                if(!enmr.MoveNext()) throw new ApplicationException("Cannot extend an empty collection");
+                if (!enmr.MoveNext()) throw new ApplicationException("Cannot extend an empty collection");
                 yield return enmr.Current;
-                
+
                 //make i = 1 instead of zero to account for the first return.
                 for (int i = 1; i < length; i++)
                 {
-                    if (!enmr.MoveNext()) {  enmr.Reset();
+                    if (!enmr.MoveNext())
+                    {
+                        enmr.Reset();
                         enmr.MoveNext();
                     }
 
@@ -36,9 +38,9 @@ namespace Underscore.Collection
             }
         }
 
-		/// <summary>
-		/// cycles through collection infinitely
-		/// </summary>
+        /// <summary>
+        /// cycles through collection infinitely
+        /// </summary>
         public IEnumerable<T> Cycle<T>(IEnumerable<T> collection)
         {
             using (var enmr = collection.GetEnumerator())
@@ -47,9 +49,11 @@ namespace Underscore.Collection
                 yield return enmr.Current;
 
                 //make i = 1 instead of zero to account for the first return.
-                while(true)
+                while (true)
                 {
-                    if (!enmr.MoveNext()) { enmr.Reset();
+                    if (!enmr.MoveNext())
+                    {
+                        enmr.Reset();
                         enmr.MoveNext();
                     }
 

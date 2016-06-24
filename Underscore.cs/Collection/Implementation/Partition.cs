@@ -14,53 +14,29 @@ namespace Underscore.Collection
         {
             _partitionComponent = partitionComponent;
         }
-
-		/// <summary>
-		/// this needs a comment
-		/// </summary>\
-        private IEnumerable<T> Segment<T>(IEnumerator<T> iter, int size, out bool cont)
-        {
-            var ret = new List<T>();
-            cont = true;
-            bool hit = false;
-
-            for (var i = 0; i < size; i++)
-            {
-                if (iter.MoveNext())
-                {
-                    hit = true;
-                    ret.Add(iter.Current);
-                }
-                else
-                {
-                    cont = false;
-                    break;
-                }
-            }
-
-            return hit ? ret : null;
-        }
+        
 
         /// <summary>
         /// Breaks the collection into smaller chunks
         /// </summary>
         public IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> collection, int size)
         {
-            bool shouldContinue = collection != null && collection.Any();
+            if (!collection.Any()) yield break;
 
-            using (var iter = collection.GetEnumerator())
+            var returning = new List<T>();
+            foreach(var item in collection)
             {
-                while (shouldContinue)
+                returning.Add(item);
+                if (returning.Count == size)
                 {
-                    //iteration of the enumerable is done in segment
-                    var result = Segment(iter, size, out shouldContinue);
-
-                    if (shouldContinue || result != null)
-                        yield return result;
-
-                    else yield break;
+                    yield return returning;
+                    returning = new List<T>();
                 }
             }
+
+            if (returning.Count != 0)
+                yield return returning;
+
         }
 
         /// <summary>
@@ -68,28 +44,23 @@ namespace Underscore.Collection
         /// </summary>
         public IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> collection, Func<T, bool> on)
         {
-            using (var iter = collection.GetEnumerator())
+            if (!collection.Any()) yield break;
+
+            var returning = new List<T>();
+            foreach(var item in collection)
             {
-                var retv = new List<T>();
-                while (iter.MoveNext())
+                if (on(item) && returning.Count!=0)
                 {
-                    // don't include empty lists
-                    if (on(iter.Current) && retv.Count != 0)
-                    {
-                        yield return retv;
-                        retv = new List<T> { iter.Current };
-                    }
-                    else
-                    {
-                        retv.Add(iter.Current);
-                    }
+                    yield return returning;
+                    returning = new List<T>();
                 }
 
-                if (retv.Count != 0)
-                    yield return retv;
-                else
-                    yield break;
+                returning.Add(item);
+
             }
+
+            if (returning.Count != 0)
+                yield return returning;
         }
 
         /// <summary>
