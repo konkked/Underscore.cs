@@ -11,48 +11,34 @@ namespace Underscore.Object.Reflection
 
         private readonly Func<object , IEnumerable<Attribute>> _getAttributes;
 
-        private IEnumerable<Attribute> GetCustomAttributesImpl( object obj )
+        private IEnumerable<Attribute> GetCustomAttributesImpl(object obj)
         {
-            if(obj == null) return new Attribute[]{};
+            if(obj == null) return new Attribute[] {};
 
-            var typeOf = obj.GetType();
-
-            
-
-            if ( typeof( MemberInfo ).IsAssignableFrom( typeOf ) )
-            {
-                return ((MemberInfo)obj).GetCustomAttributes(true).Select(a=>(Attribute)a);
-            }
-
-            if ( obj is Type )
-            {
-                return ( (Type)obj ).GetCustomAttributes( true ).Select( a => (Attribute)a );
-            }
-
-            return obj.GetType( ).GetCustomAttributes( true ).Select( a => (Attribute)a );
+            return obj.GetType().GetCustomAttributes(true).Select(a => (Attribute)a);
         }
 
-        public AttributeComponent( ICacheComponent cacheComponent ) 
+        public AttributeComponent(ICacheComponent cacheComponent) 
         {
-            _getAttributes = cacheComponent.Memoize<object , IEnumerable<Attribute>>( GetCustomAttributesImpl );
+            _getAttributes = cacheComponent.Memoize<object , IEnumerable<Attribute>>(GetCustomAttributesImpl);
         }
 
-        public bool Has<TAttribute>( object value ) where TAttribute : Attribute
+        public bool Has<TAttribute>(object value) where TAttribute : Attribute
         {
-            return _getAttributes( value )
-                        .OfType<TAttribute>( ).Any( );
+            return _getAttributes(value)
+                        .OfType<TAttribute>().Any();
         }
 
-        public TAttribute Find<TAttribute>( object value ) where TAttribute : Attribute
+        public TAttribute Find<TAttribute>(object value) where TAttribute : Attribute
         {
-            return _getAttributes( value )
-                        .OfType<TAttribute>( ).FirstOrDefault( );
+            return _getAttributes(value)
+                        .OfType<TAttribute>().FirstOrDefault();
         }
 
-        public IEnumerable<TAttribute> All<TAttribute>( object value ) where TAttribute : Attribute
+        public IEnumerable<TAttribute> All<TAttribute>(object value) where TAttribute : Attribute
         {
-            return _getAttributes( value )
-                        .OfType<TAttribute>( );
+            return _getAttributes(value)
+                        .OfType<TAttribute>();
         }
     }
 }
