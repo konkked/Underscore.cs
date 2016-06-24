@@ -18,7 +18,7 @@ namespace Underscore.Test.Action.Split
 			output = new string[1];
 		}
 
-		private string TestAction(params string[] args)
+		private string Join(params string[] args)
 		{
 			return args.Aggregate(String.Empty, (total, curr) => total + curr);
 		}
@@ -27,88 +27,88 @@ namespace Underscore.Test.Action.Split
 		public void Action_Split_Split_2Arguments()
 		{
 			const string expected = "ab";
-			Action<string, string> action = (a, b) => output[0] = TestAction(a, b);
+			Action<string, string> action = (a, b) => output[0] = Join(a, b);
 
 			component.Split(action)("a")("b");
 
-			Assert.AreEqual(output[0], expected);
+			Assert.AreEqual(expected, output[0]);
 		}
 
 		[TestMethod]
 		public void Action_Split_Split_4Arguments()
 		{
 			const string expected = "abcd";
-			Action<string, string, string, string> action = (a, b, c, d) => output[0] = TestAction(a, b, c, d);
+			Action<string, string, string, string> action = (a, b, c, d) => output[0] = Join(a, b, c, d);
 
 			component.Split(action)("a", "b")("c", "d");
 
-			Assert.AreEqual(output[0], expected);
+			Assert.AreEqual(expected, output[0]);
 		}
 
 		[TestMethod]
 		public void Action_Split_Split_6Arguments()
 		{
 			const string expected = "abcdef";
-			Action<string, string, string, string, string, string> action = (a, b, c, d, e, f) => output[0] = TestAction(a, b, c, d, e, f);
+			Action<string, string, string, string, string, string> action = (a, b, c, d, e, f) => output[0] = Join(a, b, c, d, e, f);
 
 			component.Split(action)("a", "b", "c")("d", "e", "f");
 
-			Assert.AreEqual(output[0], expected);
+			Assert.AreEqual(expected, output[0]);
 		}
 
 		[TestMethod]
 		public void Action_Split_Split_8Arguments()
 		{
 			const string expected = "abcdefgh";
-			Action<string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h) => output[0] = TestAction(a, b, c, d, e, f, g, h);
+			Action<string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h) => output[0] = Join(a, b, c, d, e, f, g, h);
 
 			component.Split(action)("a", "b", "c", "d")("e", "f", "g", "h");
 
-			Assert.AreEqual(output[0], expected);
+			Assert.AreEqual(expected, output[0]);
 		}
 
 		[TestMethod]
 		public void Action_Split_Split_10Arguments()
 		{
 			const string expected = "abcdefghij";
-			Action<string, string, string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h, i, j) => output[0] = TestAction(a, b, c, d, e, f, g, h, i, j);
+			Action<string, string, string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h, i, j) => output[0] = Join(a, b, c, d, e, f, g, h, i, j);
 
 			component.Split(action)("a", "b", "c", "d", "e")("f", "g", "h", "i", "j");
 
-			Assert.AreEqual(output[0], expected);
+			Assert.AreEqual(expected, output[0]);
 		}
 
 		[TestMethod]
 		public void Action_Split_Split_12Arguments()
 		{
 			const string expected = "abcdefghijkl";
-			Action<string, string, string, string, string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h, i, j, k, l) => output[0] = TestAction(a, b, c, d, e, f, g, h, i, j, k, l);
+			Action<string, string, string, string, string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h, i, j, k, l) => output[0] = Join(a, b, c, d, e, f, g, h, i, j, k, l);
 
 			component.Split(action)("a", "b", "c", "d", "e", "f")("g", "h", "i", "j", "k", "l");
 
-			Assert.AreEqual(output[0], expected);
+			Assert.AreEqual(expected, output[0]);
 		}
 
 		[TestMethod]
 		public void Action_Split_Split_14Arguments()
 		{
 			const string expected = "abcdefghijklmn";
-			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => output[0] = TestAction(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => output[0] = Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 
 			component.Split(action)("a", "b", "c", "d", "e", "f", "g")("h", "i", "j", "k", "l", "m", "n");
 
-			Assert.AreEqual(output[0], expected);
+			Assert.AreEqual(expected, output[0]);
 		}
 
 		[TestMethod]
 		public void Action_Split_Split_16Arguments()
 		{
 			const string expected = "abcdefghijklmnop";
-			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => output[0] = TestAction(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
+			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => output[0] = Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
 			component.Split(action)("a", "b", "c", "d", "e", "f", "g", "h")("i", "j", "k", "l", "m", "n", "o", "p");
 
-			Assert.AreEqual(output[0], expected);
+			Assert.AreEqual(expected, output[0]);
 		}
 	}
 }

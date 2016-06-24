@@ -40,3 +40,20 @@ var splitAction = _.Action.Split(action);
 
 splitAction(1, 2)(3, 4); // prints "1 2 3 4
 ```
+
+### Func\<T0, Action\<T1\>\> Curry\<T0, T1\>(Action\<T0, T1\> action)
+Returns a function which takes a chain of function calls to use as arguments for action (see examples). Can be called with Actions that have up to 16 parameters.
+```
+// with an action with a few parameters
+Action<int, int> smallAction = (a, b) => Console.WriteLine("{0} {1}");
+var smallCurriedAction = _.Curry(smallAction);
+
+smallCurriedAction(1)(2); // prints "1 2"
+
+// with an action with a lot of parameters
+Action<int, int, int, int, int, int, int, int, int, int> bigAction = (a, b, c, d, e, f, g, h, i, j) => Console.WriteLine("{0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10}", a, b, c, d, e, f, g, h, i, j);
+
+var bigCurriedAction = _.Curry(bigAction);
+
+bigCurriedAction(1)(2)(3)(4)(5)(6)(7)(8)(9)(10); // prints "1 2 3 4 5 6 7 8 9 10"
+```
