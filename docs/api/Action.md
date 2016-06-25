@@ -118,7 +118,28 @@ Console.WriteLine(counter); // prints 3
 
 ### Once
 
-### Debounce
+### Func\<Task\> Debounce(Action action, int milliseconds)
+Returns a function which acts as a debounced version of the given function. A debounced function is throttled to only be allowed to be invoked once within the given time frame.
+```
+int[] result = {0}
+
+Action<int> toDebounce = n => result[0] += n
+
+var debounced = _.Debounce(toDebounce, 50);
+
+var tasksRunning = new List<Task>>();
+
+for(int i = 0; i < 100; i++)
+    tasksRunning.Add(debounced(i))
+
+Console.WriteLine(result[0]) // 0
+
+foreach(task in tasksRunning)
+    await task;
+
+Console.WriteLine(result[0]) // 99, because only the last task was processed
+
+```
 
 ### Throttle
 
