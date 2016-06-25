@@ -226,7 +226,7 @@ def main():
     output += generate_all_test_cases(type_name)
 
     # end class block
-    output += '\t}'
+    output += '\t}\n'
     # end namespace block
     output += '}'
 
