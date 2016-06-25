@@ -40,7 +40,7 @@ def generate_test_cases_for_count(param_count, type_name):
 
     # get however many var names we need from the list
     var_names = lowercase_letters()[:param_count]
-    for i in range(1, param_count - 1):
+    for i in range(1, param_count):
         retval += generate_test_case_function(var_names, i) if type_name == 'Function' else generate_test_case_action(var_names, i)
 
     return retval
@@ -48,12 +48,12 @@ def generate_test_cases_for_count(param_count, type_name):
 def generate_test_case_function(var_names, num_params_to_bind):
     lambda_vars = lowercase_letters()[:len(var_names)]
 
-    retval = '\t\t\t[TestMethod]\n'
-    retval += '\t\t\tpublic void Function_Partial_' + str(len(var_names)) + 'Arguments' + str(num_params_to_bind) + 'Bound()\n'
-    retval += '\t\t\t{\n'
-    retval += '\t\t\t\tconst string expected = "' + expected(lambda_vars) + '";\n'
+    retval = '\t\t[TestMethod]\n'
+    retval += '\t\tpublic void Function_Partial_' + str(len(var_names)) + 'Arguments' + str(num_params_to_bind) + 'Bound()\n'
+    retval += '\t\t{\n'
+    retval += '\t\t\tconst string expected = "' + expected(lambda_vars) + '";\n'
     retval += '\n'
-    retval += '\t\t\t\tFunction<'
+    retval += '\t\t\tFunc<'
 
     # add a string to the func type signature for each var we're using
     for s in var_names:
@@ -75,7 +75,7 @@ def generate_test_case_function(var_names, num_params_to_bind):
     retval += var_names[-1] + ');\n'
     retval += '\n'
 
-    retval += '\t\t\t\tvar binding = component.Partial(toBind, '
+    retval += '\t\t\tvar binding = component.Partial(toBind, '
 
     args = generate_var_names()
 
@@ -89,15 +89,15 @@ def generate_test_case_function(var_names, num_params_to_bind):
     retval += args_to_bind[-1] + ');\n'
 
     # call binding with remaining args
-    retval += '\t\t\t\tvar result = binding('
+    retval += '\t\t\tvar result = binding('
     for i in range(0, len(args_to_pass) - 1):
         retval += args_to_pass[i] + ', '
     retval += args_to_pass[-1] + ');\n'
     retval += '\n'
 
-    retval += '\t\t\t\tAssert.AreEqual(expected, result);\n'
+    retval += '\t\t\tAssert.AreEqual(expected, result);\n'
     # close function block
-    retval += '\t\t\t}\n'
+    retval += '\t\t}\n'
     retval += '\n'
 
     return retval
@@ -105,12 +105,12 @@ def generate_test_case_function(var_names, num_params_to_bind):
 def generate_test_case_action(var_names, num_params_to_bind):
     lambda_vars = lowercase_letters()[:len(var_names)]
 
-    retval = '\t\t\t[TestMethod]\n'
-    retval += '\t\t\tpublic void Action_Partial_' + str(len(var_names)) + 'Arguments' + str(num_params_to_bind) + 'Bound()\n'
-    retval += '\t\t\t{\n'
-    retval += '\t\t\t\tconst string expected = "' + expected(lambda_vars) + '";\n'
+    retval = '\t\t[TestMethod]\n'
+    retval += '\t\tpublic void Action_Partial_' + str(len(var_names)) + 'Arguments' + str(num_params_to_bind) + 'Bound()\n'
+    retval += '\t\t{\n'
+    retval += '\t\t\tconst string expected = "' + expected(lambda_vars) + '";\n'
     retval += '\n'
-    retval += '\t\t\t\tAction<'
+    retval += '\t\t\tAction<'
 
     # add a string to the func type signature for each var we're using
     for i in range(0, len(var_names) - 1):
@@ -132,7 +132,7 @@ def generate_test_case_action(var_names, num_params_to_bind):
     retval += var_names[-1] + ');\n'
     retval += '\n'
 
-    retval += '\t\t\t\tvar binding = component.Partial(toBind, '
+    retval += '\t\t\tvar binding = component.Partial(toBind, '
 
     args = generate_var_names()
 
@@ -146,15 +146,15 @@ def generate_test_case_action(var_names, num_params_to_bind):
     retval += args_to_bind[-1] + ');\n'
 
     # call binding with remaining args
-    retval += '\t\t\t\tbinding('
+    retval += '\t\t\tbinding('
     for i in range(0, len(args_to_pass) - 1):
         retval += args_to_pass[i] + ', '
     retval += args_to_pass[-1] + ');\n'
     retval += '\n'
 
-    retval += '\t\t\t\tAssert.AreEqual(expected, output[0]);\n'
+    retval += '\t\t\tAssert.AreEqual(expected, output[0]);\n'
     # close function block
-    retval += '\t\t\t}\n'
+    retval += '\t\t}\n'
     retval += '\n'
 
     return retval
@@ -217,7 +217,7 @@ def main():
     output += '\t\t[TestInitialize]\n'
     output += '\t\tpublic void Initialize()\n'
     output += '\t\t{\n'
-    output += '\t\t\tcomponent = new PartialComponent();'
+    output += '\t\t\tcomponent = new PartialComponent();\n'
     if type_name == 'Action':
         output += '\t\t\toutput = new string[1];\n'
     output += '\t\t}\n\n'
