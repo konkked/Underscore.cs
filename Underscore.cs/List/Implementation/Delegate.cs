@@ -9,9 +9,17 @@ namespace Underscore.List
         /// <summary>
         /// Resolves a list of functions into a list
         /// </summary>
-        public IList<T> Resolve<T>( IList<Func<T>> list )
+        public IList<T> Resolve<T>(IList<Func<T>> list)
         {
-            return new List<T>( from i in list select i( ) );
+            var values = new List<T>();
+
+            for (var i = 0; i < list.Count; i++)
+            {
+                // sorry this syntax is so ugly
+                values.Add(list[i]());
+            }
+
+            return values;
         }
 
         /// <summary>

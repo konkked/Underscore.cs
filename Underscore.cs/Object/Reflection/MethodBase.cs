@@ -22,13 +22,12 @@ namespace Underscore.Object.Reflection
         private readonly Func<Type, object, IEnumerable<T>> _queryStore;
         private readonly Func<Type, object, BindingFlags, IEnumerable<T>> _flaggedQueryStore;
 
-        protected MethodsBaseComponent(ICacheComponent cacher,IPropertyComponent properties, Members<T> collection)
+        protected MethodsBaseComponent(ICacheComponent cacher, IPropertyComponent properties, Members<T> collection)
         {
             _properties = properties;
             _collection = collection;
             _queryStore = cacher.Memoize<Type, object, IEnumerable<T>>((o, a) => Query(this, o, a));
             _flaggedQueryStore = cacher.Memoize<Type, object, BindingFlags, IEnumerable<T>>((o, a, f) => Query(this, o, a, f));
-
         }
 
         private static IEnumerable<T> Query(MethodsBaseComponent<T> me, Type target, object query, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
@@ -64,8 +63,6 @@ namespace Underscore.Object.Reflection
                         );
                     }
                 }
-
-
             }
             else if (query is string)
             {
@@ -85,7 +82,7 @@ namespace Underscore.Object.Reflection
                     Value = a.GetGetMethod().Invoke(query, null), a.Name
                 });
 
-                //empty anonymous object
+                // empty anonymous object
                 if (!properties.Any())
                 {
                     currMethods = currMethods.Where(a => a.Params.Count == 0);
@@ -118,26 +115,17 @@ namespace Underscore.Object.Reflection
                             currMethods = currMethods.Where(a =>
                                 a.Params.FirstOrDefault(b => b.Name == argName && b.ParameterType == argType) != null);
                         }
-
                     }
                 }
-
-
             }
 
             return !currMethods.Any() ? (new T[] { }) : currMethods.Select(a => a.Method);
-
         }
-
-
-
-
-
 
         /// <summary>
         /// Gets all of the methods from the target object, which arent associated with properties
         /// </summary>
-        public abstract IEnumerable<T> All( object target );
+        public abstract IEnumerable<T> All(object target);
 
         /// <summary>
         /// Gets all of the methods from the target object, which arent associated with properties

@@ -1,4 +1,6 @@
 # Collection Module
+***Note that while these are separated into categories here based on behavior, they are all called from _.Collection***
+
 ## Creation
 ### Func\<IEnumerable\<T\>\> Snapshot\<T\>(IEnumerable<T> collection)
 Creates a function that always returns a copy of the passed collection at the time it was called.
