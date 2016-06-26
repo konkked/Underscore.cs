@@ -10,8 +10,6 @@ namespace Underscore.Function
 {
     public class CompactComponent : ICompactComponent
     {
-	
-		
 		/// <summary>
         ///  Creates a new Function bound to the passed parameter
         /// </summary>
@@ -20,7 +18,6 @@ namespace Underscore.Function
 			return  a => function(a.Item1, a.Item2);
 		}
 		
-				
 		/// <summary>
         ///  Creates a new Function bound to the passed parameter
         /// </summary>
@@ -29,7 +26,6 @@ namespace Underscore.Function
 			return  a => function(a.Item1, a.Item2, a.Item3);
 		}
 		
-				
 		/// <summary>
         ///  Creates a new Function bound to the passed parameter
         /// </summary>
@@ -38,7 +34,6 @@ namespace Underscore.Function
 			return  a => function(a.Item1, a.Item2, a.Item3, a.Item4);
 		}
 		
-				
 		/// <summary>
         ///  Creates a new Function bound to the passed parameter
         /// </summary>
@@ -46,7 +41,6 @@ namespace Underscore.Function
 		{
 			return  a => function(a.Item1.Item1, a.Item1.Item2, a.Item1.Item3, a.Item1.Item4, a.Item2);
 		}
-		
 				
 		/// <summary>
         ///  Creates a new Function bound to the passed parameter
@@ -55,7 +49,6 @@ namespace Underscore.Function
 		{
 			return  a => function(a.Item1.Item1, a.Item1.Item2, a.Item1.Item3, a.Item1.Item4, a.Item2, a.Item3);
 		}
-		
 				
 		/// <summary>
         ///  Creates a new Function bound to the passed parameter
@@ -64,7 +57,6 @@ namespace Underscore.Function
 		{
 			return  a => function(a.Item1.Item1, a.Item1.Item2, a.Item1.Item3, a.Item1.Item4, a.Item2, a.Item3, a.Item4);
 		}
-		
 				
 		/// <summary>
         ///  Creates a new Function bound to the passed parameter
@@ -73,7 +65,6 @@ namespace Underscore.Function
 		{
 			return  a => function(a.Item1.Item1, a.Item1.Item2, a.Item1.Item3, a.Item1.Item4, a.Item2.Item1, a.Item2.Item2, a.Item2.Item3, a.Item2.Item4);
 		}
-		
 				
 		/// <summary>
         ///  Creates a new Function bound to the passed parameter
@@ -83,7 +74,6 @@ namespace Underscore.Function
 			return  a => function(a.Item1.Item1, a.Item1.Item2, a.Item1.Item3, a.Item1.Item4, a.Item2.Item1, a.Item2.Item2, a.Item2.Item3, a.Item2.Item4, a.Item3);
 		}
 		
-				
 		/// <summary>
         ///  Creates a new Function bound to the passed parameter
         /// </summary>
@@ -91,7 +81,6 @@ namespace Underscore.Function
 		{
 			return  a => function(a.Item1.Item1, a.Item1.Item2, a.Item1.Item3, a.Item1.Item4, a.Item2.Item1, a.Item2.Item2, a.Item2.Item3, a.Item2.Item4, a.Item3, a.Item4);
 		}
-		
 				
 		/// <summary>
         ///  Creates a new Function bound to the passed parameter
@@ -100,7 +89,6 @@ namespace Underscore.Function
 		{
 			return  a => function(a.Item1.Item1, a.Item1.Item2, a.Item1.Item3, a.Item1.Item4, a.Item2.Item1, a.Item2.Item2, a.Item2.Item3, a.Item2.Item4, a.Item3, a.Item4, a.Item5);
 		}
-		
 				
 		/// <summary>
         ///  Creates a new Function bound to the passed parameter
@@ -109,7 +97,6 @@ namespace Underscore.Function
 		{
 			return  a => function(a.Item1.Item1, a.Item1.Item2, a.Item1.Item3, a.Item1.Item4, a.Item2.Item1, a.Item2.Item2, a.Item2.Item3, a.Item2.Item4, a.Item3.Item1, a.Item3.Item2, a.Item3.Item3, a.Item3.Item4);
 		}
-		
 				
 		/// <summary>
         ///  Creates a new Function bound to the passed parameter
@@ -118,7 +105,6 @@ namespace Underscore.Function
 		{
 			return  a => function(a.Item1.Item1, a.Item1.Item2, a.Item1.Item3, a.Item1.Item4, a.Item2.Item1, a.Item2.Item2, a.Item2.Item3, a.Item2.Item4, a.Item3.Item1, a.Item3.Item2, a.Item3.Item3, a.Item3.Item4, a.Item4);
 		}
-		
 				
 		/// <summary>
         ///  Creates a new Function bound to the passed parameter
@@ -128,7 +114,6 @@ namespace Underscore.Function
 			return  a => function(a.Item1.Item1, a.Item1.Item2, a.Item1.Item3, a.Item1.Item4, a.Item2.Item1, a.Item2.Item2, a.Item2.Item3, a.Item2.Item4, a.Item3.Item1, a.Item3.Item2, a.Item3.Item3, a.Item3.Item4, a.Item4, a.Item5);
 		}
 		
-				
 		/// <summary>
         ///  Creates a new Function bound to the passed parameter
         /// </summary>
@@ -136,7 +121,6 @@ namespace Underscore.Function
 		{
 			return  a => function(a.Item1.Item1, a.Item1.Item2, a.Item1.Item3, a.Item1.Item4, a.Item2.Item1, a.Item2.Item2, a.Item2.Item3, a.Item2.Item4, a.Item3.Item1, a.Item3.Item2, a.Item3.Item3, a.Item3.Item4, a.Item4, a.Item5, a.Item6);
 		}
-		
 				
 		/// <summary>
         ///  Creates a new Function bound to the passed parameter
@@ -145,7 +129,5 @@ namespace Underscore.Function
 		{
 			return  a => function(a.Item1.Item1, a.Item1.Item2, a.Item1.Item3, a.Item1.Item4, a.Item2.Item1, a.Item2.Item2, a.Item2.Item3, a.Item2.Item4, a.Item3.Item1, a.Item3.Item2, a.Item3.Item3, a.Item3.Item4, a.Item4.Item1, a.Item4.Item2, a.Item4.Item3, a.Item4.Item4);
 		}
-		
-		
     }
 }
