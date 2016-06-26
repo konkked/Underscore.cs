@@ -41,7 +41,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Throttle_NoArguments()
 		{
-			var testing = ManipulateDummy();
+			var testing = GetSynchComponent();
 
 			var result = 0;
 
@@ -65,7 +65,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Throttle_1Argument()
 		{
-			var testing = ManipulateDummy();
+			var testing = GetSynchComponent();
 
 			var results = "";
 
@@ -96,7 +96,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Throttle_2Arguments()
 		{
-			var testing = ManipulateDummy();
+			var testing = GetSynchComponent();
 			var failOnSignificantDelay = Task.Delay(1000);
 
 			var results = new string[2];
@@ -160,7 +160,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Throttle_3Arguments()
 		{
-			var testing = ManipulateDummy();
+			var testing = GetSynchComponent();
 
 			var results = new string[3];
 
@@ -225,7 +225,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Throttle_4Arguments()
 		{
-			var testing = ManipulateDummy();
+			var testing = GetSynchComponent();
 
 			var results = new string[4];
 
@@ -287,7 +287,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Throttle_5Arguments()
 		{
-			var testing = ManipulateDummy();
+			var testing = GetSynchComponent();
 
 			var results = new string[5];
 
@@ -330,7 +330,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Throttle_6Arguments()
 		{
-			var testing = ManipulateDummy();
+			var testing = GetSynchComponent();
 
 			var results = new string[6];
 
@@ -403,7 +403,6 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("100", results[4]);
 			Assert.AreEqual("-100", results[5]);
 			Assert.AreEqual(4, callCount);
-
 		}
 	}
 }

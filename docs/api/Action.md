@@ -154,4 +154,18 @@ Console.WriteLine(result[0]) // 99, because only the last task was processed
 
 ### Throttle
 
-### Delay
+### Func\<Task\> Delay(Action action, int milliseconds)
+Returns a function which executes the given action after the given delay, asynchronously.
+```
+bool invoked = false;
+Action action = () => invoked = true;
+Func<Task> delayed = _.Delay(action, 100);
+
+var timer = new Stopwatch();
+
+timer.Start();
+delayed.Wait();
+timer.Stop();
+
+Console.WriteLine(timer.ElapsedMilliseconds) // somewhere in the range of 105-115ms
+```

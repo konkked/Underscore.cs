@@ -16,7 +16,9 @@ namespace Underscore.Test.Action.Synch
         private ComposeComponent compose;
         private ISynchComponent component;
 
-		public ISynchComponent GetSynchComponent() {
+        private string[] arguments = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
+
+        public ISynchComponent GetSynchComponent() {
             return new SynchComponent(
                 new Underscore.Function.SynchComponent(
                     new CompactComponent(), 
@@ -28,168 +30,456 @@ namespace Underscore.Test.Action.Synch
                 );
         }
 
-		[TestMethod]
-		public async Task ActionDelay()
-		{
-			var fn = new ComposeComponent();
-			var testing = GetSynchComponent();
+        private void TestDelay(int waitTime, Task delayed)
+        {
+            var timer = new Stopwatch();
+            timer.Start();
+            Thread.MemoryBarrier();
+            delayed.Wait();
+            Thread.MemoryBarrier();
+            timer.Stop();
+            Assert.IsTrue(timer.ElapsedMilliseconds >= waitTime - 25);
+        }
 
-			string[] arguments = { "a", "b", "c", "d", "e", "f" };
+        [TestInitialize]
+        public void Initialize()
+        {
+            compose = new ComposeComponent();
+            component = GetSynchComponent();
+        }
 
+        public void Action_Synch_Delay_NoArguments()
+        {
+            var invoked = false;
+            var timer = new Stopwatch();
+            var delayed = component.Delay(() => invoked = true, 100);
+            var taskResult = delayed();
 
-			Action<int, Task> TestDelay = (waitTime, delayed) =>
-			{
-				var timer = new Stopwatch();
-				timer.Start();
-				Thread.MemoryBarrier();
-				delayed.Wait();
-				Thread.MemoryBarrier();
-				timer.Stop();
-				Assert.IsTrue(timer.ElapsedMilliseconds >= waitTime - 25);
-			};
+            Thread.MemoryBarrier();
 
+            Assert.IsFalse(invoked);
 
-			await Util.Tasks.Start(() =>
-			{
+            taskResult.Wait();
 
-				var result = "";
-				var timer = new Stopwatch();
-				var delayed = testing.Delay(() => result = "worked", 100);
-				var taskResult = delayed();
+            Assert.IsTrue(invoked);
+        }
 
-				Thread.MemoryBarrier();
+        [TestMethod]
+        public void Action_Synch_Delay_1Argument()
+        {
+            var invoked = false;
 
-				Assert.AreEqual("", result);
+            var delaying = new Action<string>((a) =>
+            {
+                Assert.AreEqual("a", a);
+                invoked = true;
+            });
 
-				taskResult.Wait();
+            var delayed = component.Delay(delaying, 100);
 
-				Assert.AreEqual("worked", result);
+            Thread.MemoryBarrier();
 
+            Assert.IsFalse(invoked);
 
-			}, () =>
-			{
+            TestDelay(100, compose.Apply(delayed, arguments));
 
-				var invoked = false;
+            Assert.IsTrue(invoked);
+        }
 
-				var delaying = new Action<string, string>((a, b) =>
-				{
-					Assert.AreEqual("a", a);
-					Assert.AreEqual("b", b);
-					invoked = true;
-				});
+        [TestMethod]
+        public void Action_Synch_Delay_2Arguments()
+        {
+            var invoked = false;
 
-				var delayed = testing.Delay(delaying, 100);
+            var delaying = new Action<string, string>((a, b) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                invoked = true;
+            });
 
-				Thread.MemoryBarrier();
+            var delayed = component.Delay(delaying, 100);
 
-				TestDelay(100, fn.Apply(delayed, arguments));
+            Thread.MemoryBarrier();
 
-				Assert.IsTrue(invoked);
+            TestDelay(100, compose.Apply(delayed, arguments));
 
-			}, () =>
-			{
+            Assert.IsTrue(invoked);
+        }
 
-				var invoked = false;
+        [TestMethod]
+        public void Action_Synch_Delay_3Arguments()
+        {
+            var invoked = false;
 
-				var delaying = new Action<string, string, string>((a, b, c) =>
-				{
-					Assert.AreEqual("a", a);
-					Assert.AreEqual("b", b);
-					Assert.AreEqual("c", c);
-					invoked = true;
-				});
+            var delaying = new Action<string, string, string>((a, b, c) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                invoked = true;
+            });
 
-				var delayed = testing.Delay(delaying, 100);
+            var delayed = component.Delay(delaying, 100);
 
-				Thread.MemoryBarrier();
+            Thread.MemoryBarrier();
 
-				TestDelay(100, fn.Apply(delayed, arguments));
+            TestDelay(100, compose.Apply(delayed, arguments));
 
-				Assert.IsTrue(invoked);
+            Assert.IsTrue(invoked);
+        }
 
-			}, () =>
-			{
+        [TestMethod]
+        public void Action_Synch_Delay_4Arguments()
+        {
+            var invoked = false;
 
-				var invoked = false;
+            var delaying = new Action<string, string, string, string>((a, b, c, d) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                Assert.AreEqual("d", d);
+                invoked = true;
+            });
 
-				var delaying = new Action<string, string, string, string>((a, b, c, d) =>
-				{
-					Assert.AreEqual("a", a);
-					Assert.AreEqual("b", b);
-					Assert.AreEqual("c", c);
-					Assert.AreEqual("d", d);
-					invoked = true;
-				});
+            var delayed = component.Delay(delaying, 100);
 
-				var delayed = testing.Delay(delaying, 100);
+            Thread.MemoryBarrier();
 
-				Thread.MemoryBarrier();
+            TestDelay(100, compose.Apply(delayed, arguments));
 
-				TestDelay(100, fn.Apply(delayed, arguments));
+            Assert.IsTrue(invoked);
+        }
 
-				Assert.IsTrue(invoked);
+        [TestMethod]
+        public void Action_Synch_Delay_5Arguments()
+        {
+            var invoked = false;
 
-			}, () =>
-			{
+            var delaying = new Action<string, string, string, string, string>((a, b, c, d, e) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                Assert.AreEqual("d", d);
+                Assert.AreEqual("e", e);
+                invoked = true;
+            });
 
-				var invoked = false;
+            var delayed = component.Delay(delaying, 100);
 
-				var delaying = new Action<string, string, string, string, string>((a, b, c, d, e) =>
-				{
-					Assert.AreEqual("a", a);
-					Assert.AreEqual("b", b);
-					Assert.AreEqual("c", c);
-					Assert.AreEqual("d", d);
-					Assert.AreEqual("e", e);
-					invoked = true;
-				});
+            TestDelay(100, compose.Apply(delayed, arguments));
 
-				var timer = new Stopwatch();
-				var delayed = testing.Delay(delaying, 100);
+            Assert.IsTrue(invoked);
+        }
 
-				timer.Start();
+        [TestMethod]
+        public void Action_Synch_Delay_6Arguments()
+        {
+            var invoked = false;
 
-				Thread.MemoryBarrier();
+            var delaying = new Action<string, string, string, string, string, string>((a, b, c, d, e, f) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                Assert.AreEqual("d", d);
+                Assert.AreEqual("e", e);
+                Assert.AreEqual("f", f);
+                invoked = true;
+            });
 
-				var task = fn.Apply(delayed, arguments);
+            var delayed = component.Delay(delaying, 100);
 
-				Thread.MemoryBarrier();
+            TestDelay(100, compose.Apply(delayed, arguments));
 
-				Assert.IsFalse(invoked);
+            Assert.IsTrue(invoked);
+        }
 
-				task.Wait();
+        [TestMethod]
+        public void Action_Synch_Delay_7Arguments()
+        {
+            var invoked = false;
 
-				Thread.MemoryBarrier();
+            var delaying = new Action<string, string, string, string, string, string, string>((a, b, c, d, e, f, g) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                Assert.AreEqual("d", d);
+                Assert.AreEqual("e", e);
+                Assert.AreEqual("f", f);
+                Assert.AreEqual("g", g);
+                invoked = true;
+            });
 
-				Assert.IsTrue(invoked);
-				timer.Stop();
-				Assert.IsTrue(timer.ElapsedMilliseconds >= 100);
+            var delayed = component.Delay(delaying, 100);
 
-			}, () =>
-			{
+            TestDelay(100, compose.Apply(delayed, arguments));
 
-				var invoked = false;
+            Assert.IsTrue(invoked);
+        }
 
-				var delaying = new Action<string, string, string, string, string, string>((a, b, c, d, e, f) =>
-				{
-					Assert.AreEqual("a", a);
-					Assert.AreEqual("b", b);
-					Assert.AreEqual("c", c);
-					Assert.AreEqual("d", d);
-					Assert.AreEqual("e", e);
-					Assert.AreEqual("f", f);
-					invoked = true;
-				});
+        [TestMethod]
+        public void Action_Synch_Delay_8Arguments()
+        {
+            var invoked = false;
 
-				var delayed = testing.Delay(delaying, 100);
+            var delaying = new Action<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                Assert.AreEqual("d", d);
+                Assert.AreEqual("e", e);
+                Assert.AreEqual("f", f);
+                Assert.AreEqual("g", g);
+                Assert.AreEqual("h", h);
+                invoked = true;
+            });
 
-				Thread.MemoryBarrier();
+            var delayed = component.Delay(delaying, 100);
 
-				TestDelay(100, fn.Apply(delayed, arguments));
+            TestDelay(100, compose.Apply(delayed, arguments));
 
-				Assert.IsTrue(invoked);
+            Assert.IsTrue(invoked);
+        }
 
-			});
-		}
+        [TestMethod]
+        public void Action_Synch_Delay_9Arguments()
+        {
+            var invoked = false;
+
+            var delaying = new Action<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                Assert.AreEqual("d", d);
+                Assert.AreEqual("e", e);
+                Assert.AreEqual("f", f);
+                Assert.AreEqual("g", g);
+                Assert.AreEqual("h", h);
+                Assert.AreEqual("i", i);
+                invoked = true;
+            });
+
+            var delayed = component.Delay(delaying, 100);
+
+            TestDelay(100, compose.Apply(delayed, arguments));
+
+            Assert.IsTrue(invoked);
+        }
+
+        [TestMethod]
+        public void Action_Synch_Delay_10Arguments()
+        {
+            var invoked = false;
+
+            var delaying = new Action<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                Assert.AreEqual("d", d);
+                Assert.AreEqual("e", e);
+                Assert.AreEqual("f", f);
+                Assert.AreEqual("g", g);
+                Assert.AreEqual("h", h);
+                Assert.AreEqual("i", i);
+                Assert.AreEqual("j", j);
+                invoked = true;
+            });
+
+            var delayed = component.Delay(delaying, 100);
+
+            TestDelay(100, compose.Apply(delayed, arguments));
+
+            Assert.IsTrue(invoked);
+        }
+
+        [TestMethod]
+        public void Action_Synch_Delay_11Arguments()
+        {
+            var invoked = false;
+
+            var delaying = new Action<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                Assert.AreEqual("d", d);
+                Assert.AreEqual("e", e);
+                Assert.AreEqual("f", f);
+                Assert.AreEqual("g", g);
+                Assert.AreEqual("h", h);
+                Assert.AreEqual("i", i);
+                Assert.AreEqual("j", j);
+                Assert.AreEqual("k", k);
+                invoked = true;
+            });
+
+            var delayed = component.Delay(delaying, 100);
+
+            TestDelay(100, compose.Apply(delayed, arguments));
+
+            Assert.IsTrue(invoked);
+        }
+
+        [TestMethod]
+        public void Action_Synch_Delay_12Arguments()
+        {
+            var invoked = false;
+
+            var delaying = new Action<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                Assert.AreEqual("d", d);
+                Assert.AreEqual("e", e);
+                Assert.AreEqual("f", f);
+                Assert.AreEqual("g", g);
+                Assert.AreEqual("h", h);
+                Assert.AreEqual("i", i);
+                Assert.AreEqual("j", j);
+                Assert.AreEqual("k", k);
+                Assert.AreEqual("l", l);
+                invoked = true;
+            });
+
+            var delayed = component.Delay(delaying, 100);
+
+            TestDelay(100, compose.Apply(delayed, arguments));
+
+            Assert.IsTrue(invoked);
+        }
+
+        [TestMethod]
+        public void Action_Synch_Delay_13Arguments()
+        {
+            var invoked = false;
+
+            var delaying = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                Assert.AreEqual("d", d);
+                Assert.AreEqual("e", e);
+                Assert.AreEqual("f", f);
+                Assert.AreEqual("g", g);
+                Assert.AreEqual("h", h);
+                Assert.AreEqual("i", i);
+                Assert.AreEqual("j", j);
+                Assert.AreEqual("k", k);
+                Assert.AreEqual("l", l);
+                Assert.AreEqual("m", m);
+                invoked = true;
+            });
+
+            var delayed = component.Delay(delaying, 100);
+
+            TestDelay(100, compose.Apply(delayed, arguments));
+
+            Assert.IsTrue(invoked);
+        }
+
+        [TestMethod]
+        public void Action_Synch_Delay_14Arguments()
+        {
+            var invoked = false;
+
+            var delaying = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                Assert.AreEqual("d", d);
+                Assert.AreEqual("e", e);
+                Assert.AreEqual("f", f);
+                Assert.AreEqual("g", g);
+                Assert.AreEqual("h", h);
+                Assert.AreEqual("i", i);
+                Assert.AreEqual("j", j);
+                Assert.AreEqual("k", k);
+                Assert.AreEqual("l", l);
+                Assert.AreEqual("m", m);
+                Assert.AreEqual("n", n);
+                invoked = true;
+            });
+
+            var delayed = component.Delay(delaying, 100);
+
+            TestDelay(100, compose.Apply(delayed, arguments));
+
+            Assert.IsTrue(invoked);
+        }
+
+        [TestMethod]
+        public void Action_Synch_Delay_15Arguments()
+        {
+            var invoked = false;
+
+            var delaying = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                Assert.AreEqual("d", d);
+                Assert.AreEqual("e", e);
+                Assert.AreEqual("f", f);
+                Assert.AreEqual("g", g);
+                Assert.AreEqual("h", h);
+                Assert.AreEqual("i", i);
+                Assert.AreEqual("j", j);
+                Assert.AreEqual("k", k);
+                Assert.AreEqual("l", l);
+                Assert.AreEqual("m", m);
+                Assert.AreEqual("n", n);
+                Assert.AreEqual("o", o);
+                invoked = true;
+            });
+
+            var delayed = component.Delay(delaying, 100);
+
+            TestDelay(100, compose.Apply(delayed, arguments));
+
+            Assert.IsTrue(invoked);
+        }
+
+        [TestMethod]
+        public void Action_Synch_Delay_16Arguments()
+        {
+            var invoked = false;
+
+            var delaying = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                Assert.AreEqual("d", d);
+                Assert.AreEqual("e", e);
+                Assert.AreEqual("f", f);
+                Assert.AreEqual("g", g);
+                Assert.AreEqual("h", h);
+                Assert.AreEqual("i", i);
+                Assert.AreEqual("j", j);
+                Assert.AreEqual("k", k);
+                Assert.AreEqual("l", l);
+                Assert.AreEqual("m", m);
+                Assert.AreEqual("n", n);
+                Assert.AreEqual("o", o);
+                Assert.AreEqual("p", p);
+                invoked = true;
+            });
+
+            var delayed = component.Delay(delaying, 100);
+
+            TestDelay(100, compose.Apply(delayed, arguments));
+
+            Assert.IsTrue(invoked);
+        }
 	}
 }

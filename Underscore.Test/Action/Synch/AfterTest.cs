@@ -39,7 +39,7 @@ namespace Underscore.Test.Action.Synch
         public void Initialize()
         {
             funcCompose = new ComposeComponent();
-            component = ManipulateDummy();
+            component = GetSynchComponent();
 
             counter = 0;
             result = "";

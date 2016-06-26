@@ -13,8 +13,6 @@ namespace Underscore.Test.Action.Synch
 	[TestClass]
 	public class DebounceTest
 	{
-        private ISynchComponent component;
-
         public ISynchComponent GetSynchComponent()
         {
             return new SynchComponent(
