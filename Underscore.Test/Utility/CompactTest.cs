@@ -10,5 +10,6 @@ namespace Underscore.Test.Utility
     [TestClass]
     public class CompactTest
     {
+        //TODO: Pack tests
     }
 }
