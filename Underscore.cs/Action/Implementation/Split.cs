@@ -5,9 +5,9 @@ namespace Underscore.Action
 
     public class SplitComponent : ISplitComponent
     {
-        /// <summary>
-        /// Halves the passed action
-        /// </summary>
+		/// <summary>
+		/// Halves the passed action as function that returns action that can invoke the passed action
+		/// </summary>
         public Func<T0, T1, T2, T3, T4, T5, T6, T7, Action<T8, T9, T10, T11, T12, T13, T14, T15>> Split<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>( Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action )
         {
             return
@@ -16,12 +16,43 @@ namespace Underscore.Action
                         action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
         }
 
+		/// <summary>
+		/// Halves the passed action as function that returns action that can invoke the passed action
+		/// </summary>
+		public Func<T0, T1, T2, T3, T4, T5, T6, Action<T7, T8, T9, T10, T11, T12, T13>> Split<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action)
+		{
+			return
+				(a, b, c, d, e, f, g) =>
+					(h, i, j, k, l, m, n) =>
+						action(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+		}
 
+		/// <summary>
+		/// Halves the passed action as function that returns action that can invoke the passed action
+		/// </summary>
+		public Func<T0, T1, T2, T3, T4, T5, Action<T6, T7, T8, T9, T10, T11>> Split<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action)
+		{
+			return
+				(a, b, c, d, e, f) =>
+					(g, h, i, j, k, l) =>
+						action(a, b, c, d, e, f, g, h, i, j, k, l);
+		} 
+
+		/// <summary>
+		/// Halves the passed action as function that returns action that can invoke the passed action
+		/// </summary>
+	    public Func<T0, T1, T2, T3, T4, Action<T5, T6, T7, T8, T9>> Split<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> action)
+	    {
+		    return
+			    (a, b, c, d, e) =>
+				    (f, g, h, i, j) =>
+					    action(a, b, c, d, e, f, g, h, i, j);
+	    } 
 
         /// <summary>
         /// Halves the passed action as function that returns action that can invoke the passed action
         /// </summary>
-        public Func<T0, T1, T2, T3, Action<T4, T5, T6, T7>> Split<T0, T1, T2, T3, T4, T5, T6, T7>( Action<T0, T1, T2, T3, T4, T5, T6, T7> action )
+        public Func<T0, T1, T2, T3, Action<T4, T5, T6, T7>> Split<T0, T1, T2, T3, T4, T5, T6, T7>(Action<T0, T1, T2, T3, T4, T5, T6, T7> action)
         {
             return
                 ( a, b, c, d ) =>
@@ -29,18 +60,27 @@ namespace Underscore.Action
                         action( a, b, c, d, e, f, g, h );
         }
 
+		/// <summary>
+		/// Halves the passed action as function that returns action that can invoke the passed action
+		/// </summary>
+		public Func<T0, T1, T2, Action<T3, T4, T5>> Split<T0, T1, T2, T3, T4, T5>(Action<T0, T1, T2, T3, T4, T5> action)
+		{
+			return
+				(a, b, c) =>
+					(d, e, f) =>
+						action(a, b, c, d, e, f);
+		}
 
         /// <summary>
         /// Halves the passed action as function that returns action that can invoke the passed action
         /// </summary>
-        public Func<T0, T1, Action<T2, T3>> Split<T0, T1, T2, T3>( Action<T0, T1, T2, T3> action )
+        public Func<T0, T1, Action<T2, T3>> Split<T0, T1, T2, T3>(Action<T0, T1, T2, T3> action)
         {
             return
                 ( a, b ) =>
                     ( c, d ) =>
                         action( a, b, c, d );
         }
-
 
         /// <summary>
         /// Halves the passed action as function that returns action that can invoke the passed action
@@ -52,7 +92,6 @@ namespace Underscore.Action
                     ( b ) =>
                         action( a, b );
         }
-
 
         /// <summary>
         /// Halves the passed action as function that returns action that can invoke the passed action
@@ -68,7 +107,6 @@ namespace Underscore.Action
                        action(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o,p);
         }
 
-
         /// <summary>
         /// Halves the passed action as function that returns action that can invoke the passed action
         /// </summary>
@@ -82,7 +120,6 @@ namespace Underscore.Action
                        action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
         }
 
-
         /// <summary>
         /// Halves the passed action as function that returns action that can invoke the passed action
         /// </summary>
@@ -95,7 +132,6 @@ namespace Underscore.Action
                    ( m ) => ( n ) =>
                        action( a, b, c, d, e, f, g, h, i, j, k, l, m, n);
         }
-
 
         /// <summary>
         /// Translates a function taking multiple arguments into a sequence of functions 
@@ -113,7 +149,6 @@ namespace Underscore.Action
                        action( a, b, c, d, e, f, g, h, i, j, k, l, m );
         }
 
-
         /// <summary>
         /// Translates a function taking multiple arguments into a sequence of functions 
         /// each accepting one parameter associated cardinally 
@@ -129,7 +164,6 @@ namespace Underscore.Action
                        action( a, b, c, d, e, f, g, h, i, j, k, l );
         }
 
-
         /// <summary>
         /// Translates a function taking multiple arguments into a sequence of functions 
         /// each accepting one parameter associated cardinally 
@@ -144,7 +178,6 @@ namespace Underscore.Action
                ( i ) => ( j ) => ( k ) => 
                        action( a, b, c, d, e, f, g, h, i, j, k);
         }
-
 
         /// <summary>
         /// Translates a function taking multiple arguments into a sequence of functions 
@@ -176,7 +209,6 @@ namespace Underscore.Action
                        action( a, b, c, d, e, f, g, h, i );
         }
 
-
         /// <summary>
         /// Translates a function taking multiple arguments into a sequence of functions 
         /// each accepting one parameter associated cardinally 
@@ -190,7 +222,6 @@ namespace Underscore.Action
                 ( e ) => ( f ) => ( g ) => ( h ) => 
                        action( a, b, c, d, e, f, g, h );
         }
-
 
         /// <summary>
         /// Translates a function taking multiple arguments into a sequence of functions 
@@ -206,7 +237,6 @@ namespace Underscore.Action
                        action( a, b, c, d, e, f, g);
         }
 
-
         /// <summary>
         /// Translates a function taking multiple arguments into a sequence of functions 
         /// each accepting one parameter associated cardinally 
@@ -220,7 +250,6 @@ namespace Underscore.Action
                 ( e ) => ( f ) => 
                        action( a, b, c, d, e, f);
         }
-
 
         /// <summary>
         /// Translates a function taking multiple arguments into a sequence of functions 
@@ -236,7 +265,6 @@ namespace Underscore.Action
                        action( a, b, c, d, e );
         }
 
-
         /// <summary>
         /// Translates a function taking multiple arguments into a sequence of functions each 
         /// each accepting one parameter associated cardinally 
@@ -249,7 +277,6 @@ namespace Underscore.Action
                 ( a ) => ( b ) => ( c ) => ( d ) =>
                        action( a, b, c, d );
         }
-
 
         /// <summary>
         /// Translates a function taking multiple arguments into a sequence of functions 
@@ -264,7 +291,6 @@ namespace Underscore.Action
                        action( a, b, c );
         }
 
-
         /// <summary>
         /// Translates a function taking multiple arguments into a sequence of functions 
         /// each accepting one parameter associated cardinally 
@@ -276,8 +302,6 @@ namespace Underscore.Action
             return
                 ( a ) => ( b ) => action( a, b );
         }
-
-
 
         public Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, Action<T15>>>>>>>>>>>>>>>> action)
         {

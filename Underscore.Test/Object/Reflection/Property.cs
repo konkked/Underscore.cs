@@ -485,7 +485,7 @@ namespace Underscore.Test.Object.Reflection
             public int NumberOfKids { get; set; }
         }
 
-        //TODO: Fix this crap... hurts my face when I read
+        //TODO: Rewrite this test
         [TestMethod]
         public void ObjectPropertyForeach()
         {

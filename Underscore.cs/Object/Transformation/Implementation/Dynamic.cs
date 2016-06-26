@@ -8,7 +8,7 @@ namespace Underscore.Object
     {
         private readonly IPropertyComponent _property;
 
-        public DynamicComponent( IPropertyComponent property ) 
+        public DynamicComponent(IPropertyComponent property) 
         {
             _property = property;
         }
@@ -16,10 +16,10 @@ namespace Underscore.Object
 
         public dynamic ToDynamic( object value )
         {
-            IDictionary<string , object> expando = new ExpandoObject( );
+            IDictionary<string , object> expando = new ExpandoObject();
 
-            foreach ( var property in _property.All( value ) )
-                expando.Add( property.Name , property.GetValue( value ) );
+            foreach (var property in _property.All(value))
+                expando.Add(property.Name, property.GetValue(value));
 
             return (ExpandoObject) expando;
         }

@@ -644,8 +644,8 @@ namespace Underscore.Function
 
                 while (true)
                 {
-
                     Interlocked.Exchange(ref result, running);
+
                     if (result == null)
                         break;
 

@@ -6,12 +6,8 @@
 // Partial.tt
 namespace Underscore.Action
 {
-
 	public class PartialComponent : IPartialComponent
 	{
-
-		
-
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>

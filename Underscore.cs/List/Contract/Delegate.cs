@@ -5,7 +5,6 @@ namespace Underscore.List
 {
     public interface IDelegateComponent 
     {
-
         /// <summary>
         /// Resolves a list of functions into a list
         /// </summary>
@@ -13,7 +12,6 @@ namespace Underscore.List
         /// <param name="list">collection of functions</param>
         /// <returns>returns a list of elements</returns>
         IList<T> Resolve<T>( IList<Func<T>> list );
-
 
         /// <summary>
         /// Creates a list of functions that return 
@@ -24,5 +22,4 @@ namespace Underscore.List
         /// <returns>list of functions references list item at its index at the time of invocation</returns>
         IList<Func<T>> Delegate<T>( IList<T> list );
     }
-
 }

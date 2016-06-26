@@ -1,733 +1,1407 @@
-﻿using System;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
 using Underscore.Function;
 using System.Linq;
 
-namespace Underscore.Test.Function
-{
-    [TestClass]
-    public class PartialTest
-    {
-        private static string Join( params string[ ] args )
-        {
-            return string.Join( " ", values: ( args ).Where( trg => trg != null ) );
-        }
-
-
-
-
-        private static string BindPartialFunctionTarget(string a, string b, string c, string d, string e, string f, string g, string h, string i, string j, string k, string l, string m, string n, string o, string p)
-        {
-            return Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
-        }
-
-
-
-        private static string BindPartialFunctionTarget(string a, string b, string c, string d, string e, string f, string g, string h, string i, string j, string k, string l, string m, string n, string o)
-        {
-            return Join(a, b, c, d, e, f, g, h, i, j, k, l, m,n,o);
-        }
-
-
-        private static string BindPartialFunctionTarget(string a, string b, string c, string d, string e, string f, string g, string h, string i, string j, string k, string l, string m, string n)
-        {
-            return Join(a, b, c, d, e, f, g, h, i, j, k, l, m,n);
-        }
+namespace Underscore.Test.Function{
+	// Generated using /codegen/partialTest.py
+	[TestClass]
+	public class PartialTest
+	{
+		private static string Join(params string[] args)
+		{
+			return string.Join(" ", args.Where(s => !string.IsNullOrEmpty(s)));
+		}
+
+		private const string Arg1 = "a";
+		private const string Arg2 = "b";
+		private const string Arg3 = "c";
+		private const string Arg4 = "d";
+		private const string Arg5 = "e";
+		private const string Arg6 = "f";
+		private const string Arg7 = "g";
+		private const string Arg8 = "h";
+		private const string Arg9 = "i";
+		private const string Arg10 = "j";
+		private const string Arg11 = "k";
+		private const string Arg12 = "l";
+		private const string Arg13 = "m";
+		private const string Arg14 = "n";
+		private const string Arg15 = "o";
+		private const string Arg16 = "p";
 
-        private static string BindPartialFunctionTarget(string a, string b, string c, string d, string e, string f, string g, string h, string i, string j, string k, string l, string m)
-        {
-            return Join(a, b, c, d, e, f, g, h, i, j, k, l,m);
-        }
-        private static string BindPartialFunctionTarget(string a, string b, string c, string d, string e, string f, string g, string h, string i, string j, string k, string l)
-        {
-            return Join(a, b, c, d, e, f, g, h, i, j, k,l);
-        }
-        private static string BindPartialFunctionTarget(string a, string b, string c, string d, string e, string f, string g, string h, string i, string j, string k)
-        {
-            return Join(a, b, c, d, e, f, g, h, i, j,k);
-        }
+		private PartialComponent component;
 
-        private static string BindPartialFunctionTarget(string a, string b, string c, string d, string e, string f, string g, string h, string i, string j)
-        {
-            return Join(a, b, c, d, e, f, g, h, i, j);
-        }
+		[TestInitialize]
+		public void Initialize()
+		{
+			component = new PartialComponent();
+		}
 
-        private static string BindPartialFunctionTarget(string a, string b, string c, string d, string e, string f, string g, string h, string i)
-        {
-            return Join(a, b, c, d, e, f, g, h, i);
-        }
+		[TestMethod]
+		public void Function_Partial_2Arguments1Bound()
+		{
+			const string expected = "a b";
 
-        private static string BindPartialFunctionTarget(string a, string b, string c, string d, string e, string f, string g, string h)
-        {
-            return Join(a, b, c, d, e, f, g,h);
-        }
+			Func<string, string, string> toBind = (a, b) => Join(a, b);
 
-        private static string BindPartialFunctionTarget(string a, string b, string c, string d, string e, string f,string g)
-        {
-            return Join(a, b, c, d, e, f,g);
-        }
+			var binding = component.Partial(toBind, Arg1);
+			var result = binding(Arg2);
 
+			Assert.AreEqual(expected, result);
+		}
 
-        private static string BindPartialFunctionTarget(string a, string b, string c, string d, string e, string f)
-        {
-            return Join(a, b, c, d, e, f);
-        }
+		[TestMethod]
+		public void Function_Partial_3Arguments1Bound()
+		{
+			const string expected = "a b c";
 
-        private static string BindPartialFunctionTarget( string a, string b, string c, string d, string e )
-        {
-            return Join( a, b, c, d, e );
-        }
+			Func<string, string, string, string> toBind = (a, b, c) => Join(a, b, c);
 
-        private static string BindPartialFunctionTarget( string a, string b, string c, string d )
-        {
-            return Join( a, b, c, d );
-        }
+			var binding = component.Partial(toBind, Arg1);
+			var result = binding(Arg2, Arg3);
 
-        private static string BindPartialFunctionTarget( string a, string b, string c )
-        {
-            return Join( a, b, c );
-        }
+			Assert.AreEqual(expected, result);
+		}
 
-        private static string BindPartialFunctionTarget( string a, string b )
-        {
-            return Join( a, b );
-        }
+		[TestMethod]
+		public void Function_Partial_3Arguments2Bound()
+		{
+			const string expected = "a b c";
 
-        private const string testsSet = "abcdefghijklmnop";
+			Func<string, string, string, string> toBind = (a, b, c) => Join(a, b, c);
 
-        [TestMethod]
-        public async Task BindPartial_Function( )
-        {
-            const string a = "a", b = "b", c = "c", d = "d", e = "e", 
-                f = "f", g = "g",h="h",i="i",j="j",k="k",
-                l="l",m="m",n="n",o="o",p="p";
+			var binding = component.Partial(toBind, Arg1, Arg2);
+			var result = binding(Arg3);
 
-            
-            var partialBinder = new PartialComponent( );
+			Assert.AreEqual(expected, result);
+		}
 
-            var expected =
-                Enumerable.Range(2, testsSet.Length-1 )
-                    .Select(
-                        aa => string.Join(" ", Enumerable.Range(0, aa).Select(bb => testsSet[bb].ToString()).ToArray()))
-                    .Reverse().ToArray();
+		[TestMethod]
+		public void Function_Partial_4Arguments1Bound()
+		{
+			const string expected = "a b c d";
 
-            var target16 =
-                new Func
-                    <string, string, string, string, string, string, string, string, string, string, string, string,
-                        string, string, string, string, string>(BindPartialFunctionTarget);
+			Func<string, string, string, string, string> toBind = (a, b, c, d) => Join(a, b, c, d);
 
+			var binding = component.Partial(toBind, Arg1);
+			var result = binding(Arg2, Arg3, Arg4);
 
-            var target15 =
-                new Func
-                    <string, string, string, string, string, string, string, string, string, string, string, string,
-                        string, string, string, string>(BindPartialFunctionTarget);
-
-
-
-            var target14 =
-                new Func
-                    <string, string, string, string, string, string, string, string, string, string, string, string,
-                        string, string, string>(BindPartialFunctionTarget);
-
-
-
-            var target13 =
-                new Func
-                    <string, string, string, string, string, string, string, string, string, string, string, string,
-                        string, string>(BindPartialFunctionTarget);
-
-
-
-            var target12 =
-                new Func
-                    <string, string, string, string, string, string, string, string, string, string, string, string,
-                        string>(BindPartialFunctionTarget);
-
-            var target11 =
-                new Func
-                    <string, string, string, string, string, string, string, string, string, string, string, string>(BindPartialFunctionTarget);
-
-            var target10 =
-                new Func
-                    <string, string, string, string, string, string, string, string, string, string, string>(BindPartialFunctionTarget);
-
-            var target9 =
-                new Func
-                    <string, string, string, string, string, string, string, string, string, string>(BindPartialFunctionTarget);
-
-
-            var target8 =
-                new Func
-                    <string, string, string, string, string, string, string, string, string>(BindPartialFunctionTarget);
-
-
-            var target7 =
-                new Func
-                    <string, string, string, string, string, string, string, string>(BindPartialFunctionTarget);
-
-            var target6 =
-                new Func
-                    <string, string, string, string, string, string, string>(BindPartialFunctionTarget);
-
-            var target5 =
-                new Func
-                    <string, string, string, string, string, string>(BindPartialFunctionTarget);
-
-            var target4 =
-                new Func
-                    <string, string, string, string, string>(BindPartialFunctionTarget);
-
-            var target3 =
-                new Func
-                    <string, string, string, string>(BindPartialFunctionTarget);
-
-            var target2 =
-                new Func
-                    <string, string, string>(BindPartialFunctionTarget);
-
-
-            var bound = new
-            {
-                Partial16 = new
-                {
-                    Expected = expected[0],
-                    Bound1 = partialBinder.Partial(target16, a),
-                    Bound2 = partialBinder.Partial(target16, a, b),
-                    Bound3 = partialBinder.Partial(target16, a, b, c),
-                    Bound4 = partialBinder.Partial(target16, a, b, c, d),
-                    Bound5 = partialBinder.Partial(target16, a, b, c, d, e),
-                    Bound6 = partialBinder.Partial(target16, a, b, c, d, e, f),
-                    Bound7 = partialBinder.Partial(target16, a, b, c, d, e, f, g),
-                    Bound8 = partialBinder.Partial(target16, a, b, c, d, e, f, g, h),
-                    Bound9 = partialBinder.Partial(target16, a, b, c, d, e, f, g, h, i),
-                    Bound10 = partialBinder.Partial(target16, a, b, c, d, e, f, g, h, i, j),
-                    Bound11 = partialBinder.Partial(target16, a, b, c, d, e, f, g, h, i, j, k),
-                    Bound12 = partialBinder.Partial(target16, a, b, c, d, e, f, g, h, i, j, k, l),
-                    Bound13 = partialBinder.Partial(target16, a, b, c, d, e, f, g, h, i, j, k, l, m),
-                    Bound14 = partialBinder.Partial(target16, a, b, c, d, e, f, g, h, i, j, k, l, m, n),
-                    Bound15 = partialBinder.Partial(target16, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o),
-                },
-
-
-                Partial15 = new
-                {
-                    Expected = expected[1],
-                    Bound1 = partialBinder.Partial(target15, a),
-                    Bound2 = partialBinder.Partial(target15, a, b),
-                    Bound3 = partialBinder.Partial(target15, a, b, c),
-                    Bound4 = partialBinder.Partial(target15, a, b, c, d),
-                    Bound5 = partialBinder.Partial(target15, a, b, c, d, e),
-                    Bound6 = partialBinder.Partial(target15, a, b, c, d, e, f),
-                    Bound7 = partialBinder.Partial(target15, a, b, c, d, e, f, g),
-                    Bound8 = partialBinder.Partial(target15, a, b, c, d, e, f, g, h),
-                    Bound9 = partialBinder.Partial(target15, a, b, c, d, e, f, g, h, i),
-                    Bound10 = partialBinder.Partial(target15, a, b, c, d, e, f, g, h, i, j),
-                    Bound11 = partialBinder.Partial(target15, a, b, c, d, e, f, g, h, i, j, k),
-                    Bound12 = partialBinder.Partial(target15, a, b, c, d, e, f, g, h, i, j, k, l),
-                    Bound13 = partialBinder.Partial(target15, a, b, c, d, e, f, g, h, i, j, k, l, m),
-                    Bound14 = partialBinder.Partial(target15, a, b, c, d, e, f, g, h, i, j, k, l, m, n),
-                },
-
-
-                Partial14 = new
-                {
-                    Expected = expected[2],
-                    Bound1 = partialBinder.Partial(target14, a),
-                    Bound2 = partialBinder.Partial(target14, a, b),
-                    Bound3 = partialBinder.Partial(target14, a, b, c),
-                    Bound4 = partialBinder.Partial(target14, a, b, c, d),
-                    Bound5 = partialBinder.Partial(target14, a, b, c, d, e),
-                    Bound6 = partialBinder.Partial(target14, a, b, c, d, e, f),
-                    Bound7 = partialBinder.Partial(target14, a, b, c, d, e, f, g),
-                    Bound8 = partialBinder.Partial(target14, a, b, c, d, e, f, g, h),
-                    Bound9 = partialBinder.Partial(target14, a, b, c, d, e, f, g, h, i),
-                    Bound10 = partialBinder.Partial(target14, a, b, c, d, e, f, g, h, i, j),
-                    Bound11 = partialBinder.Partial(target14, a, b, c, d, e, f, g, h, i, j, k),
-                    Bound12 = partialBinder.Partial(target14, a, b, c, d, e, f, g, h, i, j, k, l),
-                    Bound13 = partialBinder.Partial(target14, a, b, c, d, e, f, g, h, i, j, k, l, m),
-                },
-
-
-                Partial13 = new
-                {
-                    Expected = expected[3],
-                    Bound1 = partialBinder.Partial(target13, a),
-                    Bound2 = partialBinder.Partial(target13, a, b),
-                    Bound3 = partialBinder.Partial(target13, a, b, c),
-                    Bound4 = partialBinder.Partial(target13, a, b, c, d),
-                    Bound5 = partialBinder.Partial(target13, a, b, c, d, e),
-                    Bound6 = partialBinder.Partial(target13, a, b, c, d, e, f),
-                    Bound7 = partialBinder.Partial(target13, a, b, c, d, e, f, g),
-                    Bound8 = partialBinder.Partial(target13, a, b, c, d, e, f, g, h),
-                    Bound9 = partialBinder.Partial(target13, a, b, c, d, e, f, g, h, i),
-                    Bound10 = partialBinder.Partial(target13, a, b, c, d, e, f, g, h, i, j),
-                    Bound11 = partialBinder.Partial(target13, a, b, c, d, e, f, g, h, i, j, k),
-                    Bound12 = partialBinder.Partial(target13, a, b, c, d, e, f, g, h, i, j, k, l)
-                },
-
-
-                Partial12 = new
-                {
-                    Expected = expected[4],
-                    Bound1 = partialBinder.Partial(target12, a),
-                    Bound2 = partialBinder.Partial(target12, a, b),
-                    Bound3 = partialBinder.Partial(target12, a, b, c),
-                    Bound4 = partialBinder.Partial(target12, a, b, c, d),
-                    Bound5 = partialBinder.Partial(target12, a, b, c, d, e),
-                    Bound6 = partialBinder.Partial(target12, a, b, c, d, e, f),
-                    Bound7 = partialBinder.Partial(target12, a, b, c, d, e, f, g),
-                    Bound8 = partialBinder.Partial(target12, a, b, c, d, e, f, g, h),
-                    Bound9 = partialBinder.Partial(target12, a, b, c, d, e, f, g, h, i),
-                    Bound10 = partialBinder.Partial(target12, a, b, c, d, e, f, g, h, i, j),
-                    Bound11 = partialBinder.Partial(target12, a, b, c, d, e, f, g, h, i, j, k),
-                },
-
-
-                Partial11 = new
-                {
-                    Expected = expected[5],
-                    Bound1 = partialBinder.Partial(target11, a),
-                    Bound2 = partialBinder.Partial(target11, a, b),
-                    Bound3 = partialBinder.Partial(target11, a, b, c),
-                    Bound4 = partialBinder.Partial(target11, a, b, c, d),
-                    Bound5 = partialBinder.Partial(target11, a, b, c, d, e),
-                    Bound6 = partialBinder.Partial(target11, a, b, c, d, e, f),
-                    Bound7 = partialBinder.Partial(target11, a, b, c, d, e, f, g),
-                    Bound8 = partialBinder.Partial(target11, a, b, c, d, e, f, g, h),
-                    Bound9 = partialBinder.Partial(target11, a, b, c, d, e, f, g, h, i),
-                    Bound10 = partialBinder.Partial(target11, a, b, c, d, e, f, g, h, i, j)
-                },
-                Partial10 = new
-                {
-                    Expected = expected[6],
-                    Bound1 = partialBinder.Partial(target10, a),
-                    Bound2 = partialBinder.Partial(target10, a, b),
-                    Bound3 = partialBinder.Partial(target10, a, b, c),
-                    Bound4 = partialBinder.Partial(target10, a, b, c, d),
-                    Bound5 = partialBinder.Partial(target10, a, b, c, d, e),
-                    Bound6 = partialBinder.Partial(target10, a, b, c, d, e, f),
-                    Bound7 = partialBinder.Partial(target10, a, b, c, d, e, f, g),
-                    Bound8 = partialBinder.Partial(target10, a, b, c, d, e, f, g, h),
-                    Bound9 = partialBinder.Partial(target10, a, b, c, d, e, f, g, h, i)
-                },
-                Partial9 = new
-                {
-                    Expected = expected[7],
-                    Bound1 = partialBinder.Partial(target9, a),
-                    Bound2 = partialBinder.Partial(target9, a, b),
-                    Bound3 = partialBinder.Partial(target9, a, b, c),
-                    Bound4 = partialBinder.Partial(target9, a, b, c, d),
-                    Bound5 = partialBinder.Partial(target9, a, b, c, d, e),
-                    Bound6 = partialBinder.Partial(target9, a, b, c, d, e, f),
-                    Bound7 = partialBinder.Partial(target9, a, b, c, d, e, f, g),
-                    Bound8 = partialBinder.Partial(target9, a, b, c, d, e, f, g, h),
-                },
-                Partial8 = new
-                {
-                    Expected = expected[8],
-                    Bound1 = partialBinder.Partial(target8, a),
-                    Bound2 = partialBinder.Partial(target8, a, b),
-                    Bound3 = partialBinder.Partial(target8, a, b, c),
-                    Bound4 = partialBinder.Partial(target8, a, b, c, d),
-                    Bound5 = partialBinder.Partial(target8, a, b, c, d, e),
-                    Bound6 = partialBinder.Partial(target8, a, b, c, d, e, f),
-                    Bound7 = partialBinder.Partial(target8, a, b, c, d, e, f, g)
-                },
-                Partial7 = new
-                {
-                    Expected = expected[9],
-                    Bound1 = partialBinder.Partial(target7, a),
-                    Bound2 = partialBinder.Partial(target7, a, b),
-                    Bound3 = partialBinder.Partial(target7, a, b, c),
-                    Bound4 = partialBinder.Partial(target7, a, b, c, d),
-                    Bound5 = partialBinder.Partial(target7, a, b, c, d, e),
-                    Bound6 = partialBinder.Partial(target7, a, b, c, d, e, f)
-                },
-                Partial6 = new
-                {
-                    Expected = expected[10],
-                    Bound1 = partialBinder.Partial(target6, a),
-                    Bound2 = partialBinder.Partial(target6, a, b),
-                    Bound3 = partialBinder.Partial(target6, a, b, c),
-                    Bound4 = partialBinder.Partial(target6, a, b, c, d),
-                    Bound5 = partialBinder.Partial(target6, a, b, c, d, e)
-                },
-                Partial5 = new
-                {
-                    Expected = expected[11],
-                    Bound1 = partialBinder.Partial(target5, a),
-                    Bound2 = partialBinder.Partial(target5, a, b),
-                    Bound3 = partialBinder.Partial(target5, a, b, c),
-                    Bound4 = partialBinder.Partial(target5, a, b, c, d)
-                },
-                Partial4 = new
-                {
-                    Expected = expected[12],
-                    Bound1 = partialBinder.Partial(target4, a),
-                    Bound2 = partialBinder.Partial(target4, a, b),
-                    Bound3 = partialBinder.Partial(target4, a, b, c),
-                },
-                Partial3 = new
-                {
-                    Expected = expected[13],
-                    Bound1 = partialBinder.Partial(target3, a),
-                    Bound2 = partialBinder.Partial(target3, a, b),
-                },
-                Partial2 = new
-                {
-                    Expected = expected[14],
-                    Bound1 = partialBinder.Partial(target2, a),
-                }
-            };
-
-
-
-            await Util.Tasks.Start(() =>
-            {
-
-
-                var target = bound.Partial16;
-                var expecting = target.Expected;
-
-                var results = new[]
-                {
-                    target.Bound1(b, c, d, e, f, g, h, i, j, k, l, m, n, o, p),
-                    target.Bound2(c, d, e, f, g, h, i, j, k, l, m, n, o, p),
-                    target.Bound3(d, e, f, g, h, i, j, k, l, m, n,o,p),
-                    target.Bound4( e, f, g, h, i, j, k, l, m, n,o,p),
-                    target.Bound5(f, g, h, i, j, k, l, m, n,o,p),
-                    target.Bound6(g, h, i, j, k, l, m, n,o,p),
-                    target.Bound7( h, i, j, k, l, m, n,o,p),
-                    target.Bound8(i, j, k, l, m, n,o,p),
-                    target.Bound9( j, k, l, m, n,o,p),
-                    target.Bound10( k, l, m, n,o,p),
-                    target.Bound11( l, m, n, o, p),
-                    target.Bound12(m, n, o, p),
-                    target.Bound13(n, o, p),
-                    target.Bound14(o, p),
-                    target.Bound15(p),
-                };
-
-
-                foreach (var r in results)
-                    Assert.AreEqual(expecting, r);
-            },
-            () =>
-            {
-
-
-                var target = bound.Partial15;
-                var expecting = target.Expected;
-
-                var results = new[]
-                {
-                    target.Bound1(b, c, d, e, f, g, h, i, j, k, l, m, n, o),
-                    target.Bound2(c, d, e, f, g, h, i, j, k, l, m, n, o),
-                    target.Bound3(d, e, f, g, h, i, j, k, l, m, n, o),
-                    target.Bound4(e, f, g, h, i, j, k, l, m, n, o),
-                    target.Bound5(f, g, h, i, j, k, l, m, n, o),
-                    target.Bound6(g, h, i, j, k, l, m, n, o),
-                    target.Bound7(h, i, j, k, l, m, n, o),
-                    target.Bound8(i, j, k, l, m, n, o),
-                    target.Bound9(j, k, l, m, n, o),
-                    target.Bound10(k, l, m, n, o),
-                    target.Bound11(l, m, n, o),
-                    target.Bound12(m, n, o),
-                    target.Bound13(n, o),
-                    target.Bound14(o),
-                };
-
-
-                foreach (var r in results)
-                    Assert.AreEqual(expecting, r);
-            }, 
-            () =>
-            {
-
-
-                var target = bound.Partial14;
-                var expecting = target.Expected;
-
-                var results = new[]
-                {
-                    target.Bound1(b, c, d, e, f, g, h, i, j, k, l, m, n),
-                    target.Bound2( c, d, e, f, g, h, i, j, k, l, m,n),
-                    target.Bound3(d, e, f, g, h, i, j, k, l, m,n),
-                    target.Bound4(e, f, g, h, i, j, k, l, m,n),
-                    target.Bound5(f, g, h, i, j, k, l, m,n),
-                    target.Bound6(g, h, i, j, k, l, m,n),
-                    target.Bound7(h, i, j, k, l, m,n),
-                    target.Bound8(i, j, k, l, m,n),
-                    target.Bound9(j, k, l, m,n),
-                    target.Bound10(k, l, m,n),
-                    target.Bound11(l, m,n),
-                    target.Bound12(m,n),
-                    target.Bound13(n),
-                };
-
-
-                foreach (var r in results)
-                    Assert.AreEqual(expecting, r);
-            },
-            () =>
-            {
-
-
-                var target = bound.Partial13;
-                var expecting = target.Expected;
-
-                var results = new[]
-                {
-                    target.Bound1(b, c, d, e, f, g, h, i, j, k, l, m),
-                    target.Bound2(c, d, e, f, g, h, i, j, k, l, m),
-                    target.Bound3( d, e, f, g, h, i, j, k, l, m),
-                    target.Bound4(e, f, g, h, i, j, k, l, m),
-                    target.Bound5(f, g, h, i, j, k, l, m),
-                    target.Bound6(g, h, i, j, k, l, m),
-                    target.Bound7(h, i, j, k, l, m),
-                    target.Bound8(i, j, k, l, m),
-                    target.Bound9(j, k, l, m),
-                    target.Bound10( k, l, m),
-                    target.Bound11(l, m),
-                    target.Bound12(m),
-                };
-
-
-                foreach (var r in results)
-                    Assert.AreEqual(expecting, r);
-            },
-            () =>
-            {
-
-
-                var target = bound.Partial12;
-                var expecting = target.Expected;
-
-                var results = new[]
-                {
-                    target.Bound1(b, c, d, e, f, g, h, i, j, k, l),
-                    target.Bound2( c, d, e, f, g, h, i, j, k, l),
-                    target.Bound3(d, e, f, g, h, i, j, k, l),
-                    target.Bound4(e, f, g, h, i, j, k, l),
-                    target.Bound5(f, g, h, i, j, k, l),
-                    target.Bound6( g, h, i, j, k, l),
-                    target.Bound7( h, i, j, k, l),
-                    target.Bound8(i, j, k, l),
-                    target.Bound9(j, k, l),
-                    target.Bound10(k, l),
-                    target.Bound11(l),
-                };
-
-
-                foreach (var r in results)
-                    Assert.AreEqual(expecting, r);
-            },
-            () =>
-            {
-
-
-                var target = bound.Partial11;
-                var expecting = target.Expected;
-
-                var results = new[]
-                {
-                    target.Bound1(b, c, d, e, f, g, h, i, j, k),
-                    target.Bound2(c, d, e, f, g, h, i, j, k),
-                    target.Bound3(d, e, f, g, h, i, j, k),
-                    target.Bound4( e, f, g, h, i, j, k),
-                    target.Bound5(f, g, h, i, j, k),
-                    target.Bound6( g, h, i, j, k),
-                    target.Bound7(h, i, j, k),
-                    target.Bound8( i, j, k),
-                    target.Bound9( j, k),
-                    target.Bound10( k),
-                };
-
-
-                foreach (var r in results)
-                    Assert.AreEqual(expecting, r);
-            },
-            () =>
-            {
-
-
-                var target = bound.Partial10;
-                var expecting = target.Expected;
-
-                var results = new[]
-                {
-                    target.Bound1(b, c, d, e, f, g, h, i, j),
-                    target.Bound2(c, d, e, f, g, h, i, j),
-                    target.Bound3( d, e, f, g, h, i, j),
-                    target.Bound4( e, f, g, h, i, j),
-                    target.Bound5(f, g, h, i, j),
-                    target.Bound6( g, h, i, j),
-                    target.Bound7( h, i, j),
-                    target.Bound8( i, j),
-                    target.Bound9(j),
-                };
-
-
-                foreach (var r in results)
-                    Assert.AreEqual(expecting, r);
-            },
-            () =>
-            {
-
-
-                var target = bound.Partial9;
-                var expecting = target.Expected;
-
-                var results = new[]
-                {
-                    target.Bound1(b, c, d, e, f, g, h, i),
-                    target.Bound2(c, d, e, f, g, h, i),
-                    target.Bound3(d, e, f, g, h, i),
-                    target.Bound4( e, f, g, h, i),
-                    target.Bound5( f, g, h, i),
-                    target.Bound6( g, h, i),
-                    target.Bound7( h, i),
-                    target.Bound8(i),
-                };
-
-
-                foreach (var r in results)
-                    Assert.AreEqual(expecting, r);
-            },
-            () =>
-            {
-
-
-                var target = bound.Partial8;
-                var expecting = target.Expected;
-
-                var results = new[]
-                {
-                    target.Bound1(b, c, d, e, f, g, h),
-                    target.Bound2( c, d, e, f, g, h),
-                    target.Bound3( d, e, f, g, h),
-                    target.Bound4(e, f, g, h),
-                    target.Bound5(f, g, h),
-                    target.Bound6(g, h),
-                    target.Bound7(h),
-                };
-
-
-                foreach (var r in results)
-                    Assert.AreEqual(expecting, r);
-            },
-            () =>
-            {
-
-
-                var target = bound.Partial7;
-                var expecting = target.Expected;
-
-                var results = new[]
-                {
-                    target.Bound1(b, c, d, e, f, g),
-                    target.Bound2(c, d, e, f, g),
-                    target.Bound3(d, e, f, g),
-                    target.Bound4(e, f, g),
-                    target.Bound5( f, g),
-                    target.Bound6(g),
-                };
-
-
-                foreach (var r in results)
-                    Assert.AreEqual(expecting, r);
-            },
-            () =>
-            {
-
-
-                var target = bound.Partial6;
-                var expecting = target.Expected;
-
-                var results = new[]
-                {
-                    target.Bound1(b, c, d, e, f),
-                    target.Bound2( c, d, e, f),
-                    target.Bound3(d, e, f),
-                    target.Bound4(e, f),
-                    target.Bound5( f),
-                };
-
-
-                foreach (var r in results)
-                    Assert.AreEqual(expecting, r);
-            },
-            () =>
-            {
-
-
-                var target = bound.Partial5;
-                var expecting = target.Expected;
-
-                var results = new[]
-                {
-                    target.Bound1(b, c, d, e),
-                    target.Bound2(c, d, e),
-                    target.Bound3(d, e),
-                    target.Bound4( e),
-                };
-
-
-                foreach (var r in results)
-                    Assert.AreEqual(expecting, r);
-            },
-            () =>
-            {
-
-
-                var target = bound.Partial4;
-                var expecting = target.Expected;
-
-                var results = new[]
-                {
-                    target.Bound1(b, c, d),
-                    target.Bound2(c, d),
-                    target.Bound3(d),
-                };
-
-
-                foreach (var r in results)
-                    Assert.AreEqual(expecting, r);
-            },
-            () =>
-            {
-
-
-                var target = bound.Partial3;
-                var expecting = target.Expected;
-
-                var results = new[]
-                {
-                    target.Bound1(b, c),
-                    target.Bound2(c),
-                };
-
-
-                foreach (var r in results)
-                    Assert.AreEqual(expecting, r);
-            },
-            () =>
-            {
-
-
-                var target = bound.Partial2;
-                var expecting = target.Expected;
-
-                var results = new[]
-                {
-                    target.Bound1(b),
-                };
-
-
-                foreach (var r in results)
-                    Assert.AreEqual(expecting, r);
-            } );
-        }
-    }
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_4Arguments2Bound()
+		{
+			const string expected = "a b c d";
+
+			Func<string, string, string, string, string> toBind = (a, b, c, d) => Join(a, b, c, d);
+
+			var binding = component.Partial(toBind, Arg1, Arg2);
+			var result = binding(Arg3, Arg4);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_4Arguments3Bound()
+		{
+			const string expected = "a b c d";
+
+			Func<string, string, string, string, string> toBind = (a, b, c, d) => Join(a, b, c, d);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var result = binding(Arg4);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_5Arguments1Bound()
+		{
+			const string expected = "a b c d e";
+
+			Func<string, string, string, string, string, string> toBind = (a, b, c, d, e) => Join(a, b, c, d, e);
+
+			var binding = component.Partial(toBind, Arg1);
+			var result = binding(Arg2, Arg3, Arg4, Arg5);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_5Arguments2Bound()
+		{
+			const string expected = "a b c d e";
+
+			Func<string, string, string, string, string, string> toBind = (a, b, c, d, e) => Join(a, b, c, d, e);
+
+			var binding = component.Partial(toBind, Arg1, Arg2);
+			var result = binding(Arg3, Arg4, Arg5);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_5Arguments3Bound()
+		{
+			const string expected = "a b c d e";
+
+			Func<string, string, string, string, string, string> toBind = (a, b, c, d, e) => Join(a, b, c, d, e);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var result = binding(Arg4, Arg5);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_5Arguments4Bound()
+		{
+			const string expected = "a b c d e";
+
+			Func<string, string, string, string, string, string> toBind = (a, b, c, d, e) => Join(a, b, c, d, e);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var result = binding(Arg5);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_6Arguments1Bound()
+		{
+			const string expected = "a b c d e f";
+
+			Func<string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f) => Join(a, b, c, d, e, f);
+
+			var binding = component.Partial(toBind, Arg1);
+			var result = binding(Arg2, Arg3, Arg4, Arg5, Arg6);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_6Arguments2Bound()
+		{
+			const string expected = "a b c d e f";
+
+			Func<string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f) => Join(a, b, c, d, e, f);
+
+			var binding = component.Partial(toBind, Arg1, Arg2);
+			var result = binding(Arg3, Arg4, Arg5, Arg6);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_6Arguments3Bound()
+		{
+			const string expected = "a b c d e f";
+
+			Func<string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f) => Join(a, b, c, d, e, f);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var result = binding(Arg4, Arg5, Arg6);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_6Arguments4Bound()
+		{
+			const string expected = "a b c d e f";
+
+			Func<string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f) => Join(a, b, c, d, e, f);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var result = binding(Arg5, Arg6);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_6Arguments5Bound()
+		{
+			const string expected = "a b c d e f";
+
+			Func<string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f) => Join(a, b, c, d, e, f);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var result = binding(Arg6);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_7Arguments1Bound()
+		{
+			const string expected = "a b c d e f g";
+
+			Func<string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g) => Join(a, b, c, d, e, f, g);
+
+			var binding = component.Partial(toBind, Arg1);
+			var result = binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_7Arguments2Bound()
+		{
+			const string expected = "a b c d e f g";
+
+			Func<string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g) => Join(a, b, c, d, e, f, g);
+
+			var binding = component.Partial(toBind, Arg1, Arg2);
+			var result = binding(Arg3, Arg4, Arg5, Arg6, Arg7);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_7Arguments3Bound()
+		{
+			const string expected = "a b c d e f g";
+
+			Func<string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g) => Join(a, b, c, d, e, f, g);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var result = binding(Arg4, Arg5, Arg6, Arg7);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_7Arguments4Bound()
+		{
+			const string expected = "a b c d e f g";
+
+			Func<string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g) => Join(a, b, c, d, e, f, g);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var result = binding(Arg5, Arg6, Arg7);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_7Arguments5Bound()
+		{
+			const string expected = "a b c d e f g";
+
+			Func<string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g) => Join(a, b, c, d, e, f, g);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var result = binding(Arg6, Arg7);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_7Arguments6Bound()
+		{
+			const string expected = "a b c d e f g";
+
+			Func<string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g) => Join(a, b, c, d, e, f, g);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var result = binding(Arg7);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_8Arguments1Bound()
+		{
+			const string expected = "a b c d e f g h";
+
+			Func<string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h) => Join(a, b, c, d, e, f, g, h);
+
+			var binding = component.Partial(toBind, Arg1);
+			var result = binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_8Arguments2Bound()
+		{
+			const string expected = "a b c d e f g h";
+
+			Func<string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h) => Join(a, b, c, d, e, f, g, h);
+
+			var binding = component.Partial(toBind, Arg1, Arg2);
+			var result = binding(Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_8Arguments3Bound()
+		{
+			const string expected = "a b c d e f g h";
+
+			Func<string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h) => Join(a, b, c, d, e, f, g, h);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var result = binding(Arg4, Arg5, Arg6, Arg7, Arg8);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_8Arguments4Bound()
+		{
+			const string expected = "a b c d e f g h";
+
+			Func<string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h) => Join(a, b, c, d, e, f, g, h);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var result = binding(Arg5, Arg6, Arg7, Arg8);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_8Arguments5Bound()
+		{
+			const string expected = "a b c d e f g h";
+
+			Func<string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h) => Join(a, b, c, d, e, f, g, h);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var result = binding(Arg6, Arg7, Arg8);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_8Arguments6Bound()
+		{
+			const string expected = "a b c d e f g h";
+
+			Func<string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h) => Join(a, b, c, d, e, f, g, h);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var result = binding(Arg7, Arg8);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_8Arguments7Bound()
+		{
+			const string expected = "a b c d e f g h";
+
+			Func<string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h) => Join(a, b, c, d, e, f, g, h);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+			var result = binding(Arg8);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_9Arguments1Bound()
+		{
+			const string expected = "a b c d e f g h i";
+
+			Func<string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i) => Join(a, b, c, d, e, f, g, h, i);
+
+			var binding = component.Partial(toBind, Arg1);
+			var result = binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_9Arguments2Bound()
+		{
+			const string expected = "a b c d e f g h i";
+
+			Func<string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i) => Join(a, b, c, d, e, f, g, h, i);
+
+			var binding = component.Partial(toBind, Arg1, Arg2);
+			var result = binding(Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_9Arguments3Bound()
+		{
+			const string expected = "a b c d e f g h i";
+
+			Func<string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i) => Join(a, b, c, d, e, f, g, h, i);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var result = binding(Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_9Arguments4Bound()
+		{
+			const string expected = "a b c d e f g h i";
+
+			Func<string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i) => Join(a, b, c, d, e, f, g, h, i);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var result = binding(Arg5, Arg6, Arg7, Arg8, Arg9);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_9Arguments5Bound()
+		{
+			const string expected = "a b c d e f g h i";
+
+			Func<string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i) => Join(a, b, c, d, e, f, g, h, i);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var result = binding(Arg6, Arg7, Arg8, Arg9);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_9Arguments6Bound()
+		{
+			const string expected = "a b c d e f g h i";
+
+			Func<string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i) => Join(a, b, c, d, e, f, g, h, i);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var result = binding(Arg7, Arg8, Arg9);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_9Arguments7Bound()
+		{
+			const string expected = "a b c d e f g h i";
+
+			Func<string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i) => Join(a, b, c, d, e, f, g, h, i);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+			var result = binding(Arg8, Arg9);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_9Arguments8Bound()
+		{
+			const string expected = "a b c d e f g h i";
+
+			Func<string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i) => Join(a, b, c, d, e, f, g, h, i);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+			var result = binding(Arg9);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_10Arguments1Bound()
+		{
+			const string expected = "a b c d e f g h i j";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => Join(a, b, c, d, e, f, g, h, i, j);
+
+			var binding = component.Partial(toBind, Arg1);
+			var result = binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_10Arguments2Bound()
+		{
+			const string expected = "a b c d e f g h i j";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => Join(a, b, c, d, e, f, g, h, i, j);
+
+			var binding = component.Partial(toBind, Arg1, Arg2);
+			var result = binding(Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_10Arguments3Bound()
+		{
+			const string expected = "a b c d e f g h i j";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => Join(a, b, c, d, e, f, g, h, i, j);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var result = binding(Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_10Arguments4Bound()
+		{
+			const string expected = "a b c d e f g h i j";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => Join(a, b, c, d, e, f, g, h, i, j);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var result = binding(Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_10Arguments5Bound()
+		{
+			const string expected = "a b c d e f g h i j";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => Join(a, b, c, d, e, f, g, h, i, j);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var result = binding(Arg6, Arg7, Arg8, Arg9, Arg10);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_10Arguments6Bound()
+		{
+			const string expected = "a b c d e f g h i j";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => Join(a, b, c, d, e, f, g, h, i, j);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var result = binding(Arg7, Arg8, Arg9, Arg10);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_10Arguments7Bound()
+		{
+			const string expected = "a b c d e f g h i j";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => Join(a, b, c, d, e, f, g, h, i, j);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+			var result = binding(Arg8, Arg9, Arg10);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_10Arguments8Bound()
+		{
+			const string expected = "a b c d e f g h i j";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => Join(a, b, c, d, e, f, g, h, i, j);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+			var result = binding(Arg9, Arg10);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_10Arguments9Bound()
+		{
+			const string expected = "a b c d e f g h i j";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => Join(a, b, c, d, e, f, g, h, i, j);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+			var result = binding(Arg10);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_11Arguments1Bound()
+		{
+			const string expected = "a b c d e f g h i j k";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => Join(a, b, c, d, e, f, g, h, i, j, k);
+
+			var binding = component.Partial(toBind, Arg1);
+			var result = binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_11Arguments2Bound()
+		{
+			const string expected = "a b c d e f g h i j k";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => Join(a, b, c, d, e, f, g, h, i, j, k);
+
+			var binding = component.Partial(toBind, Arg1, Arg2);
+			var result = binding(Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_11Arguments3Bound()
+		{
+			const string expected = "a b c d e f g h i j k";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => Join(a, b, c, d, e, f, g, h, i, j, k);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var result = binding(Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_11Arguments4Bound()
+		{
+			const string expected = "a b c d e f g h i j k";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => Join(a, b, c, d, e, f, g, h, i, j, k);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var result = binding(Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_11Arguments5Bound()
+		{
+			const string expected = "a b c d e f g h i j k";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => Join(a, b, c, d, e, f, g, h, i, j, k);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var result = binding(Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_11Arguments6Bound()
+		{
+			const string expected = "a b c d e f g h i j k";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => Join(a, b, c, d, e, f, g, h, i, j, k);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var result = binding(Arg7, Arg8, Arg9, Arg10, Arg11);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_11Arguments7Bound()
+		{
+			const string expected = "a b c d e f g h i j k";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => Join(a, b, c, d, e, f, g, h, i, j, k);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+			var result = binding(Arg8, Arg9, Arg10, Arg11);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_11Arguments8Bound()
+		{
+			const string expected = "a b c d e f g h i j k";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => Join(a, b, c, d, e, f, g, h, i, j, k);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+			var result = binding(Arg9, Arg10, Arg11);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_11Arguments9Bound()
+		{
+			const string expected = "a b c d e f g h i j k";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => Join(a, b, c, d, e, f, g, h, i, j, k);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+			var result = binding(Arg10, Arg11);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_11Arguments10Bound()
+		{
+			const string expected = "a b c d e f g h i j k";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => Join(a, b, c, d, e, f, g, h, i, j, k);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
+			var result = binding(Arg11);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_12Arguments1Bound()
+		{
+			const string expected = "a b c d e f g h i j k l";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => Join(a, b, c, d, e, f, g, h, i, j, k, l);
+
+			var binding = component.Partial(toBind, Arg1);
+			var result = binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_12Arguments2Bound()
+		{
+			const string expected = "a b c d e f g h i j k l";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => Join(a, b, c, d, e, f, g, h, i, j, k, l);
+
+			var binding = component.Partial(toBind, Arg1, Arg2);
+			var result = binding(Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_12Arguments3Bound()
+		{
+			const string expected = "a b c d e f g h i j k l";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => Join(a, b, c, d, e, f, g, h, i, j, k, l);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var result = binding(Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_12Arguments4Bound()
+		{
+			const string expected = "a b c d e f g h i j k l";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => Join(a, b, c, d, e, f, g, h, i, j, k, l);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var result = binding(Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_12Arguments5Bound()
+		{
+			const string expected = "a b c d e f g h i j k l";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => Join(a, b, c, d, e, f, g, h, i, j, k, l);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var result = binding(Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_12Arguments6Bound()
+		{
+			const string expected = "a b c d e f g h i j k l";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => Join(a, b, c, d, e, f, g, h, i, j, k, l);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var result = binding(Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_12Arguments7Bound()
+		{
+			const string expected = "a b c d e f g h i j k l";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => Join(a, b, c, d, e, f, g, h, i, j, k, l);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+			var result = binding(Arg8, Arg9, Arg10, Arg11, Arg12);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_12Arguments8Bound()
+		{
+			const string expected = "a b c d e f g h i j k l";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => Join(a, b, c, d, e, f, g, h, i, j, k, l);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+			var result = binding(Arg9, Arg10, Arg11, Arg12);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_12Arguments9Bound()
+		{
+			const string expected = "a b c d e f g h i j k l";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => Join(a, b, c, d, e, f, g, h, i, j, k, l);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+			var result = binding(Arg10, Arg11, Arg12);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_12Arguments10Bound()
+		{
+			const string expected = "a b c d e f g h i j k l";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => Join(a, b, c, d, e, f, g, h, i, j, k, l);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
+			var result = binding(Arg11, Arg12);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_12Arguments11Bound()
+		{
+			const string expected = "a b c d e f g h i j k l";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => Join(a, b, c, d, e, f, g, h, i, j, k, l);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
+			var result = binding(Arg12);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_13Arguments1Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
+
+			var binding = component.Partial(toBind, Arg1);
+			var result = binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_13Arguments2Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
+
+			var binding = component.Partial(toBind, Arg1, Arg2);
+			var result = binding(Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_13Arguments3Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var result = binding(Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_13Arguments4Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var result = binding(Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_13Arguments5Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var result = binding(Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_13Arguments6Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var result = binding(Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_13Arguments7Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+			var result = binding(Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_13Arguments8Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+			var result = binding(Arg9, Arg10, Arg11, Arg12, Arg13);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_13Arguments9Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+			var result = binding(Arg10, Arg11, Arg12, Arg13);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_13Arguments10Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
+			var result = binding(Arg11, Arg12, Arg13);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_13Arguments11Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
+			var result = binding(Arg12, Arg13);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_13Arguments12Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
+			var result = binding(Arg13);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_14Arguments1Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+			var binding = component.Partial(toBind, Arg1);
+			var result = binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_14Arguments2Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+			var binding = component.Partial(toBind, Arg1, Arg2);
+			var result = binding(Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_14Arguments3Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var result = binding(Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_14Arguments4Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var result = binding(Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_14Arguments5Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var result = binding(Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_14Arguments6Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var result = binding(Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_14Arguments7Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+			var result = binding(Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_14Arguments8Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+			var result = binding(Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_14Arguments9Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+			var result = binding(Arg10, Arg11, Arg12, Arg13, Arg14);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_14Arguments10Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
+			var result = binding(Arg11, Arg12, Arg13, Arg14);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_14Arguments11Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
+			var result = binding(Arg12, Arg13, Arg14);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_14Arguments12Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
+			var result = binding(Arg13, Arg14);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_14Arguments13Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
+			var result = binding(Arg14);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_15Arguments1Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n o";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+
+			var binding = component.Partial(toBind, Arg1);
+			var result = binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_15Arguments2Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n o";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+
+			var binding = component.Partial(toBind, Arg1, Arg2);
+			var result = binding(Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_15Arguments3Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n o";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var result = binding(Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_15Arguments4Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n o";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var result = binding(Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_15Arguments5Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n o";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var result = binding(Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_15Arguments6Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n o";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var result = binding(Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_15Arguments7Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n o";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+			var result = binding(Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_15Arguments8Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n o";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+			var result = binding(Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_15Arguments9Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n o";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+			var result = binding(Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_15Arguments10Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n o";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
+			var result = binding(Arg11, Arg12, Arg13, Arg14, Arg15);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_15Arguments11Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n o";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
+			var result = binding(Arg12, Arg13, Arg14, Arg15);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_15Arguments12Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n o";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
+			var result = binding(Arg13, Arg14, Arg15);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_15Arguments13Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n o";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
+			var result = binding(Arg14, Arg15);
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Partial_15Arguments14Bound()
+		{
+			const string expected = "a b c d e f g h i j k l m n o";
+
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+
+			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
+			var result = binding(Arg15);
+
+			Assert.AreEqual(expected, result);
+		}
+
+	}
 }
