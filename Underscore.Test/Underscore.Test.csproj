@@ -78,6 +78,7 @@
     <Compile Include="Collection\Partition\ChunkTest.cs" />
     <Compile Include="Collection\Partition\PartitionTest.cs" />
     <Compile Include="Function\BindTest.cs" />
+    <Compile Include="Function\CacheTest.cs" />
     <Compile Include="Function\Compose\ComposeTest.cs" />
     <Compile Include="Function\Compose\ApplyTest.cs" />
     <Compile Include="Function\SynchTest.cs" />
