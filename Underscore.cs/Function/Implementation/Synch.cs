@@ -6,24 +6,19 @@ namespace Underscore.Function
 {
     public class SynchComponent: ISynchComponent
     {
-	
-
 		private readonly ICompactComponent _fnCompact;
 		private readonly Utility.ICompactComponent _utilCompact;
         private readonly Utility.IMathComponent _math;
 
-        public SynchComponent( ICompactComponent fnCompact , Utility.ICompactComponent utilCompact , Utility.IMathComponent mathComponent )
+        public SynchComponent(ICompactComponent fnCompact , Utility.ICompactComponent utilCompact , Utility.IMathComponent mathComponent)
         {
-
             _fnCompact = fnCompact;
 
             _utilCompact = utilCompact;
 
             _math = mathComponent;
-
         }
 	
-		
         /// <summary>
         ///  Returns a version of the passed function 
         ///  that only invokes after being called 
@@ -41,7 +36,6 @@ namespace Underscore.Function
 			return async()=>await target(null);
 		}
 
-				
         /// <summary>
         /// Returns a version of the passed function 
         /// that only invokes after being called 
@@ -50,18 +44,17 @@ namespace Underscore.Function
         /// all previous calls will receive 
         /// the first invocation results
         /// </summary>
-        public Func<T, Task<TResult>> After<T, TResult>( Func<T, TResult> function, int count )
+        public Func<T, Task<TResult>> After<T, TResult>(Func<T, TResult> function, int count)
         {
             int counter = count;
 
-            var first = default( TResult );
+            var first = default(TResult);
             int doneChanging=0;
 
             return (a) =>
             {
                 try
                 {
-
                     int thisTask;
                     Thread.MemoryBarrier();
                     if ((thisTask = Interlocked.Decrement(ref counter)) >= 0)
@@ -88,7 +81,6 @@ namespace Underscore.Function
                         {
                             Thread.MemoryBarrier();
 
-
                             while (doneChanging == 0)
                             {
                                 if (doneChanging == 1)
@@ -98,9 +90,7 @@ namespace Underscore.Function
                             }
 
                             return first;
-
                         });
-
                     }
                     else
                     {
@@ -113,7 +103,6 @@ namespace Underscore.Function
                 }
             };
         }
-
 				
         /// <summary>
         ///  Returns a version of the passed function 
@@ -129,9 +118,8 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = After(fn, count);
-			return async ( a, b ) => await target(_utilCompact.Pack( a, b ));
+			return async (a, b) => await target(_utilCompact.Pack(a, b));
 		}
-
 				
         /// <summary>
         ///  Returns a version of the passed function 
@@ -147,10 +135,9 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = After(fn, count);
-			return async ( a, b, c ) => await target(_utilCompact.Pack( a, b, c ));
+			return async (a, b, c) => await target(_utilCompact.Pack(a, b, c));
 		}
 
-				
         /// <summary>
         ///  Returns a version of the passed function 
         ///  that only invokes after being called 
@@ -165,9 +152,8 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = After(fn, count);
-			return async ( a, b, c, d ) => await target(_utilCompact.Pack( a, b, c, d ));
+			return async (a, b, c, d) => await target(_utilCompact.Pack(a, b, c, d));
 		}
-
 				
         /// <summary>
         ///  Returns a version of the passed function 
@@ -183,10 +169,9 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = After(fn, count);
-			return async ( a, b, c, d, e ) => await target(_utilCompact.Pack( a, b, c, d, e ));
+			return async (a, b, c, d, e) => await target(_utilCompact.Pack(a, b, c, d, e));
 		}
 
-				
         /// <summary>
         ///  Returns a version of the passed function 
         ///  that only invokes after being called 
@@ -201,10 +186,9 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = After(fn, count);
-			return async ( a, b, c, d, e, f ) => await target(_utilCompact.Pack( a, b, c, d, e, f ));
+			return async (a, b, c, d, e, f) => await target(_utilCompact.Pack(a, b, c, d, e, f));
 		}
 
-				
         /// <summary>
         ///  Returns a version of the passed function 
         ///  that only invokes after being called 
@@ -219,7 +203,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = After(fn, count);
-			return async ( a, b, c, d, e, f, g ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g ));
+			return async (a, b, c, d, e, f, g) => await target(_utilCompact.Pack(a, b, c, d, e, f, g));
 		}
 
 				
@@ -237,7 +221,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = After(fn, count);
-			return async ( a, b, c, d, e, f, g, h ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h ));
+			return async (a, b, c, d, e, f, g, h) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h));
 		}
 
 				
@@ -255,7 +239,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = After(fn, count);
-			return async ( a, b, c, d, e, f, g, h, i ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i ));
+			return async (a, b, c, d, e, f, g, h, i) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i));
 		}
 
 				
@@ -273,7 +257,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = After(fn, count);
-			return async ( a, b, c, d, e, f, g, h, i, j ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j ));
+			return async (a, b, c, d, e, f, g, h, i, j) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j));
 		}
 
 				
@@ -291,7 +275,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = After(fn, count);
-			return async ( a, b, c, d, e, f, g, h, i, j, k ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k ));
+			return async (a, b, c, d, e, f, g, h, i, j, k) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k));
 		}
 
 				
@@ -309,7 +293,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = After(fn, count);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l));
 		}
 
 				
@@ -327,7 +311,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = After(fn, count);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l, m ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l, m) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m));
 		}
 
 				
@@ -345,7 +329,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = After(fn, count);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l, m, n ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n));
 		}
 
 				
@@ -363,7 +347,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = After(fn, count);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o));
 		}
 
 				
@@ -381,7 +365,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = After(fn, count);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p));
 		}
 
 				
@@ -407,15 +391,15 @@ namespace Underscore.Function
         /// 
         /// All subsequent calls will receive the last invocation result
         /// </summary>
-        public Func<T, TResult> Before<T, TResult>( Func<T, TResult> function, int count )
+        public Func<T, TResult> Before<T, TResult>(Func<T, TResult> function, int count)
         {
             int counter = count;
-            TResult tresult = default( TResult );
+            TResult tresult = default(TResult);
 
-            return ( a ) =>
+            return (a) =>
             {
                 if (Interlocked.Decrement(ref counter) >= 0)
-                    return tresult = function( a );
+                    return tresult = function(a);
 
                 return tresult;
             };
@@ -433,7 +417,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Before(fn, count);
-			return ( a, b ) => target( _utilCompact.Pack( a, b ) );
+			return (a, b) => target(_utilCompact.Pack(a, b));
 		}
 
 				
@@ -449,7 +433,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Before(fn, count);
-			return ( a, b, c ) => target( _utilCompact.Pack( a, b, c ) );
+			return (a, b, c) => target(_utilCompact.Pack(a, b, c));
 		}
 
 				
@@ -465,7 +449,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Before(fn, count);
-			return ( a, b, c, d ) => target( _utilCompact.Pack( a, b, c, d ) );
+			return (a, b, c, d) => target(_utilCompact.Pack(a, b, c, d));
 		}
 
 				
@@ -481,7 +465,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Before(fn, count);
-			return ( a, b, c, d, e ) => target( _utilCompact.Pack( a, b, c, d, e ) );
+			return (a, b, c, d, e) => target(_utilCompact.Pack(a, b, c, d, e));
 		}
 
 				
@@ -497,7 +481,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Before(fn, count);
-			return ( a, b, c, d, e, f ) => target( _utilCompact.Pack( a, b, c, d, e, f ) );
+			return (a, b, c, d, e, f) => target(_utilCompact.Pack(a, b, c, d, e, f));
 		}
 
 				
@@ -513,7 +497,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Before(fn, count);
-			return ( a, b, c, d, e, f, g ) => target( _utilCompact.Pack( a, b, c, d, e, f, g ) );
+			return (a, b, c, d, e, f, g) => target(_utilCompact.Pack(a, b, c, d, e, f, g));
 		}
 
 				
@@ -529,7 +513,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Before(fn, count);
-			return ( a, b, c, d, e, f, g, h ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h ) );
+			return (a, b, c, d, e, f, g, h) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h));
 		}
 
 				
@@ -545,7 +529,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Before(fn, count);
-			return ( a, b, c, d, e, f, g, h, i ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h, i ) );
+			return (a, b, c, d, e, f, g, h, i) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i));
 		}
 
 				
@@ -561,7 +545,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Before(fn, count);
-			return ( a, b, c, d, e, f, g, h, i, j ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h, i, j ) );
+			return (a, b, c, d, e, f, g, h, i, j) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j));
 		}
 
 				
@@ -577,7 +561,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Before(fn, count);
-			return ( a, b, c, d, e, f, g, h, i, j, k ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k ) );
+			return (a, b, c, d, e, f, g, h, i, j, k) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k));
 		}
 
 				
@@ -593,7 +577,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Before(fn, count);
-			return ( a, b, c, d, e, f, g, h, i, j, k, l ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l ) );
+			return (a, b, c, d, e, f, g, h, i, j, k, l) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l));
 		}
 
 				
@@ -609,7 +593,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Before(fn, count);
-			return ( a, b, c, d, e, f, g, h, i, j, k, l, m ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m ) );
+			return (a, b, c, d, e, f, g, h, i, j, k, l, m) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m));
 		}
 
 				
@@ -625,7 +609,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Before(fn, count);
-			return ( a, b, c, d, e, f, g, h, i, j, k, l, m, n ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n ) );
+			return (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n));
 		}
 
 				
@@ -641,7 +625,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Before(fn, count);
-			return ( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o ) );
+			return (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o));
 		}
 
 				
@@ -657,7 +641,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Before(fn, count);
-			return ( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p ) );
+			return (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p));
 		}
 
 				
@@ -678,7 +662,7 @@ namespace Underscore.Function
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
-        public Func<T, Task<TResult>> Debounce<T, TResult>( Func<T, TResult> function, int milliseconds )
+        public Func<T, Task<TResult>> Debounce<T, TResult>(Func<T, TResult> function, int milliseconds)
         {
             Task running  = null;
 
@@ -686,36 +670,36 @@ namespace Underscore.Function
             int settingUp = 0;
             int setting = 0;
             int isready = 0;
-            var retv = new { result = default( TResult ) };
+            var retv = new { result = default(TResult) };
             var fn = function;
-            return async ( targ ) =>
+            return async (targ) =>
             {
-                var curr = Task.Delay( milliseconds );
+                var curr = Task.Delay(milliseconds);
 
-                if ( Interlocked.CompareExchange( ref settingUp, 1, 0 ) == 0 )
+                if (Interlocked.CompareExchange(ref settingUp, 1, 0) == 0)
                 {
                     Interlocked.Exchange(ref isready, 0);
                     Interlocked.Exchange(ref setting, 0);
                 }
 
-                Interlocked.Exchange( ref running, curr );
+                Interlocked.Exchange(ref running, curr);
 
                 Task result = null;
 
-                while ( true )
+                while (true)
                 {
 
-                    Interlocked.Exchange( ref result, running );
+                    Interlocked.Exchange(ref result, running);
                     if (result == null)
                         break;
 
                     await result;
-                    if ( Interlocked.CompareExchange( ref running, null, curr ) != curr ) continue;
-                    if ( Interlocked.CompareExchange( ref setting, 1, 0 ) == 0)
+                    if (Interlocked.CompareExchange(ref running, null, curr) != curr) continue;
+                    if (Interlocked.CompareExchange(ref setting, 1, 0) == 0)
                     {
                         Interlocked.Exchange(ref retv, new { result = fn(targ) });
                         Interlocked.CompareExchange(ref settingUp, 0, 1);
-                        Interlocked.CompareExchange( ref isready, 1, 0 );
+                        Interlocked.CompareExchange(ref isready, 1, 0);
                     }
 
                     break;
@@ -737,7 +721,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
-			return async ( a, b ) => await target(_utilCompact.Pack( a, b ));
+			return async (a, b) => await target(_utilCompact.Pack(a, b));
 		}
 
 				
@@ -750,7 +734,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
-			return async ( a, b, c ) => await target(_utilCompact.Pack( a, b, c ));
+			return async (a, b, c) => await target(_utilCompact.Pack(a, b, c));
 		}
 
 				
@@ -763,7 +747,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
-			return async ( a, b, c, d ) => await target(_utilCompact.Pack( a, b, c, d ));
+			return async (a, b, c, d) => await target(_utilCompact.Pack(a, b, c, d));
 		}
 
 				
@@ -776,7 +760,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
-			return async ( a, b, c, d, e ) => await target(_utilCompact.Pack( a, b, c, d, e ));
+			return async (a, b, c, d, e) => await target(_utilCompact.Pack(a, b, c, d, e));
 		}
 
 				
@@ -789,7 +773,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
-			return async ( a, b, c, d, e, f ) => await target(_utilCompact.Pack( a, b, c, d, e, f ));
+			return async (a, b, c, d, e, f) => await target(_utilCompact.Pack(a, b, c, d, e, f));
 		}
 
 				
@@ -802,7 +786,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g ));
+			return async (a, b, c, d, e, f, g) => await target(_utilCompact.Pack(a, b, c, d, e, f, g));
 		}
 
 				
@@ -815,7 +799,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h ));
+			return async (a, b, c, d, e, f, g, h) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h));
 		}
 
 				
@@ -828,7 +812,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h, i ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i ));
+			return async (a, b, c, d, e, f, g, h, i) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i));
 		}
 
 				
@@ -841,7 +825,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h, i, j ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j ));
+			return async (a, b, c, d, e, f, g, h, i, j) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j));
 		}
 
 				
@@ -854,7 +838,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h, i, j, k ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k ));
+			return async (a, b, c, d, e, f, g, h, i, j, k) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k));
 		}
 
 				
@@ -867,7 +851,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l));
 		}
 
 				
@@ -880,7 +864,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l, m ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l, m) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m));
 		}
 
 				
@@ -893,7 +877,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l, m, n ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n));
 		}
 
 				
@@ -906,7 +890,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o));
 		}
 
 				
@@ -919,7 +903,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p));
 		}
 
 				
@@ -941,13 +925,13 @@ namespace Underscore.Function
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
         /// </summary>
-        public Func<T, Task<TResult>> Delay<T, TResult>( Func<T, TResult> function, int milliseconds )
+        public Func<T, Task<TResult>> Delay<T, TResult>(Func<T, TResult> function, int milliseconds)
         {
-            return async ( t ) =>
+            return async (t) =>
             {
-                await Task.Delay( milliseconds );
-                Thread.MemoryBarrier( );
-                return function( t );
+                await Task.Delay(milliseconds);
+                Thread.MemoryBarrier();
+                return function(t);
             };
         }
 				
@@ -961,7 +945,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
-			return async ( a, b ) => await target(_utilCompact.Pack( a, b ));
+			return async (a, b) => await target(_utilCompact.Pack(a, b));
 		}
 
 				
@@ -975,7 +959,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
-			return async ( a, b, c ) => await target(_utilCompact.Pack( a, b, c ));
+			return async (a, b, c) => await target(_utilCompact.Pack(a, b, c));
 		}
 
 				
@@ -989,7 +973,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
-			return async ( a, b, c, d ) => await target(_utilCompact.Pack( a, b, c, d ));
+			return async (a, b, c, d) => await target(_utilCompact.Pack(a, b, c, d));
 		}
 
 				
@@ -1003,7 +987,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
-			return async ( a, b, c, d, e ) => await target(_utilCompact.Pack( a, b, c, d, e ));
+			return async (a, b, c, d, e) => await target(_utilCompact.Pack(a, b, c, d, e));
 		}
 
 				
@@ -1017,7 +1001,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
-			return async ( a, b, c, d, e, f ) => await target(_utilCompact.Pack( a, b, c, d, e, f ));
+			return async (a, b, c, d, e, f) => await target(_utilCompact.Pack(a, b, c, d, e, f));
 		}
 
 				
@@ -1031,7 +1015,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g ));
+			return async (a, b, c, d, e, f, g) => await target(_utilCompact.Pack(a, b, c, d, e, f, g));
 		}
 
 				
@@ -1045,7 +1029,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h ));
+			return async (a, b, c, d, e, f, g, h) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h));
 		}
 
 				
@@ -1059,7 +1043,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h, i ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i ));
+			return async (a, b, c, d, e, f, g, h, i) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i));
 		}
 
 				
@@ -1073,7 +1057,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h, i, j ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j ));
+			return async (a, b, c, d, e, f, g, h, i, j) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j));
 		}
 
 				
@@ -1087,7 +1071,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h, i, j, k ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k ));
+			return async (a, b, c, d, e, f, g, h, i, j, k) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k));
 		}
 
 				
@@ -1101,7 +1085,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l));
 		}
 
 				
@@ -1115,7 +1099,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l, m ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l, m) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m));
 		}
 
 				
@@ -1129,7 +1113,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l, m, n ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n));
 		}
 
 				
@@ -1143,7 +1127,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o));
 		}
 
 				
@@ -1157,7 +1141,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p));
 		}
 
 				
@@ -1179,15 +1163,15 @@ namespace Underscore.Function
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
         /// </summary>
-        public Func<T, TResult> Once<T, TResult>( Func<T, TResult> function )
+        public Func<T, TResult> Once<T, TResult>(Func<T, TResult> function)
         {
             int ran = 0;
-            TResult result = default( TResult );
+            TResult result = default(TResult);
 
-            return ( targ ) =>
+            return (targ) =>
             {
-                if ( Interlocked.CompareExchange( ref ran, 1, 0 ) == 0 )
-                    result = function( targ );
+                if (Interlocked.CompareExchange(ref ran, 1, 0) == 0)
+                    result = function(targ);
                 
 
                 return result;
@@ -1204,7 +1188,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
-			return ( a, b ) => target( _utilCompact.Pack( a, b ) );
+			return (a, b) => target(_utilCompact.Pack(a, b));
 		}
 
 				
@@ -1218,7 +1202,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
-			return ( a, b, c ) => target( _utilCompact.Pack( a, b, c ) );
+			return (a, b, c) => target(_utilCompact.Pack(a, b, c));
 		}
 
 				
@@ -1232,7 +1216,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
-			return ( a, b, c, d ) => target( _utilCompact.Pack( a, b, c, d ) );
+			return (a, b, c, d) => target(_utilCompact.Pack(a, b, c, d));
 		}
 
 				
@@ -1246,7 +1230,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
-			return ( a, b, c, d, e ) => target( _utilCompact.Pack( a, b, c, d, e ) );
+			return (a, b, c, d, e) => target(_utilCompact.Pack(a, b, c, d, e));
 		}
 
 				
@@ -1260,7 +1244,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
-			return ( a, b, c, d, e, f ) => target( _utilCompact.Pack( a, b, c, d, e, f ) );
+			return (a, b, c, d, e, f) => target(_utilCompact.Pack(a, b, c, d, e, f));
 		}
 
 				
@@ -1274,7 +1258,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
-			return ( a, b, c, d, e, f, g ) => target( _utilCompact.Pack( a, b, c, d, e, f, g ) );
+			return (a, b, c, d, e, f, g) => target(_utilCompact.Pack(a, b, c, d, e, f, g));
 		}
 
 				
@@ -1288,7 +1272,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
-			return ( a, b, c, d, e, f, g, h ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h ) );
+			return (a, b, c, d, e, f, g, h) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h));
 		}
 
 				
@@ -1302,7 +1286,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
-			return ( a, b, c, d, e, f, g, h, i ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h, i ) );
+			return (a, b, c, d, e, f, g, h, i) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i));
 		}
 
 				
@@ -1316,7 +1300,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
-			return ( a, b, c, d, e, f, g, h, i, j ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h, i, j ) );
+			return (a, b, c, d, e, f, g, h, i, j) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j));
 		}
 
 				
@@ -1330,7 +1314,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
-			return ( a, b, c, d, e, f, g, h, i, j, k ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k ) );
+			return (a, b, c, d, e, f, g, h, i, j, k) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k));
 		}
 
 				
@@ -1344,7 +1328,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
-			return ( a, b, c, d, e, f, g, h, i, j, k, l ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l ) );
+			return (a, b, c, d, e, f, g, h, i, j, k, l) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l));
 		}
 
 				
@@ -1358,7 +1342,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
-			return ( a, b, c, d, e, f, g, h, i, j, k, l, m ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m ) );
+			return (a, b, c, d, e, f, g, h, i, j, k, l, m) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m));
 		}
 
 				
@@ -1372,7 +1356,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
-			return ( a, b, c, d, e, f, g, h, i, j, k, l, m, n ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n ) );
+			return (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n));
 		}
 
 				
@@ -1386,7 +1370,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
-			return ( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o ) );
+			return (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o));
 		}
 
 				
@@ -1400,7 +1384,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
-			return ( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p ) => target( _utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p ) );
+			return (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p));
 		}
 
 				
@@ -1422,41 +1406,41 @@ namespace Underscore.Function
 
         private interface IPicker<T>
         {
-            void Add( T value );
-            T Get( );
+            void Add(T value);
+            T Get();
         }
 
         private class LastPicker<T> : IPicker<T>
         {
-            private System.Collections.Concurrent.ConcurrentStack<T> _timestamped = new System.Collections.Concurrent.ConcurrentStack<T>( );
+            private System.Collections.Concurrent.ConcurrentStack<T> _timestamped = new System.Collections.Concurrent.ConcurrentStack<T>();
             private bool _lastPlaced = false;
             private T _last;
-            public void Add( T value )
+            public void Add(T value)
             {
-                _timestamped.Push( value );
+                _timestamped.Push(value);
             }
 
-            public T Get( )
+            public T Get()
             {
 
-                if ( !_lastPlaced )
+                if (!_lastPlaced)
                 {
-                    lock ( this )
+                    lock (this)
                     {
-                        if ( !_lastPlaced )
+                        if (!_lastPlaced)
                         {
-                            var setting = default( T );
+                            var setting = default(T);
                             bool gotLast = false;
 
-                            while ( _timestamped.Count > 0 && !gotLast )
-                                gotLast = _timestamped.TryPop( out setting );
+                            while (_timestamped.Count > 0 && !gotLast)
+                                gotLast = _timestamped.TryPop(out setting);
 
                             _last = setting;
                             _lastPlaced = true;
                         }
                     }
                 }
-                Thread.MemoryBarrier( );
+                Thread.MemoryBarrier();
                 return _last;
             }
 
@@ -1464,37 +1448,37 @@ namespace Underscore.Function
 
         private class FirstPicker<T> : IPicker<T>
         {
-            private System.Collections.Concurrent.ConcurrentQueue<T> _timestamped = new System.Collections.Concurrent.ConcurrentQueue<T>( );
+            private System.Collections.Concurrent.ConcurrentQueue<T> _timestamped = new System.Collections.Concurrent.ConcurrentQueue<T>();
             private bool _lastPlaced = false;
             private T _last;
-            public void Add( T value )
+            public void Add(T value)
             {
-                Thread.MemoryBarrier( );
-                _timestamped.Enqueue( value );
-                Thread.MemoryBarrier( );
+                Thread.MemoryBarrier();
+                _timestamped.Enqueue(value);
+                Thread.MemoryBarrier();
             }
 
-            public T Get( )
+            public T Get()
             {
 
-                if ( !_lastPlaced )
+                if (!_lastPlaced)
                 {
-                    lock ( this )
+                    lock (this)
                     {
-                        if ( !_lastPlaced )
+                        if (!_lastPlaced)
                         {
-                            var setting = default( T );
+                            var setting = default(T);
                             bool gotLast = false;
 
-                            while ( _timestamped.Count > 0 && !gotLast )
-                                gotLast = _timestamped.TryDequeue( out setting );
+                            while (_timestamped.Count > 0 && !gotLast)
+                                gotLast = _timestamped.TryDequeue(out setting);
 
                             _last = setting;
                             _lastPlaced = true;
                         }
                     }
                 }
-                Thread.MemoryBarrier( );
+                Thread.MemoryBarrier();
                 return _last;
             }
 
@@ -1505,13 +1489,13 @@ namespace Underscore.Function
             private bool wasSet = false;
             private T value;
 
-            public T Get( Func<T> setter )
+            public T Get(Func<T> setter)
             {
-                if ( !wasSet )
-                    lock ( this )
-                        if ( !wasSet )
+                if (!wasSet)
+                    lock (this)
+                        if (!wasSet)
                         {
-                            value = setter( );
+                            value = setter();
                             wasSet = true;
                         }
                 return value;
@@ -1522,7 +1506,7 @@ namespace Underscore.Function
         private class ThrottleHandler<TParam,TResult>
         {
             private readonly Func<TParam,TResult> _executing;
-            private readonly object _lock = new object( );
+            private readonly object _lock = new object();
             private readonly DateTime _stop;
             private readonly Utility.IMathComponent _math;
             private IPicker<TParam> _parameterSelector;
@@ -1530,76 +1514,76 @@ namespace Underscore.Function
             private readonly bool _leading;
 
 
-            public ThrottleHandler( Utility.IMathComponent math , Func<TParam , TResult> executing , int milliseconds , bool takeFirst = false )
+            public ThrottleHandler(Utility.IMathComponent math , Func<TParam , TResult> executing , int milliseconds , bool takeFirst = false)
             {
                 _executing = executing;
-                _stop = DateTime.Now + new TimeSpan( 0 , 0 , 0 , 0 , milliseconds );
+                _stop = DateTime.Now + new TimeSpan(0 , 0 , 0 , 0 , milliseconds);
                 _math = math;
                 _leading = takeFirst;
 
-                if ( _leading )
-                    _parameterSelector = new FirstPicker<TParam>( );
+                if (_leading)
+                    _parameterSelector = new FirstPicker<TParam>();
                 else
-                    _parameterSelector = new LastPicker<TParam>( );
+                    _parameterSelector = new LastPicker<TParam>();
 
-                _executor = new FirstSetter<TResult>( );
+                _executor = new FirstSetter<TResult>();
 
             }
 
-            private Tuple<DateTime , TParam> TimestampParameters( TParam parameters )
+            private Tuple<DateTime , TParam> TimestampParameters(TParam parameters)
             {
-                return Tuple.Create( DateTime.Now , parameters );
+                return Tuple.Create(DateTime.Now , parameters);
             }
 
-            public async Task<TResult> Result( TParam arguments )
+            public async Task<TResult> Result(TParam arguments)
             {
-                if ( !Done( ) )
-                    _parameterSelector.Add( arguments );
+                if (!Done())
+                    _parameterSelector.Add(arguments);
                 
 
-                Thread.MemoryBarrier( );
+                Thread.MemoryBarrier();
 
-                await DelayDone( );
-                var parameters = _parameterSelector.Get( );
+                await DelayDone();
+                var parameters = _parameterSelector.Get();
 
-                Thread.MemoryBarrier( );
-                var result = _executor.Get( ( ) => _executing( parameters ) );
+                Thread.MemoryBarrier();
+                var result = _executor.Get(() => _executing(parameters));
                 return result;
             }
 
-            public bool Done( )
+            public bool Done()
             {
                 return DateTime.Now > _stop;
             }
 
-            public async Task DelayDone( )
+            public async Task DelayDone()
             {
-                var wtf = (int)(  _stop  - DateTime.Now ).TotalMilliseconds;
-                await Task.Delay( _math.Max( 0 , wtf ) );
+                var wtf = (int)( _stop  - DateTime.Now).TotalMilliseconds;
+                await Task.Delay(_math.Max(0 , wtf));
             }
         }
 
-        private Func<T , Task<TResult>> ThrottleImpl<T , TResult>( Func<T , TResult> function , int milliseconds , bool leading = true )
+        private Func<T , Task<TResult>> ThrottleImpl<T , TResult>(Func<T , TResult> function , int milliseconds , bool leading = true)
         {
             var fn = function;
             ThrottleHandler<T , TResult> throttler = null;
-            var hashset = new HashSet<object>( );
+            var hashset = new HashSet<object>();
             object fnlock = null;
-            var sharedLock = new object( );
+            var sharedLock = new object();
             DateTime firstCalled = DateTime.MinValue;
 
             return async targ =>
             {
 
-                object localHandle = new object( );
+                object localHandle = new object();
                 object localLock;
                 HashSet<object> localHashset;
                 ThrottleHandler<T , TResult> localThrottler;
                 TResult returning;
 
-                lock ( sharedLock )
+                lock (sharedLock)
                 {
-                    if ( ( DateTime.Now - firstCalled ).TotalMilliseconds >= milliseconds )
+                    if ((DateTime.Now - firstCalled).TotalMilliseconds >= milliseconds)
                     {
                         fnlock = null;
                         throttler = null;
@@ -1608,9 +1592,9 @@ namespace Underscore.Function
                     }
 
                     bool isFirst = false;
-                    if ( fnlock == null )
+                    if (fnlock == null)
                     {
-                        fnlock = new object( );
+                        fnlock = new object();
                         firstCalled = DateTime.Now;
                         isFirst = true;
                     }
@@ -1618,48 +1602,48 @@ namespace Underscore.Function
 
                     localLock = fnlock;
 
-                    if ( throttler == null )
-                        throttler = new ThrottleHandler<T , TResult>( _math , function , milliseconds , false );
+                    if (throttler == null)
+                        throttler = new ThrottleHandler<T , TResult>(_math , function , milliseconds , false);
 
                     localThrottler = throttler;
 
-                    if ( hashset == null )
-                        hashset = new HashSet<object>( );
+                    if (hashset == null)
+                        hashset = new HashSet<object>();
 
                     localHashset = hashset;
 
 
-                    if ( isFirst && leading )
+                    if (isFirst && leading)
                     {
-                        return fn( targ );
+                        return fn(targ);
                     }
 
                 }
 
 
-                lock ( localLock )
-                    localHashset.Add( localHandle );
+                lock (localLock)
+                    localHashset.Add(localHandle);
 
-                returning = await throttler.Result( targ );
+                returning = await throttler.Result(targ);
 
-                lock ( localLock )
-                    localHashset.Remove( localHandle );
+                lock (localLock)
+                    localHashset.Remove(localHandle);
 
-                lock ( sharedLock )
-                    if ( localHashset == hashset && localHashset != null && localHashset.Count == 0 )
+                lock (sharedLock)
+                    if (localHashset == hashset && localHashset != null && localHashset.Count == 0)
                     {
 
-                        if ( localLock == fnlock )
+                        if (localLock == fnlock)
                         {
                             fnlock = null;
                         }
 
-                        if ( localThrottler == throttler )
+                        if (localThrottler == throttler)
                         {
                             throttler = null;
                         }
 
-                        if ( localHashset == hashset )
+                        if (localHashset == hashset)
                         {
                             hashset = null;
                         }
@@ -1678,13 +1662,13 @@ namespace Underscore.Function
         /// </summary>
 		public Func<Task<TResult>> Throttle<TResult>(Func<TResult> function, int milliseconds)
 		{
-			return Throttle ( function, milliseconds, true ) ;
+			return Throttle (function, milliseconds, true) ;
 		}
 				
         /// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
-        public Func<T, Task<TResult>> Throttle<T, TResult>( Func<T, TResult> function, int milliseconds, bool leading )
+        public Func<T, Task<TResult>> Throttle<T, TResult>(Func<T, TResult> function, int milliseconds, bool leading)
         {
             return ThrottleImpl(function, milliseconds, leading);
         }
@@ -1694,7 +1678,7 @@ namespace Underscore.Function
         /// </summary>
 		public Func<T1, Task<TResult>> Throttle<T1, TResult>(Func<T1, TResult> function, int milliseconds)
 		{
-			return Throttle ( function, milliseconds, true ) ;
+			return Throttle (function, milliseconds, true) ;
 		}
 				
 		/// <summary>
@@ -1706,7 +1690,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
-			return async ( a, b ) => await target(_utilCompact.Pack( a, b ));
+			return async (a, b) => await target(_utilCompact.Pack(a, b));
 		}
 
 				
@@ -1715,7 +1699,7 @@ namespace Underscore.Function
         /// </summary>
 		public Func<T1, T2, Task<TResult>> Throttle<T1, T2, TResult>(Func<T1, T2, TResult> function, int milliseconds)
 		{
-			return Throttle ( function, milliseconds, true ) ;
+			return Throttle (function, milliseconds, true) ;
 		}
 				
 		/// <summary>
@@ -1727,7 +1711,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
-			return async ( a, b, c ) => await target(_utilCompact.Pack( a, b, c ));
+			return async (a, b, c) => await target(_utilCompact.Pack(a, b, c));
 		}
 
 				
@@ -1736,7 +1720,7 @@ namespace Underscore.Function
         /// </summary>
 		public Func<T1, T2, T3, Task<TResult>> Throttle<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> function, int milliseconds)
 		{
-			return Throttle ( function, milliseconds, true ) ;
+			return Throttle (function, milliseconds, true) ;
 		}
 				
 		/// <summary>
@@ -1748,7 +1732,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
-			return async ( a, b, c, d ) => await target(_utilCompact.Pack( a, b, c, d ));
+			return async (a, b, c, d) => await target(_utilCompact.Pack(a, b, c, d));
 		}
 
 				
@@ -1757,7 +1741,7 @@ namespace Underscore.Function
         /// </summary>
 		public Func<T1, T2, T3, T4, Task<TResult>> Throttle<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function, int milliseconds)
 		{
-			return Throttle ( function, milliseconds, true ) ;
+			return Throttle (function, milliseconds, true) ;
 		}
 				
 		/// <summary>
@@ -1769,7 +1753,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
-			return async ( a, b, c, d, e ) => await target(_utilCompact.Pack( a, b, c, d, e ));
+			return async (a, b, c, d, e) => await target(_utilCompact.Pack(a, b, c, d, e));
 		}
 
 				
@@ -1778,7 +1762,7 @@ namespace Underscore.Function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, Task<TResult>> Throttle<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, int milliseconds)
 		{
-			return Throttle ( function, milliseconds, true ) ;
+			return Throttle (function, milliseconds, true) ;
 		}
 				
 		/// <summary>
@@ -1790,7 +1774,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
-			return async ( a, b, c, d, e, f ) => await target(_utilCompact.Pack( a, b, c, d, e, f ));
+			return async (a, b, c, d, e, f) => await target(_utilCompact.Pack(a, b, c, d, e, f));
 		}
 
 				
@@ -1799,7 +1783,7 @@ namespace Underscore.Function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, int milliseconds)
 		{
-			return Throttle ( function, milliseconds, true ) ;
+			return Throttle (function, milliseconds, true) ;
 		}
 				
 		/// <summary>
@@ -1811,7 +1795,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
-			return async ( a, b, c, d, e, f, g ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g ));
+			return async (a, b, c, d, e, f, g) => await target(_utilCompact.Pack(a, b, c, d, e, f, g));
 		}
 
 				
@@ -1820,7 +1804,7 @@ namespace Underscore.Function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, int milliseconds)
 		{
-			return Throttle ( function, milliseconds, true ) ;
+			return Throttle (function, milliseconds, true) ;
 		}
 				
 		/// <summary>
@@ -1832,7 +1816,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
-			return async ( a, b, c, d, e, f, g, h ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h ));
+			return async (a, b, c, d, e, f, g, h) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h));
 		}
 
 				
@@ -1841,7 +1825,7 @@ namespace Underscore.Function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, int milliseconds)
 		{
-			return Throttle ( function, milliseconds, true ) ;
+			return Throttle (function, milliseconds, true) ;
 		}
 				
 		/// <summary>
@@ -1853,7 +1837,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
-			return async ( a, b, c, d, e, f, g, h, i ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i ));
+			return async (a, b, c, d, e, f, g, h, i) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i));
 		}
 
 				
@@ -1862,7 +1846,7 @@ namespace Underscore.Function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, int milliseconds)
 		{
-			return Throttle ( function, milliseconds, true ) ;
+			return Throttle (function, milliseconds, true) ;
 		}
 				
 		/// <summary>
@@ -1874,7 +1858,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
-			return async ( a, b, c, d, e, f, g, h, i, j ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j ));
+			return async (a, b, c, d, e, f, g, h, i, j) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j));
 		}
 
 				
@@ -1883,7 +1867,7 @@ namespace Underscore.Function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, int milliseconds)
 		{
-			return Throttle ( function, milliseconds, true ) ;
+			return Throttle (function, milliseconds, true) ;
 		}
 				
 		/// <summary>
@@ -1895,7 +1879,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
-			return async ( a, b, c, d, e, f, g, h, i, j, k ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k ));
+			return async (a, b, c, d, e, f, g, h, i, j, k) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k));
 		}
 
 				
@@ -1904,7 +1888,7 @@ namespace Underscore.Function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, int milliseconds)
 		{
-			return Throttle ( function, milliseconds, true ) ;
+			return Throttle (function, milliseconds, true) ;
 		}
 				
 		/// <summary>
@@ -1916,7 +1900,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l));
 		}
 
 				
@@ -1925,7 +1909,7 @@ namespace Underscore.Function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, int milliseconds)
 		{
-			return Throttle ( function, milliseconds, true ) ;
+			return Throttle (function, milliseconds, true) ;
 		}
 				
 		/// <summary>
@@ -1937,7 +1921,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l, m ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l, m) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m));
 		}
 
 				
@@ -1946,7 +1930,7 @@ namespace Underscore.Function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, int milliseconds)
 		{
-			return Throttle ( function, milliseconds, true ) ;
+			return Throttle (function, milliseconds, true) ;
 		}
 				
 		/// <summary>
@@ -1958,7 +1942,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l, m, n ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n));
 		}
 
 				
@@ -1967,7 +1951,7 @@ namespace Underscore.Function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, int milliseconds)
 		{
-			return Throttle ( function, milliseconds, true ) ;
+			return Throttle (function, milliseconds, true) ;
 		}
 				
 		/// <summary>
@@ -1979,7 +1963,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o));
 		}
 
 				
@@ -1988,7 +1972,7 @@ namespace Underscore.Function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, int milliseconds)
 		{
-			return Throttle ( function, milliseconds, true ) ;
+			return Throttle (function, milliseconds, true) ;
 		}
 				
 		/// <summary>
@@ -2000,7 +1984,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
-			return async ( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p ) => await target(_utilCompact.Pack( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p ));
+			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p));
 		}
 
 				
@@ -2009,7 +1993,7 @@ namespace Underscore.Function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, int milliseconds)
 		{
-			return Throttle ( function, milliseconds, true ) ;
+			return Throttle (function, milliseconds, true) ;
 		}
 		
     }
