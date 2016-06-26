@@ -1,404 +1,297 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Underscore.Function;
+using ComposeComponent = Underscore.Action.ComposeComponent;
 using ConvertComponent = Underscore.Action.ConvertComponent;
 using ISynchComponent = Underscore.Action.ISynchComponent;
-using SynchComponent = Underscore.Function.SynchComponent;
+using SynchComponent = Underscore.Action.SynchComponent;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Underscore.Test.Action.Synch
 {
 	[TestClass]
 	public class OnceTest
 	{
-		public ISynchComponent ManipulateDummy() { return new Underscore.Action.SynchComponent(new SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()), new ConvertComponent(), new Underscore.Function.ConvertComponent()); }
+        private ComposeComponent compose;
+        private ISynchComponent component;
+
+        private string[] arguments = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
 
-		[TestMethod]
-		public async Task ActionOnce()
-		{
-			//if I didn't use this I would lose my mind
-			var fn = new Underscore.Action.ComposeComponent();
-			var testing = ManipulateDummy();
+        private string result = "";
+
+        public ISynchComponent ManipulateDummy() { return new SynchComponent(new Underscore.Function.SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()), new ConvertComponent(), new Underscore.Function.ConvertComponent()); }
 
-			string[] arguments = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
+        [TestInitialize]
+        public void Initialize()
+        {
+            compose = new ComposeComponent();
+            component = ManipulateDummy();
+        }
+
+        [TestMethod]
+        public void Action_Synch_Once_NoArguments()
+        {
+            var result = 0;
+            var onced = component.Once(() => result++);
+            for (var i = 0; i < 10; i++)
+                onced();
 
-			await Util.Tasks.Start(() =>
-			{
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
+        public void Action_Synch_Once_1Argument()
+        {
+            var oncing = new Action<string>((a) =>
+            {
+                result += string.Join("", a);
+            });
+
+            var onced = component.Once(oncing);
 
-				var result = "";
-				var counter = 0;
-				var timer = new Stopwatch();
-				var onced = testing.Once(() => result = (counter++).ToString());
-				for (var i = 0; i < 10; i++)
-					onced();
+            for (var i = 0; i < 100; i++)
+                compose.Apply(onced, arguments);
 
-				Assert.AreEqual("0", result);
+            Assert.AreEqual("a", result);
+        }
+
+        [TestMethod]
+        public void Action_Synch_Once_2Arguments()
+        {
+            var oncing = new Action<string, string>((a, b) =>
+            {
+                result += string.Join("", a, b);
+            });
+
+            var onced = component.Once(oncing);
 
-			}, () =>
-			{
+            for (var i = 0; i < 100; i++)
+                compose.Apply(onced, arguments);
 
-				var invoked = false;
+            Assert.AreEqual("ab", result);
+        }
+
+        [TestMethod]
+        public void Action_Synch_Once_3Arguments()
+        {
+            var oncing = new Action<string, string, string>((a, b, c) =>
+            {
+                result += string.Join("", a, b, c);
+            });
+
+            var onced = component.Once(oncing);
 
-				var counter = 0;
-				var result = "";
+            for (var i = 0; i < 100; i++)
+                compose.Apply(onced, arguments);
 
-				var oncing = new Action<string, string>((a, b) =>
-				{
-					counter++;
-					result = string.Join("", a, b, counter);
-					invoked = true;
-				});
+            Assert.AreEqual("abc", result);
+        }
+
+        [TestMethod]
+        public void Action_Synch_Once_4Arguments()
+        {
+            var oncing = new Action<string, string, string, string>((a, b, c, d) =>
+            {
+                result += string.Join("", a, b, c, d);
+            });
+
+            var onced = component.Once(oncing);
 
-				var onced = testing.Once(oncing);
+            for (var i = 0; i < 100; i++)
+                compose.Apply(onced, arguments);
 
-				for (var i = 0; i < 100; i++)
-					fn.Apply(onced, arguments);
+            Assert.AreEqual("abcd", result);
+        }
+
+        [TestMethod]
+        public void Action_Synch_Once_5Arguments()
+        {
+            var oncing = new Action<string, string, string, string, string>((a, b, c, d, e) =>
+            {
+                result += string.Join("", a, b, c, d, e);
+            });
+
+            var onced = component.Once(oncing);
 
-				Assert.AreEqual("ab1", result);
-				Assert.IsTrue(invoked);
+            for (var i = 0; i < 100; i++)
+                compose.Apply(onced, arguments);
 
+            Assert.AreEqual("abcde", result);
+        }
 
-			}, () =>
-			{
+        [TestMethod]
+        public void Action_Synch_Once_6Arguments()
+        {
+            var oncing = new Action<string, string, string, string, string, string>((a, b, c, d, e, f) =>
+            {
+                result += string.Join("", a, b, c, d, e, f);
+            });
 
-				var invoked = false;
+            var onced = component.Once(oncing);
 
-				var counter = 0;
-				var result = "";
+            for (var i = 0; i < 100; i++)
+                compose.Apply(onced, arguments);
 
-				var oncing = new Action<string, string, string>((a, b, c) =>
-				{
-					counter++;
-					result = string.Join("", a, b, c, counter);
-					invoked = true;
-				});
+            Assert.AreEqual("abcdef", result);
+        }
 
-				var onced = testing.Once(oncing);
+        [TestMethod]
+        public void Action_Synch_Once_7Arguments()
+        {
+            var oncing = new Action<string, string, string, string, string, string, string>((a, b, c, d, e, f, g) =>
+            {
+                result += string.Join("", a, b, c, d, e, f, g);
+            });
 
-				for (var i = 0; i < 100; i++)
-					fn.Apply(onced, arguments);
+            var onced = component.Once(oncing);
 
-				Assert.AreEqual("abc1", result);
-				Assert.IsTrue(invoked);
+            for (var i = 0; i < 100; i++)
+                compose.Apply(onced, arguments);
 
+            Assert.AreEqual("abcdefg", result);
+        }
 
-			}, () =>
-			{
+        [TestMethod]
+        public void Action_Synch_Once_8Arguments()
+        {
+            var oncing = new Action<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) =>
+            {
+                result += string.Join("", a, b, c, d, e, f, g, h);
+            });
 
-				var invoked = false;
+            var onced = component.Once(oncing);
 
-				var counter = 0;
-				var result = "";
+            for (var i = 0; i < 100; i++)
+                compose.Apply(onced, arguments);
 
-				var oncing = new Action<string, string, string, string>((a, b, c, d) =>
-				{
-					counter++;
-					result = string.Join("", a, b, c, d, counter);
-					invoked = true;
-				});
+            Assert.AreEqual("abcdefgh", result);
+        }
 
-				var onced = testing.Once(oncing);
+        [TestMethod]
+        public void Action_Synch_Once_9Arguments()
+        {
+            var oncing = new Action<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) =>
+            {
+                result += string.Join("", a, b, c, d, e, f, g, h, i);
+            });
 
-				for (var i = 0; i < 100; i++)
-					fn.Apply(onced, arguments);
+            var onced = component.Once(oncing);
 
-				Assert.AreEqual("abcd1", result);
-				Assert.IsTrue(invoked);
+            for (var i = 0; i < 100; i++)
+                compose.Apply(onced, arguments);
 
+            Assert.AreEqual("abcdefghi", result);
+        }
 
-			}, () =>
-			{
+        [TestMethod]
+        public void Action_Synch_Once_10Arguments()
+        {
+            var oncing = new Action<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) =>
+            {
+                result += string.Join("", a, b, c, d, e, f, g, h, i, j);
+            });
 
-				var invoked = false;
+            var onced = component.Once(oncing);
 
-				var counter = 0;
-				var result = "";
+            for (var i = 0; i < 100; i++)
+                compose.Apply(onced, arguments);
 
-				var oncing = new Action<string, string, string, string>((a, b, c, d) =>
-				{
-					counter++;
-					result = string.Join("", a, b, c, d, counter);
-					invoked = true;
-				});
+            Assert.AreEqual("abcdefghij", result);
+        }
 
-				var onced = testing.Once(oncing);
+        [TestMethod]
+        public void Action_Synch_Once_11Arguments()
+        {
+            var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) =>
+            {
+                result += string.Join("", a, b, c, d, e, f, g, h, i, j, k);
+            });
 
-				for (var i = 0; i < 100; i++)
-					fn.Apply(onced, arguments);
+            var onced = component.Once(oncing);
 
-				Assert.AreEqual("abcd1", result);
-				Assert.IsTrue(invoked);
+            for (var i = 0; i < 100; i++)
+                compose.Apply(onced, arguments);
 
+            Assert.AreEqual("abcdefghijk", result);
+        }
 
-			}, () =>
-			{
+        [TestMethod]
+        public void Action_Synch_Once_12Arguments()
+        {
+            var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) =>
+            {
+                result += string.Join("", a, b, c, d, e, f, g, h, i, j, k, l);
+            });
 
-				var invoked = false;
+            var onced = component.Once(oncing);
 
-				var counter = 0;
-				var result = "";
+            for (var i = 0; i < 100; i++)
+                compose.Apply(onced, arguments);
 
-				var oncing = new Action<string, string, string, string, string>((a, b, c, d, e) =>
-				{
-					counter++;
-					result = string.Join("", a, b, c, d, e, counter);
-					invoked = true;
-				});
+            Assert.AreEqual("abcdefghijkl", result);
+        }
 
-				var onced = testing.Once(oncing);
+        [TestMethod]
+        public void Action_Synch_Once_13Arguments()
+        {
+            var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) =>
+            {
+                result += string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m);
+            });
 
-				for (var i = 0; i < 100; i++)
-					fn.Apply(onced, arguments);
+            var onced = component.Once(oncing);
 
-				Assert.AreEqual("abcde1", result);
-				Assert.IsTrue(invoked);
+            for (var i = 0; i < 100; i++)
+                compose.Apply(onced, arguments);
 
+            Assert.AreEqual("abcdefghijklm", result);
+        }
 
-			}, () =>
-			{
+        [TestMethod]
+        public void Action_Synch_Once_14Arguments()
+        {
+            var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) =>
+            {
+                result += string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+            });
 
-				var invoked = false;
+            var onced = component.Once(oncing);
 
-				var counter = 0;
-				var result = "";
+            for (var i = 0; i < 100; i++)
+                compose.Apply(onced, arguments);
 
-				var oncing = new Action<string, string, string, string, string, string>((a, b, c, d, e, f) =>
-				{
-					counter++;
-					result = string.Join("", a, b, c, d, e, f, counter);
-					invoked = true;
-				});
+            Assert.AreEqual("abcdefghijklmn", result);
+        }
 
-				var onced = testing.Once(oncing);
+        [TestMethod]
+        public void Action_Synch_Once_15Arguments()
+        {
+            var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) =>
+            {
+                result += string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+            });
 
-				for (var i = 0; i < 100; i++)
-					fn.Apply(onced, arguments);
+            var onced = component.Once(oncing);
 
-				Assert.AreEqual("abcdef1", result);
-				Assert.IsTrue(invoked);
+            for (var i = 0; i < 100; i++)
+                compose.Apply(onced, arguments);
 
+            Assert.AreEqual("abcdefghijklmno", result);
+        }
 
-			}, () =>
-			{
+        [TestMethod]
+        public void Action_Synch_Once_16Arguments()
+        {
+            var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) =>
+            {
+                result += string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
+            });
 
-				var invoked = false;
+            var onced = component.Once(oncing);
 
-				var counter = 0;
-				var result = "";
+            for (var i = 0; i < 100; i++)
+                compose.Apply(onced, arguments);
 
-				var oncing = new Action<string, string, string, string, string, string, string>((a, b, c, d, e, f, g) =>
-				{
-					counter++;
-					result = string.Join("", a, b, c, d, e, f, g, counter);
-					invoked = true;
-				});
-
-				var onced = testing.Once(oncing);
-
-				for (var i = 0; i < 100; i++)
-					fn.Apply(onced, arguments);
-
-				Assert.AreEqual("abcdefg1", result);
-				Assert.IsTrue(invoked);
-
-
-			}, () =>
-			{
-
-				var invoked = false;
-
-				var counter = 0;
-				var result = "";
-
-				var oncing = new Action<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) =>
-				{
-					counter++;
-					result = string.Join("", a, b, c, d, e, f, g, h, counter);
-					invoked = true;
-				});
-
-				var onced = testing.Once(oncing);
-
-				for (var i = 0; i < 100; i++)
-					fn.Apply(onced, arguments);
-
-				Assert.AreEqual("abcdefgh1", result);
-				Assert.IsTrue(invoked);
-
-
-			}, () =>
-			{
-
-				var invoked = false;
-
-				var counter = 0;
-				var result = "";
-
-				var oncing = new Action<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) =>
-				{
-					counter++;
-					result = string.Join("", a, b, c, d, e, f, g, h, i, counter);
-					invoked = true;
-				});
-
-				var onced = testing.Once(oncing);
-
-				for (var i = 0; i < 100; i++)
-					fn.Apply(onced, arguments);
-
-				Assert.AreEqual("abcdefghi1", result);
-				Assert.IsTrue(invoked);
-
-
-			}, () =>
-			{
-
-				var invoked = false;
-
-				var counter = 0;
-				var result = "";
-
-				var oncing = new Action<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) =>
-				{
-					counter++;
-					result = string.Join("", a, b, c, d, e, f, g, h, i, j, counter);
-					invoked = true;
-				});
-
-				var onced = testing.Once(oncing);
-
-				for (var i = 0; i < 100; i++)
-					fn.Apply(onced, arguments);
-
-				Assert.AreEqual("abcdefghij1", result);
-				Assert.IsTrue(invoked);
-
-
-			}, () =>
-			{
-
-				var invoked = false;
-
-				var counter = 0;
-				var result = "";
-
-				var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) =>
-				{
-					counter++;
-					result = string.Join("", a, b, c, d, e, f, g, h, i, j, k, counter);
-					invoked = true;
-				});
-
-				var onced = testing.Once(oncing);
-
-				for (var i = 0; i < 100; i++)
-					fn.Apply(onced, arguments);
-
-				Assert.AreEqual("abcdefghijk1", result);
-				Assert.IsTrue(invoked);
-
-
-			}, () =>
-			{
-
-				var invoked = false;
-
-				var counter = 0;
-				var result = "";
-
-				var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) =>
-				{
-					counter++;
-					result = string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, counter);
-					invoked = true;
-				});
-
-				var onced = testing.Once(oncing);
-
-				for (var i = 0; i < 100; i++)
-					fn.Apply(onced, arguments);
-
-				Assert.AreEqual("abcdefghijkl1", result);
-				Assert.IsTrue(invoked);
-
-
-			}, () =>
-			{
-
-				var invoked = false;
-
-				var counter = 0;
-				var result = "";
-
-				var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) =>
-				{
-					counter++;
-					result = string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, counter);
-					invoked = true;
-				});
-
-				var onced = testing.Once(oncing);
-
-				for (var i = 0; i < 100; i++)
-					fn.Apply(onced, arguments);
-
-				Assert.AreEqual("abcdefghijklm1", result);
-				Assert.IsTrue(invoked);
-
-
-			}, () =>
-			{
-
-				var invoked = false;
-
-				var counter = 0;
-				var result = "";
-
-				var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) =>
-				{
-					counter++;
-					result = string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, counter);
-					invoked = true;
-				});
-
-				var onced = testing.Once(oncing);
-
-				for (var i = 0; i < 100; i++)
-					fn.Apply(onced, arguments);
-
-				Assert.AreEqual("abcdefghijklmn1", result);
-				Assert.IsTrue(invoked);
-
-
-			}, () =>
-			{
-
-				var invoked = false;
-
-				var counter = 0;
-				var result = "";
-
-				var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) =>
-				{
-					counter++;
-					result = string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, counter);
-					invoked = true;
-				});
-
-				var onced = testing.Once(oncing);
-
-				for (var i = 0; i < 100; i++)
-					fn.Apply(onced, arguments);
-
-				Assert.AreEqual("abcdefghijklmno1", result);
-				Assert.IsTrue(invoked);
-
-
-			});
-
-
-
-		}
+            Assert.AreEqual("abcdefghijklmnop", result);
+        }
 	}
 }

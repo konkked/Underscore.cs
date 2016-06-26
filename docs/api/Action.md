@@ -116,7 +116,19 @@ for(int i = 0; i < tasks.Length; i++)
 Console.WriteLine(counter); // prints 3
 ```
 
-### Once
+### Action Once(Action action)
+Returns of the given action which will only invoke once. Any times it is called after the first, it instead just performs a no-op.
+```
+int counter = 0;
+Action action = () => counter++;
+Action onced = _.Once(action);
+
+// call it repeatedly
+for(int i = 0; i < 100; i++)
+    onced();
+
+Console.WriteLine(counter); // 1
+```
 
 ### Func\<Task\> Debounce(Action action, int milliseconds)
 Returns a function which acts as a debounced version of the given function. A debounced function is throttled to only be allowed to be invoked once within the given time frame.
@@ -138,7 +150,6 @@ foreach(task in tasksRunning)
     await task;
 
 Console.WriteLine(result[0]) // 99, because only the last task was processed
-
 ```
 
 ### Throttle
