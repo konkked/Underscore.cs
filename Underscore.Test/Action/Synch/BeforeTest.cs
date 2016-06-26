@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Underscore.Function;
 using ComposeComponent = Underscore.Action.ComposeComponent;
 using ConvertComponent = Underscore.Action.ConvertComponent;
 using ISynchComponent = Underscore.Action.ISynchComponent;
-using SynchComponent = Underscore.Function.SynchComponent;
+using SynchComponent = Underscore.Action.SynchComponent;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Underscore.Test.Action.Synch
@@ -22,14 +21,24 @@ namespace Underscore.Test.Action.Synch
         private bool invoked;
         private Task[] arr;
 
-
-        public ISynchComponent ManipulateDummy() { return new Underscore.Action.SynchComponent(new SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()), new ConvertComponent(), new Underscore.Function.ConvertComponent()); }
+        public ISynchComponent GetSynchComponent()
+        {
+            return new SynchComponent(
+                new Underscore.Function.SynchComponent(
+                    new CompactComponent(),
+                    new Underscore.Utility.CompactComponent(),
+                    new Underscore.Utility.MathComponent()
+                    ),
+                new ConvertComponent(),
+                new Underscore.Function.ConvertComponent()
+                );
+        }
 
         [TestInitialize]
         public void Initialize()
         {
             funcCompose = new ComposeComponent();
-            component = ManipulateDummy();
+            component = GetSynchComponent();
 
             counter = 0;
             result = "";

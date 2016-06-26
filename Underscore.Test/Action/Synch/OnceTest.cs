@@ -18,13 +18,24 @@ namespace Underscore.Test.Action.Synch
 
         private string result = "";
 
-        public ISynchComponent ManipulateDummy() { return new SynchComponent(new Underscore.Function.SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()), new ConvertComponent(), new Underscore.Function.ConvertComponent()); }
+        public ISynchComponent GetSynchComponent()
+        {
+            return new SynchComponent(
+                new Underscore.Function.SynchComponent(
+                    new CompactComponent(),
+                    new Underscore.Utility.CompactComponent(),
+                    new Underscore.Utility.MathComponent()
+                    ),
+                new ConvertComponent(),
+                new Underscore.Function.ConvertComponent()
+                );
+        }
 
         [TestInitialize]
         public void Initialize()
         {
             compose = new ComposeComponent();
-            component = ManipulateDummy();
+            component = GetSynchComponent();
         }
 
         [TestMethod]

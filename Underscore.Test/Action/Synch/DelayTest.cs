@@ -6,20 +6,33 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Underscore.Function;
 using ConvertComponent = Underscore.Action.ConvertComponent;
 using ISynchComponent = Underscore.Action.ISynchComponent;
+using SynchComponent = Underscore.Action.SynchComponent;
 
 namespace Underscore.Test.Action.Synch
 {
 	[TestClass]
 	public class DelayTest
 	{
-		public ISynchComponent ManipulateDummy() { return new Underscore.Action.SynchComponent(new SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()), new ConvertComponent(), new Underscore.Function.ConvertComponent()); }
+        private ComposeComponent compose;
+        private ISynchComponent component;
+
+		public ISynchComponent GetSynchComponent() {
+            return new SynchComponent(
+                new Underscore.Function.SynchComponent(
+                    new CompactComponent(), 
+                    new Underscore.Utility.CompactComponent(), 
+                    new Underscore.Utility.MathComponent()
+                    ), 
+                new ConvertComponent(), 
+                new Underscore.Function.ConvertComponent()
+                );
+        }
 
 		[TestMethod]
 		public async Task ActionDelay()
 		{
-			//if I didn't use this I would lose my mind
 			var fn = new ComposeComponent();
-			var testing = ManipulateDummy();
+			var testing = GetSynchComponent();
 
 			string[] arguments = { "a", "b", "c", "d", "e", "f" };
 
