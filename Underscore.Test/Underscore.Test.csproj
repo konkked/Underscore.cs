@@ -97,9 +97,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnderscoreTest.cs" />
     <Compile Include="Util.cs" />
-    <Compile Include="Utility\Functional.cs" />
-    <Compile Include="Utility\Math.cs" />
-    <Compile Include="Utility\Object.cs" />
+    <Compile Include="Utility\FunctionTest.cs" />
+    <Compile Include="Utility\MathTest.cs" />
+    <Compile Include="Utility\ObjectTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

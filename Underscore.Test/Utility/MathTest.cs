@@ -5,7 +5,7 @@ using Underscore.Utility;
 namespace Underscore.Test.Utility
 {
     [TestClass]
-    public class Math
+    public class MathTest
     {
         [TestMethod]
         public void MathCtor( )

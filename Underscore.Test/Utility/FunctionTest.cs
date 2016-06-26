@@ -7,7 +7,7 @@ using Underscore.Utility;
 namespace Underscore.Test.Utility
 {
     [TestClass]
-    public class Functional
+    public class FunctionTest
     {
         [TestMethod]
         public async Task UtilityConstant()
