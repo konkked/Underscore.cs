@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Underscore.Object.Reflection;
 
 namespace Underscore.List
 {
-    public class DelegateComponent : IDelegateComponent
+    public class DelegationComponent : IDelegationComponent
     {
+        private readonly IMethodComponent _methodComponent;
+        public DelegationComponent(IMethodComponent methodComponent)
+        {
+            _methodComponent = methodComponent;
+        }
+
         /// <summary>
         /// Resolves a list of functions into a list
         /// </summary>
@@ -13,7 +20,6 @@ namespace Underscore.List
         {
             return new List<T>( from i in list select i( ) );
         }
-
-
+        
     }
 }

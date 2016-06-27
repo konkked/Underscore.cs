@@ -113,6 +113,14 @@ namespace Underscore.List
             return Tuple.Create( new T[ ] { } as IEnumerable<T>, new List<T>( list ) as IEnumerable<T>);
         }
 
+        /// <summary>
+        /// Splits enumerable into two seperate collections based off of the passed func, all items passing the condition 
+        /// are placed in the first item in the tuple and the others placed in the second item in the tuple
+        /// </summary>
+        /// <typeparam name="T">Type of the items in the enumerable</typeparam>
+        /// <param name="list">The list to be split</param>
+        /// <param name="on">the condition to partition using</param>
+        /// <returns>a tuple containing items passing the condition on the Item1 and the other items in Item2</returns>
 	    public Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>(IList<T> list, Func<T, bool> on)
 	    {
 			var left = new List<T>();
@@ -199,6 +207,12 @@ namespace Underscore.List
             );
         }
 
+        /// <summary>
+        /// Creates an enumerable with all of the possible combinations of the list in it
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public IEnumerable<IEnumerable<T>> Combinations<T>(IList<T> list)
         {
             if(list== null) throw new ArgumentNullException("list");

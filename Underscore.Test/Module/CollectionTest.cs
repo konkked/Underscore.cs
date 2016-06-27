@@ -11,6 +11,7 @@ using Underscore.List;
 using Underscore.Object.Reflection;
 using Underscore.Utility;
 using CompactComponent = Underscore.Utility.CompactComponent;
+using DelegationComponent = Underscore.Collection.DelegationComponent;
 
 namespace Underscore.Test.Module
 {

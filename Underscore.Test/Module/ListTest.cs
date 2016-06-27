@@ -1,5 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Underscore.Function;
 using Underscore.List;
+using Underscore.Object.Reflection;
 using Underscore.Utility;
 
 namespace Underscore.Test.Module
@@ -10,12 +14,17 @@ namespace Underscore.Test.Module
         [TestMethod]
         public void CreateListModuleTest( )
         {
-            var result = new global::Underscore.Module.List(
-                new DelegateComponent( ),
-                new ManipulateComponent( ),
-                new PartitionComponent( new MathComponent() )
-            );
+            //var result = new global::Underscore.Module.List(
+            //    new DelegationComponent( new MethodComponent(new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent() ), new PropertyComponent() )  ),
+            //    new ManipulateComponent( ),
+            //    new PartitionComponent( new MathComponent() )
+            //);
 
+
+            var result = new[] {1, 2,3,4,5,6};
+            _.List.Rotate(result, 1);
+
+            Console.WriteLine(result);
 
         }
     }

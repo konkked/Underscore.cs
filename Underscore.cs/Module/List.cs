@@ -7,16 +7,16 @@ namespace Underscore.Module
 
 
     public class List : 
-        IDelegateComponent,
+        IDelegationComponent,
         IManipulateComponent,
         IPartitionComponent
     {
         private readonly IManipulateComponent _manipulator;
         private readonly IPartitionComponent _partitioner;
-        private readonly IDelegateComponent _delegator;
+        private readonly IDelegationComponent _delegator;
 
         public List( 
-            IDelegateComponent delegator,
+            IDelegationComponent delegator,
             IManipulateComponent manipulator,
             IPartitionComponent partitioner
         ) 
@@ -46,7 +46,6 @@ namespace Underscore.Module
         {
             return _delegator.Resolve( target );
         }
-
 
         /// <summary>
         /// Swaps the elements at the specified indexes

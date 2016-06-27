@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Underscore.List
 {
-    public interface IDelegateComponent 
+    public interface IDelegationComponent 
     {
 
         /// <summary>
@@ -13,6 +13,7 @@ namespace Underscore.List
         /// <param name="list">collection of functions</param>
         /// <returns>returns a list of elements</returns>
         IList<T> Resolve<T>( IList<Func<T>> list );
+
 
     }
 
