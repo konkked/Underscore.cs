@@ -83,10 +83,12 @@
     <Compile Include="Function\Boolean\OrTest.cs" />
     <Compile Include="Function\Compose\ComposeTest.cs" />
     <Compile Include="Function\Compose\ApplyTest.cs" />
+    <Compile Include="Function\Split\CurryTest.cs" />
+    <Compile Include="Function\Split\SplitTest.cs" />
+    <Compile Include="Function\Split\UncurryTest.cs" />
     <Compile Include="Function\SynchTest.cs" />
     <Compile Include="Function\PartialTest.cs" />
     <Compile Include="Function\SplitTest.cs" />
-    <Compile Include="Function\BooleanTest.cs" />
     <Compile Include="List\AggregateTest.cs" />
     <Compile Include="List\DelegateTest.cs" />
     <Compile Include="List\ManipulateTest.cs" />
