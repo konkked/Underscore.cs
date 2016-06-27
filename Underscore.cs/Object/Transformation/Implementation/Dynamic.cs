@@ -13,7 +13,6 @@ namespace Underscore.Object
             _property = property;
         }
 
-
         public dynamic ToDynamic( object value )
         {
             IDictionary<string , object> expando = new ExpandoObject();

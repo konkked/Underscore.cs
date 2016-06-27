@@ -10,16 +10,16 @@ namespace Underscore.Utility
         /// <typeparam name="T">The type of the target</typeparam>
         /// <param name="value">The target object</param>
         /// <returns>Function that always returns value</returns>
-        public Func<T> Constant<T>( T value )
+        public Func<T> Constant<T>(T value)
         {
             var tvalue = value;
-            return ( ) => tvalue;
+            return () => tvalue;
         }
 
         /// <summary>
         /// Does nothing
         /// </summary>
-        public void Noop( )
+        public void Noop()
         {
 
         }
