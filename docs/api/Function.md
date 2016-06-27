@@ -30,6 +30,26 @@ Func<string, string, string, string> bound = _.Function.Partial(bigFoo, "a", "b"
 bound("d", "e", "f"); // "abcdef"
 ```
 
+## Boolean
+### Func\<T1, bool\> Negate(Func<T1, bool> toNegate)
+Returns a function which returns the opposite of toNegate whenever it is called;
+```
+Func<string, string, bool> equals = (a, b) => a == b;
+Func<string, string, bool> notEquals = _.Function.Negate(equals);
+
+equals("foo", "foo"); // true
+notEquals("foo", "foo"); // false
+
+equals("foo", "bar"); // false
+notEquals("foo", "bar"); // true
+```
+
+### Func<bool> Or(params Func<bool>[] fns)
+***TODO***
+
+### Func<bool> And(params Func<bool>[] fns)
+***TODO***
+
 ## Compose
 ### TResult Apply\<T, TResult\>(Func\<T, TResult\> function, T[] arguments)
 Applies the given array of arguments to the given function and returns the result. Works with functions using up to 16 arguments.
