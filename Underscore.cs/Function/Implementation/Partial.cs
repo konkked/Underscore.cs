@@ -1,1216 +1,971 @@
 ﻿using System;
 
-// This code has been automatically generated
-// if you want to make changes make them on 
-// the corresponding the text template file
-// Partial.tt
 namespace Underscore.Function
 {
 
 	public class PartialComponent : IPartialComponent
 	{
 
-		
-
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T2, TResult> Partial<T1, T2, TResult>( Func<T1, T2, TResult> function, T1 a )
+		public Func<T2, TResult> Partial<T1, T2, TResult>(Func<T1, T2, TResult> function, T1 a)
 		{
-			return (b)=>function( a, b );
+			return (b) => function(a, b);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T2, T3, TResult> Partial<T1, T2, T3, TResult>( Func<T1, T2, T3, TResult> function, T1 a )
+		public Func<T2, T3, TResult> Partial<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> function, T1 a)
 		{
-			return (b, c)=>function( a, b, c );
+			return (b, c) => function(a, b, c);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T3, TResult> Partial<T1, T2, T3, TResult>( Func<T1, T2, T3, TResult> function, T1 a, T2 b )
+		public Func<T3, TResult> Partial<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> function, T1 a, T2 b)
 		{
-			return (c)=>function( a, b, c );
+			return (c) => function(a, b, c);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T2, T3, T4, TResult> Partial<T1, T2, T3, T4, TResult>( Func<T1, T2, T3, T4, TResult> function, T1 a )
+		public Func<T2, T3, T4, TResult> Partial<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function, T1 a)
 		{
-			return (b, c, d)=>function( a, b, c, d );
+			return (b, c, d) => function(a, b, c, d);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T3, T4, TResult> Partial<T1, T2, T3, T4, TResult>( Func<T1, T2, T3, T4, TResult> function, T1 a, T2 b )
+		public Func<T3, T4, TResult> Partial<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function, T1 a, T2 b)
 		{
-			return (c, d)=>function( a, b, c, d );
+			return (c, d) => function(a, b, c, d);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T4, TResult> Partial<T1, T2, T3, T4, TResult>( Func<T1, T2, T3, T4, TResult> function, T1 a, T2 b, T3 c )
+		public Func<T4, TResult> Partial<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return (d)=>function( a, b, c, d );
+			return (d) => function(a, b, c, d);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T2, T3, T4, T5, TResult> Partial<T1, T2, T3, T4, T5, TResult>( Func<T1, T2, T3, T4, T5, TResult> function, T1 a )
+		public Func<T2, T3, T4, T5, TResult> Partial<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, T1 a)
 		{
-			return (b, c, d, e)=>function( a, b, c, d, e );
+			return (b, c, d, e) => function(a, b, c, d, e);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T3, T4, T5, TResult> Partial<T1, T2, T3, T4, T5, TResult>( Func<T1, T2, T3, T4, T5, TResult> function, T1 a, T2 b )
+		public Func<T3, T4, T5, TResult> Partial<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, T1 a, T2 b)
 		{
-			return (c, d, e)=>function( a, b, c, d, e );
+			return (c, d, e) => function(a, b, c, d, e);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T4, T5, TResult> Partial<T1, T2, T3, T4, T5, TResult>( Func<T1, T2, T3, T4, T5, TResult> function, T1 a, T2 b, T3 c )
+		public Func<T4, T5, TResult> Partial<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return (d, e)=>function( a, b, c, d, e );
+			return (d, e) => function(a, b, c, d, e);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T5, TResult> Partial<T1, T2, T3, T4, T5, TResult>( Func<T1, T2, T3, T4, T5, TResult> function, T1 a, T2 b, T3 c, T4 d )
+		public Func<T5, TResult> Partial<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return (e)=>function( a, b, c, d, e );
+			return (e) => function(a, b, c, d, e);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T2, T3, T4, T5, T6, TResult> Partial<T1, T2, T3, T4, T5, T6, TResult>( Func<T1, T2, T3, T4, T5, T6, TResult> function, T1 a )
+		public Func<T2, T3, T4, T5, T6, TResult> Partial<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, T1 a)
 		{
-			return (b, c, d, e, f)=>function( a, b, c, d, e, f );
+			return (b, c, d, e, f) => function(a, b, c, d, e, f);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T3, T4, T5, T6, TResult> Partial<T1, T2, T3, T4, T5, T6, TResult>( Func<T1, T2, T3, T4, T5, T6, TResult> function, T1 a, T2 b )
+		public Func<T3, T4, T5, T6, TResult> Partial<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, T1 a, T2 b)
 		{
-			return (c, d, e, f)=>function( a, b, c, d, e, f );
+			return (c, d, e, f) => function(a, b, c, d, e, f);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T4, T5, T6, TResult> Partial<T1, T2, T3, T4, T5, T6, TResult>( Func<T1, T2, T3, T4, T5, T6, TResult> function, T1 a, T2 b, T3 c )
+		public Func<T4, T5, T6, TResult> Partial<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return (d, e, f)=>function( a, b, c, d, e, f );
+			return (d, e, f) => function(a, b, c, d, e, f);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T5, T6, TResult> Partial<T1, T2, T3, T4, T5, T6, TResult>( Func<T1, T2, T3, T4, T5, T6, TResult> function, T1 a, T2 b, T3 c, T4 d )
+		public Func<T5, T6, TResult> Partial<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return (e, f)=>function( a, b, c, d, e, f );
+			return (e, f) => function(a, b, c, d, e, f);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T6, TResult> Partial<T1, T2, T3, T4, T5, T6, TResult>( Func<T1, T2, T3, T4, T5, T6, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e )
+		public Func<T6, TResult> Partial<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return (f)=>function( a, b, c, d, e, f );
+			return (f) => function(a, b, c, d, e, f);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T2, T3, T4, T5, T6, T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a )
+		public Func<T2, T3, T4, T5, T6, T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a)
 		{
-			return (b, c, d, e, f, g)=>function( a, b, c, d, e, f, g );
+			return (b, c, d, e, f, g) => function(a, b, c, d, e, f, g);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T3, T4, T5, T6, T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a, T2 b )
+		public Func<T3, T4, T5, T6, T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a, T2 b)
 		{
-			return (c, d, e, f, g)=>function( a, b, c, d, e, f, g );
+			return (c, d, e, f, g) => function(a, b, c, d, e, f, g);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T4, T5, T6, T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a, T2 b, T3 c )
+		public Func<T4, T5, T6, T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return (d, e, f, g)=>function( a, b, c, d, e, f, g );
+			return (d, e, f, g) => function(a, b, c, d, e, f, g);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T5, T6, T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a, T2 b, T3 c, T4 d )
+		public Func<T5, T6, T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return (e, f, g)=>function( a, b, c, d, e, f, g );
+			return (e, f, g) => function(a, b, c, d, e, f, g);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T6, T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e )
+		public Func<T6, T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return (f, g)=>function( a, b, c, d, e, f, g );
+			return (f, g) => function(a, b, c, d, e, f, g);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f )
+		public Func<T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return (g)=>function( a, b, c, d, e, f, g );
+			return (g) => function(a, b, c, d, e, f, g);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T2, T3, T4, T5, T6, T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a )
+		public Func<T2, T3, T4, T5, T6, T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a)
 		{
-			return (b, c, d, e, f, g, h)=>function( a, b, c, d, e, f, g, h );
+			return (b, c, d, e, f, g, h) => function(a, b, c, d, e, f, g, h);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T3, T4, T5, T6, T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b )
+		public Func<T3, T4, T5, T6, T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b)
 		{
-			return (c, d, e, f, g, h)=>function( a, b, c, d, e, f, g, h );
+			return (c, d, e, f, g, h) => function(a, b, c, d, e, f, g, h);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T4, T5, T6, T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b, T3 c )
+		public Func<T4, T5, T6, T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return (d, e, f, g, h)=>function( a, b, c, d, e, f, g, h );
+			return (d, e, f, g, h) => function(a, b, c, d, e, f, g, h);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T5, T6, T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b, T3 c, T4 d )
+		public Func<T5, T6, T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return (e, f, g, h)=>function( a, b, c, d, e, f, g, h );
+			return (e, f, g, h) => function(a, b, c, d, e, f, g, h);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T6, T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e )
+		public Func<T6, T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return (f, g, h)=>function( a, b, c, d, e, f, g, h );
+			return (f, g, h) => function(a, b, c, d, e, f, g, h);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f )
+		public Func<T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return (g, h)=>function( a, b, c, d, e, f, g, h );
+			return (g, h) => function(a, b, c, d, e, f, g, h);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g )
+		public Func<T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g)
 		{
-			return (h)=>function( a, b, c, d, e, f, g, h );
+			return (h) => function(a, b, c, d, e, f, g, h);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T2, T3, T4, T5, T6, T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a )
+		public Func<T2, T3, T4, T5, T6, T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a)
 		{
-			return (b, c, d, e, f, g, h, i)=>function( a, b, c, d, e, f, g, h, i );
+			return (b, c, d, e, f, g, h, i) => function(a, b, c, d, e, f, g, h, i);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T3, T4, T5, T6, T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b )
+		public Func<T3, T4, T5, T6, T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b)
 		{
-			return (c, d, e, f, g, h, i)=>function( a, b, c, d, e, f, g, h, i );
+			return (c, d, e, f, g, h, i) => function(a, b, c, d, e, f, g, h, i);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T4, T5, T6, T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c )
+		public Func<T4, T5, T6, T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return (d, e, f, g, h, i)=>function( a, b, c, d, e, f, g, h, i );
+			return (d, e, f, g, h, i) => function(a, b, c, d, e, f, g, h, i);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T5, T6, T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c, T4 d )
+		public Func<T5, T6, T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return (e, f, g, h, i)=>function( a, b, c, d, e, f, g, h, i );
+			return (e, f, g, h, i) => function(a, b, c, d, e, f, g, h, i);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T6, T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e )
+		public Func<T6, T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return (f, g, h, i)=>function( a, b, c, d, e, f, g, h, i );
+			return (f, g, h, i) => function(a, b, c, d, e, f, g, h, i);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f )
+		public Func<T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return (g, h, i)=>function( a, b, c, d, e, f, g, h, i );
+			return (g, h, i) => function(a, b, c, d, e, f, g, h, i);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g )
+		public Func<T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g)
 		{
-			return (h, i)=>function( a, b, c, d, e, f, g, h, i );
+			return (h, i) => function(a, b, c, d, e, f, g, h, i);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h )
+		public Func<T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h)
 		{
-			return (i)=>function( a, b, c, d, e, f, g, h, i );
+			return (i) => function(a, b, c, d, e, f, g, h, i);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a )
+		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a)
 		{
-			return (b, c, d, e, f, g, h, i, j)=>function( a, b, c, d, e, f, g, h, i, j );
+			return (b, c, d, e, f, g, h, i, j) => function(a, b, c, d, e, f, g, h, i, j);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T3, T4, T5, T6, T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b )
+		public Func<T3, T4, T5, T6, T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b)
 		{
-			return (c, d, e, f, g, h, i, j)=>function( a, b, c, d, e, f, g, h, i, j );
+			return (c, d, e, f, g, h, i, j) => function(a, b, c, d, e, f, g, h, i, j);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T4, T5, T6, T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c )
+		public Func<T4, T5, T6, T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return (d, e, f, g, h, i, j)=>function( a, b, c, d, e, f, g, h, i, j );
+			return (d, e, f, g, h, i, j) => function(a, b, c, d, e, f, g, h, i, j);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T5, T6, T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d )
+		public Func<T5, T6, T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return (e, f, g, h, i, j)=>function( a, b, c, d, e, f, g, h, i, j );
+			return (e, f, g, h, i, j) => function(a, b, c, d, e, f, g, h, i, j);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T6, T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e )
+		public Func<T6, T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return (f, g, h, i, j)=>function( a, b, c, d, e, f, g, h, i, j );
+			return (f, g, h, i, j) => function(a, b, c, d, e, f, g, h, i, j);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f )
+		public Func<T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return (g, h, i, j)=>function( a, b, c, d, e, f, g, h, i, j );
+			return (g, h, i, j) => function(a, b, c, d, e, f, g, h, i, j);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g )
+		public Func<T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g)
 		{
-			return (h, i, j)=>function( a, b, c, d, e, f, g, h, i, j );
+			return (h, i, j) => function(a, b, c, d, e, f, g, h, i, j);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h )
+		public Func<T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h)
 		{
-			return (i, j)=>function( a, b, c, d, e, f, g, h, i, j );
+			return (i, j) => function(a, b, c, d, e, f, g, h, i, j);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i )
+		public Func<T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i)
 		{
-			return (j)=>function( a, b, c, d, e, f, g, h, i, j );
+			return (j) => function(a, b, c, d, e, f, g, h, i, j);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a )
+		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a)
 		{
-			return (b, c, d, e, f, g, h, i, j, k)=>function( a, b, c, d, e, f, g, h, i, j, k );
+			return (b, c, d, e, f, g, h, i, j, k) => function(a, b, c, d, e, f, g, h, i, j, k);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b )
+		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b)
 		{
-			return (c, d, e, f, g, h, i, j, k)=>function( a, b, c, d, e, f, g, h, i, j, k );
+			return (c, d, e, f, g, h, i, j, k) => function(a, b, c, d, e, f, g, h, i, j, k);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T4, T5, T6, T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c )
+		public Func<T4, T5, T6, T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return (d, e, f, g, h, i, j, k)=>function( a, b, c, d, e, f, g, h, i, j, k );
+			return (d, e, f, g, h, i, j, k) => function(a, b, c, d, e, f, g, h, i, j, k);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T5, T6, T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d )
+		public Func<T5, T6, T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return (e, f, g, h, i, j, k)=>function( a, b, c, d, e, f, g, h, i, j, k );
+			return (e, f, g, h, i, j, k) => function(a, b, c, d, e, f, g, h, i, j, k);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T6, T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e )
+		public Func<T6, T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return (f, g, h, i, j, k)=>function( a, b, c, d, e, f, g, h, i, j, k );
+			return (f, g, h, i, j, k) => function(a, b, c, d, e, f, g, h, i, j, k);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f )
+		public Func<T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return (g, h, i, j, k)=>function( a, b, c, d, e, f, g, h, i, j, k );
+			return (g, h, i, j, k) => function(a, b, c, d, e, f, g, h, i, j, k);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g )
+		public Func<T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g)
 		{
-			return (h, i, j, k)=>function( a, b, c, d, e, f, g, h, i, j, k );
+			return (h, i, j, k) => function(a, b, c, d, e, f, g, h, i, j, k);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h )
+		public Func<T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h)
 		{
-			return (i, j, k)=>function( a, b, c, d, e, f, g, h, i, j, k );
+			return (i, j, k) => function(a, b, c, d, e, f, g, h, i, j, k);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i )
+		public Func<T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i)
 		{
-			return (j, k)=>function( a, b, c, d, e, f, g, h, i, j, k );
+			return (j, k) => function(a, b, c, d, e, f, g, h, i, j, k);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j )
+		public Func<T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j)
 		{
-			return (k)=>function( a, b, c, d, e, f, g, h, i, j, k );
+			return (k) => function(a, b, c, d, e, f, g, h, i, j, k);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a )
+		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a)
 		{
-			return (b, c, d, e, f, g, h, i, j, k, l)=>function( a, b, c, d, e, f, g, h, i, j, k, l );
+			return (b, c, d, e, f, g, h, i, j, k, l) => function(a, b, c, d, e, f, g, h, i, j, k, l);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b )
+		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b)
 		{
-			return (c, d, e, f, g, h, i, j, k, l)=>function( a, b, c, d, e, f, g, h, i, j, k, l );
+			return (c, d, e, f, g, h, i, j, k, l) => function(a, b, c, d, e, f, g, h, i, j, k, l);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c )
+		public Func<T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return (d, e, f, g, h, i, j, k, l)=>function( a, b, c, d, e, f, g, h, i, j, k, l );
+			return (d, e, f, g, h, i, j, k, l) => function(a, b, c, d, e, f, g, h, i, j, k, l);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T5, T6, T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d )
+		public Func<T5, T6, T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return (e, f, g, h, i, j, k, l)=>function( a, b, c, d, e, f, g, h, i, j, k, l );
+			return (e, f, g, h, i, j, k, l) => function(a, b, c, d, e, f, g, h, i, j, k, l);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T6, T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e )
+		public Func<T6, T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return (f, g, h, i, j, k, l)=>function( a, b, c, d, e, f, g, h, i, j, k, l );
+			return (f, g, h, i, j, k, l) => function(a, b, c, d, e, f, g, h, i, j, k, l);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f )
+		public Func<T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return (g, h, i, j, k, l)=>function( a, b, c, d, e, f, g, h, i, j, k, l );
+			return (g, h, i, j, k, l) => function(a, b, c, d, e, f, g, h, i, j, k, l);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g )
+		public Func<T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g)
 		{
-			return (h, i, j, k, l)=>function( a, b, c, d, e, f, g, h, i, j, k, l );
+			return (h, i, j, k, l) => function(a, b, c, d, e, f, g, h, i, j, k, l);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h )
+		public Func<T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h)
 		{
-			return (i, j, k, l)=>function( a, b, c, d, e, f, g, h, i, j, k, l );
+			return (i, j, k, l) => function(a, b, c, d, e, f, g, h, i, j, k, l);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i )
+		public Func<T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i)
 		{
-			return (j, k, l)=>function( a, b, c, d, e, f, g, h, i, j, k, l );
+			return (j, k, l) => function(a, b, c, d, e, f, g, h, i, j, k, l);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j )
+		public Func<T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j)
 		{
-			return (k, l)=>function( a, b, c, d, e, f, g, h, i, j, k, l );
+			return (k, l) => function(a, b, c, d, e, f, g, h, i, j, k, l);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k )
+		public Func<T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k)
 		{
-			return (l)=>function( a, b, c, d, e, f, g, h, i, j, k, l );
+			return (l) => function(a, b, c, d, e, f, g, h, i, j, k, l);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a )
+		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a)
 		{
-			return (b, c, d, e, f, g, h, i, j, k, l, m)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m );
+			return (b, c, d, e, f, g, h, i, j, k, l, m) => function(a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b )
+		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b)
 		{
-			return (c, d, e, f, g, h, i, j, k, l, m)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m );
+			return (c, d, e, f, g, h, i, j, k, l, m) => function(a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c )
+		public Func<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return (d, e, f, g, h, i, j, k, l, m)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m );
+			return (d, e, f, g, h, i, j, k, l, m) => function(a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d )
+		public Func<T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return (e, f, g, h, i, j, k, l, m)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m );
+			return (e, f, g, h, i, j, k, l, m) => function(a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T6, T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e )
+		public Func<T6, T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return (f, g, h, i, j, k, l, m)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m );
+			return (f, g, h, i, j, k, l, m) => function(a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f )
+		public Func<T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return (g, h, i, j, k, l, m)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m );
+			return (g, h, i, j, k, l, m) => function(a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g )
+		public Func<T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g)
 		{
-			return (h, i, j, k, l, m)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m );
+			return (h, i, j, k, l, m) => function(a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h )
+		public Func<T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h)
 		{
-			return (i, j, k, l, m)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m );
+			return (i, j, k, l, m) => function(a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i )
+		public Func<T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i)
 		{
-			return (j, k, l, m)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m );
+			return (j, k, l, m) => function(a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j )
+		public Func<T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j)
 		{
-			return (k, l, m)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m );
+			return (k, l, m) => function(a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k )
+		public Func<T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k)
 		{
-			return (l, m)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m );
+			return (l, m) => function(a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l )
+		public Func<T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l)
 		{
-			return (m)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m );
+			return (m) => function(a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a )
+		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a)
 		{
-			return (b, c, d, e, f, g, h, i, j, k, l, m, n)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
+			return (b, c, d, e, f, g, h, i, j, k, l, m, n) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b )
+		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b)
 		{
-			return (c, d, e, f, g, h, i, j, k, l, m, n)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
+			return (c, d, e, f, g, h, i, j, k, l, m, n) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c )
+		public Func<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return (d, e, f, g, h, i, j, k, l, m, n)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
+			return (d, e, f, g, h, i, j, k, l, m, n) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d )
+		public Func<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return (e, f, g, h, i, j, k, l, m, n)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
+			return (e, f, g, h, i, j, k, l, m, n) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e )
+		public Func<T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return (f, g, h, i, j, k, l, m, n)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
+			return (f, g, h, i, j, k, l, m, n) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f )
+		public Func<T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return (g, h, i, j, k, l, m, n)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
+			return (g, h, i, j, k, l, m, n) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g )
+		public Func<T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g)
 		{
-			return (h, i, j, k, l, m, n)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
+			return (h, i, j, k, l, m, n) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h )
+		public Func<T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h)
 		{
-			return (i, j, k, l, m, n)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
+			return (i, j, k, l, m, n) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i )
+		public Func<T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i)
 		{
-			return (j, k, l, m, n)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
+			return (j, k, l, m, n) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j )
+		public Func<T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j)
 		{
-			return (k, l, m, n)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
+			return (k, l, m, n) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k )
+		public Func<T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k)
 		{
-			return (l, m, n)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
+			return (l, m, n) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l )
+		public Func<T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l)
 		{
-			return (m, n)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
+			return (m, n) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m )
+		public Func<T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m)
 		{
-			return (n)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
+			return (n) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a )
+		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a)
 		{
-			return (b, c, d, e, f, g, h, i, j, k, l, m, n, o)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
+			return (b, c, d, e, f, g, h, i, j, k, l, m, n, o) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b )
+		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b)
 		{
-			return (c, d, e, f, g, h, i, j, k, l, m, n, o)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
+			return (c, d, e, f, g, h, i, j, k, l, m, n, o) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c )
+		public Func<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return (d, e, f, g, h, i, j, k, l, m, n, o)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
+			return (d, e, f, g, h, i, j, k, l, m, n, o) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d )
+		public Func<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return (e, f, g, h, i, j, k, l, m, n, o)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
+			return (e, f, g, h, i, j, k, l, m, n, o) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e )
+		public Func<T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return (f, g, h, i, j, k, l, m, n, o)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
+			return (f, g, h, i, j, k, l, m, n, o) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f )
+		public Func<T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return (g, h, i, j, k, l, m, n, o)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
+			return (g, h, i, j, k, l, m, n, o) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g )
+		public Func<T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g)
 		{
-			return (h, i, j, k, l, m, n, o)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
+			return (h, i, j, k, l, m, n, o) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h )
+		public Func<T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h)
 		{
-			return (i, j, k, l, m, n, o)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
+			return (i, j, k, l, m, n, o) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i )
+		public Func<T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i)
 		{
-			return (j, k, l, m, n, o)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
+			return (j, k, l, m, n, o) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j )
+		public Func<T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j)
 		{
-			return (k, l, m, n, o)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
+			return (k, l, m, n, o) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k )
+		public Func<T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k)
 		{
-			return (l, m, n, o)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
+			return (l, m, n, o) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l )
+		public Func<T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l)
 		{
-			return (m, n, o)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
+			return (m, n, o) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m )
+		public Func<T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m)
 		{
-			return (n, o)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
+			return (n, o) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m, T14 n )
+		public Func<T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m, T14 n)
 		{
-			return (o)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
+			return (o) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a )
+		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a)
 		{
-			return (b, c, d, e, f, g, h, i, j, k, l, m, n, o, p)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
+			return (b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b )
+		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b)
 		{
-			return (c, d, e, f, g, h, i, j, k, l, m, n, o, p)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
+			return (c, d, e, f, g, h, i, j, k, l, m, n, o, p) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c )
+		public Func<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return (d, e, f, g, h, i, j, k, l, m, n, o, p)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
+			return (d, e, f, g, h, i, j, k, l, m, n, o, p) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d )
+		public Func<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return (e, f, g, h, i, j, k, l, m, n, o, p)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
+			return (e, f, g, h, i, j, k, l, m, n, o, p) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e )
+		public Func<T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return (f, g, h, i, j, k, l, m, n, o, p)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
+			return (f, g, h, i, j, k, l, m, n, o, p) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f )
+		public Func<T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return (g, h, i, j, k, l, m, n, o, p)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
+			return (g, h, i, j, k, l, m, n, o, p) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g )
+		public Func<T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g)
 		{
-			return (h, i, j, k, l, m, n, o, p)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
+			return (h, i, j, k, l, m, n, o, p) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h )
+		public Func<T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h)
 		{
-			return (i, j, k, l, m, n, o, p)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
+			return (i, j, k, l, m, n, o, p) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i )
+		public Func<T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i)
 		{
-			return (j, k, l, m, n, o, p)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
+			return (j, k, l, m, n, o, p) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j )
+		public Func<T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j)
 		{
-			return (k, l, m, n, o, p)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
+			return (k, l, m, n, o, p) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k )
+		public Func<T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k)
 		{
-			return (l, m, n, o, p)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
+			return (l, m, n, o, p) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l )
+		public Func<T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l)
 		{
-			return (m, n, o, p)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
+			return (m, n, o, p) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m )
+		public Func<T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m)
 		{
-			return (n, o, p)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
+			return (n, o, p) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m, T14 n )
+		public Func<T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m, T14 n)
 		{
-			return (o, p)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
+			return (o, p) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
-		public Func<T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>( Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m, T14 n, T15 o )
+		public Func<T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m, T14 n, T15 o)
 		{
-			return (p)=>function( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
+			return (p) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		}
-		
-		
+
 	}
 
 }
