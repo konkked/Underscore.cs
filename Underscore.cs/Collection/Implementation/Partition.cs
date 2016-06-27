@@ -16,28 +16,34 @@ namespace Underscore.Collection
         }
 
 		/// <summary>
-		/// this needs a comment
-		/// </summary>\
+		/// segment
+		/// </summary>
         private IEnumerable<T> Segment<T>(IEnumerator<T> iter, int size, out bool cont)
         {
             var ret = new List<T>();
+            // we want the calling method to know if we can keep going
             cont = true;
             bool hit = false;
 
+            // add items up until size or end of iter's collection
             for (var i = 0; i < size; i++)
             {
                 if (iter.MoveNext())
                 {
+                    // keep adding values if there are any
                     hit = true;
                     ret.Add(iter.Current);
                 }
                 else
                 {
+                    // if there's nothing left, break
                     cont = false;
                     break;
                 }
             }
 
+            // if we didn't hit anything, 
+            // there's nothing to return so return null
             return hit ? ret : null;
         }
 
@@ -46,15 +52,21 @@ namespace Underscore.Collection
         /// </summary>
         public IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> collection, int size)
         {
-            bool shouldContinue = collection != null && collection.Any();
+            // we need a non-empty collection to be able to chunk it
+            if (collection == null || !collection.Any())
+                yield break;
 
             using (var iter = collection.GetEnumerator())
             {
+                // if we reach here we must have a collection to do something to
+                bool shouldContinue = true;
+
                 while (shouldContinue)
                 {
-                    //iteration of the enumerable is done in segment
+                    // iteration of the enumerable is done in segment
                     var result = Segment(iter, size, out shouldContinue);
 
+                    // as long as we keep getting results, yield them
                     if (shouldContinue || result != null)
                         yield return result;
 
@@ -68,6 +80,9 @@ namespace Underscore.Collection
         /// </summary>
         public IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> collection, Func<T, bool> on)
         {
+            if (collection == null || !collection.Any())
+                yield break;
+
             using (var iter = collection.GetEnumerator())
             {
                 var retv = new List<T>();
@@ -111,6 +126,9 @@ namespace Underscore.Collection
 
 	        foreach (var value in collection)
 	        {
+                // if we haven't reached the index yet, 
+                // it goes in the left partition,
+                // otherwise it goes in the right partition
 		        if(i < index)
 					left.Add(value);
 				else
@@ -145,6 +163,8 @@ namespace Underscore.Collection
 	        {
 		        if (hitPred)
 		        {
+                    // if we've hit the predicate,
+                    // add it to the right
 			        right.Add(value);
 		        }
 		        else
@@ -153,11 +173,14 @@ namespace Underscore.Collection
 					// check if we're hitting it now
 			        if (on(value))
 			        {
+                        // if we've hit it set flag
+                        // and put value in right partition
 				        hitPred = true;
 				        right.Add(value);
 			        }
 			        else
 			        {
+                        // otherwise we're still in the left partition
 						left.Add(value);
 			        }
 		        }
@@ -186,6 +209,8 @@ namespace Underscore.Collection
 
 			foreach (var value in collection)
 			{
+                // if it matches the predicate, put it in the left
+                // otherwise, put it in the right
 				if (on(value))
 					left.Add(value);
 				else
@@ -200,7 +225,9 @@ namespace Underscore.Collection
 
         public IEnumerable<IEnumerable<T>> Combinations<T>(IEnumerable<T> collection)
         {
+            // need to have a collection to do combinations of it
             if(collection == null) throw new ArgumentNullException("collection");
+            // if it's a list, just cast it. Otherwise we'll need to turn it into one
             var ls = collection as IList<T> ?? collection.ToList();
             return _partitionComponent.Combinations(ls);
         }
