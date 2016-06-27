@@ -45,10 +45,31 @@ notEquals("foo", "bar"); // true
 ```
 
 ### Func<bool> Or(params Func<bool>[] fns)
-***TODO***
+Returns a function which aggregates the results of all the given functions as a logical "or" does, including short-circuiting to avoid processing functions more than necessary
+```
+bool[] wasCalled = {false, false, false};
+Func<bool> func1 = () => (wasCalled[0] = true) && false;
+Func<bool> func2 = () => (wasCalled[1] = true) && true;
+Func<bool> func3 = () => (wasCalled[2] = true) && false;
+
+var orCombined = _.Function.Or(func1, func2, func3);
+
+onCombined(); // true
+wasCalled; // {true, true, false}
+```
 
 ### Func<bool> And(params Func<bool>[] fns)
-***TODO***
+```
+bool[] wasCalled = {false, false, false};
+Func<bool> func1 = () => (wasCalled[0] = true) && true;
+Func<bool> func2 = () => (wasCalled[1] = true) && false;
+Func<bool> func3 = () => (wasCalled[2] = true) && true;
+
+var orCombined = _.Function.And(func1, func2, func3);
+
+onCombined(); // false
+wasCalled; // {true, true, false}
+```
 
 ## Compose
 ### TResult Apply\<T, TResult\>(Func\<T, TResult\> function, T[] arguments)
