@@ -42,21 +42,14 @@ namespace Underscore.List
         {
             var instance = _rng.Value;
 
-            IList<T> ls = null;
-
-            if ( inplace )
-                ls = list;
-            else
-                ls = new List<T>( list );
+            var ls = inplace ? list : new List<T>( list );
 
             int len = ls.Count;
-            int swapping = -1;
 
             for ( int i=0 ; i < len ; i++ )
             {
-                swapping = instance.Next( i, ls.Count );
+                var swapping = instance.Next( i, ls.Count );
                 Swap( ls, i, swapping );
-
             }
 
             return ls;
@@ -183,8 +176,7 @@ namespace Underscore.List
                 }
             }
         }
-
-
+        
         public void Dispose()
         {
             Dispose(true);
