@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Underscore.Function;
 namespace Underscore.Test.Boolean
@@ -22,7 +22,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsTrue(negated());
+			Assert.IsFalse(negated());
 		}
 
 		[TestMethod]
@@ -32,7 +32,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsFalse(negated());
+			Assert.IsTrue(negated());
 		}
 
 		[TestMethod]
@@ -44,7 +44,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsTrue(negated(obj));
+			Assert.IsFalse(negated(obj));
 		}
 
 		[TestMethod]
@@ -56,7 +56,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsFalse(negated(obj));
+			Assert.IsTrue(negated(obj));
 		}
 
 		[TestMethod]
@@ -68,7 +68,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsTrue(negated(obj, obj));
+			Assert.IsFalse(negated(obj, obj));
 		}
 
 		[TestMethod]
@@ -80,7 +80,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsFalse(negated(obj, obj));
+			Assert.IsTrue(negated(obj, obj));
 		}
 
 		[TestMethod]
@@ -92,7 +92,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsTrue(negated(obj, obj, obj));
+			Assert.IsFalse(negated(obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -104,7 +104,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsFalse(negated(obj, obj, obj));
+			Assert.IsTrue(negated(obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -116,7 +116,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsTrue(negated(obj, obj, obj, obj));
+			Assert.IsFalse(negated(obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -128,7 +128,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsFalse(negated(obj, obj, obj, obj));
+			Assert.IsTrue(negated(obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -140,7 +140,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsTrue(negated(obj, obj, obj, obj, obj));
+			Assert.IsFalse(negated(obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -152,7 +152,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsFalse(negated(obj, obj, obj, obj, obj));
+			Assert.IsTrue(negated(obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -164,7 +164,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj));
+			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -176,7 +176,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj));
+			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -188,7 +188,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -200,7 +200,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -212,7 +212,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -224,7 +224,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -236,7 +236,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -248,7 +248,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -260,7 +260,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -272,7 +272,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -284,7 +284,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -296,7 +296,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -308,7 +308,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -320,7 +320,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -332,7 +332,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -344,7 +344,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -356,7 +356,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -368,7 +368,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -380,7 +380,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -392,7 +392,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -404,7 +404,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 		[TestMethod]
@@ -416,7 +416,7 @@ namespace Underscore.Test.Boolean
 
 			var negated = component.Negate(toNegate);
 
-			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
+			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
 	}
