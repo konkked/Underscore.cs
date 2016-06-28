@@ -33,7 +33,6 @@ namespace Underscore.Test.Object.Reflection
         [TestMethod]
         public async Task ObjectFields()
         {
-
             var target = new FieldMethodsTestClass();
 
             var mkUtil = new Mock<ICacheComponent>();
@@ -43,8 +42,7 @@ namespace Underscore.Test.Object.Reflection
             mkUtil.Setup(a => a.Memoize(It.IsAny<Func<Type, BindingFlags, IEnumerable<FieldInfo>>>()))
                 .Returns((a, b) => fields.AsEnumerable());
 
-
-            var testing = new FieldComponent(mkUtil.Object);
+            var testing = new FieldComponent();
 
             var allPublicFields = testing.All(typeof(FieldMethodsTestClass));
             var allFieldsThatAreInts = testing.OfType(typeof(FieldMethodsTestClass), typeof(int));
@@ -59,26 +57,67 @@ namespace Underscore.Test.Object.Reflection
 
                 Assert.AreEqual(0, allPublicFields.Count(a => a.Name.StartsWith("Shouldnt")));
                 Assert.AreEqual(0, allPublicFields.Count(a => a.FieldType == typeof(decimal)));
-                Assert.AreEqual(0, allPublicFields.Count(a => a.FieldType == typeof(float)));
+	            Assert.AreEqual(0, allPublicFields.Count(a => a.FieldType == typeof (float)));
+            });
+        }
 
+        [TestMethod]
+        public async Task ObjectFieldHasField()
+        {
+
+            var target = new FieldMethodsTestClass();
+
+            var testing = new FieldComponent();
+
+            await Util.Tasks.Start(() =>
+            {
+                //test true one public string field
+                //test no type
+                //test with type
+                //test not with wrong type
+                //test not private method
+
+                Assert.IsTrue(testing.Has(target, "ShouldShowString"));
+                Assert.IsTrue(testing.Has(target, "ShouldShowString", typeof(string)));
+                Assert.IsFalse(testing.Has(target, "ShouldShowString", typeof(int)));
+                Assert.IsFalse(testing.Has(target, "ShouldntShowString"));
+                Assert.IsFalse(testing.Has(target, "ShouldntShowString", typeof(string)));
+
+            }, () =>
+            {
+
+                //test true one public int field
+                //test no type
+                //test with type
+                //test not with wrong type
+                //test not private method
+
+                Assert.IsTrue(testing.Has(target, "ShouldShowInt"));
+                Assert.IsTrue(testing.Has(target, "ShouldShowInt", typeof(int)));
+                Assert.IsFalse(testing.Has(target, "ShouldShowInt", typeof(string)));
+                Assert.IsFalse(testing.Has(target, "ShouldntShowInt"));
+                Assert.IsFalse(testing.Has(target, "ShouldntShowInt", typeof(int)));
+
+            }, () =>
+            {
+
+                //shouldnt show properties
+                Assert.IsFalse(testing.Has(target, "ShouldNotShowProperty"));
+                Assert.IsFalse(testing.Has(target, "ShouldNotShowProperty", typeof(int)));
+                Assert.IsFalse(testing.Has(target, "ShouldNotShowProperty", typeof(string)));
 
             });
 
         }
 
-
         [TestMethod]
-        public async Task ObjectFieldHasField( )
+        public async Task ObjectField()
         {
+            var target = new FieldMethodsTestClass();
 
-            var target = new FieldMethodsTestClass( );
+            var testing = new FieldComponent();
 
-
-
-            var testing = new FieldComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
-
-
-            await Util.Tasks.Start( ( ) =>
+            await Util.Tasks.Start(() =>
             {
                 //test true one public string field
                 //test no type
@@ -86,126 +125,58 @@ namespace Underscore.Test.Object.Reflection
                 //test not with wrong type
                 //test not private method
 
-                Assert.IsTrue( testing.Has( target, "ShouldShowString" ) );
-                Assert.IsTrue( testing.Has( target, "ShouldShowString", typeof( string ) ) );
-                Assert.IsFalse( testing.Has( target, "ShouldShowString", typeof( int ) ) );
-                Assert.IsFalse( testing.Has( target, "ShouldntShowString" ) );
-                Assert.IsFalse( testing.Has( target, "ShouldntShowString", typeof( string ) ) );
+                var showFieldNoArgs = testing.Find(target, "ShouldShowString");
+                var showFieldTypeArgs = testing.Find(target, "ShouldShowString", typeof(string));
+                var shouldNotShowFieldWrongArgs = testing.Find(target, "ShouldShowString", typeof(int));
+                var shouldntShowFieldPrivate = testing.Find(target, "ShoulntShowString");
+                var shouldntShowFieldPrivateWrongType = testing.Find(target, "ShoulntShowString", typeof(string));
 
-            }, ( ) =>
+                Assert.IsNotNull(showFieldNoArgs);
+
+                foreach (var item in new[ ] { showFieldTypeArgs })
+                    Assert.AreEqual(showFieldNoArgs, item);
+
+                foreach (var item in new[ ] { shouldNotShowFieldWrongArgs, shouldntShowFieldPrivate, shouldntShowFieldPrivateWrongType })
+                    Assert.IsNull(item);
+
+            }, () =>
             {
-
                 //test true one public int field
                 //test no type
                 //test with type
                 //test not with wrong type
                 //test not private method
 
+                var showFieldNoArgs = testing.Find(target, "ShouldShowInt");
+                var showFieldTypeArgs = testing.Find(target, "ShouldShowInt", typeof(int));
+                var shouldNotShowFieldWrongArgs = testing.Find(target, "ShouldntShowInt", typeof(string));
+                var shouldntShowFieldPrivate = testing.Find(target, "ShouldntShowInt");
+                var shouldntShowFieldPrivateWrongType = testing.Find(target, "ShouldintShowInt", typeof(string));
 
-                Assert.IsTrue( testing.Has( target, "ShouldShowInt" ) );
-                Assert.IsTrue( testing.Has( target, "ShouldShowInt", typeof( int ) ) );
-                Assert.IsFalse( testing.Has( target, "ShouldShowInt", typeof( string ) ) );
-                Assert.IsFalse( testing.Has( target, "ShouldntShowInt" ) );
-                Assert.IsFalse( testing.Has( target, "ShouldntShowInt", typeof( int ) ) );
+                Assert.IsNotNull(showFieldNoArgs);
 
+                foreach (var item in new[ ] { showFieldTypeArgs })
+                    Assert.AreEqual(showFieldNoArgs, item);
 
-
-            }, ( ) =>
+                foreach (var item in new[ ] { shouldNotShowFieldWrongArgs, shouldntShowFieldPrivate, shouldntShowFieldPrivateWrongType })
+                    Assert.IsNull(item);
+            }, () =>
             {
-
-                //shouldnt show properties
-                Assert.IsFalse( testing.Has( target, "ShouldNotShowProperty" ) );
-                Assert.IsFalse( testing.Has( target, "ShouldNotShowProperty", typeof( int ) ) );
-                Assert.IsFalse( testing.Has( target, "ShouldNotShowProperty", typeof( string ) ) );
-
-            } );
-
-
-        }
-
-        [TestMethod]
-        public async Task ObjectField( )
-        {
-
-            var target = new FieldMethodsTestClass( );
-
-
-
-            var testing = new FieldComponent( new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
-
-
-            await Util.Tasks.Start( ( ) =>
-            {
-                //test true one public string field
-                //test no type
-                //test with type
-                //test not with wrong type
-                //test not private method
-
-                var showFieldNoArgs = testing.Find( target, "ShouldShowString" );
-                var showFieldTypeArgs = testing.Find( target, "ShouldShowString", typeof( string ) );
-                var shouldNotShowFieldWrongArgs = testing.Find( target, "ShouldShowString", typeof( int ) );
-                var shouldntShowFieldPrivate = testing.Find( target, "ShoulntShowString" );
-                var shouldntShowFieldPrivateWrongType = testing.Find( target, "ShoulntShowString", typeof( string ) );
-
-                Assert.IsNotNull( showFieldNoArgs );
-
-                foreach ( var item in new[ ] { showFieldTypeArgs } )
-                    Assert.AreEqual( showFieldNoArgs, item );
-
-                foreach ( var item in new[ ] { shouldNotShowFieldWrongArgs, shouldntShowFieldPrivate, shouldntShowFieldPrivateWrongType } )
-                    Assert.IsNull( item );
-
-            }, ( ) =>
-            {
-
-                //test true one public int field
-                //test no type
-                //test with type
-                //test not with wrong type
-                //test not private method
-
-                var showFieldNoArgs = testing.Find( target, "ShouldShowInt" );
-                var showFieldTypeArgs = testing.Find( target, "ShouldShowInt", typeof( int ) );
-                var shouldNotShowFieldWrongArgs = testing.Find( target, "ShouldntShowInt", typeof( string ) );
-                var shouldntShowFieldPrivate = testing.Find( target, "ShouldntShowInt" );
-                var shouldntShowFieldPrivateWrongType = testing.Find( target, "ShouldintShowInt", typeof( string ) );
-
-                Assert.IsNotNull( showFieldNoArgs );
-
-                foreach ( var item in new[ ] { showFieldTypeArgs } )
-                    Assert.AreEqual( showFieldNoArgs, item );
-
-                foreach ( var item in new[ ] { shouldNotShowFieldWrongArgs, shouldntShowFieldPrivate, shouldntShowFieldPrivateWrongType } )
-                    Assert.IsNull( item );
-
-
-
-            }, ( ) =>
-            {
-
                 //test true no properties picked up
 
-
                 //shouldnt show properties
-                Assert.IsNull( testing.Find( target, "ShouldNotShowProperty" ) );
-                Assert.IsNull( testing.Find( target, "ShouldNotShowProperty", typeof( int ) ) );
-                Assert.IsNull( testing.Find( target, "ShouldNotShowProperty", typeof( string ) ) );
-
-            } );
-
+                Assert.IsNull(testing.Find(target, "ShouldNotShowProperty"));
+                Assert.IsNull(testing.Find(target, "ShouldNotShowProperty", typeof(int)));
+                Assert.IsNull(testing.Find(target, "ShouldNotShowProperty", typeof(string)));
+            });
         }
 
         [TestMethod]
         public async Task TypeField()
         {
-
             var target = typeof(FieldMethodsTestClass);
 
-
-
-            var testing = new FieldComponent(new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
-
+            var testing = new FieldComponent();
 
             await Util.Tasks.Start(() =>
             {
@@ -228,10 +199,8 @@ namespace Underscore.Test.Object.Reflection
 
                 foreach (var item in new[] { shouldNotShowFieldWrongArgs, shouldntShowFieldPrivate, shouldntShowFieldPrivateWrongType })
                     Assert.IsNull(item);
-
             }, () =>
             {
-
                 //test true one public int field
                 //test no type
                 //test with type
@@ -251,20 +220,14 @@ namespace Underscore.Test.Object.Reflection
 
                 foreach (var item in new[] { shouldNotShowFieldWrongArgs, shouldntShowFieldPrivate, shouldntShowFieldPrivateWrongType })
                     Assert.IsNull(item);
-
-
-
             }, () =>
             {
-
                 //test true no properties picked up
-
 
                 //shouldnt show properties
                 Assert.IsNull(testing.Find(target, "ShouldNotShowProperty"));
                 Assert.IsNull(testing.Find(target, "ShouldNotShowProperty", typeof(int)));
                 Assert.IsNull(testing.Find(target, "ShouldNotShowProperty", typeof(string)));
-
             });
 
         }
@@ -286,8 +249,6 @@ namespace Underscore.Test.Object.Reflection
 
             public static int IntValueStatic = 12;
             private static int IntValuePrivateStatic = 122;
-
-
         }
 
 #pragma warning restore 0414
@@ -295,9 +256,8 @@ namespace Underscore.Test.Object.Reflection
         [TestMethod]
         public void FieldValuesPublicStr()
         {
-            var testing = new FieldComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
-            
-            
+            var testing = new FieldComponent();
+
             var instance = new FieldValuesTest();
 
             var testingSets = new[]
@@ -306,7 +266,6 @@ namespace Underscore.Test.Object.Reflection
                 testing.Values<string>(instance, BindingFlags.Instance | BindingFlags.Public).ToList(),
 
             };
-
 
             foreach (var pblStrResultLs in testingSets)
             {
@@ -317,7 +276,6 @@ namespace Underscore.Test.Object.Reflection
                 Assert.IsTrue(pblStrResult.Contains("Value2"));
                 Assert.IsTrue(pblStrResult.Contains("Value3"));
 
-
                 Assert.IsFalse(pblStrResult.Contains("PrivateValue1"));
                 Assert.IsFalse(pblStrResult.Contains("PrivateValue2"));
                 Assert.IsFalse(pblStrResult.Contains("PrivateValue3"));
@@ -326,42 +284,34 @@ namespace Underscore.Test.Object.Reflection
 
             }
 
-
-
         }
-
 
         [TestMethod]
         public void FieldValuesPrivateStr()
         {
-            var testing = new FieldComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
+            var testing = new FieldComponent();
 
             var instance = new FieldValuesTest();
             var resultLs = testing.Values<string>(instance, BindingFlags.NonPublic | BindingFlags.Instance).ToList();
             var resultSet = new HashSet<string>(resultLs);
             Assert.AreEqual(3, resultSet.Count);
 
-
             Assert.IsTrue(resultSet.Contains("PrivateValue1"));
             Assert.IsTrue(resultSet.Contains("PrivateValue2"));
             Assert.IsTrue(resultSet.Contains("PrivateValue3"));
-
 
             Assert.IsFalse(resultSet.Contains("Value1"));
             Assert.IsFalse(resultSet.Contains("Value2"));
             Assert.IsFalse(resultSet.Contains("Value3"));
 
-
             Assert.AreEqual("PrivateValue1PrivateValue2PrivateValue3", string.Join("", resultLs));
 
-
         }
-
 
         [TestMethod]
         public void FieldValuesPublicInt()
         {
-            var testing = new FieldComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
+            var testing = new FieldComponent();
 
             var instance = new FieldValuesTest();
             var resultLs = testing.Values<int>(instance).ToList();
@@ -372,11 +322,10 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-
         [TestMethod]
         public void FieldValuesPrivateInt()
         {
-            var testing = new FieldComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
+            var testing = new FieldComponent();
 
             var instance = new FieldValuesTest();
             var resultLs = testing.Values<int>(instance, BindingFlags.NonPublic | BindingFlags.Instance).ToList();
@@ -387,12 +336,10 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-
-
         [TestMethod]
         public void FieldValuesStaticInt()
         {
-            var testing = new FieldComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
+            var testing = new FieldComponent();
 
             var instance = new FieldValuesTest();
             var resultls = testing.Values<int>(instance, BindingFlags.Public | BindingFlags.Static).ToList();
@@ -403,11 +350,10 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-
         [TestMethod]
         public void FieldValuesPrivateStaticInt()
         {
-            var testing = new FieldComponent(new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()));
+            var testing = new FieldComponent();
 
             var instance = new FieldValuesTest();
             var resultLs = testing.Values<int>(instance, BindingFlags.NonPublic | BindingFlags.Static).ToList();
@@ -417,9 +363,6 @@ namespace Underscore.Test.Object.Reflection
             Assert.IsTrue(resultSet.Contains(122));
 
         }
-
-
-
 
     }
 }

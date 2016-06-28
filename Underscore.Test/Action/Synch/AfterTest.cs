@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Threading;
-using Underscore.Function;
 using ComposeComponent = Underscore.Function.ComposeComponent;
-using ConvertComponent = Underscore.Action.ConvertComponent;
 using ISynchComponent = Underscore.Action.ISynchComponent;
 using SynchComponent = Underscore.Action.SynchComponent;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -21,25 +19,11 @@ namespace Underscore.Test.Action.Synch
         private string result;
         private bool invoked;
         private Task[] arr;
-
-        public ISynchComponent GetSynchComponent()
-        {
-            return new SynchComponent(
-                new Underscore.Function.SynchComponent(
-                    new CompactComponent(),
-                    new Underscore.Utility.CompactComponent(),
-                    new Underscore.Utility.MathComponent()
-                    ),
-                new ConvertComponent(),
-                new Underscore.Function.ConvertComponent()
-                );
-        }
-
         [TestInitialize]
         public void Initialize()
         {
             funcCompose = new ComposeComponent();
-            component = GetSynchComponent();
+            component = new SynchComponent();
 
             counter = 0;
             result = "";

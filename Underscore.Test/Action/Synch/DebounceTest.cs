@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Underscore.Function;
-using ConvertComponent = Underscore.Action.ConvertComponent;
-using ISynchComponent = Underscore.Action.ISynchComponent;
 using SynchComponent = Underscore.Action.SynchComponent;
 
 namespace Underscore.Test.Action.Synch
@@ -13,23 +10,10 @@ namespace Underscore.Test.Action.Synch
 	[TestClass]
 	public class DebounceTest
 	{
-        public ISynchComponent GetSynchComponent()
-        {
-            return new SynchComponent(
-                new Underscore.Function.SynchComponent(
-                    new CompactComponent(),
-                    new Underscore.Utility.CompactComponent(),
-                    new Underscore.Utility.MathComponent()
-                    ),
-                new ConvertComponent(),
-                new Underscore.Function.ConvertComponent()
-                );
-        }
-
         [TestMethod]
 		public async Task Action_Synch_Debounce_NoArguments()
 		{
-			var testing = GetSynchComponent();
+			var testing = new SynchComponent();
 			var flag = false;
 
 			var callcount = 0;
@@ -76,7 +60,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Debounce_1Argument()
 		{
-			var testing = GetSynchComponent();
+			var testing = new SynchComponent();
 			string result = null;
 			var callCount = 0;
 
@@ -102,7 +86,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Debounce_2Arguments()
 		{
-			var testing = GetSynchComponent();
+			var testing = new SynchComponent();
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -167,7 +151,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Debounce_3Arguments()
 		{
-			var testing = GetSynchComponent();
+			var testing = new SynchComponent();
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -235,7 +219,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Debounce_4Arguments()
 		{
-			var testing = GetSynchComponent();
+			var testing = new SynchComponent();
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -310,7 +294,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Debounce_5Arguments()
 		{
-			var testing = GetSynchComponent();
+			var testing = new SynchComponent();
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -385,7 +369,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Debounce_6Arguments()
 		{
-			var testing = GetSynchComponent();
+			var testing = new SynchComponent();
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -463,7 +447,7 @@ namespace Underscore.Test.Action.Synch
         [TestMethod]
         public async Task Action_Synch_Debounce_7Arguments()
         {
-            var testing = GetSynchComponent();
+            var testing = new SynchComponent();
             var flag = false;
             const int waitingFor = 50;
             var timer = new Stopwatch();
@@ -544,7 +528,7 @@ namespace Underscore.Test.Action.Synch
         [TestMethod]
         public async Task Action_Synch_Debounce_8Arguments()
         {
-            var testing = GetSynchComponent();
+            var testing = new SynchComponent();
             var flag = false;
             const int waitingFor = 50;
             var timer = new Stopwatch();
@@ -628,7 +612,7 @@ namespace Underscore.Test.Action.Synch
         [TestMethod]
         public async Task Action_Synch_Debounce_9Arguments()
         {
-            var testing = GetSynchComponent();
+            var testing = new SynchComponent();
             var flag = false;
             const int waitingFor = 50;
             var timer = new Stopwatch();
@@ -715,7 +699,7 @@ namespace Underscore.Test.Action.Synch
         [TestMethod]
         public async Task Action_Synch_Debounce_10Arguments()
         {
-            var testing = GetSynchComponent();
+            var testing = new SynchComponent();
             var flag = false;
             const int waitingFor = 50;
             var timer = new Stopwatch();
@@ -805,7 +789,7 @@ namespace Underscore.Test.Action.Synch
         [TestMethod]
         public async Task Action_Synch_Debounce_11Arguments()
         {
-            var testing = GetSynchComponent();
+            var testing = new SynchComponent();
             var flag = false;
             const int waitingFor = 50;
             var timer = new Stopwatch();
@@ -898,7 +882,7 @@ namespace Underscore.Test.Action.Synch
         [TestMethod]
         public async Task Action_Synch_Debounce_12Arguments()
         {
-            var testing = GetSynchComponent();
+            var testing = new SynchComponent();
             var flag = false;
             const int waitingFor = 50;
             var timer = new Stopwatch();
@@ -994,7 +978,7 @@ namespace Underscore.Test.Action.Synch
         [TestMethod]
         public async Task Action_Synch_Debounce_13Arguments()
         {
-            var testing = GetSynchComponent();
+            var testing = new SynchComponent();
             var flag = false;
             const int waitingFor = 50;
             var timer = new Stopwatch();
@@ -1093,7 +1077,7 @@ namespace Underscore.Test.Action.Synch
         [TestMethod]
         public async Task Action_Synch_Debounce_14Arguments()
         {
-            var testing = GetSynchComponent();
+            var testing = new SynchComponent();
             var flag = false;
             const int waitingFor = 50;
             var timer = new Stopwatch();
@@ -1195,7 +1179,7 @@ namespace Underscore.Test.Action.Synch
         [TestMethod]
         public async Task Action_Synch_Debounce_15Arguments()
         {
-            var testing = GetSynchComponent();
+            var testing = new SynchComponent();
             var flag = false;
             const int waitingFor = 50;
             var timer = new Stopwatch();
@@ -1300,7 +1284,7 @@ namespace Underscore.Test.Action.Synch
         [TestMethod]
         public async Task Action_Synch_Debounce_16Arguments()
         {
-            var testing = GetSynchComponent();
+            var testing = new SynchComponent();
             var flag = false;
             const int waitingFor = 50;
             var timer = new Stopwatch();

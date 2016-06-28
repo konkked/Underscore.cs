@@ -95,8 +95,6 @@
     <Compile Include="Function\Synch\DelayTest.cs" />
     <Compile Include="Function\Synch\OnceTest.cs" />
     <Compile Include="Function\Synch\ThrottleTest.cs" />
-    <Compile Include="List\AggregateTest.cs" />
-    <Compile Include="List\DelegateTest.cs" />
     <Compile Include="List\ManipulateTest.cs" />
     <Compile Include="List\PartitionTest.cs" />
     <Compile Include="Module\ActionTest.cs" />
