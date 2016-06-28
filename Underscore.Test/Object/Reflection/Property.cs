@@ -9,7 +9,6 @@ using Underscore.Function;
 using Underscore.Object.Reflection;
 using System.Threading;
 
-
 namespace Underscore.Test.Object.Reflection
 {
     [TestClass]
@@ -34,21 +33,11 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-        class Employee
-        {
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public decimal Salary { get; set; }
-        }
-
-
         [TestMethod]
         public void ObjectPropertyHas( )
         {
 
             var person = new Person( );
-
-
 
             var _prop = new PropertyComponent();
 
@@ -64,7 +53,6 @@ namespace Underscore.Test.Object.Reflection
         {
             var properties = typeof( Person ).GetProperties( BindingFlags.Public | BindingFlags.Instance ) ; 
             var person = new Person( );
-
 
             var _prop = new PropertyComponent( );
 
@@ -106,7 +94,6 @@ namespace Underscore.Test.Object.Reflection
                     Age = 24
                 };
 
-
                 int intExpecting =person.Age;
                 int intResult = _prop.GetValue<int>( person, "Age" );
                 Assert.AreEqual( intExpecting, intResult );
@@ -114,7 +101,6 @@ namespace Underscore.Test.Object.Reflection
                 string expecting = person.FirstName;
                 string result = _prop.GetValue<string>( person, "FirstName" );
                 Assert.AreEqual( expecting, result );
-
 
                 expecting = person.MiddleName;
                 result = _prop.GetValue<string>( person, "MiddleName" );
@@ -149,7 +135,6 @@ namespace Underscore.Test.Object.Reflection
                     Age = 24
                 };
 
-
                 object intExpecting =person.Age;
                 object intResult = _prop.GetValue( person, "Age" );
                 Assert.AreEqual( intExpecting, intResult );
@@ -157,7 +142,6 @@ namespace Underscore.Test.Object.Reflection
                 object expecting = person.FirstName;
                 object result = _prop.GetValue( person, "FirstName" );
                 Assert.AreEqual( expecting, result );
-
 
                 expecting = person.MiddleName;
                 result = _prop.GetValue( person, "MiddleName" );
@@ -192,7 +176,6 @@ namespace Underscore.Test.Object.Reflection
                     Age = 24
                 };
 
-
                 int intExpecting =12;
                 _prop.SetValue<int>( person, "Age", intExpecting );
                 int intResult = person.Age;
@@ -205,8 +188,6 @@ namespace Underscore.Test.Object.Reflection
 
                 Assert.AreEqual( expecting, result );
 
-
-
                 expecting = "Midding";
                 _prop.SetValue<string>( person, "MiddleName", expecting );
                 result = person.MiddleName;
@@ -216,21 +197,20 @@ namespace Underscore.Test.Object.Reflection
                 expecting = "DurpDurp";
                 _prop.SetValue<string>( person, "LastName", expecting );
                 result = person.LastName;
-                
+
                 Assert.AreEqual( expecting, result );
-                
+
                 expecting = "NewNickName";
                 _prop.SetValue<string>( person, "NickName", expecting );
                 result = person.NickName;
-                
+
                 Assert.AreEqual( expecting, result );
-                
+
                 expecting = "NewSuffix";
                 _prop.SetValue<string>( person, "Suffix", expecting );
                 result = person.Suffix;
 
                 Assert.AreEqual( expecting, result );
-
 
                 expecting = "NewTitle";
                 _prop.SetValue<string>( person, "Title", expecting );
@@ -250,7 +230,6 @@ namespace Underscore.Test.Object.Reflection
                     Age = 24
                 };
 
-
                 object intExpecting =12;
                 _prop.SetValue( person, "Age", intExpecting );
                 object intResult = person.Age;
@@ -262,8 +241,6 @@ namespace Underscore.Test.Object.Reflection
                 object result = person.FirstName;
 
                 Assert.AreEqual( expecting, result );
-
-
 
                 expecting = "Midding";
                 _prop.SetValue( person, "MiddleName", expecting );
@@ -289,7 +266,6 @@ namespace Underscore.Test.Object.Reflection
 
                 Assert.AreEqual( expecting, result );
 
-
                 expecting = "NewTitle";
                 _prop.SetValue( person, "Title", expecting );
                 result = person.Title;
@@ -298,12 +274,11 @@ namespace Underscore.Test.Object.Reflection
             } );
         }
 
-
         [TestMethod]
         public void PropertyHasForTypeTarget()
         {
             var testing = new PropertyComponent();
-            
+
             Assert.IsTrue(testing.Has(typeof(Person),"FirstName"));
             Assert.IsTrue(testing.Has(typeof(Person), "LastName"));
             Assert.IsTrue(testing.Has(typeof(Person), "MiddleName"));
@@ -312,7 +287,6 @@ namespace Underscore.Test.Object.Reflection
             Assert.IsTrue(testing.Has(typeof(Person), "Age"));
 
         }
-
 
         [TestMethod]
         public void PropertGetForTypeTarget()
@@ -328,7 +302,6 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-
         [TestMethod]
         public void PropertGetForTypeTargetCaseInsensitive()
         {
@@ -340,7 +313,7 @@ namespace Underscore.Test.Object.Reflection
             Assert.AreEqual(typeof(Person).GetProperty("Suffix"), testing.Find(typeof(Person), "suffix", false));
             Assert.AreEqual(typeof(Person).GetProperty("Title"), testing.Find(typeof(Person), "title", false));
             Assert.AreEqual(typeof(Person).GetProperty("Age"), testing.Find(typeof(Person), "age", false));
-            
+
         }
 
         [TestMethod]
@@ -371,19 +344,17 @@ namespace Underscore.Test.Object.Reflection
                 Title = "Title",
                 Age = 24
             };
-            
+
             Assert.AreEqual(                                            //order of decl
                 string.Join("", testing.Values<string>(testTarget)), "FirstNameLastNameNickNameMiddleNameTitleSuffix");
             Assert.AreEqual(24, testing.Values<int>(testTarget).FirstOrDefault());
 
-            
         }
 
         [TestMethod]
         public async Task ObjectProperties()
         {
             var testing = SetupPropertiesTarget();
-
 
             var example1 = new { A = 'A', B = "B", C = 1 };
             var example2 = new Person
@@ -407,12 +378,10 @@ namespace Underscore.Test.Object.Reflection
                     && a.PropertyType == typeof(char)
                     && ((char)a.GetGetMethod().Invoke(example1, new object[0])) == 'A');
 
-
                 var propB = props.FirstOrDefault(a =>
                     a.Name == "B"
                     && a.PropertyType == typeof(string)
                     && ((string)a.GetGetMethod().Invoke(example1, new object[0])) == "B");
-
 
                 var propC = props.FirstOrDefault(a =>
                     a.Name == "C"
@@ -511,7 +480,6 @@ namespace Underscore.Test.Object.Reflection
                 NumberOfKids = 3
             };
 
-
             //for single action param
             HashSet<object> propertiesContent = new HashSet<object>();
 
@@ -521,7 +489,6 @@ namespace Underscore.Test.Object.Reflection
                 .ToList().ForEach(a => propertiesContent.Add(a.GetGetMethod().Invoke(person, null)));
 
             Action<object> oneParamAction = (o) => Assert.IsTrue(propertiesContent.Contains(o), "Did not have property of value {0}", o);
-
 
             Dictionary<string, object> propertiesDict =
                 person.GetType()
@@ -559,8 +526,6 @@ namespace Underscore.Test.Object.Reflection
                                     ((o) => v.GetSetMethod().Invoke(person2, new[] { o })) :
                                     null as Action<object>)
                                 );
-
-
 
             Action<object, string, Action<object>> threeParamAction = (value, name, assigner) =>
             {
@@ -623,7 +588,6 @@ namespace Underscore.Test.Object.Reflection
                             "expected value change from {0} to {1}", orig, value
                     );
 
-
                 }
             };
 
@@ -638,10 +602,7 @@ namespace Underscore.Test.Object.Reflection
             testing.Each(person, twoParamAction);
             testing.Each(person2, threeParamAction);
 
-
-
         }
-
 
         [TestMethod]
         public void PropertyPairsGeneral()
@@ -671,7 +632,6 @@ namespace Underscore.Test.Object.Reflection
             Assert.IsTrue(pairs.Any(a => a.Name == "Age" && ((int)a.Value) == 25));
 
         }
-
 
         [TestMethod]
         public void PropertyPairsGeneric()
@@ -719,8 +679,6 @@ namespace Underscore.Test.Object.Reflection
                 NumberOfKids = 3
             };
 
-
-
             var personprime = new OtherPerson2(25)
             {
                 FirstName = "FirstName",
@@ -742,7 +700,6 @@ namespace Underscore.Test.Object.Reflection
                 Title = "Title",
                 NumberOfKids = 3
             };
-
 
             /*
              * General Notes:
@@ -775,7 +732,6 @@ namespace Underscore.Test.Object.Reflection
                         "Did not have property of value {0}",
                         o
                     );
-
 
             Dictionary<string, string> propertiesDict =
                 person.GetType()
@@ -823,8 +779,6 @@ namespace Underscore.Test.Object.Reflection
                                     ((o) => v.GetSetMethod().Invoke(person2, new object[] { o }))
                             )
                     );
-
-
 
             Action<string, string, Action<string>> threeParamAction = (value, name, assigner) =>
             {

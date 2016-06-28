@@ -28,14 +28,14 @@ namespace Underscore.Test.Object.Comparison
         [TestMethod]
         public void Object_Comparison_Equality_TypeInsensitiveSameType()
         {
-            IEqualityComponent testing = new EqualityComponent(new PropertyComponent());
+            IEqualityComponent testing = new EqualityComponent();
 
             var item1 =
                 new EqualityTestObject
                 {
                     Property1 = "Value1",
                     Property2 = "Value2",
-                    Property3 = new EqualityTestObject2()
+                    Property3 = new EqualityTestObject2
                     {
                         NestedProperty = "NestedValue",
                         NestedObject = new EqualityTestObject3

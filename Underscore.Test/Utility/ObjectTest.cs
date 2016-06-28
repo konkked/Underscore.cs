@@ -15,12 +15,6 @@ namespace Underscore.Test.Utility
         }
 
         [TestMethod]
-        public void ObjectCtor()
-        {
-            var component = new ObjectComponent();
-        }
-
-        [TestMethod]
         public void Utility_Object_Truthy_NonEmptyString()
         {
             Assert.IsTrue(component.IsTruthy("any"));
