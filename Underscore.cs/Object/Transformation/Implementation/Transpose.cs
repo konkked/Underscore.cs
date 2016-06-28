@@ -9,24 +9,29 @@ namespace Underscore.Object
     {
         private readonly IPropertyComponent _property;
 
-        public TransposeComponent( IPropertyComponent property ) 
+        public TransposeComponent(IPropertyComponent property) 
         {
             _property = property;
         }
 
-        private PropertyInfo FindBestPropertyReferenceMatch( PropertyInfo destination, IEnumerable<PropertyInfo> possibleMatches )
+        /// <summary>
+        /// returns the first property matching destination's type. 
+        /// Failing that, returns the last field with its type assignable to destination
+        /// </summary>
+        private PropertyInfo FindBestPropertyReferenceMatch(PropertyInfo destination, IEnumerable<PropertyInfo> possibleMatches)
         {
             PropertyInfo result = null;
 
-            foreach ( var possibleMatch in possibleMatches )
+            foreach (var possibleMatch in possibleMatches)
             {
-                if ( destination.PropertyType == possibleMatch.PropertyType )
+                // if we found something of a matching type return it
+                if (destination.PropertyType == possibleMatch.PropertyType)
                     return possibleMatch;
-
+                
+                // otherwise if possibleMatch can be assigned to destination and result
 	            var isAssignable = IsAssignableOneWay(destination, possibleMatch)
 	                                && IsAssignableToResult(result, possibleMatch);
 
-                //is assignable to
                 if (isAssignable)
                     result = possibleMatch;
             }
@@ -64,54 +69,54 @@ namespace Underscore.Object
         /// from the source object and 
         /// puts them to the destination
         /// </summary>
-        public void Transpose( object source , object destination )
+        public void Transpose(object source, object destination)
         {
-            var dest = _property.All( destination );
-            var src = _property.All( source );
+            var dest = _property.All(destination);
+            var src = _property.All(source);
 
             var allMatches = from d in dest
                              join s in src on d.Name equals s.Name into matchGroups
                              select new { Destination = d, PossibleMatches = matchGroups };
 
-            foreach ( var matches in allMatches )
+            foreach (var matches in allMatches)
             {
                 var destProp = matches.Destination;
-                var srcProp = FindBestPropertyReferenceMatch( destProp, matches.PossibleMatches );
+                var srcProp = FindBestPropertyReferenceMatch(destProp, matches.PossibleMatches);
 
-                if ( srcProp != null && srcProp.GetValue( source ) != null )
-                    destProp.SetValue( destination, srcProp.GetValue( source ) );
+                if (srcProp != null && srcProp.GetValue(source) != null)
+                    destProp.SetValue(destination, srcProp.GetValue(source));
 
             }
         }
 
 
-        private void CoalesceImpl( object first , object second ) 
+        private void CoalesceImpl(object first, object second) 
         {
-            var allMatches = from d in _property.All( first ).Select( a => new { a.Name , Value = a.GetMethod.Invoke( first , null ) , a } ).Where( a => a.Value == null )
-                             join s in _property.All( second ).Select( a => new { a.Name , Value = a.GetMethod.Invoke( second , null ), a } ).Where( a => a.Value != null )
+            var allMatches = from d in _property.All(first).Select(a => new { a.Name, Value = a.GetMethod.Invoke(first, null), a }).Where(a => a.Value == null)
+                             join s in _property.All(second).Select(a => new { a.Name, Value = a.GetMethod.Invoke(second, null), a }).Where(a => a.Value != null)
                                 on d.Name equals s.Name into matchGroups
-                             select new { Dest = d , PossibleMatches = matchGroups };
+                             select new { Dest = d, PossibleMatches = matchGroups };
 
-            foreach ( var matches in allMatches ) 
+            foreach (var matches in allMatches) 
             {
                 var to = matches.Dest.a;
-                var from = FindBestPropertyReferenceMatch( to , matches.PossibleMatches.Select( a => a.a ) );
+                var from = FindBestPropertyReferenceMatch(to, matches.PossibleMatches.Select(a => a.a));
 
-                if ( from != null )
-                    to.SetMethod.Invoke( first , new object[ ] { from.GetMethod.Invoke( second , null ) } );
+                if (from != null)
+                    to.SetMethod.Invoke(first, new object[ ] { from.GetMethod.Invoke(second, null) });
             }
         }
 
-        public TFirst Coalesce<TFirst>( TFirst first , object second )
+        public TFirst Coalesce<TFirst>(TFirst first, object second)
         {
-            CoalesceImpl( first , second );
+            CoalesceImpl(first, second);
             return first;
         }
 
-        public TFirst Coalesce<TFirst>( TFirst first , object second , bool newObject ) where TFirst : new( )
+        public TFirst Coalesce<TFirst>(TFirst first, object second, bool newObject) where TFirst : new()
         {
-            var returning = newObject ? Coalesce( new TFirst( ) , first ) : first;
-            return Coalesce( returning , second );
+            var returning = newObject ? Coalesce(new TFirst(), first) : first;
+            return Coalesce(returning, second);
         }
     }
 }
