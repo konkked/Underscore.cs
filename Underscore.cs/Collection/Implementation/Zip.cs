@@ -2,32 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Underscore.Collection.Contract;
-using Underscore.Function;
 
 namespace Underscore.Collection.Implementation
 {
     public class ZipComponent : IZipComponent
     {
-        public Tuple<IEnumerable<T1>, IEnumerable<T2>> UnZip<T1, T2>(IEnumerable<Tuple<T1, T2>> zipped)
-        {
-	        var a = new List<T1>();
-			var b = new List<T2>();
-
-	        foreach (var tuple in zipped)
-	        {
-		        a.Add(tuple.Item1);
-		        b.Add(tuple.Item2);
-	        }
-
-	        return Tuple.Create(
-				(IEnumerable<T1>) a,
-				(IEnumerable<T2>) b
-			);
-        }
-
 	    private bool IterateAll(IEnumerable<IEnumerator> iterators)
 	    {
 		    return iterators.Aggregate(true, (current, iter) => current & iter.MoveNext());
@@ -206,7 +186,25 @@ namespace Underscore.Collection.Implementation
 
 			return zipped;
 		}
-		
-		//TODO ZipWith overlaods
+
+		//TODO ZipWith overloads
+
+		public Tuple<IEnumerable<T1>, IEnumerable<T2>> UnZip<T1, T2>(IEnumerable<Tuple<T1, T2>> zipped)
+		{
+			var a = new List<T1>();
+			var b = new List<T2>();
+
+			foreach (var tuple in zipped)
+			{
+				a.Add(tuple.Item1);
+				b.Add(tuple.Item2);
+			}
+
+			return Tuple.Create(
+				(IEnumerable<T1>)a,
+				(IEnumerable<T2>)b
+			);
+		}
+		//TODO UnZip overloads
     }
 }
