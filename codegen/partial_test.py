@@ -30,7 +30,7 @@ def generate_var_names():
 def generate_all_test_cases(type_name):
     retval = ''
 
-    for i in range(2, 16):
+    for i in range(2, 17):
         retval += generate_test_cases_for_count(i, type_name)
 
     return retval
@@ -196,7 +196,7 @@ def main():
 
     # declare our class and our helper function
     output += '{\n'
-    output += '\t// Generated using /codegen/partialTest.py\n'
+    output += '\t// Generated using /codegen/partial_test.py\n'
     output += '\t[TestClass]\n'
     output += '\tpublic class PartialTest\n'
     output += '\t{\n'
