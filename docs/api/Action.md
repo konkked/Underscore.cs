@@ -10,7 +10,7 @@ Action<string> action = foo => Console.WriteLine(foo);
 
 Action boundAction = _.Action.Bind(action, foo);
 
-boundAction(); // prints "Hello, World!" to console
+boundAction(); // prints "Hello, World!"
 ```
 
 ### Action\<T2\> Partial\<T1, T2\>(Action\<T1, T2\> action, T1 a)
@@ -48,7 +48,7 @@ Action<int, int, int, int> action = (a, b, c, d) => Console.WriteLine("{0} {1} {
 
 var splitAction = _.Action.Split(action);
 
-splitAction(1, 2)(3, 4); // prints "1 2 3 4
+splitAction(1, 2)(3, 4); // prints "1 2 3 4"
 ```
 
 ### Func\<T0, Action\<T1\>\> Curry\<T0, T1\>(Action\<T0, T1\> action)
@@ -157,7 +157,7 @@ Console.WriteLine(result[0]) // 0
 foreach(task in tasksRunning)
     await task;
 
-Console.WriteLine(result[0]) // 99, because only the last task was processed
+Console.WriteLine(result[0]); // 99, because only the last task was processed
 ```
 
 ### Throttle
@@ -175,5 +175,5 @@ timer.Start();
 delayed.Wait();
 timer.Stop();
 
-Console.WriteLine(timer.ElapsedMilliseconds) // somewhere in the range of 105-115ms
+Console.WriteLine(timer.ElapsedMilliseconds); // somewhere in the range of 105-115ms
 ```

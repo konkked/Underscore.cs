@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -20,22 +21,22 @@ namespace Underscore.Object.Comparison
 
         public bool AreEquatable(object a, object b)
         {
-            return AreEquatableTypeInsensitiveImpl(a, b);
+            return AreEquatableTypeInsensitive(a, b);
         }
 
-        private bool AreEquatableTypeInsensitiveImpl(object a, object b)
+        private bool AreEquatableTypeInsensitive(object a, object b)
         {
             if (Equals(a, b))
                 return true;
 
-            //one is null and one isn't
+            // one is null and one isn't
             if (a == null ^ b == null)
                 return false;
 
-            //because know both match only check one to know both are null
+            // because know both match only check one to know both are null
             if (a == null)
                 return true;
-
+             
             var aProps = _property.Pairs(a).ToDictionary(c => c.Name, c => c.Value);
 
             var bProps = _property.Pairs(b).ToList();
@@ -48,19 +49,19 @@ namespace Underscore.Object.Comparison
                 if (!aProps.ContainsKey(bprop.Name))
                     return false;
 
-                if (!AreEquatableTypeInsensitiveImpl(bprop.Value, aProps[bprop.Name]))
+                if (!AreEquatableTypeInsensitive(bprop.Value, aProps[bprop.Name]))
                     return false;
             }
 
             return true;
         }
 
-        private bool AreEquatableTypeSensitiveImpl(object a, object b, bool mixed)
+        private bool AreEquatableTypeSensitive(object a, object b, bool mixed)
         {
             if (Equals(a, b))
                 return true;
             
-            //one is null and one isn't
+            // one is null and one isn't
             if (a == null ^ b == null)
                 return false;
 
@@ -76,8 +77,8 @@ namespace Underscore.Object.Comparison
                     (leftHandSide, rightHandSide) => new {leftHandSide, rightHandSide});
 
             return joined.Aggregate(true, (prevResult, nextItem) => prevResult &&
-                ((mixed && AreEquatableTypeInsensitiveImpl(nextItem.rightHandSide.Value, nextItem.leftHandSide.Value))
-                    || AreEquatableTypeSensitiveImpl(nextItem.rightHandSide.Value, nextItem.leftHandSide.Value, false)));
+                ((mixed && AreEquatableTypeInsensitive(nextItem.rightHandSide.Value, nextItem.leftHandSide.Value))
+                    || AreEquatableTypeSensitive(nextItem.rightHandSide.Value, nextItem.leftHandSide.Value, false)));
 
         }
 
@@ -85,22 +86,22 @@ namespace Underscore.Object.Comparison
         {
             if (typeSensitive)
             {
-                //in this case we want everything to be case sensitive all the way down
-                return AreEquatableTypeSensitiveImpl(a, b, false);
+                // in this case we want everything to be case sensitive all the way down
+                return AreEquatableTypeSensitive(a, b, false);
             }
 
-            return AreEquatableTypeInsensitiveImpl(a, b);
+            return AreEquatableTypeInsensitive(a, b);
         }
 
         public bool AreEquatable<T>(T a, T b)
         {
-            //here we know the first types match, but we don't know if the 
-            //caller wants to have this effect cascade all the way down the comparisions
+            // here we know the first types match, but we don't know if the 
+            // caller wants to have this effect cascade all the way down the comparisions
             //
-            //because of that and the fact this is implict will have it mimic the same behavior as
-            //the object, object counterpart, but take advantage of timesaving of not having to construct a dictionary
-            //before making comparisions the first time
-            return AreEquatableTypeSensitiveImpl(a, b , true);
+            // because of that and the fact this is implict will have it mimic the same behavior as
+            // the object, object counterpart, but take advantage of timesaving of not having to construct a dictionary
+            // before making comparisions the first time
+            return AreEquatableTypeSensitive(a, b , true);
         }
     }
 }
