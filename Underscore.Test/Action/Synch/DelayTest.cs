@@ -15,7 +15,7 @@ namespace Underscore.Test.Action.Synch
         private ComposeComponent compose;
         private ISynchComponent component;
 
-        private string[] arguments = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
+		private readonly string[] arguments = Util.LowercaseCharArray;
 
         private void TestDelay(int waitTime, Task delayed)
         {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using Underscore.Collection;
@@ -132,6 +133,13 @@ namespace Underscore.Test
 
     public static class Util
     {
+	    public static string[] LowercaseCharArray 
+	    {
+			// we could do this programmatically
+			// but this is simpler and faster
+		    get { return new[] { "a", "b", "c", "d", "e", "f", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" }; }
+	    }
+
         public static class Compare
         {
             public static void All(params Tuple<object, object>[] tuples)

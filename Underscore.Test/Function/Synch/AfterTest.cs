@@ -14,11 +14,11 @@ namespace Underscore.Test.Function.Synch
         private ISynchComponent component;
         private ComposeComponent compose;
 
-        private string[] arguments = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
+        private readonly string[] arguments = Util.LowercaseCharArray;
         private const int repeatCount = 100000;
         private const int paramValue = 15000;
 
-        private Func<Task<string>[]> mkArr = () => new Task<string>[repeatCount];
+        private readonly Func<Task<string>[]> mkArr = () => new Task<string>[repeatCount];
 
         [TestInitialize]
         public void Initialize()

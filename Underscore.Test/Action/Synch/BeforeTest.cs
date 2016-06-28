@@ -10,7 +10,7 @@ namespace Underscore.Test.Action.Synch
 	[TestClass]
 	public class BeforeTest
 	{
-        private readonly string[] arguments = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
+        private readonly string[] arguments = Util.LowercaseCharArray;
         private ComposeComponent funcCompose;
         private ISynchComponent component;
 

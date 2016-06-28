@@ -13,8 +13,7 @@ namespace Underscore.Test.Function.Synch
         private ISynchComponent component;
         private ComposeComponent compose;
 
-        //TODO: make a utility to return this argument list
-        private readonly string[] arguments = new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
+        private readonly string[] arguments = Util.LowercaseCharArray;
 
         [TestInitialize]
         public void Initialize()

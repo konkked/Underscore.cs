@@ -14,6 +14,7 @@ namespace Underscore.Test.Action
 	    {
 		    component = new BindComponent();
 	    }
+
         #region Bind.Action
         private static readonly bool[] _didRun = new bool[5];
 
