@@ -11,454 +11,459 @@ namespace Underscore.Test.Function.Synch
 	[TestClass]
 	public class BeforeTest
 	{
-		public ISynchComponent ModifyComponent() { return new SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()); }
+		private static ISynchComponent ModifyComponent() { return new SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()); }
 
-		[TestMethod]
-		public async Task FunctionBefore()
-		{
+        private ComposeComponent fn = new ComposeComponent();
+	    private ISynchComponent testing = ModifyComponent();
+        string[] arguments = new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
 
-			var fn = new ComposeComponent();
-			var testing = ModifyComponent();
+        [TestMethod]
+	    public void Function_Synch_Before_NoArgs()
+	    {
+            int counter = 0;
+            var befored = testing.Before(() => (counter++), 2);
+            for (int i = 0; i < 2; i++)
+                Assert.AreEqual(i, befored());
 
-			string[] arguments = new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
+            for (int i = 0; i < 10; i++)
+                Assert.AreEqual(1, befored());
+        }
 
-			await Util.Tasks.Start(() =>
-			{
+        [TestMethod]
+        public void Function_Synch_Before_1Arg()
+        {
+            var invoked = false;
 
-				int counter = 0;
-				var befored = testing.Before(() => (counter++), 2);
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual(i, befored());
 
-				for (int i = 0; i < 10; i++)
-					Assert.AreEqual(1, befored());
+            var counter = 0;
 
-			}, () =>
-			{
+            var beforing = new Func<string, string>((a) =>
+            {
+                invoked = true;
+                return string.Join("", a, counter++);
+            });
 
-				var invoked = false;
+            var befored = testing.Before(beforing, 2);
 
+            for (int i = 0; i < 2; i++)
+                Assert.AreEqual("a" + i, fn.Apply(befored, arguments));
 
-				var counter = 0;
+            for (int i = 2; i < 4; i++)
+                Assert.AreEqual("a1", fn.Apply(befored, arguments));
 
-				var beforing = new Func<string, string, string>((a, b) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, counter++);
-				});
 
-				var befored = testing.Before(beforing, 2);
+            Assert.IsTrue(invoked);
+        }
 
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual("ab" + i, fn.Apply(befored, arguments));
+        [TestMethod]
+	    public void Function_Synch_Before_2Arg()
+	    {
+            var invoked = false;
 
-				for (int i = 2; i < 4; i++)
-					Assert.AreEqual("ab1", fn.Apply(befored, arguments));
 
+            var counter = 0;
 
-				Assert.IsTrue(invoked);
+            var beforing = new Func<string, string, string>((a, b) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, counter++);
+            });
 
-			}, () =>
-			{
+            var befored = testing.Before(beforing, 2);
 
-				var invoked = false;
+            for (int i = 0; i < 2; i++)
+                Assert.AreEqual("ab" + i, fn.Apply(befored, arguments));
 
+            for (int i = 2; i < 4; i++)
+                Assert.AreEqual("ab1", fn.Apply(befored, arguments));
 
-				var counter = 0;
 
-				var beforing = new Func<string, string, string, string>((a, b, c) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, counter++);
-				});
+            Assert.IsTrue(invoked);
+        }
 
-				var befored = testing.Before(beforing, 2);
+	    [TestMethod]
+	    public void Function_Synch_Before_3Args()
+	    {
+            var invoked = false;
 
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual("abc" + i, fn.Apply(befored, arguments));
 
-				for (int i = 2; i < 4; i++)
-					Assert.AreEqual("abc1", fn.Apply(befored, arguments));
+            var counter = 0;
 
+            var beforing = new Func<string, string, string, string>((a, b, c) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, counter++);
+            });
 
-				Assert.IsTrue(invoked);
+            var befored = testing.Before(beforing, 2);
 
-			}, () =>
-			{
+            for (int i = 0; i < 2; i++)
+                Assert.AreEqual("abc" + i, fn.Apply(befored, arguments));
 
-				var invoked = false;
+            for (int i = 2; i < 4; i++)
+                Assert.AreEqual("abc1", fn.Apply(befored, arguments));
 
 
-				var counter = 0;
+            Assert.IsTrue(invoked);
+        }
 
-				var beforing = new Func<string, string, string, string, string>((a, b, c, d) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, counter++);
-				});
+	    [TestMethod]
+	    public void Function_Synch_Before_4Args()
+	    {
 
-				var befored = testing.Before(beforing, 2);
+            var invoked = false;
 
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual("abcd" + i, fn.Apply(befored, arguments));
 
-				for (int i = 2; i < 4; i++)
-					Assert.AreEqual("abcd1", fn.Apply(befored, arguments));
+            var counter = 0;
 
+            var beforing = new Func<string, string, string, string, string>((a, b, c, d) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, counter++);
+            });
 
-				Assert.IsTrue(invoked);
+            var befored = testing.Before(beforing, 2);
 
-			}, () =>
-			{
+            for (int i = 0; i < 2; i++)
+                Assert.AreEqual("abcd" + i, fn.Apply(befored, arguments));
 
-				var invoked = false;
+            for (int i = 2; i < 4; i++)
+                Assert.AreEqual("abcd1", fn.Apply(befored, arguments));
 
 
-				var counter = 0;
+            Assert.IsTrue(invoked);
+        }
 
-				var beforing = new Func<string, string, string, string, string, string>((a, b, c, d, e) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, counter++);
-				});
 
-				var befored = testing.Before(beforing, 2);
+	    [TestMethod]
+	    public void Function_Synch_Before_5Args()
+	    {
 
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual("abcde" + i, fn.Apply(befored, arguments));
+            var invoked = false;
 
-				for (int i = 2; i < 4; i++)
-					Assert.AreEqual("abcde1", fn.Apply(befored, arguments));
 
+            var counter = 0;
 
-				Assert.IsTrue(invoked);
+            var beforing = new Func<string, string, string, string, string, string>((a, b, c, d, e) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, counter++);
+            });
 
-			}, () =>
-			{
+            var befored = testing.Before(beforing, 2);
 
-				var invoked = false;
+            for (int i = 0; i < 2; i++)
+                Assert.AreEqual("abcde" + i, fn.Apply(befored, arguments));
 
+            for (int i = 2; i < 4; i++)
+                Assert.AreEqual("abcde1", fn.Apply(befored, arguments));
 
-				var counter = 0;
 
-				var beforing = new Func<string, string, string, string, string, string, string>((a, b, c, d, e, f) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, counter++);
-				});
+            Assert.IsTrue(invoked);
+        }
 
-				var befored = testing.Before(beforing, 2);
+	    [TestMethod]
+	    public void Function_Synch_Before_6Args()
+	    {
 
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual("abcdef" + i, fn.Apply(befored, arguments));
+            var invoked = false;
 
-				for (int i = 2; i < 4; i++)
-					Assert.AreEqual("abcdef1", fn.Apply(befored, arguments));
 
+            var counter = 0;
 
-				Assert.IsTrue(invoked);
+            var beforing = new Func<string, string, string, string, string, string, string>((a, b, c, d, e, f) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, counter++);
+            });
 
-			}, () =>
-			{
+            var befored = testing.Before(beforing, 2);
 
-				var invoked = false;
+            for (int i = 0; i < 2; i++)
+                Assert.AreEqual("abcdef" + i, fn.Apply(befored, arguments));
 
+            for (int i = 2; i < 4; i++)
+                Assert.AreEqual("abcdef1", fn.Apply(befored, arguments));
 
-				var counter = 0;
 
-				var beforing = new Func<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, counter++);
-				});
+            Assert.IsTrue(invoked);
+        }
 
-				var befored = testing.Before(beforing, 2);
+	    [TestMethod]
+	    public void Function_Synch_Before_7Args()
+	    {
 
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual("abcdefg" + i, fn.Apply(befored, arguments));
+            var invoked = false;
 
-				for (int i = 2; i < 4; i++)
-					Assert.AreEqual("abcdefg1", fn.Apply(befored, arguments));
 
+            var counter = 0;
 
-				Assert.IsTrue(invoked);
+            var beforing = new Func<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, counter++);
+            });
 
-			}, () =>
-			{
+            var befored = testing.Before(beforing, 2);
 
-				var invoked = false;
+            for (int i = 0; i < 2; i++)
+                Assert.AreEqual("abcdefg" + i, fn.Apply(befored, arguments));
 
+            for (int i = 2; i < 4; i++)
+                Assert.AreEqual("abcdefg1", fn.Apply(befored, arguments));
 
-				var counter = 0;
 
-				var beforing = new Func<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, counter++);
-				});
+            Assert.IsTrue(invoked);
+        }
 
-				var befored = testing.Before(beforing, 2);
+        
 
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual("abcdefg" + i, fn.Apply(befored, arguments));
 
-				for (int i = 2; i < 4; i++)
-					Assert.AreEqual("abcdefg1", fn.Apply(befored, arguments));
+        [TestMethod]
+        public void Function_Synch_Before_8Args()
+	    {
+            var invoked = false;
 
 
-				Assert.IsTrue(invoked);
+            var counter = 0;
 
-			}, () =>
-			{
+            var beforing = new Func<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h, counter++);
+            });
 
-				var invoked = false;
+            var befored = testing.Before(beforing, 2);
 
+            for (int i = 0; i < 2; i++)
+                Assert.AreEqual("abcdefgh" + i, fn.Apply(befored, arguments));
 
-				var counter = 0;
+            for (int i = 2; i < 4; i++)
+                Assert.AreEqual("abcdefgh1", fn.Apply(befored, arguments));
 
-				var beforing = new Func<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, counter++);
-				});
 
-				var befored = testing.Before(beforing, 2);
+            Assert.IsTrue(invoked);
+        }
 
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual("abcdefgh" + i, fn.Apply(befored, arguments));
 
-				for (int i = 2; i < 4; i++)
-					Assert.AreEqual("abcdefgh1", fn.Apply(befored, arguments));
+	    [TestMethod]
+	    public void Function_Synch_Before_9Args()
+	    {
 
+            var invoked = false;
 
-				Assert.IsTrue(invoked);
 
-			}, () =>
-			{
+            var counter = 0;
 
-				var invoked = false;
+            var beforing = new Func<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h, i, counter++);
+            });
 
+            var befored = testing.Before(beforing, 2);
 
-				var counter = 0;
+            for (int i = 0; i < 2; i++)
+                Assert.AreEqual("abcdefghi" + i, fn.Apply(befored, arguments));
 
-				var beforing = new Func<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, i, counter++);
-				});
+            for (int i = 2; i < 4; i++)
+                Assert.AreEqual("abcdefghi1", fn.Apply(befored, arguments));
 
-				var befored = testing.Before(beforing, 2);
 
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual("abcdefghi" + i, fn.Apply(befored, arguments));
+            Assert.IsTrue(invoked);
+        }
 
-				for (int i = 2; i < 4; i++)
-					Assert.AreEqual("abcdefghi1", fn.Apply(befored, arguments));
 
+	    [TestMethod]
+	    public void Function_Synch_Before_10Args()
+	    {
+            var invoked = false;
 
-				Assert.IsTrue(invoked);
 
-			}, () =>
-			{
+            var counter = 0;
 
-				var invoked = false;
+            var beforing = new Func<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h, i, j, counter++);
+            });
 
+            var befored = testing.Before(beforing, 2);
 
-				var counter = 0;
+            for (int i = 0; i < 2; i++)
+                Assert.AreEqual("abcdefghij" + i, fn.Apply(befored, arguments));
 
-				var beforing = new Func<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, i, j, counter++);
-				});
+            for (int i = 2; i < 4; i++)
+                Assert.AreEqual("abcdefghij1", fn.Apply(befored, arguments));
 
-				var befored = testing.Before(beforing, 2);
 
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual("abcdefghij" + i, fn.Apply(befored, arguments));
+            Assert.IsTrue(invoked);
+        }
 
-				for (int i = 2; i < 4; i++)
-					Assert.AreEqual("abcdefghij1", fn.Apply(befored, arguments));
 
+	    [TestMethod]
+	    public void Function_Synch_Before_11Args()
+	    {
+            var invoked = false;
 
-				Assert.IsTrue(invoked);
 
-			}, () =>
-			{
+            var counter = 0;
 
-				var invoked = false;
+            var beforing = new Func<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h, i, j, k, counter++);
+            });
 
+            var befored = testing.Before(beforing, 2);
 
-				var counter = 0;
+            for (int i = 0; i < 2; i++)
+                Assert.AreEqual("abcdefghijk" + i, fn.Apply(befored, arguments));
 
-				var beforing = new Func<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, i, j, k, counter++);
-				});
+            for (int i = 2; i < 4; i++)
+                Assert.AreEqual("abcdefghijk1", fn.Apply(befored, arguments));
 
-				var befored = testing.Before(beforing, 2);
 
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual("abcdefghijk" + i, fn.Apply(befored, arguments));
+            Assert.IsTrue(invoked);
+        }
 
-				for (int i = 2; i < 4; i++)
-					Assert.AreEqual("abcdefghijk1", fn.Apply(befored, arguments));
 
+	    [TestMethod]
+	    public void Function_Synch_Before_12Args()
+	    {
+            var invoked = false;
 
-				Assert.IsTrue(invoked);
 
-			}, () =>
-			{
+            var counter = 0;
 
-				var invoked = false;
+            var beforing = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, counter++);
+            });
 
+            var befored = testing.Before(beforing, 2);
 
-				var counter = 0;
+            for (int i = 0; i < 2; i++)
+                Assert.AreEqual("abcdefghijkl" + i, fn.Apply(befored, arguments));
 
-				var beforing = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, counter++);
-				});
+            for (int i = 2; i < 4; i++)
+                Assert.AreEqual("abcdefghijkl1", fn.Apply(befored, arguments));
 
-				var befored = testing.Before(beforing, 2);
 
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual("abcdefghijkl" + i, fn.Apply(befored, arguments));
+            Assert.IsTrue(invoked);
+        }
 
-				for (int i = 2; i < 4; i++)
-					Assert.AreEqual("abcdefghijkl1", fn.Apply(befored, arguments));
 
+	    [TestMethod]
+	    public void Function_Synch_Before_13Args()
+	    {
 
-				Assert.IsTrue(invoked);
+            var invoked = false;
 
-			}, () =>
-			{
 
-				var invoked = false;
+            var counter = 0;
 
+            var beforing = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, counter++);
+            });
 
-				var counter = 0;
+            var befored = testing.Before(beforing, 2);
 
-				var beforing = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, counter++);
-				});
+            for (int i = 0; i < 2; i++)
+                Assert.AreEqual("abcdefghijklm" + i, fn.Apply(befored, arguments));
 
-				var befored = testing.Before(beforing, 2);
+            for (int i = 2; i < 4; i++)
+                Assert.AreEqual("abcdefghijklm1", fn.Apply(befored, arguments));
 
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual("abcdefghijklm" + i, fn.Apply(befored, arguments));
 
-				for (int i = 2; i < 4; i++)
-					Assert.AreEqual("abcdefghijklm1", fn.Apply(befored, arguments));
+            Assert.IsTrue(invoked);
+        }
 
 
-				Assert.IsTrue(invoked);
+	    [TestMethod]
+	    public void Function_Synch_Before_14Args()
+	    {
 
-			}, () =>
-			{
+            var invoked = false;
 
-				var invoked = false;
 
+            var counter = 0;
 
-				var counter = 0;
+            var beforing = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, counter++);
+            });
 
-				var beforing = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, counter++);
-				});
+            var befored = testing.Before(beforing, 2);
 
-				var befored = testing.Before(beforing, 2);
+            for (int i = 0; i < 2; i++)
+                Assert.AreEqual("abcdefghijklmn" + i, fn.Apply(befored, arguments));
 
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual("abcdefghijklmn" + i, fn.Apply(befored, arguments));
+            for (int i = 2; i < 4; i++)
+                Assert.AreEqual("abcdefghijklmn1", fn.Apply(befored, arguments));
 
-				for (int i = 2; i < 4; i++)
-					Assert.AreEqual("abcdefghijklmn1", fn.Apply(befored, arguments));
 
+            Assert.IsTrue(invoked);
+        }
 
-				Assert.IsTrue(invoked);
+	    [TestMethod]
+	    public void Function_Synch_Before_15Args()
+	    {
 
-			}, () =>
-			{
 
-				var invoked = false;
+            var invoked = false;
 
 
-				var counter = 0;
+            var counter = 0;
 
-				var beforing = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, counter++);
-				});
+            var beforing = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, counter++);
+            });
 
-				var befored = testing.Before(beforing, 2);
+            var befored = testing.Before(beforing, 2);
 
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual("abcdefghijklmno" + i, fn.Apply(befored, arguments));
+            for (int i = 0; i < 2; i++)
+                Assert.AreEqual("abcdefghijklmno" + i, fn.Apply(befored, arguments));
 
-				for (int i = 2; i < 4; i++)
-					Assert.AreEqual("abcdefghijklmno1", fn.Apply(befored, arguments));
+            for (int i = 2; i < 4; i++)
+                Assert.AreEqual("abcdefghijklmno1", fn.Apply(befored, arguments));
 
 
-				Assert.IsTrue(invoked);
+            Assert.IsTrue(invoked);
+        }
 
-			}, () =>
-			{
 
-				var invoked = false;
+	    [TestMethod]
+	    public void Function_Synch_Before_16Args()
+	    {
+            var invoked = false;
 
 
-				var counter = 0;
+            var counter = 0;
 
-				var beforing = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, counter++);
-				});
+            var beforing = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, counter++);
+            });
 
-				var befored = testing.Before(beforing, 2);
+            var befored = testing.Before(beforing, 2);
 
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual("abcdefghijklmnop" + i, fn.Apply(befored, arguments));
+            for (int i = 0; i < 2; i++)
+                Assert.AreEqual("abcdefghijklmnop" + i, fn.Apply(befored, arguments));
 
-				for (int i = 2; i < 4; i++)
-					Assert.AreEqual("abcdefghijklmnop1", fn.Apply(befored, arguments));
+            for (int i = 2; i < 4; i++)
+                Assert.AreEqual("abcdefghijklmnop1", fn.Apply(befored, arguments));
 
 
-				Assert.IsTrue(invoked);
-
-			}, () =>
-			{
-
-				var invoked = false;
-
-
-				var counter = 0;
-
-				var beforing = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, counter++);
-				});
-
-				var befored = testing.Before(beforing, 2);
-
-				for (int i = 0; i < 2; i++)
-					Assert.AreEqual("abcdefghijklmnop" + i, fn.Apply(befored, arguments));
-
-				for (int i = 2; i < 4; i++)
-					Assert.AreEqual("abcdefghijklmnop1", fn.Apply(befored, arguments));
-
-
-				Assert.IsTrue(invoked);
-
-			});
-		}
+            Assert.IsTrue(invoked);
+        }
+        
 	}
 }
