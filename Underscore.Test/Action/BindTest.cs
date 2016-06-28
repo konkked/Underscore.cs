@@ -15,15 +15,11 @@ namespace Underscore.Test.Action
 		    component = new BindComponent();
 	    }
 
-
         #region Bind.Action
-
-
         private static readonly bool[] _didRun = new bool[5];
 
-
-        // actual action is basically useless, 
-        // but want it to do something so compiler doesn't just throw out a statement
+        // actual action doesn't do much
+        // but we want it to do something so compiler doesn't just throw out a statement
 
         #region Bind.Action.TestHelpers
 

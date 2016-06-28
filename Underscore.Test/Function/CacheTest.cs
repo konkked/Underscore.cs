@@ -7,6 +7,7 @@ namespace Underscore.Test.Function
     [TestClass]
     public class CacheTest
     {
+		//TODO: Finish overload tests
         [TestMethod]
         public void Function_Cache_Memo_1Argument()
         {
@@ -18,7 +19,7 @@ namespace Underscore.Test.Function
                 return a;
             };
 
-            var testing = new CacheComponent(new CompactComponent(), new Underscore.Utility.CompactComponent()); ;
+            var testing = new CacheComponent();
 
             var memoized = testing.Memoize(testFn);
 

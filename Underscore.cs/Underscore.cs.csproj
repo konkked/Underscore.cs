@@ -67,11 +67,7 @@
     <Compile Include="Collection\Implementation\Delegation.cs" />
     <Compile Include="Collection\Implementation\Partition.cs" />
     <Compile Include="Function\Contract\Bind.cs" />
-    <Compile Include="Function\Contract\Boolean.cs">
-      <DependentUpon>Boolean.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
+    <Compile Include="Function\Contract\Boolean.cs" />
     <Compile Include="Function\Contract\Cache.cs" />
     <Compile Include="Function\Contract\Compact.cs" />
     <Compile Include="Function\Contract\Compose.cs" />
@@ -80,11 +76,7 @@
     <Compile Include="Function\Contract\Split.cs" />
     <Compile Include="Function\Contract\Synch.cs" />
     <Compile Include="Function\Implementation\Bind.cs" />
-    <Compile Include="Function\Implementation\Boolean.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Boolean.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Function\Implementation\Boolean.cs" />
     <Compile Include="Function\Implementation\Cache.cs" />
     <Compile Include="Function\Implementation\Compact.cs" />
     <Compile Include="Function\Implementation\Compose.cs" />
@@ -108,10 +100,10 @@
     <Compile Include="Setup\List.cs" />
     <Compile Include="Setup\Object.cs" />
     <Compile Include="Setup\Utility.cs" />
-    <Compile Include="List\Contract\Delegate.cs" />
+    <Compile Include="List\Contract\Delegation.cs" />
     <Compile Include="List\Contract\Manipulate.cs" />
     <Compile Include="List\Contract\Partition.cs" />
-    <Compile Include="List\Implementation\Delegate.cs" />
+    <Compile Include="List\Implementation\Delegation.cs" />
     <Compile Include="List\Implementation\Manipulate.cs" />
     <Compile Include="List\Implementation\Partition.cs" />
     <Compile Include="Module\Action.cs" />
@@ -143,16 +135,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Function\Contract\Boolean.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Boolean.cs</LastGenOutput>
-    </Content>
-    <Content Include="Function\Implementation\Boolean.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Boolean.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

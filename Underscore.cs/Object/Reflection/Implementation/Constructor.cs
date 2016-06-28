@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Underscore.Function;
 
 namespace Underscore.Object.Reflection
 {
     public class ConstructorComponent: MethodsBaseComponent<ConstructorInfo>, IConstructorComponent
     {
+		public ConstructorComponent()
+			: base(new CacheComponent(), new PropertyComponent(), new Members<ConstructorInfo>(null, BindingFlags.Instance | BindingFlags.Public))
+	    {   
+	    }
+
         public ConstructorComponent(ICacheComponent cacher, IPropertyComponent properties)
             : base(cacher, properties, new Members<ConstructorInfo>( null, BindingFlags.Instance | BindingFlags.Public))
         {

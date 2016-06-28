@@ -11,7 +11,6 @@ namespace Underscore.Object.Reflection
         where T: MethodBase
     {
 
-
         protected IPropertyComponent _properties;
         protected Members<T> _collection;
         protected IFunctionComponent _util;
@@ -21,6 +20,11 @@ namespace Underscore.Object.Reflection
 
         private readonly Func<Type, object, IEnumerable<T>> _queryStore;
         private readonly Func<Type, object, BindingFlags, IEnumerable<T>> _flaggedQueryStore;
+
+	    protected MethodsBaseComponent()
+	    {
+		    _properties = new PropertyComponent();
+	    } 
 
         protected MethodsBaseComponent(ICacheComponent cacher, IPropertyComponent properties, Members<T> collection)
         {
@@ -132,7 +136,6 @@ namespace Underscore.Object.Reflection
         /// </summary>
         public abstract IEnumerable<T> All(Type target);
 
-
         /// <summary>
         /// Gets all of the methods from the target object, which arent associated with properties
         /// </summary>
@@ -142,7 +145,6 @@ namespace Underscore.Object.Reflection
         /// Gets all of the methods from the target object, which arent associated with properties
         /// </summary>
         public abstract IEnumerable<T> All(Type target, BindingFlags flags);
-
 
         /// <summary>
         /// Queries methods from target matching the query request 
@@ -156,8 +158,6 @@ namespace Underscore.Object.Reflection
             return _queryStore( target.GetType(), query );
         }
 
-
-
         /// <summary>
         /// Queries methods from target matching the query request 
         /// 
@@ -169,8 +169,6 @@ namespace Underscore.Object.Reflection
         {
             return _flaggedQueryStore(target.GetType(), query,flags);
         }
-
-
 
         /// <summary>
         /// Queries methods from target matching the query request 
@@ -184,8 +182,6 @@ namespace Underscore.Object.Reflection
             return _queryStore(target, query);
         }
 
-
-
         /// <summary>
         /// Queries methods from target matching the query request 
         /// 
@@ -197,7 +193,6 @@ namespace Underscore.Object.Reflection
         {
             return _flaggedQueryStore(target, query,flags);
         }
-
 
     }
 }

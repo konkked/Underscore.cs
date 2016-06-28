@@ -2,29 +2,42 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Xml.Schema;
+using Underscore.Function;
 
 namespace Underscore.Object.Reflection
 {
     public class MethodComponent : MethodsBaseComponent<MethodInfo>,IMethodComponent
     {
-        
-
-        private readonly static HashSet<string> s_specialRules;
+        private static HashSet<string> s_specialRules;
         private readonly IPropertyComponent _property;
 
-        static MethodComponent()
-        {
-            s_specialRules = new HashSet<string> {"return"};
-        }
+	    private static Members<MethodInfo> Members
+	    {
+		    get
+		    {
+			    return new Members<MethodInfo>(
+								a => !a.IsConstructor && !a.IsSpecialName,
+								BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance
+							);
+		    }
+	    }
 
-        public MethodComponent( Function.ICacheComponent cacher , IPropertyComponent property )
-            : base(cacher, property,
-                new Members<MethodInfo>(
-                    a=>!a.IsConstructor && !a.IsSpecialName , 
-                    BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance 
-                )
-            )
+		public MethodComponent()
+			: base(new CacheComponent(), new PropertyComponent(), Members)
+	    {
+		    if(s_specialRules == null)
+				InitSpecialRules();
+
+			_property = new PropertyComponent();
+	    }
+
+		private static void InitSpecialRules()
+	    {
+		    s_specialRules = new HashSet<string> {"return"};
+	    }
+
+        public MethodComponent(Function.ICacheComponent cacher , IPropertyComponent property)
+            : base(cacher, property, Members)
         {
             _property = property;
         }
@@ -46,20 +59,19 @@ namespace Underscore.Object.Reflection
             return _collection.All(target, flags);
         }
 
-        public override IEnumerable<MethodInfo> All( object target )
+        public override IEnumerable<MethodInfo> All(object target)
         {
-            return _collection.All( target );
+            return _collection.All(target);
         }
 
-        protected override bool IsSpecialCase( string name )
+        protected override bool IsSpecialCase(string name)
         {
-            return s_specialRules.Contains( name );
+            return s_specialRules.Contains(name);
         }
 
         protected override IEnumerable<MethodInfo> FilterSpecialCase(string name, object value,
             IEnumerable<MethodInfo> current)
         {
-
 
             if (!IsSpecialCase(name))
                 throw new InvalidOperationException("Not a special case query rule");
@@ -91,38 +103,35 @@ namespace Underscore.Object.Reflection
             return current;
         }
 
-        private MethodInfo CaseSensitiveGetMethod( object target, string name )
+        private MethodInfo CaseSensitiveGetMethod(object target, string name)
         {
-            return All( target ).FirstOrDefault( t => t.Name == name );
+            return All(target).FirstOrDefault(t => t.Name == name);
         }
 
-        private MethodInfo CaseInsensitiveGetMethod( object target, string name )
+        private MethodInfo CaseInsensitiveGetMethod(object target, string name)
         {
-            var lname = name.ToLowerInvariant( );
-            return All( target ).FirstOrDefault( a => a.Name.ToLowerInvariant( ) == lname );
-        }
-
-
-        /// <summary>
-        /// Finds a method info from target by name
-        /// </summary>
-        public MethodInfo Find( object target, string name )
-        {
-            return Find( target, name, true );
+            var lname = name.ToLowerInvariant();
+            return All(target).FirstOrDefault(a => a.Name.ToLowerInvariant() == lname);
         }
 
         /// <summary>
         /// Finds a method info from target by name
         /// </summary>
-        public MethodInfo Find( object target, string name, bool caseSensitive )
+        public MethodInfo Find(object target, string name)
         {
-            if ( caseSensitive )
-                return CaseSensitiveGetMethod( target, name );
+            return Find(target, name, true);
+        }
+
+        /// <summary>
+        /// Finds a method info from target by name
+        /// </summary>
+        public MethodInfo Find(object target, string name, bool caseSensitive)
+        {
+            if (caseSensitive)
+                return CaseSensitiveGetMethod(target, name);
             else
-                return CaseInsensitiveGetMethod( target, name );
+                return CaseInsensitiveGetMethod(target, name);
         }
-
-
 
         /// <summary>
         /// Finds the first method info from target matching the requested name 
@@ -131,24 +140,23 @@ namespace Underscore.Object.Reflection
         /// current special case property is @return, which will match the return type
         /// if you wanted to search for an actual parameter named return use pattern {overrideObj
         /// </summary>
-        public MethodInfo Find( object target, string name, object query )
+        public MethodInfo Find(object target, string name, object query)
         {
 
-            if ( query == null )
+            if (query == null)
                 query = new { };
 
-            return Query( target, query )
-                .FirstOrDefault( a => a.Name == name );
+            return Query(target, query)
+                .FirstOrDefault(a => a.Name == name);
         }
-
 
         /// <summary>
         /// Determines if the target object contains 
         /// a method with the specified name
         /// </summary>
-        public bool Has( object target, string name )
+        public bool Has(object target, string name)
         {
-            return Find( target, name,true ) != null;
+            return Find(target, name,true) != null;
         }
 
         public bool Has(Type target, string name, object query)
@@ -196,7 +204,7 @@ namespace Underscore.Object.Reflection
             return Find(target, name, flags) != null;
         }
 
-        public override IEnumerable<MethodInfo> Query( Type target , object query , BindingFlags flags )
+        public override IEnumerable<MethodInfo> Query(Type target , object query , BindingFlags flags)
         {
             return base.Query(target, query);
         }
@@ -310,7 +318,6 @@ namespace Underscore.Object.Reflection
 
             return null;
         }
-        
 
         public T Invoke<T>(object target, string name, BindingFlags flags, params object[] arguments)
         {
@@ -438,11 +445,10 @@ namespace Underscore.Object.Reflection
         /// current special case property is @return, which will match the return type
         /// if you wanted to search for an actual parameter named return use pattern {overrideObj
         /// </summary>
-        public bool Has( object target, string name, object query )
+        public bool Has(object target, string name, object query)
         {
-            return Find( target, name, query ) != null;
+            return Find(target, name, query) != null;
         }
-
 
         /// <summary>
         /// Determines the if the target object has a matching method 
@@ -450,11 +456,10 @@ namespace Underscore.Object.Reflection
         /// current special case property is @return, which will match the return type
         /// if you wanted to search for an actual parameter named return use pattern {overrideObj
         /// </summary>
-        public bool Has( object target, object query )
+        public bool Has(object target, object query)
         {
-            return Find( target, query ) != null;
+            return Find(target, query) != null;
         }
-
 
         /// <summary>
         /// Determines the if the target object has a matching method 
@@ -462,9 +467,9 @@ namespace Underscore.Object.Reflection
         /// current special case property is @return, which will match the return type
         /// if you wanted to search for an actual parameter named return use pattern {overrideObj
         /// </summary>
-        public MethodInfo Find( object target, object query )
+        public MethodInfo Find(object target, object query)
         {
-            return Query( target, query ).FirstOrDefault();
+            return Query(target, query).FirstOrDefault();
         }
 
         public MethodInfo Find(Type target, string name, bool caseSensitive)

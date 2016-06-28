@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Underscore.Function;
-using ConvertComponent = Underscore.Action.ConvertComponent;
 using ISynchComponent = Underscore.Action.ISynchComponent;
 using SynchComponent = Underscore.Action.SynchComponent;
 
@@ -16,19 +15,7 @@ namespace Underscore.Test.Action.Synch
         private ComposeComponent compose;
         private ISynchComponent component;
 
-        private string[] arguments = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
-
-        public ISynchComponent GetSynchComponent() {
-            return new SynchComponent(
-                new Underscore.Function.SynchComponent(
-                    new CompactComponent(), 
-                    new Underscore.Utility.CompactComponent(), 
-                    new Underscore.Utility.MathComponent()
-                    ), 
-                new ConvertComponent(), 
-                new Underscore.Function.ConvertComponent()
-                );
-        }
+		private readonly string[] arguments = Util.LowercaseCharArray;
 
         private void TestDelay(int waitTime, Task delayed)
         {
@@ -45,7 +32,7 @@ namespace Underscore.Test.Action.Synch
         public void Initialize()
         {
             compose = new ComposeComponent();
-            component = GetSynchComponent();
+            component = new SynchComponent();
         }
 
         public void Action_Synch_Delay_NoArguments()

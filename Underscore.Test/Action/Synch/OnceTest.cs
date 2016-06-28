@@ -1,7 +1,5 @@
 ﻿using System;
-using Underscore.Function;
 using ComposeComponent = Underscore.Action.ComposeComponent;
-using ConvertComponent = Underscore.Action.ConvertComponent;
 using ISynchComponent = Underscore.Action.ISynchComponent;
 using SynchComponent = Underscore.Action.SynchComponent;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -14,28 +12,15 @@ namespace Underscore.Test.Action.Synch
         private ComposeComponent compose;
         private ISynchComponent component;
 
-        private string[] arguments = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
+        private readonly string[] arguments = Util.LowercaseCharArray;
 
         private string result = "";
-
-        public ISynchComponent GetSynchComponent()
-        {
-            return new SynchComponent(
-                new Underscore.Function.SynchComponent(
-                    new CompactComponent(),
-                    new Underscore.Utility.CompactComponent(),
-                    new Underscore.Utility.MathComponent()
-                    ),
-                new ConvertComponent(),
-                new Underscore.Function.ConvertComponent()
-                );
-        }
 
         [TestInitialize]
         public void Initialize()
         {
             compose = new ComposeComponent();
-            component = GetSynchComponent();
+            component = new SynchComponent();
         }
 
         [TestMethod]

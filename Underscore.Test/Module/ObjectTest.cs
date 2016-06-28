@@ -1,45 +1,28 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
-using Underscore.Function;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Underscore.Object;
 using Underscore.Object.Comparison;
 using Underscore.Object.Reflection;
 
 namespace Underscore.Test.Module
 {
-    [ TestClass ]
+    [TestClass]
     public class ObjectTest
     {
 
-        [ TestMethod ]
-        public async Task ObjectCreate()
+        [TestMethod]
+        public void ObjectCreate()
         {
-            await Util.Tasks.Start(() =>
-            {
-                var cacher = new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
-
-                var property = new PropertyComponent( );
-                var methods = new MethodComponent( cacher, property);
-                var field = new FieldComponent( cacher );
-                var ctor = new ConstructorComponent(cacher, property);
-                var transformation = new TransposeComponent(property);
-                var attribute = new AttributeComponent( cacher );
-                var dynamicComponent = new DynamicComponent( property );
-
-                var example = new Underscore.Module.Object (
-                    property,
-                    methods,
-                    field,
-                    ctor,
-                    transformation,
-                    attribute, 
-                    dynamicComponent,
-                    new EqualityComponent(property)
-                ) ;
-
-                Assert.IsNotNull(example);
-            });
+            var property = new PropertyComponent();
+            var example = new Underscore.Module.Object(
+				new PropertyComponent(),
+				new MethodComponent(),
+				new FieldComponent(),
+				new ConstructorComponent(),
+				new TransposeComponent(),
+				new AttributeComponent(),
+				new DynamicComponent(),
+                new EqualityComponent(property)
+            ) ;
         }
 
 
@@ -65,8 +48,6 @@ namespace Underscore.Test.Module
                 LastCalledMethod = "two parameters";
                 ArgumentsCalledWith = new[] {arg1, arg2};
             }
-
-
         }
 
         public class GenericConstructorTestObjectTwo<TParam1,TParam2>
@@ -96,26 +77,17 @@ namespace Underscore.Test.Module
         [TestMethod]
         public void ObjectModule_NewGenericFromDefinition_OneTypeParameter()
         {
-            var cacher = new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
-
             var property = new PropertyComponent();
-            var methods = new MethodComponent(cacher, property);
-            var field = new FieldComponent(cacher);
-            var ctor = new ConstructorComponent(cacher, property);
-            var transformation = new TransposeComponent(property);
-            var attribute = new AttributeComponent(cacher);
-            var dynamicComponent = new DynamicComponent(property);
-
-            var example = new Underscore.Module.Object(
-                property,
-                methods,
-                field,
-                ctor,
-                transformation,
-                attribute,
-                dynamicComponent,
-                new EqualityComponent(property)
-            );
+			var example = new Underscore.Module.Object(
+				new PropertyComponent(),
+				new MethodComponent(),
+				new FieldComponent(),
+				new ConstructorComponent(),
+				new TransposeComponent(),
+				new AttributeComponent(),
+				new DynamicComponent(),
+				new EqualityComponent(property)
+			);
 
             var targeting = typeof (GenericConstructorTestObject<>);
 
@@ -160,31 +132,21 @@ namespace Underscore.Test.Module
 
         }
 
-
         [TestMethod]
         public void ObjectModule_NewGenericFromDefinition_MatchingConstructorsWithObjects()
         {
-
-            var cacher = new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
-
             var property = new PropertyComponent();
-            var methods = new MethodComponent(cacher, property);
-            var field = new FieldComponent(cacher);
-            var ctor = new ConstructorComponent(cacher, property);
-            var transformation = new TransposeComponent(property);
-            var attribute = new AttributeComponent(cacher);
-            var dynamicComponent = new DynamicComponent(property);
 
-            var example = new Underscore.Module.Object(
-                property,
-                methods,
-                field,
-                ctor,
-                transformation,
-                attribute,
-                dynamicComponent,
-                new EqualityComponent(property)
-            );
+			var example = new Underscore.Module.Object(
+				new PropertyComponent(),
+				new MethodComponent(),
+				new FieldComponent(),
+				new ConstructorComponent(),
+				new TransposeComponent(),
+				new AttributeComponent(),
+				new DynamicComponent(),
+				new EqualityComponent(property)
+			);
 
             var targeting = typeof(GenericConstructorTestObjectTwo<,>);
 
@@ -226,14 +188,6 @@ namespace Underscore.Test.Module
             Assert.AreEqual("two parameters", GenericConstructorTestObjectTwo<string,object>.LastCalledMethod);
             Assert.AreEqual("arg1", GenericConstructorTestObjectTwo<string,object>.ArgumentsCalledWith[0]);
             Assert.AreEqual(null, GenericConstructorTestObjectTwo<string,object>.ArgumentsCalledWith[1]);
-
         }
-
-
-
-
-
-
-
     }
 }

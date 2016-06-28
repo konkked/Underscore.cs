@@ -5,7 +5,6 @@ using Underscore.Function;
 namespace Underscore.Module
 {
 
-
     public class Function : 
         ISplitComponent, 
         IPartialComponent,
@@ -26,7 +25,7 @@ namespace Underscore.Module
         private readonly ICacheComponent _cache;
         private readonly IBooleanComponent _booleanComponent;
 
-        public Function( 
+        public Function(
             IBindComponent bind, 
             IPartialComponent partial,
             ISplitComponent split,
@@ -47,7 +46,6 @@ namespace Underscore.Module
 
             if (compose == null)
                 throw new ArgumentNullException("compose");
-
 
             if (convert == null)
                 throw new ArgumentNullException("convert");
@@ -70,7 +68,6 @@ namespace Underscore.Module
             _cache = cache;
             _booleanComponent = boolComponent;
         }
-
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -353,7 +350,6 @@ namespace Underscore.Module
         {
             return _partial.Partial(function, a, b, c, d);
         }
-
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -990,7 +986,6 @@ namespace Underscore.Module
             return _partial.Partial(function, a);
         }
 
-
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
@@ -998,7 +993,6 @@ namespace Underscore.Module
         {
             return _partial.Partial(function, a, b);
         }
-
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1008,7 +1002,6 @@ namespace Underscore.Module
             return _partial.Partial(function, a, b, c);
         }
 
-
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
@@ -1016,7 +1009,6 @@ namespace Underscore.Module
         {
             return _partial.Partial(function, a, b, c, d);
         }
-
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1026,7 +1018,6 @@ namespace Underscore.Module
             return _partial.Partial(function, a);
         }
 
-
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
@@ -1034,7 +1025,6 @@ namespace Underscore.Module
         {
             return _partial.Partial(function, a);
         }
-
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1044,7 +1034,6 @@ namespace Underscore.Module
             return _partial.Partial(function, a, b);
         }
 
-
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
@@ -1052,7 +1041,6 @@ namespace Underscore.Module
         {
             return _partial.Partial(function, a);
         }
-
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1062,7 +1050,6 @@ namespace Underscore.Module
             return _partial.Partial(function, a, b);
         }
 
-
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
@@ -1070,7 +1057,6 @@ namespace Underscore.Module
         {
             return _partial.Partial(function, a, b, c);
         }
-
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1080,7 +1066,6 @@ namespace Underscore.Module
             return _partial.Partial(function, a);
         }
 
-
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
@@ -1089,7 +1074,6 @@ namespace Underscore.Module
             return _partial.Partial(function, a, b);
         }
 
-
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
@@ -1097,8 +1081,6 @@ namespace Underscore.Module
         {
             return _partial.Partial(function, a, b, c);
         }
-
-
 
         /// <summary>
         ///  Creates a new Function bound to the passed parameter
@@ -1236,26 +1218,9 @@ namespace Underscore.Module
             return _bind.Bind(function, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
         }
 
-        /// <summary>
+	    /// <summary>
         /// Halves the passed action as function that returns action that can invoke the passed action
         /// </summary>
-        /// <typeparam name="TResult"></typeparam>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>        
-        /// <typeparam name="T4"></typeparam>
-        /// <typeparam name="T5"></typeparam>        
-        /// <typeparam name="T6"></typeparam>
-        /// <typeparam name="T7"></typeparam>
-        /// <typeparam name="T8"></typeparam>
-        /// <typeparam name="T9"></typeparam>
-        /// <typeparam name="T10"></typeparam>
-        /// <typeparam name="T11"></typeparam>        
-        /// <typeparam name="T12"></typeparam>
-        /// <typeparam name="T13"></typeparam>        
-        /// <typeparam name="T14"></typeparam>
-        /// <typeparam name="T15"></typeparam>
         /// <param name="function"></param>
         /// <returns>
         /// a function taking first half of arguments 
@@ -1264,23 +1229,110 @@ namespace Underscore.Module
         /// the passed action with all parameters from the first function call
         /// and the following action call
         /// </returns>
-        public Func<T0, T1, T2, T3, T4, T5, T6, T7, Func<T8, T9, T10, T11, T12, T13, T14, T15, TResult>> Split<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>( Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function )
+        public Func<T0, T1, T2, T3, T4, T5, T6, T7, Func<T8, T9, T10, T11, T12, T13, T14, T15, TResult>> Split<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function)
         {
-            return _split.Split( function );
+            return _split.Split(function);
+        }
+
+		/// <summary>
+		/// Halves the passed action as function that returns action that can invoke the passed action
+		/// </summary>
+		/// <param name="function"></param>
+		/// <returns>
+		/// a function taking first half of arguments 
+		/// that returns an action that takes the other half, 
+		/// invocation of returned method would be the same as invoking
+		/// the passed action with all parameters from the first function call
+		/// and the following action call
+		/// </returns>
+		public Func<T0, T1, T2, T3, T4, T5, T6, Func<T7, T8, T9, T10, T11, T12, T13, TResult>> Split<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function)
+		{
+			return _split.Split(function);
+		}
+
+		/// <summary>
+		/// Halves the passed action as function that returns action that can invoke the passed action
+		/// </summary>
+		/// <param name="function"></param>
+		/// <returns>
+		/// a function taking first half of arguments 
+		/// that returns an action that takes the other half, 
+		/// invocation of returned method would be the same as invoking
+		/// the passed action with all parameters from the first function call
+		/// and the following action call
+		/// </returns>
+		public Func<T0, T1, T2, T3, T4, T5, Func<T6, T7, T8, T9, T10, T11, TResult>> Split<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function)
+		{
+			return _split.Split(function);
+		}
+
+		/// <summary>
+		/// Halves the passed action as function that returns action that can invoke the passed action
+		/// </summary>
+		/// <param name="function"></param>
+		/// <returns>
+		/// a function taking first half of arguments 
+		/// that returns an action that takes the other half, 
+		/// invocation of returned method would be the same as invoking
+		/// the passed action with all parameters from the first function call
+		/// and the following action call
+		/// </returns>
+		public Func<T0, T1, T2, T3, T4, Func<T5, T6, T7, T8, T9, TResult>> Split<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function)
+		{
+			return _split.Split(function);
+		}
+
+        /// <summary>
+        /// Halves the passed action as function that returns action that can invoke the passed action
+        /// </summary>
+        /// <param name="function"></param>
+        /// <returns>
+        /// a function taking first half of arguments 
+        /// that returns an action that takes the other half, 
+        /// invocation of returned method would be the same as invoking
+        /// the passed action with all parameters from the first function call
+        /// and the following action call
+        /// </returns>
+        public Func<T0, T1, T2, T3, Func<T4, T5, T6, T7, TResult>> Split<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, TResult> function)
+        {
+            return _split.Split(function);
+        }
+
+	    /// <summary>
+		/// Halves the passed action as function that returns action that can invoke the passed action
+		/// </summary>
+		/// <param name="function"></param>
+		/// <returns>
+		/// a function taking first half of arguments 
+		/// that returns an action that takes the other half, 
+		/// invocation of returned method would be the same as invoking
+		/// the passed action with all parameters from the first function call
+		/// and the following action call
+		/// </returns>
+		public Func<T0, T1, T2, Func<T3, T4, T5, TResult>> Split<T0, T1, T2, T3, T4, T5, TResult>(Func<T0, T1, T2, T3, T4, T5, TResult> function)
+		{
+			return _split.Split(function);
+		}
+
+        /// <summary>
+        /// Halves the passed action as function that returns action that can invoke the passed action
+        /// </summary>
+        /// <param name="function"></param>
+        /// <returns>
+        /// a function taking first half of arguments 
+        /// that returns an action that takes the other half, 
+        /// invocation of returned method would be the same as invoking
+        /// the passed action with all parameters from the first function call
+        /// and the following action call
+        /// </returns>
+        public Func<T0, T1, Func<T2, T3, TResult>> Split<T0, T1, T2, T3, TResult>(Func<T0, T1, T2, T3, TResult> function)
+        {
+            return _split.Split(function);
         }
 
         /// <summary>
         /// Halves the passed action as function that returns action that can invoke the passed action
         /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>        
-        /// <typeparam name="T4"></typeparam>
-        /// <typeparam name="T5"></typeparam>        
-        /// <typeparam name="T6"></typeparam>
-        /// <typeparam name="T7"></typeparam>
         /// <param name="function"></param>
         /// <returns>
         /// a function taking first half of arguments 
@@ -1289,49 +1341,9 @@ namespace Underscore.Module
         /// the passed action with all parameters from the first function call
         /// and the following action call
         /// </returns>
-        public Func<T0, T1, T2, T3, Func<T4, T5, T6, T7, TResult>> Split<T0, T1, T2, T3, T4, T5, T6, T7, TResult>( Func<T0, T1, T2, T3, T4, T5, T6, T7, TResult> function )
+        public Func<T0, Func<T1, TResult>> Split<T0, T1, TResult>(Func<T0, T1, TResult> function)
         {
-            return _split.Split( function );
-        }
-
-        /// <summary>
-        /// Halves the passed action as function that returns action that can invoke the passed action
-        /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <param name="function"></param>
-        /// <returns>
-        /// a function taking first half of arguments 
-        /// that returns an action that takes the other half, 
-        /// invocation of returned method would be the same as invoking
-        /// the passed action with all parameters from the first function call
-        /// and the following action call
-        /// </returns>
-        public Func<T0, T1, Func<T2, T3, TResult>> Split<T0, T1, T2, T3, TResult>( Func<T0, T1, T2, T3, TResult> function )
-        {
-            return _split.Split( function );
-        }
-
-        /// <summary>
-        /// Halves the passed action as function that returns action that can invoke the passed action
-        /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="function"></param>
-        /// <returns>
-        /// a function taking first half of arguments 
-        /// that returns an action that takes the other half, 
-        /// invocation of returned method would be the same as invoking
-        /// the passed action with all parameters from the first function call
-        /// and the following action call
-        /// </returns>
-        public Func<T0, Func<T1, TResult>> Split<T0, T1, TResult>( Func<T0, T1, TResult> function )
-        {
-            return _split.Split( function );
+            return _split.Split(function);
         }
 
         /// <summary>
@@ -1340,29 +1352,14 @@ namespace Underscore.Module
         /// to the passed actions parameters
         /// final call is an action
         /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <typeparam name="T4"></typeparam>
-        /// <typeparam name="T5"></typeparam>
-        /// <typeparam name="T6"></typeparam>
-        /// <typeparam name="T7"></typeparam>
-        /// <typeparam name="T8"></typeparam>
-        /// <typeparam name="T9"></typeparam>
-        /// <typeparam name="T10"></typeparam>
-        /// <typeparam name="T11"></typeparam>
-        /// <typeparam name="T12"></typeparam>
-        /// <typeparam name="T13"></typeparam>
-        /// <typeparam name="T14"></typeparam>
-        /// <typeparam name="T15"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
+
         /// <param name="function">action to splay</param>
         /// <returns>Function chain resolving back to passed action</returns>
-        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, Func<T15, TResult>>>>>>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>( Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function )
+        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, Func<T15, TResult>>>>>>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function)
         {
-            return _split.Curry( function );
+            return _split.Curry(function);
         }
+
         /// <summary>
         /// Translates a sequence of functions each taking one argument into a single action
         /// </summary>
@@ -1370,6 +1367,7 @@ namespace Underscore.Module
         {
             return _split.Uncurry(function);
         }
+
         /// <summary>
         /// Translates a sequence of functions each taking one argument into a single action
         /// </summary>
@@ -1377,6 +1375,7 @@ namespace Underscore.Module
         {
             return _split.Uncurry(function);
         }
+
         /// <summary>
         /// Translates a sequence of functions each taking one argument into a single action
         /// </summary>
@@ -1384,6 +1383,7 @@ namespace Underscore.Module
         {
             return _split.Uncurry(function);
         }
+
         /// <summary>
         /// Translates a sequence of functions each taking one argument into a single action
         /// </summary>
@@ -1391,6 +1391,7 @@ namespace Underscore.Module
         {
             return _split.Uncurry(function);
         }
+
         /// <summary>
         /// Translates a sequence of functions each taking one argument into a single action
         /// </summary>
@@ -1398,6 +1399,7 @@ namespace Underscore.Module
         {
             return _split.Uncurry(function);
         }
+
         /// <summary>
         /// Translates a sequence of functions each taking one argument into a single action
         /// </summary>
@@ -1405,6 +1407,7 @@ namespace Underscore.Module
         {
             return _split.Uncurry(function);
         }
+
         /// <summary>
         /// Translates a sequence of functions each taking one argument into a single action
         /// </summary>
@@ -1412,6 +1415,7 @@ namespace Underscore.Module
         {
             return _split.Uncurry(function);
         }
+
         /// <summary>
         /// Translates a sequence of functions each taking one argument into a single action
         /// </summary>
@@ -1419,6 +1423,7 @@ namespace Underscore.Module
         {
             return _split.Uncurry(function);
         }
+
         /// <summary>
         /// Translates a sequence of functions each taking one argument into a single action
         /// </summary>
@@ -1426,6 +1431,7 @@ namespace Underscore.Module
         {
             return _split.Uncurry(function);
         }
+
         /// <summary>
         /// Translates a sequence of functions each taking one argument into a single action
         /// </summary>
@@ -1433,6 +1439,7 @@ namespace Underscore.Module
         {
             return _split.Uncurry(function);
         }
+
         /// <summary>
         /// Translates a sequence of functions each taking one argument into a single action
         /// </summary>
@@ -1440,6 +1447,7 @@ namespace Underscore.Module
         {
             return _split.Uncurry(function);
         }
+
         /// <summary>
         /// Translates a sequence of functions each taking one argument into a single action
         /// </summary>
@@ -1447,6 +1455,7 @@ namespace Underscore.Module
         {
             return _split.Uncurry(function);
         }
+
         /// <summary>
         /// Translates a sequence of functions each taking one argument into a single action
         /// </summary>
@@ -1454,6 +1463,7 @@ namespace Underscore.Module
         {
             return _split.Uncurry(function);
         }
+
         /// <summary>
         /// Translates a sequence of functions each taking one argument into a single action
         /// </summary>
@@ -1470,164 +1480,17 @@ namespace Underscore.Module
             return _split.Uncurry(function);
         }
 
-
         /// <summary>
         /// Translates a function taking multiple arguments into a sequence of functions each taking a single argument
         /// each accepting one parameter associated cardinally 
         /// to the passed actions parameters
         /// final call is an action
         /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <typeparam name="T4"></typeparam>
-        /// <typeparam name="T5"></typeparam>
-        /// <typeparam name="T6"></typeparam>
-        /// <typeparam name="T7"></typeparam>
-        /// <typeparam name="T8"></typeparam>
-        /// <typeparam name="T9"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
         /// <param name="function">action to splay</param>
         /// <returns>Function chain resolving back to passed action</returns>
-        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, TResult>>>>>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>( Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function )
+        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, TResult>>>>>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function)
         {
-            return _split.Curry( function );
-        }
-
-
-        /// <summary>
-        /// Translates a function taking multiple arguments into a sequence of functions each taking a single argument
-        /// each accepting one parameter associated cardinally 
-        /// to the passed actions parameters
-        /// final call is an action
-        /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <typeparam name="T4"></typeparam>
-        /// <typeparam name="T5"></typeparam>
-        /// <typeparam name="T6"></typeparam>
-        /// <typeparam name="T7"></typeparam>
-        /// <typeparam name="T8"></typeparam>
-        /// <typeparam name="T9"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <typeparam name="T10"></typeparam>
-        /// <typeparam name="T11"></typeparam>
-        /// <typeparam name="T12"></typeparam>
-        /// <typeparam name="T13"></typeparam>
-        /// <param name="function">action to splay</param>
-        /// <returns>Function chain resolving back to passed action</returns>
-        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, TResult>>>>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>( Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function )
-        {
-            return _split.Curry( function );
-        }
-
-
-        /// <summary>
-        /// Translates a function taking multiple arguments into a sequence of functions each taking a single argument
-        /// each accepting one parameter associated cardinally 
-        /// to the passed actions parameters
-        /// final call is an action
-        /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <typeparam name="T4"></typeparam>
-        /// <typeparam name="T5"></typeparam>
-        /// <typeparam name="T6"></typeparam>
-        /// <typeparam name="T7"></typeparam>
-        /// <typeparam name="T8"></typeparam>
-        /// <typeparam name="T9"></typeparam>
-        /// <typeparam name="T10"></typeparam>
-        /// <typeparam name="T11"></typeparam>
-        /// <typeparam name="T12"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="function">action to splay</param>
-        /// <returns>Function chain resolving back to passed action</returns>
-        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, TResult>>>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>( Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function )
-        {
-            return _split.Curry( function );
-        }
-
-
-        /// <summary>
-        /// Translates a function taking multiple arguments into a sequence of functions each taking a single argument
-        /// each accepting one parameter associated cardinally 
-        /// to the passed actions parameters
-        /// final call is an action
-        /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <typeparam name="T4"></typeparam>
-        /// <typeparam name="T5"></typeparam>
-        /// <typeparam name="T6"></typeparam>
-        /// <typeparam name="T7"></typeparam>
-        /// <typeparam name="T8"></typeparam>
-        /// <typeparam name="T9"></typeparam>
-        /// <typeparam name="T10"></typeparam>
-        /// <typeparam name="T11"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="function">action to splay</param>
-        /// <returns>Function chain resolving back to passed action</returns>
-        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, TResult>>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>( Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function )
-        {
-            return _split.Curry( function );
-        }
-
-
-        /// <summary>
-        /// Translates a function taking multiple arguments into a sequence of functions each taking a single argument
-        /// each accepting one parameter associated cardinally 
-        /// to the passed actions parameters
-        /// final call is an action
-        /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <typeparam name="T4"></typeparam>
-        /// <typeparam name="T5"></typeparam>
-        /// <typeparam name="T6"></typeparam>
-        /// <typeparam name="T7"></typeparam>
-        /// <typeparam name="T8"></typeparam>
-        /// <typeparam name="T9"></typeparam>
-        /// <typeparam name="T10"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="function">action to splay</param>
-        /// <returns>Function chain resolving back to passed action</returns>
-        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, TResult>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>( Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function )
-        {
-            return _split.Curry( function );
-        }
-
-
-        /// <summary>
-        /// Translates a function taking multiple arguments into a sequence of functions each taking a single argument
-        /// each accepting one parameter associated cardinally 
-        /// to the passed actions parameters
-        /// final call is an action
-        /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <typeparam name="T4"></typeparam>
-        /// <typeparam name="T5"></typeparam>
-        /// <typeparam name="T6"></typeparam>
-        /// <typeparam name="T7"></typeparam>
-        /// <typeparam name="T8"></typeparam>
-        /// <typeparam name="T9"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="function">action to splay</param>
-        /// <returns>Function chain resolving back to passed action</returns>
-        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, TResult>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>( Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function )
-        {
-            return _split.Curry( function );
+            return _split.Curry(function);
         }
 
         /// <summary>
@@ -1636,21 +1499,11 @@ namespace Underscore.Module
         /// to the passed actions parameters
         /// final call is an action
         /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <typeparam name="T4"></typeparam>
-        /// <typeparam name="T5"></typeparam>
-        /// <typeparam name="T6"></typeparam>
-        /// <typeparam name="T7"></typeparam>
-        /// <typeparam name="T8"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
         /// <param name="function">action to splay</param>
         /// <returns>Function chain resolving back to passed action</returns>
-        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, TResult>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>( Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> function )
+        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, TResult>>>>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function)
         {
-            return _split.Curry( function );
+            return _split.Curry(function);
         }
 
         /// <summary>
@@ -1659,20 +1512,11 @@ namespace Underscore.Module
         /// to the passed actions parameters
         /// final call is an action
         /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <typeparam name="T4"></typeparam>
-        /// <typeparam name="T5"></typeparam>
-        /// <typeparam name="T6"></typeparam>
-        /// <typeparam name="T7"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
         /// <param name="function">action to splay</param>
         /// <returns>Function chain resolving back to passed action</returns>
-        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, TResult>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, TResult>( Func<T0, T1, T2, T3, T4, T5, T6, T7, TResult> function )
+        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, TResult>>>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function)
         {
-            return _split.Curry( function );
+            return _split.Curry(function);
         }
 
         /// <summary>
@@ -1681,40 +1525,11 @@ namespace Underscore.Module
         /// to the passed actions parameters
         /// final call is an action
         /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <typeparam name="T4"></typeparam>
-        /// <typeparam name="T5"></typeparam>
-        /// <typeparam name="T6"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
         /// <param name="function">action to splay</param>
         /// <returns>Function chain resolving back to passed action</returns>
-        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, TResult>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, TResult>( Func<T0, T1, T2, T3, T4, T5, T6, TResult> function )
+        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, TResult>>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function)
         {
-            return _split.Curry( function );
-        }
-
-
-        /// <summary>
-        /// Translates a function taking multiple arguments into a sequence of functions each taking a single argument
-        /// each accepting one parameter associated cardinally 
-        /// to the passed actions parameters
-        /// final call is an action
-        /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <typeparam name="T4"></typeparam>
-        /// <typeparam name="T5"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="function">action to splay</param>
-        /// <returns>Function chain resolving back to passed action</returns>
-        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, TResult>>>>>> Curry<T0, T1, T2, T3, T4, T5, TResult>( Func<T0, T1, T2, T3, T4, T5, TResult> function )
-        {
-            return _split.Curry( function );
+            return _split.Curry(function);
         }
 
         /// <summary>
@@ -1723,55 +1538,11 @@ namespace Underscore.Module
         /// to the passed actions parameters
         /// final call is an action
         /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <typeparam name="T4"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
         /// <param name="function">action to splay</param>
         /// <returns>Function chain resolving back to passed action</returns>
-        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, TResult>>>>> Curry<T0, T1, T2, T3, T4, TResult>( Func<T0, T1, T2, T3, T4, TResult> function )
+        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, TResult>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function)
         {
-            return _split.Curry( function );
-        }
-
-
-        /// <summary>
-        /// Translates a function taking multiple arguments into a sequence of functions each taking a single argument
-        /// each accepting one parameter associated cardinally 
-        /// to the passed actions parameters
-        /// final call is an action
-        /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="T3"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="function">action to splay</param>
-        /// <returns>Function chain resolving back to passed action</returns>
-        public Func<T0, Func<T1, Func<T2, Func<T3, TResult>>>> Curry<T0, T1, T2, T3, TResult>( Func<T0, T1, T2, T3, TResult> function )
-        {
-            return _split.Curry( function );
-        }
-
-
-
-        /// <summary>
-        /// Translates a function taking multiple arguments into a sequence of functions each taking a single argument
-        /// each accepting one parameter associated cardinally 
-        /// to the passed actions parameters
-        /// final call is an action
-        /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="T2"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="function">action to splay</param>
-        /// <returns>Function chain resolving back to passed action</returns>
-        public Func<T0, Func<T1, Func<T2, TResult>>> Curry<T0, T1, T2, TResult>( Func<T0, T1, T2, TResult> function )
-        {
-            return _split.Curry( function );
+            return _split.Curry(function);
         }
 
         /// <summary>
@@ -1780,14 +1551,121 @@ namespace Underscore.Module
         /// to the passed actions parameters
         /// final call is an action
         /// </summary>
-        /// <typeparam name="T0"></typeparam>
-        /// <typeparam name="T1"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
         /// <param name="function">action to splay</param>
         /// <returns>Function chain resolving back to passed action</returns>
-        public Func<T0, Func<T1, TResult>> Curry<T0, T1, TResult>( Func<T0, T1, TResult> function )
+        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, TResult>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function)
         {
-            return _split.Curry( function );
+            return _split.Curry(function);
+        }
+
+        /// <summary>
+        /// Translates a function taking multiple arguments into a sequence of functions each taking a single argument
+        /// each accepting one parameter associated cardinally 
+        /// to the passed actions parameters
+        /// final call is an action
+        /// </summary>
+        /// <param name="function">action to splay</param>
+        /// <returns>Function chain resolving back to passed action</returns>
+        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, TResult>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> function)
+        {
+            return _split.Curry(function);
+        }
+
+        /// <summary>
+        /// Translates a function taking multiple arguments into a sequence of functions each taking a single argument
+        /// each accepting one parameter associated cardinally 
+        /// to the passed actions parameters
+        /// final call is an action
+        /// </summary>
+        /// <param name="function">action to splay</param>
+        /// <returns>Function chain resolving back to passed action</returns>
+        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, TResult>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, TResult> function)
+        {
+            return _split.Curry(function);
+        }
+
+        /// <summary>
+        /// Translates a function taking multiple arguments into a sequence of functions each taking a single argument
+        /// each accepting one parameter associated cardinally 
+        /// to the passed actions parameters
+        /// final call is an action
+        /// </summary>
+
+        /// <param name="function">action to splay</param>
+        /// <returns>Function chain resolving back to passed action</returns>
+        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, TResult>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, TResult> function)
+        {
+            return _split.Curry(function);
+        }
+
+        /// <summary>
+        /// Translates a function taking multiple arguments into a sequence of functions each taking a single argument
+        /// each accepting one parameter associated cardinally 
+        /// to the passed actions parameters
+        /// final call is an action
+        /// </summary>
+
+        /// <param name="function">action to splay</param>
+        /// <returns>Function chain resolving back to passed action</returns>
+        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, TResult>>>>>> Curry<T0, T1, T2, T3, T4, T5, TResult>(Func<T0, T1, T2, T3, T4, T5, TResult> function)
+        {
+            return _split.Curry(function);
+        }
+
+        /// <summary>
+        /// Translates a function taking multiple arguments into a sequence of functions each taking a single argument
+        /// each accepting one parameter associated cardinally 
+        /// to the passed actions parameters
+        /// final call is an action
+        /// </summary>
+
+        /// <param name="function">action to splay</param>
+        /// <returns>Function chain resolving back to passed action</returns>
+        public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, TResult>>>>> Curry<T0, T1, T2, T3, T4, TResult>(Func<T0, T1, T2, T3, T4, TResult> function)
+        {
+            return _split.Curry(function);
+        }
+
+        /// <summary>
+        /// Translates a function taking multiple arguments into a sequence of functions each taking a single argument
+        /// each accepting one parameter associated cardinally 
+        /// to the passed actions parameters
+        /// final call is an action
+        /// </summary>
+
+        /// <param name="function">action to splay</param>
+        /// <returns>Function chain resolving back to passed action</returns>
+        public Func<T0, Func<T1, Func<T2, Func<T3, TResult>>>> Curry<T0, T1, T2, T3, TResult>(Func<T0, T1, T2, T3, TResult> function)
+        {
+            return _split.Curry(function);
+        }
+
+        /// <summary>
+        /// Translates a function taking multiple arguments into a sequence of functions each taking a single argument
+        /// each accepting one parameter associated cardinally 
+        /// to the passed actions parameters
+        /// final call is an action
+        /// </summary>
+
+        /// <param name="function">action to splay</param>
+        /// <returns>Function chain resolving back to passed action</returns>
+        public Func<T0, Func<T1, Func<T2, TResult>>> Curry<T0, T1, T2, TResult>(Func<T0, T1, T2, TResult> function)
+        {
+            return _split.Curry(function);
+        }
+
+        /// <summary>
+        /// Translates a function taking multiple arguments into a sequence of functions each taking a single argument
+        /// each accepting one parameter associated cardinally 
+        /// to the passed actions parameters
+        /// final call is an action
+        /// </summary>
+
+        /// <param name="function">action to splay</param>
+        /// <returns>Function chain resolving back to passed action</returns>
+        public Func<T0, Func<T1, TResult>> Curry<T0, T1, TResult>(Func<T0, T1, TResult> function)
+        {
+            return _split.Curry(function);
         }
 
         /// <summary>
@@ -1901,137 +1779,137 @@ namespace Underscore.Module
         /// <summary>
         /// Creates a sigle composite function from the passed functions
         /// </summary>
-        public Func<T, T> Compose<T>( params Func<T, T>[ ] args )
+        public Func<T, T> Compose<T>(params Func<T, T>[ ] args)
         {
-            return _compose.Compose( args );
+            return _compose.Compose(args);
         }
 
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>( Func<T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments )
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
         {
-            return _compose.Apply( fn, arguments );
+            return _compose.Apply(fn, arguments);
         }
 
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>( Func<T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments )
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
         {
-            return _compose.Apply( fn, arguments );
+            return _compose.Apply(fn, arguments);
         }
 
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>( Func<T, T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments )
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
         {
-            return _compose.Apply( fn, arguments );
+            return _compose.Apply(fn, arguments);
         }
 
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>( Func<T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments )
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
         {
-            return _compose.Apply( fn, arguments );
+            return _compose.Apply(fn, arguments);
         }
 
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>( Func<T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments )
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
         {
-            return _compose.Apply( fn, arguments );
+            return _compose.Apply(fn, arguments);
         }
 
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>( Func<T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments )
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
         {
-            return _compose.Apply( fn, arguments );
+            return _compose.Apply(fn, arguments);
         }
 
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>( Func<T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments )
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
         {
-            return _compose.Apply( fn, arguments );
+            return _compose.Apply(fn, arguments);
         }
 
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>( Func<T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments )
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
         {
-            return _compose.Apply( fn, arguments );
+            return _compose.Apply(fn, arguments);
         }
 
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>( Func<T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments )
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
         {
-            return _compose.Apply( fn, arguments );
+            return _compose.Apply(fn, arguments);
         }
 
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>( Func<T, T, T, T, T, T, T, TResult> fn, T[ ] arguments )
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
         {
-            return _compose.Apply( fn, arguments );
+            return _compose.Apply(fn, arguments);
         }
 
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>( Func<T, T, T, T, T, T, TResult> fn, T[ ] arguments )
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, TResult> fn, T[ ] arguments)
         {
-            return _compose.Apply( fn, arguments );
+            return _compose.Apply(fn, arguments);
         }
 
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>( Func<T, T, T, T, T, TResult> fn, T[ ] arguments )
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, TResult> fn, T[ ] arguments)
         {
-            return _compose.Apply( fn, arguments );
+            return _compose.Apply(fn, arguments);
         }
 
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>( Func<T, T, T, T, TResult> fn, T[ ] arguments )
+        public TResult Apply<T, TResult>(Func<T, T, T, T, TResult> fn, T[ ] arguments)
         {
-            return _compose.Apply( fn, arguments );
+            return _compose.Apply(fn, arguments);
         }
 
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>( Func<T, T, T, TResult> fn, T[ ] arguments )
+        public TResult Apply<T, TResult>(Func<T, T, T, TResult> fn, T[ ] arguments)
         {
-            return _compose.Apply( fn, arguments );
+            return _compose.Apply(fn, arguments);
         }
 
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>( Func<T, T, TResult> fn, T[ ] arguments )
+        public TResult Apply<T, TResult>(Func<T, T, TResult> fn, T[ ] arguments)
         {
-            return _compose.Apply( fn, arguments );
+            return _compose.Apply(fn, arguments);
         }
 
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>( Func<T, TResult> fn, T[ ] arguments )
+        public TResult Apply<T, TResult>(Func<T, TResult> fn, T[ ] arguments)
         {
-            return _compose.Apply( fn, arguments );
+            return _compose.Apply(fn, arguments);
         }
 
         /// <summary>
@@ -3061,7 +2939,7 @@ namespace Underscore.Module
         {
             return _synch.Delay(function, milliseconds);
         }      
-        
+
         /// <summary>
         /// Creates a function that after a delay time
         /// </summary>
@@ -3147,7 +3025,6 @@ namespace Underscore.Module
             return _synch.Delay(function, milliseconds);
         }
 
-
         /// <summary>
         /// Creates a function that after a delay time
         /// </summary>
@@ -3157,7 +3034,6 @@ namespace Underscore.Module
             return _synch.Delay(function, milliseconds);
         }
 
-
         /// <summary>
         /// Creates a function that will only execute one time
         /// </summary>
@@ -3165,7 +3041,6 @@ namespace Underscore.Module
         {
             return _synch.Once(function);
         }
-
 
         /// <summary>
         /// Creates a function that will only execute one time
@@ -3175,7 +3050,6 @@ namespace Underscore.Module
             return _synch.Once(function);
         }
 
-
         /// <summary>
         /// Creates a function that will only execute one time
         /// </summary>
@@ -3183,7 +3057,6 @@ namespace Underscore.Module
         {
             return _synch.Once(function);
         }
-
 
         /// <summary>
         /// Creates a function that will only execute one time
@@ -3193,7 +3066,6 @@ namespace Underscore.Module
             return _synch.Once(function);
         }
 
-
         /// <summary>
         /// Creates a function that will only execute one time
         /// </summary>
@@ -3201,7 +3073,6 @@ namespace Underscore.Module
         {
             return _synch.Once(function);
         }
-
 
         /// <summary>
         /// Creates a function that will only execute one time
@@ -3211,7 +3082,6 @@ namespace Underscore.Module
             return _synch.Once(function);
         }
 
-
         /// <summary>
         /// Creates a function that will only execute one time
         /// </summary>
@@ -3219,7 +3089,6 @@ namespace Underscore.Module
         {
             return _synch.Once(function);
         }
-
 
         /// <summary>
         /// Creates a function that will only execute one time
@@ -3229,7 +3098,6 @@ namespace Underscore.Module
             return _synch.Once(function);
         }
 
-
         /// <summary>
         /// Creates a function that will only execute one time
         /// </summary>
@@ -3237,7 +3105,6 @@ namespace Underscore.Module
         {
             return _synch.Once(function);
         }
-
 
         /// <summary>
         /// Creates a function that will only execute one time
@@ -3247,7 +3114,6 @@ namespace Underscore.Module
             return _synch.Once(function);
         }
 
-
         /// <summary>
         /// Creates a function that will only execute one time
         /// </summary>
@@ -3255,7 +3121,6 @@ namespace Underscore.Module
         {
             return _synch.Once(function);
         }
-
 
         /// <summary>
         /// Creates a function that will only execute one time
@@ -3265,7 +3130,6 @@ namespace Underscore.Module
             return _synch.Once(function);
         }
 
-
         /// <summary>
         /// Creates a function that will only execute one time
         /// </summary>
@@ -3273,7 +3137,6 @@ namespace Underscore.Module
         {
             return _synch.Once(function);
         }
-
 
         /// <summary>
         /// Creates a function that will only execute one time
@@ -3283,7 +3146,6 @@ namespace Underscore.Module
             return _synch.Once(function);
         }
 
-
         /// <summary>
         /// Creates a function that will only execute one time
         /// </summary>
@@ -3291,7 +3153,6 @@ namespace Underscore.Module
         {
             return _synch.Once(function);
         }
-
 
         /// <summary>
         /// Creates a function that will only execute one time
@@ -3424,7 +3285,6 @@ namespace Underscore.Module
         {
             return _cache.Memoize(function);
         }
-
 
         /// <summary>
         /// Creates a function that caches the first request with unique arguments and returns the first result for all following calls with the same parameters 

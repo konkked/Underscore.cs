@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Underscore.List;
-using Underscore.Utility;
 
 namespace Underscore.Test.Module
 {
@@ -11,12 +10,10 @@ namespace Underscore.Test.Module
         public void CreateListModuleTest( )
         {
             var result = new global::Underscore.Module.List(
-                new DelegateComponent( ),
-                new ManipulateComponent( ),
-                new PartitionComponent( new MathComponent() )
+                new DelegationComponent(),
+                new ManipulateComponent(),
+                new PartitionComponent()
             );
-
-
         }
     }
 }

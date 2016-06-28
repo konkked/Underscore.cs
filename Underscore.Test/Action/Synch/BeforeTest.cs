@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Underscore.Function;
 using ComposeComponent = Underscore.Action.ComposeComponent;
-using ConvertComponent = Underscore.Action.ConvertComponent;
 using ISynchComponent = Underscore.Action.ISynchComponent;
 using SynchComponent = Underscore.Action.SynchComponent;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,7 +10,7 @@ namespace Underscore.Test.Action.Synch
 	[TestClass]
 	public class BeforeTest
 	{
-        private readonly string[] arguments = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
+        private readonly string[] arguments = Util.LowercaseCharArray;
         private ComposeComponent funcCompose;
         private ISynchComponent component;
 
@@ -21,29 +19,15 @@ namespace Underscore.Test.Action.Synch
         private bool invoked;
         private Task[] arr;
 
-        public ISynchComponent GetSynchComponent()
-        {
-            return new SynchComponent(
-                new Underscore.Function.SynchComponent(
-                    new CompactComponent(),
-                    new Underscore.Utility.CompactComponent(),
-                    new Underscore.Utility.MathComponent()
-                    ),
-                new ConvertComponent(),
-                new Underscore.Function.ConvertComponent()
-                );
-        }
-
         [TestInitialize]
         public void Initialize()
         {
             funcCompose = new ComposeComponent();
-            component = GetSynchComponent();
+	        component = new SynchComponent();
 
             counter = 0;
             result = "";
             invoked = false;
-            arr = new Task[4];
         }
 
         [TestMethod]

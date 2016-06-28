@@ -10,6 +10,11 @@ namespace Underscore.Collection
     {
         private readonly List.IPartitionComponent _partitionComponent;
 
+	    public PartitionComponent()
+	    {
+			_partitionComponent = new List.PartitionComponent();
+	    }
+
         public PartitionComponent(List.IPartitionComponent partitionComponent)
         {
             _partitionComponent = partitionComponent;

@@ -7,16 +7,16 @@ namespace Underscore.Test.Module
     public class FunctionTest
     {
         [TestMethod]
-        public void FunctionModuleCreateTest( )
+        public void FunctionModuleCreateTest()
         {
-            var testing = new global::Underscore.Module.Function(
-                 new BindComponent( ),
-                 new PartialComponent( ),
-                 new SplitComponent( ),
-                 new ComposeComponent( ),
+            var testing = new Underscore.Module.Function(
+                 new BindComponent(),
+                 new PartialComponent(),
+                 new SplitComponent(),
+                 new ComposeComponent(),
                  new ConvertComponent(),
-                 new SynchComponent( new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()),
-                 new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()),
+                 new SynchComponent(),
+                 new CacheComponent(),
                  new BooleanComponent()
             );
         }

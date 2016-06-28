@@ -4,7 +4,6 @@ using System.Reflection;
 using Underscore.Object;
 using Underscore.Object.Reflection;
 
-
 namespace Underscore.Test.Object.Transformation
 {
     [TestClass]
@@ -26,14 +25,6 @@ namespace Underscore.Test.Object.Transformation
             public string Suffix { get; set; }
 
             public int Age { get; set; }
-
-        }
-
-        class Employee
-        {
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public decimal Salary { get; set; }
         }
 
         [TestMethod]
@@ -44,7 +35,7 @@ namespace Underscore.Test.Object.Transformation
             var c = 12.0;
 
             var testTarget = new { a, b, c };
-            
+
             var prop = new Mock<IPropertyComponent>();
 
             prop.Setup(s=>s.All(It.Is<object>(r=> r == testTarget)))

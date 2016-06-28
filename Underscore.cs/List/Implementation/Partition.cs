@@ -10,6 +10,11 @@ namespace Underscore.List
     {
         private readonly IMathComponent _math;
 
+	    public PartitionComponent()
+	    {
+		    _math = new MathComponent();
+	    }
+
         public PartitionComponent( IMathComponent math ) 
         {
             _math = math;
@@ -113,6 +118,14 @@ namespace Underscore.List
             return Tuple.Create( new T[ ] { } as IEnumerable<T>, new List<T>( list ) as IEnumerable<T>);
         }
 
+        /// <summary>
+        /// Splits enumerable into two seperate collections based off of the passed func, all items passing the condition 
+        /// are placed in the first item in the tuple and the others placed in the second item in the tuple
+        /// </summary>
+        /// <typeparam name="T">Type of the items in the enumerable</typeparam>
+        /// <param name="list">The list to be split</param>
+        /// <param name="on">the condition to partition using</param>
+        /// <returns>a tuple containing items passing the condition on the Item1 and the other items in Item2</returns>
 	    public Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>(IList<T> list, Func<T, bool> on)
 	    {
 			var left = new List<T>();
@@ -199,26 +212,38 @@ namespace Underscore.List
             );
         }
 
+        /// <summary>
+        /// Creates an enumerable with all of the possible combinations of the list in it
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public IEnumerable<IEnumerable<T>> Combinations<T>(IList<T> list)
         {
             if(list== null) throw new ArgumentNullException("list");
 
             yield return new T[] {};
 
-            foreach (var value in NonEmptyPermutate(list))
+            foreach (var value in CombinationsImpl(list))
                 yield return value;
         }
 
 
-        private IEnumerable<IEnumerable<T>> NonEmptyPermutate<T>(IList<T> collection, int index = -1)
+        private IEnumerable<IEnumerable<T>> CombinationsImpl<T>(IList<T> collection, int index = -1)
         {
+            //initialize the index to the last index of the list
             if (index <= -1)
                 index = collection.Count - 1;
 
+            //yield a collection with just the first item in it 
             if (index == 0)
                 return new List<IEnumerable<T>> { new[] { collection[0] } };
 
-            var permutations = NonEmptyPermutate(collection, index - 1).ToList();
+            //get all of the items after this item
+            // ( Recursive call )
+            var permutations = CombinationsImpl(collection, index - 1).ToList();
+            
+            //return a collection of items with and without the item at the current index
             return permutations.Concat(permutations.Select(a => a.Concat(new[] { collection[index] })).Concat(new[] { new[] { collection[index] } }));
         }
 

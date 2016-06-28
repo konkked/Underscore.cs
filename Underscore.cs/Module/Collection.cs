@@ -118,7 +118,7 @@ namespace Underscore.Module
             return _partitioner.Partition( collection, on );
         }
 
-	    public Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>(IEnumerable<T> collection, Func<T, Boolean> @on)
+	    public Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>(IEnumerable<T> collection, Func<T, bool> @on)
 	    {
 		    return _partitioner.PartitionMatches(collection, on);
 	    }
@@ -141,7 +141,7 @@ namespace Underscore.Module
         /// <param name="items"></param>
         /// <param name="methodName"></param>
         /// <returns></returns>
-        public IEnumerable<T> Invoke<T>(IEnumerable<T> items, string methodName)
+        public IEnumerable<object> Invoke<T>(IEnumerable<T> items, string methodName)
         {
             return _delegation.Invoke(items, methodName);
         }
@@ -154,7 +154,7 @@ namespace Underscore.Module
         /// <param name="methodName"></param>
         /// <param name="arguments"></param>
         /// <returns></returns>
-        public IEnumerable<T> Invoke<T>(IEnumerable<T> items, string methodName, params object[] arguments)
+        public IEnumerable<object> Invoke<T>(IEnumerable<T> items, string methodName, params object[] arguments)
         {
             return _delegation.Invoke(items, methodName, arguments);
         }
