@@ -24,29 +24,27 @@ namespace Underscore.Utility
             }
         }
 
-        public MathComponent( ) 
+        public MathComponent() 
         {
-            _sharedUuidChecker = new HashSet<string>( );
+            _sharedUuidChecker = new HashSet<string>();
         }
 
-        private bool InternalIsUnique( string uuid )
+        private bool InternalIsUnique(string uuid)
         {
-            return _sharedUuidChecker.Add( uuid );
+            return _sharedUuidChecker.Add(uuid);
         }
 
         /// <summary>
-        /// Generates a unique id
+        /// Generates a unique id, optionally prefixed by a string
         /// </summary>
-        /// <param name="prefix"></param>
-        /// <returns></returns>
-        public string UniqueId( string prefix )
+        public string UniqueId(string prefix)
         {
             string retv;
 
             do
             {
-                retv = prefix + "_" + UniqueId( );
-            } while ( !InternalIsUnique( retv ) );
+                retv = prefix + "_" + UniqueId();
+            } while (!InternalIsUnique(retv));
 
             return retv;
         }
@@ -54,55 +52,60 @@ namespace Underscore.Utility
         /// <summary>
         /// Generates a unique id string
         /// </summary>
-        /// <returns></returns>
-        [MethodImpl( MethodImplOptions.AggressiveInlining )]
-        public string UniqueId( )
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public string UniqueId()
         {
-            return Guid.NewGuid( ).ToString( "B" ).ToUpper( );
+            return Guid.NewGuid().ToString("B").ToUpper();
         }
 
         /// <summary>
-        /// Generates a random number
+        /// Generates a random integer in specified range
         /// </summary>
         /// <param name="min">Min possible value</param>
-        /// <param name="max">Max possible value</param>
+        /// <param name="max">Max possible value, exclusive</param>
         /// <returns>A random number between <paramref name="min"/> and <paramref name="max"/></returns>
-        public int Random( int min, int max )
+        public int Random(int min, int max)
         {
-            return InternalRandom.Next( min, max );
+            if (min >= max)
+                throw new ArgumentException("min must be less than (and not equal to) max");
+
+            return InternalRandom.Next(min, max);
         }
 
         /// <summary>
-        /// Generates a random number
+        /// Generates a random integer between 0 and max
         /// </summary>
-        /// <param name="max">Max possible</param>
+        /// <param name="max">Max of range, exclusive. Must be greater than 0</param>
         /// <returns>a random number</returns>
-        public int Random( int max )
+        public int Random(int max)
         {
-            return InternalRandom.Next( max );
+            if (max <= 0)
+                throw new ArgumentException("max must be greater than 0");
+
+            return InternalRandom.Next(max);
         }
 
         /// <summary>
-        /// Generates a random number
+        /// Generates a random positive integer
         /// </summary>
         /// <returns>a random number</returns>
-        public int Random( )
+        public int Random()
         {
-            return InternalRandom.Next( );
+            return InternalRandom.Next();
         }
 
-        private const int _absValueIntMask = ( sizeof( int ) * 8 ) - 1;
+        private const int _absValueIntMask = (sizeof(int) * 8) - 1;
 
         /// <summary>
         /// Performantly calculates absolute value of an int
         /// </summary>
         /// <param name="i"></param>
         /// <returns>Absolute value of i</returns>
-        [MethodImpl( MethodImplOptions.AggressiveInlining )]
-        public int Abs( int i ) 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int Abs(int i) 
         {
             int mask = i >> _absValueIntMask;
-            return ( i + mask ) ^ mask;
+            return (i + mask) ^ mask;
         }
 
         /// <summary>
@@ -111,10 +114,10 @@ namespace Underscore.Utility
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns>The smallest of the two ints passed</returns>
-        [MethodImpl( MethodImplOptions.AggressiveInlining )]
-        public int Min( int x, int y )
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int Min(int x, int y)
         {
-            return y + ( ( ( x - y ) & ( ( x - y ) >> _absValueIntMask ) ) );
+            return y + (((x - y) & ((x - y) >> _absValueIntMask)));
         }
 
         /// <summary>
@@ -123,13 +126,10 @@ namespace Underscore.Utility
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns>The largest of the two ints passed</returns>
-        [MethodImpl( MethodImplOptions.AggressiveInlining )]
-        public int Max( int x, int y )
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int Max(int x, int y)
         {
-            return x - ( ( ( x - y ) & ( ( x - y ) >> _absValueIntMask ) ) );
+            return x - (((x - y) & ((x - y) >> _absValueIntMask)));
         }
-
-
-
     }
 }

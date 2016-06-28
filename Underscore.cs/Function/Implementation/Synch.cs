@@ -18,7 +18,7 @@ namespace Underscore.Function
 
             _math = mathComponent;
         }
-
+	
         /// <summary>
         ///  Returns a version of the passed function 
         ///  that only invokes after being called 
@@ -29,6 +29,7 @@ namespace Underscore.Function
         /// </summary>
 		public Func<Task<TResult>> After<TResult>(Func<TResult> function, int count)
 		{
+			
             var origFn = function;
             var fn = new Func<object, TResult>(a => origFn());
             var target = After(fn, count);
@@ -90,7 +91,6 @@ namespace Underscore.Function
 
                             return first;
                         });
-
                     }
                     else
                     {
@@ -103,7 +103,7 @@ namespace Underscore.Function
                 }
             };
         }
-
+				
         /// <summary>
         ///  Returns a version of the passed function 
         ///  that only invokes after being called 
@@ -119,7 +119,7 @@ namespace Underscore.Function
             var target = After(fn, count);
 			return async (a, b) => await target(_utilCompact.Pack(a, b));
 		}
-
+				
         /// <summary>
         ///  Returns a version of the passed function 
         ///  that only invokes after being called 
@@ -151,7 +151,7 @@ namespace Underscore.Function
             var target = After(fn, count);
 			return async (a, b, c, d) => await target(_utilCompact.Pack(a, b, c, d));
 		}
-
+				
         /// <summary>
         ///  Returns a version of the passed function 
         ///  that only invokes after being called 
@@ -200,6 +200,7 @@ namespace Underscore.Function
 			return async (a, b, c, d, e, f, g) => await target(_utilCompact.Pack(a, b, c, d, e, f, g));
 		}
 
+				
         /// <summary>
         ///  Returns a version of the passed function 
         ///  that only invokes after being called 
@@ -216,6 +217,7 @@ namespace Underscore.Function
 			return async (a, b, c, d, e, f, g, h) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h));
 		}
 
+				
         /// <summary>
         ///  Returns a version of the passed function 
         ///  that only invokes after being called 
@@ -232,6 +234,7 @@ namespace Underscore.Function
 			return async (a, b, c, d, e, f, g, h, i) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i));
 		}
 
+				
         /// <summary>
         ///  Returns a version of the passed function 
         ///  that only invokes after being called 
@@ -248,6 +251,7 @@ namespace Underscore.Function
 			return async (a, b, c, d, e, f, g, h, i, j) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j));
 		}
 
+				
         /// <summary>
         ///  Returns a version of the passed function 
         ///  that only invokes after being called 
@@ -264,6 +268,7 @@ namespace Underscore.Function
 			return async (a, b, c, d, e, f, g, h, i, j, k) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k));
 		}
 
+				
         /// <summary>
         ///  Returns a version of the passed function 
         ///  that only invokes after being called 
@@ -280,6 +285,7 @@ namespace Underscore.Function
 			return async (a, b, c, d, e, f, g, h, i, j, k, l) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l));
 		}
 
+				
         /// <summary>
         ///  Returns a version of the passed function 
         ///  that only invokes after being called 
@@ -296,6 +302,7 @@ namespace Underscore.Function
 			return async (a, b, c, d, e, f, g, h, i, j, k, l, m) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m));
 		}
 
+				
         /// <summary>
         ///  Returns a version of the passed function 
         ///  that only invokes after being called 
@@ -312,6 +319,7 @@ namespace Underscore.Function
 			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n));
 		}
 
+				
         /// <summary>
         ///  Returns a version of the passed function 
         ///  that only invokes after being called 
@@ -328,6 +336,7 @@ namespace Underscore.Function
 			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o));
 		}
 
+				
         /// <summary>
         ///  Returns a version of the passed function 
         ///  that only invokes after being called 
@@ -344,6 +353,7 @@ namespace Underscore.Function
 			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p));
 		}
 
+				
         /// <summary>
         /// Returns a version of the passed function 
         /// that will only invoke a certain amount of times
@@ -358,6 +368,7 @@ namespace Underscore.Function
 			return ()=>target(null);
 		}
 
+				
         /// <summary>
         /// Returns a version of the passed function 
         /// that will only invoke a certain amount of times
@@ -377,7 +388,7 @@ namespace Underscore.Function
                 return tresult;
             };
         }
-
+				
         /// <summary>
         /// Returns a version of the passed function 
         /// that will only invoke a certain amount of times
@@ -392,6 +403,7 @@ namespace Underscore.Function
 			return (a, b) => target(_utilCompact.Pack(a, b));
 		}
 
+				
         /// <summary>
         /// Returns a version of the passed function 
         /// that will only invoke a certain amount of times
@@ -419,7 +431,7 @@ namespace Underscore.Function
             var target = Before(fn, count);
 			return (a, b, c, d) => target(_utilCompact.Pack(a, b, c, d));
 		}
-
+				
         /// <summary>
         /// Returns a version of the passed function 
         /// that will only invoke a certain amount of times
@@ -433,7 +445,7 @@ namespace Underscore.Function
             var target = Before(fn, count);
 			return (a, b, c, d, e) => target(_utilCompact.Pack(a, b, c, d, e));
 		}
-
+				
         /// <summary>
         /// Returns a version of the passed function 
         /// that will only invoke a certain amount of times
@@ -518,6 +530,7 @@ namespace Underscore.Function
 			return (a, b, c, d, e, f, g, h, i, j, k) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k));
 		}
 
+				
         /// <summary>
         /// Returns a version of the passed function 
         /// that will only invoke a certain amount of times
@@ -532,6 +545,7 @@ namespace Underscore.Function
 			return (a, b, c, d, e, f, g, h, i, j, k, l) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l));
 		}
 
+				
         /// <summary>
         /// Returns a version of the passed function 
         /// that will only invoke a certain amount of times
@@ -573,7 +587,7 @@ namespace Underscore.Function
             var target = Before(fn, count);
 			return (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o));
 		}
-
+				
         /// <summary>
         /// Returns a version of the passed function 
         /// that will only invoke a certain amount of times
@@ -587,7 +601,7 @@ namespace Underscore.Function
             var target = Before(fn, count);
 			return (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p));
 		}
-
+				
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
@@ -599,6 +613,7 @@ namespace Underscore.Function
 			return async()=>await target(null);
 		}
 
+
 #pragma warning disable 4014
         /// <summary>
         /// Returns a debounced version of the passed function
@@ -606,6 +621,7 @@ namespace Underscore.Function
         public Func<T, Task<TResult>> Debounce<T, TResult>(Func<T, TResult> function, int milliseconds)
         {
             Task running  = null;
+
 
             int settingUp = 0;
             int setting = 0;
@@ -629,6 +645,7 @@ namespace Underscore.Function
                 while (true)
                 {
                     Interlocked.Exchange(ref result, running);
+
                     if (result == null)
                         break;
 
@@ -656,178 +673,210 @@ namespace Underscore.Function
         /// </summary>
 		public Func<T1, T2, Task<TResult>> Debounce<T1, T2, TResult>(Func<T1, T2, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
 			return async (a, b) => await target(_utilCompact.Pack(a, b));
 		}
 
+				
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, Task<TResult>> Debounce<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
 			return async (a, b, c) => await target(_utilCompact.Pack(a, b, c));
 		}
 
+				
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, Task<TResult>> Debounce<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
 			return async (a, b, c, d) => await target(_utilCompact.Pack(a, b, c, d));
 		}
 
+				
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, Task<TResult>> Debounce<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
 			return async (a, b, c, d, e) => await target(_utilCompact.Pack(a, b, c, d, e));
 		}
 
+				
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
 			return async (a, b, c, d, e, f) => await target(_utilCompact.Pack(a, b, c, d, e, f));
 		}
 
+				
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
 			return async (a, b, c, d, e, f, g) => await target(_utilCompact.Pack(a, b, c, d, e, f, g));
 		}
 
+				
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h));
 		}
 
+				
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h, i) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i));
 		}
 
+				
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h, i, j) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j));
 		}
 
+				
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h, i, j, k) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k));
 		}
 
+				
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h, i, j, k, l) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l));
 		}
 
+				
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h, i, j, k, l, m) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m));
 		}
 
+				
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n));
 		}
 
+				
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o));
 		}
 
+				
         /// <summary>
         /// Returns a debounced version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Debounce(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p));
 		}
 
+				
 		/// <summary>
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
         /// </summary>
 		public Func<Task<TResult>> Delay<TResult>(Func<TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = new Func<object, TResult>(a => origFn());
             var target = Delay(fn, milliseconds);
 			return async()=>await target(null);
 		}
 
+				
         /// <summary>
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
@@ -841,199 +890,231 @@ namespace Underscore.Function
                 return function(t);
             };
         }
-
+				
 		/// <summary>
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
         /// </summary>
 		public Func<T1, T2, Task<TResult>> Delay<T1, T2, TResult>(Func<T1, T2, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
 			return async (a, b) => await target(_utilCompact.Pack(a, b));
 		}
 
+				
 		/// <summary>
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
         /// </summary>
 		public Func<T1, T2, T3, Task<TResult>> Delay<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
 			return async (a, b, c) => await target(_utilCompact.Pack(a, b, c));
 		}
 
+				
 		/// <summary>
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
         /// </summary>
 		public Func<T1, T2, T3, T4, Task<TResult>> Delay<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
 			return async (a, b, c, d) => await target(_utilCompact.Pack(a, b, c, d));
 		}
 
+				
 		/// <summary>
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, Task<TResult>> Delay<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
 			return async (a, b, c, d, e) => await target(_utilCompact.Pack(a, b, c, d, e));
 		}
 
+				
 		/// <summary>
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
 			return async (a, b, c, d, e, f) => await target(_utilCompact.Pack(a, b, c, d, e, f));
 		}
 
+				
 		/// <summary>
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
 			return async (a, b, c, d, e, f, g) => await target(_utilCompact.Pack(a, b, c, d, e, f, g));
 		}
 
+				
 		/// <summary>
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h));
 		}
 
+				
 		/// <summary>
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h, i) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i));
 		}
 
+				
 		/// <summary>
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h, i, j) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j));
 		}
 
+				
 		/// <summary>
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h, i, j, k) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k));
 		}
 
+				
 		/// <summary>
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h, i, j, k, l) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l));
 		}
 
+				
 		/// <summary>
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h, i, j, k, l, m) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m));
 		}
 
+				
 		/// <summary>
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n));
 		}
 
+				
 		/// <summary>
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o));
 		}
 
+				
 		/// <summary>
         /// Creates a delayed version of passed function, delaying passed milliseconds value
         /// before executing
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, int milliseconds)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Delay(fn, milliseconds);
 			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p));
 		}
 
+				
 		/// <summary>
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
         /// </summary>
 		public Func<TResult> Once<TResult>(Func<TResult> function)
 		{
+			
             var origFn = function;
             var fn = new Func<object, TResult>(a => origFn());
             var target = Once(fn);
 			return ()=>target(null);
 		}
 
+				
         /// <summary>
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
@@ -1047,203 +1128,237 @@ namespace Underscore.Function
             {
                 if (Interlocked.CompareExchange(ref ran, 1, 0) == 0)
                     result = function(targ);
+                
 
                 return result;
             };
         }
-
+				
 		/// <summary>
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
         /// </summary>
 		public Func<T1, T2, TResult> Once<T1, T2, TResult>(Func<T1, T2, TResult> function)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
 			return (a, b) => target(_utilCompact.Pack(a, b));
 		}
 
+				
 		/// <summary>
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
         /// </summary>
 		public Func<T1, T2, T3, TResult> Once<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> function)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
 			return (a, b, c) => target(_utilCompact.Pack(a, b, c));
 		}
 
+				
 		/// <summary>
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
         /// </summary>
 		public Func<T1, T2, T3, T4, TResult> Once<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
 			return (a, b, c, d) => target(_utilCompact.Pack(a, b, c, d));
 		}
 
+				
 		/// <summary>
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, TResult> Once<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
 			return (a, b, c, d, e) => target(_utilCompact.Pack(a, b, c, d, e));
 		}
 
+				
 		/// <summary>
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, TResult> Once<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
 			return (a, b, c, d, e, f) => target(_utilCompact.Pack(a, b, c, d, e, f));
 		}
 
+				
 		/// <summary>
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, TResult> Once<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
 			return (a, b, c, d, e, f, g) => target(_utilCompact.Pack(a, b, c, d, e, f, g));
 		}
 
+				
 		/// <summary>
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
 			return (a, b, c, d, e, f, g, h) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h));
 		}
 
+				
 		/// <summary>
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
 			return (a, b, c, d, e, f, g, h, i) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i));
 		}
 
+				
 		/// <summary>
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
 			return (a, b, c, d, e, f, g, h, i, j) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j));
 		}
 
+				
 		/// <summary>
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
 			return (a, b, c, d, e, f, g, h, i, j, k) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k));
 		}
 
+				
 		/// <summary>
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
 			return (a, b, c, d, e, f, g, h, i, j, k, l) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l));
 		}
 
+				
 		/// <summary>
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
 			return (a, b, c, d, e, f, g, h, i, j, k, l, m) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m));
 		}
 
+				
 		/// <summary>
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
 			return (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n));
 		}
 
+				
 		/// <summary>
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
 			return (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o));
 		}
 
+				
 		/// <summary>
         ///  Creates a version of the function that only runs once, 
         ///  all subsequent runs will return the same value
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Once(fn);
 			return (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p));
 		}
 
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
 		public Func<Task<TResult>> Throttle<TResult>(Func<TResult> function, int milliseconds, bool leading)
 		{
+			
             var origFn = function;
             var fn = new Func<object, TResult>(a => origFn());
             var target = Throttle(fn, milliseconds, leading);
 			return async()=>await target(null);
 		}
 
+
 #pragma warning disable 4014
+
 
         private interface IPicker<T>
         {
@@ -1263,6 +1378,7 @@ namespace Underscore.Function
 
             public T Get()
             {
+
                 if (!_lastPlaced)
                 {
                     lock (this)
@@ -1300,6 +1416,7 @@ namespace Underscore.Function
 
             public T Get()
             {
+
                 if (!_lastPlaced)
                 {
                     lock (this)
@@ -1352,6 +1469,7 @@ namespace Underscore.Function
             private FirstSetter<TResult> _executor;
             private readonly bool _leading;
 
+
             public ThrottleHandler(Utility.IMathComponent math , Func<TParam , TResult> executing , int milliseconds , bool takeFirst = false)
             {
                 _executing = executing;
@@ -1377,6 +1495,7 @@ namespace Underscore.Function
             {
                 if (!Done())
                     _parameterSelector.Add(arguments);
+                
 
                 Thread.MemoryBarrier();
 
@@ -1411,6 +1530,7 @@ namespace Underscore.Function
 
             return async targ =>
             {
+
                 object localHandle = new object();
                 object localLock;
                 HashSet<object> localHashset;
@@ -1435,6 +1555,7 @@ namespace Underscore.Function
                         isFirst = true;
                     }
 
+
                     localLock = fnlock;
 
                     if (throttler == null)
@@ -1447,12 +1568,14 @@ namespace Underscore.Function
 
                     localHashset = hashset;
 
+
                     if (isFirst && leading)
                     {
                         return fn(targ);
                     }
 
                 }
+
 
                 lock (localLock)
                     localHashset.Add(localHandle);
@@ -1465,6 +1588,7 @@ namespace Underscore.Function
                 lock (sharedLock)
                     if (localHashset == hashset && localHashset != null && localHashset.Count == 0)
                     {
+
                         if (localLock == fnlock)
                         {
                             fnlock = null;
@@ -1482,6 +1606,7 @@ namespace Underscore.Function
 
                     }
 
+
                 return returning;
 
             };
@@ -1495,7 +1620,7 @@ namespace Underscore.Function
 		{
 			return Throttle (function, milliseconds, true) ;
 		}
-
+				
         /// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
@@ -1503,7 +1628,7 @@ namespace Underscore.Function
         {
             return ThrottleImpl(function, milliseconds, leading);
         }
-
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
@@ -1511,18 +1636,20 @@ namespace Underscore.Function
 		{
 			return Throttle (function, milliseconds, true) ;
 		}
-
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
 		public Func<T1, T2, Task<TResult>> Throttle<T1, T2, TResult>(Func<T1, T2, TResult> function, int milliseconds, bool leading)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
 			return async (a, b) => await target(_utilCompact.Pack(a, b));
 		}
 
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
@@ -1530,18 +1657,20 @@ namespace Underscore.Function
 		{
 			return Throttle (function, milliseconds, true) ;
 		}
-
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, Task<TResult>> Throttle<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> function, int milliseconds, bool leading)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
 			return async (a, b, c) => await target(_utilCompact.Pack(a, b, c));
 		}
 
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
@@ -1549,18 +1678,20 @@ namespace Underscore.Function
 		{
 			return Throttle (function, milliseconds, true) ;
 		}
-
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, Task<TResult>> Throttle<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function, int milliseconds, bool leading)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
 			return async (a, b, c, d) => await target(_utilCompact.Pack(a, b, c, d));
 		}
 
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
@@ -1568,18 +1699,20 @@ namespace Underscore.Function
 		{
 			return Throttle (function, milliseconds, true) ;
 		}
-
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, Task<TResult>> Throttle<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, int milliseconds, bool leading)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
 			return async (a, b, c, d, e) => await target(_utilCompact.Pack(a, b, c, d, e));
 		}
 
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
@@ -1587,18 +1720,20 @@ namespace Underscore.Function
 		{
 			return Throttle (function, milliseconds, true) ;
 		}
-
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, int milliseconds, bool leading)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
 			return async (a, b, c, d, e, f) => await target(_utilCompact.Pack(a, b, c, d, e, f));
 		}
 
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
@@ -1606,18 +1741,20 @@ namespace Underscore.Function
 		{
 			return Throttle (function, milliseconds, true) ;
 		}
-
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, int milliseconds, bool leading)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
 			return async (a, b, c, d, e, f, g) => await target(_utilCompact.Pack(a, b, c, d, e, f, g));
 		}
 
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
@@ -1625,18 +1762,20 @@ namespace Underscore.Function
 		{
 			return Throttle (function, milliseconds, true) ;
 		}
-
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, int milliseconds, bool leading)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
 			return async (a, b, c, d, e, f, g, h) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h));
 		}
 
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
@@ -1644,18 +1783,20 @@ namespace Underscore.Function
 		{
 			return Throttle (function, milliseconds, true) ;
 		}
-
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, int milliseconds, bool leading)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
 			return async (a, b, c, d, e, f, g, h, i) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i));
 		}
 
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
@@ -1663,18 +1804,20 @@ namespace Underscore.Function
 		{
 			return Throttle (function, milliseconds, true) ;
 		}
-
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, int milliseconds, bool leading)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
 			return async (a, b, c, d, e, f, g, h, i, j) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j));
 		}
 
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
@@ -1682,18 +1825,20 @@ namespace Underscore.Function
 		{
 			return Throttle (function, milliseconds, true) ;
 		}
-
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, int milliseconds, bool leading)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
 			return async (a, b, c, d, e, f, g, h, i, j, k) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k));
 		}
 
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
@@ -1701,18 +1846,20 @@ namespace Underscore.Function
 		{
 			return Throttle (function, milliseconds, true) ;
 		}
-
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, int milliseconds, bool leading)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
 			return async (a, b, c, d, e, f, g, h, i, j, k, l) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l));
 		}
 
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
@@ -1720,18 +1867,20 @@ namespace Underscore.Function
 		{
 			return Throttle (function, milliseconds, true) ;
 		}
-
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, int milliseconds, bool leading)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
 			return async (a, b, c, d, e, f, g, h, i, j, k, l, m) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m));
 		}
 
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
@@ -1739,18 +1888,20 @@ namespace Underscore.Function
 		{
 			return Throttle (function, milliseconds, true) ;
 		}
-
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, int milliseconds, bool leading)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
 			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n));
 		}
 
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
@@ -1758,18 +1909,20 @@ namespace Underscore.Function
 		{
 			return Throttle (function, milliseconds, true) ;
 		}
-
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, int milliseconds, bool leading)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
 			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o));
 		}
 
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
@@ -1777,18 +1930,20 @@ namespace Underscore.Function
 		{
 			return Throttle (function, milliseconds, true) ;
 		}
-
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, int milliseconds, bool leading)
 		{
+			
             var origFn = function;
             var fn = _fnCompact.Pack(origFn);
             var target = Throttle(fn, milliseconds, leading);
 			return async (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => await target(_utilCompact.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p));
 		}
 
+				
 		/// <summary>
         /// Returns a throttled version of the passed function
         /// </summary>
@@ -1796,6 +1951,6 @@ namespace Underscore.Function
 		{
 			return Throttle (function, milliseconds, true) ;
 		}
-
+		
     }
 }
