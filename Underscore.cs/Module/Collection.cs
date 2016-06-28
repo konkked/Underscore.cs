@@ -158,5 +158,17 @@ namespace Underscore.Module
         {
             return _delegation.Invoke(items, methodName, arguments);
         }
+
+
+        /// <summary>
+        /// Resolves an enumerable of functions into an enumerable of the passed function's results
+        /// </summary>
+        /// <typeparam name="T">Return Type of passed functions</typeparam>
+        /// <param name="items">collection of functions</param>
+        /// <returns>returns a list of elements</returns>
+        public IEnumerable<T> Resolve<T>(IEnumerable<Func<T>> items)
+        {
+            return _delegation.Resolve(items);
+        }
     }
 }

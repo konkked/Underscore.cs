@@ -1,17 +1,6 @@
 # List Module
 ***Note that while these are separated into categories here based on behavior, they are all called from _.List***
 
-## Delegation
-### IList\<T\> Resolve\<T\>(IList<T> list)
-Executes the list of functions and returns the results
-``` csharp
-
-Func<int>[] myArray = { ()=>1, ()=>2, ()=>3, ()=>4 };
-var myArraySnapshot = _.List.Resolve(myArray);
-
-int[] snapshotResult = myArraySnapshot(); // returns { 1, 2, 3, 4 }
-
-```
 # Manipulate
 ### bool Swap\<T\>(IList\<T\> collection, int i,int j)
 Swaps two items in a list, returns true if it was successful
@@ -21,9 +10,9 @@ _.List.Swap(ls, 0, 1) // returns true, ls is now {2,1,3,4}
 ```
 
 ### IList\<T\> Shuffle\<T\>(IList\<T\> ls)
-Returns a list of randomly shuffle items from passed list 
+Returns a list of randomly shuffle items from passed list
 ``` csharp
-_.List.Shuffle(new int[] {1, 2, 3}) // could return {3,2,1} or {2,3,1} or {1,3,2} 
+_.List.Shuffle(new int[] {1, 2, 3}) // could return {3,2,1} or {2,3,1} or {1,3,2}
 ```
 
 
@@ -47,7 +36,7 @@ _.List.Rotate(ls,2);
 ### IList\<T\> Sample\<T\>(IList\<T\> list)
 Generates a random sample from the passed list
 ```csharp
-_.List.Sample(new[]{1,2,3}); // could return {3,2,1} or {3,2} or {3} or {2,3,1} or {2,3} etc. 
+_.List.Sample(new[]{1,2,3}); // could return {3,2,1} or {3,2} or {3} or {2,3,1} or {2,3} etc.
 ```
 
 ### IList\<T\> Sample\<T\>(IList\<T\> list, int size)
@@ -63,7 +52,7 @@ If the same size is larger than the size of the list and unique is specified you
 ```csharp
 _.List.Sample(new[]{1,2,3,4},2,true); // could return {1,2} or {2,3} or {3,4} or {3,2}
 _.List.Sample(new[]{1,2,3,4},2,false); // could return {1,1} or {1,2} or {2,3} or {3,3}
-_.List.Sample(new[]{1,2,3,4},8,true); // Throws an exception 
+_.List.Sample(new[]{1,2,3,4},8,true); // Throws an exception
 ```
 
 ### IEnumerable\<T\> Extend\<T\>(IList\<T\> list, int size)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Underscore.Object.Reflection;
 
@@ -32,5 +33,13 @@ namespace Underscore.Collection
 		{
 		    return items.Select(item => _methodComponent.Invoke(item, methodName, arguments));
 		}
+
+        /// <summary>
+        /// Resolves a list of functions into a list
+        /// </summary>
+        public IEnumerable<T> Resolve<T>(IEnumerable<Func<T>> items)
+        {
+            return items.Select(a => a());
+        }
     }
 }

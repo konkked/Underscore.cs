@@ -7,45 +7,29 @@ namespace Underscore.Module
 
 
     public class List : 
-        IDelegationComponent,
         IManipulateComponent,
         IPartitionComponent
     {
         private readonly IManipulateComponent _manipulator;
         private readonly IPartitionComponent _partitioner;
-        private readonly IDelegationComponent _delegator;
 
         public List( 
-            IDelegationComponent delegator,
             IManipulateComponent manipulator,
             IPartitionComponent partitioner
         ) 
         {
-            if (delegator == null)
-                throw new ArgumentNullException("delegator");
-
+            
             if (manipulator == null)
                 throw new ArgumentNullException("manipulator");
 
             if (partitioner == null)
                 throw new ArgumentNullException("partitioner");
 
-
-            _delegator = delegator;
+            
             _manipulator = manipulator;
             _partitioner = partitioner;
         }
 
-        /// <summary>
-        /// Resolves a list of functions into a list
-        /// </summary>
-        /// <typeparam name="T">Return Type of passed functions</typeparam>
-        /// <param name="list">collection of functions</param>
-        /// <returns>returns a list of elements</returns>
-        public IList<T> Resolve<T>( IList<Func<T>> target )
-        {
-            return _delegator.Resolve( target );
-        }
 
         /// <summary>
         /// Swaps the elements at the specified indexes

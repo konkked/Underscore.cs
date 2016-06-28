@@ -84,7 +84,6 @@
     <Compile Include="Function\PartialTest.cs" />
     <Compile Include="Function\SplitTest.cs" />
     <Compile Include="Function\BooleanTest.cs" />
-    <Compile Include="List\DelegationTest.cs" />
     <Compile Include="List\ManipulateTest.cs" />
     <Compile Include="List\PartitionTest.cs" />
     <Compile Include="Module\ActionTest.cs" />
