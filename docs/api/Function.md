@@ -162,3 +162,44 @@ foreach(var task in tasks)
 
 results; // { "2", "2", "2", "3", "4", "5", "6", "7", "8", "9" }
 ```
+
+### Throttle
+*TODO*
+
+### Delay
+*TODO*
+
+### Func<TResult> Before<TResult>(Func\<TResult\> function, int count)
+Returns a function which performs the initial function up until the given number of invocations is reached, after which time it will return the result of the last invocation that was performed.
+```
+int counter = 0;
+Func<int> toBefore = ++counter;
+
+
+Func<int> befored = _.Function.Before(toOnce, 3);
+
+int result;
+
+for(int i = 0; i < 100; i++)
+    result = onced();
+
+result; // 3
+counter; // 3
+```
+
+### Func<TResult> Once<TResult>(Func\<TResult\> function, int count)
+```
+int counter = 0;
+Func<int> toOnce = ++counter;
+
+
+Func<int> onced = _.Function.Once(toOnce);
+
+int result;
+
+for(int i = 0; i < 100; i++)
+    result = onced();
+
+result; // 1
+counter; // 1
+```

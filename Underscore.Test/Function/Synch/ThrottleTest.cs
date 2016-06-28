@@ -13,236 +13,163 @@ namespace Underscore.Test.Function.Synch
 	[TestClass]
 	public class ThrottleTest
 	{
-		public ISynchComponent ModifyComponent() { return new SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()); }
+        //TODO: finish all the overloads for this class
 
-		[TestMethod]
-		public async Task FunctionThrottle3()
-		{
+		public ISynchComponent GetComponent() { return new SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()); }
 
-			var testing = ModifyComponent();
-			var timer = new Stopwatch();
-			int waiting = 25;
+        [TestMethod]
+        public async Task Function_Synch_Throttle_1Argument()
+        {
+            var testing = GetComponent();
+            var timer = new Stopwatch();
+            const int waiting = 1000;
 
-			int cnt = 0;
+            int cnt = 1;
 
-			timer.Start();
+            var targeting = new Func<string, string>((i) =>
+            {
+                Interlocked.Increment(ref cnt);
+                return i + i;
+            });
 
-			var targeting = new Func<string, string, string, string, string, string, string>((s1, s2, s3, s4, s5, s6) =>
-			{
-				cnt++;
-				var returning = string.Join(" ", s1, s2, s3, s4, s5, s6);
-				return returning;
-			});
+            var target = testing.Throttle(targeting, waiting);
 
-			var target = testing.Throttle(targeting, waiting);
+            var continuing = new List<Task<string>>();
 
-			var continuing = new List<Task>();
+            timer.Start();
 
+            var first = target("0");
+            var firstResult = await first;
 
-			for (int i = 0; i < 99; i++)
-			{
-				Assert.AreEqual(i == 0 ? 0 : 1, cnt);
+            Thread.MemoryBarrier();
 
-				var j = i + 1;
-
-
-				if (i == 0)
-				{
-					continuing.Add(
-						target(
-							(j).ToString(),
-							(-j).ToString(),
-							(j).ToString(),
-							(-j).ToString(),
-							(j).ToString(),
-							(-j).ToString()
-						   ).ContinueWith(a => Assert.AreEqual("1 -1 1 -1 1 -1", a.Result))
-					   );
-				}
-				else
-				{
-					continuing.Add(
-						target(
-							(j).ToString(),
-							(-j).ToString(),
-							(j).ToString(),
-							(-j).ToString(),
-							(j).ToString(),
-							(-j).ToString()
-						   )
-							.ContinueWith(
-								a => Assert.AreEqual("99 -99 99 -99 99 -99", a.Result))
-					   );
-				}
-			}
-
-			Assert.AreEqual(1, cnt);
+            Assert.AreEqual(2, cnt);
+            Assert.AreEqual("00", firstResult);
 
 
-			for (int i = 0; i < 99; i++)
-				await continuing[i];
+            for (int i = 0; i < 100; i++)
+            {
+                Assert.AreEqual(2, cnt);
 
-			timer.Stop();
+                continuing.Add(target((i + 1).ToString()));
+            }
 
-			Assert.AreEqual(2, cnt);
+            foreach (var i in continuing)
+            {
+                var result = await i;
+                Assert.AreEqual("100100", result);
+            }
 
-			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
+            timer.Stop();
+            Thread.MemoryBarrier();
+            Assert.AreEqual(3, cnt);
 
+            Assert.IsTrue(Math.Abs(timer.ElapsedMilliseconds - waiting) < 20, "Elapsed time ({0}) differs too largely from designated waiting time ({1})", timer.ElapsedMilliseconds, waiting);
+            Thread.MemoryBarrier();
 
-		}
+            continuing.Clear();
+            timer.Reset();
+            timer.Start();
 
-		[TestMethod]
-		public async Task FunctionThrottle2()
-		{
+            await Task.Delay(2);
 
-			var testing = ModifyComponent();
-			var timer = new System.Diagnostics.Stopwatch();
-			int waiting = 100;
+            Thread.MemoryBarrier();
 
-			int cnt = 0;
-
-			var targeting = new Func<string, string, string, string, string, string, string>((s1, s2, s3, s4, s5, s6) =>
-			{
-				cnt++;
-				var returning = string.Join(" ", s1, s2, s3, s4, s5, s6);
-				return returning;
-			});
-
-			var target = testing.Throttle(targeting, waiting);
-
-			var continuing = new List<Task>();
-
-			timer.Start();
-
-			Thread.MemoryBarrier();
-			for (int i = 0; i < 99; i++)
-			{
-				Assert.AreEqual(i == 0 ? 0 : 1, cnt);
-
-				var j = i + 1;
+            first = target("101");
+            firstResult = await first;
+            Assert.AreEqual(4, cnt);
+            Assert.AreEqual("101101", firstResult);
 
 
-				if (i == 0)
-				{
-					continuing.Add(
-						target(
-							(j).ToString(),
-							(-j).ToString(),
-							(j).ToString(),
-							(-j).ToString(),
-							(j).ToString(),
-							(-j).ToString()
-						   ).ContinueWith(a => Assert.AreEqual("1 -1 1 -1 1 -1", a.Result))
-					   );
-				}
-				else
-				{
-					continuing.Add(
-						target(
-							(j).ToString(),
-							(-j).ToString(),
-							(j).ToString(),
-							(-j).ToString(),
-							(j).ToString(),
-							(-j).ToString()
-						   )
-							.ContinueWith(
-								a => Assert.AreEqual("99 -99 99 -99 99 -99", a.Result))
-					   );
-				}
-			}
+            for (int i = 0; i < 100; i++)
+            {
+                Assert.AreEqual(4, cnt);
+                continuing.Add(target((101 + i).ToString()));
+            }
+            foreach (var t in continuing)
+            {
+                var result = await t;
+                Assert.AreEqual("200200", result);
+            }
 
-			foreach (var v in continuing)
-				await v;
-
-			timer.Stop();
-			Thread.MemoryBarrier();
-			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
+            timer.Stop();
+            Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 
 
-			Assert.AreEqual(2, cnt);
-		}
+            Assert.AreEqual(5, cnt);
+        }
 
-		[TestMethod]
-		public async Task FunctionThrottle()
-		{
-			var testing = ModifyComponent();
-			var timer = new Stopwatch();
-			const int waiting = 1000;
+        [TestMethod]
+        public async Task Function_Synch_Throttle_6Arguments()
+        {
+            var testing = GetComponent();
+            var timer = new Stopwatch();
+            int waiting = 25;
 
-			int cnt = 1;
+            int cnt = 0;
 
-			var targeting = new Func<string, string>((i) =>
-			{
-				Interlocked.Increment(ref cnt);
-				return i + i;
-			});
+            timer.Start();
 
-			var target = testing.Throttle(targeting, waiting);
+            var targeting = new Func<string, string, string, string, string, string, string>((s1, s2, s3, s4, s5, s6) =>
+            {
+                cnt++;
+                var returning = string.Join(" ", s1, s2, s3, s4, s5, s6);
+                return returning;
+            });
 
-			var continuing = new List<Task<string>>();
+            var target = testing.Throttle(targeting, waiting);
 
-			timer.Start();
-
-			var first = target("0");
-			var firstResult = await first;
-
-			Thread.MemoryBarrier();
-
-			Assert.AreEqual(2, cnt);
-			Assert.AreEqual("00", firstResult);
+            var continuing = new List<Task>();
 
 
-			for (int i = 0; i < 100; i++)
-			{
-				Assert.AreEqual(2, cnt);
+            for (int i = 0; i < 99; i++)
+            {
+                Assert.AreEqual(i == 0 ? 0 : 1, cnt);
 
-				continuing.Add(target((i + 1).ToString()));
-			}
-
-			foreach (var i in continuing)
-			{
-				var result = await i;
-				Assert.AreEqual("100100", result);
-			}
-
-			timer.Stop();
-			Thread.MemoryBarrier();
-			Assert.AreEqual(3, cnt);
-
-			Assert.IsTrue(Math.Abs(timer.ElapsedMilliseconds - waiting) < 20, "Elapsed time ({0}) differs too largely from designated waiting time ({1})", timer.ElapsedMilliseconds, waiting);
-			Thread.MemoryBarrier();
-
-			continuing.Clear();
-			timer.Reset();
-			timer.Start();
-
-			await Task.Delay(2);
-
-			Thread.MemoryBarrier();
-
-			first = target("101");
-			firstResult = await first;
-			Assert.AreEqual(4, cnt);
-			Assert.AreEqual("101101", firstResult);
+                var j = i + 1;
 
 
-			for (int i = 0; i < 100; i++)
-			{
-				Assert.AreEqual(4, cnt);
-				continuing.Add(target((101 + i).ToString()));
-			}
-			foreach (var t in continuing)
-			{
-				var result = await t;
-				Assert.AreEqual("200200", result);
-			}
+                if (i == 0)
+                {
+                    continuing.Add(
+                        target(
+                            (j).ToString(),
+                            (-j).ToString(),
+                            (j).ToString(),
+                            (-j).ToString(),
+                            (j).ToString(),
+                            (-j).ToString()
+                           ).ContinueWith(a => Assert.AreEqual("1 -1 1 -1 1 -1", a.Result))
+                       );
+                }
+                else
+                {
+                    continuing.Add(
+                        target(
+                            (j).ToString(),
+                            (-j).ToString(),
+                            (j).ToString(),
+                            (-j).ToString(),
+                            (j).ToString(),
+                            (-j).ToString()
+                           )
+                            .ContinueWith(
+                                a => Assert.AreEqual("99 -99 99 -99 99 -99", a.Result))
+                       );
+                }
+            }
 
-			timer.Stop();
-			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
+            Assert.AreEqual(1, cnt);
 
 
-			Assert.AreEqual(5, cnt);
-		}
+            for (int i = 0; i < 99; i++)
+                await continuing[i];
+
+            timer.Stop();
+
+            Assert.AreEqual(2, cnt);
+
+            Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
+        }
 	}
 }

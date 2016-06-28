@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,6 +8,7 @@ using Underscore.Function;
 
 namespace Underscore.Test.Function.Synch
 {
+    //TODO: finish all debounce test overloads
 	[TestClass]
 	public class DebounceTest
 	{
@@ -20,7 +19,7 @@ namespace Underscore.Test.Function.Synch
 		//should rewrite and pass parameters instead of depending on an invoked value to be the 
 
 		[TestMethod]
-		public async Task FunctionDebounce()
+		public async Task Function_Synch_Debounce_NoArguments()
 		{
 			var testing = ModifyComponent();
 			var timer = new Stopwatch();
@@ -76,7 +75,7 @@ namespace Underscore.Test.Function.Synch
 		}
 
 		[TestMethod]
-		public async Task FunctionDebounce1()
+		public async Task Function_Synch_Debounce_1Argument()
 		{
 			var testing = ModifyComponent();
 			var timer = new Stopwatch();
@@ -120,9 +119,8 @@ namespace Underscore.Test.Function.Synch
 		}
 
 		[TestMethod]
-		public async Task FunctionDebounce2()
+		public async Task Function_Synch_Debounce_2Arguments()
 		{
-
 			var testing = ModifyComponent();
 			var timer = new Stopwatch();
 			int waiting = 100;
@@ -164,7 +162,7 @@ namespace Underscore.Test.Function.Synch
 		}
 
 		[TestMethod]
-		public async Task FunctionDebounce4()
+		public async Task Function_Synch_Debounce_3Arguments()
 		{
 
 			var testing = ModifyComponent();
@@ -206,7 +204,7 @@ namespace Underscore.Test.Function.Synch
 		}
 
 		[TestMethod]
-		public async Task FunctionDebounce5()
+		public async Task Function_Synch_Debounce_4Arguments()
 		{
 
 			var testing = ModifyComponent();
@@ -250,7 +248,7 @@ namespace Underscore.Test.Function.Synch
 		}
 
 		[TestMethod]
-		public async Task FunctionDebounce6()
+		public async Task Function_Synch_Debounce_5Arguments()
 		{
 
 			var testing = ModifyComponent();
@@ -292,7 +290,7 @@ namespace Underscore.Test.Function.Synch
 		}
 
 		[TestMethod]
-		public async Task FunctionDebounce7()
+		public async Task Function_Synch_Debounce_6Arguments()
 		{
 
 			var testing = ModifyComponent();

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,191 +10,199 @@ namespace Underscore.Test.Function.Synch
 	[TestClass]
 	public class DelayTest
 	{
-		public ISynchComponent ModifyComponent() { return new SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()); }
+        private ISynchComponent component;
+        private ComposeComponent compose;
 
-		[TestMethod]
-		public async Task FunctionDelay()
-		{
-			//if I didn't use this I would lose my mind
-			var fn = new ComposeComponent();
-			var testing = ModifyComponent();
+        //TODO: make a utility to return this argument list
+        private string[] arguments = new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
 
-			string[] arguments = new[] { "a", "b", "c", "d", "e", "f" };
+        //TODO: make a default constructor for this so we don't need a method just to get it
+        public ISynchComponent GetComponent() { return new SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()); }
 
+        [TestInitialize]
+        public void Initialize()
+        {
+            component = GetComponent();
+            compose = new ComposeComponent();
+        }
 
-			Action<int, string, Task<string>> TestDelay = (waitTime, expecting, delayed) =>
-			{
-				var timer = new Stopwatch();
-				timer.Start();
-				Thread.MemoryBarrier();
-				delayed.Wait();
-				Thread.MemoryBarrier();
-				timer.Stop();
-				Assert.IsTrue(timer.ElapsedMilliseconds >= waitTime - 25);
-				Assert.AreEqual(expecting, delayed.Result);
-			};
+        private void TestDelay(int waitTime, string expecting, Task<string> delayed) 
+        {
+            var timer = new Stopwatch();
+            timer.Start();
+            Thread.MemoryBarrier();
+            delayed.Wait();
+            Thread.MemoryBarrier();
+            timer.Stop();
+            Assert.IsTrue(timer.ElapsedMilliseconds >= waitTime - 25);
+            Assert.AreEqual(expecting, delayed.Result);
+        }
 
+        [TestMethod]
+        public void Function_Synch_Delay_NoArguments()
+        {
+            var timer = new Stopwatch();
+            var delayed = component.Delay(() => "worked", 100);
 
-			await Util.Tasks.Start(() =>
-			{
-				var timer = new Stopwatch();
-				var delayed = testing.Delay(() => "worked", 100);
+            timer.Start();
+            Thread.MemoryBarrier();
+            var taskResult = delayed();
 
-				timer.Start();
-				Thread.MemoryBarrier();
-				var taskResult = delayed();
+            Thread.MemoryBarrier();
 
-				Thread.MemoryBarrier();
+            taskResult.Wait();
+            timer.Stop();
 
-				taskResult.Wait();
-				timer.Stop();
+            Thread.MemoryBarrier();
+            Assert.AreEqual("worked", taskResult.Result);
+            Assert.IsTrue(timer.ElapsedMilliseconds >= 100 - 10, string.Format("Expecting at least {0} got {1}", 100, timer.ElapsedMilliseconds));
+        }
 
-				Thread.MemoryBarrier();
-				Assert.AreEqual("worked", taskResult.Result);
-				Assert.IsTrue(timer.ElapsedMilliseconds >= 100 - 10, string.Format("Expecting at least {0} got {1}", 100, timer.ElapsedMilliseconds));
+        [TestMethod]
+        public void Function_Synch_Delay_1Argument()
+        {
+            var invoked = false;
 
-			}, () =>
-			{
+            var delaying = new Func<string, string>((a) =>
+            {
+                Assert.AreEqual("a", a);
+                invoked = true;
+                return string.Join("", a);
+            });
 
-				var invoked = false;
+            var delayed = component.Delay(delaying, 100);
 
-				var delaying = new Func<string, string>((a) =>
-				{
-					Assert.AreEqual("a", a);
-					invoked = true;
-					return string.Join("", a);
-				});
+            Thread.MemoryBarrier();
 
-				var delayed = testing.Delay(delaying, 100);
+            TestDelay(100, "a", compose.Apply(delayed, arguments));
 
-				Thread.MemoryBarrier();
+            Assert.IsTrue(invoked);
+        }
 
-				TestDelay(100, "a", fn.Apply(delayed, arguments));
+        [TestMethod]
+        public void Function_Synch_Delay_2Arguments()
+        {
+            var invoked = false;
 
-				Assert.IsTrue(invoked);
+            var delaying = new Func<string, string, string>((a, b) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                invoked = true;
+                return string.Join("", a, b);
+            });
 
-			}, () =>
-			{
+            var delayed = component.Delay(delaying, 100);
 
-				var invoked = false;
+            Thread.MemoryBarrier();
 
-				var delaying = new Func<string, string, string>((a, b) =>
-				{
-					Assert.AreEqual("a", a);
-					Assert.AreEqual("b", b);
-					invoked = true;
-					return string.Join("", a, b);
-				});
+            TestDelay(100, "ab", compose.Apply(delayed, arguments));
 
-				var delayed = testing.Delay(delaying, 100);
+            Assert.IsTrue(invoked);
+        }
 
-				Thread.MemoryBarrier();
+        [TestMethod]
+        public void Function_Synch_Delay_3Arguments()
+        {
+            var invoked = false;
 
-				TestDelay(100, "ab", fn.Apply(delayed, arguments));
+            var delaying = new Func<string, string, string, string>((a, b, c) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                invoked = true;
+                return "abc";
+            });
 
-				Assert.IsTrue(invoked);
+            var delayed = component.Delay(delaying, 100);
 
-			}, () =>
-			{
+            Thread.MemoryBarrier();
 
-				var invoked = false;
+            TestDelay(100, "abc", compose.Apply(delayed, arguments));
 
-				var delaying = new Func<string, string, string, string>((a, b, c) =>
-				{
-					Assert.AreEqual("a", a);
-					Assert.AreEqual("b", b);
-					Assert.AreEqual("c", c);
-					invoked = true;
-					return "abc";
-				});
+            Assert.IsTrue(invoked);
+        }
 
-				var delayed = testing.Delay(delaying, 100);
+        [TestMethod]
+        public void Function_Synch_Delay_4Arguments()
+        {
+            var invoked = false;
 
-				Thread.MemoryBarrier();
+            var delaying = new Func<string, string, string, string, string>((a, b, c, d) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                Assert.AreEqual("d", d);
+                invoked = true;
+                return "abcd";
+            });
 
-				TestDelay(100, "abc", fn.Apply(delayed, arguments));
+            var delayed = component.Delay(delaying, 100);
 
-				Assert.IsTrue(invoked);
+            Thread.MemoryBarrier();
 
-			}, () =>
-			{
+            TestDelay(100, "abcd", compose.Apply(delayed, arguments));
 
-				var invoked = false;
+            Assert.IsTrue(invoked);
+        }
 
-				var delaying = new Func<string, string, string, string, string>((a, b, c, d) =>
-				{
-					Assert.AreEqual("a", a);
-					Assert.AreEqual("b", b);
-					Assert.AreEqual("c", c);
-					Assert.AreEqual("d", d);
-					invoked = true;
-					return "abcd";
-				});
+        [TestMethod]
+        public void Function_Synch_Delay_5Arguments()
+        {
+            var invoked = false;
 
-				var delayed = testing.Delay(delaying, 100);
+            var delaying = new Func<string, string, string, string, string, string>((a, b, c, d, e) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                Assert.AreEqual("d", d);
+                Assert.AreEqual("e", e);
+                invoked = true;
+                return "abcde";
+            });
 
-				Thread.MemoryBarrier();
+            var timer = new Stopwatch();
+            var delayed = component.Delay(delaying, 100);
 
-				TestDelay(100, "abcd", fn.Apply(delayed, arguments));
+            timer.Start();
 
-				Assert.IsTrue(invoked);
+            Thread.MemoryBarrier();
 
-			}, () =>
-			{
+            TestDelay(100, "abcde", compose.Apply(delayed, arguments));
 
-				var invoked = false;
+            Assert.IsTrue(invoked);
+            timer.Stop();
+            Thread.MemoryBarrier();
+            Assert.IsTrue(timer.ElapsedMilliseconds >= 100, "Not {0} >= {1} ", timer.Elapsed, 100);
+        }
 
-				var delaying = new Func<string, string, string, string, string, string>((a, b, c, d, e) =>
-				{
-					Assert.AreEqual("a", a);
-					Assert.AreEqual("b", b);
-					Assert.AreEqual("c", c);
-					Assert.AreEqual("d", d);
-					Assert.AreEqual("e", e);
-					invoked = true;
-					return "abcde";
-				});
+        [TestMethod]
+        public void Function_Synch_Delay_6Arguments()
+        {
+            var invoked = false;
 
-				var timer = new Stopwatch();
-				var delayed = testing.Delay(delaying, 100);
+            var delaying = new Func<string, string, string, string, string, string, string>((a, b, c, d, e, f) =>
+            {
+                Assert.AreEqual("a", a);
+                Assert.AreEqual("b", b);
+                Assert.AreEqual("c", c);
+                Assert.AreEqual("d", d);
+                Assert.AreEqual("e", e);
+                Assert.AreEqual("f", f);
+                invoked = true;
+                return "abcdef";
+            });
 
-				timer.Start();
+            var delayed = component.Delay(delaying, 100);
 
-				Thread.MemoryBarrier();
+            Thread.MemoryBarrier();
 
-				TestDelay(100, "abcde", fn.Apply(delayed, arguments));
+            TestDelay(100, "abcdef", compose.Apply(delayed, arguments));
 
-				Assert.IsTrue(invoked);
-				timer.Stop();
-				Thread.MemoryBarrier();
-				Assert.IsTrue(timer.ElapsedMilliseconds >= 100, "Not {0} >= {1} ", timer.Elapsed, 100);
-
-			}, () =>
-			{
-
-				var invoked = false;
-
-				var delaying = new Func<string, string, string, string, string, string, string>((a, b, c, d, e, f) =>
-				{
-					Assert.AreEqual("a", a);
-					Assert.AreEqual("b", b);
-					Assert.AreEqual("c", c);
-					Assert.AreEqual("d", d);
-					Assert.AreEqual("e", e);
-					Assert.AreEqual("f", f);
-					invoked = true;
-					return "abcdef";
-				});
-
-				var delayed = testing.Delay(delaying, 100);
-
-				Thread.MemoryBarrier();
-
-				TestDelay(100, "abcdef", fn.Apply(delayed, arguments));
-
-				Assert.IsTrue(invoked);
-
-			});
-		}
-	}
+            Assert.IsTrue(invoked);
+        }
+  	}
 }
