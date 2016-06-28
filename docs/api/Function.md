@@ -138,3 +138,27 @@ function("a", "b", "c"); // "a b c"
 curriedFunction("a")("b")("c"); // "a b c"
 uncurriedFunction("a", "b", "c") // "a b c"
 ```
+
+## Synch
+### Func\<Task\<TResult\>\> After\<TResult\>(Func\<TResult\> function, int count)
+Returns a function which returns a task that only performs the given function after it is called with all of the calls before count times yielding a result equal to the result of the first working invocation, with every subsequent execution just returning the last invocation's result.
+```
+Func<string, string> function = (a) => a + a;
+
+var aftered = _.Function.After(function, 3);
+
+List<Task<string>> tasks = new List<Task<string>>();
+
+for(int i = 0; i < 10; i++)
+    tasks.Add(aftered(i.ToString()));
+
+foreach(var task in tasks)
+    task.Wait();
+
+var results = new List<string>();
+
+foreach(var task in tasks)
+    results.Add(task.Result);
+
+results; // { "2", "2", "2", "3", "4", "5", "6", "7", "8", "9" }
+```

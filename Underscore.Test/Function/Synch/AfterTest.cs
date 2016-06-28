@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,708 +12,719 @@ namespace Underscore.Test.Function.Synch
 	[TestClass]
 	public class AfterTest
 	{
-		public ISynchComponent ModifyComponent() { return new SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()); }
+        private ISynchComponent component;
+        private ComposeComponent compose;
 
-		[TestMethod]
-		public async Task FunctionAfter()
-		{
-			//if I didn't use this I would lose my mind
-			var testing = ModifyComponent();
-			var fn = new ComposeComponent();
+        private string[] arguments = new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
+        private const int repeatCount = 100000;
+        private const int paramValue = 15000;
 
-			string[] arguments = new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
+        private Func<Task<string>[]> mkArr = () => new Task<string>[repeatCount];
 
+        public ISynchComponent GetComponent() { return new SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()); }
 
-			int repeatCount = 100000;
-			int paramValue = 15000;
+        [TestInitialize]
+        public void Initialize()
+        {
+            component = GetComponent();
+            compose = new ComposeComponent();
+        }
 
-			Func<Task<string>[]> mkArr = () => new Task<string>[repeatCount];
+        [TestMethod]
+        public void Function_Synch_After_NoArguments()
+        {
+            var expected = new string[] { "2", "2", "2", "3", "4", "5", "6", "7", "8", "9" };
+            Func<string, string> function = (a) => a;
 
-			await Util.Tasks.Start(() =>
-			{
+            var aftered = component.After(function, 3);
 
-				int counter = 0;
-				var timer = new Stopwatch();
-				var aftered = testing.After(() => (counter++).ToString(), 3);
+            List<Task<string>> tasks = new List<Task<string>>();
 
-				List<Task<string>> results = new List<Task<string>>();
+            for (int i = 0; i < 10; i++)
+                tasks.Add(aftered(i.ToString()));
 
-				for (int i = 0; i < 10; i++)
-				{
-					results.Add(aftered());
-				}
+            foreach (var task in tasks)
+                task.Wait();
 
-				for (int i = 0; i < 3; i++)
-				{
-					results[i].Wait();
-					var rslt = results[i].Result;
-					Assert.AreEqual("0", rslt);
-				}
+            var results = new List<string>();
 
-				var shouldHave = new HashSet<string>();
-				var actualResults = new HashSet<string>();
+            foreach (var task in tasks)
+                results.Add(task.Result);
 
-				foreach (var j in Enumerable.Range(3, 7))
-					shouldHave.Add((j - 2).ToString());
+            for (int i = 0; i < results.Count; i++)
+                Assert.AreEqual(expected[i], results[i]);
+        }
 
-				for (int i = 3; i < 10; i++)
-				{
-					results[i].Wait();
-					var rslt = results[i].Result;
-					Assert.IsTrue(actualResults.Add((rslt)));
-					Assert.IsTrue(shouldHave.Contains(rslt));
-				}
+        [TestMethod]
+        public void Function_Synch_After_1Argument()
+        {
+            var invoked = false;
+            var arr = mkArr();
 
-				Assert.AreEqual(shouldHave.Count, actualResults.Count);
+            var counter = 0;
 
+            var aftering = new Func<string, string>((a) =>
+            {
+                invoked = true;
+                return a;
+            });
 
-			}, () =>
-			{
+            var aftered = component.After(aftering, paramValue);
 
-				var invoked = false;
-				var arr = mkArr();
+            for (int i = 0; i < repeatCount; i++)
+            {
+                var curr = counter++;
+                arr[i] = compose.Apply(aftered, arguments.Take(1).Concat(new[] { curr.ToString() }).ToArray());
+            }
 
-				var counter = 0;
+            for (int i = 0; i < repeatCount; i++)
+            {
+                arr[i].Wait();
+            }
 
+            for (int i = 0; i < paramValue; i++)
+            {
+                Assert.AreEqual("a", arr[i].Result);
+            }
 
-				var aftering = new Func<string, string, string>((a, b) =>
-				{
-					invoked = true;
-					return string.Join("", a, b);
+            for (int i = paramValue; i < repeatCount; i++)
+            {
+                Assert.AreEqual("a", arr[i].Result);
+            }
 
-				});
+            Assert.IsTrue(invoked);
+        }
 
-				var aftered = testing.After(aftering, paramValue);
+        [TestMethod]
+        public void Function_Synch_After_2Arguments()
+        {
+            var invoked = false;
+            var arr = mkArr();
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					var curr = counter++;
-					arr[i] = fn.Apply(aftered, arguments.Take(1).Concat(new[] { curr.ToString() }).ToArray());
-				}
+            var counter = 0;
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					arr[i].Wait();
-				}
 
-				for (int i = 0; i < paramValue; i++)
-				{
-					Assert.AreEqual("a" + (paramValue - 1), arr[i].Result);
-				}
+            var aftering = new Func<string, string, string>((a, b) =>
+            {
+                invoked = true;
+                return string.Join("", a, b);
 
-				for (int i = paramValue; i < repeatCount; i++)
-				{
-					Assert.AreEqual("a" + i, arr[i].Result);
-				}
+            });
 
-				Assert.IsTrue(invoked);
+            var aftered = component.After(aftering, paramValue);
 
+            for (int i = 0; i < repeatCount; i++)
+            {
+                var curr = counter++;
+                arr[i] = compose.Apply(aftered, arguments.Take(1).Concat(new[] { curr.ToString() }).ToArray());
+            }
 
-			}, () =>
-			{
+            for (int i = 0; i < repeatCount; i++)
+            {
+                arr[i].Wait();
+            }
 
+            for (int i = 0; i < paramValue; i++)
+            {
+                Assert.AreEqual("a" + (paramValue - 1), arr[i].Result);
+            }
 
-				var invoked = false;
-				var arr = mkArr();
+            for (int i = paramValue; i < repeatCount; i++)
+            {
+                Assert.AreEqual("a" + i, arr[i].Result);
+            }
 
-				var counter = 0;
+            Assert.IsTrue(invoked);
+        }
 
+        [TestMethod]
+        public void Function_Synch_After_3Arguments()
+        {
+            var invoked = false;
+            var arr = mkArr();
 
-				var aftering = new Func<string, string, string, string>((a, b, c) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c);
+            var counter = 0;
 
-				});
 
-				var aftered = testing.After(aftering, paramValue);
+            var aftering = new Func<string, string, string, string>((a, b, c) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c);
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					var curr = counter++;
-					arr[i] = fn.Apply(aftered, arguments.Take(2).Concat(new[] { curr.ToString() }).ToArray());
-				}
+            });
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					arr[i].Wait();
-				}
+            var aftered = component.After(aftering, paramValue);
 
-				for (int i = 0; i < paramValue; i++)
-				{
-					Assert.AreEqual("ab" + (paramValue - 1), arr[i].Result);
-				}
+            for (int i = 0; i < repeatCount; i++)
+            {
+                var curr = counter++;
+                arr[i] = compose.Apply(aftered, arguments.Take(2).Concat(new[] { curr.ToString() }).ToArray());
+            }
 
-				for (int i = paramValue; i < repeatCount; i++)
-				{
-					Assert.AreEqual("ab" + i, arr[i].Result);
-				}
+            for (int i = 0; i < repeatCount; i++)
+            {
+                arr[i].Wait();
+            }
 
-				Assert.IsTrue(invoked);
+            for (int i = 0; i < paramValue; i++)
+            {
+                Assert.AreEqual("ab" + (paramValue - 1), arr[i].Result);
+            }
 
+            for (int i = paramValue; i < repeatCount; i++)
+            {
+                Assert.AreEqual("ab" + i, arr[i].Result);
+            }
 
-			}, () =>
-			{
+            Assert.IsTrue(invoked);
+        }
 
-				var invoked = false;
-				var arr = mkArr();
+        [TestMethod]
+        public void Function_Synch_After_4Arguments()
+        {
+            var invoked = false;
+            var arr = mkArr();
 
-				var counter = 0;
+            var counter = 0;
 
 
-				var aftering = new Func<string, string, string, string, string>((a, b, c, d) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d);
+            var aftering = new Func<string, string, string, string, string>((a, b, c, d) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d);
 
-				});
+            });
 
-				var aftered = testing.After(aftering, paramValue);
+            var aftered = component.After(aftering, paramValue);
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					var curr = counter++;
-					arr[i] = fn.Apply(aftered, arguments.Take(3).Concat(new[] { curr.ToString() }).ToArray());
-				}
+            for (int i = 0; i < repeatCount; i++)
+            {
+                var curr = counter++;
+                arr[i] = compose.Apply(aftered, arguments.Take(3).Concat(new[] { curr.ToString() }).ToArray());
+            }
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					arr[i].Wait();
-				}
+            for (int i = 0; i < repeatCount; i++)
+            {
+                arr[i].Wait();
+            }
 
-				for (int i = 0; i < paramValue; i++)
-				{
-					Assert.AreEqual("abc" + (paramValue - 1), arr[i].Result);
-				}
+            for (int i = 0; i < paramValue; i++)
+            {
+                Assert.AreEqual("abc" + (paramValue - 1), arr[i].Result);
+            }
 
-				for (int i = paramValue; i < repeatCount; i++)
-				{
-					Assert.AreEqual("abc" + i, arr[i].Result);
-				}
+            for (int i = paramValue; i < repeatCount; i++)
+            {
+                Assert.AreEqual("abc" + i, arr[i].Result);
+            }
 
-				Assert.IsTrue(invoked);
+            Assert.IsTrue(invoked);
+        }
 
+        [TestMethod]
+        public void Function_Synch_After_5Arguments()
+        {
+            var invoked = false;
+            var arr = mkArr();
 
-			}, () =>
-			{
+            var counter = 0;
 
 
-				var invoked = false;
-				var arr = mkArr();
+            var aftering = new Func<string, string, string, string, string, string>((a, b, c, d, e) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e);
 
-				var counter = 0;
+            });
 
+            var aftered = component.After(aftering, paramValue);
 
-				var aftering = new Func<string, string, string, string, string, string>((a, b, c, d, e) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e);
+            for (int i = 0; i < repeatCount; i++)
+            {
+                var curr = counter++;
+                arr[i] = compose.Apply(aftered, arguments.Take(4).Concat(new[] { curr.ToString() }).ToArray());
+            }
 
-				});
+            for (int i = 0; i < repeatCount; i++)
+            {
+                arr[i].Wait();
+            }
 
-				var aftered = testing.After(aftering, paramValue);
+            for (int i = 0; i < paramValue; i++)
+            {
+                Assert.AreEqual("abcd" + (paramValue - 1), arr[i].Result);
+            }
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					var curr = counter++;
-					arr[i] = fn.Apply(aftered, arguments.Take(4).Concat(new[] { curr.ToString() }).ToArray());
-				}
+            for (int i = paramValue; i < repeatCount; i++)
+            {
+                Assert.AreEqual("abcd" + i, arr[i].Result);
+            }
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					arr[i].Wait();
-				}
+            Assert.IsTrue(invoked);
+        }
 
-				for (int i = 0; i < paramValue; i++)
-				{
-					Assert.AreEqual("abcd" + (paramValue - 1), arr[i].Result);
-				}
+        [TestMethod]
+        public void Function_Synch_After_6Arguments()
+        {
+            var invoked = false;
+            var arr = mkArr();
 
-				for (int i = paramValue; i < repeatCount; i++)
-				{
-					Assert.AreEqual("abcd" + i, arr[i].Result);
-				}
+            var counter = 0;
 
-				Assert.IsTrue(invoked);
 
+            var aftering = new Func<string, string, string, string, string, string, string>((a, b, c, d, e, f) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f);
 
+            });
 
-			}, () =>
-			{
+            var aftered = component.After(aftering, paramValue);
 
-				var invoked = false;
-				var arr = mkArr();
+            for (int i = 0; i < repeatCount; i++)
+            {
+                var curr = counter++;
+                arr[i] = compose.Apply(aftered, arguments.Take(5).Concat(new[] { curr.ToString() }).ToArray());
+            }
 
-				var counter = 0;
+            for (int i = 0; i < repeatCount; i++)
+            {
+                arr[i].Wait();
+            }
 
+            for (int i = 0; i < paramValue; i++)
+            {
+                Assert.AreEqual("abcde" + (paramValue - 1), arr[i].Result);
+            }
 
-				var aftering = new Func<string, string, string, string, string, string, string>((a, b, c, d, e, f) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f);
+            for (int i = paramValue; i < repeatCount; i++)
+            {
+                Assert.AreEqual("abcde" + i, arr[i].Result);
+            }
 
-				});
+            Assert.IsTrue(invoked);
+        }
 
-				var aftered = testing.After(aftering, paramValue);
+        [TestMethod]
+        public void Function_Synch_After_7Arguments()
+        {
+            var invoked = false;
+            var arr = mkArr();
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					var curr = counter++;
-					arr[i] = fn.Apply(aftered, arguments.Take(5).Concat(new[] { curr.ToString() }).ToArray());
-				}
+            var counter = 0;
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					arr[i].Wait();
-				}
 
-				for (int i = 0; i < paramValue; i++)
-				{
-					Assert.AreEqual("abcde" + (paramValue - 1), arr[i].Result);
-				}
+            var aftering = new Func<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g);
 
-				for (int i = paramValue; i < repeatCount; i++)
-				{
-					Assert.AreEqual("abcde" + i, arr[i].Result);
-				}
+            });
 
-				Assert.IsTrue(invoked);
+            var aftered = component.After(aftering, paramValue);
 
+            for (int i = 0; i < repeatCount; i++)
+            {
+                var curr = counter++;
+                arr[i] = compose.Apply(aftered, arguments.Take(6).Concat(new[] { curr.ToString() }).ToArray());
+            }
 
-			}, () =>
-			{
+            for (int i = 0; i < repeatCount; i++)
+            {
+                arr[i].Wait();
+            }
 
+            for (int i = 0; i < paramValue; i++)
+            {
+                Assert.AreEqual("abcdef" + (paramValue - 1), arr[i].Result);
+            }
 
-				var invoked = false;
-				var arr = mkArr();
+            for (int i = paramValue; i < repeatCount; i++)
+            {
+                Assert.AreEqual("abcdef" + i, arr[i].Result);
+            }
 
-				var counter = 0;
+            Assert.IsTrue(invoked);
+        }
 
+        [TestMethod]
+        public void Function_Synch_After_8Arguments()
+        {
+            var invoked = false;
+            var arr = mkArr();
 
-				var aftering = new Func<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g);
+            var counter = 0;
 
-				});
 
-				var aftered = testing.After(aftering, paramValue);
+            var aftering = new Func<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h);
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					var curr = counter++;
-					arr[i] = fn.Apply(aftered, arguments.Take(6).Concat(new[] { curr.ToString() }).ToArray());
-				}
+            });
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					arr[i].Wait();
-				}
+            var aftered = component.After(aftering, paramValue);
 
-				for (int i = 0; i < paramValue; i++)
-				{
-					Assert.AreEqual("abcdef" + (paramValue - 1), arr[i].Result);
-				}
+            for (int i = 0; i < repeatCount; i++)
+            {
+                var curr = counter++;
+                Thread.MemoryBarrier();
+                arr[i] = compose.Apply(aftered, arguments.Take(7).Concat(new[] { curr.ToString() }).ToArray());
+                Thread.MemoryBarrier();
+            }
 
-				for (int i = paramValue; i < repeatCount; i++)
-				{
-					Assert.AreEqual("abcdef" + i, arr[i].Result);
-				}
+            for (int i = 0; i < repeatCount; i++)
+            {
+                arr[i].Wait();
+            }
 
-				Assert.IsTrue(invoked);
+            for (int i = 0; i < paramValue; i++)
+            {
+                Assert.AreEqual("abcdefg" + (paramValue - 1), arr[i].Result);
+            }
 
+            for (int i = paramValue; i < repeatCount; i++)
+            {
+                Assert.AreEqual("abcdefg" + i, arr[i].Result);
+            }
 
-			}, () =>
-			{
+            Assert.IsTrue(invoked);
+        }
 
+        [TestMethod]
+        public void Function_Synch_After_9Arguments()
+        {
+            var invoked = false;
+            var arr = mkArr();
 
-				var invoked = false;
-				var arr = mkArr();
+            var counter = 0;
 
-				var counter = 0;
 
+            var aftering = new Func<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h, i);
 
-				var aftering = new Func<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h);
+            });
 
-				});
+            var aftered = component.After(aftering, paramValue);
 
-				var aftered = testing.After(aftering, paramValue);
+            for (int i = 0; i < repeatCount; i++)
+            {
+                var curr = counter++;
+                arr[i] = compose.Apply(aftered, arguments.Take(8).Concat(new[] { curr.ToString() }).ToArray());
+            }
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					var curr = counter++;
-					Thread.MemoryBarrier();
-					arr[i] = fn.Apply(aftered, arguments.Take(7).Concat(new[] { curr.ToString() }).ToArray());
-					Thread.MemoryBarrier();
-				}
+            for (int i = 0; i < repeatCount; i++)
+            {
+                arr[i].Wait();
+            }
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					arr[i].Wait();
-				}
+            for (int i = 0; i < paramValue; i++)
+            {
+                Assert.AreEqual("abcdefgh" + (paramValue - 1), arr[i].Result);
+            }
 
-				for (int i = 0; i < paramValue; i++)
-				{
-					Assert.AreEqual("abcdefg" + (paramValue - 1), arr[i].Result);
-				}
+            for (int i = paramValue; i < repeatCount; i++)
+            {
+                Assert.AreEqual("abcdefgh" + i, arr[i].Result);
+            }
 
-				for (int i = paramValue; i < repeatCount; i++)
-				{
-					Assert.AreEqual("abcdefg" + i, arr[i].Result);
-				}
+            Assert.IsTrue(invoked);
+        }
 
-				Assert.IsTrue(invoked);
+        [TestMethod]
+        public void Function_Synch_After_10Arguments()
+        {
+            var invoked = false;
+            var arr = mkArr();
 
+            var counter = 0;
 
-			}, () =>
-			{
 
+            var aftering = new Func<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h, i, j);
 
-				var invoked = false;
-				var arr = mkArr();
+            });
 
-				var counter = 0;
+            var aftered = component.After(aftering, paramValue);
 
+            for (int i = 0; i < repeatCount; i++)
+            {
+                int curr = counter++;
+                arr[i] = compose.Apply(aftered, arguments.Take(9).Concat(new[] { curr.ToString() }).ToArray());
+            }
 
-				var aftering = new Func<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, i);
+            for (int i = 0; i < repeatCount; i++)
+            {
+                arr[i].Wait();
+            }
 
-				});
+            for (int i = 0; i < paramValue; i++)
+            {
+                Assert.AreEqual("abcdefghi" + (paramValue - 1), arr[i].Result);
+            }
 
-				var aftered = testing.After(aftering, paramValue);
+            for (int i = paramValue; i < repeatCount; i++)
+            {
+                Assert.AreEqual("abcdefghi" + i, arr[i].Result);
+            }
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					var curr = counter++;
-					arr[i] = fn.Apply(aftered, arguments.Take(8).Concat(new[] { curr.ToString() }).ToArray());
-				}
+            Assert.IsTrue(invoked);
+        }
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					arr[i].Wait();
-				}
+        [TestMethod]
+        public void Function_Synch_After_11Arguments()
+        {
+            var invoked = false;
+            var arr = mkArr();
 
-				for (int i = 0; i < paramValue; i++)
-				{
-					Assert.AreEqual("abcdefgh" + (paramValue - 1), arr[i].Result);
-				}
+            var counter = 0;
 
-				for (int i = paramValue; i < repeatCount; i++)
-				{
-					Assert.AreEqual("abcdefgh" + i, arr[i].Result);
-				}
 
-				Assert.IsTrue(invoked);
+            var aftering = new Func<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h, i, j, k);
 
+            });
 
-			}, () =>
-			{
+            var aftered = component.After(aftering, paramValue);
 
-				var invoked = false;
-				var arr = mkArr();
+            for (int i = 0; i < repeatCount; i++)
+            {
+                var curr = counter++;
+                arr[i] = compose.Apply(aftered, arguments.Take(10).Concat(new[] { curr.ToString() }).ToArray());
+            }
 
-				var counter = 0;
+            for (int i = 0; i < repeatCount; i++)
+            {
+                arr[i].Wait();
+            }
 
+            for (int i = 0; i < paramValue; i++)
+            {
+                Assert.AreEqual("abcdefghij" + (paramValue - 1), arr[i].Result);
+            }
 
-				var aftering = new Func<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, i, j);
+            for (int i = paramValue; i < repeatCount; i++)
+            {
+                Assert.AreEqual("abcdefghij" + i, arr[i].Result);
+            }
 
-				});
+            Assert.IsTrue(invoked);
+        }
 
-				var aftered = testing.After(aftering, paramValue);
+        [TestMethod]
+        public void Function_Synch_After_12Arguments()
+        {
+            var invoked = false;
+            var arr = mkArr();
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					int curr = counter++;
-					arr[i] = fn.Apply(aftered, arguments.Take(9).Concat(new[] { curr.ToString() }).ToArray());
-				}
+            var counter = 0;
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					arr[i].Wait();
-				}
 
-				for (int i = 0; i < paramValue; i++)
-				{
-					Assert.AreEqual("abcdefghi" + (paramValue - 1), arr[i].Result);
-				}
+            var aftering = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l);
 
-				for (int i = paramValue; i < repeatCount; i++)
-				{
-					Assert.AreEqual("abcdefghi" + i, arr[i].Result);
-				}
+            });
 
-				Assert.IsTrue(invoked);
+            var aftered = component.After(aftering, paramValue);
 
+            for (int i = 0; i < repeatCount; i++)
+            {
+                var curr = counter++;
+                arr[i] = compose.Apply(aftered, arguments.Take(11).Concat(new[] { curr.ToString() }).ToArray());
+            }
 
-			}, () =>
-			{
+            for (int i = 0; i < repeatCount; i++)
+            {
+                arr[i].Wait();
+            }
 
+            for (int i = 0; i < paramValue; i++)
+            {
+                Assert.AreEqual("abcdefghijk" + (paramValue - 1), arr[i].Result);
+            }
 
-				var invoked = false;
-				var arr = mkArr();
+            for (int i = paramValue; i < repeatCount; i++)
+            {
+                Assert.AreEqual("abcdefghijk" + i, arr[i].Result);
+            }
 
-				var counter = 0;
+            Assert.IsTrue(invoked);
+        }
 
+        [TestMethod]
+        public void Function_Synch_After_13Arguments()
+        {
+            var invoked = false;
+            var arr = mkArr();
 
-				var aftering = new Func<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, i, j, k);
+            var counter = 0;
 
-				});
 
-				var aftered = testing.After(aftering, paramValue);
+            var aftering = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m);
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					var curr = counter++;
-					arr[i] = fn.Apply(aftered, arguments.Take(10).Concat(new[] { curr.ToString() }).ToArray());
-				}
+            });
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					arr[i].Wait();
-				}
+            var aftered = component.After(aftering, paramValue);
 
-				for (int i = 0; i < paramValue; i++)
-				{
-					Assert.AreEqual("abcdefghij" + (paramValue - 1), arr[i].Result);
-				}
+            for (int i = 0; i < repeatCount; i++)
+            {
+                var curr = counter++;
+                arr[i] = compose.Apply(aftered, arguments.Take(12).Concat(new[] { curr.ToString() }).ToArray());
+            }
 
-				for (int i = paramValue; i < repeatCount; i++)
-				{
-					Assert.AreEqual("abcdefghij" + i, arr[i].Result);
-				}
+            for (int i = 0; i < repeatCount; i++)
+            {
+                arr[i].Wait();
+            }
 
-				Assert.IsTrue(invoked);
+            for (int i = 0; i < paramValue; i++)
+            {
+                Assert.AreEqual("abcdefghijkl" + (paramValue - 1), arr[i].Result);
+            }
 
-			}, () =>
-			{
+            for (int i = paramValue; i < repeatCount; i++)
+            {
+                Assert.AreEqual("abcdefghijkl" + i, arr[i].Result);
+            }
 
+            Assert.IsTrue(invoked);
+        }
 
-				var invoked = false;
-				var arr = mkArr();
+        [TestMethod]
+        public void Function_Synch_After_14Arguments()
+        {
+            var invoked = false;
+            var arr = mkArr();
 
-				var counter = 0;
+            var counter = 0;
 
 
-				var aftering = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l);
+            var aftering = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 
-				});
+            });
 
-				var aftered = testing.After(aftering, paramValue);
+            var aftered = component.After(aftering, paramValue);
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					var curr = counter++;
-					arr[i] = fn.Apply(aftered, arguments.Take(11).Concat(new[] { curr.ToString() }).ToArray());
-				}
+            for (int i = 0; i < repeatCount; i++)
+            {
+                var curr = counter++;
+                arr[i] = compose.Apply(aftered, arguments.Take(13).Concat(new[] { curr.ToString() }).ToArray());
+            }
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					arr[i].Wait();
-				}
+            for (int i = 0; i < repeatCount; i++)
+            {
+                arr[i].Wait();
+            }
 
-				for (int i = 0; i < paramValue; i++)
-				{
-					Assert.AreEqual("abcdefghijk" + (paramValue - 1), arr[i].Result);
-				}
+            for (int i = 0; i < paramValue; i++)
+            {
+                Assert.AreEqual("abcdefghijklm" + (paramValue - 1), arr[i].Result);
+            }
 
-				for (int i = paramValue; i < repeatCount; i++)
-				{
-					Assert.AreEqual("abcdefghijk" + i, arr[i].Result);
-				}
+            for (int i = paramValue; i < repeatCount; i++)
+            {
+                Assert.AreEqual("abcdefghijklm" + i, arr[i].Result);
+            }
 
-				Assert.IsTrue(invoked);
+            Assert.IsTrue(invoked);
+        }
 
-			}, () =>
-			{
+        [TestMethod]
+        public void Function_Synch_After_15Arguments()
+        {
+            var invoked = false;
+            var arr = mkArr();
 
+            var counter = 0;
 
 
-				var invoked = false;
-				var arr = mkArr();
+            var aftering = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 
-				var counter = 0;
+            });
 
+            var aftered = component.After(aftering, paramValue);
 
-				var aftering = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m);
+            for (int i = 0; i < repeatCount; i++)
+            {
+                var curr = counter++;
+                arr[i] = compose.Apply(aftered, arguments.Take(14).Concat(new[] { curr.ToString() }).ToArray());
+            }
 
-				});
+            for (int i = 0; i < repeatCount; i++)
+            {
+                arr[i].Wait();
+            }
 
-				var aftered = testing.After(aftering, paramValue);
+            for (int i = 0; i < paramValue; i++)
+            {
+                Assert.AreEqual("abcdefghijklmn" + (paramValue - 1), arr[i].Result);
+            }
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					var curr = counter++;
-					arr[i] = fn.Apply(aftered, arguments.Take(12).Concat(new[] { curr.ToString() }).ToArray());
-				}
+            for (int i = paramValue; i < repeatCount; i++)
+            {
+                Assert.AreEqual("abcdefghijklmn" + i, arr[i].Result);
+            }
 
-				for (int i = 0; i < repeatCount; i++)
-				{
-					arr[i].Wait();
-				}
+            Assert.IsTrue(invoked);
+        }
 
-				for (int i = 0; i < paramValue; i++)
-				{
-					Assert.AreEqual("abcdefghijkl" + (paramValue - 1), arr[i].Result);
-				}
+        [TestMethod]
+        public void Function_Synch_After_16Arguments()
+        {
+            var invoked = false;
+            var arr = mkArr();
 
-				for (int i = paramValue; i < repeatCount; i++)
-				{
-					Assert.AreEqual("abcdefghijkl" + i, arr[i].Result);
-				}
+            var counter = 0;
 
-				Assert.IsTrue(invoked);
 
+            var aftering = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) =>
+            {
+                invoked = true;
+                return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
-			}, () =>
-			{
+            });
 
+            var aftered = component.After(aftering, paramValue);
 
-				var invoked = false;
-				var arr = mkArr();
+            for (int i = 0; i < repeatCount; i++)
+            {
+                var curr = counter++;
+                arr[i] = compose.Apply(aftered, arguments.Take(15).Concat(new[] { curr.ToString() }).ToArray());
+            }
 
-				var counter = 0;
+            for (int i = 0; i < repeatCount; i++)
+            {
+                arr[i].Wait();
+            }
 
+            for (int i = 0; i < paramValue; i++)
+            {
+                Assert.AreEqual("abcdefghijklmno" + (paramValue - 1), arr[i].Result);
+            }
 
-				var aftering = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+            for (int i = paramValue; i < repeatCount; i++)
+            {
+                Assert.AreEqual("abcdefghijklmno" + i, arr[i].Result);
+            }
 
-				});
-
-				var aftered = testing.After(aftering, paramValue);
-
-				for (int i = 0; i < repeatCount; i++)
-				{
-					var curr = counter++;
-					arr[i] = fn.Apply(aftered, arguments.Take(13).Concat(new[] { curr.ToString() }).ToArray());
-				}
-
-				for (int i = 0; i < repeatCount; i++)
-				{
-					arr[i].Wait();
-				}
-
-				for (int i = 0; i < paramValue; i++)
-				{
-					Assert.AreEqual("abcdefghijklm" + (paramValue - 1), arr[i].Result);
-				}
-
-				for (int i = paramValue; i < repeatCount; i++)
-				{
-					Assert.AreEqual("abcdefghijklm" + i, arr[i].Result);
-				}
-
-				Assert.IsTrue(invoked);
-
-
-			}, () =>
-			{
-
-
-
-				var invoked = false;
-				var arr = mkArr();
-
-				var counter = 0;
-
-
-				var aftering = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
-
-				});
-
-				var aftered = testing.After(aftering, paramValue);
-
-				for (int i = 0; i < repeatCount; i++)
-				{
-					var curr = counter++;
-					arr[i] = fn.Apply(aftered, arguments.Take(14).Concat(new[] { curr.ToString() }).ToArray());
-				}
-
-				for (int i = 0; i < repeatCount; i++)
-				{
-					arr[i].Wait();
-				}
-
-				for (int i = 0; i < paramValue; i++)
-				{
-					Assert.AreEqual("abcdefghijklmn" + (paramValue - 1), arr[i].Result);
-				}
-
-				for (int i = paramValue; i < repeatCount; i++)
-				{
-					Assert.AreEqual("abcdefghijklmn" + i, arr[i].Result);
-				}
-
-				Assert.IsTrue(invoked);
-
-
-			}, () =>
-			{
-
-
-
-				var invoked = false;
-				var arr = mkArr();
-
-				var counter = 0;
-
-
-				var aftering = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) =>
-				{
-					invoked = true;
-					return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
-
-				});
-
-				var aftered = testing.After(aftering, paramValue);
-
-				for (int i = 0; i < repeatCount; i++)
-				{
-					var curr = counter++;
-					arr[i] = fn.Apply(aftered, arguments.Take(15).Concat(new[] { curr.ToString() }).ToArray());
-				}
-
-				for (int i = 0; i < repeatCount; i++)
-				{
-					arr[i].Wait();
-				}
-
-				for (int i = 0; i < paramValue; i++)
-				{
-					Assert.AreEqual("abcdefghijklmno" + (paramValue - 1), arr[i].Result);
-				}
-
-				for (int i = paramValue; i < repeatCount; i++)
-				{
-					Assert.AreEqual("abcdefghijklmno" + i, arr[i].Result);
-				}
-
-				Assert.IsTrue(invoked);
-
-
-			});
-
-		}
+            Assert.IsTrue(invoked);
+        }
 	}
 }
