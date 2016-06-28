@@ -6,21 +6,6 @@ namespace Underscore.Collection.Contract
     public interface IFilterComponent
     {
         /// <summary>
-        /// Returns an enumerable containing
-        /// all unique elements from the
-        /// given collection
-        /// </summary>
-        IEnumerable<T> Unique<T>(IEnumerable<T> collection);
-
-        /// <summary>
-        /// Returns an enumerable containing
-        /// all elements from the given collection
-        /// which produce a unique result from
-        /// the given function
-        /// </summary>
-        IEnumerable<TResult> UniqueBy<TArg, TResult>(IEnumerable<TArg> collection, Func<TArg, TResult> iteratee);
-
-        /// <summary>
         /// drops the given number of elements
         /// from the front of the collection
         /// </summary>
