@@ -8,6 +8,12 @@ namespace Underscore.List
     public class DelegationComponent : IDelegationComponent
     {
         private readonly IMethodComponent _methodComponent;
+
+	    public DelegationComponent()
+	    {
+		    _methodComponent = new MethodComponent();
+	    }
+
         public DelegationComponent(IMethodComponent methodComponent)
         {
             _methodComponent = methodComponent;
@@ -20,6 +26,5 @@ namespace Underscore.List
         {
             return new List<T>( from i in list select i( ) );
         }
-        
     }
 }

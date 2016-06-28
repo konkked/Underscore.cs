@@ -10,6 +10,16 @@ namespace Underscore.Object.Reflection
     {
         private readonly Func<object , IEnumerable<Attribute>> _getAttributes;
 
+	    public AttributeComponent()
+	    {
+			_getAttributes = new CacheComponent().Memoize<object, IEnumerable<Attribute>>(GetCustomAttributesImpl);
+	    }
+
+		public AttributeComponent(ICacheComponent cacheComponent)
+		{
+			_getAttributes = cacheComponent.Memoize<object, IEnumerable<Attribute>>(GetCustomAttributesImpl);
+		}
+
         private IEnumerable<Attribute> GetCustomAttributesImpl(object obj)
         {
             if(obj == null) return new Attribute[] {};
@@ -27,11 +37,6 @@ namespace Underscore.Object.Reflection
             }
 
             return obj.GetType().GetCustomAttributes(true).Select(a => (Attribute)a);
-        }
-
-        public AttributeComponent(ICacheComponent cacheComponent) 
-        {
-            _getAttributes = cacheComponent.Memoize<object , IEnumerable<Attribute>>(GetCustomAttributesImpl);
         }
 
         public bool Has<TAttribute>(object value) where TAttribute : Attribute

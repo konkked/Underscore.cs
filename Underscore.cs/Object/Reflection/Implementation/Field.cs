@@ -8,9 +8,8 @@ namespace Underscore.Object.Reflection
     public class FieldComponent : IFieldComponent
     {
         private readonly Members<FieldInfo> _fields;
- 
 
-        public FieldComponent(Function.ICacheComponent cacher)
+        public FieldComponent()
         {
             _fields = new Members<FieldInfo>( 
                 null, 

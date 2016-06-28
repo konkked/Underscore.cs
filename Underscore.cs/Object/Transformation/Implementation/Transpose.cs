@@ -9,6 +9,11 @@ namespace Underscore.Object
     {
         private readonly IPropertyComponent _property;
 
+	    public TransposeComponent()
+	    {
+		    _property = new PropertyComponent();
+	    }
+
         public TransposeComponent(IPropertyComponent property) 
         {
             _property = property;
