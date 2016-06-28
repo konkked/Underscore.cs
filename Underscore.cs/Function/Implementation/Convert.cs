@@ -2,13 +2,11 @@
 
 namespace Underscore.Function
 {
-
-
     public class ConvertComponent : IConvertComponent
     {
         public System.Action ToAction(Func<object> function)
         {
-            return ()=>function();
+            return () => function();
         }
 
         public Action<T1> ToAction<T1>(Func<T1,object> function)

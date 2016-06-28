@@ -118,7 +118,7 @@ namespace Underscore.Module
             return _partitioner.Partition( collection, on );
         }
 
-	    public Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>(IEnumerable<T> collection, Func<T, Boolean> @on)
+	    public Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>(IEnumerable<T> collection, Func<T, bool> @on)
 	    {
 		    return _partitioner.PartitionMatches(collection, on);
 	    }

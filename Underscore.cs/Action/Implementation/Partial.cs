@@ -6,12 +6,8 @@
 // Partial.tt
 namespace Underscore.Action
 {
-
 	public class PartialComponent : IPartialComponent
 	{
-
-		
-
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
@@ -19,8 +15,6 @@ namespace Underscore.Action
 		{
 			return (b)=>action( a, b );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -29,8 +23,6 @@ namespace Underscore.Action
 		{
 			return (b, c)=>action( a, b, c );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -39,8 +31,6 @@ namespace Underscore.Action
 		{
 			return (c)=>action( a, b, c );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -49,8 +39,6 @@ namespace Underscore.Action
 		{
 			return (b, c, d)=>action( a, b, c, d );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -59,8 +47,6 @@ namespace Underscore.Action
 		{
 			return (c, d)=>action( a, b, c, d );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -69,8 +55,6 @@ namespace Underscore.Action
 		{
 			return (d)=>action( a, b, c, d );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -79,8 +63,6 @@ namespace Underscore.Action
 		{
 			return (b, c, d, e)=>action( a, b, c, d, e );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -89,8 +71,6 @@ namespace Underscore.Action
 		{
 			return (c, d, e)=>action( a, b, c, d, e );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -99,8 +79,6 @@ namespace Underscore.Action
 		{
 			return (d, e)=>action( a, b, c, d, e );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -109,8 +87,6 @@ namespace Underscore.Action
 		{
 			return (e)=>action( a, b, c, d, e );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -119,8 +95,6 @@ namespace Underscore.Action
 		{
 			return (b, c, d, e, f)=>action( a, b, c, d, e, f );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -129,8 +103,6 @@ namespace Underscore.Action
 		{
 			return (c, d, e, f)=>action( a, b, c, d, e, f );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -139,8 +111,6 @@ namespace Underscore.Action
 		{
 			return (d, e, f)=>action( a, b, c, d, e, f );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -149,8 +119,6 @@ namespace Underscore.Action
 		{
 			return (e, f)=>action( a, b, c, d, e, f );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -159,8 +127,6 @@ namespace Underscore.Action
 		{
 			return (f)=>action( a, b, c, d, e, f );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -169,8 +135,6 @@ namespace Underscore.Action
 		{
 			return (b, c, d, e, f, g)=>action( a, b, c, d, e, f, g );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -179,8 +143,6 @@ namespace Underscore.Action
 		{
 			return (c, d, e, f, g)=>action( a, b, c, d, e, f, g );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -189,8 +151,6 @@ namespace Underscore.Action
 		{
 			return (d, e, f, g)=>action( a, b, c, d, e, f, g );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -199,8 +159,6 @@ namespace Underscore.Action
 		{
 			return (e, f, g)=>action( a, b, c, d, e, f, g );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -209,8 +167,6 @@ namespace Underscore.Action
 		{
 			return (f, g)=>action( a, b, c, d, e, f, g );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -219,8 +175,6 @@ namespace Underscore.Action
 		{
 			return (g)=>action( a, b, c, d, e, f, g );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -229,8 +183,6 @@ namespace Underscore.Action
 		{
 			return (b, c, d, e, f, g, h)=>action( a, b, c, d, e, f, g, h );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -239,8 +191,6 @@ namespace Underscore.Action
 		{
 			return (c, d, e, f, g, h)=>action( a, b, c, d, e, f, g, h );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -249,8 +199,6 @@ namespace Underscore.Action
 		{
 			return (d, e, f, g, h)=>action( a, b, c, d, e, f, g, h );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -259,8 +207,6 @@ namespace Underscore.Action
 		{
 			return (e, f, g, h)=>action( a, b, c, d, e, f, g, h );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -269,8 +215,6 @@ namespace Underscore.Action
 		{
 			return (f, g, h)=>action( a, b, c, d, e, f, g, h );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -279,8 +223,6 @@ namespace Underscore.Action
 		{
 			return (g, h)=>action( a, b, c, d, e, f, g, h );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -289,8 +231,6 @@ namespace Underscore.Action
 		{
 			return (h)=>action( a, b, c, d, e, f, g, h );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -299,8 +239,6 @@ namespace Underscore.Action
 		{
 			return (b, c, d, e, f, g, h, i)=>action( a, b, c, d, e, f, g, h, i );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -309,8 +247,6 @@ namespace Underscore.Action
 		{
 			return (c, d, e, f, g, h, i)=>action( a, b, c, d, e, f, g, h, i );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -319,8 +255,6 @@ namespace Underscore.Action
 		{
 			return (d, e, f, g, h, i)=>action( a, b, c, d, e, f, g, h, i );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -329,8 +263,6 @@ namespace Underscore.Action
 		{
 			return (e, f, g, h, i)=>action( a, b, c, d, e, f, g, h, i );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -339,8 +271,6 @@ namespace Underscore.Action
 		{
 			return (f, g, h, i)=>action( a, b, c, d, e, f, g, h, i );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -349,8 +279,6 @@ namespace Underscore.Action
 		{
 			return (g, h, i)=>action( a, b, c, d, e, f, g, h, i );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -359,8 +287,6 @@ namespace Underscore.Action
 		{
 			return (h, i)=>action( a, b, c, d, e, f, g, h, i );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -369,8 +295,6 @@ namespace Underscore.Action
 		{
 			return (i)=>action( a, b, c, d, e, f, g, h, i );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -379,8 +303,6 @@ namespace Underscore.Action
 		{
 			return (b, c, d, e, f, g, h, i, j)=>action( a, b, c, d, e, f, g, h, i, j );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -389,8 +311,6 @@ namespace Underscore.Action
 		{
 			return (c, d, e, f, g, h, i, j)=>action( a, b, c, d, e, f, g, h, i, j );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -399,8 +319,6 @@ namespace Underscore.Action
 		{
 			return (d, e, f, g, h, i, j)=>action( a, b, c, d, e, f, g, h, i, j );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -409,8 +327,6 @@ namespace Underscore.Action
 		{
 			return (e, f, g, h, i, j)=>action( a, b, c, d, e, f, g, h, i, j );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -419,8 +335,6 @@ namespace Underscore.Action
 		{
 			return (f, g, h, i, j)=>action( a, b, c, d, e, f, g, h, i, j );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -429,8 +343,6 @@ namespace Underscore.Action
 		{
 			return (g, h, i, j)=>action( a, b, c, d, e, f, g, h, i, j );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -439,8 +351,6 @@ namespace Underscore.Action
 		{
 			return (h, i, j)=>action( a, b, c, d, e, f, g, h, i, j );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -449,8 +359,6 @@ namespace Underscore.Action
 		{
 			return (i, j)=>action( a, b, c, d, e, f, g, h, i, j );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -459,8 +367,6 @@ namespace Underscore.Action
 		{
 			return (j)=>action( a, b, c, d, e, f, g, h, i, j );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -469,8 +375,6 @@ namespace Underscore.Action
 		{
 			return (b, c, d, e, f, g, h, i, j, k)=>action( a, b, c, d, e, f, g, h, i, j, k );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -479,8 +383,6 @@ namespace Underscore.Action
 		{
 			return (c, d, e, f, g, h, i, j, k)=>action( a, b, c, d, e, f, g, h, i, j, k );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -489,8 +391,6 @@ namespace Underscore.Action
 		{
 			return (d, e, f, g, h, i, j, k)=>action( a, b, c, d, e, f, g, h, i, j, k );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -499,8 +399,6 @@ namespace Underscore.Action
 		{
 			return (e, f, g, h, i, j, k)=>action( a, b, c, d, e, f, g, h, i, j, k );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -509,8 +407,6 @@ namespace Underscore.Action
 		{
 			return (f, g, h, i, j, k)=>action( a, b, c, d, e, f, g, h, i, j, k );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -519,8 +415,6 @@ namespace Underscore.Action
 		{
 			return (g, h, i, j, k)=>action( a, b, c, d, e, f, g, h, i, j, k );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -529,8 +423,6 @@ namespace Underscore.Action
 		{
 			return (h, i, j, k)=>action( a, b, c, d, e, f, g, h, i, j, k );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -539,8 +431,6 @@ namespace Underscore.Action
 		{
 			return (i, j, k)=>action( a, b, c, d, e, f, g, h, i, j, k );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -549,8 +439,6 @@ namespace Underscore.Action
 		{
 			return (j, k)=>action( a, b, c, d, e, f, g, h, i, j, k );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -559,8 +447,6 @@ namespace Underscore.Action
 		{
 			return (k)=>action( a, b, c, d, e, f, g, h, i, j, k );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -569,8 +455,6 @@ namespace Underscore.Action
 		{
 			return (b, c, d, e, f, g, h, i, j, k, l)=>action( a, b, c, d, e, f, g, h, i, j, k, l );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -579,8 +463,6 @@ namespace Underscore.Action
 		{
 			return (c, d, e, f, g, h, i, j, k, l)=>action( a, b, c, d, e, f, g, h, i, j, k, l );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -589,8 +471,6 @@ namespace Underscore.Action
 		{
 			return (d, e, f, g, h, i, j, k, l)=>action( a, b, c, d, e, f, g, h, i, j, k, l );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -599,8 +479,6 @@ namespace Underscore.Action
 		{
 			return (e, f, g, h, i, j, k, l)=>action( a, b, c, d, e, f, g, h, i, j, k, l );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -609,8 +487,6 @@ namespace Underscore.Action
 		{
 			return (f, g, h, i, j, k, l)=>action( a, b, c, d, e, f, g, h, i, j, k, l );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -619,8 +495,6 @@ namespace Underscore.Action
 		{
 			return (g, h, i, j, k, l)=>action( a, b, c, d, e, f, g, h, i, j, k, l );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -629,8 +503,6 @@ namespace Underscore.Action
 		{
 			return (h, i, j, k, l)=>action( a, b, c, d, e, f, g, h, i, j, k, l );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -639,8 +511,6 @@ namespace Underscore.Action
 		{
 			return (i, j, k, l)=>action( a, b, c, d, e, f, g, h, i, j, k, l );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -649,8 +519,6 @@ namespace Underscore.Action
 		{
 			return (j, k, l)=>action( a, b, c, d, e, f, g, h, i, j, k, l );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -659,8 +527,6 @@ namespace Underscore.Action
 		{
 			return (k, l)=>action( a, b, c, d, e, f, g, h, i, j, k, l );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -669,8 +535,6 @@ namespace Underscore.Action
 		{
 			return (l)=>action( a, b, c, d, e, f, g, h, i, j, k, l );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -679,8 +543,6 @@ namespace Underscore.Action
 		{
 			return (b, c, d, e, f, g, h, i, j, k, l, m)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -689,8 +551,6 @@ namespace Underscore.Action
 		{
 			return (c, d, e, f, g, h, i, j, k, l, m)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -699,8 +559,6 @@ namespace Underscore.Action
 		{
 			return (d, e, f, g, h, i, j, k, l, m)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -709,8 +567,6 @@ namespace Underscore.Action
 		{
 			return (e, f, g, h, i, j, k, l, m)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -719,8 +575,6 @@ namespace Underscore.Action
 		{
 			return (f, g, h, i, j, k, l, m)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -729,8 +583,6 @@ namespace Underscore.Action
 		{
 			return (g, h, i, j, k, l, m)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -739,8 +591,6 @@ namespace Underscore.Action
 		{
 			return (h, i, j, k, l, m)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -749,8 +599,6 @@ namespace Underscore.Action
 		{
 			return (i, j, k, l, m)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -759,8 +607,6 @@ namespace Underscore.Action
 		{
 			return (j, k, l, m)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -769,8 +615,6 @@ namespace Underscore.Action
 		{
 			return (k, l, m)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -779,8 +623,6 @@ namespace Underscore.Action
 		{
 			return (l, m)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -789,8 +631,6 @@ namespace Underscore.Action
 		{
 			return (m)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -799,8 +639,6 @@ namespace Underscore.Action
 		{
 			return (b, c, d, e, f, g, h, i, j, k, l, m, n)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -809,8 +647,6 @@ namespace Underscore.Action
 		{
 			return (c, d, e, f, g, h, i, j, k, l, m, n)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -819,8 +655,6 @@ namespace Underscore.Action
 		{
 			return (d, e, f, g, h, i, j, k, l, m, n)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -829,8 +663,6 @@ namespace Underscore.Action
 		{
 			return (e, f, g, h, i, j, k, l, m, n)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -839,8 +671,6 @@ namespace Underscore.Action
 		{
 			return (f, g, h, i, j, k, l, m, n)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -849,8 +679,6 @@ namespace Underscore.Action
 		{
 			return (g, h, i, j, k, l, m, n)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -859,8 +687,6 @@ namespace Underscore.Action
 		{
 			return (h, i, j, k, l, m, n)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -869,8 +695,6 @@ namespace Underscore.Action
 		{
 			return (i, j, k, l, m, n)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -879,8 +703,6 @@ namespace Underscore.Action
 		{
 			return (j, k, l, m, n)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -889,8 +711,6 @@ namespace Underscore.Action
 		{
 			return (k, l, m, n)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -899,8 +719,6 @@ namespace Underscore.Action
 		{
 			return (l, m, n)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -909,8 +727,6 @@ namespace Underscore.Action
 		{
 			return (m, n)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -919,8 +735,6 @@ namespace Underscore.Action
 		{
 			return (n)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -929,8 +743,6 @@ namespace Underscore.Action
 		{
 			return (b, c, d, e, f, g, h, i, j, k, l, m, n, o)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -939,8 +751,6 @@ namespace Underscore.Action
 		{
 			return (c, d, e, f, g, h, i, j, k, l, m, n, o)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -949,8 +759,6 @@ namespace Underscore.Action
 		{
 			return (d, e, f, g, h, i, j, k, l, m, n, o)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -959,8 +767,6 @@ namespace Underscore.Action
 		{
 			return (e, f, g, h, i, j, k, l, m, n, o)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -969,8 +775,6 @@ namespace Underscore.Action
 		{
 			return (f, g, h, i, j, k, l, m, n, o)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -979,8 +783,6 @@ namespace Underscore.Action
 		{
 			return (g, h, i, j, k, l, m, n, o)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -989,8 +791,6 @@ namespace Underscore.Action
 		{
 			return (h, i, j, k, l, m, n, o)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -999,8 +799,6 @@ namespace Underscore.Action
 		{
 			return (i, j, k, l, m, n, o)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1009,8 +807,6 @@ namespace Underscore.Action
 		{
 			return (j, k, l, m, n, o)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1019,8 +815,6 @@ namespace Underscore.Action
 		{
 			return (k, l, m, n, o)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1029,8 +823,6 @@ namespace Underscore.Action
 		{
 			return (l, m, n, o)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1039,8 +831,6 @@ namespace Underscore.Action
 		{
 			return (m, n, o)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1049,8 +839,6 @@ namespace Underscore.Action
 		{
 			return (n, o)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1059,8 +847,6 @@ namespace Underscore.Action
 		{
 			return (o)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1069,8 +855,6 @@ namespace Underscore.Action
 		{
 			return (b, c, d, e, f, g, h, i, j, k, l, m, n, o, p)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1079,8 +863,6 @@ namespace Underscore.Action
 		{
 			return (c, d, e, f, g, h, i, j, k, l, m, n, o, p)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1089,8 +871,6 @@ namespace Underscore.Action
 		{
 			return (d, e, f, g, h, i, j, k, l, m, n, o, p)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1099,8 +879,6 @@ namespace Underscore.Action
 		{
 			return (e, f, g, h, i, j, k, l, m, n, o, p)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1109,8 +887,6 @@ namespace Underscore.Action
 		{
 			return (f, g, h, i, j, k, l, m, n, o, p)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1119,8 +895,6 @@ namespace Underscore.Action
 		{
 			return (g, h, i, j, k, l, m, n, o, p)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1129,8 +903,6 @@ namespace Underscore.Action
 		{
 			return (h, i, j, k, l, m, n, o, p)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1139,8 +911,6 @@ namespace Underscore.Action
 		{
 			return (i, j, k, l, m, n, o, p)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1149,8 +919,6 @@ namespace Underscore.Action
 		{
 			return (j, k, l, m, n, o, p)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1159,8 +927,6 @@ namespace Underscore.Action
 		{
 			return (k, l, m, n, o, p)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1169,8 +935,6 @@ namespace Underscore.Action
 		{
 			return (l, m, n, o, p)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1179,8 +943,6 @@ namespace Underscore.Action
 		{
 			return (m, n, o, p)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1189,8 +951,6 @@ namespace Underscore.Action
 		{
 			return (n, o, p)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1199,8 +959,6 @@ namespace Underscore.Action
 		{
 			return (o, p)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
 		}
-		
-				
 
         /// <summary>
         /// Binds the function partially, from left to right
@@ -1209,8 +967,5 @@ namespace Underscore.Action
 		{
 			return (p)=>action( a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p );
 		}
-		
-		
 	}
-
 }

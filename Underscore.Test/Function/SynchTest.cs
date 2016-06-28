@@ -77,13 +77,11 @@ namespace Underscore.Test.Function
         [TestMethod]
         public async Task FunctionDebounce1( ) 
         {
-
             var testing = ModifyComponent( );
             var timer = new Stopwatch( );
             int waiting = 25;
 
             int cnt = 1;
-            string expecting = "";
 
             var targeting = new Func<string,string>( ( a ) =>
             {

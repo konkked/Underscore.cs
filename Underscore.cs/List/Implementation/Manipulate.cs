@@ -151,17 +151,27 @@ namespace Underscore.List
             return retv;
         }
 
+        /// <summary>
+        /// Creates a collection that is created from extending from passed list as if it was a circular list
+        /// </summary>
         public IEnumerable<T> Extend<T>(IList<T> list, int size)
         {
             for (int i = 0; i < size; i++)
                 yield return list[i%list.Count];
         }
 
+        /// <summary>
+        /// Creates an infinte repition of the passed list
+        /// </summary>
         public IEnumerable<T> Cycle<T>(IList<T> list)
         {
             for(int i=0;;i++)
             {
-                yield return list[i%list.Count];
+
+                if (i == list.Count)
+                    i = 0;
+
+                yield return list[i];
             }
         }
 

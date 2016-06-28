@@ -219,20 +219,26 @@ namespace Underscore.List
 
             yield return new T[] {};
 
-            foreach (var value in NonEmptyPermutate(list))
+            foreach (var value in CombinationsImpl(list))
                 yield return value;
         }
 
 
-        private IEnumerable<IEnumerable<T>> NonEmptyPermutate<T>(IList<T> collection, int index = -1)
+        private IEnumerable<IEnumerable<T>> CombinationsImpl<T>(IList<T> collection, int index = -1)
         {
+            //initialize the index to the last index of the list
             if (index <= -1)
                 index = collection.Count - 1;
 
+            //yield a collection with just the first item in it 
             if (index == 0)
                 return new List<IEnumerable<T>> { new[] { collection[0] } };
 
-            var permutations = NonEmptyPermutate(collection, index - 1).ToList();
+            //get all of the items after this item
+            // ( Recursive call )
+            var permutations = CombinationsImpl(collection, index - 1).ToList();
+            
+            //return a collection of items with and without the item at the current index
             return permutations.Concat(permutations.Select(a => a.Concat(new[] { collection[index] })).Concat(new[] { new[] { collection[index] } }));
         }
 

@@ -14,29 +14,65 @@ namespace Underscore.Collection
         {
             _partitionComponent = partitionComponent;
         }
-        
+
+		/// <summary>
+		/// segment
+		/// </summary>
+        private IEnumerable<T> Segment<T>(IEnumerator<T> iter, int size, out bool cont)
+        {
+            var ret = new List<T>();
+            // we want the calling method to know if we can keep going
+            cont = true;
+            bool hit = false;
+
+            // add items up until size or end of iter's collection
+            for (var i = 0; i < size; i++)
+            {
+                if (iter.MoveNext())
+                {
+                    // keep adding values if there are any
+                    hit = true;
+                    ret.Add(iter.Current);
+                }
+                else
+                {
+                    // if there's nothing left, break
+                    cont = false;
+                    break;
+                }
+            }
+
+            // if we didn't hit anything, 
+            // there's nothing to return so return null
+            return hit ? ret : null;
+        }
 
         /// <summary>
         /// Breaks the collection into smaller chunks
         /// </summary>
         public IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> collection, int size)
         {
-            if (!collection.Any()) yield break;
+            // we need a non-empty collection to be able to chunk it
+            if (collection == null || !collection.Any())
+                yield break;
 
-            var returning = new List<T>();
-            foreach(var item in collection)
+            using (var iter = collection.GetEnumerator())
             {
-                returning.Add(item);
-                if (returning.Count == size)
+                // if we reach here we must have a collection to do something to
+                bool shouldContinue = true;
+
+                while (shouldContinue)
                 {
-                    yield return returning;
-                    returning = new List<T>();
+                    // iteration of the enumerable is done in segment
+                    var result = Segment(iter, size, out shouldContinue);
+
+                    // as long as we keep getting results, yield them
+                    if (shouldContinue || result != null)
+                        yield return result;
+
+                    else yield break;
                 }
             }
-
-            if (returning.Count != 0)
-                yield return returning;
-
         }
 
         /// <summary>
@@ -44,23 +80,31 @@ namespace Underscore.Collection
         /// </summary>
         public IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> collection, Func<T, bool> on)
         {
-            if (!collection.Any()) yield break;
+            if (collection == null || !collection.Any())
+                yield break;
 
-            var returning = new List<T>();
-            foreach(var item in collection)
+            using (var iter = collection.GetEnumerator())
             {
-                if (on(item) && returning.Count!=0)
+                var retv = new List<T>();
+                while (iter.MoveNext())
                 {
-                    yield return returning;
-                    returning = new List<T>();
+                    // don't include empty lists
+                    if (on(iter.Current) && retv.Count != 0)
+                    {
+                        yield return retv;
+                        retv = new List<T> { iter.Current };
+                    }
+                    else
+                    {
+                        retv.Add(iter.Current);
+                    }
                 }
 
-                returning.Add(item);
-
+                if (retv.Count != 0)
+                    yield return retv;
+                else
+                    yield break;
             }
-
-            if (returning.Count != 0)
-                yield return returning;
         }
 
         /// <summary>
@@ -82,6 +126,9 @@ namespace Underscore.Collection
 
 	        foreach (var value in collection)
 	        {
+                // if we haven't reached the index yet, 
+                // it goes in the left partition,
+                // otherwise it goes in the right partition
 		        if(i < index)
 					left.Add(value);
 				else
@@ -116,6 +163,8 @@ namespace Underscore.Collection
 	        {
 		        if (hitPred)
 		        {
+                    // if we've hit the predicate,
+                    // add it to the right
 			        right.Add(value);
 		        }
 		        else
@@ -124,11 +173,14 @@ namespace Underscore.Collection
 					// check if we're hitting it now
 			        if (on(value))
 			        {
+                        // if we've hit it set flag
+                        // and put value in right partition
 				        hitPred = true;
 				        right.Add(value);
 			        }
 			        else
 			        {
+                        // otherwise we're still in the left partition
 						left.Add(value);
 			        }
 		        }
@@ -157,6 +209,8 @@ namespace Underscore.Collection
 
 			foreach (var value in collection)
 			{
+                // if it matches the predicate, put it in the left
+                // otherwise, put it in the right
 				if (on(value))
 					left.Add(value);
 				else
@@ -171,7 +225,9 @@ namespace Underscore.Collection
 
         public IEnumerable<IEnumerable<T>> Combinations<T>(IEnumerable<T> collection)
         {
+            // need to have a collection to do combinations of it
             if(collection == null) throw new ArgumentNullException("collection");
+            // if it's a list, just cast it. Otherwise we'll need to turn it into one
             var ls = collection as IList<T> ?? collection.ToList();
             return _partitionComponent.Combinations(ls);
         }
