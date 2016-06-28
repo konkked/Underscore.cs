@@ -7,16 +7,16 @@ namespace Underscore.Module
 
 
     public class List : 
-        IDelegateComponent,
+        IDelegationComponent,
         IManipulateComponent,
         IPartitionComponent
     {
         private readonly IManipulateComponent _manipulator;
         private readonly IPartitionComponent _partitioner;
-        private readonly IDelegateComponent _delegator;
+        private readonly IDelegationComponent _delegator;
 
         public List( 
-            IDelegateComponent delegator,
+            IDelegationComponent delegator,
             IManipulateComponent manipulator,
             IPartitionComponent partitioner
         ) 
@@ -45,18 +45,6 @@ namespace Underscore.Module
         public IList<T> Resolve<T>( IList<Func<T>> target )
         {
             return _delegator.Resolve( target );
-        }
-
-        /// <summary>
-        /// Creates a list of functions that return 
-        /// an element from the passed list when invoked 
-        /// </summary>
-        /// <typeparam name="T">Type of the items in the list</typeparam>
-        /// <param name="list">list to create references to</param>
-        /// <returns>list of functions references list item at its index at the time of invocation</returns>
-        public IList<Func<T>> Delegate<T>( IList<T> target )
-        {
-            return _delegator.Delegate( target );
         }
 
         /// <summary>

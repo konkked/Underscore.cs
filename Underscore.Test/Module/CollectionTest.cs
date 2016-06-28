@@ -7,7 +7,7 @@ namespace Underscore.Test.Module
     public class CollectionTest
     {
         [TestMethod]
-        public void CreateListModuleTest()
+        public void CreateCollectionModuleTest()
         {
             var result = new Underscore.Module.Collection(
 				new CreationComponent(),

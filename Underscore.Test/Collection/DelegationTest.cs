@@ -45,15 +45,25 @@ namespace Underscore.Test.Collection
         {
 			foreach (var item in component.Invoke(testingItems, "MethodWithoutParameters"))
             {
+                Assert.IsNull(item);
+            }
+
+            foreach (var item in testingItems)
+            {
                 Assert.IsTrue(item.WasWithoutMethodCalled);
             }
         }
 
 	    public void Collection_Delegation_Invoke_WithArguments()
 	    {
-			foreach (var item in component.Invoke(testingItems, "MethodWithParameters", "str"))
-			{
-				Assert.IsTrue(item.WasWithMethodCalled);
+	        foreach (var item in component.Invoke(testingItems, "MethodWithParameters", "str"))
+	        {
+	            Assert.IsNull(item);
+	        }
+
+            foreach(var item in testingItems)
+            { 
+	            Assert.IsTrue(item.WasWithMethodCalled);
 				Assert.AreEqual("str", item.ParameterCalled);
 			}
 		}

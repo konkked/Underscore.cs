@@ -108,10 +108,10 @@
     <Compile Include="Setup\List.cs" />
     <Compile Include="Setup\Object.cs" />
     <Compile Include="Setup\Utility.cs" />
-    <Compile Include="List\Contract\Delegate.cs" />
+    <Compile Include="List\Contract\Delegation.cs" />
     <Compile Include="List\Contract\Manipulate.cs" />
     <Compile Include="List\Contract\Partition.cs" />
-    <Compile Include="List\Implementation\Delegate.cs" />
+    <Compile Include="List\Implementation\Delegation.cs" />
     <Compile Include="List\Implementation\Manipulate.cs" />
     <Compile Include="List\Implementation\Partition.cs" />
     <Compile Include="Module\Action.cs" />
