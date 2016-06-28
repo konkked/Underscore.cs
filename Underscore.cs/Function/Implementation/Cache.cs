@@ -5,12 +5,18 @@ namespace Underscore.Function
 {
     public class CacheComponent : ICacheComponent
     {
-        private readonly ICompactComponent _fncompactor;
+        private readonly ICompactComponent _fnCompactor;
         private readonly Utility.ICompactComponent _paramCompactor;
 
-        public CacheComponent(ICompactComponent fncompactor, Utility.ICompactComponent paramCompactor)
+	    public CacheComponent()
+	    {
+		    _fnCompactor = new CompactComponent();
+			_paramCompactor = new Utility.CompactComponent();
+	    }
+
+        public CacheComponent(ICompactComponent fnCompactor, Utility.ICompactComponent paramCompactor)
         {
-            _fncompactor = fncompactor;
+            _fnCompactor = fnCompactor;
             _paramCompactor = paramCompactor;
         }
 
@@ -50,7 +56,7 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2>, TResult>();
             var fn = function;
-            var packedTarget = Memoize(_fncompactor.Pack(function));
+            var packedTarget = Memoize(_fnCompactor.Pack(function));
             return (a, b) => packedTarget(_paramCompactor.Pack(a, b));
         }
 
@@ -67,7 +73,7 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3>, TResult>();
             var fn = function;
-            var packedTarget = Memoize(_fncompactor.Pack(function));
+            var packedTarget = Memoize(_fnCompactor.Pack(function));
             return (a, b, c) => packedTarget(_paramCompactor.Pack(a, b, c));
         }
 
@@ -85,7 +91,7 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4>, TResult>();
             var fn = function;
-            var packedTarget = Memoize(_fncompactor.Pack(function));
+            var packedTarget = Memoize(_fnCompactor.Pack(function));
             return (a, b, c, d) => packedTarget(_paramCompactor.Pack(a, b, c,d));
         }
 
@@ -104,7 +110,7 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<Tuple<TArg1, TArg2, TArg3, TArg4>, TArg5>, TResult>();
             var fn = function;
-            var packedTarget = Memoize(_fncompactor.Pack(function));
+            var packedTarget = Memoize(_fnCompactor.Pack(function));
             return (a, b, c, d, e) => packedTarget(_paramCompactor.Pack(a, b, c, d, e));
         }
 
@@ -124,7 +130,7 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6>, TResult>();
             var fn = function;
-            var packedTarget = Memoize(_fncompactor.Pack(function));
+            var packedTarget = Memoize(_fnCompactor.Pack(function));
             return (a, b, c, d, e, f) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f));
         }
 
@@ -132,7 +138,7 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7>, TResult>();
             var fn = function;
-            var packedTarget = Memoize(_fncompactor.Pack(function));
+            var packedTarget = Memoize(_fnCompactor.Pack(function));
             return (a, b, c, d, e, f, g) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g));
         }
 
@@ -140,7 +146,7 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7,Tuple<TArg8>>, TResult>();
             var fn = function;
-            var packedTarget = Memoize(_fncompactor.Pack(function));
+            var packedTarget = Memoize(_fnCompactor.Pack(function));
             return (a, b, c, d, e, f, g, h) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h));
         }
 
@@ -148,7 +154,7 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8,TArg9>>, TResult>();
             var fn = function;
-            var packedTarget = Memoize(_fncompactor.Pack(function));
+            var packedTarget = Memoize(_fnCompactor.Pack(function));
             return (a, b, c, d, e, f, g, h,i) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h, i));
         }
 
@@ -156,7 +162,7 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9,TArg10>>, TResult>();
             var fn = function;
-            var packedTarget = Memoize(_fncompactor.Pack(function));
+            var packedTarget = Memoize(_fnCompactor.Pack(function));
             return (a, b, c, d, e, f, g, h, i,j) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h, i,j));
         }
 
@@ -164,7 +170,7 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10,TArg11>>, TResult>();
             var fn = function;
-            var packedTarget = Memoize(_fncompactor.Pack(function));
+            var packedTarget = Memoize(_fnCompactor.Pack(function));
             return (a, b, c, d, e, f, g, h, i, j,k) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h, i, j,k));
         }
 
@@ -173,7 +179,7 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10, TArg11,TArg12>>, TResult>();
             var fn = function;
-            var packedTarget = Memoize(_fncompactor.Pack(function));
+            var packedTarget = Memoize(_fnCompactor.Pack(function));
             return (a, b, c, d, e, f, g, h, i, j, k,l) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h, i, j, k,l));
         }
 
@@ -182,7 +188,7 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10, TArg11, TArg12,TArg13>>, TResult>();
             var fn = function;
-            var packedTarget = Memoize(_fncompactor.Pack(function));
+            var packedTarget = Memoize(_fnCompactor.Pack(function));
             return (a, b, c, d, e, f, g, h, i, j, k, l,m) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h, i, j, k, l,m));
         }
 
@@ -192,7 +198,7 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10, TArg11, TArg12, TArg13,TArg14>>, TResult>();
             var fn = function;
-            var packedTarget = Memoize(_fncompactor.Pack(function));
+            var packedTarget = Memoize(_fnCompactor.Pack(function));
             return (a, b, c, d, e, f, g, h, i, j, k, l, m,n) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m,n));
         }
 
@@ -202,7 +208,7 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, Tuple<TArg14,TArg15>>>, TResult>();
             var fn = function;
-            var packedTarget = Memoize(_fncompactor.Pack(function));
+            var packedTarget = Memoize(_fnCompactor.Pack(function));
             return (a, b, c, d, e, f, g, h, i, j, k, l, m, n,o) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n,o));
         }
 
@@ -212,7 +218,7 @@ namespace Underscore.Function
         {
             var localStore = new Dictionary<Tuple<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, Tuple<TArg8, TArg9, TArg10, TArg11, TArg12, TArg13, Tuple<TArg14, TArg15,TArg16>>>, TResult>();
             var fn = function;
-            var packedTarget = Memoize(_fncompactor.Pack(function));
+            var packedTarget = Memoize(_fnCompactor.Pack(function));
             return (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o,p) => packedTarget(_paramCompactor.Pack(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o,p));
         }
     }

@@ -7,6 +7,11 @@ namespace Underscore.Collection
     {
         private readonly IMethodComponent _methodComponent;
 
+	    public DelegationComponent()
+	    {
+		    _methodComponent = new MethodComponent();
+	    }
+
         public DelegationComponent(IMethodComponent methodComponent)
         {
             _methodComponent = methodComponent;
