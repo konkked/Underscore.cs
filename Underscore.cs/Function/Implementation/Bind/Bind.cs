@@ -2,7 +2,7 @@
 
 namespace Underscore.Function
 {
-	public class BindComponent : IBindComponent
+	public partial class BindComponent : IBindComponent
 	{
 		/// <summary>
         ///  Creates a new Function bound to the passed parameter

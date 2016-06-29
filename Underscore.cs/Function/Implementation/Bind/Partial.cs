@@ -2,10 +2,8 @@
 
 namespace Underscore.Function
 {
-
-	public class PartialComponent : IPartialComponent
+	public partial class BindComponent : IBindComponent
 	{
-
         /// <summary>
         /// Binds the function partially, from left to right
         /// </summary>
@@ -965,7 +963,5 @@ namespace Underscore.Function
 		{
 			return (p) => function(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 		}
-
 	}
-
 }
