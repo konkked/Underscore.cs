@@ -1,44 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using Underscore.Collection;
+using Underscore.Collection.Contract;
 using Underscore.Collection.Contract.Zip;
 
 namespace Underscore.Module
 {
-    public class Collection :
+    public class Collection:
+		ICompareComponent,
         ICreationComponent,
+		IDelegationComponent,
         IPartitionComponent,
-        IDelegationComponent,
 		IZipComponent
     {
+	    private readonly ICompareComponent _compare;
         private readonly ICreationComponent _creator;
         private readonly IPartitionComponent _partitioner;
         private readonly IDelegationComponent _delegation;
 	    private readonly IZipComponent _zip;
 
-        public Collection( 
+        public Collection(
+			ICompareComponent compare,
             ICreationComponent creator,
+			IDelegationComponent delegation,
             IPartitionComponent partitioner,
-            IDelegationComponent delegation,
 			IZipComponent zip
-        )
+       )
         {
+
+			if(compare == null)
+				throw new ArgumentNullException("compare");
 
             if (creator == null)
                 throw new ArgumentNullException("creator");
 
+			if (delegation == null)
+				throw new ArgumentNullException("delegation");
+
             if (partitioner == null)
                 throw new ArgumentNullException("partitioner");
-
-            if (delegation == null)
-                throw new ArgumentNullException("delegation");
 
 			if (zip == null)
 				throw new ArgumentNullException("zip");
 
+	        _compare = compare;
             _creator = creator;
+			_delegation = delegation;
             _partitioner = partitioner;
-            _delegation = delegation;
 	        _zip = zip;
         }
 
@@ -46,9 +54,9 @@ namespace Underscore.Module
         /// Creates a snapshot of the collection at the time the method was called and can be called to return the value
         /// the collection was at when this method was called
         /// </summary>
-        public Func<IEnumerable<T>> Snapshot<T>( IEnumerable<T> collection )
+        public Func<IEnumerable<T>> Snapshot<T>(IEnumerable<T> collection)
         {
-            return _creator.Snapshot( collection );
+            return _creator.Snapshot(collection);
         }
 
         /// <summary>
@@ -70,33 +78,33 @@ namespace Underscore.Module
         /// <summary>
         /// Breaks the collection into chunks, splitting by size
         /// </summary>
-        public IEnumerable<IEnumerable<T>> Chunk<T>( IEnumerable<T> collection, int size )
+        public IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> collection, int size)
         {
-            return _partitioner.Chunk( collection, size );
+            return _partitioner.Chunk(collection, size);
         }
 
         /// <summary>
         /// Breaks the collection into chunks, splitting on the predicate on
         /// </summary>
-        public IEnumerable<IEnumerable<T>> Chunk<T>( IEnumerable<T> collection, Func<T, bool> on )
+        public IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> collection, Func<T, bool> on)
         {
-            return _partitioner.Chunk( collection, on );
+            return _partitioner.Chunk(collection, on);
         }
 
         /// <summary>
         /// Splits a collection into two halves, first contains all that items before the on index, the second
         /// </summary>
-        public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IEnumerable<T> collection, int on )
+        public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>(IEnumerable<T> collection, int on)
         {
-            return _partitioner.Partition( collection, on );
+            return _partitioner.Partition(collection, on);
         }
 
         /// <summary>
         /// Splits a collection into two halves, first contains all that pass predicate "on", second the ones that don't
         /// </summary>
-        public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IEnumerable<T> collection, Func<T, bool> on )
+        public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>(IEnumerable<T> collection, Func<T, bool> on)
         {
-            return _partitioner.Partition( collection, on );
+            return _partitioner.Partition(collection, on);
         }
 
 	    public Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>(IEnumerable<T> collection, Func<T, bool> @on)
@@ -188,6 +196,11 @@ namespace Underscore.Module
 	    public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>> UnZip<T1, T2, T3, T4, T5, T6, T7>(IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> zipped)
 	    {
 			return _zip.UnZip(zipped);
+	    }
+
+	    public Boolean IsSorted<T>(IEnumerable<T> collection, bool descending = false) where T : IComparable
+	    {
+		    return _compare.IsSorted(collection, descending);
 	    }
     }
 }

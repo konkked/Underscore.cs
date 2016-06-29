@@ -79,6 +79,7 @@
     <Compile Include="Collection\Partition\CombinationsTest.cs" />
     <Compile Include="Collection\Partition\ChunkTest.cs" />
     <Compile Include="Collection\Partition\PartitionTest.cs" />
+    <Compile Include="Collection\SetTest.cs" />
     <Compile Include="Collection\Zip\UnZipTest.cs" />
     <Compile Include="Collection\Zip\ZipTest.cs" />
     <Compile Include="Function\BindTest.cs" />

@@ -38,7 +38,7 @@ namespace Underscore.Collection
 		/// Partition([1,2,3], n => n == 2) would return
 		/// Tuple([1],[2,3])
 		/// </summary>
-        Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>(IEnumerable<T> collection, Func<T,bool> on);
+        Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>(IEnumerable<T> collection, Func<T, bool> on);
 
 		/// <summary>
 		/// Breaks collection into two seperate parts,
