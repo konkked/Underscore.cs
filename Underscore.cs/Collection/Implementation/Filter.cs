@@ -9,7 +9,7 @@ namespace Underscore.Collection.Implementation
     {
         public IEnumerable<T> Drop<T>(IEnumerable<T> collection, int count)
         {
-	        var i = 0;
+	        var i = 1;
 
 			foreach(var value in collection)
 			{
@@ -23,13 +23,14 @@ namespace Underscore.Collection.Implementation
         public IEnumerable<T> DropWhile<T>(IEnumerable<T> collection, Func<T, bool> predicate)
         {
 			// to track whether the predicate has been hit
-	        var satisfied = false;
+	        var satisfied = true;
 
 			foreach (var value in collection)
 			{
-				satisfied = satisfied || predicate(value);
+				// only start returning items after the predicate has been hit
+				satisfied = satisfied && predicate(value);
 
-				if (satisfied)
+				if (!satisfied)
 					yield return value;
 			}
         }

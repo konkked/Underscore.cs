@@ -61,11 +61,11 @@
     <Compile Include="Action\Implementation\Split.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Collection\Contract\ICompare.cs" />
-    <Compile Include="Collection\Contract\Creation.cs" />
-    <Compile Include="Collection\Contract\Delegation.cs" />
-    <Compile Include="Collection\Contract\Filter.cs" />
-    <Compile Include="Collection\Contract\Partition.cs" />
-    <Compile Include="Collection\Contract\Set.cs" />
+    <Compile Include="Collection\Contract\ICreation.cs" />
+    <Compile Include="Collection\Contract\IDelegation.cs" />
+    <Compile Include="Collection\Contract\IFilter.cs" />
+    <Compile Include="Collection\Contract\IPartition.cs" />
+    <Compile Include="Collection\Contract\ISet.cs" />
     <Compile Include="Collection\Contract\Zip\IZip.cs" />
     <Compile Include="Collection\Contract\Zip\IUnZip.cs" />
     <Compile Include="Collection\Implementation\Compare.cs" />

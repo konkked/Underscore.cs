@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Underscore.Collection;
+using Underscore.Collection.Implementation.Zip;
 
 namespace Underscore.Test.Module
 {
@@ -12,7 +13,8 @@ namespace Underscore.Test.Module
             var result = new Underscore.Module.Collection(
 				new CreationComponent(),
                 new PartitionComponent(),
-                new DelegationComponent()
+                new DelegationComponent(),
+				new ZipComponent()
 			);
 
             Assert.IsNotNull(result);

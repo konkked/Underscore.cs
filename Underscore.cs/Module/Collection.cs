@@ -5,11 +5,11 @@ using Underscore.Collection.Contract.Zip;
 
 namespace Underscore.Module
 {
-
     public class Collection :
         ICreationComponent,
         IPartitionComponent,
-        IDelegationComponent
+        IDelegationComponent,
+		IZipComponent
     {
         private readonly ICreationComponent _creator;
         private readonly IPartitionComponent _partitioner;
@@ -19,7 +19,8 @@ namespace Underscore.Module
         public Collection( 
             ICreationComponent creator,
             IPartitionComponent partitioner,
-            IDelegationComponent delegation
+            IDelegationComponent delegation,
+			IZipComponent zip
         )
         {
 
@@ -32,18 +33,19 @@ namespace Underscore.Module
             if (delegation == null)
                 throw new ArgumentNullException("delegation");
 
+			if (zip == null)
+				throw new ArgumentNullException("zip");
+
             _creator = creator;
             _partitioner = partitioner;
             _delegation = delegation;
+	        _zip = zip;
         }
 
         /// <summary>
         /// Creates a snapshot of the collection at the time the method was called and can be called to return the value
         /// the collection was at when this method was called
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <returns></returns>
         public Func<IEnumerable<T>> Snapshot<T>( IEnumerable<T> collection )
         {
             return _creator.Snapshot( collection );
@@ -52,10 +54,6 @@ namespace Underscore.Module
         /// <summary>
         /// Extends the collection to the specified length
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="length"></param>
-        /// <returns></returns>
         public IEnumerable<T> Extend<T>(IEnumerable<T> collection, int length)
         {
             return _creator.Extend(collection, length);
@@ -64,9 +62,6 @@ namespace Underscore.Module
         /// <summary>
         /// Creates a Cycle from the collection
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <returns></returns>
         public IEnumerable<T> Cycle<T>(IEnumerable<T> collection)
         {
             return _creator.Cycle(collection);
@@ -75,10 +70,6 @@ namespace Underscore.Module
         /// <summary>
         /// Breaks the collection into chunks, splitting by size
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="size"></param>
-        /// <returns></returns>
         public IEnumerable<IEnumerable<T>> Chunk<T>( IEnumerable<T> collection, int size )
         {
             return _partitioner.Chunk( collection, size );
@@ -87,34 +78,22 @@ namespace Underscore.Module
         /// <summary>
         /// Breaks the collection into chunks, splitting on the predicate on
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="on"></param>
-        /// <returns></returns>
         public IEnumerable<IEnumerable<T>> Chunk<T>( IEnumerable<T> collection, Func<T, bool> on )
         {
             return _partitioner.Chunk( collection, on );
         }
 
-
         /// <summary>
         /// Splits a collection into two halves, first contains all that items before the on index, the second
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <returns></returns>
         public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IEnumerable<T> collection, int on )
         {
             return _partitioner.Partition( collection, on );
         }
 
-
         /// <summary>
         /// Splits a collection into two halves, first contains all that pass predicate "on", second the ones that don't
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <returns></returns>
         public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IEnumerable<T> collection, Func<T, bool> on )
         {
             return _partitioner.Partition( collection, on );
@@ -128,9 +107,6 @@ namespace Underscore.Module
 	    /// <summary>
         /// Returns all of the different possible combinations for a collection
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <returns></returns>
         public IEnumerable<IEnumerable<T>> Combinations<T>(IEnumerable<T> collection)
         {
             return _partitioner.Combinations(collection);
@@ -139,10 +115,6 @@ namespace Underscore.Module
         /// <summary>
         /// Lazily invokes methods by name for each element in the collection
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="items"></param>
-        /// <param name="methodName"></param>
-        /// <returns></returns>
         public IEnumerable<object> Invoke<T>(IEnumerable<T> items, string methodName)
         {
             return _delegation.Invoke(items, methodName);
@@ -151,14 +123,71 @@ namespace Underscore.Module
         /// <summary>
         /// Lazily invokes methods by name for each element in the collection
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="items"></param>
-        /// <param name="methodName"></param>
-        /// <param name="arguments"></param>
-        /// <returns></returns>
         public IEnumerable<object> Invoke<T>(IEnumerable<T> items, string methodName, params object[] arguments)
         {
             return _delegation.Invoke(items, methodName, arguments);
         }
+
+	    public IEnumerable<Tuple<T1, T2>> Zip<T1, T2>(IEnumerable<T1> a, IEnumerable<T2> b)
+	    {
+		    return _zip.Zip(a, b);
+	    }
+
+	    public IEnumerable<Tuple<T1, T2, T3>> Zip<T1, T2, T3>(IEnumerable<T1> a, IEnumerable<T2> b, IEnumerable<T3> c)
+	    {
+			return _zip.Zip(a, b, c);
+	    }
+
+	    public IEnumerable<Tuple<T1, T2, T3, T4>> Zip<T1, T2, T3, T4>(IEnumerable<T1> a, IEnumerable<T2> b, IEnumerable<T3> c, IEnumerable<T4> d)
+	    {
+			return _zip.Zip(a, b, c, d);
+	    }
+
+	    public IEnumerable<Tuple<T1, T2, T3, T4, T5>> Zip<T1, T2, T3, T4, T5>(IEnumerable<T1> a, IEnumerable<T2> b, IEnumerable<T3> c, IEnumerable<T4> d, IEnumerable<T5> e)
+	    {
+			return _zip.Zip(a, b, c, d, e);
+	    }
+
+	    public IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> Zip<T1, T2, T3, T4, T5, T6>(IEnumerable<T1> a, IEnumerable<T2> b, IEnumerable<T3> c, IEnumerable<T4> d, IEnumerable<T5> e,
+		    IEnumerable<T6> f)
+	    {
+			return _zip.Zip(a, b, c, d, e, f);
+	    }
+
+	    public IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> Zip<T1, T2, T3, T4, T5, T6, T7>(IEnumerable<T1> a, IEnumerable<T2> b, IEnumerable<T3> c, IEnumerable<T4> d, IEnumerable<T5> e,
+		    IEnumerable<T6> f, IEnumerable<T7> g)
+	    {
+			return _zip.Zip(a, b, c, d, e, f, g);
+	    }
+
+	    public Tuple<IEnumerable<T1>, IEnumerable<T2>> UnZip<T1, T2>(IEnumerable<Tuple<T1, T2>> zipped)
+	    {
+		    return _zip.UnZip(zipped);
+	    }
+
+	    public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>> UnZip<T1, T2, T3>(IEnumerable<Tuple<T1, T2, T3>> zipped)
+	    {
+			return _zip.UnZip(zipped);
+	    }
+
+	    public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>> UnZip<T1, T2, T3, T4>(IEnumerable<Tuple<T1, T2, T3, T4>> zipped)
+	    {
+			return _zip.UnZip(zipped);
+	    }
+
+	    public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>> UnZip<T1, T2, T3, T4, T5>(IEnumerable<Tuple<T1, T2, T3, T4, T5>> zipped)
+	    {
+			return _zip.UnZip(zipped);
+	    }
+
+	    public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>> UnZip<T1, T2, T3, T4, T5, T6>(IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> zipped)
+	    {
+			return _zip.UnZip(zipped);
+	    }
+
+	    public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>> UnZip<T1, T2, T3, T4, T5, T6, T7>(IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> zipped)
+	    {
+			return _zip.UnZip(zipped);
+	    }
     }
 }
