@@ -41,14 +41,14 @@ namespace Underscore.Collection.Implementation
 		        {
 					// if it's descending and this value isn't smaller than
 					// the last one, it isn't sorted
-			        if (prev.CompareTo(curr) > 0)
+			        if (prev.CompareTo(curr) < 0)
 				        return false;
 		        }
 		        else
 		        {
 					// if it's ascending and this value isn't 
 					// bigger than the last one, it isn't sorted
-			        if (prev.CompareTo(curr) < 0)
+			        if (prev.CompareTo(curr) > 0)
 				        return false;
 		        }
 
@@ -57,25 +57,5 @@ namespace Underscore.Collection.Implementation
 
 	        return true;
         }
-
-		public bool DeepEquals<T>(IEnumerable<T> a, IEnumerable<T> b)
-		{
-			var aIter = a.GetEnumerator();
-			var bIter = b.GetEnumerator();
-
-			while (aIter.MoveNext())
-			{
-				// uneven lengths, not equal
-				if (!bIter.MoveNext())
-					return false;
-
-				// the current objects aren't equal, the sequences aren't equal
-				if (!equalityComponent.AreEquatable(aIter.Current, bIter.Current))
-					return false;
-			}
-
-			// unless the lengths are unequal, the enumerables must be equal
-			return !bIter.MoveNext();
-		}
     }
 }

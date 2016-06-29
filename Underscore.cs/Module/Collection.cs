@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Underscore.Collection;
+using Underscore.Collection.Contract.Zip;
 
 namespace Underscore.Module
 {
@@ -13,6 +14,7 @@ namespace Underscore.Module
         private readonly ICreationComponent _creator;
         private readonly IPartitionComponent _partitioner;
         private readonly IDelegationComponent _delegation;
+	    private readonly IZipComponent _zip;
 
         public Collection( 
             ICreationComponent creator,

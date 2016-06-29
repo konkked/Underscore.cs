@@ -137,7 +137,7 @@ namespace Underscore.Test
 	    {
 			// we could do this programmatically
 			// but this is simpler and faster
-		    get { return new[] { "a", "b", "c", "d", "e", "f", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" }; }
+		    get { return new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" }; }
 	    }
 
         public static class Compare

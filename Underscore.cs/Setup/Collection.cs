@@ -1,6 +1,8 @@
 ﻿using Underscore.Collection;
 using Underscore.Collection.Contract;
+using Underscore.Collection.Contract.Zip;
 using Underscore.Collection.Implementation;
+using Underscore.Collection.Implementation.Zip;
 using Underscore.Setup.Liteioc;
 
 namespace Underscore.Setup
