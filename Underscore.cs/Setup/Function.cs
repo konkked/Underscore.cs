@@ -11,7 +11,6 @@ namespace Underscore.Setup
             kernel.Register<IComposeComponent, ComposeComponent>();
             kernel.Register<IBindComponent, BindComponent>();
             kernel.Register<ISplitComponent,SplitComponent>();
-            kernel.Register<IPartialComponent,PartialComponent>();
             kernel.Register<IConvertComponent,ConvertComponent>();
             kernel.Register<ISynchComponent,SynchComponent>();
             kernel.Register<ICacheComponent , CacheComponent>();
