@@ -106,20 +106,42 @@ namespace Underscore.Module
             return _manipulator.Cycle(list);
         }
 
-	    public Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>(IList<T> list, Func<T, Boolean> @on)
+	    public Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>(IList<T> list, Func<T, bool> on)
 	    {
 		    return _partitioner.PartitionMatches(list, on);
 	    }
 
-	    /// <summary>
+        /// <summary>
+        /// Takes a slice from a list, if start is greater then the end index
+        /// the results are reversed, if the index is negative corresponds to the index
+        /// from the back of the list
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the list</typeparam>
+        /// <param name="list">The list to take the slice from</param>
+        /// <param name="start">The start index</param>
+        /// <param name="end">The end index</param>
+        /// <returns>slice of the list</returns>
+        public IList<T> Slice<T>( IList<T> list, int start, int end )
+        {
+            return _partitioner.Slice( list, start, end );
+        }
+
+
+        /// <summary>
         /// Takes a slice from a list, if start is greater then the end index
         /// the results are reversed, if the index is negative corresponds to the index
         /// from the back of the list, if the slice is larger than the size of the list
         /// then the items are repeated
         /// </summary>
-        public IList<T> Slice<T>( IList<T> list, int start, int end )
+        /// <typeparam name="T">The type of the elements in the list</typeparam>
+        /// <param name="list">The list to take the slice from</param>
+        /// <param name="start">The start index</param>
+        /// <param name="end">The end index</param>
+        /// <param name="allowOverflow">specifies if the slice should cycle on overflow</param>
+        /// <returns>slice of the list</returns>
+        public IList<T> Slice<T>(IList<T> list, int start, int end, bool allowOverflow)
         {
-            return _partitioner.Slice( list, start, end );
+            return _partitioner.Slice(list, start, end, allowOverflow);
         }
 
         /// <summary>

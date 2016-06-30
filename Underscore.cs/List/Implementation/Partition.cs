@@ -140,7 +140,23 @@ namespace Underscore.List
 			);
 	    }
 
-	    /// <summary>
+        /// <summary>
+        /// Takes a slice from a list, if start is greater then the end index
+        /// the results are reversed, if the index is negative corresponds to the index
+        /// from the back of the list
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the list</typeparam>
+        /// <param name="list">The list to take the slice from</param>
+        /// <param name="start">The start index</param>
+        /// <param name="end">The end index</param>
+        /// <returns>slice of the list</returns>
+        public IList<T> Slice<T>(IList<T> list, int start, int end)
+        {
+            return Slice(list, start, end, false);
+        }
+
+
+        /// <summary>
         /// Takes a slice from a list, if start is greater then the end index
         /// the results are reversed, if the index is negative corresponds to the index
         /// from the back of the list, if the slice is larger than the size of the list
@@ -150,8 +166,54 @@ namespace Underscore.List
         /// <param name="list">The list to take the slice from</param>
         /// <param name="start">The start index</param>
         /// <param name="end">The end index</param>
+        /// <param name="allowOverflow">specifies if the slice should cycle on overflow</param>
         /// <returns>slice of the list</returns>
-        public IList<T> Slice<T>( IList<T> list, int start, int end )
+        public IList<T> Slice<T>(IList<T> list, int start, int end, bool allowOverflow)
+        {
+            if (!allowOverflow)
+            {
+                if (start < -list.Count)
+                {
+                    throw new IndexOutOfRangeException(
+                        "start index value must be greater than or equal to -list.Count unless allowOverflow option is used, actual value was " +
+                        start);
+                }
+
+                if (start >= list.Count)
+                {
+                    throw new IndexOutOfRangeException(
+                        "start index value must be less than list.Count unless allowOverflow option is used, actual value was " +
+                        start);
+                }
+
+                if (end < -list.Count)
+                {
+                    throw new IndexOutOfRangeException(
+                        "end index value must be greater than or equal to -list.Count unless allowOverflow option is used, actual value was " +
+                        end);
+                }
+
+
+                if (end >= list.Count)
+                {
+                    throw new IndexOutOfRangeException(
+                        "end index value must be less than list.Count unless allowOverflow option is used, actual value was " +
+                        end);
+                }
+
+                if ((start < 0 && end >= 0) || (start >= 0 && end < 0))
+                {
+                    throw new InvalidOperationException(
+                        "When using a negative index both values must be negative, actual values were " + start +
+                        " for start and " + end + " for end");
+                }
+
+            }
+
+            return SliceImpl(list, start, end);
+        }
+
+        private IList<T> SliceImpl<T>( IList<T> list, int start, int end )
         {
             int count = list.Count;
             var len = end - start;
@@ -174,7 +236,8 @@ namespace Underscore.List
                 {
                     returning[ j++ ] = list[ ( i + offset ) % count ];
                 }
-            } else 
+            }
+            else 
             {
                 len ++;
                 returning = new T[ len ];
@@ -190,7 +253,7 @@ namespace Underscore.List
             return returning;
 
         }
-
+         
         /// <summary>
         /// Splits the list in half
         /// </summary>

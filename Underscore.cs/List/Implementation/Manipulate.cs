@@ -65,7 +65,7 @@ namespace Underscore.List
         }
 
         /// <summary>
-        /// Rotates passed list
+        /// Rotates passed list, postive change will shift right negative will shift left
         /// </summary>
         public void Rotate<T>( IList<T> list, int change ) 
         {
