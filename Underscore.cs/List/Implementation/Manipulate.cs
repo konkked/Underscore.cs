@@ -157,7 +157,7 @@ namespace Underscore.List
         public IEnumerable<T> Extend<T>(IList<T> list, int size)
         {
             for (int i = 0; i < size; i++)
-                yield return list[i%list.Count];
+                yield return list[i % list.Count];
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace Underscore.List
         /// </summary>
         public IEnumerable<T> Cycle<T>(IList<T> list)
         {
-            for(int i=0;;i++)
+            for(int i = 0; ; i++)
             {
 
                 if (i == list.Count)
