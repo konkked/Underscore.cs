@@ -15,10 +15,9 @@ namespace Underscore.Module
 
         public List( 
             IManipulateComponent manipulator,
-            IPartitionComponent partitioner
-        ) 
+            IPartitionComponent partitioner ) 
         {
-            
+
             if (manipulator == null)
                 throw new ArgumentNullException("manipulator");
 

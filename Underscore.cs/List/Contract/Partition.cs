@@ -51,10 +51,11 @@ namespace Underscore.List
         /// from the back of the list
         /// </summary>
         /// <typeparam name="T">The type of the elements in the list</typeparam>
-        /// <param name="list">The list to take the slice from</param>
-        /// <param name="start">The start index</param>
-        /// <param name="end">The end index</param>
+        /// <param name="start">The inclusive start index</param>
+        /// <param name="end">The inclusive end index</param>
+        /// <returns>slice of the list</returns>
         IList<T> Slice<T>( IList<T> list, int start, int end );
+
 
 
         /// <summary>
@@ -64,9 +65,8 @@ namespace Underscore.List
         /// then the items are repeated
         /// </summary>
         /// <typeparam name="T">The type of the elements in the list</typeparam>
-        /// <param name="list">The list to take the slice from</param>
-        /// <param name="start">The start index</param>
-        /// <param name="end">The end index</param>
+        /// <param name="start">The inclusive start index</param>
+        /// <param name="end">The inclusive end index</param>
         /// <param name="allowOverflow">specifies if the slice should cycle on overflow</param>
         /// <returns>slice of the list</returns>
         IList<T> Slice<T>(IList<T> list, int start, int end, bool allowOverflow);
