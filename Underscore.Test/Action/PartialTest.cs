@@ -30,14 +30,14 @@ namespace Underscore.Test.Action{
 		private const string Arg15 = "o";
 		private const string Arg16 = "p";
 
-		private PartialComponent component;
+		private BindComponent component;
 
 		private string[] output;
 
 		[TestInitialize]
 		public void Initialize()
 		{
-			component = new PartialComponent();
+			component = new BindComponent();
 			output = new string[1];
 		}
 
