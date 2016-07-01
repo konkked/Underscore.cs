@@ -139,6 +139,16 @@ namespace Underscore.Test
 			get { return new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" }; }
 		}
 
+		public static string[] UppercaseCharArray
+		{
+			get { return new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }; }
+		}
+
+		public static string Join(params string[] args)
+		{
+			return args.Aggregate(String.Empty, (total, curr) => total + curr);
+		}
+
 		public static class Compare
 		{
 			public static void All(params Tuple<object, object>[] tuples)

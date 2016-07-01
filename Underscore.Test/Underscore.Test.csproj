@@ -82,7 +82,8 @@
     <Compile Include="Collection\SetTest.cs" />
     <Compile Include="Collection\Zip\UnZipTest.cs" />
     <Compile Include="Collection\Zip\ZipTest.cs" />
-    <Compile Include="Function\BindTest.cs" />
+    <Compile Include="Function\Bind\BindTest.cs" />
+    <Compile Include="Function\Bind\PartialTest.cs" />
     <Compile Include="Function\Boolean\AndTest.cs" />
     <Compile Include="Function\Boolean\NegateTest.cs" />
     <Compile Include="Function\Boolean\OrTest.cs" />
@@ -92,7 +93,6 @@
     <Compile Include="Function\Split\CurryTest.cs" />
     <Compile Include="Function\Split\SplitTest.cs" />
     <Compile Include="Function\Split\UncurryTest.cs" />
-    <Compile Include="Function\PartialTest.cs" />
     <Compile Include="Function\Synch\AfterTest.cs" />
     <Compile Include="Function\Synch\BeforeTest.cs" />
     <Compile Include="Function\Synch\DebounceTest.cs" />

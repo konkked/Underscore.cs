@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Underscore.Action;
 
@@ -8,153 +9,267 @@ namespace Underscore.Test.Action
     public class BindTest
     {
 	    private BindComponent component;
+		private string[] output;
+	    private string expected;
 
 	    [TestInitialize]
 	    public void Initialize()
 	    {
 		    component = new BindComponent();
+		    output = new[] { "" };
 	    }
-
-        #region Bind.Action
-        private static readonly bool[] _didRun = new bool[5];
-
-        // actual action doesn't do much
-        // but we want it to do something so compiler doesn't just throw out a statement
-
-        #region Bind.Action.TestHelpers
-
-        public static void TestingAction<T0, T1, T2, T3, T4>(T0 arg0, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
-        {
-            _didRun[4] = true;
-        }
-
-        public static Action<T0, T1, T2, T3, T4> CreateTestingAction<T0, T1, T2, T3, T4>(int index, bool[] target)
-        {
-            return (a, b, c, d, e) =>
-            {
-                TestingAction(a, b, c, d, e);
-                target[index] = true;
-            };
-        }
-
-        public static void TestingAction<T0, T1, T2, T3>(T0 arg0, T1 arg1, T2 arg2, T3 arg3)
-        {
-            _didRun[3] = true;
-        }
-
-        public static Action<T0, T1, T2, T3> CreateTestingAction<T0, T1, T2, T3>(int index, bool[] target)
-        {
-            return (a, b, c, d) =>
-            {
-                TestingAction(a, b, c, d);
-                target[index] = true;
-            };
-        }
-
-        public static void TestingAction<T0, T1, T2>(T0 arg0, T1 arg1, T2 arg2)
-        {
-            _didRun[2] = true;
-        }
-
-        public static Action<T0, T1, T2> CreateTestingAction<T0, T1, T2>(int index, bool[] target)
-        {
-            return (a, b, c) =>
-            {
-                TestingAction(a, b, c);
-                target[index] = true;
-            };
-        }
-
-        public static void TestingAction<T0, T1>(T0 arg0, T1 arg1)
-        {
-            _didRun[1] = true;
-        }
-
-        public static Action<T0, T1> CreateTestingAction<T0, T1>(int index, bool[] target)
-        {
-            return ( a, b ) =>
-            {
-                TestingAction(a, b);
-                target[index] = true;
-            };
-        }
-
-        public static void TestingAction<T>(T value)
-        {
-            _didRun[0] = true;
-        }
-
-        public static Action<TParam> CreateTestingAction<TParam>(int index, bool[] target)
-        {
-            return a =>
-            {
-                TestingAction(a);
-                target[index] = true;
-            };
-        }
-
-        #endregion
 
 		[TestMethod]
 		public void Action_Bind_OneParameter()
 		{
-			var didRun = new bool[1];
+			expected = "a";
+			Action<string> action = (a) => output[0] = Util.Join(a);
 
-			component.Bind(CreateTestingAction<string>(0, didRun), "").Invoke();
+			var bound = component.Bind(action, "a");
 
-			foreach (var b in didRun)
-				Assert.IsTrue(b, "One of the testing methods failed to execute");
+			bound();
+
+			Assert.AreEqual(expected, output[0]);
 		}
 
 		[TestMethod]
 		public void Action_Bind_2Parameters()
-        {
-	        var didRun = new bool[2];
+		{
+			expected = "ab";
+			Action<string, string> action = (a, b) =>
+			{
+				output[0] = Util.Join(a, b);
+			};
 
+			var bound = component.Bind(action, "a", "b");
 
-			component.Bind(CreateTestingAction<string, string>(0, didRun), "a", "b").Invoke();
-            //2 types
-			component.Bind(CreateTestingAction<string, int>(1, didRun), "a", 1).Invoke();
+			bound();
 
-
-            foreach ( var b in didRun )
-                Assert.IsTrue( b, "One of the testing methods failed to execute" );
+			Assert.AreEqual(expected, output[0]);
         }
 
 		[TestMethod]
         public void Action_Bind_3Parameters()
         {
-            var didRun = new bool[3];
+			expected = "abc";
+			Action<string, string, string> action = (a, b, c) =>
+			{
+				output[0] = Util.Join(a, b, c);
+			};
 
+			var bound = component.Bind(action, "a", "b", "c");
 
-			component.Bind(CreateTestingAction<string, string, string>(0, didRun), "a", "b", "c").Invoke();
-            //2 types
-			component.Bind(CreateTestingAction<string, int, string>(1, didRun), "a", 1, "b").Invoke();
-            //3 types
-			component.Bind(CreateTestingAction<string, int, char>(2, didRun), "a", 1, 'b').Invoke();
+			bound();
 
-
-	        foreach (var b in didRun)
-		        Assert.IsTrue(b, "One of the testing methods failed to execute");
+			Assert.AreEqual(expected, output[0]);
         }
 
         [TestMethod]
         public void Action_Bind_4Parameters()
         {
-            var didRun = new bool[4];
+			expected = "abcd";
+			Action<string, string, string, string> action = (a, b, c, d) =>
+			{
+				output[0] = Util.Join(a, b, c, d);
+			};
 
+			var bound = component.Bind(action, "a", "b", "c", "d");
 
-			component.Bind(CreateTestingAction<string, string, string, string>(0, didRun), "a", "b", "c", "d").Invoke();
-            //2 types
-			component.Bind(CreateTestingAction<string, int, string, int>(1, didRun), "a", 1, "b", 2).Invoke();
-            //3 types
-			component.Bind(CreateTestingAction<string, int, char, string>(2, didRun), "a", 1, 'b', "2").Invoke();
-            //4 types
-			component.Bind(CreateTestingAction<double, int, char, string>(3, didRun), 0.0, 1, 'b', "2").Invoke();
+			bound();
 
-	        foreach (var b in didRun)
-		        Assert.IsTrue(b, "One of the testing methods failed to execute");
+			Assert.AreEqual(expected, output[0]);
         }
-        #endregion
+
+		[TestMethod]
+		public void Action_Bind_5Parameters()
+		{
+			expected = "abcde";
+			Action<string, string, string, string, string> action = (a, b, c, d, e) =>
+			{
+				output[0] = Util.Join(a, b, c, d, e);
+			};
+
+			var bound = component.Bind(action, "a", "b", "c", "d", "e");
+
+			bound();
+
+			Assert.AreEqual(expected, output[0]);
+		}
+
+		[TestMethod]
+		public void Action_Bind_6Parameters()
+		{
+			expected = "abcdef";
+			Action<string, string, string, string, string, string> action = (a, b, c, d, e, f) =>
+			{
+				output[0] = Util.Join(a, b, c, d, e, f);
+			};
+
+			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f");
+
+			bound();
+
+			Assert.AreEqual(expected, output[0]);
+		}
+
+		[TestMethod]
+		public void Action_Bind_7Parameters()
+		{
+			expected = "abcdefg";
+			Action<string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g) =>
+			{
+				output[0] = Util.Join(a, b, c, d, e, f, g);
+			};
+
+			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g");
+
+			bound();
+
+			Assert.AreEqual(expected, output[0]);
+		}
+
+		[TestMethod]
+		public void Action_Bind_8Parameters()
+		{
+			expected = "abcdefgh";
+			Action<string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h) =>
+			{
+				output[0] = Util.Join(a, b, c, d, e, f, g, h);
+			};
+
+			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h");
+
+			bound();
+
+			Assert.AreEqual(expected, output[0]);
+		}
+
+		[TestMethod]
+		public void Action_Bind_9Parameters()
+		{
+			expected = "abcdefghi";
+			Action<string, string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h, i) =>
+			{
+				output[0] = Util.Join(a, b, c, d, e, f, g, h, i);
+			};
+
+			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i");
+
+			bound();
+
+			Assert.AreEqual(expected, output[0]);
+		}
+
+		[TestMethod]
+		public void Action_Bind_10Parameters()
+		{
+			expected = "abcdefghij";
+			Action<string, string, string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h, i, j) =>
+			{
+				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j);
+			};
+
+			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j");
+
+			bound();
+
+			Assert.AreEqual(expected, output[0]);
+		}
+
+		[TestMethod]
+		public void Action_Bind_11Parameters()
+		{
+			expected = "abcdefghijk";
+			Action<string, string, string, string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h, i, j, k) =>
+			{
+				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k);
+			};
+
+			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k");
+
+			bound();
+
+			Assert.AreEqual(expected, output[0]);
+		}
+
+		[TestMethod]
+		public void Action_Bind_12Parameters()
+		{
+			expected = "abcdefghijkl";
+			Action<string, string, string, string, string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h, i, j, k, l) =>
+			{
+				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
+			};
+
+			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l");
+
+			bound();
+
+			Assert.AreEqual(expected, output[0]);
+		}
+
+		[TestMethod]
+		public void Action_Bind_13Parameters()
+		{
+			expected = "abcdefghijklm";
+			Action<string, string, string, string, string, string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h, i, j, k, l, m) =>
+			{
+				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
+			};
+
+			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m");
+
+			bound();
+
+			Assert.AreEqual(expected, output[0]);
+		}
+
+		[TestMethod]
+		public void Action_Bind_14Parameters()
+		{
+			expected = "abcdefghijklmn";
+			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) =>
+			{
+				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+			};
+
+			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n");
+
+			bound();
+
+			Assert.AreEqual(expected, output[0]);
+		}
+
+		[TestMethod]
+		public void Action_Bind_15Parameters()
+		{
+			expected = "abcdefghijklmno";
+			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) =>
+			{
+				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+			};
+
+			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o");
+
+			bound();
+
+			Assert.AreEqual(expected, output[0]);
+		}
+
+		[TestMethod]
+		public void Action_Bind_16Parameters()
+		{
+			expected = "abcdefghijklmnop";
+			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> action = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) =>
+			{
+				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
+			};
+
+			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p");
+
+			bound();
+
+			Assert.AreEqual(expected, output[0]);
+		}
     }
 }

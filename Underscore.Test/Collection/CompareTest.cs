@@ -6,46 +6,6 @@ namespace Underscore.Test.Collection
 	[TestClass]
 	public class CompareTest
 	{
-		public class TestObject
-		{
-			public TestObject() { }
-
-			public TestObject(TestObject toClone)
-			{
-				Value = toClone.Value;
-				Nested = new TestNestedObject(toClone.Nested);
-			}
-
-			public int Value { get; set; }
-			public TestNestedObject Nested { get; set; }
-		}
-
-		public class TestNestedObject
-		{
-			public TestNestedObject() { }
-
-			public TestNestedObject(TestNestedObject toClone)
-			{
-				Value = toClone.Value;
-				DeepNested = new TestDeepNestedObject(toClone.DeepNested);
-			}
-
-			public int Value { get; set; }
-			public TestDeepNestedObject DeepNested { get; set; }
-		}
-
-		public class TestDeepNestedObject
-		{
-			public TestDeepNestedObject() { }
-
-			public TestDeepNestedObject(TestDeepNestedObject toClone)
-			{
-				Value = toClone.Value;
-			}
-
-			public int Value { get; set; }
-		}
-
 		private CompareComponent component;
 
 		[TestInitialize]

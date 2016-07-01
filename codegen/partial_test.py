@@ -7,8 +7,8 @@ import os
 def expected(var_names):
     retval = ''
     for c in var_names:
-        retval += c + ' '
-    return retval.strip()
+        retval += c
+    return retval
 
 def lowercase_letters():
     return list(map(chr, range(97, 123)))
@@ -65,7 +65,7 @@ def generate_test_case_function(var_names, num_params_to_bind):
         retval += var_names[i] + ', '
 
     # add the last element to arg declaration
-    retval += var_names[-1] + ') => Join('
+    retval += var_names[-1] + ') => Util.Join('
 
     # put all the var names into the logic except the last one so we can have proper syntax
     for i in range(0, len(var_names) - 1):
@@ -122,7 +122,7 @@ def generate_test_case_action(var_names, num_params_to_bind):
         retval += var_names[i] + ', '
 
     # add the last element to arg declaration
-    retval += var_names[-1] + ') => output[0] = Join('
+    retval += var_names[-1] + ') => output[0] = Util.Join('
 
     # put all the var names into the logic except the last one so we can have proper syntax
     for i in range(0, len(var_names) - 1):
@@ -160,10 +160,10 @@ def generate_test_case_action(var_names, num_params_to_bind):
     return retval
 
 def action_test_file():
-    return os.path.join(os.path.dirname(__file__), '..', 'Underscore.Test', 'Action', 'PartialTest.cs')
+    return os.path.join(os.path.dirname(__file__), '..', 'Underscore.Test', 'Action', 'Bind', 'PartialTest.cs')
 
 def function_test_file():
-    return os.path.join(os.path.dirname(__file__), '..', 'Underscore.Test', 'Function', 'PartialTest.cs')
+    return os.path.join(os.path.dirname(__file__), '..', 'Underscore.Test', 'Function', 'Bind', 'PartialTest.cs')
 
 def write_to_file(output, type_name):
     # get the filename for the given type
@@ -189,10 +189,10 @@ def main():
     output += 'using Microsoft.VisualStudio.TestTools.UnitTesting;\n'
     # make sure we include the right component
     output += 'using Underscore.' + type_name + ';\n'
-    output += 'using System.Linq;\n\n'
+    output += '\n'
 
     # make sure it's in the right namespace
-    output += 'namespace Underscore.Test.' + type_name
+    output += 'namespace Underscore.Test.' + type_name + ' '
 
     # declare our class and our helper function
     output += '{\n'
@@ -200,24 +200,20 @@ def main():
     output += '\t[TestClass]\n'
     output += '\tpublic class PartialTest\n'
     output += '\t{\n'
-    output += '\t\tprivate static string Join(params string[] args)\n'
-    output += '\t\t{\n'
-    output += '\t\t\treturn string.Join(" ", args.Where(s => !string.IsNullOrEmpty(s)));\n'
-    output += '\t\t}\n\n'
 
     # add const variable declarations
     output += generate_variable_declarations()
     output += '\n'
 
     # declare the initialization variables
-    output += '\t\tprivate PartialComponent component;\n\n'
+    output += '\t\tprivate BindComponent component;\n\n'
     # only the action implementation needs to use this
     if type_name == 'Action':
         output += '\t\tprivate string[] output;\n\n'
     output += '\t\t[TestInitialize]\n'
     output += '\t\tpublic void Initialize()\n'
     output += '\t\t{\n'
-    output += '\t\t\tcomponent = new PartialComponent();\n'
+    output += '\t\t\tcomponent = new BindComponent();\n'
     if type_name == 'Action':
         output += '\t\t\toutput = new string[1];\n'
     output += '\t\t}\n\n'
