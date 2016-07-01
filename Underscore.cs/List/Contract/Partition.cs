@@ -48,10 +48,28 @@ namespace Underscore.List
         /// <summary>
         /// Takes a slice from a list, if start is greater then the end index
         /// the results are reversed, if the index is negative corresponds to the index
+        /// from the back of the list
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the list</typeparam>
+        /// <param name="start">The inclusive start index</param>
+        /// <param name="end">The inclusive end index</param>
+        /// <returns>slice of the list</returns>
+        IList<T> Slice<T>( IList<T> list, int start, int end );
+
+
+
+        /// <summary>
+        /// Takes a slice from a list, if start is greater then the end index
+        /// the results are reversed, if the index is negative corresponds to the index
         /// from the back of the list, if the slice is larger than the size of the list
         /// then the items are repeated
         /// </summary>
-        IList<T> Slice<T>( IList<T> list, int start, int end );
+        /// <typeparam name="T">The type of the elements in the list</typeparam>
+        /// <param name="start">The inclusive start index</param>
+        /// <param name="end">The inclusive end index</param>
+        /// <param name="allowOverflow">specifies if the slice should cycle on overflow</param>
+        /// <returns>slice of the list</returns>
+        IList<T> Slice<T>(IList<T> list, int start, int end, bool allowOverflow);
 
         /// <summary>
         /// Splits the list in half

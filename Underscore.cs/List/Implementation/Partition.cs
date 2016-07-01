@@ -91,8 +91,7 @@ namespace Underscore.List
         /// Breaks list into two seperate parts
         /// </summary>
         /// <typeparam name="T">Type of items elements in list</typeparam>
-        /// <param name="collection">list to partition</param>
-        /// <param name="on">the index to partition on</param>
+        /// <param name="index">the index to partition on</param>
         /// <returns>a Tuple containing the first partition in the first item, second partition in the second</returns>
         public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IList<T> list, int index )
         {
@@ -106,7 +105,6 @@ namespace Underscore.List
         /// Breaks collection into two seperate parts
         /// </summary>
         /// <typeparam name="T">Type of items in collection</typeparam>
-        /// <param name="collection">collection to partition</param>
         /// <param name="on">the condition to partition</param>
         /// <returns>a Tuple containing the first partition in the first item, second partition in the second, the element partitioned will be the first element of the second partition </returns>
         public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IList<T> list, Func<T, bool> on ) 
@@ -123,7 +121,6 @@ namespace Underscore.List
         /// are placed in the first item in the tuple and the others placed in the second item in the tuple
         /// </summary>
         /// <typeparam name="T">Type of the items in the enumerable</typeparam>
-        /// <param name="list">The list to be split</param>
         /// <param name="on">the condition to partition using</param>
         /// <returns>a tuple containing items passing the condition on the Item1 and the other items in Item2</returns>
 	    public Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>(IList<T> list, Func<T, bool> on)
@@ -145,18 +142,78 @@ namespace Underscore.List
 			);
 	    }
 
-	    /// <summary>
+        /// <summary>
+        /// Takes a slice from a list, if start is greater then the end index
+        /// the results are reversed, if the index is negative corresponds to the index
+        /// from the back of the list
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the list</typeparam>
+        /// <param name="start">The inclusive start index</param>
+        /// <param name="end">The inclusive end index</param>
+        /// <returns>slice of the list</returns>
+        public IList<T> Slice<T>(IList<T> list, int start, int end)
+        {
+            return Slice(list, start, end, false);
+        }
+
+
+        /// <summary>
         /// Takes a slice from a list, if start is greater then the end index
         /// the results are reversed, if the index is negative corresponds to the index
         /// from the back of the list, if the slice is larger than the size of the list
         /// then the items are repeated
         /// </summary>
         /// <typeparam name="T">The type of the elements in the list</typeparam>
-        /// <param name="list">The list to take the slice from</param>
-        /// <param name="start">The start index</param>
-        /// <param name="end">The end index</param>
+        /// <param name="start">The inclusive start index</param>
+        /// <param name="end">The inclusive end index</param>
+        /// <param name="allowOverflow">specifies if the slice should cycle on overflow</param>
         /// <returns>slice of the list</returns>
-        public IList<T> Slice<T>( IList<T> list, int start, int end )
+        public IList<T> Slice<T>(IList<T> list, int start, int end, bool allowOverflow)
+        {
+            if (!allowOverflow)
+            {
+                if (start < -list.Count)
+                {
+                    throw new IndexOutOfRangeException(
+                        "start index value must be greater than or equal to -list.Count unless allowOverflow option is used, actual value was " +
+                        start);
+                }
+
+                if (start >= list.Count)
+                {
+                    throw new IndexOutOfRangeException(
+                        "start index value must be less than list.Count unless allowOverflow option is used, actual value was " +
+                        start);
+                }
+
+                if (end < -list.Count)
+                {
+                    throw new IndexOutOfRangeException(
+                        "end index value must be greater than or equal to -list.Count unless allowOverflow option is used, actual value was " +
+                        end);
+                }
+
+
+                if (end >= list.Count)
+                {
+                    throw new IndexOutOfRangeException(
+                        "end index value must be less than list.Count unless allowOverflow option is used, actual value was " +
+                        end);
+                }
+
+                if ((start < 0 && end >= 0) || (start >= 0 && end < 0))
+                {
+                    throw new InvalidOperationException(
+                        "When using a negative index both values must be negative, actual values were " + start +
+                        " for start and " + end + " for end");
+                }
+
+            }
+
+            return SliceImpl(list, start, end);
+        }
+
+        private IList<T> SliceImpl<T>( IList<T> list, int start, int end )
         {
             int count = list.Count;
             var len = end - start;
@@ -177,9 +234,11 @@ namespace Underscore.List
                 //shift left
                 for ( int i=start ; i >= end ; i-- )
                 {
-                    returning[ j++ ] = list[ ( i + offset ) % count ];
+                    returning[ j ] = list[ ( i + offset ) % count ];
+                    j++;
                 }
-            } else 
+            }
+            else 
             {
                 len ++;
                 returning = new T[ len ];
@@ -187,15 +246,15 @@ namespace Underscore.List
                 int j=0;
                 for ( int i=start ; i <= end ; i++ ) 
                 {
-                    returning[ j++ ] = list[ ( i + offset ) % count ];
-
+                    returning[j] = list[ ( i + offset ) % count ];
+                    j++;
                 }
             }
 
             return returning;
 
         }
-
+         
         /// <summary>
         /// Splits the list in half
         /// </summary>
@@ -215,9 +274,6 @@ namespace Underscore.List
         /// <summary>
         /// Creates an enumerable with all of the possible combinations of the list in it
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="list"></param>
-        /// <returns></returns>
         public IEnumerable<IEnumerable<T>> Combinations<T>(IList<T> list)
         {
             if(list== null) throw new ArgumentNullException("list");
