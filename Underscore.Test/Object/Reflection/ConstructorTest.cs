@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Underscore.Test.Object.Reflection
 {
     [TestClass]
-    public class ConstructorComponentTest
+    public class ConstructorTest
     {
 
         [TestMethod]

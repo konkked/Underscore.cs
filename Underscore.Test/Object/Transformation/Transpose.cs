@@ -94,21 +94,21 @@ namespace Underscore.Test.Object.Transformation
             decimal employeeToPersonSalary=10000m;
             var employeeToPerson = new Employee { FirstName = shouldbehere, LastName = null, Salary = employeeToPersonSalary };
 
-            target.Transpose( person  , employeeWithNoInfo);
-            target.Transpose( person  , employeeWithExistingInfo);
-            target.Transpose( person  , employeeWithOnlySalary );
+            target.Transpose( person , employeeWithNoInfo);
+            target.Transpose( person , employeeWithExistingInfo);
+            target.Transpose( person , employeeWithOnlySalary );
 
-            Assert.AreEqual( person.FirstName , employeeWithExistingInfo.FirstName );
-            Assert.AreEqual( person.LastName , employeeWithExistingInfo.LastName );
-            Assert.AreEqual( 60000m  , employeeWithExistingInfo.Salary );
+            Assert.AreEqual( person.FirstName, employeeWithExistingInfo.FirstName );
+            Assert.AreEqual( person.LastName, employeeWithExistingInfo.LastName );
+            Assert.AreEqual( 60000m , employeeWithExistingInfo.Salary );
 
-            Assert.AreEqual( person.FirstName  , employeeWithNoInfo.FirstName);
-            Assert.AreEqual( person.LastName  , employeeWithNoInfo.LastName );
-            Assert.AreEqual( default( decimal )  , employeeWithNoInfo.Salary);
+            Assert.AreEqual( person.FirstName , employeeWithNoInfo.FirstName);
+            Assert.AreEqual( person.LastName , employeeWithNoInfo.LastName );
+            Assert.AreEqual( default( decimal ) , employeeWithNoInfo.Salary);
 
-            Assert.AreEqual( person.FirstName  , employeeWithOnlySalary.FirstName);
-            Assert.AreEqual( person.LastName  , employeeWithOnlySalary.LastName);
-            Assert.AreEqual( 60000m  , employeeWithOnlySalary.Salary );
+            Assert.AreEqual( person.FirstName , employeeWithOnlySalary.FirstName);
+            Assert.AreEqual( person.LastName , employeeWithOnlySalary.LastName);
+            Assert.AreEqual( 60000m , employeeWithOnlySalary.Salary );
 
             target.Transpose( person, employeeToPerson );
 
@@ -127,7 +127,7 @@ namespace Underscore.Test.Object.Transformation
         public void Coalesce( )
         {
             string middleName = "Henry";
-            var coalscing = new { MiddleName = middleName , FirstName = "ShouldNotBeHere" , LastName = "ShouldBeHere" };
+            var coalscing = new { MiddleName = middleName, FirstName = "ShouldNotBeHere", LastName = "ShouldBeHere" };
             var coalscingType = coalscing.GetType( );
 
             var mkprop = new Mock<IPropertyComponent>( );
@@ -152,21 +152,20 @@ namespace Underscore.Test.Object.Transformation
 
             var target = new TransposeComponent( mkprop.Object );
 
-            string title = "Mr." ,
-                firstName = "Charles" ,
-                lastName = "Keyser" ,
-                suffix = "IV" ,
+            string title = "Mr.",
+                firstName = "Charles",
+                suffix = "IV",
                 nickName = "Chip";
 
             int age = 24;
 
             var person = new Person
             {
-                Title = title ,
-                FirstName = firstName ,
-                Suffix = suffix ,
-                NickName = nickName ,
-                Age = age ,
+                Title = title,
+                FirstName = firstName,
+                Suffix = suffix,
+                NickName = nickName,
+                Age = age,
             };
 
             string shouldbehere = "ShouldBeHere";
@@ -174,8 +173,8 @@ namespace Underscore.Test.Object.Transformation
 
             var employeeWithExistingInfo = new Employee
             {
-                FirstName = shouldbehere ,
-                LastName = shouldbehere ,
+                FirstName = shouldbehere,
+                LastName = shouldbehere,
                 Salary = defaultedSalary
             };
 
@@ -186,34 +185,34 @@ namespace Underscore.Test.Object.Transformation
                 Salary = 60000m
             };
 
-            var result = target.Coalesce( employeeWithExistingInfo , person );
+            var result = target.Coalesce( employeeWithExistingInfo, person );
 
-            Assert.AreEqual( employeeWithExistingInfo , result );
-            Assert.AreEqual( defaultedSalary , result.Salary );
-            Assert.AreEqual( shouldbehere , result.FirstName );
-            Assert.AreEqual( shouldbehere , result.LastName );
+            Assert.AreEqual( employeeWithExistingInfo, result );
+            Assert.AreEqual( defaultedSalary, result.Salary );
+            Assert.AreEqual( shouldbehere, result.FirstName );
+            Assert.AreEqual( shouldbehere, result.LastName );
 
             var dm = default( decimal );
             var ml = new Employee{};
-            var result3 = target.Coalesce( ml , new { Salary = 1000m } );
+            var result3 = target.Coalesce( ml, new { Salary = 1000m } );
 
             // the salary should not be replaced because
-            Assert.AreEqual( result3 , ml );
-            Assert.AreEqual( dm , ml.Salary );
+            Assert.AreEqual( result3, ml );
+            Assert.AreEqual( dm, ml.Salary );
 
-            var result2 = target.Coalesce( person , coalscing );
-            Assert.AreEqual    ( person , result2  );
-            Assert.AreNotEqual ( "ShouldNotBeHere" , result2.FirstName );
-            Assert.AreEqual( "ShouldBeHere" , result2.LastName );
-            Assert.AreEqual( "Henry" , result2.MiddleName );
-            Assert.AreEqual( "IV" , result2.Suffix );
+            var result2 = target.Coalesce( person, coalscing );
+            Assert.AreEqual    ( person, result2  );
+            Assert.AreNotEqual ( "ShouldNotBeHere", result2.FirstName );
+            Assert.AreEqual( "ShouldBeHere", result2.LastName );
+            Assert.AreEqual( "Henry", result2.MiddleName );
+            Assert.AreEqual( "IV", result2.Suffix );
 
-            var result4 = target.Coalesce( person , coalscing, true );
-            Assert.AreNotEqual( person , result4 );
-            Assert.AreNotEqual( "ShouldNotBeHere" , result2.FirstName );
-            Assert.AreEqual( "ShouldBeHere" , result2.LastName );
-            Assert.AreEqual( "Henry" , result2.MiddleName );
-            Assert.AreEqual( "IV" , result2.Suffix );
+            var result4 = target.Coalesce( person, coalscing, true );
+            Assert.AreNotEqual( person, result4 );
+            Assert.AreNotEqual( "ShouldNotBeHere", result2.FirstName );
+            Assert.AreEqual( "ShouldBeHere", result2.LastName );
+            Assert.AreEqual( "Henry", result2.MiddleName );
+            Assert.AreEqual( "IV", result2.Suffix );
 
         }
 

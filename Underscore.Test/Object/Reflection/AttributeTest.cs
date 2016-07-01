@@ -1,31 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Threading.Tasks;
-using Moq;
-using System.Reflection;
 using System.Linq;
-using Underscore.Function;
 using Underscore.Object.Reflection;
-
 
 namespace Underscore.Test.Object.Reflection
 {
     [TestClass]
-    public class Attribute
+    public class AttributeTest
     {
         [AttributeUsage(AttributeTargets.All,AllowMultiple=true)]
-        public class TestMultipleAttribute : System.Attribute 
+        public class TestMultipleAttribute : Attribute 
         {
             public string Info { get; set; }
         }
 
         [AttributeUsage(AttributeTargets.All , AllowMultiple = true)]
-        public class TestSingleAttribute : System.Attribute
+        public class TestSingleAttribute : Attribute
         {
             public string Info { get; set; }
         }
-
 
         [TestSingle(Info="OnClass")]
         public class Person
@@ -68,11 +61,10 @@ namespace Underscore.Test.Object.Reflection
             public string A { get; set; }
         }
 
-
         [TestMethod]
         public void AttributeHasCustomAttribute()
         {
-            
+
             var testing = new Underscore.Object.Reflection.AttributeComponent(new MockUtilFunctionComponent());
 
             Assert.IsFalse(
@@ -87,9 +79,8 @@ namespace Underscore.Test.Object.Reflection
                 testing.Has<TestMultipleAttribute>(null)
            );
 
-
             var fnProp = typeof(Person).GetMember("FirstName").FirstOrDefault();
- 
+
             Assert.IsFalse(
                testing.Has<TestMultipleAttribute>(fnProp)
            );
@@ -110,18 +101,14 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-
-
-
         [TestMethod]
         public void AttributeGetCustomAttribute()
         {
-            
+
             var testing = new AttributeComponent(new MockUtilFunctionComponent());
 
-
             var multiAttr = testing.Find<TestMultipleAttribute>(typeof(Person));
-            
+
             Assert.IsNull(multiAttr);
 
             multiAttr = testing.Find<TestMultipleAttribute>(new Person());
@@ -129,7 +116,6 @@ namespace Underscore.Test.Object.Reflection
             Assert.IsNull(multiAttr);
 
             multiAttr = testing.Find<TestMultipleAttribute>(null);
-
 
             var fnProp = typeof(Person).GetMember("FirstName").FirstOrDefault();
 
@@ -148,7 +134,6 @@ namespace Underscore.Test.Object.Reflection
 
             Assert.IsNotNull(sattr);
             Assert.AreEqual("Single" , sattr.Info);
-
 
             multiAttr = testing.Find<TestMultipleAttribute>(mp);
 

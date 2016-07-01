@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using Moq;
@@ -9,12 +8,11 @@ using System.Linq;
 using Underscore.Function;
 using Underscore.Object.Reflection;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Underscore.Test.Object.Reflection
 {
     [TestClass]
-    public class Method
+    public class MethodTest
     {
 
         public class MethodInvokeTestTargetObject
