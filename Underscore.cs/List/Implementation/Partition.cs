@@ -144,7 +144,7 @@ namespace Underscore.List
         /// </summary>
         /// <typeparam name="T">The type of the elements in the list</typeparam>
         /// <param name="start">The inclusive start index</param>
-        /// <param name="end">The inclusive end index</param>
+        /// <param name="end">The exclusive end index</param>
         /// <returns>slice of the list</returns>
         public IList<T> Slice<T>(IList<T> list, int start, int end)
         {
@@ -155,16 +155,57 @@ namespace Underscore.List
         /// <summary>
         /// Takes a slice from a list, if start is greater then the end index
         /// the results are reversed, if the index is negative corresponds to the index
+        /// from the back of the list
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the list</typeparam>
+        /// <param name="start">The inclusive start index</param>
+        /// <param name="end">The exclusive end index</param>
+        /// <param name="step">The increase of the index</param>
+        /// <returns>slice of the list</returns>
+        public IList<T> Slice<T>(IList<T> list, int start, int end, int step)
+        {
+            return Slice(list, start, end, step,false);
+        }
+
+        /// <summary>
+        /// Takes a slice from a list, if start is greater then the end index
+        /// the results are reversed, if the index is negative corresponds to the index
         /// from the back of the list, if the slice is larger than the size of the list
         /// then the items are repeated
         /// </summary>
         /// <typeparam name="T">The type of the elements in the list</typeparam>
         /// <param name="start">The inclusive start index</param>
-        /// <param name="end">The inclusive end index</param>
+        /// <param name="end">The exclusive end index</param>
         /// <param name="allowOverflow">specifies if the slice should cycle on overflow</param>
         /// <returns>slice of the list</returns>
         public IList<T> Slice<T>(IList<T> list, int start, int end, bool allowOverflow)
         {
+            return SliceImpl(list, start, end, allowOverflow, null);
+        }
+
+        /// <summary>
+        /// Takes a slice from a list, if start is greater then the end index
+        /// the results are reversed, if the index is negative corresponds to the index
+        /// from the back of the list, if the slice is larger than the size of the list
+        /// then the items are repeated
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the list</typeparam>
+        /// <param name="start">The inclusive start index</param>
+        /// <param name="end">The exclusive end index</param>
+        /// <param name="step">The step of the index</param>
+        /// <param name="allowOverflow">specifies if the slice should cycle on overflow</param>
+        /// <returns>slice of the list</returns>
+        public IList<T> Slice<T>(IList<T> list, int start, int end, int step, bool allowOverflow)
+        {
+           
+            return SliceImpl(list, start, end,allowOverflow,step);
+        }
+
+
+        private IList<T> SliceImpl<T>( IList<T> list, int start, int end, bool allowOverflow, int? pstep )
+        {
+
+
             if (!allowOverflow)
             {
                 if (start < -list.Count)
@@ -205,45 +246,90 @@ namespace Underscore.List
 
             }
 
-            return SliceImpl(list, start, end);
-        }
-
-        private IList<T> SliceImpl<T>( IList<T> list, int start, int end )
-        {
             int count = list.Count;
-            var len = end - start;
+            var len = ( end - start );
+            
             T[] returning;
+            
+            //creates an offset for handling negative indexes
+            int offset = ( ( _math.Max( _math.Abs( start ), _math.Abs( end )  )   / count ) + 1 ) * count;
 
-            int offset = ( ( _math.Max( _math.Abs( start ), _math.Abs( end ) ) / count ) + 1 ) * count;
+            if(pstep.HasValue && pstep.Value == 0)
+                throw new InvalidOperationException("Cannot have a zero value step");
 
+            int step = 1;
+            //when the len is negative we are going backwards
             if ( len < 0 )
             {
-                len = -len;
-                len++;
 
-                returning = new T[ len ];
-
-                int j=0;
-
-
-                //shift left
-                for ( int i=start ; i >= end ; i-- )
+                if (pstep.HasValue)
                 {
-                    returning[ j ] = list[ ( i + offset ) % count ];
-                    j++;
-                }
-            }
-            else 
-            {
-                len ++;
-                returning = new T[ len ];
+                    //if we are going backwards and a value was passed
+                    //the value has to be negative or we're going to 
+                    //throw an invalid operation exception
+                    if(pstep.Value>=0)
+                        throw new InvalidOperationException("Cannot have a backwards slice with a forward (postive) step, value passed " + pstep.Value);
 
-                int j=0;
-                for ( int i=start ; i <= end ; i++ ) 
+                    step = -pstep.Value;
+                }
+
+                if (len % step == 0)
+                    len /= step;
+                else
+                    len = (len / step) - 1;
+                
+                len = -len;
+
+                returning = new T[ len ];
+                
+
+                int j =0;
+                for ( int i=start ; i > end ; i-=step )
                 {
                     returning[j] = list[ ( i + offset ) % count ];
                     j++;
                 }
+
+            }
+            else if (len > 0)
+            {
+
+                if (pstep.HasValue)
+                {
+                    //if we are going forwards and the passed step is negative
+                    //will throw an exception 
+                    if (pstep.Value <= 0)
+                        throw new InvalidOperationException("Cannot have a forward slice with a backwards (negative) step, value passed " + pstep.Value);
+
+                    step = pstep.Value;
+                }
+
+                if (len % step == 0)
+                    len /= step;
+                else
+                    len = (len / step) + 1;
+
+                returning = new T[len];
+                
+                if (step < 0)
+                {
+                    var t = start;
+                    start = end;
+                    end = t;
+                    step = -step;
+                }
+
+                int j = 0;
+                for (int i = start; i < end; i+=step)
+                {
+                    returning[j] = list[ (i + offset ) % count ];
+                    j++;
+                }
+
+            }
+            else
+            {
+                returning = new T[] {};
             }
 
             return returning;
