@@ -25,6 +25,5 @@ namespace Underscore.Collection
         /// <param name="items">collection of functions</param>
         /// <returns>returns a list of elements</returns>
         IEnumerable<T> Resolve<T>(IEnumerable<Func<T>> items);
-
     }
 }

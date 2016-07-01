@@ -18,6 +18,13 @@ namespace Underscore.Collection.Contract
         /// </summary>
         IEnumerable<T> DropWhile<T>(IEnumerable<T> collection, Func<T, bool> predicate);
 
+		/// <summary>
+		/// Removes any occurrences of 
+		/// the specified parameters
+		/// from the collection
+		/// </summary>
+		IEnumerable<T> Pull<T>(IEnumerable<T> collection, params T[] toPull);
+
         /// <summary>
         /// Takes the given number of elements
         /// from the end of the collection,
@@ -34,12 +41,5 @@ namespace Underscore.Collection.Contract
         /// original collection
         /// </summary>
         IEnumerable<T> TakeRightWhile<T>(IEnumerable<T> collection, Func<T, bool> predicate);
-
-        /// <summary>
-        /// Removes any occurrences of 
-        /// the specified parameters
-        /// from the collection
-        /// </summary>
-        IEnumerable<T> Pull<T>(IEnumerable<T> collection, params T[] toPull);
     }
 }

@@ -6,39 +6,45 @@ namespace Underscore.Collection.Contract.Zip
 	public partial interface IZipComponent
 	{
 		/// <summary>
-		/// zips collections together into tuples
-		/// of each collections' elements by index
+		/// Unzip an enumerable of tuples into a single 
+		/// tuple containing separate enumerables 
+		/// for each of the values previously in the tuples
 		/// </summary>
-		IEnumerable<Tuple<T1, T2>> Zip<T1, T2>(IEnumerable<T1> a, IEnumerable<T2> b);
+		Tuple<IEnumerable<T1>, IEnumerable<T2>> UnZip<T1, T2>(IEnumerable<Tuple<T1, T2>> zipped);
 
 		/// <summary>
-		/// zips collections together into tuples
-		/// of each collections' elements by index
+		/// Unzip an enumerable of tuples into a single 
+		/// tuple containing separate enumerables 
+		/// for each of the values previously in the tuples
 		/// </summary>
-		IEnumerable<Tuple<T1, T2, T3>> Zip<T1, T2, T3>(IEnumerable<T1> a, IEnumerable<T2> b, IEnumerable<T3> c);
+		Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>> UnZip<T1, T2, T3>(IEnumerable<Tuple<T1, T2, T3>> zipped);
 
 		/// <summary>
-		/// zips collections together into tuples
-		/// of each collections' elements by index
+		/// Unzip an enumerable of tuples into a single 
+		/// tuple containing separate enumerables 
+		/// for each of the values previously in the tuples
 		/// </summary>
-		IEnumerable<Tuple<T1, T2, T3, T4>> Zip<T1, T2, T3, T4>(IEnumerable<T1> a, IEnumerable<T2> b, IEnumerable<T3> c, IEnumerable<T4> d);
+		Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>> UnZip<T1, T2, T3, T4>(IEnumerable<Tuple<T1, T2, T3, T4>> zipped);
 
 		/// <summary>
-		/// zips collections together into tuples
-		/// of each collections' elements by index
+		/// Unzip an enumerable of tuples into a single 
+		/// tuple containing separate enumerables 
+		/// for each of the values previously in the tuples
 		/// </summary>
-		IEnumerable<Tuple<T1, T2, T3, T4, T5>> Zip<T1, T2, T3, T4, T5>(IEnumerable<T1> a, IEnumerable<T2> b, IEnumerable<T3> c, IEnumerable<T4> d, IEnumerable<T5> e);
+		Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>> UnZip<T1, T2, T3, T4, T5>(IEnumerable<Tuple<T1, T2, T3, T4, T5>> zipped);
 
 		/// <summary>
-		/// zips collections together into tuples
-		/// of each collections' elements by index
+		/// Unzip an enumerable of tuples into a single 
+		/// tuple containing separate enumerables 
+		/// for each of the values previously in the tuples
 		/// </summary>
-		IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> Zip<T1, T2, T3, T4, T5, T6>(IEnumerable<T1> a, IEnumerable<T2> b, IEnumerable<T3> c, IEnumerable<T4> d, IEnumerable<T5> e, IEnumerable<T6> f);
+		Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>> UnZip<T1, T2, T3, T4, T5, T6>(IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> zipped);
 
 		/// <summary>
-		/// zips collections together into tuples
-		/// of each collections' elements by index
+		/// Unzip an enumerable of tuples into a single 
+		/// tuple containing separate enumerables 
+		/// for each of the values previously in the tuples
 		/// </summary>
-		IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> Zip<T1, T2, T3, T4, T5, T6, T7>(IEnumerable<T1> a, IEnumerable<T2> b, IEnumerable<T3> c, IEnumerable<T4> d, IEnumerable<T5> e, IEnumerable<T6> f, IEnumerable<T7> g);
+		Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>> UnZip<T1, T2, T3, T4, T5, T6, T7>(IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> zipped);
 	}
 }
