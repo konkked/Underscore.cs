@@ -10,6 +10,7 @@ namespace Underscore.Test.Function.Synch
 	[TestClass]
 	public class DelayTest
 	{
+		//TODO Finish delay overload tests
         private ISynchComponent component;
         private ComposeComponent compose;
 

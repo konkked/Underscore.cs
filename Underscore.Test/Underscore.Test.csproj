@@ -108,11 +108,11 @@
     <Compile Include="Module\ObjectTest.cs" />
     <Compile Include="Module\UtilityTest.cs" />
     <Compile Include="Object\Comparison\EqualityTest.cs" />
-    <Compile Include="Object\Reflection\Field.cs" />
-    <Compile Include="Object\Reflection\Method.cs" />
-    <Compile Include="Object\Reflection\Attribute.cs" />
-    <Compile Include="Object\Reflection\Property.cs" />
-    <Compile Include="Object\Reflection\Constructors.cs" />
+    <Compile Include="Object\Reflection\FieldTest.cs" />
+    <Compile Include="Object\Reflection\MethodTest.cs" />
+    <Compile Include="Object\Reflection\AttributeTest.cs" />
+    <Compile Include="Object\Reflection\PropertyTest.cs" />
+    <Compile Include="Object\Reflection\ConstructorTest.cs" />
     <Compile Include="Object\Transformation\Dynamic.cs" />
     <Compile Include="Object\Transformation\Transpose.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

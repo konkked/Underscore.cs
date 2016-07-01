@@ -873,7 +873,7 @@ namespace Underscore.Test.Function.Synch
 				   ).ContinueWith(a =>
 				   {
 					   Assert.AreEqual(2, count);
-					   Assert.AreEqual("99 -99 99 -99 99 -99 99 -99 99 -99 99 -99 99 -99 99 1", a.Result);
+					   Assert.AreEqual("99 -99 99 -99 99 -99 99 -99 99 -99 99 -99 99 -99 99 -99 1", a.Result);
 				   }));
 			}
 
