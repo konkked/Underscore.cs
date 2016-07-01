@@ -2,7 +2,7 @@
 
 namespace Underscore.Utility
 {
-    public interface IFunctionComponent 
+    public interface IFunctionComponent
     {
         /// <summary>
         /// Does nothing
@@ -15,8 +15,6 @@ namespace Underscore.Utility
         /// <typeparam name="T">The type of the target</typeparam>
         /// <param name="value">The target object</param>
         /// <returns>Function that always returns value</returns>
-        Func<T> Constant<T>( T value );
-
+        Func<T> Constant<T>(T value);
     }
-
 }

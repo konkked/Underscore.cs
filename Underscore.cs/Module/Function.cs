@@ -5,7 +5,7 @@ using Underscore.Function;
 namespace Underscore.Module
 {
 
-    public class Function : 
+    public class Function :
         ISplitComponent,
         IBindComponent,
         IComposeComponent,
@@ -30,7 +30,7 @@ namespace Underscore.Module
             IConvertComponent convert,
             ISynchComponent synch,
             ICacheComponent cache,
-            IBooleanComponent boolComponent) 
+            IBooleanComponent boolComponent)
         {
             if (bind == null)
                 throw new ArgumentNullException("bind");
@@ -1211,7 +1211,7 @@ namespace Underscore.Module
             return _bind.Bind(function, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
         }
 
-	    /// <summary>
+        /// <summary>
         /// Halves the passed action as function that returns action that can invoke the passed action
         /// </summary>
         /// <param name="function"></param>
@@ -1227,53 +1227,53 @@ namespace Underscore.Module
             return _split.Split(function);
         }
 
-		/// <summary>
-		/// Halves the passed action as function that returns action that can invoke the passed action
-		/// </summary>
-		/// <param name="function"></param>
-		/// <returns>
-		/// a function taking first half of arguments 
-		/// that returns an action that takes the other half, 
-		/// invocation of returned method would be the same as invoking
-		/// the passed action with all parameters from the first function call
-		/// and the following action call
-		/// </returns>
-		public Func<T0, T1, T2, T3, T4, T5, T6, Func<T7, T8, T9, T10, T11, T12, T13, TResult>> Split<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function)
-		{
-			return _split.Split(function);
-		}
+        /// <summary>
+        /// Halves the passed action as function that returns action that can invoke the passed action
+        /// </summary>
+        /// <param name="function"></param>
+        /// <returns>
+        /// a function taking first half of arguments 
+        /// that returns an action that takes the other half, 
+        /// invocation of returned method would be the same as invoking
+        /// the passed action with all parameters from the first function call
+        /// and the following action call
+        /// </returns>
+        public Func<T0, T1, T2, T3, T4, T5, T6, Func<T7, T8, T9, T10, T11, T12, T13, TResult>> Split<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function)
+        {
+            return _split.Split(function);
+        }
 
-		/// <summary>
-		/// Halves the passed action as function that returns action that can invoke the passed action
-		/// </summary>
-		/// <param name="function"></param>
-		/// <returns>
-		/// a function taking first half of arguments 
-		/// that returns an action that takes the other half, 
-		/// invocation of returned method would be the same as invoking
-		/// the passed action with all parameters from the first function call
-		/// and the following action call
-		/// </returns>
-		public Func<T0, T1, T2, T3, T4, T5, Func<T6, T7, T8, T9, T10, T11, TResult>> Split<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function)
-		{
-			return _split.Split(function);
-		}
+        /// <summary>
+        /// Halves the passed action as function that returns action that can invoke the passed action
+        /// </summary>
+        /// <param name="function"></param>
+        /// <returns>
+        /// a function taking first half of arguments 
+        /// that returns an action that takes the other half, 
+        /// invocation of returned method would be the same as invoking
+        /// the passed action with all parameters from the first function call
+        /// and the following action call
+        /// </returns>
+        public Func<T0, T1, T2, T3, T4, T5, Func<T6, T7, T8, T9, T10, T11, TResult>> Split<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function)
+        {
+            return _split.Split(function);
+        }
 
-		/// <summary>
-		/// Halves the passed action as function that returns action that can invoke the passed action
-		/// </summary>
-		/// <param name="function"></param>
-		/// <returns>
-		/// a function taking first half of arguments 
-		/// that returns an action that takes the other half, 
-		/// invocation of returned method would be the same as invoking
-		/// the passed action with all parameters from the first function call
-		/// and the following action call
-		/// </returns>
-		public Func<T0, T1, T2, T3, T4, Func<T5, T6, T7, T8, T9, TResult>> Split<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function)
-		{
-			return _split.Split(function);
-		}
+        /// <summary>
+        /// Halves the passed action as function that returns action that can invoke the passed action
+        /// </summary>
+        /// <param name="function"></param>
+        /// <returns>
+        /// a function taking first half of arguments 
+        /// that returns an action that takes the other half, 
+        /// invocation of returned method would be the same as invoking
+        /// the passed action with all parameters from the first function call
+        /// and the following action call
+        /// </returns>
+        public Func<T0, T1, T2, T3, T4, Func<T5, T6, T7, T8, T9, TResult>> Split<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function)
+        {
+            return _split.Split(function);
+        }
 
         /// <summary>
         /// Halves the passed action as function that returns action that can invoke the passed action
@@ -1291,21 +1291,21 @@ namespace Underscore.Module
             return _split.Split(function);
         }
 
-	    /// <summary>
-		/// Halves the passed action as function that returns action that can invoke the passed action
-		/// </summary>
-		/// <param name="function"></param>
-		/// <returns>
-		/// a function taking first half of arguments 
-		/// that returns an action that takes the other half, 
-		/// invocation of returned method would be the same as invoking
-		/// the passed action with all parameters from the first function call
-		/// and the following action call
-		/// </returns>
-		public Func<T0, T1, T2, Func<T3, T4, T5, TResult>> Split<T0, T1, T2, T3, T4, T5, TResult>(Func<T0, T1, T2, T3, T4, T5, TResult> function)
-		{
-			return _split.Split(function);
-		}
+        /// <summary>
+        /// Halves the passed action as function that returns action that can invoke the passed action
+        /// </summary>
+        /// <param name="function"></param>
+        /// <returns>
+        /// a function taking first half of arguments 
+        /// that returns an action that takes the other half, 
+        /// invocation of returned method would be the same as invoking
+        /// the passed action with all parameters from the first function call
+        /// and the following action call
+        /// </returns>
+        public Func<T0, T1, T2, Func<T3, T4, T5, TResult>> Split<T0, T1, T2, T3, T4, T5, TResult>(Func<T0, T1, T2, T3, T4, T5, TResult> function)
+        {
+            return _split.Split(function);
+        }
 
         /// <summary>
         /// Halves the passed action as function that returns action that can invoke the passed action
@@ -1772,7 +1772,7 @@ namespace Underscore.Module
         /// <summary>
         /// Creates a sigle composite function from the passed functions
         /// </summary>
-        public Func<T, T> Compose<T>(params Func<T, T>[ ] args)
+        public Func<T, T> Compose<T>(params Func<T, T>[] args)
         {
             return _compose.Compose(args);
         }
@@ -1780,7 +1780,7 @@ namespace Underscore.Module
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
         {
             return _compose.Apply(fn, arguments);
         }
@@ -1788,7 +1788,7 @@ namespace Underscore.Module
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
         {
             return _compose.Apply(fn, arguments);
         }
@@ -1796,7 +1796,7 @@ namespace Underscore.Module
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
         {
             return _compose.Apply(fn, arguments);
         }
@@ -1804,7 +1804,7 @@ namespace Underscore.Module
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
         {
             return _compose.Apply(fn, arguments);
         }
@@ -1812,7 +1812,7 @@ namespace Underscore.Module
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
         {
             return _compose.Apply(fn, arguments);
         }
@@ -1820,7 +1820,7 @@ namespace Underscore.Module
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
         {
             return _compose.Apply(fn, arguments);
         }
@@ -1828,7 +1828,7 @@ namespace Underscore.Module
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
         {
             return _compose.Apply(fn, arguments);
         }
@@ -1836,7 +1836,7 @@ namespace Underscore.Module
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
         {
             return _compose.Apply(fn, arguments);
         }
@@ -1844,7 +1844,7 @@ namespace Underscore.Module
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
         {
             return _compose.Apply(fn, arguments);
         }
@@ -1852,7 +1852,7 @@ namespace Underscore.Module
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, TResult> fn, T[ ] arguments)
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, TResult> fn, T[] arguments)
         {
             return _compose.Apply(fn, arguments);
         }
@@ -1860,7 +1860,7 @@ namespace Underscore.Module
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, TResult> fn, T[ ] arguments)
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, TResult> fn, T[] arguments)
         {
             return _compose.Apply(fn, arguments);
         }
@@ -1868,7 +1868,7 @@ namespace Underscore.Module
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>(Func<T, T, T, T, T, TResult> fn, T[ ] arguments)
+        public TResult Apply<T, TResult>(Func<T, T, T, T, T, TResult> fn, T[] arguments)
         {
             return _compose.Apply(fn, arguments);
         }
@@ -1876,7 +1876,7 @@ namespace Underscore.Module
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>(Func<T, T, T, T, TResult> fn, T[ ] arguments)
+        public TResult Apply<T, TResult>(Func<T, T, T, T, TResult> fn, T[] arguments)
         {
             return _compose.Apply(fn, arguments);
         }
@@ -1884,7 +1884,7 @@ namespace Underscore.Module
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>(Func<T, T, T, TResult> fn, T[ ] arguments)
+        public TResult Apply<T, TResult>(Func<T, T, T, TResult> fn, T[] arguments)
         {
             return _compose.Apply(fn, arguments);
         }
@@ -1892,7 +1892,7 @@ namespace Underscore.Module
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>(Func<T, T, TResult> fn, T[ ] arguments)
+        public TResult Apply<T, TResult>(Func<T, T, TResult> fn, T[] arguments)
         {
             return _compose.Apply(fn, arguments);
         }
@@ -1900,7 +1900,7 @@ namespace Underscore.Module
         /// <summary>
         /// Calls a function using the passed array of arguments
         /// </summary>
-        public TResult Apply<T, TResult>(Func<T, TResult> fn, T[ ] arguments)
+        public TResult Apply<T, TResult>(Func<T, TResult> fn, T[] arguments)
         {
             return _compose.Apply(fn, arguments);
         }
@@ -2931,7 +2931,7 @@ namespace Underscore.Module
         public Func<T1, T2, T3, Task<TResult>> Delay<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> function, int milliseconds)
         {
             return _synch.Delay(function, milliseconds);
-        }      
+        }
 
         /// <summary>
         /// Creates a function that after a delay time

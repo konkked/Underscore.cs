@@ -3,107 +3,88 @@ using Underscore.Utility;
 
 namespace Underscore.Module
 {
-
-    public class Utility : 
-        IFunctionComponent , 
-        IMathComponent , 
+    public class Utility :
+        IFunctionComponent,
+        IMathComponent,
         IObjectComponent
     {
-
-
-
         private readonly IMathComponent _math;
         private readonly IFunctionComponent _function;
         private readonly IObjectComponent _object;
 
-
         public Utility(
-            IFunctionComponent function, 
-            IMathComponent math, 
-            IObjectComponent obj )
+            IFunctionComponent function,
+            IMathComponent math,
+            IObjectComponent obj)
         {
-            if(function == null)
+            if (function == null)
                 throw new ArgumentNullException("function");
 
-            if(math == null)
+            if (math == null)
                 throw new ArgumentNullException("math");
 
-            if(obj == null)
+            if (obj == null)
                 throw new ArgumentNullException("obj");
 
-            _math = math ;
-            _function = function ;
-            _object = obj ;
+            _math = math;
+            _function = function;
+            _object = obj;
         }
 
         /// <summary>
         /// Creates a unique id (Guid as a string) with a prefix string
         /// </summary>
-        /// <param name="prefix"></param>
-        /// <returns></returns>
-        public string UniqueId( string prefix )
+        public string UniqueId(string prefix)
         {
-            return _math.UniqueId( prefix );
+            return _math.UniqueId(prefix);
         }
-
 
         /// <summary>
         /// Creates a unique id (Guid as a string)
         /// </summary>
-        /// <param name="prefix"></param>
-        /// <returns></returns>
-        public string UniqueId( )
+        public string UniqueId()
         {
-            return _math.UniqueId( );
-        }
-
-
-        /// <summary>
-        /// returns a thread safe random number
-        /// </summary>
-        /// <returns></returns>
-        public int Random( )
-        {
-            return _math.Random( );
+            return _math.UniqueId();
         }
 
         /// <summary>
         /// returns a thread safe random number
         /// </summary>
-        /// <returns></returns>
-        public int Random( int max )
+        public int Random()
         {
-            return _math.Random( max );
+            return _math.Random();
         }
 
         /// <summary>
         /// returns a thread safe random number
         /// </summary>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
-        /// <returns></returns>
-        public int Random( int min, int max )
+        public int Random(int max)
         {
-            return _math.Random( min, max );
+            return _math.Random(max);
+        }
+
+        /// <summary>
+        /// returns a thread safe random number
+        /// </summary>
+        public int Random(int min, int max)
+        {
+            return _math.Random(min, max);
         }
 
         /// <summary>
         /// A method that does nothing
         /// </summary>
-        public void Noop( )
+        public void Noop()
         {
-            _function.Noop( );
+            _function.Noop();
         }
 
         /// <summary>
         /// Creates a function that returns the constant that was passed
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public Func<T> Constant<T>( T value )
+        public Func<T> Constant<T>(T value)
         {
-            return _function.Constant( value );
+            return _function.Constant(value);
         }
 
         /// <summary>
@@ -111,45 +92,33 @@ namespace Underscore.Module
         /// </summary>
         /// <param name="o"></param>
         /// <returns></returns>
-        public bool IsTruthy( object o )
+        public bool IsTruthy(object o)
         {
-            return _object.IsTruthy( o );
+            return _object.IsTruthy(o);
         }
-
 
         /// <summary>
         /// Returns the absolute value of the int passed
         /// </summary>
-        /// <param name="i"></param>
-        /// <returns></returns>
-        public int Abs( int i )
+        public int Abs(int i)
         {
-            return _math.Abs( i );
+            return _math.Abs(i);
         }
-
 
         /// <summary>
         /// Returns the min value between the two ints
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        public int Min( int x, int y )
+        public int Min(int x, int y)
         {
-            return _math.Min( x, y );
+            return _math.Min(x, y);
         }
-
 
         /// <summary>
         /// Returns the max value between the two ints
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        public int Max( int x, int y )
+        public int Max(int x, int y)
         {
-            return _math.Max( x, y );
+            return _math.Max(x, y);
         }
-
     }
 }

@@ -7,7 +7,6 @@ using Underscore.Object.Reflection;
 
 namespace Underscore.Module
 {
-
     public class Object : ITransposeComponent, IDynamicComponent, IEqualityComponent
     {
         private readonly IPropertyComponent _property;
@@ -19,7 +18,6 @@ namespace Underscore.Module
         private readonly IDynamicComponent _dynamic;
         private readonly IEqualityComponent _equality;
 
-
         public Object(
             IPropertyComponent property,
             IMethodComponent method,
@@ -30,7 +28,7 @@ namespace Underscore.Module
             IDynamicComponent dynamicComponent, 
             IEqualityComponent equality) 
         {
-            
+
             if (property == null)
                 throw new ArgumentNullException("property");
 
@@ -55,7 +53,6 @@ namespace Underscore.Module
             if (equality == null)
                 throw new ArgumentNullException("equality");
 
-
             _property = property;
             _field = field;
             _method = method;
@@ -66,7 +63,6 @@ namespace Underscore.Module
             _equality = equality;
         }
 
- 
         /// <summary>
         /// Returns null, useful ft generor anonymous type declarations to avoid having to cast null to an object
         /// </summary>
@@ -80,25 +76,20 @@ namespace Underscore.Module
         /// </summary>
         public IPropertyComponent Property { get { return _property; } }
 
-
-
         /// <summary>
         /// Module that contains functionality regarding fields
         /// </summary>
         public IFieldComponent Field { get { return _field; } }
-
 
         /// <summary>
         /// Module that contains functionality regarding methods
         /// </summary>
         public IMethodComponent Method { get { return _method; } }
 
-
         /// <summary>
         /// Module that contains functionality regarding attributes
         /// </summary>
         public IAttributeComponent Attribute { get { return _attribute;  } }
-
 
         /// <summary>
         /// Module that contains functionality regarding constructors
@@ -152,7 +143,6 @@ namespace Underscore.Module
             return _dynamic.ToDynamic( target );
         }
 
-
         /// <summary>
         /// Creates a new generic type using the default constructor and the passed types as the generic type parameters
         /// </summary>
@@ -181,10 +171,8 @@ namespace Underscore.Module
             if (!genericTypeDefinition.IsGenericTypeDefinition)
                 throw new ArgumentException("Must be a generic type definition", "genericTypeDefinition");
 
-            
             var typeArr =  typeArguments as Type[] ?? typeArguments.ToArray();
-                   
-    
+
             var gtype = genericTypeDefinition.MakeGenericType(typeArr);
 
             var queryObj = constructorParameter.Select(a => a == null ? null : a.GetType()).ToArray();

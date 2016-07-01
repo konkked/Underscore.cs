@@ -34,7 +34,7 @@ namespace Underscore.Object.Comparison
             // because know both match only check one to know both are null
             if (a == null)
                 return true;
-             
+
             var aProps = _property.Pairs(a).ToDictionary(c => c.Name, c => c.Value);
 
             var bProps = _property.Pairs(b).ToList();
@@ -58,7 +58,7 @@ namespace Underscore.Object.Comparison
         {
             if (Equals(a, b))
                 return true;
-            
+
             // one is null and one isn't
             if (a == null ^ b == null)
                 return false;

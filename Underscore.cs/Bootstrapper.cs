@@ -7,10 +7,9 @@ namespace Underscore
     {
         private static readonly Kernel s_kernel;
 
-
-        static Bootstrapper( )
+        static Bootstrapper()
         {
-            s_kernel= new Kernel(
+            s_kernel = new Kernel(
                 new ActionModule(),
                 new CollectionModule(),
                 new FunctionModule(),
@@ -24,6 +23,5 @@ namespace Underscore
         {
             get { return s_kernel; }
         }
-
     }
 }

@@ -1,8 +1,7 @@
 ﻿namespace Underscore.Utility
 {
-    public interface IObjectComponent 
+    public interface IObjectComponent
     {
-
         /// <summary>
         /// Returns true if an object is truthy,
         /// basically if the value is not the default
@@ -10,9 +9,6 @@
         /// one exception are strings 
         /// which return false if empty or null
         /// </summary>
-        /// <param name="target"></param>
-        /// <returns></returns>
-        bool IsTruthy( object target );
+        bool IsTruthy(object target);
     }
-
 }

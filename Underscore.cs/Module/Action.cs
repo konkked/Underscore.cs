@@ -28,16 +28,16 @@ namespace Underscore.Module
         {
             if(bind == null)
                 throw new ArgumentNullException("bind");
-            
+
             if (split == null)
                 throw new ArgumentNullException("split");
-            
+
             if (compose == null)
                 throw new ArgumentNullException("compose");
-            
+
             if (synch == null)
                 throw new ArgumentNullException("synch");
-            
+
             if (convert == null)
                 throw new ArgumentNullException("convert");
 
@@ -1877,7 +1877,6 @@ namespace Underscore.Module
             return _convert.ToFunction(action);
         }
 
-
         /// <summary>
         /// Creates function from the passed action ( resulting function will always return null )
         /// </summary>
@@ -1885,7 +1884,6 @@ namespace Underscore.Module
         {
             return _convert.ToFunction(action);
         }
-
 
         /// <summary>
         /// Creates function from the passed action ( resulting function will always return null )
@@ -1895,7 +1893,6 @@ namespace Underscore.Module
             return _convert.ToFunction(action);
         }
 
-
         /// <summary>
         /// Creates function from the passed action ( resulting function will always return null )
         /// </summary>
@@ -1903,7 +1900,6 @@ namespace Underscore.Module
         {
             return _convert.ToFunction(action);
         }
-
 
         /// <summary>
         /// Creates function from the passed action ( resulting function will always return null )
@@ -1913,7 +1909,6 @@ namespace Underscore.Module
             return _convert.ToFunction(action);
         }
 
-
         /// <summary>
         /// Creates function from the passed action ( resulting function will always return null )
         /// </summary>
@@ -1921,7 +1916,6 @@ namespace Underscore.Module
         {
             return _convert.ToFunction(action);
         }
-
 
         /// <summary>
         /// Creates function from the passed action ( resulting function will always return null )
@@ -1932,7 +1926,6 @@ namespace Underscore.Module
             return _convert.ToFunction(action);
         }
 
-
         /// <summary>
         /// Creates function from the passed action ( resulting function will always return null )
         /// </summary>
@@ -1941,7 +1934,6 @@ namespace Underscore.Module
         {
             return _convert.ToFunction(action);
         }
-
 
         /// <summary>
         /// Creates function from the passed action ( resulting function will always return null )
@@ -1952,7 +1944,6 @@ namespace Underscore.Module
             return _convert.ToFunction(action);
         }
 
-
         /// <summary>
         /// Creates function from the passed action ( resulting function will always return null )
         /// </summary>
@@ -1961,7 +1952,6 @@ namespace Underscore.Module
         {
             return _convert.ToFunction(action);
         }
-
 
         /// <summary>
         /// Creates function from the passed action ( resulting function will always return null )
@@ -1972,7 +1962,6 @@ namespace Underscore.Module
             return _convert.ToFunction(action);
         }
 
-
         /// <summary>
         /// Creates function from the passed action ( resulting function will always return null )
         /// </summary>
@@ -1981,7 +1970,6 @@ namespace Underscore.Module
         {
             return _convert.ToFunction(action);
         }
-
 
         /// <summary>
         /// Creates function from the passed action ( resulting function will always return null )
@@ -1993,7 +1981,6 @@ namespace Underscore.Module
             return _convert.ToFunction(action);
         }
 
-
         /// <summary>
         /// Creates function from the passed action ( resulting function will always return null )
         /// </summary>
@@ -2003,7 +1990,6 @@ namespace Underscore.Module
         {
             return _convert.ToFunction(action);
         }
-
 
         /// <summary>
         /// Creates function from the passed action ( resulting function will always return null )
@@ -2015,7 +2001,6 @@ namespace Underscore.Module
             return _convert.ToFunction(action);
         }
 
-
         /// <summary>
         /// Creates function from the passed action ( resulting function will always return null )
         /// </summary>
@@ -2025,7 +2010,6 @@ namespace Underscore.Module
         {
             return _convert.ToFunction(action);
         }
-
 
         /// <summary>
         /// Creates function from the passed action ( resulting function will always return null )
@@ -2037,7 +2021,6 @@ namespace Underscore.Module
             return _convert.ToFunction(action);
         }
 
-
         /// <summary>
         ///  Creates a new action from the passed action being bound to the passed parameters
         /// </summary>
@@ -2045,7 +2028,6 @@ namespace Underscore.Module
         {
             return _bind.Bind(action, a);
         }
-
 
         /// <summary>
         ///  Creates a new action from the passed action being bound to the passed parameters
@@ -2055,7 +2037,6 @@ namespace Underscore.Module
             return _bind.Bind(action, a, b);
         }
 
-
         /// <summary>
         ///  Creates a new action from the passed action being bound to the passed parameters
         /// </summary>
@@ -2063,7 +2044,6 @@ namespace Underscore.Module
         {
             return _bind.Bind(action, a, b, c);
         }
-
 
         /// <summary>
         ///  Creates a new action from the passed action being bound to the passed parameters
@@ -2073,7 +2053,6 @@ namespace Underscore.Module
             return _bind.Bind(action, a, b, c, d);
         }
 
-
         /// <summary>
         ///  Creates a new action from the passed action being bound to the passed parameters
         /// </summary>
@@ -2081,7 +2060,6 @@ namespace Underscore.Module
         {
             return _bind.Bind(action, a, b, c, d, e);
         }
-
 
         /// <summary>
         ///  Creates a new action from the passed action being bound to the passed parameters
@@ -2092,7 +2070,6 @@ namespace Underscore.Module
             return _bind.Bind(action, a, b, c, d, e, f);
         }
 
-
         /// <summary>
         ///  Creates a new action from the passed action being bound to the passed parameters
         /// </summary>
@@ -2101,7 +2078,6 @@ namespace Underscore.Module
         {
             return _bind.Bind(action, a, b, c, d, e, f, g);
         }
-
 
         /// <summary>
         ///  Creates a new action from the passed action being bound to the passed parameters
@@ -2112,7 +2088,6 @@ namespace Underscore.Module
             return _bind.Bind(action, a, b, c, d, e, f, g, h);
         }
 
-
         /// <summary>
         ///  Creates a new action from the passed action being bound to the passed parameters
         /// </summary>
@@ -2121,7 +2096,6 @@ namespace Underscore.Module
         {
             return _bind.Bind(action, a, b, c, d, e, f, g, h, i);
         }
-
 
         /// <summary>
         ///  Creates a new action from the passed action being bound to the passed parameters
@@ -2133,7 +2107,6 @@ namespace Underscore.Module
             return _bind.Bind(action, a, b, c, d, e, f, g, h, i, j);
         }
 
-
         /// <summary>
         ///  Creates a new action from the passed action being bound to the passed parameters
         /// </summary>
@@ -2143,7 +2116,6 @@ namespace Underscore.Module
         {
             return _bind.Bind(action, a, b, c, d, e, f, g, h, i, j, k);
         }
-
 
         /// <summary>
         ///  Creates a new action from the passed action being bound to the passed parameters
@@ -2155,7 +2127,6 @@ namespace Underscore.Module
             return _bind.Bind(action, a, b, c, d, e, f, g, h, i, j, k, l);
         }
 
-
         /// <summary>
         ///  Creates a new action from the passed action being bound to the passed parameters
         /// </summary>
@@ -2165,7 +2136,6 @@ namespace Underscore.Module
         {
             return _bind.Bind(action, a, b, c, d, e, f, g, h, i, j, k, l, m);
         }
-
 
         /// <summary>
         ///  Creates a new action from the passed action being bound to the passed parameters
@@ -2177,7 +2147,6 @@ namespace Underscore.Module
             return _bind.Bind(action, a, b, c, d, e, f, g, h, i, j, k, l, m, n);
         }
 
-
         /// <summary>
         ///  Creates a new action from the passed action being bound to the passed parameters
         /// </summary>
@@ -2187,7 +2156,6 @@ namespace Underscore.Module
         {
             return _bind.Bind(action, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
         }
-
 
         /// <summary>
         ///  Creates a new action from the passed action being bound to the passed parameters
