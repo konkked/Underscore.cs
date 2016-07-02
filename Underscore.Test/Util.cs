@@ -117,7 +117,7 @@ namespace Underscore.Test
 
 
     //added chaining
-    public static class TaskExntensions
+    public static class TaskExtensions
     {
         public static Task Start(this System.Action action) 
         {

@@ -1,158 +1,215 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Underscore.Function;
-using System.Threading.Tasks;
 
 namespace Underscore.Test.Function
 {
     [TestClass]
     public class BindTest
     {
+	    private BindComponent component;
 
+	    private static string Join(params object[] args)
+	    {
+		    return string.Join(" ", args);
+	    }
 
+	    [TestInitialize]
+	    public void Initialize()
+	    {
+		    component = new BindComponent();
+	    }
 
+	    [TestMethod]
+	    public void Function_Bind_1Argument()
+	    {
+		    const string expected = "a";
+		    Func<string, string> function = (a) => Join(a);
+		    
+			var bound = component.Bind(function, "a");
+		    var result = bound();
 
-        public static string ConcateAllToStrings<T0, T1, T2, T3>( T0 arg0, T1 arg1, T2 arg2, T3 arg3 )
-        {
-            return string.Join( " ", new object[ ] { arg0, arg1, arg2, arg3 } );
-        }
+			Assert.AreEqual(expected, result);
+	    }
 
-        public static string ConcateAllToStrings<T0, T1, T2>( T0 arg0, T1 arg1, T2 arg2 )
-        {
-            return string.Join( " ", new object[ ] { arg0, arg1, arg2 } );
-        }
+		[TestMethod]
+		public void Function_Bind_2Argument()
+		{
+			const string expected = "a b";
+			Func<string, string, string> function = (a, b) => Join(a, b);
 
-        public static string ConcateAllToStrings<T0, T1>( T0 arg0, T1 arg1 )
-        {
-            return string.Join( " ", new object[ ] { arg0, arg1 } );
-        }
+			var bound = component.Bind(function, "a", "b");
+			var result = bound();
 
-        public static string ToString<T>( T value )
-        {
-            return value.ToString( );
-        }
+			Assert.AreEqual(expected, result);
+		}
 
+		[TestMethod]
+		public void Function_Bind_3Argument()
+		{
+			const string expected = "a b c";
+			Func<string, string, string, string> function = (a, b, c) => Join(a, b, c);
 
-        [TestMethod]
-        public async Task FunctionBind1( )
-        {
-            var _module = new BindComponent( );
+			var bound = component.Bind(function, "a", "b", "c");
+			var result = bound();
 
-            await Util.Tasks.Start(
-                ( ) =>
-                {
-                    var resultMethod = _module.Bind( ConcateAllToStrings, "a", "b", "c", "d" );
-                    var result = resultMethod( );
-                    Assert.AreEqual( "a b c d", result );
-                },
-                ( ) =>
-                {
-                    var resultMethod = _module.Bind( ConcateAllToStrings, "a", 1, "b", 2 );
-                    var result = resultMethod( );
-                    Assert.AreEqual( "a 1 b 2", result );
-                },
-                ( ) =>
-                {
-                    //3 types
-                    var resultMethod = _module.Bind( ConcateAllToStrings, "a", 1, 'b', "2" );
-                    var result = resultMethod( );
-                    Assert.AreEqual( result, "a 1 b 2" );
-                },
-                ( ) =>
-                {
-                    //4 types
-                    var resultMethod = _module.Bind( ConcateAllToStrings, new { a = 'a' }, 1, 'b', "2" );
-                    var result = resultMethod( );
-                    Assert.AreEqual( ( ( new { a = 'a' } ).ToString( ) + " 1 b 2" ), result );
-                }
-            );
-        }
+			Assert.AreEqual(expected, result);
+		}
 
-        [TestMethod]
-        public async Task FunctionBind2( )
-        {
+		[TestMethod]
+		public void Function_Bind_4Argument()
+		{
+			const string expected = "a b c d";
+			Func<string, string, string, string, string> function = (a, b, c, d) => Join(a, b, c, d);
 
-            var _module = new BindComponent( );
+			var bound = component.Bind(function, "a", "b", "c", "d");
+			var result = bound();
 
-            //same type
-            await Util.Tasks.Start(
-                ( ) =>
-                {
-                    Assert.AreEqual( "a b c", _module.Bind( ConcateAllToStrings, "a", "b", "c" )( ) );
-                },
-                //2 types
-                ( ) =>
-                {
-                    Assert.AreEqual( "a 1 b", _module.Bind( ConcateAllToStrings, "a", 1, "b" )( ) );
-                },
-                //3 types
-                ( ) =>
-                {
-                    Assert.AreEqual( "a 1 b", _module.Bind( ConcateAllToStrings, "a", 1, 'b' )( ) );
-                },
-                ( ) =>
-                {
-                    Assert.AreEqual( ( new { a = 'a' } ).ToString( ) + " 1 b", _module.Bind( ConcateAllToStrings, new { a = 'a' }, 1, 'b' )( ) );
-                } );
-        }
+			Assert.AreEqual(expected, result);
+		}
 
-        [TestMethod]
-        public async Task FunctionBind3( )
-        {
+		[TestMethod]
+		public void Function_Bind_5Argument()
+		{
+			const string expected = "a b c d e";
+			Func<string, string, string, string, string, string> function = (a, b, c, d, e) => Join(a, b, c, d, e);
 
-            var _module = new BindComponent( );
+			var bound = component.Bind(function, "a", "b", "c", "d", "e");
+			var result = bound();
 
-            await Util.Tasks.Start( ( ) =>
-            {
-                Assert.AreEqual("a b" , _module.Bind( ConcateAllToStrings, "a", "b" )( ) );
-            },
-                //2 types
-            ( ) =>
-            {
-                Assert.AreEqual("a 1",_module.Bind( ConcateAllToStrings, "a", 1 )( ));
-            },
+			Assert.AreEqual(expected, result);
+		}
 
-            ( ) =>
-            {
-                Assert.AreEqual("a b",_module.Bind( ConcateAllToStrings, "a", 'b' )( ) );
-            },
+		[TestMethod]
+		public void Function_Bind_6Argument()
+		{
+			const string expected = "a b c d e f";
+			Func<string, string, string, string, string, string, string> function = (a, b, c, d, e, f) => Join(a, b, c, d, e, f);
 
-            ( ) =>
-            {
-                Assert.AreEqual( ( new { a = 'a' } ).ToString( ) + " 1"  , _module.Bind( ConcateAllToStrings, new { a = 'a' }, 1 )( )) ;
-            } );
-        }
+			var bound = component.Bind(function, "a", "b", "c", "d", "e", "f");
+			var result = bound();
 
-        //why is one Parameter_Function taking the longest?
-        //might be good to try and figure out why this is happening
-        [TestMethod]
-        public async Task FunctionBind4( )
-        {
+			Assert.AreEqual(expected, result);
+		}
 
-            var _module = new BindComponent( );
+		[TestMethod]
+		public void Function_Bind_7Argument()
+		{
+			const string expected = "a b c d e f g";
+			Func<string, string, string, string, string, string, string, string> function = (a, b, c, d, e, f, g) => Join(a, b, c, d, e, f, g);
 
-            var target = new object( );
+			var bound = component.Bind(function, "a", "b", "c", "d", "e", "f", "g");
+			var result = bound();
 
-            //same type
-            await Util.Tasks.Start(
-                ( ) =>
-                {
+			Assert.AreEqual(expected, result);
+		}
 
-                    Assert.AreEqual(
-                        ( new { a = 'a' } ).ToString( ),
-                        _module.Bind( ToString, new { a = 'a' } )( )
-                    );
+		[TestMethod]
+		public void Function_Bind_8Argument()
+		{
+			const string expected = "a b c d e f g h";
+			Func<string, string, string, string, string, string, string, string, string> function = (a, b, c, d, e, f, g, h) => Join(a, b, c, d, e, f, g, h);
 
-                },
-                ( ) =>
-                {
-                    Assert.AreEqual( "a", _module.Bind( ToString, "a" )( ) );
-                },
-                ( ) =>
-                {
-                    Assert.AreEqual( target.ToString( ), _module.Bind( ToString, target )( ) );
-                }
-            );
-        }
+			var bound = component.Bind(function, "a", "b", "c", "d", "e", "f", "g", "h");
+			var result = bound();
 
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Bind_9Argument()
+		{
+			const string expected = "a b c d e f g h i";
+			Func<string, string, string, string, string, string, string, string, string, string> function = (a, b, c, d, e, f, g, h, i) => Join(a, b, c, d, e, f, g, h, i);
+
+			var bound = component.Bind(function, "a", "b", "c", "d", "e", "f", "g", "h", "i");
+			var result = bound();
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Bind_10Argument()
+		{
+			const string expected = "a b c d e f g h i j";
+			Func<string, string, string, string, string, string, string, string, string, string, string> function = (a, b, c, d, e, f, g, h, i, j) => Join(a, b, c, d, e, f, g, h, i, j);
+
+			var bound = component.Bind(function, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j");
+			var result = bound();
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Bind_11Argument()
+		{
+			const string expected = "a b c d e f g h i j k";
+			Func<string, string, string, string, string, string, string, string, string, string, string, string> function = (a, b, c, d, e, f, g, h, i, j, k) => Join(a, b, c, d, e, f, g, h, i, j, k);
+
+			var bound = component.Bind(function, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k");
+			var result = bound();
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Bind_12Argument()
+		{
+			const string expected = "a b c d e f g h i j k l";
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string> function = (a, b, c, d, e, f, g, h, i, j, k, l) => Join(a, b, c, d, e, f, g, h, i, j, k, l);
+
+			var bound = component.Bind(function, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l");
+			var result = bound();
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Bind_13Argument()
+		{
+			const string expected = "a b c d e f g h i j k l m";
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string> function = (a, b, c, d, e, f, g, h, i, j, k, l, m) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
+
+			var bound = component.Bind(function, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m");
+			var result = bound();
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Bind_14Argument()
+		{
+			const string expected = "a b c d e f g h i j k l m n";
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> function = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+			var bound = component.Bind(function, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n");
+			var result = bound();
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Bind_15Argument()
+		{
+			const string expected = "a b c d e f g h i j k l m n o";
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> function = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+
+			var bound = component.Bind(function, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o");
+			var result = bound();
+
+			Assert.AreEqual(expected, result);
+		}
+
+		[TestMethod]
+		public void Function_Bind_16Argument()
+		{
+			const string expected = "a b c d e f g h i j k l m n o p";
+			Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> function = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
+
+			var bound = component.Bind(function, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p");
+			var result = bound();
+
+			Assert.AreEqual(expected, result);
+		}
     }
 }

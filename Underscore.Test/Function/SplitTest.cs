@@ -6,7 +6,7 @@ using Underscore.Function;
 namespace Underscore.Test.Function
 {
         [TestClass]
-        public class SplitTest
+        public class SplitTesta
         {
 
             private static Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> CreateSplitterTest( bool[ ] reference,
@@ -465,31 +465,6 @@ namespace Underscore.Test.Function
                     return string.Join( "", _a, _b );
 
                 };
-            }
-
-            [TestMethod]
-            public void FunctionSplit( )
-            {
-                var splitter = new SplitComponent( );
-                bool[] reference = new[ ] { false };
-
-                //can hit every line of code by splitting the largest case multiple times 
-                var result = 
-            splitter.Split(
-                    CreateSplitterTest(
-                        reference, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" ) );
-
-                var retv = 
-                    splitter.Split
-                    (
-                        splitter.Split(
-                            splitter.Split(
-                                    result( "a", "b", "c", "d", "e", "f", "g", "h" ) )( "i", "j", "k", "l" )
-                            )( "m", "n" )
-                )( "o" )( "p" );
-
-                Assert.IsTrue( reference[ 0 ] );
-                Assert.AreEqual( "abcdefghijklmnop", retv );
             }
 
             [TestMethod]
