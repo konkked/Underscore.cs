@@ -10,12 +10,17 @@ namespace Underscore.Function
 		private readonly Utility.ICompactComponent _utilCompact;
         private readonly Utility.IMathComponent _math;
 
+	    public SynchComponent()
+	    {
+		    _fnCompact = new CompactComponent();
+		    _utilCompact = new Utility.CompactComponent();
+		    _math = new Utility.MathComponent();
+	    }
+
         public SynchComponent(ICompactComponent fnCompact , Utility.ICompactComponent utilCompact , Utility.IMathComponent mathComponent)
         {
             _fnCompact = fnCompact;
-
             _utilCompact = utilCompact;
-
             _math = mathComponent;
         }
 	
@@ -33,7 +38,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = new Func<object, TResult>(a => origFn());
             var target = After(fn, count);
-			return async()=>await target(null);
+			return async() => await target(null);
 		}
 
         /// <summary>
@@ -610,7 +615,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = new Func<object, TResult>(a => origFn());
             var target = Debounce(fn, milliseconds);
-			return async()=>await target(null);
+			return async() => await target(null);
 		}
 
 
@@ -873,7 +878,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = new Func<object, TResult>(a => origFn());
             var target = Delay(fn, milliseconds);
-			return async()=>await target(null);
+			return async() => await target(null);
 		}
 
 				
@@ -1353,7 +1358,7 @@ namespace Underscore.Function
             var origFn = function;
             var fn = new Func<object, TResult>(a => origFn());
             var target = Throttle(fn, milliseconds, leading);
-			return async()=>await target(null);
+			return async() => await target(null);
 		}
 
 

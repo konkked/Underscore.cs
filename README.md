@@ -15,7 +15,7 @@ Install-Package Underscore.cs
 
 An overview of the project's modules and capabilities can be found [here](https://github.com/konkked/Underscore.cs/blob/master/docs/Overview.md).
 
-More specific API documentation with examples for each function can be found in the documents [here](https://github.com/konkked/Underscore.cs/tree/action-test-cleanup/docs/api).
+More specific API documentation with examples for each function can be found in the [documents here](https://github.com/konkked/Underscore.cs/tree/master/docs/api).
 
 Here is a simple example of using the library's list chunking and random:
 
