@@ -33,12 +33,14 @@ _.Collection.IsSorted(unsortedStringArr); // false
 Creates a function that always returns a copy of the passed collection at the time it was called.
 ```csharp
 int[] arr = { 1, 2, 3, 4 };
-Func<IEnumerable<int>> myArraySnapshot = _.Collection.Snapshot(arr);
+Func<IEnumerable<int>> snapshot = _.Collection.Snapshot(arr);
+
+int[] snapshotResult = snapshot(); // { 1, 2, 3, 4 }
 
 // change arr
 arr[1] = 30;
 
-snapshotResult = myArraySnapshot(); // { 1, 2, 3, 4 }
+snapshotResult = snapshot(); // { 1, 2, 3, 4 }
 ```
 
 ### IEnumerable\<T\> Extend\<T\>(IEnumerable\<T\> collection, int length)

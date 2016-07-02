@@ -52,7 +52,7 @@ namespace Underscore.List
         /// </summary>
         /// <typeparam name="T">The type of the elements in the list</typeparam>
         /// <param name="start">The inclusive start index</param>
-        /// <param name="end">The inclusive end index</param>
+        /// <param name="end">The exclusive end index</param>
         /// <returns>slice of the list</returns>
         IList<T> Slice<T>( IList<T> list, int start, int end );
 
@@ -66,7 +66,7 @@ namespace Underscore.List
         /// </summary>
         /// <typeparam name="T">The type of the elements in the list</typeparam>
         /// <param name="start">The inclusive start index</param>
-        /// <param name="end">The inclusive end index</param>
+        /// <param name="end">The exclusive end index</param>
         /// <param name="allowOverflow">specifies if the slice should cycle on overflow</param>
         /// <returns>slice of the list</returns>
         IList<T> Slice<T>(IList<T> list, int start, int end, bool allowOverflow);
