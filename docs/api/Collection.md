@@ -6,19 +6,19 @@
 Creates a function that always returns a copy of the passed collection at the time it was called.
 ```csharp
 int[] arr = { 1, 2, 3, 4 };
-Func<IEnumerable<int>> myArraySnapshot = _.Collection.Snapshot(arr);
+Func<IEnumerable<int>> snapshot = _.Collection.Snapshot(arr);
 
-int[] snapshotResult = myArraySnapshot(); // { 1, 2, 3, 4 }
+int[] snapshotResult = snapshot(); // { 1, 2, 3, 4 }
 
 // change arr
 arr[1] = 30;
 
-snapshotResult = myArraySnapshot(); // { 1, 2, 3, 4 }
+snapshotResult = snapshot(); // { 1, 2, 3, 4 }
 ```
 
 ### IEnumerable\<T\> Extend\<T\>(IEnumerable\<T\> collection, int length)
 Cycles through the given collection for "length" iterations.
-```
+```csharp
 _.Collection.Extend(new int[] {1, 2, 3}, 12) // {1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3}
 ```
 
@@ -67,6 +67,17 @@ Foo[] items = new Foo[] {new Foo(), new Foo(), new Foo(), new Foo()}
 IEnumerable<Foo> afterInvoke = _.Collection.Invoke(items, "Bar", new object[] {1});
 
 afterInvoke.Select(foo => foo.Value); // {1, 1, 1, 1}
+```
+
+### IList\<T\> Resolve\<T\>(IList<T> list)
+Executes the list of functions and returns the results
+``` csharp
+
+Func<int>[] myArray = { ()=>1, ()=>2, ()=>3, ()=>4 };
+var myArraySnapshot = _.List.Resolve(myArray);
+
+int[] snapshotResult = myArraySnapshot(); // returns { 1, 2, 3, 4 }
+
 ```
 
 ## Partition
