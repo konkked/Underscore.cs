@@ -65,7 +65,7 @@ namespace Underscore.List
         }
 
         /// <summary>
-        /// Rotates passed list
+        /// Rotates passed list, postive change will shift right negative will shift left
         /// </summary>
         public void Rotate<T>( IList<T> list, int change ) 
         {
@@ -157,7 +157,7 @@ namespace Underscore.List
         public IEnumerable<T> Extend<T>(IList<T> list, int size)
         {
             for (int i = 0; i < size; i++)
-                yield return list[i%list.Count];
+                yield return list[i % list.Count];
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace Underscore.List
         /// </summary>
         public IEnumerable<T> Cycle<T>(IList<T> list)
         {
-            for(int i=0;;i++)
+            for(int i = 0; ; i++)
             {
 
                 if (i == list.Count)

@@ -17,7 +17,6 @@ namespace Underscore.Test.Action.Synch
         private int counter;
         private string result;
         private bool invoked;
-        private Task[] arr;
 
         [TestInitialize]
         public void Initialize()

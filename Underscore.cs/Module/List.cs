@@ -7,22 +7,16 @@ namespace Underscore.Module
 
 
     public class List : 
-        IDelegationComponent,
         IManipulateComponent,
         IPartitionComponent
     {
         private readonly IManipulateComponent _manipulator;
         private readonly IPartitionComponent _partitioner;
-        private readonly IDelegationComponent _delegator;
 
         public List( 
-            IDelegationComponent delegator,
             IManipulateComponent manipulator,
-            IPartitionComponent partitioner
-        ) 
+            IPartitionComponent partitioner ) 
         {
-            if (delegator == null)
-                throw new ArgumentNullException("delegator");
 
             if (manipulator == null)
                 throw new ArgumentNullException("manipulator");
@@ -30,22 +24,11 @@ namespace Underscore.Module
             if (partitioner == null)
                 throw new ArgumentNullException("partitioner");
 
-
-            _delegator = delegator;
+            
             _manipulator = manipulator;
             _partitioner = partitioner;
         }
 
-        /// <summary>
-        /// Resolves a list of functions into a list
-        /// </summary>
-        /// <typeparam name="T">Return Type of passed functions</typeparam>
-        /// <param name="list">collection of functions</param>
-        /// <returns>returns a list of elements</returns>
-        public IList<T> Resolve<T>( IList<Func<T>> target )
-        {
-            return _delegator.Resolve( target );
-        }
 
         /// <summary>
         /// Swaps the elements at the specified indexes
@@ -122,20 +105,42 @@ namespace Underscore.Module
             return _manipulator.Cycle(list);
         }
 
-	    public Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>(IList<T> list, Func<T, Boolean> @on)
+	    public Tuple<IEnumerable<T>, IEnumerable<T>> PartitionMatches<T>(IList<T> list, Func<T, bool> on)
 	    {
 		    return _partitioner.PartitionMatches(list, on);
 	    }
 
-	    /// <summary>
+        /// <summary>
+        /// Takes a slice from a list, if start is greater then the end index
+        /// the results are reversed, if the index is negative corresponds to the index
+        /// from the back of the list
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the list</typeparam>
+        /// <param name="list">The list to take the slice from</param>
+        /// <param name="start">The start index</param>
+        /// <param name="end">The end index</param>
+        /// <returns>slice of the list</returns>
+        public IList<T> Slice<T>( IList<T> list, int start, int end )
+        {
+            return _partitioner.Slice( list, start, end );
+        }
+
+
+        /// <summary>
         /// Takes a slice from a list, if start is greater then the end index
         /// the results are reversed, if the index is negative corresponds to the index
         /// from the back of the list, if the slice is larger than the size of the list
         /// then the items are repeated
         /// </summary>
-        public IList<T> Slice<T>( IList<T> list, int start, int end )
+        /// <typeparam name="T">The type of the elements in the list</typeparam>
+        /// <param name="list">The list to take the slice from</param>
+        /// <param name="start">The start index</param>
+        /// <param name="end">The end index</param>
+        /// <param name="allowOverflow">specifies if the slice should cycle on overflow</param>
+        /// <returns>slice of the list</returns>
+        public IList<T> Slice<T>(IList<T> list, int start, int end, bool allowOverflow)
         {
-            return _partitioner.Slice( list, start, end );
+            return _partitioner.Slice(list, start, end, allowOverflow);
         }
 
         /// <summary>
