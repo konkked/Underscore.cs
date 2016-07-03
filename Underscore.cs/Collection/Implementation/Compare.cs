@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Underscore.Collection.Contract;
 using Underscore.Object.Comparison;
 
-namespace Underscore.Collection.Implementation
+namespace Underscore.Collection
 {
     public class CompareComponent : ICompareComponent
     {

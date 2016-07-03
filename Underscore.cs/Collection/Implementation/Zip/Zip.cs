@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Underscore.Collection.Implementation.Zip
+namespace Underscore.Collection
 {
 	public partial class ZipComponent
 	{

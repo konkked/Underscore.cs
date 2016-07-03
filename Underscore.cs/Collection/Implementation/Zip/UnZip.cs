@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Underscore.Collection.Contract.Zip;
 
-namespace Underscore.Collection.Implementation.Zip
+namespace Underscore.Collection
 {
 	public partial class ZipComponent : IZipComponent
 	{

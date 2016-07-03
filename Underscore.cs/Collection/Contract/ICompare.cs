@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Underscore.Collection.Contract
+namespace Underscore.Collection
 {
     public interface ICompareComponent
     {

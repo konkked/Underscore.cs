@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Underscore.Collection.Contract.Zip
+namespace Underscore.Collection
 {
 	public partial interface IZipComponent
 	{
