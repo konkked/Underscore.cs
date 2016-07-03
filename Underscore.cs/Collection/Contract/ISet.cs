@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Underscore.Collection.Contract
+namespace Underscore.Collection
 {
     /// <summary>
     /// Utilities that apply set operations to enumerables

@@ -64,7 +64,7 @@ namespace Underscore.Function
 							}
 						}
 
-						return Task.Factory.StartNew(() =>
+						return Task.Run(() =>
 						{
 							Thread.MemoryBarrier();
 
@@ -72,7 +72,7 @@ namespace Underscore.Function
 							{
 								if (doneChanging == 1)
 									break;
-
+                                
 								Thread.MemoryBarrier();
 							}
 

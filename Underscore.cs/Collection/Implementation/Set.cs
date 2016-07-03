@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Underscore.Collection.Contract;
 
-namespace Underscore.Collection.Implementation
+namespace Underscore.Collection
 {
     public class SetComponent : ISetComponent
     {

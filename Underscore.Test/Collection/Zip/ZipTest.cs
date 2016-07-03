@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Underscore.Collection.Implementation.Zip;
+using Underscore.Collection;
 
 namespace Underscore.Test.Collection.Zip
 {

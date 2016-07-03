@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Underscore.Collection.Contract.Zip;
 
 namespace Underscore.Collection
 {

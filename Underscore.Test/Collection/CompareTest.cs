@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Underscore.Collection.Implementation;
+using Underscore.Collection;
 
 namespace Underscore.Test.Collection
 {
