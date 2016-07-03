@@ -3,7 +3,6 @@
 
 ## Bind
 ### Action Bind\<T1\>(Action\<T1\> action, T1 a)
-<<<<<<< HEAD
 Returns an action with all of its arguments bound to the passed arguments. Works with up to 16 arguments.
 ```csharp
 string foo = "Hello, World!";

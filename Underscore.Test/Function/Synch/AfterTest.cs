@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,25 +14,23 @@ namespace Underscore.Test.Function.Synch
         private ISynchComponent component;
         private ComposeComponent compose;
 
-        private string[] arguments = new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
+        private readonly string[] arguments = Util.LowercaseCharArray;
         private const int repeatCount = 100000;
         private const int paramValue = 15000;
 
-        private Func<Task<string>[]> mkArr = () => new Task<string>[repeatCount];
-
-        public ISynchComponent GetComponent() { return new SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()); }
+        private readonly Func<Task<string>[]> mkArr = () => new Task<string>[repeatCount];
 
         [TestInitialize]
         public void Initialize()
         {
-            component = GetComponent();
+            component = new SynchComponent();
             compose = new ComposeComponent();
         }
 
         [TestMethod]
         public void Function_Synch_After_NoArguments()
         {
-            var expected = new string[] { "2", "2", "2", "3", "4", "5", "6", "7", "8", "9" };
+            var expected = new [] { "2", "2", "2", "3", "4", "5", "6", "7", "8", "9" };
             Func<string, string> function = (a) => a;
 
             var aftered = component.After(function, 3);

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Underscore.Function;
 
@@ -13,14 +10,12 @@ namespace Underscore.Test.Function.Synch
         private ISynchComponent component;
         private ComposeComponent compose;
 
-        string[] arguments = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
-
-		public ISynchComponent GetComponent() { return new SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()); }
+        private readonly string[] arguments = Util.LowercaseCharArray;
 
         [TestInitialize]
         public void Initialize()
         {
-            component = GetComponent();
+            component = new SynchComponent();
             compose = new ComposeComponent();
         }
 
@@ -29,7 +24,6 @@ namespace Underscore.Test.Function.Synch
         {
             string result = "";
             int counter = 0;
-            var timer = new Stopwatch();
             var onced = component.Once(() => result = (counter++).ToString());
             for (int i = 0; i < 10; i++)
                 onced();

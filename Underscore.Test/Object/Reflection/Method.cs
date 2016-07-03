@@ -20,7 +20,6 @@ namespace Underscore.Test.Object.Reflection
         public class MethodInvokeTestTargetObject
         {
 
-
             public bool InvokeWithParametersAndReturnValueWasCalled { get; private set; }
             public string InvokeWithParametersAndReturnValueParameter1 { get; private set; }
             public string InvokeWithParametersAndReturnValueParameter2 { get; private set; }
@@ -63,7 +62,7 @@ namespace Underscore.Test.Object.Reflection
             }
 
             public bool InvokeWithoutParameterAndWithoutReturnValueWasCalled { get; private set; }
-            
+
             public void InvokeWithoutParameterAndWithoutReturnValue()
             {
                 InvokeWithoutParameterAndWithoutReturnValueWasCalled = true;
@@ -82,7 +81,6 @@ namespace Underscore.Test.Object.Reflection
             // when the method is a void just returns null;
             Assert.IsNull(result);
         }
-
 
         [TestMethod]
         public void MethodInvokeWithoutParameterWithReturnValue()
@@ -114,7 +112,6 @@ namespace Underscore.Test.Object.Reflection
             result = testing.Invoke<string>(testingTarget, "InvokeWithoutParameterAndWithReturnValue");
             Assert.AreEqual("2", result);
         }
-
 
         [TestMethod]
         public void MethodInvokeWithParameterWithoutReturnValue()
@@ -158,8 +155,6 @@ namespace Underscore.Test.Object.Reflection
             Assert.AreEqual("b", testingTarget.InvokeWithParametersAndReturnValueParameter2);
         }
 
-
-
         [TestMethod]
         public void MethodInvokeForAllWithParameterWithoutReturnValueLazy()
         {
@@ -178,10 +173,8 @@ namespace Underscore.Test.Object.Reflection
             //Now will be true
             Assert.IsTrue(testingTarget.InvokeWithParameterWithoutReturnValueWasCalled);
 
-
             Assert.AreEqual("a", testingTarget.InvokeWithParameterWithoutReturnValueParameter1History[0]);
             Assert.AreEqual("b", testingTarget.InvokeWithParameterWithoutReturnValueParameter2History[0]);
-
 
             Assert.AreEqual("c", testingTarget.InvokeWithParameterWithoutReturnValueParameter1History[1]);
             Assert.AreEqual("d", testingTarget.InvokeWithParameterWithoutReturnValueParameter2History[1]);
@@ -194,7 +187,6 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-
         [TestMethod]
         public void MethodInvokeForAllWithParameterWithoutReturnValueGreedy()
         {
@@ -204,7 +196,6 @@ namespace Underscore.Test.Object.Reflection
             var result = testing.InvokeForAll(testingTarget, "InvokeWithParameterWithoutReturnValue",
                 new[] { new object[] { "a", "b" }, new object[] { "c", "d" }, new object[] { "e", "f" } },true);
 
-
             //Should be invoked right away, so in this test case the first pull will be true
             Assert.IsTrue(testingTarget.InvokeWithParameterWithoutReturnValueWasCalled);
 
@@ -213,7 +204,6 @@ namespace Underscore.Test.Object.Reflection
 
             Assert.AreEqual("a", testingTarget.InvokeWithParameterWithoutReturnValueParameter1History[0]);
             Assert.AreEqual("b", testingTarget.InvokeWithParameterWithoutReturnValueParameter2History[0]);
-
 
             Assert.AreEqual("c", testingTarget.InvokeWithParameterWithoutReturnValueParameter1History[1]);
             Assert.AreEqual("d", testingTarget.InvokeWithParameterWithoutReturnValueParameter2History[1]);
@@ -247,7 +237,6 @@ namespace Underscore.Test.Object.Reflection
             Assert.AreEqual("a", testingTarget.InvokeWithParameterWithReturnValueParameter1History[0]);
             Assert.AreEqual("b", testingTarget.InvokeWithParameterWithReturnValueParameter2History[0]);
 
-
             Assert.AreEqual("c", testingTarget.InvokeWithParameterWithReturnValueParameter1History[1]);
             Assert.AreEqual("d", testingTarget.InvokeWithParameterWithReturnValueParameter2History[1]);
 
@@ -270,14 +259,13 @@ namespace Underscore.Test.Object.Reflection
 
             Assert.IsTrue(testingTarget.InvokeWithParametersAndReturnValueWasCalled);
             var result = tresult.OfType<string>().ToArray();
-            
+
             Assert.AreEqual("a b", result[0]);
             Assert.AreEqual("c d", result[1]);
             Assert.AreEqual("e f", result[2]);
 
             Assert.AreEqual("a", testingTarget.InvokeWithParameterWithReturnValueParameter1History[0]);
             Assert.AreEqual("b", testingTarget.InvokeWithParameterWithReturnValueParameter2History[0]);
-
 
             Assert.AreEqual("c", testingTarget.InvokeWithParameterWithReturnValueParameter1History[1]);
             Assert.AreEqual("d", testingTarget.InvokeWithParameterWithReturnValueParameter2History[1]);
@@ -288,8 +276,6 @@ namespace Underscore.Test.Object.Reflection
             Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter1History.Count);
             Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter2History.Count);
         }
-
-
 
         [TestMethod]
         public void MethodInvokeForAllWithParameterWithReturnValueGenericLazy()
@@ -314,7 +300,6 @@ namespace Underscore.Test.Object.Reflection
             Assert.AreEqual("a", testingTarget.InvokeWithParameterWithReturnValueParameter1History[0]);
             Assert.AreEqual("b", testingTarget.InvokeWithParameterWithReturnValueParameter2History[0]);
 
-
             Assert.AreEqual("c", testingTarget.InvokeWithParameterWithReturnValueParameter1History[1]);
             Assert.AreEqual("d", testingTarget.InvokeWithParameterWithReturnValueParameter2History[1]);
 
@@ -324,7 +309,6 @@ namespace Underscore.Test.Object.Reflection
             Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter1History.Count);
             Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter2History.Count);
         }
-
 
         [TestMethod]
         public void MethodInvokeForAllWithParameterWithReturnGenericGreedy()
@@ -347,7 +331,6 @@ namespace Underscore.Test.Object.Reflection
             Assert.AreEqual("a", testingTarget.InvokeWithParameterWithReturnValueParameter1History[0]);
             Assert.AreEqual("b", testingTarget.InvokeWithParameterWithReturnValueParameter2History[0]);
 
-
             Assert.AreEqual("c", testingTarget.InvokeWithParameterWithReturnValueParameter1History[1]);
             Assert.AreEqual("d", testingTarget.InvokeWithParameterWithReturnValueParameter2History[1]);
 
@@ -358,7 +341,6 @@ namespace Underscore.Test.Object.Reflection
             Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter2History.Count);
         }
 
-
         [TestMethod]
         public void MethodsAll1()
         {
@@ -366,7 +348,6 @@ namespace Underscore.Test.Object.Reflection
             var target = new MethodMethodsTestClass();
 
             IMethodComponent testing = SetupMethodsComponent();// = new Underscore.Object.Reflection.Methods()
-
 
                 var methods = testing.All(target);
 
@@ -430,7 +411,6 @@ namespace Underscore.Test.Object.Reflection
                 Assert.IsNotNull(infos.FirstOrDefault(a => a.Name == "ShouldShowStringReturnValue"));
                 Assert.AreEqual(1, infos.Count(a => a.Name == "ShouldShowStringReturnValue"));
 
-
                 var singleParamTypeString1 = testing.Query(target, typeof(string));
                 var singleParamTypeString2 = testing.Query(target, new[] { typeof(string) });
 
@@ -459,7 +439,6 @@ namespace Underscore.Test.Object.Reflection
 
                 Assert.AreEqual(singParamName1Arr.FirstOrDefault(), sngParamName2Arr.FirstOrDefault());
 
-
                 var dblParamType = testing.Query(target, new[] { typeof(string), typeof(string) });
 
             var dblParamTypeArr = dblParamType as MethodInfo[] ?? dblParamType.ToArray();
@@ -484,7 +463,6 @@ namespace Underscore.Test.Object.Reflection
                 Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg1"));
                 Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg2"));
 
-
         }
 
         [TestMethod]
@@ -496,7 +474,6 @@ namespace Underscore.Test.Object.Reflection
             var target =  typeof(MethodMethodsTestClass);
 
             IMethodComponent testing = SetupMethodsComponent();// = new Underscore.Object.Reflection.Methods()
-
 
             var methods = testing.All(target);
 
@@ -560,7 +537,6 @@ namespace Underscore.Test.Object.Reflection
             Assert.IsNotNull(infos.FirstOrDefault(a => a.Name == "ShouldShowStringReturnValue"));
             Assert.AreEqual(1, infos.Count(a => a.Name == "ShouldShowStringReturnValue"));
 
-
             var singleParamTypeString1 = testing.Query(target, typeof(string));
             var singleParamTypeString2 = testing.Query(target, new[] { typeof(string) });
 
@@ -589,7 +565,6 @@ namespace Underscore.Test.Object.Reflection
 
             Assert.AreEqual(singParamName1Arr.FirstOrDefault(), sngParamName2Arr.FirstOrDefault());
 
-
             var dblParamType = testing.Query(target, new[] { typeof(string), typeof(string) });
 
             var dblParamTypeArr = dblParamType as MethodInfo[] ?? dblParamType.ToArray();
@@ -613,7 +588,6 @@ namespace Underscore.Test.Object.Reflection
 
             Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg1"));
             Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg2"));
-
 
         }
 
@@ -658,16 +632,12 @@ namespace Underscore.Test.Object.Reflection
 
             return new MethodComponent(new MockUtilFunctionComponent(), mk);
 
-
-
         }
 
         private static Expression<Func<T, bool>> EqualTo<T>( T comparing ) 
         {
             return a => comparing.Equals( a ) ;
         }
-
-
 
         private class MethodMethodsTestClass
         {
@@ -694,16 +664,12 @@ namespace Underscore.Test.Object.Reflection
             return typeof( MethodMethodsTestClass ).GetMethods( BindingFlags.Public | BindingFlags.Instance ).Where(a=>!a.IsSpecialName && !a.IsConstructor);
         }
 
-
         private static void SetupDoubleArgMock( Mock<IMethodComponent> mock )
         {
             //should return all methods with one param type string
             //expected results
 
-
             var methodsActuals = AllMethodsInfo( );
-
-
 
             var expectingForQueryEmpty = methodsActuals
                 .Where( a => a.Name == "ShouldShowNoReturnValue" || a.Name == "ShouldShowStringReturnValue" )
@@ -717,7 +683,6 @@ namespace Underscore.Test.Object.Reflection
                         && a.Parameters.Skip( 1 ).First( ).Name == "arg2"
                 )
                 .Select( a => a.Target );
-
 
             var forQueryEmpty = expectingForQueryEmpty as MethodInfo[] ?? expectingForQueryEmpty.ToArray();
             mock.Setup(
@@ -736,7 +701,6 @@ namespace Underscore.Test.Object.Reflection
             )
             .Returns( forQueryEmpty );
 
-
             mock.Setup(
                 a => a.Query(
                     It.Is<object>( b => ( b is MethodMethodsTestClass || ( b is Type && typeof( MethodMethodsTestClass ) == ( Type ) b ) ) ),
@@ -745,21 +709,14 @@ namespace Underscore.Test.Object.Reflection
             )
             .Returns( forQueryEmpty );
 
-
-
-        
-        
         }
-        
+
         private static void SetupSingleArgMock( Mock<IMethodComponent> mock )
         {
             //should return all methods with one param type string
             //expected results
-            
 
             var methodsActuals = AllMethodsInfo( );
-
-
 
             var expectingForQueryEmpty = methodsActuals
                 .Where( a => a.Name == "ShouldShowNoReturnValue" || a.Name == "ShouldShowStringReturnValue" )
@@ -798,7 +755,6 @@ namespace Underscore.Test.Object.Reflection
             )
             .Returns( forQueryEmpty);
 
-
             mock.Setup(
                 a => a.Query(
                     It.Is<object>( b=> ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ),
@@ -836,7 +792,7 @@ namespace Underscore.Test.Object.Reflection
                 ) 
             )
             .Returns( forQueryEmpty );
-        
+
         }
 
         private static void SetupEmptyMock( Mock<IMethodComponent> mock )
@@ -861,13 +817,11 @@ namespace Underscore.Test.Object.Reflection
             mock.Setup( a => a.Query(It.IsAny<object>(), It.Is<object>(b=> b == null || !(b is string && ((string)b).Contains("Shouldnt") ) ) ) )
                 .Returns( forQueryEmpty );
         }
-        
 
         [TestMethod]
         public async Task ObjectMethodFind_PrivateMethodsNotShownByDefault()
         {
             var target = new MethodMethodsTestClass();
-
 
             await Util.Tasks.Start(
                 () =>
@@ -888,12 +842,10 @@ namespace Underscore.Test.Object.Reflection
                         testing.Find(target, "ShouldShowNoReturnValue", null)
                     };
 
-
                     var allNotNull = !results.Aggregate(false, (prev, curr) => prev || curr == null);
 
                     Assert.IsTrue(allNotNull,
                         "One of the targeting Find results returned null when expecting corresponding method info");
-
 
                     var allEqual = results.Aggregate(expecting, (prev, curr) => prev == curr ? curr : null) != null;
 
@@ -913,17 +865,13 @@ namespace Underscore.Test.Object.Reflection
                     Assert.IsTrue(allNull,
                         "One of the invalid calls to Find found a method when expecting all to return null");
 
-
                 });
         }
-
-
 
         [TestMethod]
         public async Task ObjectMethodFind_SingleParameter()
         {
             var target = new MethodMethodsTestClass();
-
 
             await Util.Tasks.Start(
                 () =>
@@ -953,12 +901,10 @@ namespace Underscore.Test.Object.Reflection
                     Assert.IsTrue(allNotNull,
                         "One of the targeting Find results returned null when expecting corresponding method info");
 
-
                     var allEqual = results.Aggregate(expecting, (prev, curr) => prev == curr ? curr : null) != null;
 
                     Assert.IsTrue(allEqual,
                         "One of the targeting Find results were not equal, all calls to empty find should be eqiv");
-
 
                     results = new[]
                     {
@@ -977,13 +923,10 @@ namespace Underscore.Test.Object.Reflection
                 });
         }
 
-
-
         [TestMethod]
         public async Task ObjectMethodFind_TwoParameters()
         {
             var target = new MethodMethodsTestClass();
-
 
             await Util.Tasks.Start(
                 () =>
@@ -1014,12 +957,10 @@ namespace Underscore.Test.Object.Reflection
                     Assert.IsTrue(allNotNull,
                         "One of the targeting Find results returned null when expecting corresponding method info");
 
-
                     var allEqual = results.Aggregate(expecting, (prev, curr) => prev == curr ? curr : null) != null;
 
                     Assert.IsTrue(allEqual,
                         "One of the targeting Find results were not equal, all calls to empty find should be eqiv");
-
 
                     results = new[]
                     {
@@ -1034,7 +975,6 @@ namespace Underscore.Test.Object.Reflection
                     Assert.IsTrue(allNull,
                         "One of the invalid calls to Find found a method when expecting all to return null");
 
-
                     results = new[]
                     {
                         testing.Find(target, "ShouldShowNoReturnValue",
@@ -1043,12 +983,10 @@ namespace Underscore.Test.Object.Reflection
                         testing.Find(target, "ShouldShowNoReturnValue", new[] {"arg1", "arg2"})
                     };
 
-
                     allNotNull = !results.Aggregate(false, (prev, curr) => prev || curr == null);
 
                     Assert.IsTrue(allNotNull,
                         "One of the targeting Find results returned null when expecting corresponding method info");
-
 
                     allEqual = results.Aggregate(expecting, (prev, curr) => prev == curr ? curr : null) != null;
 
@@ -1066,12 +1004,10 @@ namespace Underscore.Test.Object.Reflection
                 });
         }
 
-
         [TestMethod]
         public async Task ObjectMethodFind_PropertyMethodsNotShown()
         {
             var target = new MethodMethodsTestClass();
-
 
             await Util.Tasks.Start(
                 () =>
@@ -1099,12 +1035,10 @@ namespace Underscore.Test.Object.Reflection
                 });
         }
 
-
         [TestMethod]
         public void ObjectMethodFind_ReturnParameterOverride()
         {
             var target = new MethodMethodsTestClass();
-
 
             //ReturnAsAParameter
             var cacher = new CacheComponent(new CompactComponent(), new Underscore.Utility.CompactComponent());
@@ -1117,12 +1051,10 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-
         [TestMethod]
         public async Task ObjectMethodFind_SkippingArguments()
         {
             var target = new MethodMethodsTestClass();
-
 
             await Util.Tasks.Start(
                 () =>
@@ -1134,7 +1066,7 @@ namespace Underscore.Test.Object.Reflection
                     var expecting = typeof (MethodMethodsTestClass).GetMethods().FirstOrDefault(a=> a.Name == "ShouldShowNoReturnValue" &&  a.GetParameters().Length == 2);
 
                     var result = testing.Find(target, new [] {null, typeof(string)});
-                    
+
                     Assert.AreEqual(expecting,result);
 
                 });
@@ -1144,7 +1076,6 @@ namespace Underscore.Test.Object.Reflection
         public async Task ObjectMethodHas( )
         {
             var target = new MethodMethodsTestClass( );
-
 
             await Util.Tasks.Start(
                 ( ) =>
@@ -1186,7 +1117,6 @@ namespace Underscore.Test.Object.Reflection
                 ( ) =>
                 {
 
-
                     var cacher = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
                     var testing = new MethodComponent(cacher, new PropertyComponent());
 
@@ -1196,22 +1126,18 @@ namespace Underscore.Test.Object.Reflection
                     Assert.IsTrue( testing.Has( target, "ShouldShowNoReturnValue", new[ ] { "arg" } ) );
                     Assert.IsTrue( testing.Has( target, "ShouldShowNoReturnValue", "arg" ) );
 
-
                     Assert.IsFalse( testing.Has( target, "ShouldntShowNoReturnValue", new { arg = typeof( string ) } ) );
                     Assert.IsFalse( testing.Has( target, "ShouldntShowNoReturnValue", new[ ] { typeof( string ) } ) );
                     Assert.IsFalse( testing.Has( target, "ShouldntShowNoReturnValue", typeof( string ) ) );
                     Assert.IsFalse( testing.Has( target, "ShouldntShowNoReturnValue", new[ ] { "arg" } ) );
                     Assert.IsFalse( testing.Has( target, "ShouldntShowNoReturnValue", "arg" ) );
 
-
-                    
                     var shouldShowMethods = new[ ]{
                         testing.Has( target, "ShouldShowNoReturnValue", new { arg = typeof( string ) } ),
                         testing.Has(target,"ShouldShowNoReturnValue",new []{ typeof(string)}),
                         testing.Has(target,"ShouldShowNoReturnValue",new[]{"arg"})
                     };
 
-                    
                     foreach ( var result in shouldShowMethods )
                         Assert.IsTrue( result );
 
@@ -1285,7 +1211,6 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-
         [TestMethod]
         public async Task MethodsAll2()
         {
@@ -1293,7 +1218,6 @@ namespace Underscore.Test.Object.Reflection
             var target = new MethodMethodsTestClass();
 
             IMethodComponent testing = SetupMethodsComponent();// = new Underscore.Object.Reflection.Methods()
-
 
             await Util.Tasks.Start(() =>
             {
@@ -1359,7 +1283,6 @@ namespace Underscore.Test.Object.Reflection
                 Assert.IsNotNull(methodsArr.FirstOrDefault(a => a.Name == "ShouldShowStringReturnValue"));
                 Assert.AreEqual(1, methodsArr.Count(a => a.Name == "ShouldShowStringReturnValue"));
 
-
                 var singleParamTypeString1 = testing.Query(target, typeof(string));
                 var singleParamTypeString2 = testing.Query(target, new[] { typeof(string) });
 
@@ -1385,7 +1308,6 @@ namespace Underscore.Test.Object.Reflection
 
                 Assert.AreEqual(singleParamName1.FirstOrDefault(), singleParamName2.FirstOrDefault());
 
-
                 var dblParamType = testing.Query(target, new[] { typeof(string), typeof(string) });
 
                 Assert.AreEqual(1, dblParamType.Count());
@@ -1408,12 +1330,8 @@ namespace Underscore.Test.Object.Reflection
                 Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg1"));
                 Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg2"));
 
-
-
             });
         }
-
-
 
         [TestMethod]
         public async Task MethodsTypeAll2()
@@ -1423,7 +1341,6 @@ namespace Underscore.Test.Object.Reflection
 
             IMethodComponent testing = SetupMethodsComponent();// = new Underscore.Object.Reflection.Methods()
 
-
             await Util.Tasks.Start(() =>
             {
                 var methods = testing.All(target);
@@ -1488,7 +1405,6 @@ namespace Underscore.Test.Object.Reflection
                 Assert.IsNotNull(methodsArr.FirstOrDefault(a => a.Name == "ShouldShowStringReturnValue"));
                 Assert.AreEqual(1, methodsArr.Count(a => a.Name == "ShouldShowStringReturnValue"));
 
-
                 var singleParamTypeString1 = testing.Query(target, typeof(string));
                 var singleParamTypeString2 = testing.Query(target, new[] { typeof(string) });
 
@@ -1514,7 +1430,6 @@ namespace Underscore.Test.Object.Reflection
 
                 Assert.AreEqual(singleParamName1.FirstOrDefault(), singleParamName2.FirstOrDefault());
 
-
                 var dblParamType = testing.Query(target, new[] { typeof(string), typeof(string) });
 
                 Assert.AreEqual(1, dblParamType.Count());
@@ -1536,8 +1451,6 @@ namespace Underscore.Test.Object.Reflection
 
                 Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg1"));
                 Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg2"));
-
-
 
             });
         }
@@ -1562,9 +1475,7 @@ namespace Underscore.Test.Object.Reflection
 
             return new MethodComponent(new MockUtilFunctionComponent(), mk);
 
-
-
         }
-        
+
     }
 }

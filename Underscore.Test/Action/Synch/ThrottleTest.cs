@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Underscore.Function;
-using ConvertComponent = Underscore.Action.ConvertComponent;
-using ISynchComponent = Underscore.Action.ISynchComponent;
 using SynchComponent = Underscore.Action.SynchComponent;
 
 namespace Underscore.Test.Action.Synch
@@ -13,19 +10,6 @@ namespace Underscore.Test.Action.Synch
 	[TestClass]
 	public class ThrottleTest
 	{
-        public ISynchComponent GetSynchComponent()
-        {
-            return new SynchComponent(
-                new Underscore.Function.SynchComponent(
-                    new CompactComponent(),
-                    new Underscore.Utility.CompactComponent(),
-                    new Underscore.Utility.MathComponent()
-                    ),
-                new ConvertComponent(),
-                new Underscore.Function.ConvertComponent()
-                );
-        }
-
         private static async Task SafeAwait(Task t, int timeout)
 		{
 			var to = Task.Delay(timeout * 1000);
@@ -41,7 +25,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Throttle_NoArguments()
 		{
-			var testing = GetSynchComponent();
+			var testing = new SynchComponent();
 
 			var result = 0;
 
@@ -65,7 +49,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Throttle_1Argument()
 		{
-			var testing = GetSynchComponent();
+			var testing = new SynchComponent();
 
 			var results = "";
 
@@ -96,7 +80,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Throttle_2Arguments()
 		{
-			var testing = GetSynchComponent();
+			var testing = new SynchComponent();
 			var failOnSignificantDelay = Task.Delay(1000);
 
 			var results = new string[2];
@@ -160,7 +144,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Throttle_3Arguments()
 		{
-			var testing = GetSynchComponent();
+			var testing = new SynchComponent();
 
 			var results = new string[3];
 
@@ -225,7 +209,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Throttle_4Arguments()
 		{
-			var testing = GetSynchComponent();
+			var testing = new SynchComponent();
 
 			var results = new string[4];
 
@@ -287,7 +271,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Throttle_5Arguments()
 		{
-			var testing = GetSynchComponent();
+			var testing = new SynchComponent();
 
 			var results = new string[5];
 
@@ -330,7 +314,7 @@ namespace Underscore.Test.Action.Synch
 		[TestMethod]
 		public async Task Action_Synch_Throttle_6Arguments()
 		{
-			var testing = GetSynchComponent();
+			var testing = new SynchComponent();
 
 			var results = new string[6];
 

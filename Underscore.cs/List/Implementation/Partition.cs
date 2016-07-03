@@ -10,6 +10,11 @@ namespace Underscore.List
     {
         private readonly IMathComponent _math;
 
+	    public PartitionComponent()
+	    {
+		    _math = new MathComponent();
+	    }
+
         public PartitionComponent( IMathComponent math ) 
         {
             _math = math;

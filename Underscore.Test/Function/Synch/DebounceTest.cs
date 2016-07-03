@@ -12,8 +12,6 @@ namespace Underscore.Test.Function.Synch
 	[TestClass]
 	public class DebounceTest
 	{
-		public ISynchComponent ModifyComponent() { return new SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()); }
-
 		//TODO: Reimplement Debounce Test
 		//Realized that the current implementation is flawed
 		//should rewrite and pass parameters instead of depending on an invoked value to be the 
@@ -21,11 +19,11 @@ namespace Underscore.Test.Function.Synch
 		[TestMethod]
 		public async Task Function_Synch_Debounce_NoArguments()
 		{
-			var testing = ModifyComponent();
+			var testing = new SynchComponent();
 			var timer = new Stopwatch();
-			int waiting = 500;
+			var waiting = 500;
 
-			int cnt = 1;
+			var cnt = 1;
 
 			var targeting = new Func<string>(() =>
 			{
@@ -40,7 +38,7 @@ namespace Underscore.Test.Function.Synch
 
 			timer.Start();
 
-			for (int i = 0; i < 100; i++)
+			for (var i = 0; i < 100; i++)
 			{
 				Assert.AreEqual(1, cnt);
 				continuing.Add(target());
@@ -58,7 +56,7 @@ namespace Underscore.Test.Function.Synch
 			timer.Reset();
 			timer.Start();
 
-			for (int i = 0; i < 100; i++)
+			for (var i = 0; i < 100; i++)
 			{
 				Assert.AreEqual(2, cnt);
 				continuing.Add(target());
@@ -77,11 +75,11 @@ namespace Underscore.Test.Function.Synch
 		[TestMethod]
 		public async Task Function_Synch_Debounce_1Argument()
 		{
-			var testing = ModifyComponent();
+			var testing = new SynchComponent();
 			var timer = new Stopwatch();
-			int waiting = 25;
+			var waiting = 25;
 
-			int cnt = 1;
+			var cnt = 1;
 
 			var targeting = new Func<string, string>((a) =>
 			{
@@ -96,7 +94,7 @@ namespace Underscore.Test.Function.Synch
 
 			timer.Start();
 
-			for (int i = 0; i < 100; i++)
+			for (var i = 0; i < 100; i++)
 			{
 				Assert.AreEqual(1, cnt);
 				var calling = i.ToString();
@@ -121,11 +119,11 @@ namespace Underscore.Test.Function.Synch
 		[TestMethod]
 		public async Task Function_Synch_Debounce_2Arguments()
 		{
-			var testing = ModifyComponent();
+			var testing = new SynchComponent();
 			var timer = new Stopwatch();
-			int waiting = 100;
+			var waiting = 100;
 
-			int cnt = 1;
+			var cnt = 1;
 
 			var ir = string.Empty;
 
@@ -142,7 +140,7 @@ namespace Underscore.Test.Function.Synch
 
 			timer.Start();
 
-			for (int i = 0; i < 100; i++)
+			for (var i = 0; i < 100; i++)
 			{
 				Assert.AreEqual(1, cnt);
 				var j = i;
@@ -164,12 +162,11 @@ namespace Underscore.Test.Function.Synch
 		[TestMethod]
 		public async Task Function_Synch_Debounce_3Arguments()
 		{
-
-			var testing = ModifyComponent();
+			var testing = new SynchComponent();
 			var timer = new Stopwatch();
-			int waiting = 50;
+			var waiting = 50;
 
-			int cnt = 1;
+			var cnt = 1;
 
 			var targeting = new Func<string, string, string, string>((s1, s2, s3) =>
 			{
@@ -184,7 +181,7 @@ namespace Underscore.Test.Function.Synch
 
 			timer.Start();
 
-			for (int i = 0; i < 100; i++)
+			for (var i = 0; i < 100; i++)
 			{
 				Assert.AreEqual(1, cnt);
 				var j = i;
@@ -207,11 +204,11 @@ namespace Underscore.Test.Function.Synch
 		public async Task Function_Synch_Debounce_4Arguments()
 		{
 
-			var testing = ModifyComponent();
+			var testing = new SynchComponent();
 			var timer = new Stopwatch();
-			int waiting = 200;
+			var waiting = 200;
 
-			int cnt = 1;
+			var cnt = 1;
 
 			var targeting = new Func<string, string, string, string, string>((s1, s2, s3, s4) =>
 			{
@@ -226,7 +223,7 @@ namespace Underscore.Test.Function.Synch
 
 			timer.Start();
 			Thread.MemoryBarrier();
-			for (int i = 0; i < 100; i++)
+			for (var i = 0; i < 100; i++)
 			{
 				Assert.AreEqual(1, cnt);
 				var j = i;
@@ -251,11 +248,11 @@ namespace Underscore.Test.Function.Synch
 		public async Task Function_Synch_Debounce_5Arguments()
 		{
 
-			var testing = ModifyComponent();
+			var testing = new SynchComponent();
 			var timer = new Stopwatch();
-			int waiting = 25;
+			var waiting = 25;
 
-			int cnt = 1;
+			var cnt = 1;
 
 			var targeting = new Func<string, string, string, string, string, string>((s1, s2, s3, s4, s5) =>
 			{
@@ -270,7 +267,7 @@ namespace Underscore.Test.Function.Synch
 
 			timer.Start();
 
-			for (int i = 0; i < 100; i++)
+			for (var i = 0; i < 100; i++)
 			{
 				Assert.AreEqual(1, cnt);
 				var j = i;
@@ -293,11 +290,11 @@ namespace Underscore.Test.Function.Synch
 		public async Task Function_Synch_Debounce_6Arguments()
 		{
 
-			var testing = ModifyComponent();
+			var testing = new SynchComponent();
 			var timer = new Stopwatch();
-			int waiting = 25;
+			var waiting = 25;
 
-			int cnt = 1;
+			var cnt = 1;
 
 			var targeting = new Func<string, string, string, string, string, string, string>((s1, s2, s3, s4, s5, s6) =>
 			{
@@ -312,7 +309,7 @@ namespace Underscore.Test.Function.Synch
 
 			timer.Start();
 
-			for (int i = 0; i < 100; i++)
+			for (var i = 0; i < 100; i++)
 			{
 				Assert.AreEqual(1, cnt);
 				var j = i;

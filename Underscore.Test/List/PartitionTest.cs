@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Underscore.List;
 using Underscore.Utility;
@@ -65,15 +63,15 @@ namespace Underscore.Test.List
             var result = _testing.Chunk(_target, 2);
 
             //testing even distribution
-            
-            foreach (var coll in result.Zip(new[] {new[] {0,1},new [] {2,3},new [] {4,5},new [] {6,7},new [] {8,9}},Tuple.Create))
+
+            foreach (var coll in result.Zip(new[] { new[] { 0, 1 }, new[] { 2, 3 }, new[] { 4, 5 }, new[] { 6, 7 }, new[] { 8, 9 } }, Tuple.Create))
                 Assert.IsTrue(coll.Item1.SequenceEqual(coll.Item2));
-            
+
             //test overlapped
             result = _testing.Chunk(_target, 11);
 
             Assert.IsTrue(result.First().SequenceEqual(_target));
-            
+
         }
 
         [TestMethod]
@@ -241,7 +239,7 @@ namespace Underscore.Test.List
 
             var ls = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             //negative reverse slice
-            Assert.IsTrue(partitioner.Slice(ls,  -1, -9,-2).SequenceEqual(new[] { 10, 8, 6, 4 }));
+            Assert.IsTrue(partitioner.Slice(ls, -1, -9, -2).SequenceEqual(new[] { 10, 8, 6, 4 }));
 
         }
 
@@ -411,7 +409,7 @@ namespace Underscore.Test.List
             // negative 
             // forward
             Assert.IsTrue(
-                partitioner.Slice(ls, -12, 3,2, true).SequenceEqual(new[] { 10, 1, 3, 5, 7, 9, 0, 2 }));
+                partitioner.Slice(ls, -12, 3, 2, true).SequenceEqual(new[] { 10, 1, 3, 5, 7, 9, 0, 2 }));
 
         }
 
@@ -481,12 +479,12 @@ namespace Underscore.Test.List
             // negative backwards
             // should be
             Assert.IsTrue(
-                partitioner.Slice(ls, 2, -13,-2, true).SequenceEqual(new[] { 2, 0, 9, 7, 5, 3, 1, 10 }));
+                partitioner.Slice(ls, 2, -13, -2, true).SequenceEqual(new[] { 2, 0, 9, 7, 5, 3, 1, 10 }));
 
         }
 
 
-
+        [TestMethod]
         public void List_Partition_LargeLists()
         {
             var partitioner = new PartitionComponent(new MathComponent());
@@ -495,16 +493,16 @@ namespace Underscore.Test.List
 
             var slice = partitioner.Slice(ls, 0, 1000, true);
 
-            Assert.AreEqual(slice.Count, 1001);
+            Assert.AreEqual(slice.Count, 1000);
 
             slice = partitioner.Slice(ls, 0, 10000, true);
-            Assert.AreEqual(slice.Count, 10001);
+            Assert.AreEqual(slice.Count, 10000);
 
             slice = partitioner.Slice(ls, 0, 100000, true);
-            Assert.AreEqual(slice.Count, 100001);
+            Assert.AreEqual(slice.Count, 100000);
 
             slice = partitioner.Slice(ls, 0, -1000000, true);
-            Assert.AreEqual(slice.Count, 1000001);
+            Assert.AreEqual(slice.Count, 1000000);
 
         }
 
@@ -615,18 +613,3 @@ namespace Underscore.Test.List
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

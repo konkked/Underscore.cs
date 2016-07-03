@@ -13,16 +13,12 @@ namespace Underscore.Test.Function.Synch
         private ISynchComponent component;
         private ComposeComponent compose;
 
-        //TODO: make a utility to return this argument list
-        private string[] arguments = new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
-
-        //TODO: make a default constructor for this so we don't need a method just to get it
-        public ISynchComponent GetComponent() { return new SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()); }
+        private readonly string[] arguments = Util.LowercaseCharArray;
 
         [TestInitialize]
         public void Initialize()
         {
-            component = GetComponent();
+            component = new SynchComponent();
             compose = new ComposeComponent();
         }
 

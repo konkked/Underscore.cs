@@ -27,18 +27,12 @@ namespace Underscore.Test.Action
 
         public Func<string, string> TestComposeStart(string s)
         {
-            return (t) =>
-            {
-                return "Start" + s + t;
-            };
+            return (t) => "Start" + s + t;
         }
 
         public Func<string, string> TestComposeLinks(string s)
         {
-            return (t) =>
-            {
-                return t + s;
-            };
+            return (t) => t + s;
         }
 
         [TestMethod]

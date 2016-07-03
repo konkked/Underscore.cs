@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,12 +13,10 @@ namespace Underscore.Test.Function.Synch
 	{
         //TODO: finish all the overloads for this class
 
-		public ISynchComponent GetComponent() { return new SynchComponent(new CompactComponent(), new Underscore.Utility.CompactComponent(), new Underscore.Utility.MathComponent()); }
-
         [TestMethod]
         public async Task Function_Synch_Throttle_1Argument()
         {
-            var testing = GetComponent();
+            var testing = new SynchComponent();
             var timer = new Stopwatch();
             const int waiting = 1000;
 
@@ -102,7 +98,7 @@ namespace Underscore.Test.Function.Synch
         [TestMethod]
         public async Task Function_Synch_Throttle_6Arguments()
         {
-            var testing = GetComponent();
+            var testing = new SynchComponent();
             var timer = new Stopwatch();
             int waiting = 25;
 

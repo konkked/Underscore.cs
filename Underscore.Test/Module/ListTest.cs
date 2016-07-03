@@ -1,9 +1,6 @@
-﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Underscore.Function;
+using System;
 using Underscore.List;
-using Underscore.Object.Reflection;
-using Underscore.Utility;
 
 namespace Underscore.Test.Module
 {
@@ -11,14 +8,13 @@ namespace Underscore.Test.Module
     public class ListTest
     {
         [TestMethod]
-        public void List_CreateModule( )
+        public void List_CreateModule()
         {
             var result = new global::Underscore.Module.List(
-                new ManipulateComponent( ),
-                new PartitionComponent( new MathComponent() )
+                new ManipulateComponent(),
+                new Underscore.List.PartitionComponent()
             );
         }
-
 
         [TestMethod]
         [ExpectedException(typeof (ArgumentNullException))]
@@ -26,7 +22,7 @@ namespace Underscore.Test.Module
         {
             try
             {
-                var result = new Underscore.Module.List(null, new PartitionComponent(new MathComponent()));
+                var result = new Underscore.Module.List(null, new Underscore.List.PartitionComponent());
             }
             catch (ArgumentNullException e)
             {
@@ -38,9 +34,6 @@ namespace Underscore.Test.Module
 
             Assert.Fail("List create should have thrown an exception about the missing manipulate component");
         }
-
-
-
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]

@@ -14,8 +14,6 @@ namespace Underscore.Test.Module
                 new MathComponent(),
                 new ObjectComponent()
             );
-
-
         }
     }
 }

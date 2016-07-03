@@ -88,7 +88,6 @@
     <Compile Include="Function\Split\SplitTest.cs" />
     <Compile Include="Function\Split\UncurryTest.cs" />
     <Compile Include="Function\PartialTest.cs" />
-    <Compile Include="Function\SplitTest.cs" />
     <Compile Include="Function\Synch\AfterTest.cs" />
     <Compile Include="Function\Synch\BeforeTest.cs" />
     <Compile Include="Function\Synch\DebounceTest.cs" />

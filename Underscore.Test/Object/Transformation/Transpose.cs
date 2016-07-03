@@ -4,7 +4,6 @@ using System.Reflection;
 using Underscore.Object;
 using Underscore.Object.Reflection;
 
-
 namespace Underscore.Test.Object.Transformation
 {
     [TestClass]
@@ -12,7 +11,6 @@ namespace Underscore.Test.Object.Transformation
     {
         public class Person
         {
-
             public string FirstName { get; set; }
 
             public string LastName { get; set; }
@@ -47,21 +45,13 @@ namespace Underscore.Test.Object.Transformation
             mkprop.Setup( a => a.All( typeof( Employee ) ) )
                 .Returns( typeof( Employee ).GetProperties( BindingFlags.Instance | BindingFlags.Public ) );
 
-
-
             mkprop.Setup( a => a.All( It.IsAny<Person>( ) ) )
                 .Returns( typeof( Person ).GetProperties( BindingFlags.Instance | BindingFlags.Public ) );
 
             mkprop.Setup( a => a.All( It.IsAny<Employee>( ) ) )
                 .Returns( typeof( Employee ).GetProperties( BindingFlags.Instance | BindingFlags.Public ) );
 
-
-
-
-
-
             var target = new TransposeComponent( mkprop.Object );
-
 
             string title = "Mr.",
                 firstName = "Charles",
@@ -101,7 +91,6 @@ namespace Underscore.Test.Object.Transformation
                 Salary = 60000m
             };
 
-
             decimal employeeToPersonSalary=10000m;
             var employeeToPerson = new Employee { FirstName = shouldbehere, LastName = null, Salary = employeeToPersonSalary };
 
@@ -113,11 +102,9 @@ namespace Underscore.Test.Object.Transformation
             Assert.AreEqual( person.LastName , employeeWithExistingInfo.LastName );
             Assert.AreEqual( 60000m  , employeeWithExistingInfo.Salary );
 
-
             Assert.AreEqual( person.FirstName  , employeeWithNoInfo.FirstName);
             Assert.AreEqual( person.LastName  , employeeWithNoInfo.LastName );
             Assert.AreEqual( default( decimal )  , employeeWithNoInfo.Salary);
-
 
             Assert.AreEqual( person.FirstName  , employeeWithOnlySalary.FirstName);
             Assert.AreEqual( person.LastName  , employeeWithOnlySalary.LastName);
@@ -134,10 +121,7 @@ namespace Underscore.Test.Object.Transformation
             Assert.AreEqual( nickName, person.NickName );
             Assert.AreEqual( age, person.Age );
 
-
-
         }
-
 
         [TestMethod]
         public void Coalesce( )
@@ -154,11 +138,8 @@ namespace Underscore.Test.Object.Transformation
             mkprop.Setup( a => a.All( typeof( Employee ) ) )
                 .Returns( typeof( Employee ).GetProperties( BindingFlags.Instance | BindingFlags.Public ) );
 
-
             mkprop.Setup( a => a.All( coalscingType  ) )
                 .Returns( coalscingType.GetProperties( BindingFlags.Instance | BindingFlags.Public ) );
-
-
 
             mkprop.Setup( a => a.All( It.IsAny<Person>( ) ) )
                 .Returns( typeof( Person ).GetProperties( BindingFlags.Instance | BindingFlags.Public ) );
@@ -169,13 +150,7 @@ namespace Underscore.Test.Object.Transformation
             mkprop.Setup( a => a.All( coalscing ) )
                 .Returns( coalscingType.GetProperties( BindingFlags.Instance | BindingFlags.Public ) );
 
-
-
-
-
-
             var target = new TransposeComponent( mkprop.Object );
-
 
             string title = "Mr." ,
                 firstName = "Charles" ,
@@ -218,11 +193,10 @@ namespace Underscore.Test.Object.Transformation
             Assert.AreEqual( shouldbehere , result.FirstName );
             Assert.AreEqual( shouldbehere , result.LastName );
 
-
             var dm = default( decimal );
             var ml = new Employee{};
             var result3 = target.Coalesce( ml , new { Salary = 1000m } );
-            
+
             // the salary should not be replaced because
             Assert.AreEqual( result3 , ml );
             Assert.AreEqual( dm , ml.Salary );
@@ -240,7 +214,6 @@ namespace Underscore.Test.Object.Transformation
             Assert.AreEqual( "ShouldBeHere" , result2.LastName );
             Assert.AreEqual( "Henry" , result2.MiddleName );
             Assert.AreEqual( "IV" , result2.Suffix );
-
 
         }
 
