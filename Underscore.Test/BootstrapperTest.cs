@@ -6,7 +6,7 @@ namespace Underscore.Test
     public class BootstrapperTest
     {
         [TestMethod]
-        public void GetKernel( )
+        public void GetKernel()
         {
             var kernel = Bootstrapper.Kernel;
         }

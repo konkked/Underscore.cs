@@ -6,15 +6,15 @@ using Underscore.Function;
 
 namespace Underscore.Object.Reflection
 {
-    public class ConstructorComponent: MethodsBaseComponent<ConstructorInfo>, IConstructorComponent
+    public class ConstructorComponent : MethodsBaseComponent<ConstructorInfo>, IConstructorComponent
     {
-		public ConstructorComponent()
-			: base(new CacheComponent(), new PropertyComponent(), new Members<ConstructorInfo>(null, BindingFlags.Instance | BindingFlags.Public))
-	    {   
-	    }
+        public ConstructorComponent()
+            : base(new CacheComponent(), new PropertyComponent(), new Members<ConstructorInfo>(null, BindingFlags.Instance | BindingFlags.Public))
+        {
+        }
 
         public ConstructorComponent(ICacheComponent cacher, IPropertyComponent properties)
-            : base(cacher, properties, new Members<ConstructorInfo>( null, BindingFlags.Instance | BindingFlags.Public))
+            : base(cacher, properties, new Members<ConstructorInfo>(null, BindingFlags.Instance | BindingFlags.Public))
         {
         }
 
@@ -53,22 +53,22 @@ namespace Underscore.Object.Reflection
 
         public bool HasParameterless(object target)
         {
-            return Parameterless(target)  != null;
+            return Parameterless(target) != null;
         }
 
         public bool HasParameterless(object target, BindingFlags flags)
         {
-            return Parameterless(target,flags) != null;
+            return Parameterless(target, flags) != null;
         }
 
         public bool HasParameterless(Type target)
         {
-            return Parameterless(target)  != null;
+            return Parameterless(target) != null;
         }
 
         public bool HasParameterless(Type target, BindingFlags flags)
         {
-            return Parameterless(target,flags) != null;
+            return Parameterless(target, flags) != null;
         }
 
         public ConstructorInfo Parameterless(object target)
@@ -78,7 +78,7 @@ namespace Underscore.Object.Reflection
 
         public ConstructorInfo Parameterless(object target, BindingFlags flags)
         {
-            return All(target,flags).FirstOrDefault(a => !a.GetParameters().Any());
+            return All(target, flags).FirstOrDefault(a => !a.GetParameters().Any());
         }
 
         public ConstructorInfo Parameterless(Type target)
@@ -91,26 +91,26 @@ namespace Underscore.Object.Reflection
             return All(target, flags).FirstOrDefault(a => !a.GetParameters().Any());
         }
 
-        public ConstructorInfo Simplest( object target ) 
+        public ConstructorInfo Simplest(object target)
         {
-            return Simplest( target.GetType( ) );
+            return Simplest(target.GetType());
         }
 
-        public ConstructorInfo Simplest( Type target ) 
+        public ConstructorInfo Simplest(Type target)
         {
-            return All( target ).OrderBy( a => a.GetParameters( ).Count( ) ).FirstOrDefault( );
+            return All(target).OrderBy(a => a.GetParameters().Count()).FirstOrDefault();
         }
 
         public ConstructorInfo Simplest(Type target, BindingFlags flags)
         {
-            return All( target , flags )
-                        .OrderBy( a => a.GetParameters().Count() )
+            return All(target, flags)
+                        .OrderBy(a => a.GetParameters().Count())
                         .FirstOrDefault();
         }
 
-        public ConstructorInfo Simplest( object target , BindingFlags flags ) 
+        public ConstructorInfo Simplest(object target, BindingFlags flags)
         {
-            return Simplest( target.GetType( ) , flags );
+            return Simplest(target.GetType(), flags);
         }
 
         public ConstructorInfo Find(Type target, object query)
@@ -122,7 +122,6 @@ namespace Underscore.Object.Reflection
         {
             return Query(target, query, flags).FirstOrDefault();
         }
-
 
         public ConstructorInfo Find(object target, object query)
         {

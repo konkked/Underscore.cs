@@ -57,14 +57,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Action\BindTest.cs" />
+    <Compile Include="Action\Bind\BindTest.cs" />
     <Compile Include="Action\Compose\ComposeTest.cs" />
     <Compile Include="Action\Compose\ApplyTest.cs" />
-    <Compile Include="Action\ConvertTest.cs" />
+    <Compile Include="Action\Convert\ConvertTest.cs" />
     <Compile Include="Action\Split\CurryTest.cs" />
     <Compile Include="Action\Split\SplitTest.cs" />
     <Compile Include="Action\Split\UncurryTest.cs" />
-    <Compile Include="Action\PartialTest.cs" />
+    <Compile Include="Action\Bind\PartialTest.cs" />
     <Compile Include="Action\Synch\AfterTest.cs" />
     <Compile Include="Action\Synch\BeforeTest.cs" />
     <Compile Include="Action\Synch\DebounceTest.cs" />
@@ -72,12 +72,18 @@
     <Compile Include="Action\Synch\OnceTest.cs" />
     <Compile Include="Action\Synch\ThrottleTest.cs" />
     <Compile Include="BootstrapperTest.cs" />
+    <Compile Include="Collection\CompareTest.cs" />
     <Compile Include="Collection\CreationTest.cs" />
     <Compile Include="Collection\DelegationTest.cs" />
+    <Compile Include="Collection\FilterTest.cs" />
     <Compile Include="Collection\Partition\CombinationsTest.cs" />
     <Compile Include="Collection\Partition\ChunkTest.cs" />
     <Compile Include="Collection\Partition\PartitionTest.cs" />
-    <Compile Include="Function\BindTest.cs" />
+    <Compile Include="Collection\SetTest.cs" />
+    <Compile Include="Collection\Zip\UnZipTest.cs" />
+    <Compile Include="Collection\Zip\ZipTest.cs" />
+    <Compile Include="Function\Bind\BindTest.cs" />
+    <Compile Include="Function\Bind\PartialTest.cs" />
     <Compile Include="Function\Boolean\AndTest.cs" />
     <Compile Include="Function\Boolean\NegateTest.cs" />
     <Compile Include="Function\Boolean\OrTest.cs" />
@@ -87,7 +93,6 @@
     <Compile Include="Function\Split\CurryTest.cs" />
     <Compile Include="Function\Split\SplitTest.cs" />
     <Compile Include="Function\Split\UncurryTest.cs" />
-    <Compile Include="Function\PartialTest.cs" />
     <Compile Include="Function\Synch\AfterTest.cs" />
     <Compile Include="Function\Synch\BeforeTest.cs" />
     <Compile Include="Function\Synch\DebounceTest.cs" />
@@ -103,11 +108,11 @@
     <Compile Include="Module\ObjectTest.cs" />
     <Compile Include="Module\UtilityTest.cs" />
     <Compile Include="Object\Comparison\EqualityTest.cs" />
-    <Compile Include="Object\Reflection\Field.cs" />
-    <Compile Include="Object\Reflection\Method.cs" />
-    <Compile Include="Object\Reflection\Attribute.cs" />
-    <Compile Include="Object\Reflection\Property.cs" />
-    <Compile Include="Object\Reflection\Constructors.cs" />
+    <Compile Include="Object\Reflection\FieldTest.cs" />
+    <Compile Include="Object\Reflection\MethodTest.cs" />
+    <Compile Include="Object\Reflection\AttributeTest.cs" />
+    <Compile Include="Object\Reflection\PropertyTest.cs" />
+    <Compile Include="Object\Reflection\ConstructorTest.cs" />
     <Compile Include="Object\Transformation\Dynamic.cs" />
     <Compile Include="Object\Transformation\Transpose.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -127,6 +132,7 @@
       <Name>Underscore.cs</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

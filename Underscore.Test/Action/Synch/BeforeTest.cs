@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using ComposeComponent = Underscore.Action.ComposeComponent;
 using ISynchComponent = Underscore.Action.ISynchComponent;
 using SynchComponent = Underscore.Action.SynchComponent;

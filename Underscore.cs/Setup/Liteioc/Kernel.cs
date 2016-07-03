@@ -19,21 +19,21 @@ namespace Underscore.Setup.Liteioc
         public Kernel(params IKernelModule[] modules)
         {
             _resolver = new Dictionary<Type, Type>();
-            
+
             foreach (var module in modules)
                 module.Load(this);
-           
+
         }
 
         public void Register<TInterface, TImplementation>()
             where TImplementation : TInterface
         {
-            _resolver[typeof (TInterface)] = typeof (TImplementation);
+            _resolver[typeof(TInterface)] = typeof(TImplementation);
         }
 
         public void Register<T>()
         {
-            _resolver[typeof (T)] = typeof (T);
+            _resolver[typeof(T)] = typeof(T);
         }
 
         private object Resolve(Type contract)
@@ -68,7 +68,7 @@ namespace Underscore.Setup.Liteioc
 
         public TInterface Resolve<TInterface>()
         {
-            return (TInterface) Resolve(typeof (TInterface));
+            return (TInterface)Resolve(typeof(TInterface));
         }
     }
 }

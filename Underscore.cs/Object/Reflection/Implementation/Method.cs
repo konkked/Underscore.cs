@@ -6,37 +6,37 @@ using Underscore.Function;
 
 namespace Underscore.Object.Reflection
 {
-    public class MethodComponent : MethodsBaseComponent<MethodInfo>,IMethodComponent
+    public class MethodComponent : MethodsBaseComponent<MethodInfo>, IMethodComponent
     {
         private static HashSet<string> s_specialRules;
         private readonly IPropertyComponent _property;
 
-	    private static Members<MethodInfo> Members
-	    {
-		    get
-		    {
-			    return new Members<MethodInfo>(
-								a => !a.IsConstructor && !a.IsSpecialName,
-								BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance
-							);
-		    }
-	    }
+        private static Members<MethodInfo> Members
+        {
+            get
+            {
+                return new Members<MethodInfo>(
+                                a => !a.IsConstructor && !a.IsSpecialName,
+                                BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance
+                            );
+            }
+        }
 
-		public MethodComponent()
-			: base(new CacheComponent(), new PropertyComponent(), Members)
-	    {
-		    if(s_specialRules == null)
-				InitSpecialRules();
+        public MethodComponent()
+            : base(new CacheComponent(), new PropertyComponent(), Members)
+        {
+            if (s_specialRules == null)
+                InitSpecialRules();
 
-			_property = new PropertyComponent();
-	    }
+            _property = new PropertyComponent();
+        }
 
-		private static void InitSpecialRules()
-	    {
-		    s_specialRules = new HashSet<string> {"return"};
-	    }
+        private static void InitSpecialRules()
+        {
+            s_specialRules = new HashSet<string> { "return" };
+        }
 
-        public MethodComponent(Function.ICacheComponent cacher , IPropertyComponent property)
+        public MethodComponent(Function.ICacheComponent cacher, IPropertyComponent property)
             : base(cacher, property, Members)
         {
             _property = property;
@@ -95,7 +95,7 @@ namespace Underscore.Object.Reflection
                                 null);
                 }
 
-                var lookingFor = (Type) value;
+                var lookingFor = (Type)value;
                 return current.Where(a => a.ReturnType == lookingFor);
 
             }
@@ -156,7 +156,7 @@ namespace Underscore.Object.Reflection
         /// </summary>
         public bool Has(object target, string name)
         {
-            return Find(target, name,true) != null;
+            return Find(target, name, true) != null;
         }
 
         public bool Has(Type target, string name, object query)
@@ -166,7 +166,7 @@ namespace Underscore.Object.Reflection
 
         public bool Has(Type target, object query)
         {
-            return Find(target,  query) != null;
+            return Find(target, query) != null;
         }
 
         public bool Has(Type target, string name)
@@ -204,7 +204,7 @@ namespace Underscore.Object.Reflection
             return Find(target, name, flags) != null;
         }
 
-        public override IEnumerable<MethodInfo> Query(Type target , object query , BindingFlags flags)
+        public override IEnumerable<MethodInfo> Query(Type target, object query, BindingFlags flags)
         {
             return base.Query(target, query);
         }
@@ -257,7 +257,7 @@ namespace Underscore.Object.Reflection
 
         public object Invoke(object target, string name, BindingFlags flags)
         {
-            var method = Find(target,name,new {}, flags);
+            var method = Find(target, name, new { }, flags);
 
             if (method != null)
                 return method.Invoke(target, null);
@@ -277,7 +277,7 @@ namespace Underscore.Object.Reflection
 
         public T Invoke<T>(object target, string name, BindingFlags flags)
         {
-            var method = Query(target, new { }, name, flags).FirstOrDefault(a=>a.ReturnType == typeof(T));
+            var method = Query(target, new { }, name, flags).FirstOrDefault(a => a.ReturnType == typeof(T));
 
             if (method != null)
                 return (T)method.Invoke(target, null);
@@ -350,7 +350,7 @@ namespace Underscore.Object.Reflection
 
         public IEnumerable<object> InvokeForAll(object target, string name, object[][] argumentSets)
         {
-            return InvokeForAll(target, name,argumentSets, false);
+            return InvokeForAll(target, name, argumentSets, false);
         }
 
         public IEnumerable<T> InvokeForAll<T>(object target, string name, BindingFlags flags, object[][] argumentSets)
@@ -365,7 +365,7 @@ namespace Underscore.Object.Reflection
 
         public IEnumerable<object> InvokeForAll(object target, string name, BindingFlags flags, object[][] argumentSets, bool greedy)
         {
-            var returning =  argumentSets.Select(argumentSet => Invoke(target, name, flags, argumentSet));
+            var returning = argumentSets.Select(argumentSet => Invoke(target, name, flags, argumentSet));
 
             return greedy ? returning.ToList() : returning;
         }
@@ -403,7 +403,7 @@ namespace Underscore.Object.Reflection
 
         public MethodInfo Find(object target, string name, object query, BindingFlags flags)
         {
-            return Find(target.GetType(),name, query, flags);
+            return Find(target.GetType(), name, query, flags);
         }
 
         public MethodInfo Find(object target, string name, BindingFlags flags)

@@ -10,9 +10,11 @@ namespace Underscore.Test.Module
         public void CreateCollectionModuleTest()
         {
             var result = new Underscore.Module.Collection(
+				new CompareComponent(),
 				new CreationComponent(),
+				new DelegationComponent(),
                 new PartitionComponent(),
-                new DelegationComponent()
+				new ZipComponent()
 			);
 
             Assert.IsNotNull(result);

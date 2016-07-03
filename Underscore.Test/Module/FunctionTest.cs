@@ -11,7 +11,6 @@ namespace Underscore.Test.Module
         {
             var testing = new Underscore.Module.Function(
                  new BindComponent(),
-                 new PartialComponent(),
                  new SplitComponent(),
                  new ComposeComponent(),
                  new ConvertComponent(),

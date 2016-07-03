@@ -61,9 +61,8 @@ namespace Underscore.Test.Function.Synch
 
             var delaying = new Func<string, string>((a) =>
             {
-                Assert.AreEqual("a", a);
                 invoked = true;
-                return string.Join("", a);
+                return Util.Join("", a);
             });
 
             var delayed = component.Delay(delaying, 100);
@@ -82,10 +81,8 @@ namespace Underscore.Test.Function.Synch
 
             var delaying = new Func<string, string, string>((a, b) =>
             {
-                Assert.AreEqual("a", a);
-                Assert.AreEqual("b", b);
                 invoked = true;
-                return string.Join("", a, b);
+				return Util.Join(a, b);
             });
 
             var delayed = component.Delay(delaying, 100);
@@ -104,11 +101,8 @@ namespace Underscore.Test.Function.Synch
 
             var delaying = new Func<string, string, string, string>((a, b, c) =>
             {
-                Assert.AreEqual("a", a);
-                Assert.AreEqual("b", b);
-                Assert.AreEqual("c", c);
                 invoked = true;
-                return "abc";
+				return Util.Join(a, b, c);
             });
 
             var delayed = component.Delay(delaying, 100);
@@ -127,12 +121,8 @@ namespace Underscore.Test.Function.Synch
 
             var delaying = new Func<string, string, string, string, string>((a, b, c, d) =>
             {
-                Assert.AreEqual("a", a);
-                Assert.AreEqual("b", b);
-                Assert.AreEqual("c", c);
-                Assert.AreEqual("d", d);
                 invoked = true;
-                return "abcd";
+				return Util.Join(a, b, c, d);
             });
 
             var delayed = component.Delay(delaying, 100);
@@ -151,13 +141,8 @@ namespace Underscore.Test.Function.Synch
 
             var delaying = new Func<string, string, string, string, string, string>((a, b, c, d, e) =>
             {
-                Assert.AreEqual("a", a);
-                Assert.AreEqual("b", b);
-                Assert.AreEqual("c", c);
-                Assert.AreEqual("d", d);
-                Assert.AreEqual("e", e);
                 invoked = true;
-                return "abcde";
+                return Util.Join(a, b, c, d, e);
             });
 
             var timer = new Stopwatch();
@@ -182,14 +167,8 @@ namespace Underscore.Test.Function.Synch
 
             var delaying = new Func<string, string, string, string, string, string, string>((a, b, c, d, e, f) =>
             {
-                Assert.AreEqual("a", a);
-                Assert.AreEqual("b", b);
-                Assert.AreEqual("c", c);
-                Assert.AreEqual("d", d);
-                Assert.AreEqual("e", e);
-                Assert.AreEqual("f", f);
                 invoked = true;
-                return "abcdef";
+				return Util.Join(a, b, c, d, e, f);
             });
 
             var delayed = component.Delay(delaying, 100);
@@ -200,5 +179,205 @@ namespace Underscore.Test.Function.Synch
 
             Assert.IsTrue(invoked);
         }
+
+		[TestMethod]
+		public void Function_Synch_Delay_7Arguments()
+		{
+			var invoked = false;
+
+			var delaying = new Func<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g) =>
+			{
+				invoked = true;
+				return Util.Join(a, b, c, d, e, f, g);
+			});
+
+			var delayed = component.Delay(delaying, 100);
+
+			Thread.MemoryBarrier();
+
+			TestDelay(100, "abcdefg", compose.Apply(delayed, arguments));
+
+			Assert.IsTrue(invoked);
+		}
+
+		[TestMethod]
+		public void Function_Synch_Delay_8Arguments()
+		{
+			var invoked = false;
+
+			var delaying = new Func<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) =>
+			{
+				invoked = true;
+				return Util.Join(a, b, c, d, e, f, g, h);
+			});
+
+			var delayed = component.Delay(delaying, 100);
+
+			Thread.MemoryBarrier();
+
+			TestDelay(100, "abcdefgh", compose.Apply(delayed, arguments));
+
+			Assert.IsTrue(invoked);
+		}
+
+		[TestMethod]
+		public void Function_Synch_Delay_9Arguments()
+		{
+			var invoked = false;
+
+			var delaying = new Func<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) =>
+			{
+				invoked = true;
+				return Util.Join(a, b, c, d, e, f, g, h, i);
+			});
+
+			var delayed = component.Delay(delaying, 100);
+
+			Thread.MemoryBarrier();
+
+			TestDelay(100, "abcdefghi", compose.Apply(delayed, arguments));
+
+			Assert.IsTrue(invoked);
+		}
+
+		[TestMethod]
+		public void Function_Synch_Delay_10Arguments()
+		{
+			var invoked = false;
+
+			var delaying = new Func<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) =>
+			{
+				invoked = true;
+				return Util.Join(a, b, c, d, e, f, g, h, i, j);
+			});
+
+			var delayed = component.Delay(delaying, 100);
+
+			Thread.MemoryBarrier();
+
+			TestDelay(100, "abcdefghij", compose.Apply(delayed, arguments));
+
+			Assert.IsTrue(invoked);
+		}
+
+		[TestMethod]
+		public void Function_Synch_Delay_11Arguments()
+		{
+			var invoked = false;
+
+			var delaying = new Func<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) =>
+			{
+				invoked = true;
+				return Util.Join(a, b, c, d, e, f, g, h, i, j, k);
+			});
+
+			var delayed = component.Delay(delaying, 100);
+
+			Thread.MemoryBarrier();
+
+			TestDelay(100, "abcdefghijk", compose.Apply(delayed, arguments));
+
+			Assert.IsTrue(invoked);
+		}
+
+		[TestMethod]
+		public void Function_Synch_Delay_12Arguments()
+		{
+			var invoked = false;
+
+			var delaying = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) =>
+			{
+				invoked = true;
+				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
+			});
+
+			var delayed = component.Delay(delaying, 100);
+
+			Thread.MemoryBarrier();
+
+			TestDelay(100, "abcdefghijkl", compose.Apply(delayed, arguments));
+
+			Assert.IsTrue(invoked);
+		}
+
+		[TestMethod]
+		public void Function_Synch_Delay_13Arguments()
+		{
+			var invoked = false;
+
+			var delaying = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) =>
+			{
+				invoked = true;
+				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
+			});
+
+			var delayed = component.Delay(delaying, 100);
+
+			Thread.MemoryBarrier();
+
+			TestDelay(100, "abcdefghijklm", compose.Apply(delayed, arguments));
+
+			Assert.IsTrue(invoked);
+		}
+
+		[TestMethod]
+		public void Function_Synch_Delay_14Arguments()
+		{
+			var invoked = false;
+
+			var delaying = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) =>
+			{
+				invoked = true;
+				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+			});
+
+			var delayed = component.Delay(delaying, 100);
+
+			Thread.MemoryBarrier();
+
+			TestDelay(100, "abcdefghijklmn", compose.Apply(delayed, arguments));
+
+			Assert.IsTrue(invoked);
+		}
+
+		[TestMethod]
+		public void Function_Synch_Delay_15Arguments()
+		{
+			var invoked = false;
+
+			var delaying = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) =>
+			{
+				invoked = true;
+				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+			});
+
+			var delayed = component.Delay(delaying, 100);
+
+			Thread.MemoryBarrier();
+
+			TestDelay(100, "abcdefghijklmno", compose.Apply(delayed, arguments));
+
+			Assert.IsTrue(invoked);
+		}
+
+		[TestMethod]
+		public void Function_Synch_Delay_16Arguments()
+		{
+			var invoked = false;
+
+			var delaying = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) =>
+			{
+				invoked = true;
+				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
+			});
+
+			var delayed = component.Delay(delaying, 100);
+
+			Thread.MemoryBarrier();
+
+			TestDelay(100, "abcdefghijklmnop", compose.Apply(delayed, arguments));
+
+			Assert.IsTrue(invoked);
+		}
   	}
 }

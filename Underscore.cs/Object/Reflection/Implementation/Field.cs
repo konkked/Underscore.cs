@@ -11,17 +11,16 @@ namespace Underscore.Object.Reflection
 
         public FieldComponent()
         {
-            _fields = new Members<FieldInfo>( 
-                null, 
+            _fields = new Members<FieldInfo>(
+                null,
                 BindingFlags.Public | BindingFlags.Instance
             );
-
         }
 
         /// <summary>
         /// Retrieves all fields from the targeted type
         /// </summary>
-        public IEnumerable<FieldInfo> All( object target )
+        public IEnumerable<FieldInfo> All(object target)
         {
             return All(target.GetType());
         }
@@ -34,9 +33,9 @@ namespace Underscore.Object.Reflection
         /// <summary>
         /// Finds all fields of a specific type
         /// </summary>
-        public IEnumerable<FieldInfo> OfType( object target, Type type ) 
+        public IEnumerable<FieldInfo> OfType(object target, Type type)
         {
-            return OfType(target.GetType(),type);
+            return OfType(target.GetType(), type);
         }
 
         public IEnumerable<FieldInfo> OfType(Type target, Type type)
@@ -49,15 +48,14 @@ namespace Underscore.Object.Reflection
             return All(target).Select(a => a.GetValue(target));
         }
 
-
         public IEnumerable<T> Values<T>(object target)
         {
-            return OfType(target,typeof(T)).Select(a => (T)a.GetValue(target));
+            return OfType(target, typeof(T)).Select(a => (T)a.GetValue(target));
         }
 
         public FieldInfo Find(object target, string name, bool caseSensitive, BindingFlags flags)
         {
-            return Find(target.GetType(), name,  caseSensitive, flags);
+            return Find(target.GetType(), name, caseSensitive, flags);
         }
 
         public FieldInfo Find(object target, string name, BindingFlags flags)
@@ -67,7 +65,7 @@ namespace Underscore.Object.Reflection
 
         public FieldInfo Find(Type target, string name, BindingFlags flags)
         {
-            return Find(target, name, true,  flags);
+            return Find(target, name, true, flags);
         }
 
         public FieldInfo Find(Type target, string name, bool caseSensitive, BindingFlags flags)
@@ -80,7 +78,7 @@ namespace Underscore.Object.Reflection
 
         public FieldInfo Find(object target, string name, Type type, BindingFlags flags)
         {
-            return Find(target.GetType(), name, type,  flags);
+            return Find(target.GetType(), name, type, flags);
         }
 
         public FieldInfo Find(object target, string name, Type type, bool caseSensitive, BindingFlags flags)
@@ -103,7 +101,7 @@ namespace Underscore.Object.Reflection
 
         public bool Has(object target, string name, BindingFlags flags)
         {
-            return Find(target, name,  flags) != null;
+            return Find(target, name, flags) != null;
         }
 
         public bool Has(object target, string name, bool caseSensitive, BindingFlags flags)
@@ -128,7 +126,7 @@ namespace Underscore.Object.Reflection
 
         public bool Has(object target, string name, Type type, bool caseSensitive, BindingFlags flags)
         {
-            return Find(target, name, type,caseSensitive, flags) != null;
+            return Find(target, name, type, caseSensitive, flags) != null;
         }
 
         public bool Has(Type target, string name, Type type, BindingFlags flags)
@@ -168,24 +166,23 @@ namespace Underscore.Object.Reflection
 
         public IEnumerable<T> Values<T>(object target, BindingFlags flags)
         {
-            return OfType(target, typeof (T), flags).Select(a => (T) a.GetValue(target));
+            return OfType(target, typeof(T), flags).Select(a => (T)a.GetValue(target));
         }
 
         /// <summary>
         /// Finds a public field by name
         /// </summary>
-        public FieldInfo Find( object target, string name, bool caseSensitive )
+        public FieldInfo Find(object target, string name, bool caseSensitive)
         {
             return Find(target.GetType(), name, caseSensitive);
         }
 
-
         /// <summary>
         /// Finds a public field by name
         /// </summary>
-        public FieldInfo Find( object target, string field )
+        public FieldInfo Find(object target, string field)
         {
-            return Find( target, field, true );
+            return Find(target, field, true);
         }
 
         public FieldInfo Find(Type target, string name)
@@ -201,13 +198,12 @@ namespace Underscore.Object.Reflection
                 : All(target).Where(a => a.Name.ToLower() == lcname)).FirstOrDefault();
         }
 
-
         /// <summary>
         /// Finds a public field by name
         /// </summary>
-        public FieldInfo Find( object target, string name, Type type )
+        public FieldInfo Find(object target, string name, Type type)
         {
-            return OfType( target, type ).FirstOrDefault( a => a.Name == name );
+            return OfType(target, type).FirstOrDefault(a => a.Name == name);
         }
 
         public FieldInfo Find(object target, string name, Type type, bool caseSensitive)
@@ -222,37 +218,34 @@ namespace Underscore.Object.Reflection
 
         public FieldInfo Find(Type target, string name, Type type, bool caseSensitive)
         {
-            var lcname = name.ToLower( );
-            return ( caseSensitive
-                ? All( target ).Where( a => a.Name == name )
-                : All( target ).Where( a => a.Name.ToLower() == lcname )
+            var lcname = name.ToLower();
+            return (caseSensitive
+                ? All(target).Where(a => a.Name == name)
+                : All(target).Where(a => a.Name.ToLower() == lcname)
             ).FirstOrDefault(a => a.FieldType == type);
         }
 
-
         /// <summary>
         /// Returns true if the field searching for exists in item
         /// </summary>
-        public bool Has( object target, string name )
+        public bool Has(object target, string name)
         {
-            return Has( target, name, true );
+            return Has(target, name, true);
         }
 
         /// <summary>
         /// Returns true if the field searching for exists in item
         /// </summary>
-        public bool Has( object target, string name, bool caseSensitive )
+        public bool Has(object target, string name, bool caseSensitive)
         {
 
             return Find(target, name, caseSensitive) != null;
         }
 
-
         public bool Has(Type target, string name, Type type, bool caseSensitive)
         {
             return Find(target, name, type, caseSensitive) != null;
         }
-
 
         public bool Has(Type target, string name)
         {
@@ -264,13 +257,12 @@ namespace Underscore.Object.Reflection
             return Find(target, name, caseSensitive) != null;
         }
 
-
         /// <summary>
         /// Returns true if the field searching for exists in item
         /// </summary>
-        public bool Has( object target, string name, Type type )
+        public bool Has(object target, string name, Type type)
         {
-            return Find( target, name, type ) != null;
+            return Find(target, name, type) != null;
         }
 
         public bool Has(object target, string name, Type type, bool caseSensitive)
@@ -282,9 +274,6 @@ namespace Underscore.Object.Reflection
         {
             return Find(target, name, type) != null;
         }
-
-
-
 
     }
 }
