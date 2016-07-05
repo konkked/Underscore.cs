@@ -83,23 +83,21 @@ namespace Underscore.Utility
 			throw new NotImplementedException();
 		}
 
-		public bool IsStartCase(string s)
-		{
-			// each word must be a capitalized letter-only string
-			const string wordPattern = @"^[A-Z]([a-z]|[A)*$";
-
-			return s.Split(' ').All(word => Regex.IsMatch(word, wordPattern));
-		}
-
 		public IEnumerable<string> Words(string s)
 		{
-			const string containsLettersPattern = @"[\l\L]+";
-			const string isLetterPattern = @"^[\l\L]+$";
-			return s.Split(' ')
-				.Where(word => Regex.IsMatch(word, containsLettersPattern)) // only bother with strings that have letters in them
-				.Select(word => 
-					word.Where(c => Regex.IsMatch(word, isLetterPattern)) // filter each word to only have letters
-					.Aggregate("", (curr, next) => curr + next)); // rejoin back into full strings
+			const string containsLettersPattern = @"[a-zA-Z]+";
+			const string isLetterPattern = @"^[a-zA-Z]$";
+
+			// only bother with strings that have letters in them
+			var unfilteredWords = s.Split(' ')
+				.Where(word => Regex.IsMatch(word, containsLettersPattern));
+
+			var wordCharArrs = unfilteredWords.Select(word => word.ToCharArray());
+
+			return wordCharArrs.Select(
+				word => word.Select(c => Regex.IsMatch(c.ToString(), isLetterPattern))
+					.Aggregate("", (curr, next) => curr + next)
+			);
 		}
 	}
 }

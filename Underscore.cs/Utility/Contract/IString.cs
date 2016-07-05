@@ -30,8 +30,6 @@ namespace Underscore.Utility
 
 		string ToStartCase(string s);
 
-		bool IsStartCase(string s);
-
 		IEnumerable<string> Words(string s);
 	}
 }

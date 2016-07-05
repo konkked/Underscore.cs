@@ -76,57 +76,123 @@ namespace Underscore.Test.Utility
 		}
 
 		[TestMethod]
-		public void Utility_String_IsPascalCase_DoesNotMatchNonPascalCaseString()
+		public void Utility_String_IsPascalCase_DoesNotMatchNonPascalCaseString_NotCapitalized()
 		{
+			const string input = "fooBar";
 
+			Assert.IsFalse(component.IsPascalCase(input));
+		}
+
+		[TestMethod]
+		public void Utility_String_IsPascalCase_DoesNotMatchNonPascalCaseString_HasNumber()
+		{
+			const string input = "FooBar1";
+
+			Assert.IsFalse(component.IsPascalCase(input));
+		}
+
+		[TestMethod]
+		public void Utility_String_IsPascalCase_DoesNotMatchNonPascalCaseString_HasSpace()
+		{
+			const string input = "Foo Bar";
+
+			Assert.IsFalse(component.IsPascalCase(input));
 		}
 
 		[TestMethod]
 		public void Utility_String_IsCapitalized_MatchesCapitalizedString()
 		{
+			const string input = "FooBar";
 
+			Assert.IsTrue(component.IsCapitalized(input));
 		}
 
 		[TestMethod]
 		public void Utility_String_IsCapitalized_DoesNotMatchUncapitalizedString()
 		{
+			const string input = "fooBar";
 
+			Assert.IsFalse(component.IsCapitalized(input));
 		}
 
 		[TestMethod]
-		public void Utility_String_IsSnakeCase_MatchesSnakeCaseString()
+		public void Utility_String_IsSnakeCase_MatchesSnakeCaseString_OneWord()
 		{
+			const string input = "foo";
 
+			Assert.IsTrue(component.IsSnakeCase(input));
 		}
 
 		[TestMethod]
-		public void Utility_String_IsSnakeCase_DoesNotMatchNonSnakeCaseString()
+		public void Utility_String_IsSnakeCase_MatchesSnakeCaseString_MultiWord()
 		{
+			const string input = "foo_bar";
 
+			Assert.IsTrue(component.IsSnakeCase(input));
 		}
 
 		[TestMethod]
-		public void Utility_String_IsKebabCase_MatchesKebabCaseString()
+		public void Utility_String_IsSnakeCase_DoesNotMatchNonSnakeCaseString_Capitalized()
 		{
-
+			const string input = "Foo";
+		
+			Assert.IsFalse(component.IsSnakeCase(input));
 		}
 
 		[TestMethod]
-		public void Utility_String_IsKebabCase_DoesNotMatchNonKebabCaseString()
+		public void Utility_String_IsSnakeCase_DoesNotMatchNonSnakeCaseString_HasSpace()
 		{
+			const string input = "foo bar";
 
+			Assert.IsFalse(component.IsSnakeCase(input));
 		}
 
 		[TestMethod]
-		public void Utility_String_IsCStartCase_MatchesStartCaseString()
+		public void Utility_String_IsSnakeCase_DoesNotMatchNonSnakeCaseString_HasNonUnderscoreNonLetter()
 		{
+			const string input = "foo-bar";
 
+			Assert.IsFalse(component.IsSnakeCase(input));
 		}
 
 		[TestMethod]
-		public void Utility_String_IsStartCase_DoesNotMatchNonStartCaseString()
+		public void Utility_String_IsKebabCase_MatchesKebabCaseString_OneWord()
 		{
+			const string input = "foo";
 
+			Assert.IsTrue(component.IsKebabCase(input));
+		}
+
+		[TestMethod]
+		public void Utility_String_IsKebabCase_MatchesKebabCaseString_MultiWord()
+		{
+			const string input = "foo-bar";
+
+			Assert.IsTrue(component.IsKebabCase(input));
+		}
+
+		[TestMethod]
+		public void Utility_String_IsKebabCase_DoesNotMatchNonKebabCaseString_Capitalized()
+		{
+			const string input = "Foo";
+
+			Assert.IsFalse(component.IsKebabCase(input));
+		}
+
+		[TestMethod]
+		public void Utility_String_IsKebabCase_DoesNotMatchNonKebabCaseString_HasSpace()
+		{
+			const string input = "foo bar";
+
+			Assert.IsFalse(component.IsKebabCase(input));
+		}
+
+		[TestMethod]
+		public void Utility_String_IsKebabCase_DoesNotMatchNonKebabCaseString_HasNonUnderscoreNonLetter()
+		{
+			const string input = "foo_bar";
+
+			Assert.IsFalse(component.IsKebabCase(input));
 		}
 	}
 }
