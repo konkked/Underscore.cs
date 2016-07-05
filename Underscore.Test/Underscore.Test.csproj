@@ -122,6 +122,7 @@
     <Compile Include="Utility\FunctionTest.cs" />
     <Compile Include="Utility\MathTest.cs" />
     <Compile Include="Utility\ObjectTest.cs" />
+    <Compile Include="Utility\String\CaseMatchingTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
