@@ -165,28 +165,28 @@ namespace Underscore.Utility
 			return chars.Where(IsLetter).Aggregate("", (curr, next) => curr + next);
 		}
 
-		public bool ContainsLetters(string s)
+		private bool ContainsLetters(string s)
 		{
 			const string pattern = @"[a-zA-Z]+";
 
 			return Regex.IsMatch(s, pattern);
 		}
 
-		public bool IsLetter(char c)
+		private bool IsLetter(char c)
 		{
 			const string pattern = @"^[a-zA-Z]$";
 
 			return Regex.IsMatch(c.ToString(), pattern);
 		}
 
-		public bool IsLower(char c)
+		private bool IsLower(char c)
 		{
 			const string pattern = @"^[a-z]$";
 
 			return Regex.IsMatch(c.ToString(), pattern);
 		}
 
-		public bool IsUpper(char c)
+		private bool IsUpper(char c)
 		{
 			const string pattern = @"^[A-Z]$";
 
