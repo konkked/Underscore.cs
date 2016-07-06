@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Underscore.Utility
 {
@@ -27,8 +23,6 @@ namespace Underscore.Utility
 		string ToKebabCase(string s);
 
 		bool IsKebabCase(string s);
-
-		string ToStartCase(string s);
 
 		IEnumerable<string> Words(string s);
 	}

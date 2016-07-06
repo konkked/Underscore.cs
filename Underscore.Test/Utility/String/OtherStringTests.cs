@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Underscore.Utility;
 
@@ -53,6 +49,27 @@ namespace Underscore.Test.Utility.String
 			var result = component.Words(input);
 
 			Assert.IsTrue(expected.SequenceEqual(result), "expected and result sequences are equal");
+		}
+
+		[TestMethod]
+		public void Utility_String_IsLetter()
+		{
+			Assert.IsTrue(component.IsLetter('s'));
+			Assert.IsTrue(component.IsLetter('S'));
+			Assert.IsFalse(component.IsLetter('1'));
+			Assert.IsFalse(component.IsLetter('-'));
+		}
+
+		[TestMethod]
+		public void Utility_String_ContainsLetter()
+		{
+			Assert.IsTrue(component.ContainsLetters("asd"));
+			Assert.IsTrue(component.ContainsLetters("a"));
+			Assert.IsTrue(component.ContainsLetters("a1"));
+			Assert.IsTrue(component.ContainsLetters("-1a123"));
+			Assert.IsFalse(component.ContainsLetters("1"));
+			Assert.IsFalse(component.ContainsLetters("=-"));
+			Assert.IsFalse(component.ContainsLetters("1=-;"));
 		}
 	}
 }

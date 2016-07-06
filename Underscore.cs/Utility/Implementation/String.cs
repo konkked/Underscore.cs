@@ -78,26 +78,32 @@ namespace Underscore.Utility
 			return Regex.IsMatch(s, pattern);
 		}
 
-		public string ToStartCase(string s)
-		{
-			throw new NotImplementedException();
-		}
-
 		public IEnumerable<string> Words(string s)
 		{
-			const string containsLettersPattern = @"[a-zA-Z]+";
-			const string isLetterPattern = @"^[a-zA-Z]$";
+			// filter for words that contain letters,
+			// then filter non-letters out of those words
+			return s.Split(' ').Where(ContainsLetters).Select(FilterForLetters);
+		}
 
-			// only bother with strings that have letters in them
-			var unfilteredWords = s.Split(' ')
-				.Where(word => Regex.IsMatch(word, containsLettersPattern));
+		private string FilterForLetters(string s)
+		{
+			var chars = s.ToCharArray();
 
-			var wordCharArrs = unfilteredWords.Select(word => word.ToCharArray());
+			return chars.Where(IsLetter).Aggregate("", (curr, next) => curr + next);
+		}
 
-			return wordCharArrs.Select(
-				word => word.Select(c => Regex.IsMatch(c.ToString(), isLetterPattern))
-					.Aggregate("", (curr, next) => curr + next)
-			);
+		public bool ContainsLetters(string s)
+		{
+			const string pattern = @"[a-zA-Z]+";
+
+			return Regex.IsMatch(s, pattern);
+		}
+
+		public bool IsLetter(char c)
+		{
+			const string pattern = @"^[a-zA-Z]$";
+
+			return Regex.IsMatch(c.ToString(), pattern);
 		}
 	}
 }
