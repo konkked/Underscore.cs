@@ -31,6 +31,7 @@ namespace Underscore.Object.Reflection
             _property = new PropertyComponent();
         }
 
+        //Initializes special rules for the query method
         private static void InitSpecialRules()
         {
             s_specialRules = new HashSet<string> { "return" };
@@ -129,8 +130,8 @@ namespace Underscore.Object.Reflection
         {
             if (caseSensitive)
                 return CaseSensitiveGetMethod(target, name);
-            else
-                return CaseInsensitiveGetMethod(target, name);
+
+            return CaseInsensitiveGetMethod(target, name);
         }
 
         /// <summary>
@@ -426,7 +427,7 @@ namespace Underscore.Object.Reflection
 
         public MethodInfo Find(Type target, string name, object query, BindingFlags flags)
         {
-            return base.Query(target, query, flags).FirstOrDefault(a => a.Name == name);
+            return base.Query(target, query ?? new {}, flags).FirstOrDefault(a => a.Name == name);
         }
 
         public MethodInfo Find(Type target, string name, BindingFlags flags)
@@ -436,7 +437,7 @@ namespace Underscore.Object.Reflection
 
         public MethodInfo Find(Type target, object query, BindingFlags flags)
         {
-            return base.Query(target, query, flags).FirstOrDefault();
+            return base.Query(target, query ?? new {}, flags).FirstOrDefault();
         }
 
         /// <summary>

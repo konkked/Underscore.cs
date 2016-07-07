@@ -8,6 +8,7 @@ using System.Linq;
 using Underscore.Function;
 using Underscore.Object.Reflection;
 using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Underscore.Test.Object.Reflection
 {
@@ -68,10 +69,10 @@ namespace Underscore.Test.Object.Reflection
         }
 
         [TestMethod]
-        public void MethodInvokeWithoutParameterAndWithoutReturnValue()
+        public void Object_Method_Invoke_WithoutParameterAndWithoutReturnValue()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
-            var testing = SetupMethodsComponent();
+            var testing = _.Object.Method;
 
             var result = testing.Invoke(testingTarget, "InvokeWithoutParameterAndWithoutReturnValue");
 
@@ -81,10 +82,10 @@ namespace Underscore.Test.Object.Reflection
         }
 
         [TestMethod]
-        public void MethodInvokeWithoutParameterWithReturnValue()
+        public void Object_Method_Invoke_WithoutParameterWithReturnValue()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
-            var testing = SetupMethodsComponent();
+            var testing = _.Object.Method;
 
             string result  = (string)testing.Invoke(testingTarget, "InvokeWithoutParameterAndWithReturnValue");
 
@@ -97,10 +98,10 @@ namespace Underscore.Test.Object.Reflection
         }
 
         [TestMethod]
-        public void MethodInvokeWithoutParameterWithReturnValueGeneric()
+        public void Object_Method_Invoke_WithoutParameterWithReturnValueGeneric()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
-            var testing = SetupMethodsComponent();
+            var testing = _.Object.Method;
 
             string result = testing.Invoke<string>(testingTarget, "InvokeWithoutParameterAndWithReturnValue");
 
@@ -112,10 +113,10 @@ namespace Underscore.Test.Object.Reflection
         }
 
         [TestMethod]
-        public void MethodInvokeWithParameterWithoutReturnValue()
+        public void Object_Method_Invoke_WithParameterWithoutReturnValue()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
-            var testing = SetupMethodsComponent();
+            var testing = _.Object.Method;
 
             object result = testing.Invoke(testingTarget, "InvokeWithParameterWithoutReturnValue","a","b");
 
@@ -126,10 +127,10 @@ namespace Underscore.Test.Object.Reflection
         }
 
         [TestMethod]
-        public void MethodInvokeWithParameterWithReturnValueNonGeneric()
+        public void Object_Method_Invoke_WithParameterWithReturnValueNonGeneric()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
-            var testing = SetupMethodsComponent();
+            var testing = _.Object.Method;
 
             string result = (string)testing.Invoke(testingTarget, "InvokeWithParametersAndReturnValue", "a", "b");
 
@@ -140,10 +141,10 @@ namespace Underscore.Test.Object.Reflection
         }
 
         [TestMethod]
-        public void MethodInvokeWithParameterWithReturnValueGeneric()
+        public void Object_Method_Invoke_WithParameterWithReturnValueGeneric()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
-            var testing = SetupMethodsComponent();
+            var testing = _.Object.Method;
 
             string result = testing.Invoke<string>(testingTarget, "InvokeWithParametersAndReturnValue", "a", "b");
 
@@ -154,10 +155,10 @@ namespace Underscore.Test.Object.Reflection
         }
 
         [TestMethod]
-        public void MethodInvokeForAllWithParameterWithoutReturnValueLazy()
+        public void Object_Method_Invoke_ForAllWithParameterWithoutReturnValueLazy()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
-            var testing = SetupMethodsComponent();
+            var testing = _.Object.Method;
 
             var result = testing.InvokeForAll(testingTarget, "InvokeWithParameterWithoutReturnValue",
                 new[] {new object[] {"a", "b"}, new object[] {"c", "d"}, new object[] {"e", "f"}});
@@ -186,10 +187,10 @@ namespace Underscore.Test.Object.Reflection
         }
 
         [TestMethod]
-        public void MethodInvokeForAllWithParameterWithoutReturnValueGreedy()
+        public void Object_Method_Invoke_ForAllWithParameterWithoutReturnValueGreedy()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
-            var testing = SetupMethodsComponent();
+            var testing = _.Object.Method;
 
             var result = testing.InvokeForAll(testingTarget, "InvokeWithParameterWithoutReturnValue",
                 new[] { new object[] { "a", "b" }, new object[] { "c", "d" }, new object[] { "e", "f" } },true);
@@ -215,10 +216,10 @@ namespace Underscore.Test.Object.Reflection
         }
 
         [TestMethod]
-        public void MethodInvokeForAllWithParameterWithReturnValueLazy()
+        public void Object_Method_Invoke_ForAllWithParameterWithReturnValueLazy()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
-            var testing = SetupMethodsComponent();
+            var testing = _.Object.Method;
 
             var tresult =
                 testing.InvokeForAll(testingTarget, "InvokeWithParametersAndReturnValue",
@@ -246,10 +247,10 @@ namespace Underscore.Test.Object.Reflection
         }
 
         [TestMethod]
-        public void MethodInvokeForAllWithParameterWithReturnValueGreedy()
+        public void Object_Method_Invoke_ForAllWithParameterWithReturnValueGreedy()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
-            var testing = SetupMethodsComponent();
+            var testing = _.Object.Method;
 
             var tresult =
                 testing.InvokeForAll(testingTarget, "InvokeWithParametersAndReturnValue",
@@ -276,10 +277,10 @@ namespace Underscore.Test.Object.Reflection
         }
 
         [TestMethod]
-        public void MethodInvokeForAllWithParameterWithReturnValueGenericLazy()
+        public void Object_Method_InvokeForAllWithParameterWithReturnValueGenericLazy()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
-            var testing = SetupMethodsComponent();
+            var testing = _.Object.Method;
 
             var tresult =
                 testing.InvokeForAll<string>(testingTarget, "InvokeWithParametersAndReturnValue",
@@ -309,10 +310,10 @@ namespace Underscore.Test.Object.Reflection
         }
 
         [TestMethod]
-        public void MethodInvokeForAllWithParameterWithReturnGenericGreedy()
+        public void Object_Method_Invoke_ForAllWithParameterWithReturnGenericGreedy()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
-            var testing = SetupMethodsComponent();
+            var testing = _.Object.Method;
 
             var tresult =
                 testing.InvokeForAll<string>(testingTarget, "InvokeWithParametersAndReturnValue",
@@ -338,221 +339,88 @@ namespace Underscore.Test.Object.Reflection
             Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter1History.Count);
             Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter2History.Count);
         }
-
+        
         [TestMethod]
-        public void MethodsAll1()
+        public void Object_Method_Query_TargetInstanceNoArgs()
         {
 
+            var testing = _.Object.Method;
             var target = new MethodMethodsTestClass();
-
-            IMethodComponent testing = SetupMethodsComponent();// = new Underscore.Object.Reflection.Methods()
-
-                var methods = testing.All(target);
-
-            var methodInfos = methods as MethodInfo[] ?? methods.ToArray();
-            var targetMethod = methodInfos.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue");
-                Assert.IsNotNull(targetMethod);
-
-                var results = methodInfos.Where(a => a.Name == "ShouldShowNoReturnValue");
-            var enumerable = results as MethodInfo[] ?? results.ToArray();
-            Assert.AreEqual(3, enumerable.Count(a => a.Name == "ShouldShowNoReturnValue"));
-                //no param
-                var noRetMethods = enumerable.Where(a => a.ReturnType == typeof(void));
-            var retMethods = noRetMethods as MethodInfo[] ?? noRetMethods.ToArray();
-            Assert.IsNotNull(retMethods.FirstOrDefault(), "Missing no parametered method");
-                //one param
-                Assert.AreEqual(1, (
-                    from m in retMethods
-                    let parameters = m.GetParameters()
-                    where parameters.Count() == 1
-                        && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg") == 1
-                        && m.ReturnType == typeof(void)
-                    select m
-                    ).Count(),
-                    "Missing single parametered method"
-                );
-                //two params
-                Assert.AreEqual(1, (
-                    from m in retMethods
-                    let parameters = m.GetParameters()
-                    where parameters.Count() == 2
-                        && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg1") == 1
-                        && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg2") == 1
-                        && m.ReturnType == typeof(void)
-                    select m
-                    ).Count(),
-                    "Missing double parametered method"
-                );
-
-                //no param string return type
-                targetMethod = methodInfos.FirstOrDefault(a => a.Name == "ShouldShowStringReturnValue");
-
-                Assert.IsNotNull(targetMethod);
-                Assert.AreEqual(1, methodInfos.Count(a => a.Name == "ShouldShowStringReturnValue"));
-                Assert.IsTrue(
-                    targetMethod.ReturnType == typeof(string)
-                    && !targetMethod.GetParameters().Any()
-                );
-
-                Assert.AreEqual(5, methodInfos.Count());
-
-                //all methods with no params
-                methods = testing.Query(target, new { });
-            var infos = methods as MethodInfo[] ?? methods.ToArray();
-            targetMethod = infos.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue");
-
-                Assert.AreEqual(2, infos.Count());
-
-                Assert.IsNotNull(infos.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue"));
-                Assert.AreEqual(1, infos.Count(a => a.Name == "ShouldShowNoReturnValue"));
-
-                Assert.IsNotNull(infos.FirstOrDefault(a => a.Name == "ShouldShowStringReturnValue"));
-                Assert.AreEqual(1, infos.Count(a => a.Name == "ShouldShowStringReturnValue"));
-
-                var singleParamTypeString1 = testing.Query(target, typeof(string));
-                var singleParamTypeString2 = testing.Query(target, new[] { typeof(string) });
-
-            var paramTypeString1 = singleParamTypeString1 as MethodInfo[] ?? singleParamTypeString1.ToArray();
-            Assert.IsTrue(paramTypeString1.Count() == 2);
-                Assert.IsNotNull(paramTypeString1.FirstOrDefault());
-
-                var targetingSingleParam = paramTypeString1.FirstOrDefault();
-                Assert.IsNotNull(targetingSingleParam);
-                Assert.IsTrue(targetingSingleParam.GetParameters().Count() == 1 && targetingSingleParam.GetParameters().Count(a => a.Name == "arg" && a.ParameterType == typeof(string)) == 1);
-
-                Assert.AreEqual(paramTypeString1.FirstOrDefault(), singleParamTypeString2.FirstOrDefault());
-
-                var singleParamName1 = testing.Query(target, "arg");
-                var singleParamName2 = testing.Query(target, new[] { "arg" });
-
-            var singParamName1Arr = singleParamName1 as MethodInfo[] ?? singleParamName1.ToArray();
-            Assert.IsTrue(singParamName1Arr.Count() == 1);
-            var sngParamName2Arr = singleParamName2 as MethodInfo[] ?? singleParamName2.ToArray();
-            Assert.IsTrue(sngParamName2Arr.Count() == 1);
-
-                Assert.IsTrue(
-                    singParamName1Arr.Count(a => a.GetParameters().Count() == 1
-                    && a.GetParameters().Count(b => b.ParameterType == typeof(string) && b.Name == "arg") == 1
-                ) == 1);
-
-                Assert.AreEqual(singParamName1Arr.FirstOrDefault(), sngParamName2Arr.FirstOrDefault());
-
-                var dblParamType = testing.Query(target, new[] { typeof(string), typeof(string) });
-
-            var dblParamTypeArr = dblParamType as MethodInfo[] ?? dblParamType.ToArray();
-            Assert.AreEqual(1, dblParamTypeArr.Count());
-                targetMethod = dblParamTypeArr.FirstOrDefault();
-
-                Assert.IsNotNull(targetMethod);
-                Assert.AreEqual(1, dblParamTypeArr.Count());
-                Assert.AreEqual(2, targetMethod.GetParameters().Count());
-
-                Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg1"));
-                Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg2"));
-
-                var dblParamName = testing.Query(target, new[] { "arg1", "arg2" });
-            var dblParamNameArr = dblParamName as MethodInfo[] ?? dblParamName.ToArray();
-            targetMethod = dblParamNameArr.FirstOrDefault();
-
-                Assert.IsNotNull(targetMethod);
-                Assert.AreEqual(1, dblParamNameArr.Count());
-                Assert.AreEqual(2, targetMethod.GetParameters().Count());
-
-                Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg1"));
-                Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg2"));
-
-        }
-
-        [TestMethod]
-        public void MethodsTypeAll1()
-        {
-            // Test behave differently when they are called from another method
-            // even though it is a type get's treated like a general object
-            // which is why the tests are repeated
-            var target =  typeof(MethodMethodsTestClass);
-
-            IMethodComponent testing = SetupMethodsComponent();// = new Underscore.Object.Reflection.Methods()
-
-            var methods = testing.All(target);
-
-            var methodInfos = methods as MethodInfo[] ?? methods.ToArray();
-            var targetMethod = methodInfos.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue");
-            Assert.IsNotNull(targetMethod);
-
-            var results = methodInfos.Where(a => a.Name == "ShouldShowNoReturnValue");
-            var enumerable = results as MethodInfo[] ?? results.ToArray();
-            Assert.AreEqual(3, enumerable.Count(a => a.Name == "ShouldShowNoReturnValue"));
-            //no param
-            var noRetMethods = enumerable.Where(a => a.ReturnType == typeof(void));
-            var retMethods = noRetMethods as MethodInfo[] ?? noRetMethods.ToArray();
-            Assert.IsNotNull(retMethods.FirstOrDefault(), "Missing no parametered method");
-            //one param
-            Assert.AreEqual(1, (
-                from m in retMethods
-                let parameters = m.GetParameters()
-                where parameters.Count() == 1
-                    && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg") == 1
-                    && m.ReturnType == typeof(void)
-                select m
-                ).Count(),
-                "Missing single parametered method"
-            );
-            //two params
-            Assert.AreEqual(1, (
-                from m in retMethods
-                let parameters = m.GetParameters()
-                where parameters.Count() == 2
-                    && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg1") == 1
-                    && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg2") == 1
-                    && m.ReturnType == typeof(void)
-                select m
-                ).Count(),
-                "Missing double parametered method"
-            );
-
-            //no param string return type
-            targetMethod = methodInfos.FirstOrDefault(a => a.Name == "ShouldShowStringReturnValue");
-
-            Assert.IsNotNull(targetMethod);
-            Assert.AreEqual(1, methodInfos.Count(a => a.Name == "ShouldShowStringReturnValue"));
-            Assert.IsTrue(
-                targetMethod.ReturnType == typeof(string)
-                && !targetMethod.GetParameters().Any()
-            );
-
-            Assert.AreEqual(5, methodInfos.Count());
+            
 
             //all methods with no params
-            methods = testing.Query(target, new { });
+            var methods = testing.Query(target, new { });
             var infos = methods as MethodInfo[] ?? methods.ToArray();
-            targetMethod = infos.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue");
 
-            Assert.AreEqual(2, infos.Count());
-
+            //query does a deep search unlike all which will only give all from declaring type
+            Assert.AreEqual(5, infos.Count());
+            
             Assert.IsNotNull(infos.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue"));
             Assert.AreEqual(1, infos.Count(a => a.Name == "ShouldShowNoReturnValue"));
 
             Assert.IsNotNull(infos.FirstOrDefault(a => a.Name == "ShouldShowStringReturnValue"));
             Assert.AreEqual(1, infos.Count(a => a.Name == "ShouldShowStringReturnValue"));
 
-            var singleParamTypeString1 = testing.Query(target, typeof(string));
-            var singleParamTypeString2 = testing.Query(target, new[] { typeof(string) });
+            Assert.IsNotNull(infos.FirstOrDefault(a => a.Name == "ToString"));
+            Assert.AreEqual(1, infos.Count(a => a.Name == "ToString"));
 
-            var paramTypeString1 = singleParamTypeString1 as MethodInfo[] ?? singleParamTypeString1.ToArray();
-            Assert.IsTrue(paramTypeString1.Count() == 2);
-            Assert.IsNotNull(paramTypeString1.FirstOrDefault());
+            Assert.IsNotNull(infos.FirstOrDefault(a => a.Name == "GetHashCode"));
+            Assert.AreEqual(1, infos.Count(a => a.Name == "GetHashCode"));
 
-            var targetingSingleParam = paramTypeString1.FirstOrDefault();
-            Assert.IsNotNull(targetingSingleParam);
-            Assert.IsTrue(targetingSingleParam.GetParameters().Count() == 1 && targetingSingleParam.GetParameters().Count(a => a.Name == "arg" && a.ParameterType == typeof(string)) == 1);
+            Assert.IsNotNull(infos.FirstOrDefault(a => a.Name == "GetType"));
+            Assert.AreEqual(1, infos.Count(a => a.Name == "GetType"));
 
-            Assert.AreEqual(paramTypeString1.FirstOrDefault(), singleParamTypeString2.FirstOrDefault());
+            Assert.IsTrue(infos.All(a=>a.GetParameters().Length == 0));
 
+        }
+
+        [TestMethod]
+        public void Object_Method_Query_TargetInstanceReturnType()
+        {
+
+            var target = new MethodMethodsTestClass();
+            
+            //all void methods
+            var methods = _.Object.Method.Query(target, new { @return=typeof(void) });
+            var infos = methods as MethodInfo[] ?? methods.ToArray();
+
+            Assert.AreEqual(4, infos.Count());
+            
+            Assert.IsNotNull(infos.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue"));
+            Assert.AreEqual(3, infos.Count(a => a.Name == "ShouldShowNoReturnValue"));
+
+            Assert.IsNotNull(infos.FirstOrDefault(a => a.Name == "ReturnAsAParameter"));
+            Assert.AreEqual(1, infos.Count(a => a.Name == "ReturnAsAParameter"));
+        }
+        
+        [TestMethod]
+        public void Object_Method_Query_TargetInstanceReturnOverride()
+        {
+
+            var target = new MethodMethodsTestClass();
+
+            //all void methods
+            var methods = _.Object.Method.Query(target, new { @return = new { parameterType= typeof(string) } });
+            var infos = methods as MethodInfo[] ?? methods.ToArray();
+
+            Assert.AreEqual(1, infos.Count());
+            Assert.IsNotNull(infos.FirstOrDefault(a => a.Name == "ReturnAsAParameter"));
+            Assert.AreEqual(1, infos.Count(a => a.Name == "ReturnAsAParameter"));
+        }
+        
+        [TestMethod]
+        public void Object_Method_Query_TargetInstanceOneArgNames()
+        {
+
+            var testing = _.Object.Method;
+            var target = new MethodMethodsTestClass();
+            
             var singleParamName1 = testing.Query(target, "arg");
             var singleParamName2 = testing.Query(target, new[] { "arg" });
 
             var singParamName1Arr = singleParamName1 as MethodInfo[] ?? singleParamName1.ToArray();
             Assert.IsTrue(singParamName1Arr.Count() == 1);
+
             var sngParamName2Arr = singleParamName2 as MethodInfo[] ?? singleParamName2.ToArray();
             Assert.IsTrue(sngParamName2Arr.Count() == 1);
 
@@ -562,42 +430,384 @@ namespace Underscore.Test.Object.Reflection
             ) == 1);
 
             Assert.AreEqual(singParamName1Arr.FirstOrDefault(), sngParamName2Arr.FirstOrDefault());
-
-            var dblParamType = testing.Query(target, new[] { typeof(string), typeof(string) });
-
-            var dblParamTypeArr = dblParamType as MethodInfo[] ?? dblParamType.ToArray();
-            Assert.AreEqual(1, dblParamTypeArr.Count());
-            targetMethod = dblParamTypeArr.FirstOrDefault();
-
-            Assert.IsNotNull(targetMethod);
-            Assert.AreEqual(1, dblParamTypeArr.Count());
-            Assert.AreEqual(2, targetMethod.GetParameters().Count());
-
-            Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg1"));
-            Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg2"));
-
-            var dblParamName = testing.Query(target, new[] { "arg1", "arg2" });
-            var dblParamNameArr = dblParamName as MethodInfo[] ?? dblParamName.ToArray();
-            targetMethod = dblParamNameArr.FirstOrDefault();
-
-            Assert.IsNotNull(targetMethod);
-            Assert.AreEqual(1, dblParamNameArr.Count());
-            Assert.AreEqual(2, targetMethod.GetParameters().Count());
-
-            Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg1"));
-            Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg2"));
-
         }
 
-        private static Type Type<T>(T example)
+        [TestMethod]
+        public void Object_Method_Query_TargetInstanceOneArgType()
         {
-            return typeof(T);
+
+            var testing = _.Object.Method;
+            var target = new MethodMethodsTestClass();
+
+
+            //gets the methods where the number of args with a single string parameter using just a type as an arg
+            var byOneType = testing.Query(target, typeof(string));
+
+            //is logically equivelant to this linq expression
+            Assert.IsTrue(
+                typeof(MethodMethodsTestClass).GetMethods()
+                    .Where(
+                        a => a.GetParameters().Length == 1 
+                            && a.GetParameters().First().ParameterType == typeof(string)
+                            && !a.IsSpecialName
+                     )
+                    .SequenceEqual(byOneType));
+
+            //This should produce the same results
+            var byOneTypeInArray = testing.Query(target, new[] { typeof(string) });
+
+            Assert.IsTrue(byOneType.SequenceEqual(byOneTypeInArray));
+            
+
+        }
+        
+        [TestMethod]
+        public void Object_Method_Query_TargetInstanceOneArgAnonObj()
+        {
+
+            var testing = _.Object.Method;
+            var target = new MethodMethodsTestClass();
+
+
+            //gets the methods where the number of args with a single string parameter using just a type as an arg
+            var byAnonObj = testing.Query(target, new {arg= typeof(string)});
+
+            //is logically equivelant to this linq expression
+            Assert.IsTrue(
+                typeof(MethodMethodsTestClass).GetMethods()
+                    .Where(
+                        a => a.GetParameters().Length == 1
+                            && a.GetParameters().Count(b=>b.ParameterType == typeof(string) && b.Name=="arg")==1
+                            && !a.IsSpecialName
+                     )
+                    .SequenceEqual(byAnonObj));
+            
+
         }
 
-        private static IEnumerable<PropertyInfo> PropertiesOf<T>(T example)
+        [TestMethod]
+        public void Object_Methods_Query_InstanceTwoArgNames()
         {
-            return typeof(T).GetProperties(BindingFlags.Instance | BindingFlags.Public);
+
+            var testing = _.Object.Method;
+            var target = new MethodMethodsTestClass();
+
+
+            //gets the methods with parameters named "arg1" and "arg2"
+            var doubleParamNames = testing.Query(target, new[] { "arg1","arg2" });
+
+
+            Assert.IsTrue(
+                //logicall equivelant to 
+                typeof (MethodMethodsTestClass).GetMethods()
+                    .Where(
+                        a =>
+                            a.GetParameters().Length == 2 &&
+                            !a.IsSpecialName &&
+                            new[] {"arg1", "arg2"}.SequenceEqual(a.GetParameters().Select(b => b.Name).ToList()))
+                    .SequenceEqual(doubleParamNames));
+
+            
+            
         }
+        
+        [TestMethod]
+        public void Object_Methods_Query_InstanceTwoArgTypes()
+        {
+
+            var testing = _.Object.Method;
+            var target = new MethodMethodsTestClass();
+
+
+            var doubleTypeParams = testing.Query(target, new[] { typeof(string), typeof(string)});
+
+
+            Assert.IsTrue(
+                //is logically equivalent to the following
+                typeof (MethodMethodsTestClass).GetMethods()
+                    .Where(
+                        a =>
+                            a.GetParameters().Length == 2 &&
+                            !a.IsSpecialName &&
+                            new[] {typeof (string), typeof (string)}.SequenceEqual(
+                                a.GetParameters().Select(b => b.ParameterType)))
+                    .SequenceEqual(doubleTypeParams));
+
+
+        }
+        
+        [TestMethod]
+        public void Object_Methods_Query_InstanceTwoArgAnonymousObject()
+        {
+
+            var target = new MethodMethodsTestClass();
+
+
+            var dblAnonParam = _.Object.Method.Query(target, new{  arg1=typeof(string), arg2=typeof(string) });
+
+            Assert.IsTrue(
+                //is logically equivalent to the following
+                typeof(MethodMethodsTestClass).GetMethods()
+                    .Where(
+                        a =>
+                            a.GetParameters().Length == 2 &&
+                            !a.IsSpecialName &&
+                            a.GetParameters().Count(b=>b.Name=="arg1" && b.ParameterType==typeof(string))==1 &&
+                            a.GetParameters().Count(b=>b.Name=="arg2" && b.ParameterType==typeof(string))==1
+                    )
+                    .SequenceEqual(dblAnonParam));
+
+        }
+        
+        [TestMethod]
+        public void Object_Method_Query_TargetTypeNoArgs()
+        {
+
+            var testing = _.Object.Method;
+            var target = typeof(MethodMethodsTestClass);
+
+            var methods = testing.Query(target, new {});
+
+            //query does a deep search unlike all which will only give all from declaring type
+            Assert.AreEqual(5, methods.Count());
+
+            Assert.IsNotNull(methods.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue"));
+            Assert.AreEqual(1, methods.Count(a => a.Name == "ShouldShowNoReturnValue"));
+
+            Assert.IsNotNull(methods.FirstOrDefault(a => a.Name == "ShouldShowStringReturnValue"));
+            Assert.AreEqual(1, methods.Count(a => a.Name == "ShouldShowStringReturnValue"));
+
+            Assert.IsNotNull(methods.FirstOrDefault(a => a.Name == "ToString"));
+            Assert.AreEqual(1, methods.Count(a => a.Name == "ToString"));
+
+            Assert.IsNotNull(methods.FirstOrDefault(a => a.Name == "GetHashCode"));
+            Assert.AreEqual(1, methods.Count(a => a.Name == "GetHashCode"));
+
+            Assert.IsNotNull(methods.FirstOrDefault(a => a.Name == "GetType"));
+            Assert.AreEqual(1, methods.Count(a => a.Name == "GetType"));
+
+            Assert.IsTrue(methods.All(a => a.GetParameters().Length == 0));
+        }
+
+        [TestMethod]
+        public void Object_Method_Query_TargetTypeReturnType()
+        {
+
+            var target = typeof(MethodMethodsTestClass);
+
+            //all void methods
+            var methods = _.Object.Method.Query(target, new { @return = typeof(void) });
+            var infos = methods as MethodInfo[] ?? methods.ToArray();
+
+            Assert.AreEqual(4, infos.Count());
+
+            Assert.IsNotNull(infos.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue"));
+            Assert.AreEqual(3, infos.Count(a => a.Name == "ShouldShowNoReturnValue"));
+
+            Assert.IsNotNull(infos.FirstOrDefault(a => a.Name == "ReturnAsAParameter"));
+            Assert.AreEqual(1, infos.Count(a => a.Name == "ReturnAsAParameter"));
+        }
+
+        [TestMethod]
+        public void Object_Method_Query_TargetTypeReturnOverride()
+        {
+
+            var target = typeof(MethodMethodsTestClass);
+
+            //all void methods
+            var methods = _.Object.Method.Query(target, new { @return = new { parameterType = typeof(string) } });
+            var infos = methods as MethodInfo[] ?? methods.ToArray();
+
+            Assert.AreEqual(1, infos.Count());
+            Assert.IsNotNull(infos.FirstOrDefault(a => a.Name == "ReturnAsAParameter"));
+            Assert.AreEqual(1, infos.Count(a => a.Name == "ReturnAsAParameter"));
+        }
+
+        [TestMethod]
+        public void Object_Method_Query_TargetTypeOneArgNames()
+        {
+
+            var testing = _.Object.Method;
+            var target = typeof(MethodMethodsTestClass);
+
+            var singleParamName1 = testing.Query(target, "arg");
+            var singleParamName2 = testing.Query(target, new[] { "arg" });
+
+            var singParamName1Arr = singleParamName1 as MethodInfo[] ?? singleParamName1.ToArray();
+            Assert.IsTrue(singParamName1Arr.Count() == 1);
+
+            var sngParamName2Arr = singleParamName2 as MethodInfo[] ?? singleParamName2.ToArray();
+            Assert.IsTrue(sngParamName2Arr.Count() == 1);
+
+            Assert.IsTrue(
+                singParamName1Arr.Count(a => a.GetParameters().Count() == 1
+                && a.GetParameters().Count(b => b.ParameterType == typeof(string) && b.Name == "arg") == 1
+            ) == 1);
+
+            Assert.AreEqual(singParamName1Arr.FirstOrDefault(), sngParamName2Arr.FirstOrDefault());
+        }
+
+        [TestMethod]
+        public void Object_Method_Query_TargetTypeOneArgType()
+        {
+
+            var testing = _.Object.Method;
+            var target = typeof(MethodMethodsTestClass);
+
+
+            //gets the methods where the number of args with a single string parameter using just a type as an arg
+            var byOneType = testing.Query(target, typeof(string));
+
+            //is logically equivelant to this linq expression
+            Assert.IsTrue(
+                typeof(MethodMethodsTestClass).GetMethods()
+                    .Where(
+                        a => a.GetParameters().Length == 1
+                            && a.GetParameters().First().ParameterType == typeof(string)
+                            && !a.IsSpecialName
+                     )
+                    .SequenceEqual(byOneType));
+
+            //This should produce the same results
+            var byOneTypeInArray = testing.Query(target, new[] { typeof(string) });
+
+            Assert.IsTrue(byOneType.SequenceEqual(byOneTypeInArray));
+
+
+        }
+
+        [TestMethod]
+        public void Object_Method_Query_TargetTypeOneArgAnonObj()
+        {
+
+            var testing = _.Object.Method;
+            var target = typeof(MethodMethodsTestClass);
+
+
+            //gets the methods where the number of args with a single string parameter using just a type as an arg
+            var byAnonObj = testing.Query(target, new { arg = typeof(string) });
+
+            //is logically equivelant to this linq expression
+            Assert.IsTrue(
+                typeof(MethodMethodsTestClass).GetMethods()
+                    .Where(
+                        a => a.GetParameters().Length == 1
+                            && a.GetParameters().Count(b => b.ParameterType == typeof(string) && b.Name == "arg") == 1
+                            && !a.IsSpecialName
+                     )
+                    .SequenceEqual(byAnonObj));
+
+
+        }
+
+        [TestMethod]
+        public void Object_Methods_Query_TypeTwoArgNames()
+        {
+
+            var testing = _.Object.Method;
+            var target = typeof(MethodMethodsTestClass);
+
+
+            //gets the methods with parameters named "arg1" and "arg2"
+            var doubleParamNames = testing.Query(target, new[] { "arg1", "arg2" });
+
+
+            Assert.IsTrue(
+                //logicall equivelant to 
+                typeof(MethodMethodsTestClass).GetMethods()
+                    .Where(
+                        a =>
+                            a.GetParameters().Length == 2 &&
+                            !a.IsSpecialName &&
+                            new[] { "arg1", "arg2" }.SequenceEqual(a.GetParameters().Select(b => b.Name).ToList()))
+                    .SequenceEqual(doubleParamNames));
+
+
+
+        }
+
+        [TestMethod]
+        public void Object_Methods_Query_TypeTwoArgTypes()
+        {
+
+            var testing = _.Object.Method;
+            var target = typeof(MethodMethodsTestClass);
+
+
+            var doubleTypeParams = testing.Query(target, new[] { typeof(string), typeof(string) });
+
+
+            Assert.IsTrue(
+                //is logically equivalent to the following
+                typeof(MethodMethodsTestClass).GetMethods()
+                    .Where(
+                        a =>
+                            a.GetParameters().Length == 2 &&
+                            !a.IsSpecialName &&
+                            new[] { typeof(string), typeof(string) }.SequenceEqual(
+                                a.GetParameters().Select(b => b.ParameterType)))
+                    .SequenceEqual(doubleTypeParams));
+
+
+        }
+
+        [TestMethod]
+        public void Object_Methods_Query_TypeTwoArgAnonymousObject()
+        {
+
+            var target = typeof(MethodMethodsTestClass);
+
+
+            var dblAnonParam = _.Object.Method.Query(target, new { arg1 = typeof(string), arg2 = typeof(string) });
+
+            Assert.IsTrue(
+                //is logically equivalent to the following
+                typeof(MethodMethodsTestClass).GetMethods()
+                    .Where(
+                        a =>
+                            a.GetParameters().Length == 2 &&
+                            !a.IsSpecialName &&
+                            a.GetParameters().Count(b => b.Name == "arg1" && b.ParameterType == typeof(string)) == 1 &&
+                            a.GetParameters().Count(b => b.Name == "arg2" && b.ParameterType == typeof(string)) == 1
+                    )
+                    .SequenceEqual(dblAnonParam));
+
+        }
+        
+        [TestMethod]
+        public void Object_Methods_All_InstanceArg()
+        {
+
+            var target = new MethodMethodsTestClass();
+            var result = _.Object.Method.All(target);
+
+            Assert.IsTrue(
+                //should be logically equal to this
+                typeof (MethodMethodsTestClass).GetMethods()
+                .Where(a => !a.IsSpecialName && a.DeclaringType==typeof(MethodMethodsTestClass))
+                .SequenceEqual(result));
+
+
+
+        }
+
+        [TestMethod]
+        public void Object_Method_All_TypeArg()
+        {
+
+            var target = typeof(MethodMethodsTestClass);
+            var result = _.Object.Method.All(target);
+
+            Assert.IsTrue(
+                //should be logically equal to this
+                typeof(MethodMethodsTestClass).GetMethods()
+                .Where(a => !a.IsSpecialName && a.DeclaringType == typeof(MethodMethodsTestClass))
+                .SequenceEqual(result));
+
+
+        }
+
+        
 
         private static void SetupAll<T>(Mock<IPropertyComponent> mock, T targeting, IEnumerable<PropertyInfo> results)
         {
@@ -610,32 +820,6 @@ namespace Underscore.Test.Object.Reflection
                 ).Returns(hresults);
         }
 
-        private IMethodComponent SetupMethodsComponent1523724033()
-        {
-            // need to create an old school mock for this...might be an easier way 
-            // but feel like this is the most clear way to do this
-
-            var mock = new Mock<IPropertyComponent>();
-
-            var empty = new { };
-            SetupAll(mock, empty, PropertiesOf(empty));
-
-            var one = new { arg = typeof(string) };
-            SetupAll(mock, one, PropertiesOf(one));
-
-            var two = new { arg1 = typeof(string), arg2 = typeof(string) };
-            SetupAll(mock, two, PropertiesOf(two));
-
-            var mk = mock.Object;
-
-            return new MethodComponent(new MockUtilFunctionComponent(), mk);
-
-        }
-
-        private static Expression<Func<T, bool>> EqualTo<T>( T comparing ) 
-        {
-            return a => comparing.Equals( a ) ;
-        }
 
         private class MethodMethodsTestClass
         {
@@ -661,819 +845,474 @@ namespace Underscore.Test.Object.Reflection
         {
             return typeof( MethodMethodsTestClass ).GetMethods( BindingFlags.Public | BindingFlags.Instance ).Where(a=>!a.IsSpecialName && !a.IsConstructor);
         }
-
-        private static void SetupDoubleArgMock( Mock<IMethodComponent> mock )
-        {
-            //should return all methods with one param type string
-            //expected results
-
-            var methodsActuals = AllMethodsInfo( );
-
-            var expectingForQueryEmpty = methodsActuals
-                .Where( a => a.Name == "ShouldShowNoReturnValue" || a.Name == "ShouldShowStringReturnValue" )
-                .Select( a => new { Target = a, Parameters = a.GetParameters( ) } )
-                .Where(
-
-                    a => a.Parameters.Count( ) == 2
-                        && a.Parameters.First( ).ParameterType == typeof( string )
-                        && a.Parameters.First( ).Name == "arg1"
-                        && a.Parameters.Skip( 1 ).First( ).ParameterType == typeof( string )
-                        && a.Parameters.Skip( 1 ).First( ).Name == "arg2"
-                )
-                .Select( a => a.Target );
-
-            var forQueryEmpty = expectingForQueryEmpty as MethodInfo[] ?? expectingForQueryEmpty.ToArray();
-            mock.Setup(
-                a => a.Query(
-                    It.Is<object>( b => ( b is MethodMethodsTestClass || ( b is Type && typeof( MethodMethodsTestClass ) == ( Type ) b ) ) ),
-                    It.Is( EqualTo( new { arg1 = typeof( string ), arg2 = typeof( string ) } ) )
-                )
-            )
-            .Returns( forQueryEmpty );
-
-            mock.Setup(
-                a => a.Query(
-                    It.Is<object>( b => ( b is MethodMethodsTestClass || ( b is Type && typeof( MethodMethodsTestClass ) == ( Type ) b ) ) ),
-                    It.Is<Type[]>( b => b.Length == 2 && b[0] == typeof(string) && b[1] == typeof(string ) )
-                )
-            )
-            .Returns( forQueryEmpty );
-
-            mock.Setup(
-                a => a.Query(
-                    It.Is<object>( b => ( b is MethodMethodsTestClass || ( b is Type && typeof( MethodMethodsTestClass ) == ( Type ) b ) ) ),
-                    It.Is<string[]>( b => b.Count( ) == 2 && b[0] == "arg1" && b[1] == "arg2" )
-                )
-            )
-            .Returns( forQueryEmpty );
-
-        }
-
-        private static void SetupSingleArgMock( Mock<IMethodComponent> mock )
-        {
-            //should return all methods with one param type string
-            //expected results
-
-            var methodsActuals = AllMethodsInfo( );
-
-            var expectingForQueryEmpty = methodsActuals
-                .Where( a => a.Name == "ShouldShowNoReturnValue" || a.Name == "ShouldShowStringReturnValue" )
-                .Select( a => new { Target = a, Parameters = a.GetParameters( ) } )
-                .Where(
-
-                    a => a.Parameters.Count( ) == 1
-                        && a.Parameters.First( ).ParameterType == typeof( string )
-                        && a.Parameters.First( ).Name == "arg"
-                        && !a.Target.IsSpecialName
-                )
-                .Select( a => a.Target );
-
-            var forQueryEmpty = expectingForQueryEmpty as MethodInfo[] ?? expectingForQueryEmpty.ToArray();
-            mock.Setup( 
-                a => a.Query( 
-                    It.Is<object>( b=> ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ), 
-                    It.Is( EqualTo( new { arg = typeof(string) } ) ) 
-                ) 
-            )
-            .Returns( forQueryEmpty );
-
-            mock.Setup( 
-                a => a.Query( 
-                    It.Is<object>( b=> ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ), 
-                    typeof(string) 
-                )
-            )
-            .Returns( forQueryEmpty );
-
-            mock.Setup(
-                a => a.Query(
-                    It.Is<object>( b=> ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ),
-                    typeof( string )
-                )
-            )
-            .Returns( forQueryEmpty);
-
-            mock.Setup(
-                a => a.Query(
-                    It.Is<object>( b=> ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ),
-                    "arg"
-                )
-            )
-            .Returns( forQueryEmpty );
-
-            mock.Setup(
-                a => a.Query(
-                    It.Is<object>( b=> ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ),
-                    It.Is( EqualTo( new { arg = typeof( string ) } ) )
-                )
-            )
-            .Returns( forQueryEmpty );
-
-            mock.Setup( 
-                a => a.Query( 
-                    It.Is<object>( b=> ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ), 
-                    It.Is<object[]>( 
-                        b => b.Length == 1 
-                            && ( 
-                                ( b[0] is Type && typeof(string) == ( (Type) b[0] ) )
-                                || ( b[0] is string && "arg" == ((string)b[0]) )
-                            )
-                    )
-                )
-            )
-            .Returns( forQueryEmpty );
-
-            mock.Setup( 
-                a => a.Query( 
-                    It.Is<object>( b=> ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ), 
-                    It.Is<object>( b => b == null ) 
-                ) 
-            )
-            .Returns( forQueryEmpty );
-
-        }
-
-        private static void SetupEmptyMock( Mock<IMethodComponent> mock )
-        {
-            var methodsActuals = AllMethodsInfo( );
-
-            //should return all methods with no parameters
-            //expected results
-            var expectingForQueryEmpty = methodsActuals
-                .Where( a => 
-                    a.GetParameters( ).FirstOrDefault( ) == null && 
-                    a.Name == "ShouldShowNoReturnValue" || a.Name == "ShouldShowStringReturnValue" 
-                );
-
-            var forQueryEmpty = expectingForQueryEmpty as MethodInfo[] ?? expectingForQueryEmpty.ToArray();
-            mock.Setup( a => a.Query( It.Is<object>( b => ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ), It.Is( EqualTo( new { } ) ) ) )
-                .Returns( forQueryEmpty );
-
-            mock.Setup( a => a.Query( It.Is<object>( b => ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ), It.Is<object[]>( b => b.Length == 0 ) ) )
-                .Returns( forQueryEmpty );
-
-            mock.Setup( a => a.Query(It.IsAny<object>(), It.Is<object>(b=> b == null || !(b is string && ((string)b).Contains("Shouldnt") ) ) ) )
-                .Returns( forQueryEmpty );
-        }
-
+        
         [TestMethod]
-        public async Task ObjectMethodFind_PrivateMethodsNotShownByDefault()
-        {
-            var target = new MethodMethodsTestClass();
-
-            await Util.Tasks.Start(
-                () =>
-                {
-                    var cacher = new CacheComponent(new Underscore.Function.CompactComponent(),
-                        new Underscore.Utility.CompactComponent());
-                    var testing = new MethodComponent(cacher, new PropertyComponent());
-
-                    var expecting = typeof (MethodMethodsTestClass)
-                        .GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                        .First(a => a.GetParameters().FirstOrDefault() == null);
-
-                    var results = new[]
-                    {
-                        testing.Find(target, "ShouldShowNoReturnValue"),
-                        testing.Find(target, "ShouldShowNoReturnValue", new {}),
-                        testing.Find(target, "ShouldShowNoReturnValue", new object[] {}),
-                        testing.Find(target, "ShouldShowNoReturnValue", null)
-                    };
-
-                    var allNotNull = !results.Aggregate(false, (prev, curr) => prev || curr == null);
-
-                    Assert.IsTrue(allNotNull,
-                        "One of the targeting Find results returned null when expecting corresponding method info");
-
-                    var allEqual = results.Aggregate(expecting, (prev, curr) => prev == curr ? curr : null) != null;
-
-                    Assert.IsTrue(allEqual,
-                        "One of the targeting Find results were not equal, all calls to empty find should be eqiv");
-
-                    results = new[]
-                    {
-                        testing.Find(target, "ShouldntShowNoReturnValue"),
-                        testing.Find(target, "ShouldntShowNoReturnValue", new {}),
-                        testing.Find(target, "ShouldntShowNoReturnValue", new object[] {}),
-                        testing.Find(target, "ShouldntShowNoReturnValue", null)
-                    };
-
-                    var allNull = results.Aggregate(true, (prev, curr) => prev && curr == null);
-
-                    Assert.IsTrue(allNull,
-                        "One of the invalid calls to Find found a method when expecting all to return null");
-
-                });
-        }
-
-        [TestMethod]
-        public async Task ObjectMethodFind_SingleParameter()
-        {
-            var target = new MethodMethodsTestClass();
-
-            await Util.Tasks.Start(
-                () =>
-                {
-
-                    var expecting = typeof (MethodMethodsTestClass)
-                        .GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                        .First(a => a.GetParameters().Count() == 1
-                                    && a.GetParameters().First().ParameterType == typeof (string)
-                                    && a.GetParameters().First().Name == "arg");
-
-                    var cacher = new CacheComponent(new Underscore.Function.CompactComponent(),
-                        new Underscore.Utility.CompactComponent());
-                    var testing = new MethodComponent(cacher, new PropertyComponent());
-
-                    var results = new[]
-                    {
-                        testing.Find(target, "ShouldShowNoReturnValue", new {arg = typeof (string)}),
-                        testing.Find(target, "ShouldShowNoReturnValue", new[] {typeof (string)}),
-                        testing.Find(target, "ShouldShowNoReturnValue", typeof (string)),
-                        testing.Find(target, "ShouldShowNoReturnValue", new[] {"arg"}),
-                        testing.Find(target, "ShouldShowNoReturnValue", "arg")
-                    };
-
-                    var allNotNull = !results.Aggregate(false, (prev, curr) => prev || curr == null);
-
-                    Assert.IsTrue(allNotNull,
-                        "One of the targeting Find results returned null when expecting corresponding method info");
-
-                    var allEqual = results.Aggregate(expecting, (prev, curr) => prev == curr ? curr : null) != null;
-
-                    Assert.IsTrue(allEqual,
-                        "One of the targeting Find results were not equal, all calls to empty find should be eqiv");
-
-                    results = new[]
-                    {
-                        testing.Find(target, "ShouldntShowNoReturnValue", new {arg = typeof (string)}),
-                        testing.Find(target, "ShouldntShowNoReturnValue", new[] {typeof (string)}),
-                        testing.Find(target, "ShouldntShowNoReturnValue", typeof (string)),
-                        testing.Find(target, "ShouldntShowNoReturnValue", new[] {"arg"}),
-                        testing.Find(target, "ShouldntShowNoReturnValue", "arg")
-                    };
-
-                    var allNull = results.Aggregate(true, (prev, curr) => prev && curr == null);
-
-                    Assert.IsTrue(allNull,
-                        "One of the invalid calls to Find found a method when expecting all to return null");
-
-                });
-        }
-
-        [TestMethod]
-        public async Task ObjectMethodFind_TwoParameters()
-        {
-            var target = new MethodMethodsTestClass();
-
-            await Util.Tasks.Start(
-                () =>
-                {
-                    var expecting = typeof (MethodMethodsTestClass)
-                        .GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                        .First(a => a.GetParameters().Count() == 2
-                                    && a.GetParameters().First().ParameterType == typeof (string)
-                                    && a.GetParameters().First().Name == "arg1"
-                                    && a.GetParameters().Skip(1).First().ParameterType == typeof (string)
-                                    && a.GetParameters().Skip(1).First().Name == "arg2"
-                                    && a.Name == "ShouldShowNoReturnValue");
-
-                    var cacher = new CacheComponent(new Underscore.Function.CompactComponent(),
-                        new Underscore.Utility.CompactComponent());
-                    var testing = new MethodComponent(cacher, new PropertyComponent());
-
-                    var results = new[]
-                    {
-                        testing.Find(target, "ShouldShowNoReturnValue",
-                            new {arg1 = typeof (string), arg2 = typeof (string)}),
-                        testing.Find(target, "ShouldShowNoReturnValue", new[] {typeof (string), typeof (string)}),
-                        testing.Find(target, "ShouldShowNoReturnValue", new[] {"arg1", "arg2"})
-                    };
-
-                    var allNotNull = !results.Aggregate(false, (prev, curr) => prev || curr == null);
-
-                    Assert.IsTrue(allNotNull,
-                        "One of the targeting Find results returned null when expecting corresponding method info");
-
-                    var allEqual = results.Aggregate(expecting, (prev, curr) => prev == curr ? curr : null) != null;
-
-                    Assert.IsTrue(allEqual,
-                        "One of the targeting Find results were not equal, all calls to empty find should be eqiv");
-
-                    results = new[]
-                    {
-                        testing.Find(target, "ShouldntShowNoReturnValue",
-                            new {arg1 = typeof (string), arg2 = typeof (string)}),
-                        testing.Find(target, "ShouldntShowNoReturnValue", new[] {typeof (string), typeof (string)}),
-                        testing.Find(target, "ShouldntShowNoReturnValue", new[] {"arg1", "arg2"})
-                    };
-
-                    var allNull = results.Aggregate(true, (prev, curr) => prev && curr == null);
-
-                    Assert.IsTrue(allNull,
-                        "One of the invalid calls to Find found a method when expecting all to return null");
-
-                    results = new[]
-                    {
-                        testing.Find(target, "ShouldShowNoReturnValue",
-                            new {arg1 = typeof (string), arg2 = typeof (string)}),
-                        testing.Find(target, "ShouldShowNoReturnValue", new[] {typeof (string), typeof (string)}),
-                        testing.Find(target, "ShouldShowNoReturnValue", new[] {"arg1", "arg2"})
-                    };
-
-                    allNotNull = !results.Aggregate(false, (prev, curr) => prev || curr == null);
-
-                    Assert.IsTrue(allNotNull,
-                        "One of the targeting Find results returned null when expecting corresponding method info");
-
-                    allEqual = results.Aggregate(expecting, (prev, curr) => prev == curr ? curr : null) != null;
-
-                    Assert.IsTrue(allEqual,
-                        "One of the targeting Find results were not equal, all calls to empty find should be eqiv");
-
-                    results = new[]
-                    {
-                        testing.Find(target, "ShouldntShowNoReturnValue",
-                            new {arg1 = typeof (string), arg2 = typeof (string)}),
-                        testing.Find(target, "ShouldntShowNoReturnValue", new[] {typeof (string), typeof (string)}),
-                        testing.Find(target, "ShouldntShowNoReturnValue", new[] {"arg1", "arg2"})
-                    };
-
-                });
-        }
-
-        [TestMethod]
-        public async Task ObjectMethodFind_PropertyMethodsNotShown()
-        {
-            var target = new MethodMethodsTestClass();
-
-            await Util.Tasks.Start(
-                () =>
-                {
-                    var cacher = new CacheComponent(new Underscore.Function.CompactComponent(),
-                    new Underscore.Utility.CompactComponent());
-                    var testing = new MethodComponent(cacher, new PropertyComponent());
-
-                    Assert.IsNull(testing.Find(target, "get_PublicPropertyShouldNotShow"));
-                    Assert.IsNull(testing.Find(target, "get_PrivatePropertyShouldNotShow"));
-
-                    Assert.IsNull(testing.Find(target, "set_PublicPropertyShouldNotShow", new {value = typeof (string)}));
-                    Assert.IsNull(testing.Find(target, "set_PublicPropertyShouldNotShow", new[] {typeof (string)}));
-                    Assert.IsNull(testing.Find(target, "set_PublicPropertyShouldNotShow", typeof (string)));
-                    Assert.IsNull(testing.Find(target, "set_PublicPropertyShouldNotShow", new[] {"value"}));
-                    Assert.IsNull(testing.Find(target, "set_PublicPropertyShouldNotShow", "value"));
-
-                    Assert.IsNull(testing.Find(target, "set_PrivatePropertyShouldNotShow"));
-                    Assert.IsNull(testing.Find(target, "set_PrivatePropertyShouldNotShow", new {value = typeof (string)}));
-                    Assert.IsNull(testing.Find(target, "set_PrivatePropertyShouldNotShow", new[] {typeof (string)}));
-                    Assert.IsNull(testing.Find(target, "set_PrivatePropertyShouldNotShow", typeof (string)));
-                    Assert.IsNull(testing.Find(target, "set_PrivatePropertyShouldNotShow", new[] {"value"}));
-                    Assert.IsNull(testing.Find(target, "set_PrivatePropertyShouldNotShow", "value"));
-
-                });
-        }
-
-        [TestMethod]
-        public void ObjectMethodFind_ReturnParameterOverride()
-        {
-            var target = new MethodMethodsTestClass();
-
-            //ReturnAsAParameter
-            var cacher = new CacheComponent(new CompactComponent(), new Underscore.Utility.CompactComponent());
-            var testing = new MethodComponent(cacher, new PropertyComponent());
-
-            var result = testing.Find(target, new { @return = new { parameterType=typeof(string) } });
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(result, testing.Find(target, "ReturnAsAParameter"));
-
-        }
-
-        [TestMethod]
-        public async Task ObjectMethodFind_SkippingArguments()
-        {
-            var target = new MethodMethodsTestClass();
-
-            await Util.Tasks.Start(
-                () =>
-                {
-                    //ReturnAsAParameter
-                    var cacher = new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
-                    var testing = new MethodComponent(cacher, new PropertyComponent());
-
-                    var expecting = typeof (MethodMethodsTestClass).GetMethods().FirstOrDefault(a=> a.Name == "ShouldShowNoReturnValue" &&  a.GetParameters().Length == 2);
-
-                    var result = testing.Find(target, new [] {null, typeof(string)});
-
-                    Assert.AreEqual(expecting,result);
-
-                });
-        }
-
-        [TestMethod]
-        public async Task ObjectMethodHas( )
-        {
-            var target = new MethodMethodsTestClass( );
-
-            await Util.Tasks.Start(
-                ( ) =>
-                {
-                    var cacher = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
-                    var testing = new MethodComponent(cacher, new PropertyComponent());
-
-                    Assert.IsTrue( testing.Has( target, "ShouldShowNoReturnValue" ) );
-                    Assert.IsTrue( testing.Has( target, "ShouldShowNoReturnValue", new { } ) );
-                    Assert.IsTrue( testing.Has( target, "ShouldShowNoReturnValue", new object[ ] { } ) );
-                    Assert.IsTrue( testing.Has( target, "ShouldShowNoReturnValue", null ) );
-
-                    Assert.IsFalse( testing.Has( target, "ShouldntShowNoReturnValue" ) );
-                    Assert.IsFalse( testing.Has( target, "ShouldntShowNoReturnValue", new { } ) );
-                    Assert.IsFalse( testing.Has( target, "ShouldntShowNoReturnValue", new object[ ] { } ) );
-                    Assert.IsFalse( testing.Has( target, "ShouldntShowNoReturnValue", null ) );
-
-                    var shouldShowMethods = new[ ]{
-                        testing.Has( target, "ShouldShowNoReturnValue" ),
-                        testing.Has(target,"ShouldShowNoReturnValue",new{}),
-                        testing.Has(target,"ShouldShowNoReturnValue",new object[]{}),
-                        testing.Has(target,"ShouldShowNoReturnValue",null)
-                    };
-
-                    foreach ( var result in shouldShowMethods )
-                        Assert.IsTrue( result );
-
-                    var shouldntShowMethods = new[ ]{
-                        testing.Has(target,"ShouldntShowNoReturnValue"),
-                        testing.Has(target,"ShouldntShowNoReturnValue",new{}),
-                        testing.Has(target,"ShouldntShowNoReturnValue",new object[]{}),
-                        testing.Has(target,"ShouldntShowNoReturnValue",null)
-                    };
-
-                    foreach ( var result in shouldntShowMethods )
-                        Assert.IsFalse( result );
-
-                },
-                ( ) =>
-                {
-
-                    var cacher = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
-                    var testing = new MethodComponent(cacher, new PropertyComponent());
-
-                    Assert.IsTrue( testing.Has( target, "ShouldShowNoReturnValue", new { arg = typeof( string ) } ) );
-                    Assert.IsTrue( testing.Has( target, "ShouldShowNoReturnValue", new[ ] { typeof( string ) } ) );
-                    Assert.IsTrue( testing.Has( target, "ShouldShowNoReturnValue", typeof( string ) ) );
-                    Assert.IsTrue( testing.Has( target, "ShouldShowNoReturnValue", new[ ] { "arg" } ) );
-                    Assert.IsTrue( testing.Has( target, "ShouldShowNoReturnValue", "arg" ) );
-
-                    Assert.IsFalse( testing.Has( target, "ShouldntShowNoReturnValue", new { arg = typeof( string ) } ) );
-                    Assert.IsFalse( testing.Has( target, "ShouldntShowNoReturnValue", new[ ] { typeof( string ) } ) );
-                    Assert.IsFalse( testing.Has( target, "ShouldntShowNoReturnValue", typeof( string ) ) );
-                    Assert.IsFalse( testing.Has( target, "ShouldntShowNoReturnValue", new[ ] { "arg" } ) );
-                    Assert.IsFalse( testing.Has( target, "ShouldntShowNoReturnValue", "arg" ) );
-
-                    var shouldShowMethods = new[ ]{
-                        testing.Has( target, "ShouldShowNoReturnValue", new { arg = typeof( string ) } ),
-                        testing.Has(target,"ShouldShowNoReturnValue",new []{ typeof(string)}),
-                        testing.Has(target,"ShouldShowNoReturnValue",new[]{"arg"})
-                    };
-
-                    foreach ( var result in shouldShowMethods )
-                        Assert.IsTrue( result );
-
-                    var shouldntShowMethods = new[ ]{ 
-                        testing.Has( target, "ShouldntShowNoReturnValue", new { arg = typeof( string ) } ),
-                        testing.Has(target,"ShouldntShowNoReturnValue",new []{ typeof(string)}),
-                        testing.Has(target,"ShouldntShowNoReturnValue",new[]{"arg"})
-                    };
-
-                    foreach ( var result in shouldntShowMethods )
-                        Assert.IsFalse( result );
-
-                },
-                ( ) =>
-                {
-
-                    var cacher = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
-                    var testing = new MethodComponent(cacher, new PropertyComponent());
-
-                    Assert.IsTrue( testing.Has( target, "ShouldShowNoReturnValue", new { arg1 = typeof( string ), arg2 = typeof( string ) } ) );
-                    Assert.IsTrue( testing.Has( target, "ShouldShowNoReturnValue", new[ ] { typeof( string ), typeof( string ) } ) );
-                    Assert.IsTrue( testing.Has( target, "ShouldShowNoReturnValue", new[ ] { "arg1", "arg2" } ) );
-
-                    Assert.IsFalse( testing.Has( target, "ShouldntShowNoReturnValue", new { arg1 = typeof( string ), arg2 = typeof( string ) } ) );
-                    Assert.IsFalse( testing.Has( target, "ShouldntShowNoReturnValue", new[ ] { typeof( string ), typeof( string ) } ) );
-                    Assert.IsFalse( testing.Has( target, "ShouldntShowNoReturnValue", new[ ] { "arg1", "arg2" } ) );
-
-                    var shouldShowMethods = new[ ]{
-                        testing.Has( target, "ShouldShowNoReturnValue", new { arg1 = typeof( string ), arg2 = typeof( string ) } ),
-                        testing.Has(target,"ShouldShowNoReturnValue",new []{ typeof(string), typeof(string)}),
-                        testing.Has(target,"ShouldShowNoReturnValue",new[]{"arg1","arg2"})
-                    };
-
-                    foreach ( var result in shouldShowMethods )
-                        Assert.IsTrue( result );
-
-                    var shouldntShowMethods = new[ ]{ 
-                        testing.Has( target, "ShouldntShowNoReturnValue", new { arg1 = typeof( string ), arg2 = typeof(string) } ),
-                        testing.Has(target,"ShouldntShowNoReturnValue",new []{ typeof(string),typeof(string)}),
-                        testing.Has(target,"ShouldntShowNoReturnValue",new[]{"arg1", "arg2"})
-                    };
-
-                    foreach ( var result in shouldntShowMethods )
-                        Assert.IsFalse( result );
-
-                },
-                ( ) =>
-                {
-                    var cacher = new CacheComponent( new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
-                    var testing = new MethodComponent(cacher, new PropertyComponent());
-
-                    Assert.IsFalse( testing.Has( target, "get_PublicPropertyShouldNotShow" ) );
-                    Assert.IsFalse( testing.Has( target, "get_PrivatePropertyShouldNotShow" ) );
-
-                    Assert.IsFalse( testing.Has( target, "set_PublicPropertyShouldNotShow", new { value = typeof( string ) } ) );
-                    Assert.IsFalse( testing.Has( target, "set_PublicPropertyShouldNotShow", new[ ] { typeof( string ) } ) );
-                    Assert.IsFalse( testing.Has( target, "set_PublicPropertyShouldNotShow", typeof( string ) ) );
-                    Assert.IsFalse( testing.Has( target, "set_PublicPropertyShouldNotShow", new[ ] { "value" } ) );
-                    Assert.IsFalse( testing.Has( target, "set_PublicPropertyShouldNotShow", "value" ) );
-
-                    Assert.IsFalse( testing.Has( target, "set_PrivatePropertyShouldNotShow" ) );
-                    Assert.IsFalse( testing.Has( target, "set_PrivatePropertyShouldNotShow", new { value = typeof( string ) } ) );
-                    Assert.IsFalse( testing.Has( target, "set_PrivatePropertyShouldNotShow", new[ ] { typeof( string ) } ) );
-                    Assert.IsFalse( testing.Has( target, "set_PrivatePropertyShouldNotShow", typeof( string ) ) );
-                    Assert.IsFalse( testing.Has( target, "set_PrivatePropertyShouldNotShow", new[ ] { "value" } ) );
-                    Assert.IsFalse( testing.Has( target, "set_PrivatePropertyShouldNotShow", "value" ) );
-
-                }
-
-            );
-
-        }
-
-        [TestMethod]
-        public async Task MethodsAll2()
+        public void Object_Method_Find_TargetInstanceFindWithSingleItemNoParameters()
         {
 
             var target = new MethodMethodsTestClass();
 
-            IMethodComponent testing = SetupMethodsComponent();// = new Underscore.Object.Reflection.Methods()
-
-            await Util.Tasks.Start(() =>
+            var results = new[]
             {
-                var methods = testing.All(target);
+                        _.Object.Method.Find(target, "ShouldShowNoReturnValue"),
+                        _.Object.Method.Find(target, "ShouldShowNoReturnValue", new {}),
+                        _.Object.Method.Find(target, "ShouldShowNoReturnValue", new object[] {}),
+                        _.Object.Method.Find(target, "ShouldShowNoReturnValue", null)
+            };
 
-                var methodInfos = methods as MethodInfo[] ?? methods.ToArray();
-                var targetMethod = methodInfos.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue");
-                Assert.IsNotNull(targetMethod);
+            //equivelant to
+            var expecting =
+                typeof (MethodMethodsTestClass)
+                    .GetMethods()
+                    .First(a => a.Name == "ShouldShowNoReturnValue" && a.GetParameters().Length == 0);
 
-                var results = methodInfos.Where(a => a.Name == "ShouldShowNoReturnValue");
-                var resultArr = results as MethodInfo[] ?? results.ToArray();
-                Assert.AreEqual(3, resultArr.Count(a => a.Name == "ShouldShowNoReturnValue"));
-                //no param
-                var noRetMethods = resultArr.Where(a => a.ReturnType == typeof(void));
-                var noRetMethodsArr = noRetMethods as MethodInfo[] ?? noRetMethods.ToArray();
-                Assert.IsNotNull(noRetMethodsArr.FirstOrDefault(), "Missing no parametered method");
-                //one param
-                Assert.AreEqual(1, (
-                    from m in noRetMethodsArr
-                    let parameters = m.GetParameters()
-                    where parameters.Count() == 1
-                          && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg") == 1
-                          && m.ReturnType == typeof(void)
-                    select m
-                    ).Count(),
-                    "Missing single parametered method"
-                    );
-                //two params
-                Assert.AreEqual(1, (
-                    from m in noRetMethodsArr
-                    let parameters = m.GetParameters()
-                    where parameters.Count() == 2
-                          && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg1") == 1
-                          && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg2") == 1
-                          && m.ReturnType == typeof(void)
-                    select m
-                    ).Count(),
-                    "Missing double parametered method"
-                    );
-
-                //no param string return type
-                targetMethod = methodInfos.FirstOrDefault(a => a.Name == "ShouldShowStringReturnValue");
-
-                Assert.IsNotNull(targetMethod);
-                Assert.AreEqual(1, methodInfos.Count(a => a.Name == "ShouldShowStringReturnValue"));
-                Assert.IsTrue(
-                    targetMethod.ReturnType == typeof(string)
-                    && !targetMethod.GetParameters().Any()
-                    );
-
-                Assert.AreEqual(5, methodInfos.Count());
-
-                //all methods with no params
-                methods = testing.Query(target, new { });
-                var methodsArr = methods as MethodInfo[] ?? methods.ToArray();
-                targetMethod = methodsArr.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue");
-
-                Assert.AreEqual(2, methodsArr.Count());
-
-                Assert.IsNotNull(methodsArr.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue"));
-                Assert.AreEqual(1, methodsArr.Count(a => a.Name == "ShouldShowNoReturnValue"));
-
-                Assert.IsNotNull(methodsArr.FirstOrDefault(a => a.Name == "ShouldShowStringReturnValue"));
-                Assert.AreEqual(1, methodsArr.Count(a => a.Name == "ShouldShowStringReturnValue"));
-
-                var singleParamTypeString1 = testing.Query(target, typeof(string));
-                var singleParamTypeString2 = testing.Query(target, new[] { typeof(string) });
-
-                var singParamTypeArr = singleParamTypeString1 as MethodInfo[] ?? singleParamTypeString1.ToArray();
-                Assert.IsTrue(singParamTypeArr.Count() == 2);
-                Assert.IsNotNull(singParamTypeArr.FirstOrDefault());
-
-                var targetingSingleParam = singParamTypeArr.FirstOrDefault();
-                Assert.IsTrue(targetingSingleParam.GetParameters().Count() == 1 && targetingSingleParam.GetParameters().Count(a => a.Name == "arg" && a.ParameterType == typeof(string)) == 1);
-
-                Assert.AreEqual(singParamTypeArr.FirstOrDefault(), singleParamTypeString2.FirstOrDefault());
-
-                var singleParamName1 = testing.Query(target, "arg");
-                var singleParamName2 = testing.Query(target, new[] { "arg" });
-
-                Assert.IsTrue(singleParamName1.Count() == 1);
-                Assert.IsTrue(singleParamName2.Count() == 1);
-
-                Assert.IsTrue(
-                    singleParamName1.Count(a => a.GetParameters().Count() == 1
-                                                && a.GetParameters().Count(b => b.ParameterType == typeof(string) && b.Name == "arg") == 1
-                        ) == 1);
-
-                Assert.AreEqual(singleParamName1.FirstOrDefault(), singleParamName2.FirstOrDefault());
-
-                var dblParamType = testing.Query(target, new[] { typeof(string), typeof(string) });
-
-                Assert.AreEqual(1, dblParamType.Count());
-                targetMethod = dblParamType.FirstOrDefault();
-
-                Assert.IsNotNull(targetMethod);
-                Assert.AreEqual(1, dblParamType.Count());
-                Assert.AreEqual(2, targetMethod.GetParameters().Count());
-
-                Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg1"));
-                Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg2"));
-
-                var dblParamName = testing.Query(target, new[] { "arg1", "arg2" });
-                targetMethod = dblParamName.FirstOrDefault();
-
-                Assert.IsNotNull(targetMethod);
-                Assert.AreEqual(1, dblParamName.Count());
-                Assert.AreEqual(2, targetMethod.GetParameters().Count());
-
-                Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg1"));
-                Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg2"));
-
-            });
+            Assert.IsTrue(results.All(a=>a==expecting));
         }
 
         [TestMethod]
-        public async Task MethodsTypeAll2()
+        public void Object_Method_Find_TargetInstanceFindWithSingleItemOneParameter()
+        {
+
+            var target = new MethodMethodsTestClass();
+
+            var results = new[]
+            {
+                _.Object.Method.Find(target, "ShouldShowNoReturnValue", new {arg = typeof (string)}),
+                _.Object.Method.Find(target, "ShouldShowNoReturnValue", typeof (string)),
+                _.Object.Method.Find(target, "ShouldShowNoReturnValue", new[] {typeof (string)}),
+                _.Object.Method.Find(target, "ShouldShowNoReturnValue", new[] {"arg"}),
+                _.Object.Method.Find(target, "ShouldShowNoReturnValue", "arg")
+            };
+
+            //equivelant to
+            var expecting =
+                typeof (MethodMethodsTestClass)
+                    .GetMethods()
+                    .First(
+                        a =>
+                            a.Name == "ShouldShowNoReturnValue" && a.GetParameters().Length == 1 &&
+                            a.GetParameters().Count(b => b.Name == "arg" && b.ParameterType == typeof (string)) == 1);
+
+            Assert.IsTrue(results.All(a => a == expecting));
+        }
+        
+        [TestMethod]
+        public void Object_Method_Find_TargetInstanceFindWithSingleItemTwoParameter()
+        {
+
+            var target = new MethodMethodsTestClass();
+
+            var results = new[]
+            {
+                _.Object.Method.Find(target, "ShouldShowNoReturnValue", new {arg1 = typeof (string), arg2=typeof(string)}),
+                _.Object.Method.Find(target, "ShouldShowNoReturnValue", new[] {"arg1","arg2"}),
+                _.Object.Method.Find(target, "ShouldShowNoReturnValue", new[] {typeof(string),typeof(string)}),
+            };
+
+            //equivelant to
+            var expecting =
+                typeof(MethodMethodsTestClass)
+                    .GetMethods()
+                    .First(
+                        a =>
+                            a.Name == "ShouldShowNoReturnValue" && a.GetParameters().Length == 2 &&
+                            a.GetParameters().Count(b => b.Name == "arg1" && b.ParameterType == typeof(string)) == 1 &&
+                            a.GetParameters().Count(b => b.Name == "arg2" && b.ParameterType == typeof(string)) == 1);
+
+            Assert.IsTrue(results.All(a => a == expecting));
+        }
+
+
+        [TestMethod]
+        public void Object_Method_Find_TargetInstanceFindFailsForPrivateByDefault()
+        {
+
+            var target = new MethodMethodsTestClass();
+
+            var results = new[]
+            {
+                _.Object.Method.Find(target, "ShouldntShowNoReturnValue"),
+                _.Object.Method.Find(target, "ShouldntShowNoReturnValue", new {}),
+                _.Object.Method.Find(target, "ShouldntShowNoReturnValue", new object[] {}),
+                _.Object.Method.Find(target, "ShouldntShowNoReturnValue", null)
+            };
+
+            Assert.IsTrue(results.All(a => a == null));
+        }
+
+        [TestMethod]
+        public void Object_Method_Find_TargetInstanceFindWorksForPrivateUsingBindingFlag()
+        {
+
+            var target = new MethodMethodsTestClass();
+
+            var results = new[]
+            {
+                _.Object.Method.Find(target, "ShouldntShowNoReturnValue",BindingFlags.Instance|BindingFlags.NonPublic),
+                _.Object.Method.Find(target, "ShouldntShowNoReturnValue", new {},BindingFlags.Instance|BindingFlags.NonPublic),
+                _.Object.Method.Find(target, "ShouldntShowNoReturnValue", new object[] {},BindingFlags.Instance|BindingFlags.NonPublic),
+                _.Object.Method.Find(target, "ShouldntShowNoReturnValue", null,BindingFlags.Instance|BindingFlags.NonPublic)
+            };
+
+            var expecting =
+                typeof(MethodMethodsTestClass).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
+                    .FirstOrDefault(a => a.Name == "ShouldntShowNoReturnValue");
+
+            Assert.IsTrue(results.All(a => a == expecting));
+        }
+
+
+        [TestMethod]
+        public void Object_Method_Find_TargetInstanceFindFailsForPropertyMethods()
+        {
+            var target = new MethodMethodsTestClass();
+
+            Assert.IsNull(_.Object.Method.Find(target, "get_PublicPropertyShouldNotShow"));
+            Assert.IsNull(_.Object.Method.Find(target, "get_PrivatePropertyShouldNotShow"));
+
+            Assert.IsNull(_.Object.Method.Find(target, "set_PublicPropertyShouldNotShow", new { value = typeof(string) }));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PublicPropertyShouldNotShow", new[] { typeof(string) }));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PublicPropertyShouldNotShow", typeof(string)));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PublicPropertyShouldNotShow", new[] { "value" }));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PublicPropertyShouldNotShow", "value"));
+
+            Assert.IsNull(_.Object.Method.Find(target, "set_PrivatePropertyShouldNotShow"));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PrivatePropertyShouldNotShow", new { value = typeof(string) }));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PrivatePropertyShouldNotShow", new[] { typeof(string) }));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PrivatePropertyShouldNotShow", typeof(string)));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PrivatePropertyShouldNotShow", new[] { "value" }));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PrivatePropertyShouldNotShow", "value"));
+        }
+
+
+        [TestMethod]
+        public void Object_Method_Find_TargetTypeFindWithSingleItemNoParameters()
         {
 
             var target = typeof(MethodMethodsTestClass);
 
-            IMethodComponent testing = SetupMethodsComponent();// = new Underscore.Object.Reflection.Methods()
-
-            await Util.Tasks.Start(() =>
+            var results = new[]
             {
-                var methods = testing.All(target);
+                        _.Object.Method.Find(target, "ShouldShowNoReturnValue"),
+                        _.Object.Method.Find(target, "ShouldShowNoReturnValue", new {}),
+                        _.Object.Method.Find(target, "ShouldShowNoReturnValue", new object[] {}),
+                        _.Object.Method.Find(target, "ShouldShowNoReturnValue", null)
+            };
 
-                var methodInfos = methods as MethodInfo[] ?? methods.ToArray();
-                var targetMethod = methodInfos.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue");
-                Assert.IsNotNull(targetMethod);
+            //equivelant to
+            var expecting =
+                typeof(MethodMethodsTestClass)
+                    .GetMethods()
+                    .First(a => a.Name == "ShouldShowNoReturnValue" && a.GetParameters().Length == 0);
 
-                var results = methodInfos.Where(a => a.Name == "ShouldShowNoReturnValue");
-                var resultArr = results as MethodInfo[] ?? results.ToArray();
-                Assert.AreEqual(3, resultArr.Count(a => a.Name == "ShouldShowNoReturnValue"));
-                //no param
-                var noRetMethods = resultArr.Where(a => a.ReturnType == typeof(void));
-                var noRetMethodsArr = noRetMethods as MethodInfo[] ?? noRetMethods.ToArray();
-                Assert.IsNotNull(noRetMethodsArr.FirstOrDefault(), "Missing no parametered method");
-                //one param
-                Assert.AreEqual(1, (
-                    from m in noRetMethodsArr
-                    let parameters = m.GetParameters()
-                    where parameters.Count() == 1
-                          && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg") == 1
-                          && m.ReturnType == typeof(void)
-                    select m
-                    ).Count(),
-                    "Missing single parametered method"
-                    );
-                //two params
-                Assert.AreEqual(1, (
-                    from m in noRetMethodsArr
-                    let parameters = m.GetParameters()
-                    where parameters.Count() == 2
-                          && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg1") == 1
-                          && parameters.Count(a => a.ParameterType == typeof(string) && a.Name == "arg2") == 1
-                          && m.ReturnType == typeof(void)
-                    select m
-                    ).Count(),
-                    "Missing double parametered method"
-                    );
-
-                //no param string return type
-                targetMethod = methodInfos.FirstOrDefault(a => a.Name == "ShouldShowStringReturnValue");
-
-                Assert.IsNotNull(targetMethod);
-                Assert.AreEqual(1, methodInfos.Count(a => a.Name == "ShouldShowStringReturnValue"));
-                Assert.IsTrue(
-                    targetMethod.ReturnType == typeof(string)
-                    && !targetMethod.GetParameters().Any()
-                    );
-
-                Assert.AreEqual(5, methodInfos.Count());
-
-                //all methods with no params
-                methods = testing.Query(target, new { });
-                var methodsArr = methods as MethodInfo[] ?? methods.ToArray();
-                targetMethod = methodsArr.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue");
-
-                Assert.AreEqual(2, methodsArr.Count());
-
-                Assert.IsNotNull(methodsArr.FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue"));
-                Assert.AreEqual(1, methodsArr.Count(a => a.Name == "ShouldShowNoReturnValue"));
-
-                Assert.IsNotNull(methodsArr.FirstOrDefault(a => a.Name == "ShouldShowStringReturnValue"));
-                Assert.AreEqual(1, methodsArr.Count(a => a.Name == "ShouldShowStringReturnValue"));
-
-                var singleParamTypeString1 = testing.Query(target, typeof(string));
-                var singleParamTypeString2 = testing.Query(target, new[] { typeof(string) });
-
-                var singParamTypeArr = singleParamTypeString1 as MethodInfo[] ?? singleParamTypeString1.ToArray();
-                Assert.IsTrue(singParamTypeArr.Count() == 2);
-                Assert.IsNotNull(singParamTypeArr.FirstOrDefault());
-
-                var targetingSingleParam = singParamTypeArr.FirstOrDefault();
-                Assert.IsTrue(targetingSingleParam.GetParameters().Count() == 1 && targetingSingleParam.GetParameters().Count(a => a.Name == "arg" && a.ParameterType == typeof(string)) == 1);
-
-                Assert.AreEqual(singParamTypeArr.FirstOrDefault(), singleParamTypeString2.FirstOrDefault());
-
-                var singleParamName1 = testing.Query(target, "arg");
-                var singleParamName2 = testing.Query(target, new[] { "arg" });
-
-                Assert.IsTrue(singleParamName1.Count() == 1);
-                Assert.IsTrue(singleParamName2.Count() == 1);
-
-                Assert.IsTrue(
-                    singleParamName1.Count(a => a.GetParameters().Count() == 1
-                                                && a.GetParameters().Count(b => b.ParameterType == typeof(string) && b.Name == "arg") == 1
-                        ) == 1);
-
-                Assert.AreEqual(singleParamName1.FirstOrDefault(), singleParamName2.FirstOrDefault());
-
-                var dblParamType = testing.Query(target, new[] { typeof(string), typeof(string) });
-
-                Assert.AreEqual(1, dblParamType.Count());
-                targetMethod = dblParamType.FirstOrDefault();
-
-                Assert.IsNotNull(targetMethod);
-                Assert.AreEqual(1, dblParamType.Count());
-                Assert.AreEqual(2, targetMethod.GetParameters().Count());
-
-                Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg1"));
-                Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg2"));
-
-                var dblParamName = testing.Query(target, new[] { "arg1", "arg2" });
-                targetMethod = dblParamName.FirstOrDefault();
-
-                Assert.IsNotNull(targetMethod);
-                Assert.AreEqual(1, dblParamName.Count());
-                Assert.AreEqual(2, targetMethod.GetParameters().Count());
-
-                Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg1"));
-                Assert.AreEqual(1, targetMethod.GetParameters().Count(a => a.ParameterType == typeof(string) && a.Name == "arg2"));
-
-            });
+            Assert.IsTrue(results.All(a => a == expecting));
         }
 
-        private IMethodComponent SetupMethodsComponent()
+        [TestMethod]
+        public void Object_Method_Find_TargetTypeFindWithSingleItemOneParameter()
         {
-            // need to create an old school mock for this...might be an easier way 
-            // but feel like this is the most clear way to do this
 
-            var mock = new Mock<IPropertyComponent>();
+            var target = typeof(MethodMethodsTestClass);
 
-            var empty = new { };
-            SetupAll(mock, empty, PropertiesOf(empty));
+            var results = new[]
+            {
+                _.Object.Method.Find(target, "ShouldShowNoReturnValue", new {arg = typeof (string)}),
+                _.Object.Method.Find(target, "ShouldShowNoReturnValue", typeof (string)),
+                _.Object.Method.Find(target, "ShouldShowNoReturnValue", new[] {typeof (string)}),
+                _.Object.Method.Find(target, "ShouldShowNoReturnValue", new[] {"arg"}),
+                _.Object.Method.Find(target, "ShouldShowNoReturnValue", "arg")
+            };
 
-            var one = new { arg = typeof(string) };
-            SetupAll(mock, one, PropertiesOf(one));
+            //equivelant to
+            var expecting =
+                typeof(MethodMethodsTestClass)
+                    .GetMethods()
+                    .First(
+                        a =>
+                            a.Name == "ShouldShowNoReturnValue" && a.GetParameters().Length == 1 &&
+                            a.GetParameters().Count(b => b.Name == "arg" && b.ParameterType == typeof(string)) == 1);
 
-            var two = new { arg1 = typeof(string), arg2 = typeof(string) };
-            SetupAll(mock, two, PropertiesOf(two));
+            Assert.IsTrue(results.All(a => a == expecting));
+        }
 
-            var mk = mock.Object;
+        [TestMethod]
+        public void Object_Method_Find_TargetTypeFindWithSingleItemTwoParameter()
+        {
 
-            return new MethodComponent(new MockUtilFunctionComponent(), mk);
+            var target =  typeof(MethodMethodsTestClass);
+
+            var results = new[]
+            {
+                _.Object.Method.Find(target, "ShouldShowNoReturnValue", new {arg1 = typeof (string), arg2=typeof(string)}),
+                _.Object.Method.Find(target, "ShouldShowNoReturnValue", new[] {"arg1","arg2"}),
+                _.Object.Method.Find(target, "ShouldShowNoReturnValue", new[] {typeof(string),typeof(string)}),
+            };
+
+            //equivelant to
+            var expecting =
+                typeof(MethodMethodsTestClass)
+                    .GetMethods()
+                    .First(
+                        a =>
+                            a.Name == "ShouldShowNoReturnValue" && a.GetParameters().Length == 2 &&
+                            a.GetParameters().Count(b => b.Name == "arg1" && b.ParameterType == typeof(string)) == 1 &&
+                            a.GetParameters().Count(b => b.Name == "arg2" && b.ParameterType == typeof(string)) == 1);
+
+            Assert.IsTrue(results.All(a => a == expecting));
+        }
+
+        [TestMethod]
+        public void Object_Method_Find_TargetTypeFindFailsForPrivateByDefault()
+        {
+
+            var target = typeof(MethodMethodsTestClass);
+
+            var results = new[]
+            {
+                _.Object.Method.Find(target, "ShouldntShowNoReturnValue"),
+                _.Object.Method.Find(target, "ShouldntShowNoReturnValue", new {}),
+                _.Object.Method.Find(target, "ShouldntShowNoReturnValue", new object[] {}),
+                _.Object.Method.Find(target, "ShouldntShowNoReturnValue", null)
+            };
+
+            Assert.IsTrue(results.All(a=>a==null));
+        }
+
+        [TestMethod]
+        public void Object_Method_Find_TargetTypeFindWorksForPrivateUsingBindingFlag()
+        {
+
+            var target = typeof(MethodMethodsTestClass);
+
+            var results = new[]
+            {
+                _.Object.Method.Find(target, "ShouldntShowNoReturnValue",BindingFlags.Instance|BindingFlags.NonPublic),
+                _.Object.Method.Find(target, "ShouldntShowNoReturnValue", new {},BindingFlags.Instance|BindingFlags.NonPublic),
+                _.Object.Method.Find(target, "ShouldntShowNoReturnValue", new object[] {},BindingFlags.Instance|BindingFlags.NonPublic),
+                _.Object.Method.Find(target, "ShouldntShowNoReturnValue", null,BindingFlags.Instance|BindingFlags.NonPublic)
+            };
+
+            var expecting =
+                typeof (MethodMethodsTestClass).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
+                    .FirstOrDefault(a => a.Name == "ShouldntShowNoReturnValue");
+
+            Assert.IsTrue(results.All(a => a == expecting));
+        }
+        
+        [TestMethod]
+        public void Object_Method_Find_TargetTypeFindFailsForPropertyMethods()
+        {
+            var target = typeof (MethodMethodsTestClass);
+
+            Assert.IsNull(_.Object.Method.Find(target, "get_PublicPropertyShouldNotShow"));
+            Assert.IsNull(_.Object.Method.Find(target, "get_PrivatePropertyShouldNotShow"));
+
+            Assert.IsNull(_.Object.Method.Find(target, "set_PublicPropertyShouldNotShow", new { value = typeof(string) }));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PublicPropertyShouldNotShow", new[] { typeof(string) }));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PublicPropertyShouldNotShow", typeof(string)));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PublicPropertyShouldNotShow", new[] { "value" }));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PublicPropertyShouldNotShow", "value"));
+
+            Assert.IsNull(_.Object.Method.Find(target, "set_PrivatePropertyShouldNotShow"));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PrivatePropertyShouldNotShow", new { value = typeof(string) }));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PrivatePropertyShouldNotShow", new[] { typeof(string) }));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PrivatePropertyShouldNotShow", typeof(string)));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PrivatePropertyShouldNotShow", new[] { "value" }));
+            Assert.IsNull(_.Object.Method.Find(target, "set_PrivatePropertyShouldNotShow", "value"));
+        }
+        
+        [TestMethod]
+        public void Object_Method_Find_TargetInstanceReturnParameterOverride()
+        {
+            var target = new MethodMethodsTestClass();
+
+            var result = _.Object.Method.Find(target, new { @return = new { parameterType=typeof(string) } });
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result, _.Object.Method.Find(target, "ReturnAsAParameter"));
 
         }
+
+
+        [TestMethod]
+        public void Object_Method_Find_TargetTypeReturnParameterOverride()
+        {
+            var target = typeof(MethodMethodsTestClass);
+
+            var result = _.Object.Method.Find(target, new { @return = new { parameterType = typeof(string) } });
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(result, _.Object.Method.Find(target, "ReturnAsAParameter"));
+
+        }
+
+        [TestMethod]
+        public void Object_Method_Find_TargetInstanceSkippingArguments()
+        {
+            var target = new MethodMethodsTestClass();
+
+            var expecting = typeof (MethodMethodsTestClass).GetMethods().FirstOrDefault(a=> a.Name == "ShouldShowNoReturnValue" &&  a.GetParameters().Length == 2);
+
+            var result = _.Object.Method.Find(target, new [] {null, typeof(string)});
+
+            Assert.AreEqual(expecting,result);
+            
+        }
+
+
+        [TestMethod]
+        public void Object_Method_Find_TargetTypeSkippingArguments()
+        {
+            var target = typeof(MethodMethodsTestClass);
+
+            var expecting = typeof(MethodMethodsTestClass).GetMethods().FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue" && a.GetParameters().Length == 2);
+
+            var result = _.Object.Method.Find(target, new[] { null, typeof(string) });
+
+            Assert.AreEqual(expecting, result);
+
+        }
+
+        [TestMethod]
+        public void Object_Method_Has_TargetHasNoArgs()
+        {
+            var target = new MethodMethodsTestClass();
+
+            Assert.IsTrue(_.Object.Method.Has(target, "ShouldShowNoReturnValue"));
+            Assert.IsTrue(_.Object.Method.Has(target, "ShouldShowNoReturnValue", new {}));
+            Assert.IsTrue(_.Object.Method.Has(target, "ShouldShowNoReturnValue", new object[] {}));
+            Assert.IsTrue(_.Object.Method.Has(target, "ShouldShowNoReturnValue", null));
+
+            Assert.IsFalse(_.Object.Method.Has(target, "ShouldntShowNoReturnValue"));
+            Assert.IsFalse(_.Object.Method.Has(target, "ShouldntShowNoReturnValue", new {}));
+            Assert.IsFalse(_.Object.Method.Has(target, "ShouldntShowNoReturnValue", new object[] {}));
+            Assert.IsFalse(_.Object.Method.Has(target, "ShouldntShowNoReturnValue", null));
+
+            var shouldShowMethods = new[]
+            {
+                _.Object.Method.Has(target, "ShouldShowNoReturnValue"),
+                _.Object.Method.Has(target, "ShouldShowNoReturnValue", new {}),
+                _.Object.Method.Has(target, "ShouldShowNoReturnValue", new object[] {}),
+                _.Object.Method.Has(target, "ShouldShowNoReturnValue", null)
+            };
+
+            foreach (var result in shouldShowMethods)
+                Assert.IsTrue(result);
+
+            var shouldntShowMethods = new[]
+            {
+                _.Object.Method.Has(target, "ShouldntShowNoReturnValue"),
+                _.Object.Method.Has(target, "ShouldntShowNoReturnValue", new {}),
+                _.Object.Method.Has(target, "ShouldntShowNoReturnValue", new object[] {}),
+                _.Object.Method.Has(target, "ShouldntShowNoReturnValue", null)
+            };
+
+            foreach (var result in shouldntShowMethods)
+                Assert.IsFalse(result);
+        }
+
+        public void Object_Method_Has_TargetHasOneArg()
+        {
+            var target = new MethodMethodsTestClass();
+            var testing = _.Object.Method;
+
+            Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue", new {arg = typeof (string)}));
+            Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue", new[] {typeof (string)}));
+            Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue", typeof (string)));
+            Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue", new[] {"arg"}));
+            Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue", "arg"));
+
+            Assert.IsFalse(testing.Has(target, "ShouldntShowNoReturnValue", new {arg = typeof (string)}));
+            Assert.IsFalse(testing.Has(target, "ShouldntShowNoReturnValue", new[] {typeof (string)}));
+            Assert.IsFalse(testing.Has(target, "ShouldntShowNoReturnValue", typeof (string)));
+            Assert.IsFalse(testing.Has(target, "ShouldntShowNoReturnValue", new[] {"arg"}));
+            Assert.IsFalse(testing.Has(target, "ShouldntShowNoReturnValue", "arg"));
+
+            var shouldShowMethods = new[]
+            {
+                testing.Has(target, "ShouldShowNoReturnValue", new {arg = typeof (string)}),
+                testing.Has(target, "ShouldShowNoReturnValue", new[] {typeof (string)}),
+                testing.Has(target, "ShouldShowNoReturnValue", new[] {"arg"})
+            };
+
+            foreach (var result in shouldShowMethods)
+                Assert.IsTrue(result);
+
+            var shouldntShowMethods = new[]
+            {
+                testing.Has(target, "ShouldntShowNoReturnValue", new {arg = typeof (string)}),
+                testing.Has(target, "ShouldntShowNoReturnValue", new[] {typeof (string)}),
+                testing.Has(target, "ShouldntShowNoReturnValue", new[] {"arg"})
+            };
+
+            foreach (var result in shouldntShowMethods)
+                Assert.IsFalse(result);
+
+        }
+
+        [TestMethod]
+        public void Object_Method_Has_TargetHasTwoArgs()
+        {
+            var target = new MethodMethodsTestClass();
+            var testing = _.Object.Method;
+
+            Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue",
+                new {arg1 = typeof (string), arg2 = typeof (string)}));
+            Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue", new[] {typeof (string), typeof (string)}));
+            Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue", new[] {"arg1", "arg2"}));
+
+            Assert.IsFalse(testing.Has(target, "ShouldntShowNoReturnValue",
+                new {arg1 = typeof (string), arg2 = typeof (string)}));
+            Assert.IsFalse(testing.Has(target, "ShouldntShowNoReturnValue", new[] {typeof (string), typeof (string)}));
+            Assert.IsFalse(testing.Has(target, "ShouldntShowNoReturnValue", new[] {"arg1", "arg2"}));
+
+            var shouldShowMethods = new[]
+            {
+                testing.Has(target, "ShouldShowNoReturnValue", new {arg1 = typeof (string), arg2 = typeof (string)}),
+                testing.Has(target, "ShouldShowNoReturnValue", new[] {typeof (string), typeof (string)}),
+                testing.Has(target, "ShouldShowNoReturnValue", new[] {"arg1", "arg2"})
+            };
+
+            foreach (var result in shouldShowMethods)
+                Assert.IsTrue(result);
+
+            var shouldntShowMethods = new[]
+            {
+                testing.Has(target, "ShouldntShowNoReturnValue", new {arg1 = typeof (string), arg2 = typeof (string)}),
+                testing.Has(target, "ShouldntShowNoReturnValue", new[] {typeof (string), typeof (string)}),
+                testing.Has(target, "ShouldntShowNoReturnValue", new[] {"arg1", "arg2"})
+            };
+
+            foreach (var result in shouldntShowMethods)
+                Assert.IsFalse(result);
+
+        }
+
+        [TestMethod]
+        public void Object_Method_Has_DoesNotMatchPropertyMethods()
+        {
+            var target = new MethodMethodsTestClass();
+            var testing = _.Object.Method;
+
+            Assert.IsFalse(testing.Has(target, "get_PublicPropertyShouldNotShow"));
+            Assert.IsFalse(testing.Has(target, "get_PrivatePropertyShouldNotShow"));
+
+            Assert.IsFalse(testing.Has(target, "set_PublicPropertyShouldNotShow", new {value = typeof (string)}));
+            Assert.IsFalse(testing.Has(target, "set_PublicPropertyShouldNotShow", new[] {typeof (string)}));
+            Assert.IsFalse(testing.Has(target, "set_PublicPropertyShouldNotShow", typeof (string)));
+            Assert.IsFalse(testing.Has(target, "set_PublicPropertyShouldNotShow", new[] {"value"}));
+            Assert.IsFalse(testing.Has(target, "set_PublicPropertyShouldNotShow", "value"));
+
+            Assert.IsFalse(testing.Has(target, "set_PrivatePropertyShouldNotShow"));
+            Assert.IsFalse(testing.Has(target, "set_PrivatePropertyShouldNotShow", new {value = typeof (string)}));
+            Assert.IsFalse(testing.Has(target, "set_PrivatePropertyShouldNotShow", new[] {typeof (string)}));
+            Assert.IsFalse(testing.Has(target, "set_PrivatePropertyShouldNotShow", typeof (string)));
+            Assert.IsFalse(testing.Has(target, "set_PrivatePropertyShouldNotShow", new[] {"value"}));
+            Assert.IsFalse(testing.Has(target, "set_PrivatePropertyShouldNotShow", "value"));
+
+        }
+        
+        
 
     }
 }

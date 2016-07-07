@@ -36,7 +36,7 @@ namespace Underscore.Object.Reflection
 
         private static IEnumerable<T> Query(MethodsBaseComponent<T> me, Type target, object query, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
         {
-            var currMethods = me.All(target).Select(a => new { Method = a, Params = a.GetParameters().ToList() });
+            var currMethods = me.All(target,flags).Select(a => new { Method = a, Params = a.GetParameters().ToList() });
 
             if (query == null)
                 return me.All(target);
