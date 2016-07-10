@@ -11,6 +11,7 @@ namespace Underscore.Setup
             kernel.Register<IMathComponent, MathComponent>();
             kernel.Register<IObjectComponent, ObjectComponent>();
             kernel.Register<ICompactComponent, CompactComponent>();
+            kernel.Register<IStringComponent, StringComponent>();
             kernel.Register<Module.Utility>();
         }
     }
