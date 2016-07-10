@@ -131,7 +131,7 @@ _.Utility.ToPascalCase(mixedDelimiters); // "ImNotAPascalCaseStringForReal"
 
 ### string IsPascalCase(string s)
 Checks if a string is PascalCase. Does not consider numbers to be valid characters for PascalCase, so will return false if any are contained.
-```
+```csharp
 string pascalCase = "PascalCase";
 string notPascalCaseNumbers = "PascalCase1";
 string notPascalCaseSpaces = "Pascal case";
@@ -141,6 +141,24 @@ _.Utility.IsPascalCase(pascalCase); // true
 _.Utility.IsPascalCase(notPascalCaseNumbers); // false
 _.Utility.IsPascalCase(notPascalCaseSpaces); // false
 _.Utility.IsPascalCase(notPascalCaseCaps); // false
+```
+
+### bool IsCapitalized(string s)
+Checks if the first character of a string is capitalized.
+```csharp
+string capitalized = "Hello, world!";
+string uncapitalized = "hello, world!";
+
+_.Utility.IsCapitalized(capitalized); // true
+_.Utility.IsCapitalized(uncapitalized); // false
+```
+
+### string Capitalize(string s)
+Capitalizes the first character of a string.
+```csharp
+string uncapitalized = "hello, world!";
+
+_.Utility.Capitalize(uncapitalized); // "Hello, world!"
 ```
 
 ### string ToSnakeCase(string s)
