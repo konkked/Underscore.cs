@@ -14,7 +14,29 @@ namespace Underscore.Test.Utility.String
 			component = new StringComponent();
 		}
 
-		[TestMethod]
+        [TestMethod]
+        public void Capitalize_UncapitalizedString()
+        {
+            const string input = "hello, world!";
+            const string expected = "Hello, world!";
+
+            var result = component.Capitalize(input);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void Capitalize_CapitalizedString()
+        {
+            const string input = "Hello, world!";
+            const string expected = "Hello, world!";
+
+            var result = component.Capitalize(input);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
 		public void Utility_String_ToCamelCase_FromSnakeCase()
 		{
 			const string input = "camel_case";
