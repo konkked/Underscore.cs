@@ -1,21 +1,21 @@
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Function;
 namespace Underscore.Test.Boolean
 {
 	// Generated using /codegen/boolean_negate_test.py
-	[TestClass]
+	[TestFixture]
 	public class NegateTest
 	{
 		private BooleanComponent component;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new BooleanComponent();
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_NoArguments_TrueInput()
 		{
 			Func<bool> toNegate = () => true;
@@ -25,7 +25,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(negated());
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_NoArguments_FalseInput()
 		{
 			Func<bool> toNegate = () => false;
@@ -35,7 +35,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(negated());
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_1Argument_TrueInput()
 		{
 			// this is just used to fill params
@@ -47,7 +47,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(negated(obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_1Argument_FalseInput()
 		{
 			// this is just used to fill params
@@ -59,7 +59,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(negated(obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_2Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -71,7 +71,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(negated(obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_2Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -83,7 +83,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(negated(obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_3Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -95,7 +95,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(negated(obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_3Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -107,7 +107,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(negated(obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_4Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -119,7 +119,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(negated(obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_4Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -131,7 +131,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(negated(obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_5Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -143,7 +143,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_5Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -155,7 +155,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_6Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -167,7 +167,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_6Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -179,7 +179,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_7Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -191,7 +191,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_7Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -203,7 +203,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_8Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -215,7 +215,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_8Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -227,7 +227,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_9Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -239,7 +239,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_9Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -251,7 +251,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_10Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -263,7 +263,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_10Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -275,7 +275,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_11Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -287,7 +287,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_11Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -299,7 +299,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_12Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -311,7 +311,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_12Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -323,7 +323,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_13Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -335,7 +335,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_13Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -347,7 +347,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_14Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -359,7 +359,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_14Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -371,7 +371,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_15Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -383,7 +383,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_15Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -395,7 +395,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_16Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -407,7 +407,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Negate_16Arguments_FalseInput()
 		{
 			// this is just used to fill params

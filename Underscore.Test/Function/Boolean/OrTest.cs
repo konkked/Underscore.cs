@@ -1,25 +1,25 @@
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Collections.Generic;
 using Underscore.Function;
 
 namespace Underscore.Test.Boolean
 {
 	// Generated using /codegen/boolean_or_test.py
-	[TestClass]
+	[TestFixture]
 	public class OrTest
 	{
 		private BooleanComponent component;
 		private bool[] wasCalled;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new BooleanComponent();
 			wasCalled = new[] {false, false, false, false};
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_NoArguments_TrueInput()
 		{
 			var funcsToCombine = new List<Func<bool>>
@@ -39,7 +39,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_NoArguments_FalseInput()
 		{
 			var funcsToCombine = new List<Func<bool>>
@@ -59,7 +59,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_1Argument_TrueInput()
 		{
 			// this is just used to fill params
@@ -81,7 +81,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_1Argument_FalseInput()
 		{
 			// this is just used to fill params
@@ -103,7 +103,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_2Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -125,7 +125,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_2Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -147,7 +147,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_3Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -169,7 +169,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_3Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -191,7 +191,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_4Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -213,7 +213,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_4Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -235,7 +235,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_5Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -257,7 +257,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_5Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -279,7 +279,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_6Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -301,7 +301,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_6Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -323,7 +323,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_7Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -345,7 +345,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_7Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -367,7 +367,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_8Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -389,7 +389,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_8Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -411,7 +411,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_9Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -433,7 +433,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_9Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -455,7 +455,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_10Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -477,7 +477,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_10Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -499,7 +499,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_11Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -521,7 +521,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_11Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -543,7 +543,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_12Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -565,7 +565,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_12Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -587,7 +587,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_13Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -609,7 +609,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_13Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -631,7 +631,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_14Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -653,7 +653,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_14Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -675,7 +675,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_15Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -697,7 +697,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_15Arguments_FalseInput()
 		{
 			// this is just used to fill params
@@ -719,7 +719,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsTrue(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_16Arguments_TrueInput()
 		{
 			// this is just used to fill params
@@ -741,7 +741,7 @@ namespace Underscore.Test.Boolean
 			Assert.IsFalse(wasCalled[3]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Boolean_Or_16Arguments_FalseInput()
 		{
 			// this is just used to fill params

@@ -1,16 +1,16 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Action;
 
 namespace Underscore.Test.Action
 {
-    [TestClass]
+    [TestFixture]
     public class ComposeTest
     {
         private ComposeComponent component;
         private string str;
 
-        [TestInitialize]
+        [SetUp]
         public void Initialize()
         {
             component = new ComposeComponent();
@@ -35,7 +35,7 @@ namespace Underscore.Test.Action
             return (t) => t + s;
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Compose_Compose_2Arguments()
         {
             var composeResult = component.Compose(
@@ -46,7 +46,7 @@ namespace Underscore.Test.Action
             composeResult("2");
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Compose_Compose_3Arguments()
         {
             var composeResult = component.Compose(
@@ -58,7 +58,7 @@ namespace Underscore.Test.Action
             composeResult("2");
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Compose_Compose_4Arguments()
         {
             var composeResult = component.Compose(
@@ -71,7 +71,7 @@ namespace Underscore.Test.Action
             composeResult("2");
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Compose_Compose_5Arguments()
         {
                var composeResult = component.Compose(
@@ -85,7 +85,7 @@ namespace Underscore.Test.Action
                composeResult("2");
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Compose_Compose_6Arguments()
         {            
             var composeResult = component.Compose(
@@ -100,7 +100,7 @@ namespace Underscore.Test.Action
             composeResult("2");
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Compose_Compose_7Arguments()
         {
             var component = new ComposeComponent();
@@ -118,7 +118,7 @@ namespace Underscore.Test.Action
             composeResult("2");
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Compose_Compose_8Arguments()
         {
             var composeResult = component.Compose(
@@ -135,7 +135,7 @@ namespace Underscore.Test.Action
             composeResult("2");
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Compose_Compose_9Arguments()
         {
             var act = new Action<string>(a => str += a);

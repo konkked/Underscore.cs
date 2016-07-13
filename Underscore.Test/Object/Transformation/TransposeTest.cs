@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Moq;
 using System.Reflection;
 using Underscore.Object;
@@ -6,7 +6,7 @@ using Underscore.Object.Reflection;
 
 namespace Underscore.Test.Object.Transformation
 {
-    [TestClass]
+    [TestFixture]
     public class TransposeTest
     {
         public class Person
@@ -34,7 +34,7 @@ namespace Underscore.Test.Object.Transformation
             public decimal Salary { get; set; }
         }
 
-        [TestMethod]
+        [Test]
         public void Transpose( )
         {
             var mkprop = new Mock<IPropertyComponent>( );
@@ -123,7 +123,7 @@ namespace Underscore.Test.Object.Transformation
 
         }
 
-        [TestMethod]
+        [Test]
         public void Coalesce( )
         {
             string middleName = "Henry";

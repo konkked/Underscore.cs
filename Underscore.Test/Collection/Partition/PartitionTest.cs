@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Collection;
 using Underscore.Utility;
 
 namespace Underscore.Test.Collection
 {
-	[TestClass]
+	[TestFixture]
 	public class PartitionTest
 	{
 		private PartitionComponent component;
 		private int[] target;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new PartitionComponent(new Underscore.List.PartitionComponent(new MathComponent()));
 			target = new[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Partition_Partition_IndexStartOfList()
 		{
 			var expected = Tuple.Create(
@@ -34,7 +34,7 @@ namespace Underscore.Test.Collection
 			Assert.IsTrue(expected.Item2.SequenceEqual(result.Item2));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Partition_Partition_IndexMiddleOfList()
 		{
 			var expected = Tuple.Create(
@@ -48,7 +48,7 @@ namespace Underscore.Test.Collection
 			Assert.IsTrue(expected.Item2.SequenceEqual(result.Item2));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Partition_Partition_IndexAtEndOfList()
 		{
 			var expected = Tuple.Create(
@@ -62,7 +62,7 @@ namespace Underscore.Test.Collection
 			Assert.IsTrue(expected.Item2.SequenceEqual(result.Item2));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Partition_Partition_IndexPastEndOfList()
 		{
 			var expected = Tuple.Create(
@@ -76,7 +76,7 @@ namespace Underscore.Test.Collection
 			Assert.IsTrue(expected.Item2.SequenceEqual(result.Item2));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Partition_Partition_PredicateNoMatch()
 		{
 			var expected = Tuple.Create(
@@ -90,7 +90,7 @@ namespace Underscore.Test.Collection
 			Assert.IsTrue(expected.Item2.SequenceEqual(result.Item2));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Partition_Partition_PredicateHasMatch()
 		{
 			var expected = Tuple.Create(
@@ -104,7 +104,7 @@ namespace Underscore.Test.Collection
 			Assert.IsTrue(expected.Item2.SequenceEqual(result.Item2));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Partition_PartitionMatches_NoMatches()
 		{
 			var expected = Tuple.Create(
@@ -118,7 +118,7 @@ namespace Underscore.Test.Collection
 			Assert.IsTrue(expected.Item2.SequenceEqual(result.Item2));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Partition_PartitionMatches_SomeMatches()
 		{
 			var expected = Tuple.Create(
@@ -132,7 +132,7 @@ namespace Underscore.Test.Collection
 			Assert.IsTrue(expected.Item2.SequenceEqual(result.Item2));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Partition_PartitionMatches_AllMatches()
 		{
 			var expected = Tuple.Create(

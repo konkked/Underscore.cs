@@ -1,20 +1,20 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Underscore.Utility;
 
 namespace Underscore.Test.Utility.String
 {
-	[TestClass]
+	[TestFixture]
 	public class CaseChangingTest
 	{
 		private StringComponent component;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new StringComponent();
 		}
 
-        [TestMethod]
+        [Test]
         public void Capitalize_UncapitalizedString()
         {
             const string input = "hello, world!";
@@ -25,7 +25,7 @@ namespace Underscore.Test.Utility.String
             Assert.AreEqual(expected, result);
         }
 
-        [TestMethod]
+        [Test]
         public void Capitalize_CapitalizedString()
         {
             const string input = "Hello, world!";
@@ -36,7 +36,7 @@ namespace Underscore.Test.Utility.String
             Assert.AreEqual(expected, result);
         }
 
-        [TestMethod]
+        [Test]
 		public void Utility_String_ToCamelCase_FromSnakeCase()
 		{
 			const string input = "camel_case";
@@ -47,7 +47,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToCamelCase_FromKebabCase()
 		{
 			const string input = "camel-case";
@@ -58,7 +58,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToCamelCase_FromCamelCase()
 		{
 			const string input = "camelCase";
@@ -69,7 +69,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToCamelCase_FromPascalCase()
 		{
 			const string input = "CamelCase";
@@ -80,7 +80,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToCamelCase_FromOther()
 		{
 			const string input = "Camel,Case-This.Is Not";
@@ -91,7 +91,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToPascalCase_FromSnakeCase()
 		{
 			const string input = "pascal_case";
@@ -102,7 +102,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToPascalCase_FromKebabCase()
 		{
 			const string input = "pascal-case";
@@ -113,7 +113,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToPascalCase_FromCamelCase()
 		{
 			const string input = "camelCase";
@@ -124,7 +124,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToPascalCase_FromPascalCase()
 		{
 			const string input = "PascalCase";
@@ -135,7 +135,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToPascalCase_FromOther()
 		{
 			const string input = "Pascal,Case-This.Is Not";
@@ -146,7 +146,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToSnakeCase_FromSnakeCase()
 		{
 			const string input = "snake_case";
@@ -157,7 +157,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToSnakeCase_FromKebabCase()
 		{
 			const string input = "snake-case";
@@ -168,7 +168,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToSnakeCase_FromCamelCase()
 		{
 			const string input = "snakeCase";
@@ -179,7 +179,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToSnakeCase_FromPascalCase()
 		{
 			const string input = "SnakeCase";
@@ -190,7 +190,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToSnakeCase_FromOther()
 		{
 			const string input = "Snake,Case-This.Is Not";
@@ -201,7 +201,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToKebabCase_FromSnakeCase()
 		{
 			const string input = "kebab_case";
@@ -212,7 +212,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToKebabCase_FromKebabCase()
 		{
 			const string input = "kebab-case";
@@ -223,7 +223,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToKebabCase_FromCamelCase()
 		{
 			const string input = "kebabCase";
@@ -234,7 +234,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToKebabCase_FromPascalCase()
 		{
 			const string input = "KebabCase";
@@ -245,7 +245,7 @@ namespace Underscore.Test.Utility.String
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_ToKebabCase_FromOther()
 		{
 			const string input = "Kebab,Case-This.Is Not";

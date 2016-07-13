@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Utility;
 
 namespace Underscore.Test.Utility
 {
-	[TestClass]
+	[TestFixture]
 	public class CaseMatchingTest
 	{
 		private StringComponent component;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new StringComponent();
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsCamelCase_MatchesCamelCaseString_SingleWord()
 		{
 			const string input = "foo";
@@ -27,7 +27,7 @@ namespace Underscore.Test.Utility
 			Assert.IsTrue(component.IsCamelCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsCamelCase_MatchesCamelCaseString_MultiWord()
 		{
 			const string input = "fooBar";
@@ -35,7 +35,7 @@ namespace Underscore.Test.Utility
 			Assert.IsTrue(component.IsCamelCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsCamelCase_DoesNotMatchNonCamelCaseString_HasSpace()
 		{
 			const string input = "foo Bar";
@@ -43,7 +43,7 @@ namespace Underscore.Test.Utility
 			Assert.IsFalse(component.IsCamelCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsCamelCase_DoesNotMatchNonCamelCaseString_CapitalStartLetter()
 		{
 			const string input = "FooBar";
@@ -51,7 +51,7 @@ namespace Underscore.Test.Utility
 			Assert.IsFalse(component.IsCamelCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsCamelCase_DoesNotMatchNonCamelCaseString_HasNumber()
 		{
 			const string input = "fooBar1";
@@ -59,7 +59,7 @@ namespace Underscore.Test.Utility
 			Assert.IsFalse(component.IsCamelCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsPascalCase_MatchesPascalCaseString_SingleWord()
 		{
 			const string input = "Foo";
@@ -67,7 +67,7 @@ namespace Underscore.Test.Utility
 			Assert.IsTrue(component.IsPascalCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsPascalCase_MatchesPascalCaseString_MultiWord()
 		{
 			const string input = "FooBar";
@@ -75,7 +75,7 @@ namespace Underscore.Test.Utility
 			Assert.IsTrue(component.IsPascalCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsPascalCase_DoesNotMatchNonPascalCaseString_NotCapitalized()
 		{
 			const string input = "fooBar";
@@ -83,7 +83,7 @@ namespace Underscore.Test.Utility
 			Assert.IsFalse(component.IsPascalCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsPascalCase_DoesNotMatchNonPascalCaseString_HasNumber()
 		{
 			const string input = "FooBar1";
@@ -91,7 +91,7 @@ namespace Underscore.Test.Utility
 			Assert.IsFalse(component.IsPascalCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsPascalCase_DoesNotMatchNonPascalCaseString_HasSpace()
 		{
 			const string input = "Foo Bar";
@@ -99,7 +99,7 @@ namespace Underscore.Test.Utility
 			Assert.IsFalse(component.IsPascalCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsCapitalized_MatchesCapitalizedString()
 		{
 			const string input = "FooBar";
@@ -107,7 +107,7 @@ namespace Underscore.Test.Utility
 			Assert.IsTrue(component.IsCapitalized(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsCapitalized_DoesNotMatchUncapitalizedString()
 		{
 			const string input = "fooBar";
@@ -115,7 +115,7 @@ namespace Underscore.Test.Utility
 			Assert.IsFalse(component.IsCapitalized(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsSnakeCase_MatchesSnakeCaseString_OneWord()
 		{
 			const string input = "foo";
@@ -123,7 +123,7 @@ namespace Underscore.Test.Utility
 			Assert.IsTrue(component.IsSnakeCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsSnakeCase_MatchesSnakeCaseString_MultiWord()
 		{
 			const string input = "foo_bar";
@@ -131,7 +131,7 @@ namespace Underscore.Test.Utility
 			Assert.IsTrue(component.IsSnakeCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsSnakeCase_DoesNotMatchNonSnakeCaseString_Capitalized()
 		{
 			const string input = "Foo";
@@ -139,7 +139,7 @@ namespace Underscore.Test.Utility
 			Assert.IsFalse(component.IsSnakeCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsSnakeCase_DoesNotMatchNonSnakeCaseString_HasSpace()
 		{
 			const string input = "foo bar";
@@ -147,7 +147,7 @@ namespace Underscore.Test.Utility
 			Assert.IsFalse(component.IsSnakeCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsSnakeCase_DoesNotMatchNonSnakeCaseString_HasNonUnderscoreNonLetter()
 		{
 			const string input = "foo-bar";
@@ -155,7 +155,7 @@ namespace Underscore.Test.Utility
 			Assert.IsFalse(component.IsSnakeCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsKebabCase_MatchesKebabCaseString_OneWord()
 		{
 			const string input = "foo";
@@ -163,7 +163,7 @@ namespace Underscore.Test.Utility
 			Assert.IsTrue(component.IsKebabCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsKebabCase_MatchesKebabCaseString_MultiWord()
 		{
 			const string input = "foo-bar";
@@ -171,7 +171,7 @@ namespace Underscore.Test.Utility
 			Assert.IsTrue(component.IsKebabCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsKebabCase_DoesNotMatchNonKebabCaseString_Capitalized()
 		{
 			const string input = "Foo";
@@ -179,7 +179,7 @@ namespace Underscore.Test.Utility
 			Assert.IsFalse(component.IsKebabCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsKebabCase_DoesNotMatchNonKebabCaseString_HasSpace()
 		{
 			const string input = "foo bar";
@@ -187,7 +187,7 @@ namespace Underscore.Test.Utility
 			Assert.IsFalse(component.IsKebabCase(input));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Utility_String_IsKebabCase_DoesNotMatchNonKebabCaseString_HasNonUnderscoreNonLetter()
 		{
 			const string input = "foo_bar";

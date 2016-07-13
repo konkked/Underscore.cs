@@ -179,11 +179,6 @@ namespace Underscore.Module
             return _string.IsKebabCase(s);
         }
 
-        public string ToStartCase(string s)
-        {
-            return _string.ToStartCase(s);
-        }
-
         public IEnumerable<string> Words(string s)
         {
             return _string.Words(s);

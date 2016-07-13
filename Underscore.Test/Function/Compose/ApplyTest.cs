@@ -1,23 +1,23 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System;
 using Underscore.Function;
 
 namespace Underscore.Test.Function
 {
-    [TestClass]
+    [TestFixture]
     public class ApplyTest
     {
         private ComposeComponent component;
         private string str;
 
-        [TestInitialize]
+        [SetUp]
         public void Initialize()
         {
             component = new ComposeComponent();
             str = "";
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Compose_Apply_1Argument()
         {
             var function = new Func<string, string>((a) => str += a);
@@ -28,7 +28,7 @@ namespace Underscore.Test.Function
             Assert.AreEqual(str, result);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Compose_Apply_2Arguments()
         {
             var function = new Func<string, string, string>((a, b) => str += a + b);
@@ -39,7 +39,7 @@ namespace Underscore.Test.Function
             Assert.AreEqual(str, result);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Compose_Apply_3Arguments()
         {
             var function = new Func<string, string, string, string>((a, b, c) => str += a + b + c);
@@ -50,7 +50,7 @@ namespace Underscore.Test.Function
             Assert.AreEqual(str, result);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Compose_Apply_4Arguments()
         {
             var function = new Func<string, string, string, string, string>((a, b, c, d) => str += a + b + c + d);
@@ -61,7 +61,7 @@ namespace Underscore.Test.Function
             Assert.AreEqual(str, result);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Compose_Apply_5Arguments()
         {
             var function = new Func<string, string, string, string, string, string>((a, b, c, d, e) => str += a + b + c + d + e);
@@ -72,7 +72,7 @@ namespace Underscore.Test.Function
             Assert.AreEqual(str, result);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Compose_Apply_6Arguments()
         {
             var function = new Func<string, string, string, string, string, string, string>((a, b, c, d, e, f) => str += a + b + c + d + e + f);
@@ -83,7 +83,7 @@ namespace Underscore.Test.Function
             Assert.AreEqual(str, result);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Compose_Apply_14Arguments()
         {
             var function = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) => str += a + b + c + d + e + f + g + h + i + j + k + l + m + n);
@@ -96,7 +96,7 @@ namespace Underscore.Test.Function
 
         
 
-        [TestMethod]
+        [Test]
         public void Function_Compose_Apply_7Arguments()
         {
             var function = new Func<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g) => str += a + b + c + d + e + f + g);
@@ -108,7 +108,7 @@ namespace Underscore.Test.Function
             Assert.AreEqual(str, result);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Compose_Apply_8Arguments()
         {
             var function = new Func<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) => str += a + b + c + d + e + f + g + h);
@@ -120,7 +120,7 @@ namespace Underscore.Test.Function
             Assert.AreEqual(str, result);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Compose_Apply_9Arguments()
         {
             var function = new Func<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) => str += a + b + c + d + e + f + g + h + i);
@@ -131,7 +131,7 @@ namespace Underscore.Test.Function
             Assert.AreEqual(str, result);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Compose_Apply_10Arguments()
         {
             var function = new Func<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) => str += a + b + c + d + e + f + g + h + i + j);
@@ -142,7 +142,7 @@ namespace Underscore.Test.Function
             Assert.AreEqual(str, result);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Compose_Apply_11Arguments()
         {
             var function = new Func<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) => str += a + b + c + d + e + f + g + h + i + j + k);
@@ -153,7 +153,7 @@ namespace Underscore.Test.Function
             Assert.AreEqual(str, result);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Compose_Apply_12Arguments()
         {
             var function = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) => str += a + b + c + d + e + f + g + h + i + j + k + l);
@@ -164,7 +164,7 @@ namespace Underscore.Test.Function
             Assert.AreEqual(str, result);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Compose_Apply_13Arguments()
         {
             var function = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) => str += a + b + c + d + e + f + g + h + i + j + k + l + m);
@@ -175,7 +175,7 @@ namespace Underscore.Test.Function
             Assert.AreEqual(str, result);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Compose_Apply_15Arguments()
         {
             var function = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => str += a + b + c + d + e + f + g + h + i + j + k + l + m + n + o);
@@ -186,7 +186,7 @@ namespace Underscore.Test.Function
             Assert.AreEqual(str, result);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Compose_Apply_16Arguments()
         {
             var function = new Func<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => str += a + b + c + d + e + f + g + h + i + j + k + l + m + n + o + p);
