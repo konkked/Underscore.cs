@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Moq;
 using System.Reflection;
 using Underscore.Object;
@@ -6,7 +6,7 @@ using Underscore.Object.Reflection;
 
 namespace Underscore.Test.Object.Transformation
 {
-    [TestClass]
+    [TestFixture]
     public class DynamicTest
     {
         public class Person
@@ -26,7 +26,7 @@ namespace Underscore.Test.Object.Transformation
             public int Age { get; set; }
         }
 
-        [TestMethod]
+        [Test]
         public void Object_Transformation_Dynamic()
         {
             var a = "a";

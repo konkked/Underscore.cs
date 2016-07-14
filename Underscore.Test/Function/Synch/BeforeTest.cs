@@ -1,10 +1,10 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Function;
 
 namespace Underscore.Test.Function.Synch
 {
-	[TestClass]
+	[TestFixture]
 	public class BeforeTest
 	{
 		private ISynchComponent component;
@@ -12,14 +12,14 @@ namespace Underscore.Test.Function.Synch
 
         private readonly string[] arguments = Util.LowercaseCharArray;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new SynchComponent();
 			compose = new ComposeComponent();
 		}
 
-        [TestMethod]
+        [Test]
 	    public void Function_Synch_Before_NoArguments()
 	    {
             var counter = 0;
@@ -31,7 +31,7 @@ namespace Underscore.Test.Function.Synch
                 Assert.AreEqual(1, befored());
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Before_1Argument()
         {
             var invoked = false;
@@ -55,7 +55,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
 	    public void Function_Synch_Before_2Arguments()
 	    {
             var invoked = false;
@@ -79,7 +79,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_3Arguments()
 	    {
             var invoked = false;
@@ -103,7 +103,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_4Arguments()
 	    {
 
@@ -128,7 +128,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_5Arguments()
 	    {
 
@@ -153,7 +153,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_6Arguments()
 	    {
 
@@ -178,7 +178,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_7Arguments()
 	    {
 
@@ -203,7 +203,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Before_8Arguments()
 	    {
             var invoked = false;
@@ -227,7 +227,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_9Arguments()
 	    {
 
@@ -252,7 +252,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_10Arguments()
 	    {
             var invoked = false;
@@ -276,7 +276,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_11Arguments()
 	    {
             var invoked = false;
@@ -300,7 +300,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_12Arguments()
 	    {
             var invoked = false;
@@ -324,7 +324,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_13Arguments()
 	    {
 
@@ -349,7 +349,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_14Arguments()
 	    {
 
@@ -374,7 +374,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_15Arguments()
 	    {
 
@@ -399,7 +399,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_16Arguments()
 	    {
             var invoked = false;

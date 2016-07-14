@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Underscore.Utility;
 
 namespace Underscore.Module
@@ -6,16 +7,19 @@ namespace Underscore.Module
     public class Utility :
         IFunctionComponent,
         IMathComponent,
-        IObjectComponent
+        IObjectComponent,
+        IStringComponent
     {
         private readonly IMathComponent _math;
         private readonly IFunctionComponent _function;
         private readonly IObjectComponent _object;
+        private readonly IStringComponent _string;
 
         public Utility(
             IFunctionComponent function,
             IMathComponent math,
-            IObjectComponent obj)
+            IObjectComponent obj,
+            IStringComponent str)
         {
             if (function == null)
                 throw new ArgumentNullException("function");
@@ -26,9 +30,13 @@ namespace Underscore.Module
             if (obj == null)
                 throw new ArgumentNullException("obj");
 
+            if (str == null)
+                throw new ArgumentNullException("str");
+
             _math = math;
             _function = function;
             _object = obj;
+            _string = str;
         }
 
         /// <summary>
@@ -119,6 +127,61 @@ namespace Underscore.Module
         public int Max(int x, int y)
         {
             return _math.Max(x, y);
+        }
+
+        public string ToCamelCase(string s)
+        {
+            return _string.ToCamelCase(s);
+        }
+
+        public bool IsCamelCase(string s)
+        {
+            return _string.IsCamelCase(s);
+        }
+
+        public string ToPascalCase(string s)
+        {
+            return _string.ToPascalCase(s);
+        }
+
+        public bool IsPascalCase(string s)
+        {
+            return _string.IsPascalCase(s);
+        }
+
+        public string Capitalize(string s)
+        {
+            return _string.Capitalize(s);
+        }
+
+        public bool IsCapitalized(string s)
+        {
+            return _string.IsCapitalized(s);
+        }
+
+        public string ToSnakeCase(string s)
+        {
+            return _string.ToSnakeCase(s);
+        }
+
+        public bool IsSnakeCase(string s)
+        {
+            return _string.IsSnakeCase(s);
+        }
+
+        public string ToKebabCase(string s)
+        {
+            return _string.ToKebabCase(s);
+        }
+
+        public bool IsKebabCase(string s)
+        {
+            return _string.IsKebabCase(s);
+        }
+
+        public IEnumerable<string> Words(string s)
+        {
+            return _string.Words(s);
         }
     }
 }

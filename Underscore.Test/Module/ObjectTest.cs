@@ -1,15 +1,15 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Underscore.Object;
 using Underscore.Object.Comparison;
 using Underscore.Object.Reflection;
 
 namespace Underscore.Test.Module
 {
-    [TestClass]
+    [TestFixture]
     public class ObjectTest
     {
 
-        [TestMethod]
+        [Test]
         public void ObjectCreate()
         {
             var property = new PropertyComponent();
@@ -74,7 +74,7 @@ namespace Underscore.Test.Module
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ObjectModule_NewGenericFromDefinition_OneTypeParameter()
         {
             var property = new PropertyComponent();
@@ -132,7 +132,7 @@ namespace Underscore.Test.Module
 
         }
 
-        [TestMethod]
+        [Test]
         public void ObjectModule_NewGenericFromDefinition_MatchingConstructorsWithObjects()
         {
             var property = new PropertyComponent();

@@ -1,21 +1,21 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System;
 using Underscore.Utility;
 
 namespace Underscore.Test.Utility
 {
-    [TestClass]
+    [TestFixture]
     public class CompactTest
     {
         private CompactComponent component;
 
-        [TestInitialize]
+        [SetUp]
         public void Initialize()
         {
             component = new CompactComponent();
         }
 
-        [TestMethod]
+        [Test]
         public void Utility_Compact_Pack_2Arguments()
         {
             var expected = Tuple.Create(1, 2);
@@ -24,7 +24,7 @@ namespace Underscore.Test.Utility
             Assert.IsTrue(expected.Equals(result));
         }
 
-        [TestMethod]
+        [Test]
         public void Utility_Compact_Pack_3Arguments()
         {
             var expected = Tuple.Create(1, 2, 3);
@@ -33,7 +33,7 @@ namespace Underscore.Test.Utility
             Assert.IsTrue(expected.Equals(result));
         }
 
-        [TestMethod]
+        [Test]
         public void Utility_Compact_Pack_4Arguments()
         {
             var expected = Tuple.Create(1, 2, 3, 4);
@@ -42,7 +42,7 @@ namespace Underscore.Test.Utility
             Assert.IsTrue(expected.Equals(result));
         }
 
-        [TestMethod]
+        [Test]
         public void Utility_Compact_Pack_5Arguments()
         {
             var expected = Tuple.Create(Tuple.Create(1, 2, 3, 4), 5);
@@ -51,7 +51,7 @@ namespace Underscore.Test.Utility
             Assert.IsTrue(expected.Equals(result));
         }
 
-        [TestMethod]
+        [Test]
         public void Utility_Compact_Pack_6Arguments()
         {
             var expected = Tuple.Create(Tuple.Create(1, 2, 3, 4), 5, 6);
@@ -60,7 +60,7 @@ namespace Underscore.Test.Utility
             Assert.IsTrue(expected.Equals(result));
         }
 
-        [TestMethod]
+        [Test]
         public void Utility_Compact_Pack_7Arguments()
         {
             var expected = Tuple.Create(Tuple.Create(1, 2, 3, 4), 5, 6, 7);
@@ -69,7 +69,7 @@ namespace Underscore.Test.Utility
             Assert.IsTrue(expected.Equals(result));
         }
 
-        [TestMethod]
+        [Test]
         public void Utility_Compact_Pack_8Arguments()
         {
             var expected = Tuple.Create(Tuple.Create(1, 2, 3, 4), Tuple.Create(5, 6, 7, 8));
@@ -78,7 +78,7 @@ namespace Underscore.Test.Utility
             Assert.IsTrue(expected.Equals(result));
         }
 
-        [TestMethod]
+        [Test]
         public void Utility_Compact_Pack_9Arguments()
         {
             var expected = Tuple.Create(Tuple.Create(1, 2, 3, 4), Tuple.Create(5, 6, 7, 8), 9);
@@ -87,7 +87,7 @@ namespace Underscore.Test.Utility
             Assert.IsTrue(expected.Equals(result));
         }
 
-        [TestMethod]
+        [Test]
         public void Utility_Compact_Pack_10Arguments()
         {
             var expected = Tuple.Create(Tuple.Create(1, 2, 3, 4), Tuple.Create(5, 6, 7, 8), 9, 10);
@@ -96,7 +96,7 @@ namespace Underscore.Test.Utility
             Assert.IsTrue(expected.Equals(result));
         }
 
-        [TestMethod]
+        [Test]
         public void Utility_Compact_Pack_11Arguments()
         {
             var expected = Tuple.Create(Tuple.Create(1, 2, 3, 4), Tuple.Create(5, 6, 7, 8), 9, 10, 11);
@@ -105,7 +105,7 @@ namespace Underscore.Test.Utility
             Assert.IsTrue(expected.Equals(result));
         }
 
-        [TestMethod]
+        [Test]
         public void Utility_Compact_Pack_12Arguments()
         {
             var expected = Tuple.Create(Tuple.Create(1, 2, 3, 4), Tuple.Create(5, 6, 7, 8), Tuple.Create(9, 10, 11, 12));
@@ -114,7 +114,7 @@ namespace Underscore.Test.Utility
             Assert.IsTrue(expected.Equals(result));
         }
 
-        [TestMethod]
+        [Test]
         public void Utility_Compact_Pack_13Arguments()
         {
             var expected = Tuple.Create(Tuple.Create(1, 2, 3, 4), Tuple.Create(5, 6, 7, 8), Tuple.Create(9, 10, 11, 12), 13);
@@ -123,7 +123,7 @@ namespace Underscore.Test.Utility
             Assert.IsTrue(expected.Equals(result));
         }
 
-        [TestMethod]
+        [Test]
         public void Utility_Compact_Pack_14Arguments()
         {
             var expected = Tuple.Create(Tuple.Create(1, 2, 3, 4), Tuple.Create(5, 6, 7, 8), Tuple.Create(9, 10, 11, 12), 13, 14);
@@ -132,7 +132,7 @@ namespace Underscore.Test.Utility
             Assert.IsTrue(expected.Equals(result));
         }
 
-        [TestMethod]
+        [Test]
         public void Utility_Compact_Pack_15Arguments()
         {
             var expected = Tuple.Create(Tuple.Create(1, 2, 3, 4), Tuple.Create(5, 6, 7, 8), Tuple.Create(9, 10, 11, 12), 13, 14, 15);
@@ -141,7 +141,7 @@ namespace Underscore.Test.Utility
             Assert.IsTrue(expected.Equals(result));
         }
 
-        [TestMethod]
+        [Test]
         public void Utility_Compact_Pack_16Arguments()
         {
             var expected = Tuple.Create(Tuple.Create(1, 2, 3, 4), Tuple.Create(5, 6, 7, 8), Tuple.Create(9, 10, 11, 12), Tuple.Create(13, 14, 15, 16));

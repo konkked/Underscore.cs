@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Threading.Tasks;
 using Moq;
 using System.Reflection;
@@ -10,11 +10,11 @@ using Underscore.Object.Reflection;
 
 namespace Underscore.Test.Object.Reflection
 {
-    [TestClass]
+    [TestFixture]
     public class FieldTest
     {
 #pragma warning disable 0649, 0169
-        private class FieldMethodsTestClass
+        private class FieldMethodsTestFixture
         {
             public string ShouldShowString;
             private string ShouldntShowString;
@@ -30,23 +30,23 @@ namespace Underscore.Test.Object.Reflection
 
 #pragma warning restore 0649, 0169
 
-        [TestMethod]
+        [Test]
         public async Task ObjectFields()
         {
-            var target = new FieldMethodsTestClass();
+            var target = new FieldMethodsTestFixture();
 
             var mkUtil = new Mock<ICacheComponent>();
 
-            var fields = typeof(FieldMethodsTestClass).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            var fields = typeof(FieldMethodsTestFixture).GetFields(BindingFlags.Public | BindingFlags.Instance);
 
             mkUtil.Setup(a => a.Memoize(It.IsAny<Func<Type, BindingFlags, IEnumerable<FieldInfo>>>()))
                 .Returns((a, b) => fields.AsEnumerable());
 
             var testing = new FieldComponent();
 
-            var allPublicFields = testing.All(typeof(FieldMethodsTestClass));
-            var allFieldsThatAreInts = testing.OfType(typeof(FieldMethodsTestClass), typeof(int));
-            var allFieldsThatAreStrings = testing.OfType(typeof(FieldMethodsTestClass), typeof(string));
+            var allPublicFields = testing.All(typeof(FieldMethodsTestFixture));
+            var allFieldsThatAreInts = testing.OfType(typeof(FieldMethodsTestFixture), typeof(int));
+            var allFieldsThatAreStrings = testing.OfType(typeof(FieldMethodsTestFixture), typeof(string));
 
             await Util.Tasks.Start(() =>
             {
@@ -61,11 +61,11 @@ namespace Underscore.Test.Object.Reflection
             });
         }
 
-        [TestMethod]
+        [Test]
         public async Task ObjectFieldHasField()
         {
 
-            var target = new FieldMethodsTestClass();
+            var target = new FieldMethodsTestFixture();
 
             var testing = new FieldComponent();
 
@@ -110,10 +110,10 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-        [TestMethod]
+        [Test]
         public async Task ObjectField()
         {
-            var target = new FieldMethodsTestClass();
+            var target = new FieldMethodsTestFixture();
 
             var testing = new FieldComponent();
 
@@ -171,10 +171,10 @@ namespace Underscore.Test.Object.Reflection
             });
         }
 
-        [TestMethod]
+        [Test]
         public async Task TypeField()
         {
-            var target = typeof(FieldMethodsTestClass);
+            var target = typeof(FieldMethodsTestFixture);
 
             var testing = new FieldComponent();
 
@@ -253,7 +253,7 @@ namespace Underscore.Test.Object.Reflection
 
 #pragma warning restore 0414
 
-        [TestMethod]
+        [Test]
         public void FieldValuesPublicStr()
         {
             var testing = new FieldComponent();
@@ -286,7 +286,7 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-        [TestMethod]
+        [Test]
         public void FieldValuesPrivateStr()
         {
             var testing = new FieldComponent();
@@ -308,7 +308,7 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-        [TestMethod]
+        [Test]
         public void FieldValuesPublicInt()
         {
             var testing = new FieldComponent();
@@ -322,7 +322,7 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-        [TestMethod]
+        [Test]
         public void FieldValuesPrivateInt()
         {
             var testing = new FieldComponent();
@@ -336,7 +336,7 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-        [TestMethod]
+        [Test]
         public void FieldValuesStaticInt()
         {
             var testing = new FieldComponent();
@@ -350,7 +350,7 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-        [TestMethod]
+        [Test]
         public void FieldValuesPrivateStaticInt()
         {
             var testing = new FieldComponent();

@@ -1,11 +1,11 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Linq;
 using Underscore.Object.Reflection;
 
 namespace Underscore.Test.Object.Reflection
 {
-    [TestClass]
+    [TestFixture]
     public class AttributeTest
     {
         [AttributeUsage(AttributeTargets.All,AllowMultiple=true)]
@@ -61,7 +61,7 @@ namespace Underscore.Test.Object.Reflection
             public string A { get; set; }
         }
 
-        [TestMethod]
+        [Test]
         public void AttributeHasCustomAttribute()
         {
 
@@ -101,7 +101,7 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-        [TestMethod]
+        [Test]
         public void AttributeGetCustomAttribute()
         {
 
@@ -141,7 +141,7 @@ namespace Underscore.Test.Object.Reflection
             Assert.IsTrue("First" ==  multiAttr.Info  || "Second" == multiAttr.Info);
         }
 
-        [TestMethod]
+        [Test]
         public void AttributeGetCustomAttributes()
         {
             var testing = new AttributeComponent(new MockUtilFunctionComponent());

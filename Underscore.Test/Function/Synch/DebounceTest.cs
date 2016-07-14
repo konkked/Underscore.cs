@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Function;
 
 namespace Underscore.Test.Function.Synch
 {
-	[TestClass]
+	[TestFixture]
 	public class DebounceTest
 	{
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Debounce_NoArguments()
 		{
 			var testing = new SynchComponent();
@@ -66,7 +66,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting, "Waiting({0}) was less then expected ({1})", timer.ElapsedMilliseconds, waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Debounce_1Argument()
 		{
 			var testing = new SynchComponent();
@@ -110,7 +110,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Debounce_2Arguments()
 		{
 			var testing = new SynchComponent();
@@ -153,7 +153,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Debounce_3Arguments()
 		{
 			var testing = new SynchComponent();
@@ -194,7 +194,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Debounce_4Arguments()
 		{
 
@@ -238,7 +238,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting, "Not {0} >= {1}", timer.ElapsedMilliseconds, waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Debounce_5Arguments()
 		{
 
@@ -280,7 +280,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Debounce_6Arguments()
 		{
 
@@ -330,7 +330,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Debounce_7Arguments()
 		{
 			var testing = new SynchComponent();
@@ -381,7 +381,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Debounce_8Arguments()
 		{
 			var testing = new SynchComponent();
@@ -433,7 +433,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Debounce_9Arguments()
 		{
 			var testing = new SynchComponent();
@@ -486,7 +486,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Debounce_10Arguments()
 		{
 			var testing = new SynchComponent();
@@ -540,7 +540,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Debounce_11Arguments()
 		{
 			var testing = new SynchComponent();
@@ -595,7 +595,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Debounce_12Arguments()
 		{
 			var testing = new SynchComponent();
@@ -651,7 +651,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Debounce_13Arguments()
 		{
 			var testing = new SynchComponent();
@@ -708,7 +708,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Debounce_14Arguments()
 		{
 			var testing = new SynchComponent();
@@ -766,7 +766,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Debounce_15Arguments()
 		{
 			var testing = new SynchComponent();
@@ -825,7 +825,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Debounce_16Arguments()
 		{
 			var testing = new SynchComponent();

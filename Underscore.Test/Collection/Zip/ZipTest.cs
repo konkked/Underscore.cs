@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Collection;
 
 namespace Underscore.Test.Collection.Zip
 {
-	[TestClass]
+	[TestFixture]
 	public class ZipTest
 	{
 		private ZipComponent component;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new ZipComponent();
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_2Arguments_SameTypes()
 		{
 			int[] toZipA = {1, 2, 3, 4, 5, 6};
@@ -39,7 +39,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_2Arguments_MixedTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -62,7 +62,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_2Arguments_MixedLength()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -83,7 +83,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_3Arguments_SameTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -107,7 +107,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_3Arguments_MixedTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -131,7 +131,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_3Arguments_MixedLength()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -153,7 +153,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_4Arguments_SameTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -178,7 +178,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_4Arguments_MixedTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -203,7 +203,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_4Arguments_MixedLength()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -226,7 +226,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_5Arguments_SameTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -252,7 +252,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_5Arguments_MixedTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -278,7 +278,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_5Arguments_MixedLength()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -302,7 +302,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_6Arguments_SameTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -329,7 +329,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_6Arguments_MixedTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -356,7 +356,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_6Arguments_MixedLength()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -381,7 +381,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_7Arguments_SameTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -409,7 +409,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_7Arguments_MixedTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -437,7 +437,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_7Arguments_MixedLength()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };

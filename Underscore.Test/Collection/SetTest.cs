@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Collection;
 
 namespace Underscore.Test.Collection
 {
-	[TestClass]
+	[TestFixture]
 	public class SetTest
 	{
 		private SetComponent component;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new SetComponent();
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Set_Difference()
 		{
 			var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
@@ -28,7 +28,7 @@ namespace Underscore.Test.Collection
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Set_DifferenceBy()
 		{
 			var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
@@ -43,7 +43,7 @@ namespace Underscore.Test.Collection
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Set_Intersection()
 		{
 			var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
@@ -55,7 +55,7 @@ namespace Underscore.Test.Collection
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Set_IntersectionBy()
 		{
 			var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
@@ -69,7 +69,7 @@ namespace Underscore.Test.Collection
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Set_Union()
 		{
 			var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
@@ -81,7 +81,7 @@ namespace Underscore.Test.Collection
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Set_UnionBy()
 		{
 			var a = new[] { 1, 2, 3, 4, 5, 6, 7 };

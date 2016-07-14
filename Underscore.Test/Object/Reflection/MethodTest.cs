@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Threading.Tasks;
 using Moq;
 using System.Reflection;
@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 
 namespace Underscore.Test.Object.Reflection
 {
-    [TestClass]
+    [TestFixture]
     public class MethodTest
     {
 
@@ -67,7 +67,7 @@ namespace Underscore.Test.Object.Reflection
             }
         }
 
-        [TestMethod]
+        [Test]
         public void MethodInvokeWithoutParameterAndWithoutReturnValue()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
@@ -80,7 +80,7 @@ namespace Underscore.Test.Object.Reflection
             Assert.IsNull(result);
         }
 
-        [TestMethod]
+        [Test]
         public void MethodInvokeWithoutParameterWithReturnValue()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
@@ -96,7 +96,7 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-        [TestMethod]
+        [Test]
         public void MethodInvokeWithoutParameterWithReturnValueGeneric()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
@@ -111,7 +111,7 @@ namespace Underscore.Test.Object.Reflection
             Assert.AreEqual("2", result);
         }
 
-        [TestMethod]
+        [Test]
         public void MethodInvokeWithParameterWithoutReturnValue()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
@@ -125,7 +125,7 @@ namespace Underscore.Test.Object.Reflection
             Assert.AreEqual("b", testingTarget.InvokeWithParameterWithoutReturnValueParameter2);
         }
 
-        [TestMethod]
+        [Test]
         public void MethodInvokeWithParameterWithReturnValueNonGeneric()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
@@ -139,7 +139,7 @@ namespace Underscore.Test.Object.Reflection
             Assert.AreEqual("b", testingTarget.InvokeWithParametersAndReturnValueParameter2);
         }
 
-        [TestMethod]
+        [Test]
         public void MethodInvokeWithParameterWithReturnValueGeneric()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
@@ -153,7 +153,7 @@ namespace Underscore.Test.Object.Reflection
             Assert.AreEqual("b", testingTarget.InvokeWithParametersAndReturnValueParameter2);
         }
 
-        [TestMethod]
+        [Test]
         public void MethodInvokeForAllWithParameterWithoutReturnValueLazy()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
@@ -185,7 +185,7 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-        [TestMethod]
+        [Test]
         public void MethodInvokeForAllWithParameterWithoutReturnValueGreedy()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
@@ -214,7 +214,7 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-        [TestMethod]
+        [Test]
         public void MethodInvokeForAllWithParameterWithReturnValueLazy()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
@@ -245,7 +245,7 @@ namespace Underscore.Test.Object.Reflection
             Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter2History.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void MethodInvokeForAllWithParameterWithReturnValueGreedy()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
@@ -275,7 +275,7 @@ namespace Underscore.Test.Object.Reflection
             Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter2History.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void MethodInvokeForAllWithParameterWithReturnValueGenericLazy()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
@@ -308,7 +308,7 @@ namespace Underscore.Test.Object.Reflection
             Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter2History.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void MethodInvokeForAllWithParameterWithReturnGenericGreedy()
         {
             var testingTarget = new MethodInvokeTestTargetObject();
@@ -339,11 +339,11 @@ namespace Underscore.Test.Object.Reflection
             Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter2History.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void MethodsAll1()
         {
 
-            var target = new MethodMethodsTestClass();
+            var target = new MethodMethodsTestFixture();
 
             IMethodComponent testing = SetupMethodsComponent();// = new Underscore.Object.Reflection.Methods()
 
@@ -463,13 +463,13 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-        [TestMethod]
+        [Test]
         public void MethodsTypeAll1()
         {
             // Test behave differently when they are called from another method
             // even though it is a type get's treated like a general object
             // which is why the tests are repeated
-            var target =  typeof(MethodMethodsTestClass);
+            var target =  typeof(MethodMethodsTestFixture);
 
             IMethodComponent testing = SetupMethodsComponent();// = new Underscore.Object.Reflection.Methods()
 
@@ -637,7 +637,7 @@ namespace Underscore.Test.Object.Reflection
             return a => comparing.Equals( a ) ;
         }
 
-        private class MethodMethodsTestClass
+        private class MethodMethodsTestFixture
         {
             public void ShouldShowNoReturnValue( ) { }
             private void ShouldntShowNoReturnValue( ) { }
@@ -659,7 +659,7 @@ namespace Underscore.Test.Object.Reflection
 
         private static IEnumerable<MethodInfo> AllMethodsInfo( ) 
         {
-            return typeof( MethodMethodsTestClass ).GetMethods( BindingFlags.Public | BindingFlags.Instance ).Where(a=>!a.IsSpecialName && !a.IsConstructor);
+            return typeof( MethodMethodsTestFixture ).GetMethods( BindingFlags.Public | BindingFlags.Instance ).Where(a=>!a.IsSpecialName && !a.IsConstructor);
         }
 
         private static void SetupDoubleArgMock( Mock<IMethodComponent> mock )
@@ -685,7 +685,7 @@ namespace Underscore.Test.Object.Reflection
             var forQueryEmpty = expectingForQueryEmpty as MethodInfo[] ?? expectingForQueryEmpty.ToArray();
             mock.Setup(
                 a => a.Query(
-                    It.Is<object>( b => ( b is MethodMethodsTestClass || ( b is Type && typeof( MethodMethodsTestClass ) == ( Type ) b ) ) ),
+                    It.Is<object>( b => ( b is MethodMethodsTestFixture || ( b is Type && typeof( MethodMethodsTestFixture ) == ( Type ) b ) ) ),
                     It.Is( EqualTo( new { arg1 = typeof( string ), arg2 = typeof( string ) } ) )
                 )
             )
@@ -693,7 +693,7 @@ namespace Underscore.Test.Object.Reflection
 
             mock.Setup(
                 a => a.Query(
-                    It.Is<object>( b => ( b is MethodMethodsTestClass || ( b is Type && typeof( MethodMethodsTestClass ) == ( Type ) b ) ) ),
+                    It.Is<object>( b => ( b is MethodMethodsTestFixture || ( b is Type && typeof( MethodMethodsTestFixture ) == ( Type ) b ) ) ),
                     It.Is<Type[]>( b => b.Length == 2 && b[0] == typeof(string) && b[1] == typeof(string ) )
                 )
             )
@@ -701,7 +701,7 @@ namespace Underscore.Test.Object.Reflection
 
             mock.Setup(
                 a => a.Query(
-                    It.Is<object>( b => ( b is MethodMethodsTestClass || ( b is Type && typeof( MethodMethodsTestClass ) == ( Type ) b ) ) ),
+                    It.Is<object>( b => ( b is MethodMethodsTestFixture || ( b is Type && typeof( MethodMethodsTestFixture ) == ( Type ) b ) ) ),
                     It.Is<string[]>( b => b.Count( ) == 2 && b[0] == "arg1" && b[1] == "arg2" )
                 )
             )
@@ -731,7 +731,7 @@ namespace Underscore.Test.Object.Reflection
             var forQueryEmpty = expectingForQueryEmpty as MethodInfo[] ?? expectingForQueryEmpty.ToArray();
             mock.Setup( 
                 a => a.Query( 
-                    It.Is<object>( b=> ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ), 
+                    It.Is<object>( b=> ( b is MethodMethodsTestFixture || (b is Type && typeof(MethodMethodsTestFixture) == (Type)b ) ) ), 
                     It.Is( EqualTo( new { arg = typeof(string) } ) ) 
                 ) 
             )
@@ -739,7 +739,7 @@ namespace Underscore.Test.Object.Reflection
 
             mock.Setup( 
                 a => a.Query( 
-                    It.Is<object>( b=> ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ), 
+                    It.Is<object>( b=> ( b is MethodMethodsTestFixture || (b is Type && typeof(MethodMethodsTestFixture) == (Type)b ) ) ), 
                     typeof(string) 
                 )
             )
@@ -747,7 +747,7 @@ namespace Underscore.Test.Object.Reflection
 
             mock.Setup(
                 a => a.Query(
-                    It.Is<object>( b=> ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ),
+                    It.Is<object>( b=> ( b is MethodMethodsTestFixture || (b is Type && typeof(MethodMethodsTestFixture) == (Type)b ) ) ),
                     typeof( string )
                 )
             )
@@ -755,7 +755,7 @@ namespace Underscore.Test.Object.Reflection
 
             mock.Setup(
                 a => a.Query(
-                    It.Is<object>( b=> ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ),
+                    It.Is<object>( b=> ( b is MethodMethodsTestFixture || (b is Type && typeof(MethodMethodsTestFixture) == (Type)b ) ) ),
                     "arg"
                 )
             )
@@ -763,7 +763,7 @@ namespace Underscore.Test.Object.Reflection
 
             mock.Setup(
                 a => a.Query(
-                    It.Is<object>( b=> ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ),
+                    It.Is<object>( b=> ( b is MethodMethodsTestFixture || (b is Type && typeof(MethodMethodsTestFixture) == (Type)b ) ) ),
                     It.Is( EqualTo( new { arg = typeof( string ) } ) )
                 )
             )
@@ -771,7 +771,7 @@ namespace Underscore.Test.Object.Reflection
 
             mock.Setup( 
                 a => a.Query( 
-                    It.Is<object>( b=> ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ), 
+                    It.Is<object>( b=> ( b is MethodMethodsTestFixture || (b is Type && typeof(MethodMethodsTestFixture) == (Type)b ) ) ), 
                     It.Is<object[]>( 
                         b => b.Length == 1 
                             && ( 
@@ -785,7 +785,7 @@ namespace Underscore.Test.Object.Reflection
 
             mock.Setup( 
                 a => a.Query( 
-                    It.Is<object>( b=> ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ), 
+                    It.Is<object>( b=> ( b is MethodMethodsTestFixture || (b is Type && typeof(MethodMethodsTestFixture) == (Type)b ) ) ), 
                     It.Is<object>( b => b == null ) 
                 ) 
             )
@@ -806,20 +806,20 @@ namespace Underscore.Test.Object.Reflection
                 );
 
             var forQueryEmpty = expectingForQueryEmpty as MethodInfo[] ?? expectingForQueryEmpty.ToArray();
-            mock.Setup( a => a.Query( It.Is<object>( b => ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ), It.Is( EqualTo( new { } ) ) ) )
+            mock.Setup( a => a.Query( It.Is<object>( b => ( b is MethodMethodsTestFixture || (b is Type && typeof(MethodMethodsTestFixture) == (Type)b ) ) ), It.Is( EqualTo( new { } ) ) ) )
                 .Returns( forQueryEmpty );
 
-            mock.Setup( a => a.Query( It.Is<object>( b => ( b is MethodMethodsTestClass || (b is Type && typeof(MethodMethodsTestClass) == (Type)b ) ) ), It.Is<object[]>( b => b.Length == 0 ) ) )
+            mock.Setup( a => a.Query( It.Is<object>( b => ( b is MethodMethodsTestFixture || (b is Type && typeof(MethodMethodsTestFixture) == (Type)b ) ) ), It.Is<object[]>( b => b.Length == 0 ) ) )
                 .Returns( forQueryEmpty );
 
             mock.Setup( a => a.Query(It.IsAny<object>(), It.Is<object>(b=> b == null || !(b is string && ((string)b).Contains("Shouldnt") ) ) ) )
                 .Returns( forQueryEmpty );
         }
 
-        [TestMethod]
+        [Test]
         public async Task ObjectMethodFind_PrivateMethodsNotShownByDefault()
         {
-            var target = new MethodMethodsTestClass();
+            var target = new MethodMethodsTestFixture();
 
             await Util.Tasks.Start(
                 () =>
@@ -828,7 +828,7 @@ namespace Underscore.Test.Object.Reflection
                         new Underscore.Utility.CompactComponent());
                     var testing = new MethodComponent(cacher, new PropertyComponent());
 
-                    var expecting = typeof (MethodMethodsTestClass)
+                    var expecting = typeof (MethodMethodsTestFixture)
                         .GetMethods(BindingFlags.Public | BindingFlags.Instance)
                         .First(a => a.GetParameters().FirstOrDefault() == null);
 
@@ -866,16 +866,16 @@ namespace Underscore.Test.Object.Reflection
                 });
         }
 
-        [TestMethod]
+        [Test]
         public async Task ObjectMethodFind_SingleParameter()
         {
-            var target = new MethodMethodsTestClass();
+            var target = new MethodMethodsTestFixture();
 
             await Util.Tasks.Start(
                 () =>
                 {
 
-                    var expecting = typeof (MethodMethodsTestClass)
+                    var expecting = typeof (MethodMethodsTestFixture)
                         .GetMethods(BindingFlags.Public | BindingFlags.Instance)
                         .First(a => a.GetParameters().Count() == 1
                                     && a.GetParameters().First().ParameterType == typeof (string)
@@ -921,15 +921,15 @@ namespace Underscore.Test.Object.Reflection
                 });
         }
 
-        [TestMethod]
+        [Test]
         public async Task ObjectMethodFind_TwoParameters()
         {
-            var target = new MethodMethodsTestClass();
+            var target = new MethodMethodsTestFixture();
 
             await Util.Tasks.Start(
                 () =>
                 {
-                    var expecting = typeof (MethodMethodsTestClass)
+                    var expecting = typeof (MethodMethodsTestFixture)
                         .GetMethods(BindingFlags.Public | BindingFlags.Instance)
                         .First(a => a.GetParameters().Count() == 2
                                     && a.GetParameters().First().ParameterType == typeof (string)
@@ -1002,10 +1002,10 @@ namespace Underscore.Test.Object.Reflection
                 });
         }
 
-        [TestMethod]
+        [Test]
         public async Task ObjectMethodFind_PropertyMethodsNotShown()
         {
-            var target = new MethodMethodsTestClass();
+            var target = new MethodMethodsTestFixture();
 
             await Util.Tasks.Start(
                 () =>
@@ -1033,10 +1033,10 @@ namespace Underscore.Test.Object.Reflection
                 });
         }
 
-        [TestMethod]
+        [Test]
         public void ObjectMethodFind_ReturnParameterOverride()
         {
-            var target = new MethodMethodsTestClass();
+            var target = new MethodMethodsTestFixture();
 
             //ReturnAsAParameter
             var cacher = new CacheComponent(new CompactComponent(), new Underscore.Utility.CompactComponent());
@@ -1049,10 +1049,10 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-        [TestMethod]
+        [Test]
         public async Task ObjectMethodFind_SkippingArguments()
         {
-            var target = new MethodMethodsTestClass();
+            var target = new MethodMethodsTestFixture();
 
             await Util.Tasks.Start(
                 () =>
@@ -1061,7 +1061,7 @@ namespace Underscore.Test.Object.Reflection
                     var cacher = new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
                     var testing = new MethodComponent(cacher, new PropertyComponent());
 
-                    var expecting = typeof (MethodMethodsTestClass).GetMethods().FirstOrDefault(a=> a.Name == "ShouldShowNoReturnValue" &&  a.GetParameters().Length == 2);
+                    var expecting = typeof (MethodMethodsTestFixture).GetMethods().FirstOrDefault(a=> a.Name == "ShouldShowNoReturnValue" &&  a.GetParameters().Length == 2);
 
                     var result = testing.Find(target, new [] {null, typeof(string)});
 
@@ -1070,10 +1070,10 @@ namespace Underscore.Test.Object.Reflection
                 });
         }
 
-        [TestMethod]
+        [Test]
         public async Task ObjectMethodHas( )
         {
-            var target = new MethodMethodsTestClass( );
+            var target = new MethodMethodsTestFixture( );
 
             await Util.Tasks.Start(
                 ( ) =>
@@ -1209,11 +1209,11 @@ namespace Underscore.Test.Object.Reflection
 
         }
 
-        [TestMethod]
+        [Test]
         public async Task MethodsAll2()
         {
 
-            var target = new MethodMethodsTestClass();
+            var target = new MethodMethodsTestFixture();
 
             IMethodComponent testing = SetupMethodsComponent();// = new Underscore.Object.Reflection.Methods()
 
@@ -1331,11 +1331,11 @@ namespace Underscore.Test.Object.Reflection
             });
         }
 
-        [TestMethod]
+        [Test]
         public async Task MethodsTypeAll2()
         {
 
-            var target = typeof(MethodMethodsTestClass);
+            var target = typeof(MethodMethodsTestFixture);
 
             IMethodComponent testing = SetupMethodsComponent();// = new Underscore.Object.Reflection.Methods()
 
