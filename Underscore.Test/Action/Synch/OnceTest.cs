@@ -13,8 +13,6 @@ namespace Underscore.Test.Action.Synch
         private ComposeComponent compose;
         private ISynchComponent component;
 
-        private string result = "";
-
         [SetUp]
         public void Initialize()
         {
@@ -36,6 +34,8 @@ namespace Underscore.Test.Action.Synch
         [Test]
         public void Action_Synch_Once_1Argument()
         {
+	        string result = "";
+
 	        var arguments = Util.LowercaseCharArray.Take(1).ToArray();
 
             var oncing = new Action<string>((a) =>
@@ -53,7 +53,9 @@ namespace Underscore.Test.Action.Synch
 
         [Test]
         public void Action_Synch_Once_2Arguments()
-        {
+		{
+			string result = "";
+
 			var arguments = Util.LowercaseCharArray.Take(2).ToArray();
 
             var oncing = new Action<string, string>((a, b) =>
@@ -71,7 +73,9 @@ namespace Underscore.Test.Action.Synch
 
         [Test]
         public void Action_Synch_Once_3Arguments()
-        {
+		{
+			string result = "";
+
 			var arguments = Util.LowercaseCharArray.Take(3).ToArray();
 
             var oncing = new Action<string, string, string>((a, b, c) =>
@@ -90,6 +94,8 @@ namespace Underscore.Test.Action.Synch
         [Test]
         public void Action_Synch_Once_4Arguments()
 		{
+			string result = "";
+
 			var arguments = Util.LowercaseCharArray.Take(4).ToArray();
 
             var oncing = new Action<string, string, string, string>((a, b, c, d) =>
@@ -108,6 +114,8 @@ namespace Underscore.Test.Action.Synch
         [Test]
         public void Action_Synch_Once_5Arguments()
 		{
+			string result = "";
+
 			var arguments = Util.LowercaseCharArray.Take(5).ToArray();
 
             var oncing = new Action<string, string, string, string, string>((a, b, c, d, e) =>
@@ -126,6 +134,8 @@ namespace Underscore.Test.Action.Synch
         [Test]
         public void Action_Synch_Once_6Arguments()
 		{
+			string result = "";
+
 			var arguments = Util.LowercaseCharArray.Take(6).ToArray();
 
             var oncing = new Action<string, string, string, string, string, string>((a, b, c, d, e, f) =>
@@ -144,6 +154,8 @@ namespace Underscore.Test.Action.Synch
         [Test]
         public void Action_Synch_Once_7Arguments()
 		{
+			string result = "";
+
 			var arguments = Util.LowercaseCharArray.Take(7).ToArray();
 
             var oncing = new Action<string, string, string, string, string, string, string>((a, b, c, d, e, f, g) =>
@@ -162,6 +174,8 @@ namespace Underscore.Test.Action.Synch
         [Test]
         public void Action_Synch_Once_8Arguments()
 		{
+			string result = "";
+
 			var arguments = Util.LowercaseCharArray.Take(8).ToArray();
 
             var oncing = new Action<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) =>
@@ -180,6 +194,8 @@ namespace Underscore.Test.Action.Synch
         [Test]
         public void Action_Synch_Once_9Arguments()
 		{
+			string result = "";
+
 			var arguments = Util.LowercaseCharArray.Take(9).ToArray();
 
             var oncing = new Action<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) =>
@@ -198,6 +214,8 @@ namespace Underscore.Test.Action.Synch
         [Test]
         public void Action_Synch_Once_10Arguments()
 		{
+			string result = "";
+
 			var arguments = Util.LowercaseCharArray.Take(10).ToArray();
 
             var oncing = new Action<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) =>
@@ -216,6 +234,8 @@ namespace Underscore.Test.Action.Synch
         [Test]
         public void Action_Synch_Once_11Arguments()
 		{
+			string result = "";
+
 			var arguments = Util.LowercaseCharArray.Take(11).ToArray();
 
             var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) =>
@@ -234,6 +254,8 @@ namespace Underscore.Test.Action.Synch
         [Test]
         public void Action_Synch_Once_12Arguments()
 		{
+			string result = "";
+
 			var arguments = Util.LowercaseCharArray.Take(12).ToArray();
 
             var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) =>
@@ -252,6 +274,8 @@ namespace Underscore.Test.Action.Synch
         [Test]
         public void Action_Synch_Once_13Arguments()
 		{
+			string result = "";
+
 			var arguments = Util.LowercaseCharArray.Take(13).ToArray();
 
             var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) =>
@@ -270,6 +294,8 @@ namespace Underscore.Test.Action.Synch
         [Test]
         public void Action_Synch_Once_14Arguments()
 		{
+			string result = "";
+
 			var arguments = Util.LowercaseCharArray.Take(14).ToArray();
 
             var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) =>
@@ -288,6 +314,8 @@ namespace Underscore.Test.Action.Synch
         [Test]
         public void Action_Synch_Once_15Arguments()
 		{
+			string result = "";
+
 			var arguments = Util.LowercaseCharArray.Take(15).ToArray();
 
             var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) =>
@@ -306,6 +334,8 @@ namespace Underscore.Test.Action.Synch
         [Test]
         public void Action_Synch_Once_16Arguments()
 		{
+			string result = "";
+
 			var arguments = Util.LowercaseCharArray.Take(16).ToArray();
 
             var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) =>
