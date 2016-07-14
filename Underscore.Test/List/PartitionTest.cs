@@ -200,8 +200,6 @@ namespace Underscore.Test.List
             // forward 
             // this should throw an exception
             Assert.Throws<InvalidOperationException>(() => partitioner.Slice(ls, 0, 8, -2));
-            Assert.Fail("Should have thrown an exception");
-
         }
 
         [Test]
@@ -309,10 +307,6 @@ namespace Underscore.Test.List
             // with negative step
 
             Assert.Throws<InvalidOperationException>(() => partitioner.Slice(ls, 3, 16, -2, true));
-
-
-            Assert.Fail("Should have thrown an exception");
-
         }
 
         [Test]
@@ -369,8 +363,6 @@ namespace Underscore.Test.List
             var ls = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
             Assert.Throws<InvalidOperationException>(() => partitioner.Slice(ls, 16, 3, 2, true));
-
-            Assert.Fail("Should have thrown an exception");
         }
 
         [Test]
@@ -423,9 +415,6 @@ namespace Underscore.Test.List
             // forward
             // backwards step
             Assert.Throws<InvalidOperationException>(() => partitioner.Slice(ls, -12, 3, -2, true));
-
-            Assert.Fail("Should have thrown exception");
-
         }
 
         [Test]
@@ -455,7 +444,6 @@ namespace Underscore.Test.List
             // slice length > list length
             // negative backwards
             Assert.Throws<InvalidOperationException>(() => partitioner.Slice(ls, 2, -13, 2, true));
-
         }
 
 
@@ -506,8 +494,6 @@ namespace Underscore.Test.List
             var ls = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
 			Assert.Throws<IndexOutOfRangeException>(() => partitioner.Slice(ls, 10000, 0));
-
-            Assert.Fail("Should have thrown exception");
         }
 
 
@@ -520,8 +506,6 @@ namespace Underscore.Test.List
             var ls = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
 			Assert.Throws<IndexOutOfRangeException>(() => partitioner.Slice(ls, -10000, 0));
-
-            Assert.Fail("Should have thrown exception");
         }
 
 
@@ -535,8 +519,6 @@ namespace Underscore.Test.List
             var ls = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
 			Assert.Throws<IndexOutOfRangeException>(() => partitioner.Slice(ls, 0, 100000));
-
-            Assert.Fail("Should have thrown exception");
         }
 
         [Test]
@@ -547,8 +529,6 @@ namespace Underscore.Test.List
             var ls = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
 			Assert.Throws<IndexOutOfRangeException>(() => partitioner.Slice(ls, 0, -100000));
-
-            Assert.Fail("Should have thrown exception");
         }
 
 
@@ -560,8 +540,6 @@ namespace Underscore.Test.List
             var ls = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
             Assert.Throws<InvalidOperationException>(() => partitioner.Slice(ls, 0, -1));
-
-            Assert.Fail("Should have thrown exception");
         }
 
 
