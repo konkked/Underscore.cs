@@ -22,7 +22,7 @@ namespace Underscore.Test.Action
         {
             var act = new Action<string>((a) => str += a);
 
-            component.Apply(act, new[] { "a" });
+            _.Action.Apply(act, new[] { "a" });
 
             Assert.AreEqual("a", str);
 
@@ -33,7 +33,7 @@ namespace Underscore.Test.Action
         {
             var act = new Action<string, string>((a, b) => str += a + b);
 
-            component.Apply(act, new[] { "a", "b" });
+            _.Action.Apply(act, new[] { "a", "b" });
 
             Assert.AreEqual("ab", str);
         }
@@ -43,7 +43,7 @@ namespace Underscore.Test.Action
         {
             var act = new Action<string, string, string>((a, b, c) => str += a + b + c);
 
-            component.Apply(act, new[] { "a", "b", "c" });
+            _.Action.Apply(act, new[] { "a", "b", "c" });
 
             Assert.AreEqual("abc", str);
         }
@@ -53,7 +53,7 @@ namespace Underscore.Test.Action
         {
             var act = new Action<string, string, string, string>((a, b, c, d) => str += a + b + c + d);
 
-            component.Apply(act, new[] { "a", "b", "c", "d" });
+            _.Action.Apply(act, new[] { "a", "b", "c", "d" });
 
             Assert.AreEqual("abcd", str);
         }
@@ -63,7 +63,7 @@ namespace Underscore.Test.Action
         {
             var act = new Action<string, string, string, string, string>((a, b, c, d, e) => str += a + b + c + d + e);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e" });
+            _.Action.Apply(act, new[] { "a", "b", "c", "d", "e" });
 
             Assert.AreEqual("abcde", str);
         }
@@ -73,7 +73,7 @@ namespace Underscore.Test.Action
         {
             var act = new Action<string, string, string, string, string, string>((a, b, c, d, e, f) => str += a + b + c + d + e + f);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f" });
+            _.Action.Apply(act, new[] { "a", "b", "c", "d", "e", "f" });
 
             Assert.AreEqual("abcdef", str);
         }
@@ -83,7 +83,7 @@ namespace Underscore.Test.Action
         {
             var act = new Action<string, string, string, string, string, string, string>((a, b, c, d, e, f, g) => str += a + b + c + d + e + f + g);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g" });
+            _.Action.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g" });
 
             Assert.AreEqual("abcdefg", str);
         }
@@ -93,7 +93,7 @@ namespace Underscore.Test.Action
         {
             var act = new Action<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) => str += a + b + c + d + e + f + g + h);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h" });
+            _.Action.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h" });
 
             Assert.AreEqual("abcdefgh", str);
         }
@@ -103,7 +103,7 @@ namespace Underscore.Test.Action
         {
             var act = new Action<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) => str += a + b + c + d + e + f + g + h + i);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i" });
+            _.Action.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i" });
 
             Assert.AreEqual("abcdefghi", str);
         }
@@ -113,7 +113,7 @@ namespace Underscore.Test.Action
         {
             var act = new Action<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) => str += a + b + c + d + e + f + g + h + i + j);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" });
+            _.Action.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" });
 
             Assert.AreEqual("abcdefghij", str);
         }
@@ -123,7 +123,7 @@ namespace Underscore.Test.Action
         {
             var act = new Action<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) => str += a + b + c + d + e + f + g + h + i + j + k);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k" });
+            _.Action.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k" });
 
             Assert.AreEqual("abcdefghijk", str);
         }
@@ -133,7 +133,7 @@ namespace Underscore.Test.Action
         {
             var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) => str += a + b + c + d + e + f + g + h + i + j + k + l);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l" });
+            _.Action.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l" });
 
             Assert.AreEqual("abcdefghijkl", str);
         }
@@ -143,7 +143,7 @@ namespace Underscore.Test.Action
         {
             var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) => str += a + b + c + d + e + f + g + h + i + j + k + l + m);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m" });
+            _.Action.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m" });
 
             Assert.AreEqual("abcdefghijklm", str);
         }
@@ -153,7 +153,7 @@ namespace Underscore.Test.Action
         {
             var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) => str += a + b + c + d + e + f + g + h + i + j + k + l + m + n);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n" });
+            _.Action.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n" });
 
             Assert.AreEqual("abcdefghijklmn", str);
         }
@@ -163,7 +163,7 @@ namespace Underscore.Test.Action
         {
             var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => str += a + b + c + d + e + f + g + h + i + j + k + l + m + n + o);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" });
+            _.Action.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" });
 
             Assert.AreEqual("abcdefghijklmno", str);
         }
@@ -173,7 +173,7 @@ namespace Underscore.Test.Action
         {
             var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => str += a + b + c + d + e + f + g + h + i + j + k + l + m + n + o + p);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" });
+            _.Action.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" });
 
             Assert.AreEqual("abcdefghijklmnop", str);
         }

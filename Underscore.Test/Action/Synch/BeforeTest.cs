@@ -31,7 +31,7 @@ namespace Underscore.Test.Action.Synch
         [Test]
         public void Action_Synch_Before_NoArguments()
         {
-            var befored = component.Before(() => result = (counter++).ToString(), 2);
+            var befored = _.Action.Before(() => result = (counter++).ToString(), 2);
             for (var i = 0; i < 10; i++)
                 befored();
 
@@ -48,7 +48,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Action.Before(beforing, 2);
 
             for (var i = 0; i < 4; i++)
                 funcCompose.Apply(befored, arguments);
@@ -68,7 +68,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Action.Before(beforing, 2);
 
             for (var i = 0; i < 4; i++)
                 funcCompose.Apply(befored, arguments);
@@ -87,7 +87,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Action.Before(beforing, 2);
 
             for (var i = 0; i < 4; i++)
                 funcCompose.Apply(befored, arguments);
@@ -106,7 +106,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Action.Before(beforing, 2);
 
             for (var i = 0; i < 4; i++)
                 funcCompose.Apply(befored, arguments);
@@ -125,7 +125,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Action.Before(beforing, 2);
 
             for (var i = 0; i < 4; i++)
                 funcCompose.Apply(befored, arguments);
@@ -144,7 +144,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Action.Before(beforing, 2);
 
             for (var i = 0; i < 4; i++)
                 funcCompose.Apply(befored, arguments);
@@ -163,7 +163,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Action.Before(beforing, 2);
 
             for (var i = 0; i < 4; i++)
                 funcCompose.Apply(befored, arguments);
@@ -182,7 +182,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Action.Before(beforing, 2);
 
             for (var i = 0; i < 4; i++)
                 funcCompose.Apply(befored, arguments);
@@ -201,7 +201,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Action.Before(beforing, 2);
 
             for (var i = 0; i < 4; i++)
                 funcCompose.Apply(befored, arguments);
@@ -220,7 +220,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Action.Before(beforing, 2);
 
             for (var i = 0; i < 4; i++)
                 funcCompose.Apply(befored, arguments);
@@ -239,7 +239,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Action.Before(beforing, 2);
 
             for (var i = 0; i < 4; i++)
                 funcCompose.Apply(befored, arguments);
@@ -258,7 +258,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Action.Before(beforing, 2);
 
             for (var i = 0; i < 4; i++)
                 funcCompose.Apply(befored, arguments);
@@ -277,7 +277,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Action.Before(beforing, 2);
 
             for (var i = 0; i < 4; i++)
                 funcCompose.Apply(befored, arguments);
@@ -296,7 +296,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Action.Before(beforing, 2);
 
             for (var i = 0; i < 4; i++)
                 funcCompose.Apply(befored, arguments);
@@ -315,7 +315,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Action.Before(beforing, 2);
 
             for (var i = 0; i < 4; i++)
                 funcCompose.Apply(befored, arguments);

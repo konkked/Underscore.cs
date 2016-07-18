@@ -39,7 +39,7 @@ namespace Underscore.Test.Action.Synch
         {
             var invoked = false;
             var timer = new Stopwatch();
-            var delayed = component.Delay(() => invoked = true, 100);
+            var delayed = _.Action.Delay(() => invoked = true, 100);
             var taskResult = delayed();
 
             Thread.MemoryBarrier();
@@ -62,7 +62,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Action.Delay(delaying, 100);
 
             Thread.MemoryBarrier();
 
@@ -85,7 +85,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Action.Delay(delaying, 100);
 
             Thread.MemoryBarrier();
 
@@ -107,7 +107,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Action.Delay(delaying, 100);
 
             Thread.MemoryBarrier();
 
@@ -130,7 +130,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Action.Delay(delaying, 100);
 
             Thread.MemoryBarrier();
 
@@ -154,7 +154,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Action.Delay(delaying, 100);
 
             TestDelay(100, compose.Apply(delayed, arguments));
 
@@ -177,7 +177,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Action.Delay(delaying, 100);
 
             TestDelay(100, compose.Apply(delayed, arguments));
 
@@ -201,7 +201,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Action.Delay(delaying, 100);
 
             TestDelay(100, compose.Apply(delayed, arguments));
 
@@ -226,7 +226,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Action.Delay(delaying, 100);
 
             TestDelay(100, compose.Apply(delayed, arguments));
 
@@ -252,7 +252,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Action.Delay(delaying, 100);
 
             TestDelay(100, compose.Apply(delayed, arguments));
 
@@ -279,7 +279,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Action.Delay(delaying, 100);
 
             TestDelay(100, compose.Apply(delayed, arguments));
 
@@ -307,7 +307,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Action.Delay(delaying, 100);
 
             TestDelay(100, compose.Apply(delayed, arguments));
 
@@ -336,7 +336,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Action.Delay(delaying, 100);
 
             TestDelay(100, compose.Apply(delayed, arguments));
 
@@ -366,7 +366,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Action.Delay(delaying, 100);
 
             TestDelay(100, compose.Apply(delayed, arguments));
 
@@ -397,7 +397,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Action.Delay(delaying, 100);
 
             TestDelay(100, compose.Apply(delayed, arguments));
 
@@ -429,7 +429,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Action.Delay(delaying, 100);
 
             TestDelay(100, compose.Apply(delayed, arguments));
 
@@ -462,7 +462,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Action.Delay(delaying, 100);
 
             TestDelay(100, compose.Apply(delayed, arguments));
 

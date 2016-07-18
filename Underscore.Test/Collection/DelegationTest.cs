@@ -45,7 +45,7 @@ namespace Underscore.Test.Collection
         [Test]
         public void Collection_Delegation_Invoke_WithoutArguments()
         {
-			foreach (var item in component.Invoke(testingItems, "MethodWithoutParameters"))
+			foreach (var item in _.Collection.Invoke(testingItems, "MethodWithoutParameters"))
             {
                 Assert.IsNull(item);
             }
@@ -58,7 +58,7 @@ namespace Underscore.Test.Collection
 
 	    public void Collection_Delegation_Invoke_WithArguments()
 	    {
-	        foreach (var item in component.Invoke(testingItems, "MethodWithParameters", "str"))
+	        foreach (var item in _.Collection.Invoke(testingItems, "MethodWithParameters", "str"))
 	        {
 	            Assert.IsNull(item);
 	        }

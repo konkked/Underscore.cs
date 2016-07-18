@@ -17,49 +17,49 @@ namespace Underscore.Test.Utility
         [Test]
         public void Utility_Object_Truthy_NonEmptyString()
         {
-            Assert.IsTrue(component.IsTruthy("any"));
+            Assert.IsTrue(_.Utility.IsTruthy("any"));
         }
 
         [Test]
         public void Utility_Object_Truthy_EmptyString()
         {
-            Assert.IsFalse(component.IsTruthy(""));
+            Assert.IsFalse(_.Utility.IsTruthy(""));
         }
 
         [Test]
         public void Utility_Object_Truthy_NonZero()
         {
-            Assert.IsTrue(component.IsTruthy(1));
+            Assert.IsTrue(_.Utility.IsTruthy(1));
         }
 
         [Test]
         public void Utility_Object_Truthy_Zero()
         {
-            Assert.IsFalse(component.IsTruthy(0));
+            Assert.IsFalse(_.Utility.IsTruthy(0));
         }
 
         [Test]
         public void Utility_Object_Truthy_True()
         {
-            Assert.IsTrue(component.IsTruthy(true));
+            Assert.IsTrue(_.Utility.IsTruthy(true));
         }
 
         [Test]
         public void Utility_Object_Truthy_False()
         {
-            Assert.IsFalse(component.IsTruthy(false));
+            Assert.IsFalse(_.Utility.IsTruthy(false));
         }
 
         [Test]
         public void Utility_Object_Truthy_MiscObject()
         {
-            Assert.IsTrue(component.IsTruthy(new object()));
+            Assert.IsTrue(_.Utility.IsTruthy(new object()));
         }
 
         [Test]
         public void Utility_Object_Truthy_NullObject()
         {
-            Assert.IsFalse(component.IsTruthy(null));
+            Assert.IsFalse(_.Utility.IsTruthy(null));
         }
     }
 }

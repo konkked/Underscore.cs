@@ -38,7 +38,7 @@ namespace Underscore.Test.Function.Synch
         public void Function_Synch_Delay_NoArguments()
         {
             var timer = new Stopwatch();
-            var delayed = component.Delay(() => "worked", 100);
+            var delayed = _.Function.Delay(() => "worked", 100);
 
             timer.Start();
             Thread.MemoryBarrier();
@@ -65,7 +65,7 @@ namespace Underscore.Test.Function.Synch
                 return Util.Join("", a);
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Function.Delay(delaying, 100);
 
             Thread.MemoryBarrier();
 
@@ -85,7 +85,7 @@ namespace Underscore.Test.Function.Synch
 				return Util.Join(a, b);
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Function.Delay(delaying, 100);
 
             Thread.MemoryBarrier();
 
@@ -105,7 +105,7 @@ namespace Underscore.Test.Function.Synch
 				return Util.Join(a, b, c);
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Function.Delay(delaying, 100);
 
             Thread.MemoryBarrier();
 
@@ -125,7 +125,7 @@ namespace Underscore.Test.Function.Synch
 				return Util.Join(a, b, c, d);
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Function.Delay(delaying, 100);
 
             Thread.MemoryBarrier();
 
@@ -146,7 +146,7 @@ namespace Underscore.Test.Function.Synch
             });
 
             var timer = new Stopwatch();
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Function.Delay(delaying, 100);
 
             timer.Start();
 
@@ -171,7 +171,7 @@ namespace Underscore.Test.Function.Synch
 				return Util.Join(a, b, c, d, e, f);
             });
 
-            var delayed = component.Delay(delaying, 100);
+            var delayed = _.Function.Delay(delaying, 100);
 
             Thread.MemoryBarrier();
 
@@ -191,7 +191,7 @@ namespace Underscore.Test.Function.Synch
 				return Util.Join(a, b, c, d, e, f, g);
 			});
 
-			var delayed = component.Delay(delaying, 100);
+			var delayed = _.Function.Delay(delaying, 100);
 
 			Thread.MemoryBarrier();
 
@@ -211,7 +211,7 @@ namespace Underscore.Test.Function.Synch
 				return Util.Join(a, b, c, d, e, f, g, h);
 			});
 
-			var delayed = component.Delay(delaying, 100);
+			var delayed = _.Function.Delay(delaying, 100);
 
 			Thread.MemoryBarrier();
 
@@ -231,7 +231,7 @@ namespace Underscore.Test.Function.Synch
 				return Util.Join(a, b, c, d, e, f, g, h, i);
 			});
 
-			var delayed = component.Delay(delaying, 100);
+			var delayed = _.Function.Delay(delaying, 100);
 
 			Thread.MemoryBarrier();
 
@@ -251,7 +251,7 @@ namespace Underscore.Test.Function.Synch
 				return Util.Join(a, b, c, d, e, f, g, h, i, j);
 			});
 
-			var delayed = component.Delay(delaying, 100);
+			var delayed = _.Function.Delay(delaying, 100);
 
 			Thread.MemoryBarrier();
 
@@ -271,7 +271,7 @@ namespace Underscore.Test.Function.Synch
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k);
 			});
 
-			var delayed = component.Delay(delaying, 100);
+			var delayed = _.Function.Delay(delaying, 100);
 
 			Thread.MemoryBarrier();
 
@@ -291,7 +291,7 @@ namespace Underscore.Test.Function.Synch
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
 			});
 
-			var delayed = component.Delay(delaying, 100);
+			var delayed = _.Function.Delay(delaying, 100);
 
 			Thread.MemoryBarrier();
 
@@ -311,7 +311,7 @@ namespace Underscore.Test.Function.Synch
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
 			});
 
-			var delayed = component.Delay(delaying, 100);
+			var delayed = _.Function.Delay(delaying, 100);
 
 			Thread.MemoryBarrier();
 
@@ -331,7 +331,7 @@ namespace Underscore.Test.Function.Synch
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 			});
 
-			var delayed = component.Delay(delaying, 100);
+			var delayed = _.Function.Delay(delaying, 100);
 
 			Thread.MemoryBarrier();
 
@@ -351,7 +351,7 @@ namespace Underscore.Test.Function.Synch
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 			});
 
-			var delayed = component.Delay(delaying, 100);
+			var delayed = _.Function.Delay(delaying, 100);
 
 			Thread.MemoryBarrier();
 
@@ -371,7 +371,7 @@ namespace Underscore.Test.Function.Synch
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 			});
 
-			var delayed = component.Delay(delaying, 100);
+			var delayed = _.Function.Delay(delaying, 100);
 
 			Thread.MemoryBarrier();
 

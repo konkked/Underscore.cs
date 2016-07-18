@@ -31,7 +31,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, 7)
 			};
 
-			var result = component.Zip(toZipA, toZipB).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -54,7 +54,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, "f")
 			};
 
-			var result = component.Zip(toZipA, toZipB).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -75,7 +75,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(4, 5)
 			};
 
-			var result = component.Zip(toZipA, toZipB).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -99,7 +99,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, 7, 8)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -123,7 +123,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, "f", 8.0)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -145,7 +145,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(4, 5, 6)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -170,7 +170,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, 7, 8, 9)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -195,7 +195,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, "f", 8.0, 'u')
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -218,7 +218,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(4, 5, 6, 7)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -244,7 +244,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, 7, 8, 9, 10)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -270,7 +270,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, "f", 8.0, 'u', 10m)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -294,7 +294,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(4, 5, 6, 7, 8)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -321,7 +321,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, 7, 8, 9, 10, 11)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -348,7 +348,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, "f", 8.0, 'u', 10m, 11f)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -373,7 +373,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(4, 5, 6, 7, 8, 9),
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -401,7 +401,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, 7, 8, 9, 10, 11, 12)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF, toZipG).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF, toZipG).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -429,7 +429,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, "f", 8.0, 'u', 10m, 11f, 12L)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF, toZipG).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF, toZipG).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -455,7 +455,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(4, 5, 6, 7, 8, 9, 10),
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF, toZipG).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF, toZipG).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{

@@ -24,7 +24,7 @@ namespace Underscore.Test.Action.Synch
         public void Action_Synch_Once_NoArguments()
         {
             var result = 0;
-            var onced = component.Once(() => result++);
+            var onced = _.Action.Once(() => result++);
             for (var i = 0; i < 10; i++)
                 onced();
 
@@ -43,7 +43,7 @@ namespace Underscore.Test.Action.Synch
                 result += string.Join("", a);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Action.Once(oncing);
 
             for (var i = 0; i < 100; i++)
                 compose.Apply(onced, arguments);
@@ -63,7 +63,7 @@ namespace Underscore.Test.Action.Synch
                 result += string.Join("", a, b);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Action.Once(oncing);
 			
             for (var i = 0; i < 100; i++)
 				compose.Apply(onced, arguments);
@@ -83,7 +83,7 @@ namespace Underscore.Test.Action.Synch
                 result += string.Join("", a, b, c);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Action.Once(oncing);
 
             for (var i = 0; i < 100; i++)
                 compose.Apply(onced, arguments);
@@ -103,7 +103,7 @@ namespace Underscore.Test.Action.Synch
                 result += string.Join("", a, b, c, d);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Action.Once(oncing);
 
             for (var i = 0; i < 100; i++)
                 compose.Apply(onced, arguments);
@@ -123,7 +123,7 @@ namespace Underscore.Test.Action.Synch
                 result += string.Join("", a, b, c, d, e);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Action.Once(oncing);
 
             for (var i = 0; i < 100; i++)
                 compose.Apply(onced, arguments);
@@ -143,7 +143,7 @@ namespace Underscore.Test.Action.Synch
                 result += string.Join("", a, b, c, d, e, f);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Action.Once(oncing);
 
             for (var i = 0; i < 100; i++)
                 compose.Apply(onced, arguments);
@@ -163,7 +163,7 @@ namespace Underscore.Test.Action.Synch
                 result += string.Join("", a, b, c, d, e, f, g);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Action.Once(oncing);
 
             for (var i = 0; i < 100; i++)
                 compose.Apply(onced, arguments);
@@ -183,7 +183,7 @@ namespace Underscore.Test.Action.Synch
                 result += string.Join("", a, b, c, d, e, f, g, h);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Action.Once(oncing);
 
             for (var i = 0; i < 100; i++)
                 compose.Apply(onced, arguments);
@@ -203,7 +203,7 @@ namespace Underscore.Test.Action.Synch
                 result += string.Join("", a, b, c, d, e, f, g, h, i);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Action.Once(oncing);
 
             for (var i = 0; i < 100; i++)
                 compose.Apply(onced, arguments);
@@ -223,7 +223,7 @@ namespace Underscore.Test.Action.Synch
                 result += string.Join("", a, b, c, d, e, f, g, h, i, j);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Action.Once(oncing);
 
             for (var i = 0; i < 100; i++)
                 compose.Apply(onced, arguments);
@@ -243,7 +243,7 @@ namespace Underscore.Test.Action.Synch
                 result += string.Join("", a, b, c, d, e, f, g, h, i, j, k);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Action.Once(oncing);
 
             for (var i = 0; i < 100; i++)
                 compose.Apply(onced, arguments);
@@ -263,7 +263,7 @@ namespace Underscore.Test.Action.Synch
                 result += string.Join("", a, b, c, d, e, f, g, h, i, j, k, l);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Action.Once(oncing);
 
             for (var i = 0; i < 100; i++)
                 compose.Apply(onced, arguments);
@@ -283,7 +283,7 @@ namespace Underscore.Test.Action.Synch
                 result += string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Action.Once(oncing);
 
             for (var i = 0; i < 100; i++)
                 compose.Apply(onced, arguments);
@@ -303,7 +303,7 @@ namespace Underscore.Test.Action.Synch
                 result += string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Action.Once(oncing);
 
             for (var i = 0; i < 100; i++)
                 compose.Apply(onced, arguments);
@@ -323,7 +323,7 @@ namespace Underscore.Test.Action.Synch
                 result += string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Action.Once(oncing);
 
             for (var i = 0; i < 100; i++)
                 compose.Apply(onced, arguments);
@@ -343,7 +343,7 @@ namespace Underscore.Test.Action.Synch
                 result += string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Action.Once(oncing);
 
             for (var i = 0; i < 100; i++)
                 compose.Apply(onced, arguments);

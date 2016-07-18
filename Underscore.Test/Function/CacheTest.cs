@@ -29,7 +29,7 @@ namespace Underscore.Test.Function
                 return Util.Join(a);
             };
 
-            var memoized = component.Memoize(testFn);
+            var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -66,7 +66,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -103,7 +103,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -140,7 +140,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -177,7 +177,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -214,7 +214,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -251,7 +251,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -288,7 +288,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -325,7 +325,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h, i);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -362,7 +362,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h, i, j);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -399,7 +399,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -436,7 +436,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -473,7 +473,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -510,7 +510,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -547,7 +547,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -584,7 +584,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 

@@ -34,7 +34,7 @@ namespace Underscore.Test.Action.Synch
         [Test]
         public void Action_Synch_After_NoArguments()
         {
-            var aftered = component.After(() => result = (counter++).ToString(), 3);
+            var aftered = _.Action.After(() => result = (counter++).ToString(), 3);
 
             var tasks = new Task[10];
             for (var i = 0; i < 10; i++)
@@ -57,7 +57,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < arr.Length; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -81,7 +81,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -103,7 +103,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -125,7 +125,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -147,7 +147,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
 
             for (var i = 0; i < 4; i++)
@@ -170,7 +170,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
 
             for (var i = 0; i < 4; i++)
@@ -193,7 +193,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
 
             for (var i = 0; i < 4; i++)
@@ -216,7 +216,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
 
             for (var i = 0; i < 4; i++)
@@ -239,7 +239,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
 
             for (var i = 0; i < 4; i++)
@@ -262,7 +262,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -284,7 +284,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -306,7 +306,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -328,7 +328,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -350,7 +350,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -372,7 +372,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);

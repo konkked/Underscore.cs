@@ -31,7 +31,7 @@ namespace Underscore.Test.Collection.Partition
 				new List<int> { 8, 9 }
 			};
 
-			var result = component.Chunk(target, 2).ToList();
+			var result = _.Collection.Chunk(target, 2).ToList();
 
 			Assert.AreEqual(expected.Count, result.Count);
 
@@ -54,7 +54,7 @@ namespace Underscore.Test.Collection.Partition
 				new List<int> { 9 }
 			};
 
-			var result = component.Chunk(target, 3).ToList();
+			var result = _.Collection.Chunk(target, 3).ToList();
 
 			Assert.AreEqual(expected.Count, result.Count);
 
@@ -74,7 +74,7 @@ namespace Underscore.Test.Collection.Partition
 				new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
 			};
 
-			var result = component.Chunk(target, n => n == 10).ToList();
+			var result = _.Collection.Chunk(target, n => n == 10).ToList();
 
 			Assert.AreEqual(expected.Count, result.Count);
 
@@ -98,7 +98,7 @@ namespace Underscore.Test.Collection.Partition
 				new List<int> { 8, 9 }
 			};
 
-			var result = component.Chunk(target, n => n % 2 == 0).ToList();
+			var result = _.Collection.Chunk(target, n => n % 2 == 0).ToList();
 
 			Assert.AreEqual(expected.Count, result.Count);
 
@@ -127,7 +127,7 @@ namespace Underscore.Test.Collection.Partition
 				new List<int> { 9 },
 			};
 
-			var result = component.Chunk(target, n => n % 1 == 0).ToList();
+			var result = _.Collection.Chunk(target, n => n % 1 == 0).ToList();
 
 			Assert.AreEqual(expected.Count, result.Count);
 

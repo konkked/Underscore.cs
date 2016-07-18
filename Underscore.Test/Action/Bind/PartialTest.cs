@@ -42,7 +42,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string> toBind = (a, b) => output[0] = Util.Join(a, b);
 
-			var binding = component.Partial(toBind, Arg1);
+			var binding = _.Action.Partial(toBind, Arg1);
 			binding(Arg2);
 
 			Assert.AreEqual(expected, output[0]);
@@ -55,7 +55,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string> toBind = (a, b, c) => output[0] = Util.Join(a, b, c);
 
-			var binding = component.Partial(toBind, Arg1);
+			var binding = _.Action.Partial(toBind, Arg1);
 			binding(Arg2, Arg3);
 
 			Assert.AreEqual(expected, output[0]);
@@ -68,7 +68,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string> toBind = (a, b, c) => output[0] = Util.Join(a, b, c);
 
-			var binding = component.Partial(toBind, Arg1, Arg2);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2);
 			binding(Arg3);
 
 			Assert.AreEqual(expected, output[0]);
@@ -81,7 +81,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string> toBind = (a, b, c, d) => output[0] = Util.Join(a, b, c, d);
 
-			var binding = component.Partial(toBind, Arg1);
+			var binding = _.Action.Partial(toBind, Arg1);
 			binding(Arg2, Arg3, Arg4);
 
 			Assert.AreEqual(expected, output[0]);
@@ -94,7 +94,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string> toBind = (a, b, c, d) => output[0] = Util.Join(a, b, c, d);
 
-			var binding = component.Partial(toBind, Arg1, Arg2);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2);
 			binding(Arg3, Arg4);
 
 			Assert.AreEqual(expected, output[0]);
@@ -107,7 +107,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string> toBind = (a, b, c, d) => output[0] = Util.Join(a, b, c, d);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3);
 			binding(Arg4);
 
 			Assert.AreEqual(expected, output[0]);
@@ -120,7 +120,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string> toBind = (a, b, c, d, e) => output[0] = Util.Join(a, b, c, d, e);
 
-			var binding = component.Partial(toBind, Arg1);
+			var binding = _.Action.Partial(toBind, Arg1);
 			binding(Arg2, Arg3, Arg4, Arg5);
 
 			Assert.AreEqual(expected, output[0]);
@@ -133,7 +133,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string> toBind = (a, b, c, d, e) => output[0] = Util.Join(a, b, c, d, e);
 
-			var binding = component.Partial(toBind, Arg1, Arg2);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2);
 			binding(Arg3, Arg4, Arg5);
 
 			Assert.AreEqual(expected, output[0]);
@@ -146,7 +146,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string> toBind = (a, b, c, d, e) => output[0] = Util.Join(a, b, c, d, e);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3);
 			binding(Arg4, Arg5);
 
 			Assert.AreEqual(expected, output[0]);
@@ -159,7 +159,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string> toBind = (a, b, c, d, e) => output[0] = Util.Join(a, b, c, d, e);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
 			binding(Arg5);
 
 			Assert.AreEqual(expected, output[0]);
@@ -172,7 +172,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string> toBind = (a, b, c, d, e, f) => output[0] = Util.Join(a, b, c, d, e, f);
 
-			var binding = component.Partial(toBind, Arg1);
+			var binding = _.Action.Partial(toBind, Arg1);
 			binding(Arg2, Arg3, Arg4, Arg5, Arg6);
 
 			Assert.AreEqual(expected, output[0]);
@@ -185,7 +185,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string> toBind = (a, b, c, d, e, f) => output[0] = Util.Join(a, b, c, d, e, f);
 
-			var binding = component.Partial(toBind, Arg1, Arg2);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2);
 			binding(Arg3, Arg4, Arg5, Arg6);
 
 			Assert.AreEqual(expected, output[0]);
@@ -198,7 +198,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string> toBind = (a, b, c, d, e, f) => output[0] = Util.Join(a, b, c, d, e, f);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3);
 			binding(Arg4, Arg5, Arg6);
 
 			Assert.AreEqual(expected, output[0]);
@@ -211,7 +211,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string> toBind = (a, b, c, d, e, f) => output[0] = Util.Join(a, b, c, d, e, f);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
 			binding(Arg5, Arg6);
 
 			Assert.AreEqual(expected, output[0]);
@@ -224,7 +224,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string> toBind = (a, b, c, d, e, f) => output[0] = Util.Join(a, b, c, d, e, f);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
 			binding(Arg6);
 
 			Assert.AreEqual(expected, output[0]);
@@ -237,7 +237,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g) => output[0] = Util.Join(a, b, c, d, e, f, g);
 
-			var binding = component.Partial(toBind, Arg1);
+			var binding = _.Action.Partial(toBind, Arg1);
 			binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 
 			Assert.AreEqual(expected, output[0]);
@@ -250,7 +250,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g) => output[0] = Util.Join(a, b, c, d, e, f, g);
 
-			var binding = component.Partial(toBind, Arg1, Arg2);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2);
 			binding(Arg3, Arg4, Arg5, Arg6, Arg7);
 
 			Assert.AreEqual(expected, output[0]);
@@ -263,7 +263,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g) => output[0] = Util.Join(a, b, c, d, e, f, g);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3);
 			binding(Arg4, Arg5, Arg6, Arg7);
 
 			Assert.AreEqual(expected, output[0]);
@@ -276,7 +276,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g) => output[0] = Util.Join(a, b, c, d, e, f, g);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
 			binding(Arg5, Arg6, Arg7);
 
 			Assert.AreEqual(expected, output[0]);
@@ -289,7 +289,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g) => output[0] = Util.Join(a, b, c, d, e, f, g);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
 			binding(Arg6, Arg7);
 
 			Assert.AreEqual(expected, output[0]);
@@ -302,7 +302,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g) => output[0] = Util.Join(a, b, c, d, e, f, g);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 			binding(Arg7);
 
 			Assert.AreEqual(expected, output[0]);
@@ -315,7 +315,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h) => output[0] = Util.Join(a, b, c, d, e, f, g, h);
 
-			var binding = component.Partial(toBind, Arg1);
+			var binding = _.Action.Partial(toBind, Arg1);
 			binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
 			Assert.AreEqual(expected, output[0]);
@@ -328,7 +328,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h) => output[0] = Util.Join(a, b, c, d, e, f, g, h);
 
-			var binding = component.Partial(toBind, Arg1, Arg2);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2);
 			binding(Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 
 			Assert.AreEqual(expected, output[0]);
@@ -341,7 +341,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h) => output[0] = Util.Join(a, b, c, d, e, f, g, h);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3);
 			binding(Arg4, Arg5, Arg6, Arg7, Arg8);
 
 			Assert.AreEqual(expected, output[0]);
@@ -354,7 +354,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h) => output[0] = Util.Join(a, b, c, d, e, f, g, h);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
 			binding(Arg5, Arg6, Arg7, Arg8);
 
 			Assert.AreEqual(expected, output[0]);
@@ -367,7 +367,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h) => output[0] = Util.Join(a, b, c, d, e, f, g, h);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
 			binding(Arg6, Arg7, Arg8);
 
 			Assert.AreEqual(expected, output[0]);
@@ -380,7 +380,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h) => output[0] = Util.Join(a, b, c, d, e, f, g, h);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 			binding(Arg7, Arg8);
 
 			Assert.AreEqual(expected, output[0]);
@@ -393,7 +393,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h) => output[0] = Util.Join(a, b, c, d, e, f, g, h);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 			binding(Arg8);
 
 			Assert.AreEqual(expected, output[0]);
@@ -406,7 +406,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i);
 
-			var binding = component.Partial(toBind, Arg1);
+			var binding = _.Action.Partial(toBind, Arg1);
 			binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
 			Assert.AreEqual(expected, output[0]);
@@ -419,7 +419,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i);
 
-			var binding = component.Partial(toBind, Arg1, Arg2);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2);
 			binding(Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
 			Assert.AreEqual(expected, output[0]);
@@ -432,7 +432,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3);
 			binding(Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 
 			Assert.AreEqual(expected, output[0]);
@@ -445,7 +445,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
 			binding(Arg5, Arg6, Arg7, Arg8, Arg9);
 
 			Assert.AreEqual(expected, output[0]);
@@ -458,7 +458,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
 			binding(Arg6, Arg7, Arg8, Arg9);
 
 			Assert.AreEqual(expected, output[0]);
@@ -471,7 +471,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 			binding(Arg7, Arg8, Arg9);
 
 			Assert.AreEqual(expected, output[0]);
@@ -484,7 +484,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 			binding(Arg8, Arg9);
 
 			Assert.AreEqual(expected, output[0]);
@@ -497,7 +497,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 			binding(Arg9);
 
 			Assert.AreEqual(expected, output[0]);
@@ -510,7 +510,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j);
 
-			var binding = component.Partial(toBind, Arg1);
+			var binding = _.Action.Partial(toBind, Arg1);
 			binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
 
 			Assert.AreEqual(expected, output[0]);
@@ -523,7 +523,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j);
 
-			var binding = component.Partial(toBind, Arg1, Arg2);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2);
 			binding(Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
 
 			Assert.AreEqual(expected, output[0]);
@@ -536,7 +536,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3);
 			binding(Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
 
 			Assert.AreEqual(expected, output[0]);
@@ -549,7 +549,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
 			binding(Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
 
 			Assert.AreEqual(expected, output[0]);
@@ -562,7 +562,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
 			binding(Arg6, Arg7, Arg8, Arg9, Arg10);
 
 			Assert.AreEqual(expected, output[0]);
@@ -575,7 +575,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 			binding(Arg7, Arg8, Arg9, Arg10);
 
 			Assert.AreEqual(expected, output[0]);
@@ -588,7 +588,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 			binding(Arg8, Arg9, Arg10);
 
 			Assert.AreEqual(expected, output[0]);
@@ -601,7 +601,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 			binding(Arg9, Arg10);
 
 			Assert.AreEqual(expected, output[0]);
@@ -614,7 +614,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 			binding(Arg10);
 
 			Assert.AreEqual(expected, output[0]);
@@ -627,7 +627,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k);
 
-			var binding = component.Partial(toBind, Arg1);
+			var binding = _.Action.Partial(toBind, Arg1);
 			binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
 
 			Assert.AreEqual(expected, output[0]);
@@ -640,7 +640,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k);
 
-			var binding = component.Partial(toBind, Arg1, Arg2);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2);
 			binding(Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
 
 			Assert.AreEqual(expected, output[0]);
@@ -653,7 +653,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3);
 			binding(Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
 
 			Assert.AreEqual(expected, output[0]);
@@ -666,7 +666,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
 			binding(Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
 
 			Assert.AreEqual(expected, output[0]);
@@ -679,7 +679,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
 			binding(Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
 
 			Assert.AreEqual(expected, output[0]);
@@ -692,7 +692,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 			binding(Arg7, Arg8, Arg9, Arg10, Arg11);
 
 			Assert.AreEqual(expected, output[0]);
@@ -705,7 +705,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 			binding(Arg8, Arg9, Arg10, Arg11);
 
 			Assert.AreEqual(expected, output[0]);
@@ -718,7 +718,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 			binding(Arg9, Arg10, Arg11);
 
 			Assert.AreEqual(expected, output[0]);
@@ -731,7 +731,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 			binding(Arg10, Arg11);
 
 			Assert.AreEqual(expected, output[0]);
@@ -744,7 +744,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
 			binding(Arg11);
 
 			Assert.AreEqual(expected, output[0]);
@@ -757,7 +757,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
 
-			var binding = component.Partial(toBind, Arg1);
+			var binding = _.Action.Partial(toBind, Arg1);
 			binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
 
 			Assert.AreEqual(expected, output[0]);
@@ -770,7 +770,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
 
-			var binding = component.Partial(toBind, Arg1, Arg2);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2);
 			binding(Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
 
 			Assert.AreEqual(expected, output[0]);
@@ -783,7 +783,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3);
 			binding(Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
 
 			Assert.AreEqual(expected, output[0]);
@@ -796,7 +796,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
 			binding(Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
 
 			Assert.AreEqual(expected, output[0]);
@@ -809,7 +809,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
 			binding(Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
 
 			Assert.AreEqual(expected, output[0]);
@@ -822,7 +822,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 			binding(Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
 
 			Assert.AreEqual(expected, output[0]);
@@ -835,7 +835,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 			binding(Arg8, Arg9, Arg10, Arg11, Arg12);
 
 			Assert.AreEqual(expected, output[0]);
@@ -848,7 +848,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 			binding(Arg9, Arg10, Arg11, Arg12);
 
 			Assert.AreEqual(expected, output[0]);
@@ -861,7 +861,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 			binding(Arg10, Arg11, Arg12);
 
 			Assert.AreEqual(expected, output[0]);
@@ -874,7 +874,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
 			binding(Arg11, Arg12);
 
 			Assert.AreEqual(expected, output[0]);
@@ -887,7 +887,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
 			binding(Arg12);
 
 			Assert.AreEqual(expected, output[0]);
@@ -900,7 +900,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
 
-			var binding = component.Partial(toBind, Arg1);
+			var binding = _.Action.Partial(toBind, Arg1);
 			binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
 
 			Assert.AreEqual(expected, output[0]);
@@ -913,7 +913,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
 
-			var binding = component.Partial(toBind, Arg1, Arg2);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2);
 			binding(Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
 
 			Assert.AreEqual(expected, output[0]);
@@ -926,7 +926,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3);
 			binding(Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
 
 			Assert.AreEqual(expected, output[0]);
@@ -939,7 +939,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
 			binding(Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
 
 			Assert.AreEqual(expected, output[0]);
@@ -952,7 +952,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
 			binding(Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
 
 			Assert.AreEqual(expected, output[0]);
@@ -965,7 +965,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 			binding(Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
 
 			Assert.AreEqual(expected, output[0]);
@@ -978,7 +978,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 			binding(Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
 
 			Assert.AreEqual(expected, output[0]);
@@ -991,7 +991,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 			binding(Arg9, Arg10, Arg11, Arg12, Arg13);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1004,7 +1004,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 			binding(Arg10, Arg11, Arg12, Arg13);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1017,7 +1017,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
 			binding(Arg11, Arg12, Arg13);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1030,7 +1030,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
 			binding(Arg12, Arg13);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1043,7 +1043,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
 			binding(Arg13);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1056,7 +1056,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 
-			var binding = component.Partial(toBind, Arg1);
+			var binding = _.Action.Partial(toBind, Arg1);
 			binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1069,7 +1069,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 
-			var binding = component.Partial(toBind, Arg1, Arg2);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2);
 			binding(Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1082,7 +1082,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3);
 			binding(Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1095,7 +1095,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
 			binding(Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1108,7 +1108,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
 			binding(Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1121,7 +1121,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 			binding(Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1134,7 +1134,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 			binding(Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1147,7 +1147,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 			binding(Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1160,7 +1160,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 			binding(Arg10, Arg11, Arg12, Arg13, Arg14);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1173,7 +1173,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
 			binding(Arg11, Arg12, Arg13, Arg14);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1186,7 +1186,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
 			binding(Arg12, Arg13, Arg14);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1199,7 +1199,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
 			binding(Arg13, Arg14);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1212,7 +1212,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
 			binding(Arg14);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1225,7 +1225,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 
-			var binding = component.Partial(toBind, Arg1);
+			var binding = _.Action.Partial(toBind, Arg1);
 			binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1238,7 +1238,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 
-			var binding = component.Partial(toBind, Arg1, Arg2);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2);
 			binding(Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1251,7 +1251,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3);
 			binding(Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1264,7 +1264,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
 			binding(Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1277,7 +1277,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
 			binding(Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1290,7 +1290,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 			binding(Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1303,7 +1303,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 			binding(Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1316,7 +1316,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 			binding(Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1329,7 +1329,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 			binding(Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1342,7 +1342,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
 			binding(Arg11, Arg12, Arg13, Arg14, Arg15);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1355,7 +1355,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
 			binding(Arg12, Arg13, Arg14, Arg15);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1368,7 +1368,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
 			binding(Arg13, Arg14, Arg15);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1381,7 +1381,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
 			binding(Arg14, Arg15);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1394,7 +1394,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
 			binding(Arg15);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1407,7 +1407,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
-			var binding = component.Partial(toBind, Arg1);
+			var binding = _.Action.Partial(toBind, Arg1);
 			binding(Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15, Arg16);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1420,7 +1420,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
-			var binding = component.Partial(toBind, Arg1, Arg2);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2);
 			binding(Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15, Arg16);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1433,7 +1433,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3);
 			binding(Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15, Arg16);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1446,7 +1446,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4);
 			binding(Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15, Arg16);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1459,7 +1459,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5);
 			binding(Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15, Arg16);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1472,7 +1472,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
 			binding(Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15, Arg16);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1485,7 +1485,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7);
 			binding(Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15, Arg16);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1498,7 +1498,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8);
 			binding(Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15, Arg16);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1511,7 +1511,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9);
 			binding(Arg10, Arg11, Arg12, Arg13, Arg14, Arg15, Arg16);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1524,7 +1524,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10);
 			binding(Arg11, Arg12, Arg13, Arg14, Arg15, Arg16);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1537,7 +1537,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11);
 			binding(Arg12, Arg13, Arg14, Arg15, Arg16);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1550,7 +1550,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12);
 			binding(Arg13, Arg14, Arg15, Arg16);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1563,7 +1563,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13);
 			binding(Arg14, Arg15, Arg16);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1576,7 +1576,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14);
 			binding(Arg15, Arg16);
 
 			Assert.AreEqual(expected, output[0]);
@@ -1589,7 +1589,7 @@ namespace Underscore.Test.Action{
 
 			Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string> toBind = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 
-			var binding = component.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
+			var binding = _.Action.Partial(toBind, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9, Arg10, Arg11, Arg12, Arg13, Arg14, Arg15);
 			binding(Arg16);
 
 			Assert.AreEqual(expected, output[0]);

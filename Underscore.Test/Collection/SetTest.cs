@@ -23,7 +23,7 @@ namespace Underscore.Test.Collection
 			var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
 			var expected = new[] { 1, 2, 3, 8, 9, 10 };
 
-			var result = component.Difference(a, b);
+			var result = _.Collection.Difference(a, b);
 
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
@@ -38,7 +38,7 @@ namespace Underscore.Test.Collection
 
 			var expected = new[] { "1", "2", "3", "8", "9", "10" };
 
-			var result = component.DifferenceBy(a, b, transform);
+			var result = _.Collection.DifferenceBy(a, b, transform);
 
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
@@ -50,7 +50,7 @@ namespace Underscore.Test.Collection
 			var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
 			var expected = new[] { 4, 5, 6, 7 };
 
-			var result = component.Intersection(a, b);
+			var result = _.Collection.Intersection(a, b);
 
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
@@ -64,7 +64,7 @@ namespace Underscore.Test.Collection
 
 			var expected = new[] { "4", "5", "6", "7" };
 
-			var result = component.IntersectionBy(a, b, transform);
+			var result = _.Collection.IntersectionBy(a, b, transform);
 
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
@@ -76,7 +76,7 @@ namespace Underscore.Test.Collection
 			var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
 			var expected = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-			var result = component.Union(a, b);
+			var result = _.Collection.Union(a, b);
 
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
@@ -90,7 +90,7 @@ namespace Underscore.Test.Collection
 
 			var expected = new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
 
-			var result = component.UnionBy(a, b, transform);
+			var result = _.Collection.UnionBy(a, b, transform);
 
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}

@@ -30,7 +30,7 @@ namespace Underscore.Test.Function
         [Test]
         public void Function_Compose_Compose_2Arguments()
         {
-            var composeResult = component.Compose(
+            var composeResult = _.Function.Compose(
                     Add("1"),
                     Add("2")
            );
@@ -43,7 +43,7 @@ namespace Underscore.Test.Function
         [Test]
         public void Function_Compose_Compose_3Arguments()
         {
-            var composeResult = component.Compose(
+            var composeResult = _.Function.Compose(
                     Add("1"),
                     Add("2"),
                     Add("3")
@@ -59,7 +59,7 @@ namespace Underscore.Test.Function
         {
             var component = new ComposeComponent();
 
-            var composeResult = component.Compose(
+            var composeResult = _.Function.Compose(
                 Add("1"),
                 Add("2"),
                 Add("3"),
@@ -76,7 +76,7 @@ namespace Underscore.Test.Function
         {   
             var component = new ComposeComponent();
 
-            var composeResult = component.Compose (
+            var composeResult = _.Function.Compose (
                 Add ("1"),    
                 Add ("2"),
                 Add ("3"),
@@ -92,7 +92,7 @@ namespace Underscore.Test.Function
         [Test]
         public void Function_Compose_Compose_6Arguments()
         {
-            var composeResult = component.Compose(
+            var composeResult = _.Function.Compose(
                 Add("1"),
                 Add("2"),
                 Add("3"),
@@ -109,7 +109,7 @@ namespace Underscore.Test.Function
         [Test]
         public void Function_Compose_Compose_7Arguments()
         {
-            var composeResult = component.Compose(
+            var composeResult = _.Function.Compose(
                 Add("1"),
                 Add("2"),
                 Add("3"),
@@ -127,7 +127,7 @@ namespace Underscore.Test.Function
         [Test]
         public void Function_Compose_Compose_8Arguments()
         {
-            var composeResult = component.Compose(
+            var composeResult = _.Function.Compose(
                 Add("1"),
                 Add("2"),
                 Add("3"),
@@ -147,7 +147,7 @@ namespace Underscore.Test.Function
         [Test]
         public void Function_Compose_Compose_9Arguments()
         {   
-            var composeResult = component.Compose(
+            var composeResult = _.Function.Compose(
                 Add("1"),
                 Add("2"),
                 Add("3"),
@@ -167,7 +167,7 @@ namespace Underscore.Test.Function
         [Test]
         public void Function_Compose_Compose_10Arguments()
         {
-            var composeResult = component.Compose(
+            var composeResult = _.Function.Compose(
                 Add("1"),
                 Add("2"),
                 Add("3"),
@@ -188,7 +188,7 @@ namespace Underscore.Test.Function
         [Test]
         public void Function_Compose_Compose_11Arguments()
         {
-            var composeResult = component.Compose(
+            var composeResult = _.Function.Compose(
                 Add("1"),
                 Add("2"),
                 Add("3"),
@@ -210,7 +210,7 @@ namespace Underscore.Test.Function
         [Test]
         public void Function_Compose_Compose_12Arguments()
         {
-            var composeResult = component.Compose(
+            var composeResult = _.Function.Compose(
                 Add("1"),
                 Add("2"),
                 Add("3"),
@@ -233,7 +233,7 @@ namespace Underscore.Test.Function
         [Test]
         public void Function_Compose_Compose_13Arguments()
         {
-            var composeResult = component.Compose(
+            var composeResult = _.Function.Compose(
                 Add("1"),
                 Add("2"),
                 Add("3"),
@@ -257,7 +257,7 @@ namespace Underscore.Test.Function
         [Test]
         public void Function_Compose_Compose_14Arguments()
         {
-            var composeResult = component.Compose(
+            var composeResult = _.Function.Compose(
                 Add("1"),
                 Add("2"),
                 Add("3"),
@@ -282,7 +282,7 @@ namespace Underscore.Test.Function
         [Test]
         public void Function_Compose_Compose_15Arguments()
         {
-            var composeResult = component.Compose(
+            var composeResult = _.Function.Compose(
                 Add("1"),
                 Add("2"),
                 Add("3"),
@@ -308,7 +308,7 @@ namespace Underscore.Test.Function
         [Test]
         public void Function_Compose_Compose_16Arguments()
         {
-            var composeResult = component.Compose(
+            var composeResult = _.Function.Compose(
                 Add("1"),
                 Add("2"),
                 Add("3"),
@@ -335,7 +335,7 @@ namespace Underscore.Test.Function
         [Test]
         public void Function_Compose_Compose_17Arguments()
         {
-            var composeResult = component.Compose(
+            var composeResult = _.Function.Compose(
                 Add("1"),
                 Add("2"),
                 Add("3"),
