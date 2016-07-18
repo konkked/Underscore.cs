@@ -127,102 +127,102 @@ namespace Underscore.Object.Reflection
 		}
 
 
-        /// <summary>
-        ///     Searches for the methods of <paramref name="target"></paramref>
-        /// </summary>
-        /// <param name="target">The object whose methods are being searched</param>
-        public abstract IEnumerable<T> All(object target);
+		/// <summary>
+		///     Searches for the methods of <paramref name="target"></paramref>
+		/// </summary>
+		/// <param name="target">The object whose methods are being searched</param>
+		public abstract IEnumerable<T> All(object target);
 
 
-        /// <summary>
-        ///     Searches for the methods of <paramref name="target"> </paramref>
-        /// </summary>
-        /// <param name="target">The Type whose properties are being searched</param>
-        public abstract IEnumerable<T> All(Type target);
+		/// <summary>
+		///     Searches for the methods of <paramref name="target"> </paramref>
+		/// </summary>
+		/// <param name="target">The Type whose properties are being searched</param>
+		public abstract IEnumerable<T> All(Type target);
 
-        /// <summary>
-        ///     Searches for the methods of <paramref name="target"></paramref>'s <see cref="Type"></see>, using binding
-        ///     constraints provided
-        /// </summary>
-        /// <param name="target">The object whose methods are being searched</param>
-        /// <param name="flags">
-        ///     A bitmask comprised of one or more <see cref="BindingFlags"></see>
-        ///     that specify how the search is conducted
-        /// </param>
-        public abstract IEnumerable<T> All(object target, BindingFlags flags);
-        
-        /// <summary>
-        ///     Searches for the methods of <paramref name="target"></paramref>, using binding
-        ///     constraints provided
-        /// </summary>
-        /// <param name="target">The Type whose methods are being searched</param>
-        /// <param name="flags">
-        ///     A bitmask comprised of one or more <see cref="BindingFlags"></see>
-        ///     that specify how the search is conducted
-        /// </param>
-        public abstract IEnumerable<T> All(Type target, BindingFlags flags);
+		/// <summary>
+		///     Searches for the methods of <paramref name="target"></paramref>'s <see cref="Type"></see>, using binding
+		///     constraints provided
+		/// </summary>
+		/// <param name="target">The object whose methods are being searched</param>
+		/// <param name="flags">
+		///     A bitmask comprised of one or more <see cref="BindingFlags"></see>
+		///     that specify how the search is conducted
+		/// </param>
+		public abstract IEnumerable<T> All(object target, BindingFlags flags);
+		
+		/// <summary>
+		///     Searches for the methods of <paramref name="target"></paramref>, using binding
+		///     constraints provided
+		/// </summary>
+		/// <param name="target">The Type whose methods are being searched</param>
+		/// <param name="flags">
+		///     A bitmask comprised of one or more <see cref="BindingFlags"></see>
+		///     that specify how the search is conducted
+		/// </param>
+		public abstract IEnumerable<T> All(Type target, BindingFlags flags);
 
-        /// <summary>
-        /// Returns all methods of the specified target that match the specified query pattern object.
-        /// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
-        /// Special Cases:
-        /// @return - matches on return type match
-        /// </summary>
-        /// <param name="target">The object whose methods are being searched</param>
-        /// <param name="query">The query pattern object used to modify the search </param>
-        /// <returns>All methods that match the query passed with the specified name</returns>
+		/// <summary>
+		/// Returns all methods of the specified target that match the specified query pattern object.
+		/// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
+		/// Special Cases:
+		/// @return - matches on return type match
+		/// </summary>
+		/// <param name="target">The object whose methods are being searched</param>
+		/// <param name="query">The query pattern object used to modify the search </param>
+		/// <returns>All methods that match the query passed with the specified name</returns>
 		public virtual IEnumerable<T> Query( object target, object query )
 		{
 			return _queryStore( target.GetType(), query );
 		}
 
-        /// <summary>
-        /// Returns all methods of the specified target that match the specified query pattern object.
-        /// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
-        /// Special Cases:
-        /// @return - matches on return type match
-        /// </summary>
-        /// <param name="target">The object whose methods are being searched</param>
-        /// <param name="query">The query pattern object used to modify the search </param>
-        /// <param name="flags">
-        ///     A bitmask comprised of one or more <see cref="BindingFlags"></see>
-        ///     that specify how the search is conducted
-        /// </param>
-        /// <returns>All methods that match the query passed with the specified name</returns>
-        public virtual IEnumerable<T> Query( object target , object query , BindingFlags flags )
+		/// <summary>
+		/// Returns all methods of the specified target that match the specified query pattern object.
+		/// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
+		/// Special Cases:
+		/// @return - matches on return type match
+		/// </summary>
+		/// <param name="target">The object whose methods are being searched</param>
+		/// <param name="query">The query pattern object used to modify the search </param>
+		/// <param name="flags">
+		///     A bitmask comprised of one or more <see cref="BindingFlags"></see>
+		///     that specify how the search is conducted
+		/// </param>
+		/// <returns>All methods that match the query passed with the specified name</returns>
+		public virtual IEnumerable<T> Query( object target , object query , BindingFlags flags )
 		{
 			return _flaggedQueryStore(target.GetType(), query,flags);
 		}
 
 
-        /// <summary>
-        /// Returns first method info of the specfied target that matches query request pattern.
-        /// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
-        /// Special Cases:
-        /// @return - matches on return type match
-        /// </summary>
-        /// <param name="target">The object whose properties are being search</param>
-        /// <param name="query">The query object to specify how search is conducted</param>
-        /// <returns><see cref="MethodInfo"></see> of the matching method or null if no method is found</returns>
-        public virtual IEnumerable<T> Query( Type target , object query )
+		/// <summary>
+		/// Returns first method info of the specfied target that matches query request pattern.
+		/// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
+		/// Special Cases:
+		/// @return - matches on return type match
+		/// </summary>
+		/// <param name="target">The object whose properties are being search</param>
+		/// <param name="query">The query object to specify how search is conducted</param>
+		/// <returns><see cref="MethodInfo"></see> of the matching method or null if no method is found</returns>
+		public virtual IEnumerable<T> Query( Type target , object query )
 		{
 			return _queryStore(target, query);
 		}
 
-        /// <summary>
-        /// Returns all methods of the specified target that match the specified query pattern object.
-        /// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
-        /// Special Cases:
-        /// @return - matches on return type match
-        /// </summary>
-        /// <param name="target">The type whose methods are being searched</param>
-        /// <param name="query">The query pattern object used to modify the search </param>
-        /// <param name="flags">
-        ///     A bitmask comprised of one or more <see cref="BindingFlags"></see>
-        ///     that specify how the search is conducted
-        /// </param>
-        /// <returns>All methods that match the query passed that match the provided flags</returns>
-        public virtual IEnumerable<T> Query( Type target , object query , BindingFlags flags )
+		/// <summary>
+		/// Returns all methods of the specified target that match the specified query pattern object.
+		/// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
+		/// Special Cases:
+		/// @return - matches on return type match
+		/// </summary>
+		/// <param name="target">The type whose methods are being searched</param>
+		/// <param name="query">The query pattern object used to modify the search </param>
+		/// <param name="flags">
+		///     A bitmask comprised of one or more <see cref="BindingFlags"></see>
+		///     that specify how the search is conducted
+		/// </param>
+		/// <returns>All methods that match the query passed that match the provided flags</returns>
+		public virtual IEnumerable<T> Query( Type target , object query , BindingFlags flags )
 		{
 			return _flaggedQueryStore(target, query,flags);
 		}
