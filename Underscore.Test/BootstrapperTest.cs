@@ -2,13 +2,13 @@
 
 namespace Underscore.Test
 {
-    [TestClass]
-    public class BootstrapperTest
-    {
-        [TestMethod]
-        public void GetKernel()
-        {
-            var kernel = Bootstrapper.Kernel;
-        }
-    }
+	[TestClass]
+	public class BootstrapperTest
+	{
+		[TestMethod]
+		public void GetKernel()
+		{
+			var kernel = Bootstrapper.Kernel;
+		}
+	}
 }

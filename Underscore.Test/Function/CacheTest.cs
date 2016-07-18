@@ -4,37 +4,37 @@ using Underscore.Function;
 
 namespace Underscore.Test.Function
 {
-    [TestClass]
-    public class CacheTest
-    {
-	    private CacheComponent component;
-	    private ComposeComponent compose;
+	[TestClass]
+	public class CacheTest
+	{
+		private CacheComponent component;
+		private ComposeComponent compose;
 
-	    [TestInitialize]
-	    public void Initialize()
-	    {
-		    component = new CacheComponent();
+		[TestInitialize]
+		public void Initialize()
+		{
+			component = new CacheComponent();
 			compose = new ComposeComponent();
-	    }
+		}
 
-        [TestMethod]
-        public void Function_Cache_Memo_1Argument()
-        {
-	        var expected = "a";
-            var callcount = 0;
+		[TestMethod]
+		public void Function_Cache_Memo_1Argument()
+		{
+			var expected = "a";
+			var callcount = 0;
 
-            Func<string, string> testFn = a =>
-            {
-                callcount++;
-                return Util.Join(a);
-            };
+			Func<string, string> testFn = a =>
+			{
+				callcount++;
+				return Util.Join(a);
+			};
 
-            var memoized = component.Memoize(testFn);
+			var memoized = component.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
-            Assert.AreEqual(1, callcount);
+			Assert.AreEqual(1, callcount);
 
 			result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -49,10 +49,10 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(2, callcount);
 
 			result = compose.Apply(memoized, Util.UppercaseCharArray);
-	        
+			
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
-        }
+		}
 
 		[TestMethod]
 		public void Function_Cache_Memo_2Arguments()
@@ -608,5 +608,5 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 		}
-    }
+	}
 }

@@ -4,28 +4,28 @@ using Underscore.Function;
 
 namespace Underscore.Test.Function
 {
-    [TestClass]
-    public class BindTest
-    {
-	    private BindComponent component;
+	[TestClass]
+	public class BindTest
+	{
+		private BindComponent component;
 
-	    [TestInitialize]
-	    public void Initialize()
-	    {
-		    component = new BindComponent();
-	    }
+		[TestInitialize]
+		public void Initialize()
+		{
+			component = new BindComponent();
+		}
 
-	    [TestMethod]
-	    public void Function_Bind_1Argument()
-	    {
-		    const string expected = "a";
-		    Func<string, string> function = (a) => Util.Join(a);
-		    
+		[TestMethod]
+		public void Function_Bind_1Argument()
+		{
+			const string expected = "a";
+			Func<string, string> function = (a) => Util.Join(a);
+			
 			var bound = component.Bind(function, "a");
-		    var result = bound();
+			var result = bound();
 
 			Assert.AreEqual(expected, result);
-	    }
+		}
 
 		[TestMethod]
 		public void Function_Bind_2Argument()
@@ -206,5 +206,5 @@ namespace Underscore.Test.Function
 
 			Assert.AreEqual(expected, result);
 		}
-    }
+	}
 }

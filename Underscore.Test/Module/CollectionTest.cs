@@ -3,21 +3,21 @@ using Underscore.Collection;
 
 namespace Underscore.Test.Module
 {
-    [TestClass]
-    public class CollectionTest
-    {
-        [TestMethod]
-        public void CreateCollectionModuleTest()
-        {
-            var result = new Underscore.Module.Collection(
+	[TestClass]
+	public class CollectionTest
+	{
+		[TestMethod]
+		public void CreateCollectionModuleTest()
+		{
+			var result = new Underscore.Module.Collection(
 				new CompareComponent(),
 				new CreationComponent(),
 				new DelegationComponent(),
-                new PartitionComponent(),
+				new PartitionComponent(),
 				new ZipComponent()
 			);
 
-            Assert.IsNotNull(result);
-        }
-    }
+			Assert.IsNotNull(result);
+		}
+	}
 }

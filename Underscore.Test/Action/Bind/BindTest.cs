@@ -5,19 +5,19 @@ using Underscore.Action;
 
 namespace Underscore.Test.Action
 {
-    [TestClass]
-    public class BindTest
-    {
-	    private BindComponent component;
+	[TestClass]
+	public class BindTest
+	{
+		private BindComponent component;
 		private string[] output;
-	    private string expected;
+		private string expected;
 
-	    [TestInitialize]
-	    public void Initialize()
-	    {
-		    component = new BindComponent();
-		    output = new[] { "" };
-	    }
+		[TestInitialize]
+		public void Initialize()
+		{
+			component = new BindComponent();
+			output = new[] { "" };
+		}
 
 		[TestMethod]
 		public void Action_Bind_OneParameter()
@@ -46,11 +46,11 @@ namespace Underscore.Test.Action
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
-        }
+		}
 
 		[TestMethod]
-        public void Action_Bind_3Parameters()
-        {
+		public void Action_Bind_3Parameters()
+		{
 			expected = "abc";
 			Action<string, string, string> action = (a, b, c) =>
 			{
@@ -62,11 +62,11 @@ namespace Underscore.Test.Action
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
-        }
+		}
 
-        [TestMethod]
-        public void Action_Bind_4Parameters()
-        {
+		[TestMethod]
+		public void Action_Bind_4Parameters()
+		{
 			expected = "abcd";
 			Action<string, string, string, string> action = (a, b, c, d) =>
 			{
@@ -78,7 +78,7 @@ namespace Underscore.Test.Action
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
-        }
+		}
 
 		[TestMethod]
 		public void Action_Bind_5Parameters()
@@ -271,5 +271,5 @@ namespace Underscore.Test.Action
 
 			Assert.AreEqual(expected, output[0]);
 		}
-    }
+	}
 }

@@ -10,7 +10,7 @@ namespace Underscore.Test.Action.Synch
 	[TestClass]
 	public class ThrottleTest
 	{
-        private static async Task SafeAwait(Task t, int timeout)
+		private static async Task SafeAwait(Task t, int timeout)
 		{
 			var to = Task.Delay(timeout * 1000);
 			while (true)

@@ -72,7 +72,7 @@ namespace Underscore.Function
 							{
 								if (doneChanging == 1)
 									break;
-                                
+								
 								Thread.MemoryBarrier();
 							}
 

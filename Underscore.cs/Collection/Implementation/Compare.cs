@@ -4,57 +4,57 @@ using Underscore.Object.Comparison;
 
 namespace Underscore.Collection
 {
-    public class CompareComponent : ICompareComponent
-    {
-	    private readonly IEqualityComponent equalityComponent;
+	public class CompareComponent : ICompareComponent
+	{
+		private readonly IEqualityComponent equalityComponent;
 
-	    public CompareComponent()
-	    {
-		    equalityComponent = new EqualityComponent();
-	    }
+		public CompareComponent()
+		{
+			equalityComponent = new EqualityComponent();
+		}
 
-	    public CompareComponent(IEqualityComponent equalityComponent)
-	    {
-		    this.equalityComponent = equalityComponent;
-	    }
+		public CompareComponent(IEqualityComponent equalityComponent)
+		{
+			this.equalityComponent = equalityComponent;
+		}
 
 		/// <summary>
 		/// Determines whether the given array is sorted,
 		/// can check for either ascending or descending
 		/// sorts based on the passed boolean parameter (defaults to ascending)
 		/// </summary>
-        public bool IsSorted<T>(IEnumerable<T> collection, bool descending = false) where T : IComparable
-        {
-	        var iter = collection.GetEnumerator();
+		public bool IsSorted<T>(IEnumerable<T> collection, bool descending = false) where T : IComparable
+		{
+			var iter = collection.GetEnumerator();
 
-	        // get initial value
-	        iter.MoveNext();
-	        var prev = iter.Current;
+			// get initial value
+			iter.MoveNext();
+			var prev = iter.Current;
 
-	        while (iter.MoveNext())
-	        {
+			while (iter.MoveNext())
+			{
 				// compare the last value against the current one
-		        var curr = iter.Current;
+				var curr = iter.Current;
 
-		        if (descending)
-		        {
+				if (descending)
+				{
 					// if it's descending and this value isn't smaller than
 					// the last one, it isn't sorted
-			        if (prev.CompareTo(curr) < 0)
-				        return false;
-		        }
-		        else
-		        {
+					if (prev.CompareTo(curr) < 0)
+						return false;
+				}
+				else
+				{
 					// if it's ascending and this value isn't 
 					// bigger than the last one, it isn't sorted
-			        if (prev.CompareTo(curr) > 0)
-				        return false;
-		        }
+					if (prev.CompareTo(curr) > 0)
+						return false;
+				}
 
-		        prev = curr;
-	        }
+				prev = curr;
+			}
 
-	        return true;
-        }
-    }
+			return true;
+		}
+	}
 }

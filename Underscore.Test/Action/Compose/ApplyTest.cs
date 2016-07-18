@@ -4,178 +4,178 @@ using Underscore.Action;
 
 namespace Underscore.Test.Action
 {
-    [TestClass]
-    public class ApplyTest
-    {
-        private ComposeComponent component;
-        private string str;
+	[TestClass]
+	public class ApplyTest
+	{
+		private ComposeComponent component;
+		private string str;
 
-        [TestInitialize]
-        public void Initialize()
-        {
-            component = new ComposeComponent();
-            str = "";
-        }
+		[TestInitialize]
+		public void Initialize()
+		{
+			component = new ComposeComponent();
+			str = "";
+		}
 
-        [TestMethod]
-        public void Action_Compose_Apply_1Argument()
-        {
-            var act = new Action<string>((a) => str += a);
+		[TestMethod]
+		public void Action_Compose_Apply_1Argument()
+		{
+			var act = new Action<string>((a) => str += a);
 
-            component.Apply(act, new[] { "a" });
+			component.Apply(act, new[] { "a" });
 
-            Assert.AreEqual("a", str);
+			Assert.AreEqual("a", str);
 
-        }
+		}
 
-        [TestMethod]
-        public void Action_Compose_Apply_2Arguments()
-        {
-            var act = new Action<string, string>((a, b) => str += a + b);
+		[TestMethod]
+		public void Action_Compose_Apply_2Arguments()
+		{
+			var act = new Action<string, string>((a, b) => str += a + b);
 
-            component.Apply(act, new[] { "a", "b" });
+			component.Apply(act, new[] { "a", "b" });
 
-            Assert.AreEqual("ab", str);
-        }
+			Assert.AreEqual("ab", str);
+		}
 
-        [TestMethod]
-        public void Action_Compose_Apply_3Arguments()
-        {
-            var act = new Action<string, string, string>((a, b, c) => str += a + b + c);
+		[TestMethod]
+		public void Action_Compose_Apply_3Arguments()
+		{
+			var act = new Action<string, string, string>((a, b, c) => str += a + b + c);
 
-            component.Apply(act, new[] { "a", "b", "c" });
+			component.Apply(act, new[] { "a", "b", "c" });
 
-            Assert.AreEqual("abc", str);
-        }
+			Assert.AreEqual("abc", str);
+		}
 
-        [TestMethod]
-        public void Action_Compose_Apply_4Arguments()
-        {
-            var act = new Action<string, string, string, string>((a, b, c, d) => str += a + b + c + d);
+		[TestMethod]
+		public void Action_Compose_Apply_4Arguments()
+		{
+			var act = new Action<string, string, string, string>((a, b, c, d) => str += a + b + c + d);
 
-            component.Apply(act, new[] { "a", "b", "c", "d" });
+			component.Apply(act, new[] { "a", "b", "c", "d" });
 
-            Assert.AreEqual("abcd", str);
-        }
+			Assert.AreEqual("abcd", str);
+		}
 
-        [TestMethod]
-        public void Action_Compose_Apply_5Arguments()
-        {
-            var act = new Action<string, string, string, string, string>((a, b, c, d, e) => str += a + b + c + d + e);
+		[TestMethod]
+		public void Action_Compose_Apply_5Arguments()
+		{
+			var act = new Action<string, string, string, string, string>((a, b, c, d, e) => str += a + b + c + d + e);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e" });
+			component.Apply(act, new[] { "a", "b", "c", "d", "e" });
 
-            Assert.AreEqual("abcde", str);
-        }
+			Assert.AreEqual("abcde", str);
+		}
 
-        [TestMethod]
-        public void Action_Compose_Apply_6Arguments()
-        {
-            var act = new Action<string, string, string, string, string, string>((a, b, c, d, e, f) => str += a + b + c + d + e + f);
+		[TestMethod]
+		public void Action_Compose_Apply_6Arguments()
+		{
+			var act = new Action<string, string, string, string, string, string>((a, b, c, d, e, f) => str += a + b + c + d + e + f);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f" });
+			component.Apply(act, new[] { "a", "b", "c", "d", "e", "f" });
 
-            Assert.AreEqual("abcdef", str);
-        }
+			Assert.AreEqual("abcdef", str);
+		}
 
-        [TestMethod]
-        public void Action_Compose_Apply_7Arguments()
-        {
-            var act = new Action<string, string, string, string, string, string, string>((a, b, c, d, e, f, g) => str += a + b + c + d + e + f + g);
+		[TestMethod]
+		public void Action_Compose_Apply_7Arguments()
+		{
+			var act = new Action<string, string, string, string, string, string, string>((a, b, c, d, e, f, g) => str += a + b + c + d + e + f + g);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g" });
+			component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g" });
 
-            Assert.AreEqual("abcdefg", str);
-        }
+			Assert.AreEqual("abcdefg", str);
+		}
 
-        [TestMethod]
-        public void Action_Compose_Apply_8Arguments()
-        {
-            var act = new Action<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) => str += a + b + c + d + e + f + g + h);
+		[TestMethod]
+		public void Action_Compose_Apply_8Arguments()
+		{
+			var act = new Action<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) => str += a + b + c + d + e + f + g + h);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h" });
+			component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h" });
 
-            Assert.AreEqual("abcdefgh", str);
-        }
+			Assert.AreEqual("abcdefgh", str);
+		}
 
-        [TestMethod]
-        public void Action_Compose_Apply_9Arguments()
-        {
-            var act = new Action<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) => str += a + b + c + d + e + f + g + h + i);
+		[TestMethod]
+		public void Action_Compose_Apply_9Arguments()
+		{
+			var act = new Action<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) => str += a + b + c + d + e + f + g + h + i);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i" });
+			component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i" });
 
-            Assert.AreEqual("abcdefghi", str);
-        }
+			Assert.AreEqual("abcdefghi", str);
+		}
 
-        [TestMethod]
-        public void Action_Compose_Apply_10Arguments()
-        {
-            var act = new Action<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) => str += a + b + c + d + e + f + g + h + i + j);
+		[TestMethod]
+		public void Action_Compose_Apply_10Arguments()
+		{
+			var act = new Action<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) => str += a + b + c + d + e + f + g + h + i + j);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" });
+			component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" });
 
-            Assert.AreEqual("abcdefghij", str);
-        }
+			Assert.AreEqual("abcdefghij", str);
+		}
 
-        [TestMethod]
-        public void Action_Compose_Apply_11Arguments()
-        {
-            var act = new Action<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) => str += a + b + c + d + e + f + g + h + i + j + k);
+		[TestMethod]
+		public void Action_Compose_Apply_11Arguments()
+		{
+			var act = new Action<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) => str += a + b + c + d + e + f + g + h + i + j + k);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k" });
+			component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k" });
 
-            Assert.AreEqual("abcdefghijk", str);
-        }
+			Assert.AreEqual("abcdefghijk", str);
+		}
 
-        [TestMethod]
-        public void Action_Compose_Apply_12Arguments()
-        {
-            var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) => str += a + b + c + d + e + f + g + h + i + j + k + l);
+		[TestMethod]
+		public void Action_Compose_Apply_12Arguments()
+		{
+			var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) => str += a + b + c + d + e + f + g + h + i + j + k + l);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l" });
+			component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l" });
 
-            Assert.AreEqual("abcdefghijkl", str);
-        }
+			Assert.AreEqual("abcdefghijkl", str);
+		}
 
-        [TestMethod]
-        public void Action_Compose_Apply_13Arguments()
-        {
-            var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) => str += a + b + c + d + e + f + g + h + i + j + k + l + m);
+		[TestMethod]
+		public void Action_Compose_Apply_13Arguments()
+		{
+			var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) => str += a + b + c + d + e + f + g + h + i + j + k + l + m);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m" });
+			component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m" });
 
-            Assert.AreEqual("abcdefghijklm", str);
-        }
+			Assert.AreEqual("abcdefghijklm", str);
+		}
 
-        [TestMethod]
-        public void Action_Compose_Apply_14Arguments()
-        {
-            var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) => str += a + b + c + d + e + f + g + h + i + j + k + l + m + n);
+		[TestMethod]
+		public void Action_Compose_Apply_14Arguments()
+		{
+			var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) => str += a + b + c + d + e + f + g + h + i + j + k + l + m + n);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n" });
+			component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n" });
 
-            Assert.AreEqual("abcdefghijklmn", str);
-        }
+			Assert.AreEqual("abcdefghijklmn", str);
+		}
 
-        [TestMethod]
-        public void Action_Compose_Apply_15Arguments()
-        {
-            var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => str += a + b + c + d + e + f + g + h + i + j + k + l + m + n + o);
+		[TestMethod]
+		public void Action_Compose_Apply_15Arguments()
+		{
+			var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => str += a + b + c + d + e + f + g + h + i + j + k + l + m + n + o);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" });
+			component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" });
 
-            Assert.AreEqual("abcdefghijklmno", str);
-        }
+			Assert.AreEqual("abcdefghijklmno", str);
+		}
 
-        [TestMethod]
-        public void Action_Compose_Apply_16Arguments()
-        {
-            var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => str += a + b + c + d + e + f + g + h + i + j + k + l + m + n + o + p);
+		[TestMethod]
+		public void Action_Compose_Apply_16Arguments()
+		{
+			var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => str += a + b + c + d + e + f + g + h + i + j + k + l + m + n + o + p);
 
-            component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" });
+			component.Apply(act, new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" });
 
-            Assert.AreEqual("abcdefghijklmnop", str);
-        }
-    }
+			Assert.AreEqual("abcdefghijklmnop", str);
+		}
+	}
 }

@@ -7,19 +7,19 @@ using SynchComponent = Underscore.Action.SynchComponent;
 
 namespace Underscore.Test.Module
 {
-    [TestClass]
-    public class ActionTest
-    {
-        [TestMethod]
-        public void ActionCreate()
-        {
-            var action = new Underscore.Module.Action( 
-                new BindComponent(),
-                new SplitComponent(),
-                new ComposeComponent(),
-                new SynchComponent(),
-                new ConvertComponent()
-            );
-        }
-    }
+	[TestClass]
+	public class ActionTest
+	{
+		[TestMethod]
+		public void ActionCreate()
+		{
+			var action = new Underscore.Module.Action( 
+				new BindComponent(),
+				new SplitComponent(),
+				new ComposeComponent(),
+				new SynchComponent(),
+				new ConvertComponent()
+			);
+		}
+	}
 }
