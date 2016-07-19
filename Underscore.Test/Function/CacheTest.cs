@@ -1,23 +1,23 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System;
 using Underscore.Function;
 
 namespace Underscore.Test.Function
 {
-    [TestClass]
+    [TestFixture]
     public class CacheTest
     {
 	    private CacheComponent component;
 	    private ComposeComponent compose;
 
-	    [TestInitialize]
+	    [SetUp]
 	    public void Initialize()
 	    {
 		    component = new CacheComponent();
 			compose = new ComposeComponent();
 	    }
 
-        [TestMethod]
+        [Test]
         public void Function_Cache_Memo_1Argument()
         {
 	        var expected = "a";
@@ -29,7 +29,7 @@ namespace Underscore.Test.Function
                 return Util.Join(a);
             };
 
-            var memoized = component.Memoize(testFn);
+            var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -54,7 +54,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(2, callcount);
         }
 
-		[TestMethod]
+		[Test]
 		public void Function_Cache_Memo_2Arguments()
 		{
 			var expected = "ab";
@@ -66,7 +66,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -91,7 +91,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(2, callcount);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Cache_Memo_3Arguments()
 		{
 			var expected = "abc";
@@ -103,7 +103,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -128,7 +128,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(2, callcount);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Cache_Memo_4Arguments()
 		{
 			var expected = "abcd";
@@ -140,7 +140,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -165,7 +165,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(2, callcount);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Cache_Memo_5Arguments()
 		{
 			var expected = "abcde";
@@ -177,7 +177,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -202,7 +202,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(2, callcount);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Cache_Memo_6Arguments()
 		{
 			var expected = "abcdef";
@@ -214,7 +214,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -239,7 +239,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(2, callcount);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Cache_Memo_7Arguments()
 		{
 			var expected = "abcdefg";
@@ -251,7 +251,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -276,7 +276,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(2, callcount);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Cache_Memo_8Arguments()
 		{
 			var expected = "abcdefgh";
@@ -288,7 +288,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -313,7 +313,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(2, callcount);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Cache_Memo_9Arguments()
 		{
 			var expected = "abcdefghi";
@@ -325,7 +325,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h, i);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -350,7 +350,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(2, callcount);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Cache_Memo_10Arguments()
 		{
 			var expected = "abcdefghij";
@@ -362,7 +362,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h, i, j);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -387,7 +387,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(2, callcount);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Cache_Memo_11Arguments()
 		{
 			var expected = "abcdefghijk";
@@ -399,7 +399,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -424,7 +424,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(2, callcount);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Cache_Memo_12Arguments()
 		{
 			var expected = "abcdefghijkl";
@@ -436,7 +436,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -461,7 +461,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(2, callcount);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Cache_Memo_13Arguments()
 		{
 			var expected = "abcdefghijklm";
@@ -473,7 +473,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -498,7 +498,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(2, callcount);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Cache_Memo_14Arguments()
 		{
 			var expected = "abcdefghijklmn";
@@ -510,7 +510,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -535,7 +535,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(2, callcount);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Cache_Memo_15Arguments()
 		{
 			var expected = "abcdefghijklmno";
@@ -547,7 +547,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 
@@ -572,7 +572,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(2, callcount);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Cache_Memo_16Arguments()
 		{
 			var expected = "abcdefghijklmnop";
@@ -584,7 +584,7 @@ namespace Underscore.Test.Function
 				return Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 			};
 
-			var memoized = component.Memoize(testFn);
+			var memoized = _.Function.Memoize(testFn);
 
 			var result = compose.Apply(memoized, Util.LowercaseCharArray);
 

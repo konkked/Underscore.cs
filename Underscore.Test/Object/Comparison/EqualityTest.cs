@@ -1,10 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Underscore.Object.Comparison;
 using Underscore.Object.Reflection;
 
 namespace Underscore.Test.Object.Comparison
 {
-    [TestClass]
+    [TestFixture]
     public class EqualityComponentTest
     {
         public class EqualityTestObject
@@ -25,7 +25,7 @@ namespace Underscore.Test.Object.Comparison
             public string SomeInternalProperty { get; set; }
         }
 
-        [TestMethod]
+        [Test]
         public void Object_Comparison_Equality_TypeInsensitiveSameType()
         {
             IEqualityComponent testing = new EqualityComponent();
@@ -64,7 +64,7 @@ namespace Underscore.Test.Object.Comparison
             Assert.IsTrue(testing.AreEquatable(item1, item2));
         }
 
-        [TestMethod]
+        [Test]
         public void Object_Comparison_Equality_TypeInsensitiveDifferentTypes()
         {
             IEqualityComponent testing = new EqualityComponent(new PropertyComponent());
@@ -96,7 +96,7 @@ namespace Underscore.Test.Object.Comparison
             Assert.IsTrue(testing.AreEquatable(item1, item2));
         }
 
-        [TestMethod]
+        [Test]
         public void Object_Comparison_Equality_TypeSensitiveSameType()
         {
             IEqualityComponent testing = new EqualityComponent(new PropertyComponent());
@@ -135,7 +135,7 @@ namespace Underscore.Test.Object.Comparison
             Assert.IsTrue(testing.AreEquatable(item1, item2, true));
         }
 
-        [TestMethod]
+        [Test]
         public void Object_Comparison_Equality_TypeSensitiveDifferentTypes()
         {
             IEqualityComponent testing = new EqualityComponent(new PropertyComponent());
@@ -167,7 +167,7 @@ namespace Underscore.Test.Object.Comparison
             Assert.IsFalse(testing.AreEquatable(item1, item2, true));
         }
 
-        [TestMethod]
+        [Test]
         public void Object_Comparison_Equality_IsCommunicative()
         {
             IEqualityComponent testing = new EqualityComponent(new PropertyComponent());

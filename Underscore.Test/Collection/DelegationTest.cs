@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Collection;
 using Underscore.Function;
 using Underscore.Object.Reflection;
 
 namespace Underscore.Test.Collection
 {
-    [TestClass]
+    [TestFixture]
     public class DelegationTest
     {
         public class TestObj
@@ -31,7 +31,7 @@ namespace Underscore.Test.Collection
 	    private TestObj[] testingItems;
 	    private DelegationComponent component;
 
-		[TestInitialize]
+		[SetUp]
 	    public void Initialize()
 	    {
 			testingItems = new[] { new TestObj(), new TestObj(), new TestObj(), new TestObj() };
@@ -42,10 +42,10 @@ namespace Underscore.Test.Collection
 							new Underscore.Utility.CompactComponent()), new PropertyComponent()));
 	    }
 
-        [TestMethod]
+        [Test]
         public void Collection_Delegation_Invoke_WithoutArguments()
         {
-			foreach (var item in component.Invoke(testingItems, "MethodWithoutParameters"))
+			foreach (var item in _.Collection.Invoke(testingItems, "MethodWithoutParameters"))
             {
                 Assert.IsNull(item);
             }
@@ -58,7 +58,7 @@ namespace Underscore.Test.Collection
 
 	    public void Collection_Delegation_Invoke_WithArguments()
 	    {
-	        foreach (var item in component.Invoke(testingItems, "MethodWithParameters", "str"))
+	        foreach (var item in _.Collection.Invoke(testingItems, "MethodWithParameters", "str"))
 	        {
 	            Assert.IsNull(item);
 	        }
@@ -70,7 +70,7 @@ namespace Underscore.Test.Collection
 			}
 		}
 
-        [TestMethod]
+        [Test]
         public void Collection_Delegation_Resolve()
         {
             var targetArr = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };

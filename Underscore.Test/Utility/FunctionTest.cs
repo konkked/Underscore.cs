@@ -1,12 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Underscore.Utility;
 
 namespace Underscore.Test.Utility
 {
-    [TestClass]
+    [TestFixture]
     public class FunctionTest
     {
-        [TestMethod]
+        [Test]
         public void Utility_Function_Constant()
         {
             var testing = new FunctionComponent();

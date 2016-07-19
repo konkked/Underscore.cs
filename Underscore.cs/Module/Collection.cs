@@ -8,25 +8,31 @@ namespace Underscore.Module
 		ICompareComponent,
         ICreationComponent,
 		IDelegationComponent,
+		IFilterComponent,
         IPartitionComponent,
+		ISetComponent,
 		IZipComponent
     {
 	    private readonly ICompareComponent _compare;
         private readonly ICreationComponent _creator;
+		private readonly IDelegationComponent _delegation;
+	    private readonly IFilterComponent _filter;
         private readonly IPartitionComponent _partitioner;
-        private readonly IDelegationComponent _delegation;
+	    private readonly ISetComponent _set;
 	    private readonly IZipComponent _zip;
 
         public Collection(
 			ICompareComponent compare,
             ICreationComponent creator,
 			IDelegationComponent delegation,
+			IFilterComponent filter,
             IPartitionComponent partitioner,
+			ISetComponent set,
 			IZipComponent zip
        )
         {
 
-			if(compare == null)
+			if (compare == null)
 				throw new ArgumentNullException("compare");
 
             if (creator == null)
@@ -35,8 +41,14 @@ namespace Underscore.Module
 			if (delegation == null)
 				throw new ArgumentNullException("delegation");
 
+	        if (filter == null)
+				throw new ArgumentNullException("filter");
+
             if (partitioner == null)
                 throw new ArgumentNullException("partitioner");
+
+			if (set == null)
+				throw new ArgumentNullException("set");
 
 			if (zip == null)
 				throw new ArgumentNullException("zip");
@@ -44,7 +56,9 @@ namespace Underscore.Module
 	        _compare = compare;
             _creator = creator;
 			_delegation = delegation;
+	        _filter = filter;
             _partitioner = partitioner;
+	        _set = set;
 	        _zip = zip;
         }
 
@@ -211,5 +225,60 @@ namespace Underscore.Module
         {
             return _delegation.Resolve(items);
         }
+
+	    public IEnumerable<T> Difference<T>(IEnumerable<T> a, IEnumerable<T> b)
+	    {
+		    return _set.Difference(a, b);
+	    }
+
+	    public IEnumerable<TResult> DifferenceBy<TArg, TResult>(IEnumerable<TArg> a, IEnumerable<TArg> b, Func<TArg, TResult> transform)
+	    {
+		    return _set.DifferenceBy(a, b, transform);
+	    }
+
+	    public IEnumerable<T> Intersection<T>(IEnumerable<T> a, IEnumerable<T> b)
+	    {
+		    return _set.Intersection(a, b);
+	    }
+
+	    public IEnumerable<TResult> IntersectionBy<TArg, TResult>(IEnumerable<TArg> a, IEnumerable<TArg> b, Func<TArg, TResult> transform)
+	    {
+			return _set.IntersectionBy(a, b, transform);
+	    }
+
+	    public IEnumerable<T> Union<T>(IEnumerable<T> a, IEnumerable<T> b)
+	    {
+			return _set.Union(a, b);
+	    }
+
+	    public IEnumerable<TResult> UnionBy<TArg, TResult>(IEnumerable<TArg> a, IEnumerable<TArg> b, Func<TArg, TResult> transform)
+	    {
+			return _set.UnionBy(a, b, transform);
+	    }
+
+	    public IEnumerable<T> Drop<T>(IEnumerable<T> collection, int count)
+	    {
+		    return _filter.Drop(collection, count);
+	    }
+
+	    public IEnumerable<T> DropWhile<T>(IEnumerable<T> collection, Func<T, bool> predicate)
+	    {
+		    return _filter.DropWhile(collection, predicate);
+	    }
+
+	    public IEnumerable<T> Pull<T>(IEnumerable<T> collection, params T[] toPull)
+	    {
+		    return _filter.Pull(collection, toPull);
+	    }
+
+	    public IEnumerable<T> TakeRight<T>(IEnumerable<T> collection, int count)
+	    {
+		    return _filter.TakeRight(collection, count);
+	    }
+
+	    public IEnumerable<T> TakeRightWhile<T>(IEnumerable<T> collection, Func<T, bool> predicate)
+	    {
+		    return _filter.TakeRightWhile(collection, predicate);
+	    }
     }
 }

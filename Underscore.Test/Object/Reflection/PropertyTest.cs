@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Linq;
@@ -8,7 +8,7 @@ using Underscore.Object.Reflection;
 
 namespace Underscore.Test.Object.Reflection
 {
-	[TestClass]
+	[TestFixture]
 	public class PropertyTest
 	{
 		public class Person
@@ -30,7 +30,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void ObjectPropertyHas()
 		{
 
@@ -45,7 +45,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void ObjectPropertyFind()
 		{
 			var properties = typeof(Person).GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -72,7 +72,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task ObjectPropertyGetSet()
 		{
 
@@ -271,7 +271,7 @@ namespace Underscore.Test.Object.Reflection
 			});
 		}
 
-		[TestMethod]
+		[Test]
 		public void PropertyHasForTypeTarget()
 		{
 			var testing = new PropertyComponent();
@@ -285,7 +285,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void PropertGetForTypeTarget()
 		{
 			var testing = new PropertyComponent();
@@ -299,7 +299,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void PropertGetForTypeTargetCaseInsensitive()
 		{
 			var testing = new PropertyComponent();
@@ -313,7 +313,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void PropertyOfTypeForType()
 		{
 			var testing = new PropertyComponent();
@@ -327,7 +327,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void PropertyGetValues()
 		{
 			var testing = new PropertyComponent();
@@ -348,7 +348,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task ObjectProperties()
 		{
 			var testing = SetupPropertiesTarget();
@@ -452,7 +452,7 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 		//TODO: Rewrite this test
-		[TestMethod]
+		[Test]
 		public void ObjectPropertyForeach()
 		{
 			var person = new OtherPerson2(25)
@@ -601,7 +601,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void PropertyPairsGeneral()
 		{
 			var person = new OtherPerson2(25)
@@ -630,7 +630,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void PropertyPairsGeneric()
 		{
 			var person = new OtherPerson2(25)
@@ -662,7 +662,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void PropertyForeachGeneric()
 		{
 			var person = new OtherPerson2(25)

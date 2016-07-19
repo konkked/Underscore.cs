@@ -1,10 +1,10 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Function;
 
 namespace Underscore.Test.Function.Synch
 {
-	[TestClass]
+	[TestFixture]
 	public class BeforeTest
 	{
 		private ISynchComponent component;
@@ -12,18 +12,18 @@ namespace Underscore.Test.Function.Synch
 
         private readonly string[] arguments = Util.LowercaseCharArray;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new SynchComponent();
 			compose = new ComposeComponent();
 		}
 
-        [TestMethod]
+        [Test]
 	    public void Function_Synch_Before_NoArguments()
 	    {
             var counter = 0;
-            var befored = component.Before(() => (counter++), 2);
+            var befored = _.Function.Before(() => (counter++), 2);
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual(i, befored());
 
@@ -31,7 +31,7 @@ namespace Underscore.Test.Function.Synch
                 Assert.AreEqual(1, befored());
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Before_1Argument()
         {
             var invoked = false;
@@ -44,7 +44,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, counter++);
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Function.Before(beforing, 2);
 
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual("a" + i, compose.Apply(befored, arguments));
@@ -55,7 +55,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
 	    public void Function_Synch_Before_2Arguments()
 	    {
             var invoked = false;
@@ -68,7 +68,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, counter++);
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Function.Before(beforing, 2);
 
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual("ab" + i, compose.Apply(befored, arguments));
@@ -79,7 +79,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_3Arguments()
 	    {
             var invoked = false;
@@ -92,7 +92,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, counter++);
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Function.Before(beforing, 2);
 
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual("abc" + i, compose.Apply(befored, arguments));
@@ -103,7 +103,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_4Arguments()
 	    {
 
@@ -117,7 +117,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, counter++);
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Function.Before(beforing, 2);
 
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual("abcd" + i, compose.Apply(befored, arguments));
@@ -128,7 +128,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_5Arguments()
 	    {
 
@@ -142,7 +142,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, counter++);
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Function.Before(beforing, 2);
 
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual("abcde" + i, compose.Apply(befored, arguments));
@@ -153,7 +153,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_6Arguments()
 	    {
 
@@ -167,7 +167,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, counter++);
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Function.Before(beforing, 2);
 
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual("abcdef" + i, compose.Apply(befored, arguments));
@@ -178,7 +178,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_7Arguments()
 	    {
 
@@ -192,7 +192,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, counter++);
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Function.Before(beforing, 2);
 
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual("abcdefg" + i, compose.Apply(befored, arguments));
@@ -203,7 +203,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Before_8Arguments()
 	    {
             var invoked = false;
@@ -216,7 +216,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, counter++);
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Function.Before(beforing, 2);
 
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual("abcdefgh" + i, compose.Apply(befored, arguments));
@@ -227,7 +227,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_9Arguments()
 	    {
 
@@ -241,7 +241,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, i, counter++);
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Function.Before(beforing, 2);
 
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual("abcdefghi" + i, compose.Apply(befored, arguments));
@@ -252,7 +252,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_10Arguments()
 	    {
             var invoked = false;
@@ -265,7 +265,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, i, j, counter++);
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Function.Before(beforing, 2);
 
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual("abcdefghij" + i, compose.Apply(befored, arguments));
@@ -276,7 +276,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_11Arguments()
 	    {
             var invoked = false;
@@ -289,7 +289,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, i, j, k, counter++);
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Function.Before(beforing, 2);
 
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual("abcdefghijk" + i, compose.Apply(befored, arguments));
@@ -300,7 +300,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_12Arguments()
 	    {
             var invoked = false;
@@ -313,7 +313,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, counter++);
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Function.Before(beforing, 2);
 
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual("abcdefghijkl" + i, compose.Apply(befored, arguments));
@@ -324,7 +324,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_13Arguments()
 	    {
 
@@ -338,7 +338,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, counter++);
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Function.Before(beforing, 2);
 
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual("abcdefghijklm" + i, compose.Apply(befored, arguments));
@@ -349,7 +349,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_14Arguments()
 	    {
 
@@ -363,7 +363,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, counter++);
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Function.Before(beforing, 2);
 
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual("abcdefghijklmn" + i, compose.Apply(befored, arguments));
@@ -374,7 +374,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_15Arguments()
 	    {
 
@@ -388,7 +388,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, counter++);
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Function.Before(beforing, 2);
 
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual("abcdefghijklmno" + i, compose.Apply(befored, arguments));
@@ -399,7 +399,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-	    [TestMethod]
+	    [Test]
 	    public void Function_Synch_Before_16Arguments()
 	    {
             var invoked = false;
@@ -412,7 +412,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, counter++);
             });
 
-            var befored = component.Before(beforing, 2);
+            var befored = _.Function.Before(beforing, 2);
 
             for (var i = 0; i < 2; i++)
                 Assert.AreEqual("abcdefghijklmnop" + i, compose.Apply(befored, arguments));

@@ -174,10 +174,12 @@
     <Compile Include="Utility\Contract\IFunction.cs" />
     <Compile Include="Utility\Contract\IMath.cs" />
     <Compile Include="Utility\Contract\IObject.cs" />
+    <Compile Include="Utility\Contract\IString.cs" />
     <Compile Include="Utility\Implementation\Compact.cs" />
     <Compile Include="Utility\Implementation\Function.cs" />
     <Compile Include="Utility\Implementation\Math.cs" />
     <Compile Include="Utility\Implementation\Object.cs" />
+    <Compile Include="Utility\Implementation\String.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

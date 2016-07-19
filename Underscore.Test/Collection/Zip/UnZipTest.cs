@@ -1,55 +1,55 @@
 ﻿using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Collection;
 
 namespace Underscore.Test.Collection.Zip
 {
-	[TestClass]
+	[TestFixture]
 	public class UnZipTest
 	{
 		private ZipComponent component;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new ZipComponent();
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_UnZip_2Arguments()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
 			int[] toZipB = { 2, 3, 4, 5, 6, 7 };
-			var zipped = component.Zip(toZipA, toZipB);
-			var result = component.UnZip(zipped);
+			var zipped = _.Collection.Zip(toZipA, toZipB);
+			var result = _.Collection.UnZip(zipped);
 
 			Assert.IsTrue(result.Item1.SequenceEqual(toZipA));
 			Assert.IsTrue(result.Item2.SequenceEqual(toZipB));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_UnZip_3Arguments()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
 			int[] toZipB = { 2, 3, 4, 5, 6, 7 };
 			int[] toZipC = { 3, 4, 5, 6, 7, 8 };
-			var zipped = component.Zip(toZipA, toZipB, toZipC);
-			var result = component.UnZip(zipped);
+			var zipped = _.Collection.Zip(toZipA, toZipB, toZipC);
+			var result = _.Collection.UnZip(zipped);
 
 			Assert.IsTrue(result.Item1.SequenceEqual(toZipA));
 			Assert.IsTrue(result.Item2.SequenceEqual(toZipB));
 			Assert.IsTrue(result.Item3.SequenceEqual(toZipC));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_UnZip_4Arguments()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
 			int[] toZipB = { 2, 3, 4, 5, 6, 7 };
 			int[] toZipC = { 3, 4, 5, 6, 7, 8 };
 			int[] toZipD = { 4, 5, 6, 7, 8, 9 };
-			var zipped = component.Zip(toZipA, toZipB, toZipC, toZipD);
-			var result = component.UnZip(zipped);
+			var zipped = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD);
+			var result = _.Collection.UnZip(zipped);
 
 			Assert.IsTrue(result.Item1.SequenceEqual(toZipA));
 			Assert.IsTrue(result.Item2.SequenceEqual(toZipB));
@@ -57,7 +57,7 @@ namespace Underscore.Test.Collection.Zip
 			Assert.IsTrue(result.Item4.SequenceEqual(toZipD));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_UnZip_5Arguments()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -65,8 +65,8 @@ namespace Underscore.Test.Collection.Zip
 			int[] toZipC = { 3, 4, 5, 6, 7, 8 };
 			int[] toZipD = { 4, 5, 6, 7, 8, 9 };
 			int[] toZipE = { 5, 6, 7, 8, 9, 10 };
-			var zipped = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE);
-			var result = component.UnZip(zipped);
+			var zipped = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE);
+			var result = _.Collection.UnZip(zipped);
 
 			Assert.IsTrue(result.Item1.SequenceEqual(toZipA));
 			Assert.IsTrue(result.Item2.SequenceEqual(toZipB));
@@ -75,7 +75,7 @@ namespace Underscore.Test.Collection.Zip
 			Assert.IsTrue(result.Item5.SequenceEqual(toZipE));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_UnZip_6Arguments()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -84,8 +84,8 @@ namespace Underscore.Test.Collection.Zip
 			int[] toZipD = { 4, 5, 6, 7, 8, 9 };
 			int[] toZipE = { 5, 6, 7, 8, 9, 10 };
 			int[] toZipF = { 6, 7, 8, 9, 10, 11 };
-			var zipped = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF);
-			var result = component.UnZip(zipped);
+			var zipped = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF);
+			var result = _.Collection.UnZip(zipped);
 
 			Assert.IsTrue(result.Item1.SequenceEqual(toZipA));
 			Assert.IsTrue(result.Item2.SequenceEqual(toZipB));
@@ -95,7 +95,7 @@ namespace Underscore.Test.Collection.Zip
 			Assert.IsTrue(result.Item6.SequenceEqual(toZipF));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_UnZip_7Arguments()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -105,8 +105,8 @@ namespace Underscore.Test.Collection.Zip
 			int[] toZipE = { 5, 6, 7, 8, 9, 10 };
 			int[] toZipF = { 6, 7, 8, 9, 10, 11 };
 			int[] toZipG = { 7, 8, 9, 10, 11, 12 };
-			var zipped = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF, toZipG);
-			var result = component.UnZip(zipped);
+			var zipped = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF, toZipG);
+			var result = _.Collection.UnZip(zipped);
 
 			Assert.IsTrue(result.Item1.SequenceEqual(toZipA));
 			Assert.IsTrue(result.Item2.SequenceEqual(toZipB));

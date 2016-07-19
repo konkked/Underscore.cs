@@ -4,11 +4,11 @@ using System.Threading;
 using ComposeComponent = Underscore.Function.ComposeComponent;
 using ISynchComponent = Underscore.Action.ISynchComponent;
 using SynchComponent = Underscore.Action.SynchComponent;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Underscore.Test.Action.Synch
 {
-    [TestClass]
+    [TestFixture]
     public class AfterTest
     {
         private readonly string[] arguments = Util.LowercaseCharArray;
@@ -19,7 +19,7 @@ namespace Underscore.Test.Action.Synch
         private string result;
         private bool invoked;
         private Task[] arr;
-        [TestInitialize]
+        [SetUp]
         public void Initialize()
         {
             funcCompose = new ComposeComponent();
@@ -31,23 +31,19 @@ namespace Underscore.Test.Action.Synch
             arr = new Task[4];
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Synch_After_NoArguments()
         {
-            var aftered = component.After(() => result = (counter++).ToString(), 3);
-
-            var tasks = new Task[10];
-            for (var i = 0; i < 10; i++)
-                tasks[i] = aftered();
+            var aftered = _.Action.After(() => result = (counter++).ToString(), 3);
 
             for (var i = 0; i < 10; i++)
-                tasks[i].Wait();
+                aftered();
 
             Thread.MemoryBarrier();
             Assert.AreEqual("7", result);
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Synch_After_2Arguments()
         {
             var aftering = new Action<string, string>((a, b) =>
@@ -57,7 +53,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < arr.Length; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -71,7 +67,7 @@ namespace Underscore.Test.Action.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Synch_After_3Arguments()
         {
             var aftering = new Action<string, string, string>((a, b, c) =>
@@ -81,7 +77,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -93,7 +89,7 @@ namespace Underscore.Test.Action.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Synch_After_4Arguments()
         {
             var aftering = new Action<string, string, string, string>((a, b, c, d) =>
@@ -103,7 +99,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -115,7 +111,7 @@ namespace Underscore.Test.Action.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Synch_After_5Arguments()
         {
             var aftering = new Action<string, string, string, string, string>((a, b, c, d, e) =>
@@ -125,7 +121,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -137,7 +133,7 @@ namespace Underscore.Test.Action.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Synch_After_6Arguments()
         {
             var aftering = new Action<string, string, string, string, string, string>((a, b, c, d, e, f) =>
@@ -147,7 +143,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
 
             for (var i = 0; i < 4; i++)
@@ -160,7 +156,7 @@ namespace Underscore.Test.Action.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Synch_After_7Arguments()
         {
             var aftering = new Action<string, string, string, string, string, string, string>((a, b, c, d, e, f, g) =>
@@ -170,7 +166,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
 
             for (var i = 0; i < 4; i++)
@@ -183,7 +179,7 @@ namespace Underscore.Test.Action.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Synch_After_8Arguments()
         {
             var aftering = new Action<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) =>
@@ -193,7 +189,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
 
             for (var i = 0; i < 4; i++)
@@ -206,7 +202,7 @@ namespace Underscore.Test.Action.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Synch_After_9Arguments()
         {
             var aftering = new Action<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) =>
@@ -216,7 +212,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
 
             for (var i = 0; i < 4; i++)
@@ -229,7 +225,7 @@ namespace Underscore.Test.Action.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Synch_After_10Arguments()
         {
             var aftering = new Action<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) =>
@@ -239,7 +235,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
 
             for (var i = 0; i < 4; i++)
@@ -252,7 +248,7 @@ namespace Underscore.Test.Action.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Synch_After_11Arguments()
         {
             var aftering = new Action<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) =>
@@ -262,7 +258,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -274,7 +270,7 @@ namespace Underscore.Test.Action.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Synch_After_12Arguments()
         {
             var aftering = new Action<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) =>
@@ -284,7 +280,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -296,7 +292,7 @@ namespace Underscore.Test.Action.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Synch_After_13Arguments()
         {
             var aftering = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) =>
@@ -306,7 +302,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -318,7 +314,7 @@ namespace Underscore.Test.Action.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Synch_After_14Arguments()
         {
             var aftering = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) =>
@@ -328,7 +324,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -340,7 +336,7 @@ namespace Underscore.Test.Action.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Synch_After_15Arguments()
         {
             var aftering = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) =>
@@ -350,7 +346,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);
@@ -362,7 +358,7 @@ namespace Underscore.Test.Action.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Synch_After_16Arguments()
         {
             var aftering = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) =>
@@ -372,7 +368,7 @@ namespace Underscore.Test.Action.Synch
                 invoked = true;
             });
 
-            var aftered = component.After(aftering, 3);
+            var aftered = _.Action.After(aftering, 3);
 
             for (var i = 0; i < 4; i++)
                 arr[i] = funcCompose.Apply(aftered, arguments);

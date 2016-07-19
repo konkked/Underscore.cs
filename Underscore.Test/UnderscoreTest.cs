@@ -1,13 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System.Linq;
 using System.Collections.Generic;
 
 namespace Underscore.Test
 {
-	[TestClass]
+	[TestFixture]
 	public class UnderscoreTest
 	{
-		[TestMethod]
+		[Test]
 		public void CreateUnderscore()
 		{
 			// initial call will trigger static constructor
@@ -37,7 +37,7 @@ namespace Underscore.Test
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void BasicFunctionalObjectTest()
 		{
 			// initial call will trigger static constructor
@@ -78,7 +78,7 @@ namespace Underscore.Test
 			Assert.AreEqual(2, query.Count());
 		}
 
-		[TestMethod]
+		[Test]
 		public void BasicFunctionalUtilityTest()
 		{
 			var utility = _.Utility;

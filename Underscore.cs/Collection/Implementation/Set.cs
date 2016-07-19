@@ -24,10 +24,10 @@ namespace Underscore.Collection
 		/// elements contained in one list but not the other
 		/// after both collections have had transform called on them
 		/// </summary>
-        public IEnumerable<TResult> DifferenceBy<TArg, TResult>(IEnumerable<TArg> a, IEnumerable<TArg> b, Func<TArg, TResult> with)
+        public IEnumerable<TResult> DifferenceBy<TArg, TResult>(IEnumerable<TArg> a, IEnumerable<TArg> b, Func<TArg, TResult> transform)
         {
-			var transformedA = a.Select(with);
-			var transformedB = b.Select(with);
+			var transformedA = a.Select(transform);
+			var transformedB = b.Select(transform);
 			var hashSetA = new HashSet<TResult>(transformedA);
 			var hashSetB = new HashSet<TResult>(transformedB);
 

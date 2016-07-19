@@ -1,38 +1,38 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Action;
 
 namespace Underscore.Test.Action
 {
-    [TestClass]
+    [TestFixture]
     public class BindTest
     {
 	    private BindComponent component;
 		private string[] output;
 	    private string expected;
 
-	    [TestInitialize]
+	    [SetUp]
 	    public void Initialize()
 	    {
 		    component = new BindComponent();
 		    output = new[] { "" };
 	    }
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_OneParameter()
 		{
 			expected = "a";
 			Action<string> action = (a) => output[0] = Util.Join(a);
 
-			var bound = component.Bind(action, "a");
+			var bound = _.Action.Bind(action, "a");
 
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_2Parameters()
 		{
 			expected = "ab";
@@ -41,14 +41,14 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b);
 			};
 
-			var bound = component.Bind(action, "a", "b");
+			var bound = _.Action.Bind(action, "a", "b");
 
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
         }
 
-		[TestMethod]
+		[Test]
         public void Action_Bind_3Parameters()
         {
 			expected = "abc";
@@ -57,14 +57,14 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c");
+			var bound = _.Action.Bind(action, "a", "b", "c");
 
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
         }
 
-        [TestMethod]
+        [Test]
         public void Action_Bind_4Parameters()
         {
 			expected = "abcd";
@@ -73,14 +73,14 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d");
 
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
         }
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_5Parameters()
 		{
 			expected = "abcde";
@@ -89,14 +89,14 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e");
 
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_6Parameters()
 		{
 			expected = "abcdef";
@@ -105,14 +105,14 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f");
 
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_7Parameters()
 		{
 			expected = "abcdefg";
@@ -121,14 +121,14 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g");
 
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_8Parameters()
 		{
 			expected = "abcdefgh";
@@ -137,14 +137,14 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h");
 
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_9Parameters()
 		{
 			expected = "abcdefghi";
@@ -153,14 +153,14 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h, i);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i");
 
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_10Parameters()
 		{
 			expected = "abcdefghij";
@@ -169,14 +169,14 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j");
 
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_11Parameters()
 		{
 			expected = "abcdefghijk";
@@ -185,14 +185,14 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k");
 
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_12Parameters()
 		{
 			expected = "abcdefghijkl";
@@ -201,14 +201,14 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l");
 
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_13Parameters()
 		{
 			expected = "abcdefghijklm";
@@ -217,14 +217,14 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m");
 
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_14Parameters()
 		{
 			expected = "abcdefghijklmn";
@@ -233,14 +233,14 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n");
 
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_15Parameters()
 		{
 			expected = "abcdefghijklmno";
@@ -249,14 +249,14 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o");
 
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_16Parameters()
 		{
 			expected = "abcdefghijklmnop";
@@ -265,7 +265,7 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p");
 
 			bound();
 

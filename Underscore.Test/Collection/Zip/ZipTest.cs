@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Collection;
 
 namespace Underscore.Test.Collection.Zip
 {
-	[TestClass]
+	[TestFixture]
 	public class ZipTest
 	{
 		private ZipComponent component;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new ZipComponent();
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_2Arguments_SameTypes()
 		{
 			int[] toZipA = {1, 2, 3, 4, 5, 6};
@@ -31,7 +31,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, 7)
 			};
 
-			var result = component.Zip(toZipA, toZipB).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -39,7 +39,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_2Arguments_MixedTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -54,7 +54,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, "f")
 			};
 
-			var result = component.Zip(toZipA, toZipB).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -62,7 +62,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_2Arguments_MixedLength()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -75,7 +75,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(4, 5)
 			};
 
-			var result = component.Zip(toZipA, toZipB).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -83,7 +83,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_3Arguments_SameTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -99,7 +99,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, 7, 8)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -107,7 +107,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_3Arguments_MixedTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -123,7 +123,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, "f", 8.0)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -131,7 +131,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_3Arguments_MixedLength()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -145,7 +145,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(4, 5, 6)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -153,7 +153,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_4Arguments_SameTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -170,7 +170,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, 7, 8, 9)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -178,7 +178,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_4Arguments_MixedTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -195,7 +195,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, "f", 8.0, 'u')
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -203,7 +203,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_4Arguments_MixedLength()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -218,7 +218,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(4, 5, 6, 7)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -226,7 +226,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_5Arguments_SameTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -244,7 +244,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, 7, 8, 9, 10)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -252,7 +252,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_5Arguments_MixedTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -270,7 +270,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, "f", 8.0, 'u', 10m)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -278,7 +278,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_5Arguments_MixedLength()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -294,7 +294,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(4, 5, 6, 7, 8)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -302,7 +302,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_6Arguments_SameTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -321,7 +321,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, 7, 8, 9, 10, 11)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -329,7 +329,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_6Arguments_MixedTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -348,7 +348,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, "f", 8.0, 'u', 10m, 11f)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -356,7 +356,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_6Arguments_MixedLength()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -373,7 +373,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(4, 5, 6, 7, 8, 9),
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -381,7 +381,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_7Arguments_SameTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -401,7 +401,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, 7, 8, 9, 10, 11, 12)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF, toZipG).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF, toZipG).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -409,7 +409,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_7Arguments_MixedTypes()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -429,7 +429,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(6, "f", 8.0, 'u', 10m, 11f, 12L)
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF, toZipG).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF, toZipG).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{
@@ -437,7 +437,7 @@ namespace Underscore.Test.Collection.Zip
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_Zip_7Arguments_MixedLength()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -455,7 +455,7 @@ namespace Underscore.Test.Collection.Zip
 				Tuple.Create(4, 5, 6, 7, 8, 9, 10),
 			};
 
-			var result = component.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF, toZipG).ToList();
+			var result = _.Collection.Zip(toZipA, toZipB, toZipC, toZipD, toZipE, toZipF, toZipG).ToList();
 
 			for (var i = 0; i < result.Count; i++)
 			{

@@ -19,7 +19,7 @@ namespace Underscore.Collection
 		/// elements contained in one list but not the other
 		/// after both collections have had transform called on them
 		/// </summary>
-		IEnumerable<TResult> DifferenceBy<TArg, TResult>(IEnumerable<TArg> a, IEnumerable<TArg> b, Func<TArg, TResult> with);
+		IEnumerable<TResult> DifferenceBy<TArg, TResult>(IEnumerable<TArg> a, IEnumerable<TArg> b, Func<TArg, TResult> transform);
 
         /// <summary>
         /// Returns an enumerable containing all

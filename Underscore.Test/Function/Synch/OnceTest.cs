@@ -1,10 +1,10 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Function;
 
 namespace Underscore.Test.Function.Synch
 {
-	[TestClass]
+	[TestFixture]
 	public class OnceTest
 	{
         private ISynchComponent component;
@@ -12,26 +12,26 @@ namespace Underscore.Test.Function.Synch
 
         private readonly string[] arguments = Util.LowercaseCharArray;
 
-        [TestInitialize]
+        [SetUp]
         public void Initialize()
         {
             component = new SynchComponent();
             compose = new ComposeComponent();
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Once_NoArguments()
         {
             string result = "";
             int counter = 0;
-            var onced = component.Once(() => result = (counter++).ToString());
+            var onced = _.Function.Once(() => result = (counter++).ToString());
             for (int i = 0; i < 10; i++)
                 onced();
 
             Assert.AreEqual("0", result);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Once_1Argument()
         {
             var invoked = false;
@@ -45,7 +45,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, counter);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Function.Once(oncing);
             string[] result = new string[100];
             for (int i = 0; i < 100; i++)
                 result[i] = compose.Apply(onced, arguments);
@@ -55,7 +55,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Once_2Arguments()
         {
             var invoked = false;
@@ -69,7 +69,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, counter);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Function.Once(oncing);
             string[] result = new string[100];
             for (int i = 0; i < 100; i++)
                 result[i] = compose.Apply(onced, arguments);
@@ -79,7 +79,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Once_3Arguments()
         {
             var invoked = false;
@@ -93,7 +93,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, counter);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Function.Once(oncing);
             string[] result = new string[100];
             for (int i = 0; i < 100; i++)
                 result[i] = compose.Apply(onced, arguments);
@@ -103,7 +103,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Once_4Arguments()
         {
             var invoked = false;
@@ -117,7 +117,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, counter);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Function.Once(oncing);
             string[] result = new string[100];
             for (int i = 0; i < 100; i++)
                 result[i] = compose.Apply(onced, arguments);
@@ -127,7 +127,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Once_5Arguments()
         {
             var invoked = false;
@@ -141,7 +141,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, counter);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Function.Once(oncing);
             string[] result = new string[100];
             for (int i = 0; i < 100; i++)
                 result[i] = compose.Apply(onced, arguments);
@@ -152,7 +152,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Once_6Arguments()
         {
             var invoked = false;
@@ -166,7 +166,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, counter);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Function.Once(oncing);
             string[] result = new string[100];
             for (int i = 0; i < 100; i++)
                 result[i] = compose.Apply(onced, arguments);
@@ -177,7 +177,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Once_7Arguments()
         {
             var invoked = false;
@@ -191,7 +191,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, counter);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Function.Once(oncing);
             string[] result = new string[100];
             for (int i = 0; i < 100; i++)
                 result[i] = compose.Apply(onced, arguments);
@@ -202,7 +202,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Once_8Arguments()
         {
             var invoked = false;
@@ -216,7 +216,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, counter);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Function.Once(oncing);
             string[] result = new string[100];
             for (int i = 0; i < 100; i++)
                 result[i] = compose.Apply(onced, arguments);
@@ -227,7 +227,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Once_9Arguments()
         {
             var invoked = false;
@@ -241,7 +241,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, i, counter);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Function.Once(oncing);
             string[] result = new string[100];
             for (int i = 0; i < 100; i++)
                 result[i] = compose.Apply(onced, arguments);
@@ -252,7 +252,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Once_10Arguments()
         {
             var invoked = false;
@@ -266,7 +266,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, i, j, counter);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Function.Once(oncing);
             string[] result = new string[100];
             for (int i = 0; i < 100; i++)
                 result[i] = compose.Apply(onced, arguments);
@@ -277,7 +277,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Once_11Arguments()
         {
             var invoked = false;
@@ -291,7 +291,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, i, j, k, counter);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Function.Once(oncing);
             string[] result = new string[100];
             for (int i = 0; i < 100; i++)
                 result[i] = compose.Apply(onced, arguments);
@@ -302,7 +302,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Once_12Arguments()
         {
             var invoked = false;
@@ -316,7 +316,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, counter);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Function.Once(oncing);
             string[] result = new string[100];
             for (int i = 0; i < 100; i++)
                 result[i] = compose.Apply(onced, arguments);
@@ -327,7 +327,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Once_13Arguments()
         {
             var invoked = false;
@@ -341,7 +341,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, counter);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Function.Once(oncing);
             string[] result = new string[100];
             for (int i = 0; i < 100; i++)
                 result[i] = compose.Apply(onced, arguments);
@@ -352,7 +352,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Once_14Arguments()
         {
             var invoked = false;
@@ -366,7 +366,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, counter);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Function.Once(oncing);
             string[] result = new string[100];
             for (int i = 0; i < 100; i++)
                 result[i] = compose.Apply(onced, arguments);
@@ -377,7 +377,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Once_15Arguments()
         {
             var invoked = false;
@@ -391,7 +391,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, counter);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Function.Once(oncing);
             string[] result = new string[100];
             for (int i = 0; i < 100; i++)
                 result[i] = compose.Apply(onced, arguments);
@@ -402,7 +402,7 @@ namespace Underscore.Test.Function.Synch
             Assert.IsTrue(invoked);
         }
 
-        [TestMethod]
+        [Test]
         public void Function_Synch_Once_16Arguments()
         {
             var invoked = false;
@@ -416,7 +416,7 @@ namespace Underscore.Test.Function.Synch
                 return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, counter);
             });
 
-            var onced = component.Once(oncing);
+            var onced = _.Function.Once(oncing);
             string[] result = new string[100];
             for (int i = 0; i < 100; i++)
                 result[i] = compose.Apply(onced, arguments);
