@@ -1,23 +1,23 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System;
 using Underscore.Action;
 
 namespace Underscore.Test.Action
 {
-	[TestClass]
+	[TestFixture]
 	public class ApplyTest
 	{
 		private ComposeComponent component;
 		private string str;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new ComposeComponent();
 			str = "";
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Compose_Apply_1Argument()
 		{
 			var act = new Action<string>((a) => str += a);
@@ -28,7 +28,7 @@ namespace Underscore.Test.Action
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Compose_Apply_2Arguments()
 		{
 			var act = new Action<string, string>((a, b) => str += a + b);
@@ -38,7 +38,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual("ab", str);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Compose_Apply_3Arguments()
 		{
 			var act = new Action<string, string, string>((a, b, c) => str += a + b + c);
@@ -48,7 +48,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual("abc", str);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Compose_Apply_4Arguments()
 		{
 			var act = new Action<string, string, string, string>((a, b, c, d) => str += a + b + c + d);
@@ -58,7 +58,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual("abcd", str);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Compose_Apply_5Arguments()
 		{
 			var act = new Action<string, string, string, string, string>((a, b, c, d, e) => str += a + b + c + d + e);
@@ -68,7 +68,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual("abcde", str);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Compose_Apply_6Arguments()
 		{
 			var act = new Action<string, string, string, string, string, string>((a, b, c, d, e, f) => str += a + b + c + d + e + f);
@@ -78,7 +78,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual("abcdef", str);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Compose_Apply_7Arguments()
 		{
 			var act = new Action<string, string, string, string, string, string, string>((a, b, c, d, e, f, g) => str += a + b + c + d + e + f + g);
@@ -88,7 +88,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual("abcdefg", str);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Compose_Apply_8Arguments()
 		{
 			var act = new Action<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) => str += a + b + c + d + e + f + g + h);
@@ -98,7 +98,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual("abcdefgh", str);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Compose_Apply_9Arguments()
 		{
 			var act = new Action<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) => str += a + b + c + d + e + f + g + h + i);
@@ -108,7 +108,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual("abcdefghi", str);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Compose_Apply_10Arguments()
 		{
 			var act = new Action<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) => str += a + b + c + d + e + f + g + h + i + j);
@@ -118,7 +118,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual("abcdefghij", str);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Compose_Apply_11Arguments()
 		{
 			var act = new Action<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) => str += a + b + c + d + e + f + g + h + i + j + k);
@@ -128,7 +128,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual("abcdefghijk", str);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Compose_Apply_12Arguments()
 		{
 			var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) => str += a + b + c + d + e + f + g + h + i + j + k + l);
@@ -138,7 +138,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual("abcdefghijkl", str);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Compose_Apply_13Arguments()
 		{
 			var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) => str += a + b + c + d + e + f + g + h + i + j + k + l + m);
@@ -148,7 +148,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual("abcdefghijklm", str);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Compose_Apply_14Arguments()
 		{
 			var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) => str += a + b + c + d + e + f + g + h + i + j + k + l + m + n);
@@ -158,7 +158,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual("abcdefghijklmn", str);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Compose_Apply_15Arguments()
 		{
 			var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => str += a + b + c + d + e + f + g + h + i + j + k + l + m + n + o);
@@ -168,7 +168,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual("abcdefghijklmno", str);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Compose_Apply_16Arguments()
 		{
 			var act = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => str += a + b + c + d + e + f + g + h + i + j + k + l + m + n + o + p);

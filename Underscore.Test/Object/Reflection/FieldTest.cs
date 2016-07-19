@@ -1,7 +1,7 @@
 ﻿using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Threading.Tasks;
 using Moq;
 using System.Reflection;
@@ -12,19 +12,19 @@ using Underscore.Object.Reflection;
 
 namespace Underscore.Test.Object.Reflection
 {
-	[TestClass]
+	[TestFixture]
 	public class FieldTest
 	{
 #pragma warning disable 0649, 0169
-		private class FieldMethodsTestClass
+		private class FieldMethodsTestFixture
 		{
-			public FieldMethodsTestClass(int privateInt, string privateString)
+			public FieldMethodsTestFixture(int privateInt, string privateString)
 			{
 				ShouldntShowInt = privateInt;
 				ShouldntShowString = privateString;
 			}
 
-			public FieldMethodsTestClass()
+			public FieldMethodsTestFixture()
 			{
 			}
 
@@ -44,13 +44,13 @@ namespace Underscore.Test.Object.Reflection
 
 #pragma warning restore 0649, 0169
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_All_TargetType()
 		{
 
 			var testing = _.Object.Field;
 
-			var allPublicFields = testing.All(typeof (FieldMethodsTestClass));
+			var allPublicFields = testing.All(typeof (FieldMethodsTestFixture));
 
 
 			Assert.AreEqual(2, allPublicFields.Count());
@@ -64,12 +64,12 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Has_TargetType_Name()
 		{
 
 
-			var boundTesting = _.Function.Partial<Type, string, bool>(_.Object.Field.Has, typeof (FieldMethodsTestClass));
+			var boundTesting = _.Function.Partial<Type, string, bool>(_.Object.Field.Has, typeof (FieldMethodsTestFixture));
 
 			//check the pub fields exist
 			Assert.IsTrue(boundTesting("ShouldShowString"));
@@ -87,13 +87,13 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Has_TargetType_NameBindingFlags()
 		{
 
 
 			var boundTesting = _.Function.Partial<Type, string, BindingFlags, bool>(_.Object.Field.Has,
-				typeof (FieldMethodsTestClass));
+				typeof (FieldMethodsTestFixture));
 
 			var publicInstance = BindingFlags.Instance | BindingFlags.Public;
 			var protectedInstance = BindingFlags.Instance | BindingFlags.NonPublic;
@@ -122,12 +122,12 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsTrue(boundTesting("ShouldntShowInt", protectedInstance));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Has_TargetType_NameAndCaseSenstive()
 		{
 
 			var boundTesting = _.Function.Partial<Type, string, bool, bool>(_.Object.Field.Has,
-				typeof (FieldMethodsTestClass));
+				typeof (FieldMethodsTestFixture));
 
 			//check the pub fields exist
 			Assert.IsTrue(boundTesting("ShouldShowString", true));
@@ -154,12 +154,12 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Has_TargetType_NameAndCaseSenstiveBindingFlags()
 		{
 
 			var boundTesting = _.Function.Partial<Type, string, bool, BindingFlags, bool>(_.Object.Field.Has,
-				typeof (FieldMethodsTestClass));
+				typeof (FieldMethodsTestFixture));
 
 			var publicInstance = BindingFlags.Instance | BindingFlags.Public;
 			var nonpublicInstance = BindingFlags.Instance | BindingFlags.NonPublic;
@@ -205,13 +205,13 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_All_Object()
 		{
 
 			var testing = _.Object.Field;
 
-			var allPublicFields = testing.All(new FieldMethodsTestClass());
+			var allPublicFields = testing.All(new FieldMethodsTestFixture());
 
 
 			Assert.AreEqual(2, allPublicFields.Count());
@@ -224,12 +224,12 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Has_TargetObject_Name()
 		{
 
 
-			var boundTesting = _.Function.Partial<object, string, bool>(_.Object.Field.Has, new FieldMethodsTestClass());
+			var boundTesting = _.Function.Partial<object, string, bool>(_.Object.Field.Has, new FieldMethodsTestFixture());
 
 			//check the pub fields exist
 			Assert.IsTrue(boundTesting("ShouldShowString"));
@@ -246,13 +246,13 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsFalse(boundTesting("ShouldntShowInt"));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Has_TargetObject_NameBindingFlags()
 		{
 
 
 			var boundTesting = _.Function.Partial<object, string, BindingFlags, bool>(_.Object.Field.Has,
-				new FieldMethodsTestClass());
+				new FieldMethodsTestFixture());
 
 			var publicInstance = BindingFlags.Instance | BindingFlags.Public;
 			var protectedInstance = BindingFlags.Instance | BindingFlags.NonPublic;
@@ -281,12 +281,12 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsTrue(boundTesting("ShouldntShowInt", protectedInstance));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Has_TargetObject_NameAndCaseSenstive()
 		{
 
 			var boundTesting = _.Function.Partial<object, string, bool, bool>(_.Object.Field.Has,
-				new FieldMethodsTestClass());
+				new FieldMethodsTestFixture());
 
 			//check the pub fields exist
 			Assert.IsTrue(boundTesting("ShouldShowString", true));
@@ -313,12 +313,12 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Has_TargetObject_NameAndCaseSenstiveBindingFlags()
 		{
 
 			var boundTesting = _.Function.Partial<object, string, bool, BindingFlags, bool>(_.Object.Field.Has,
-				new FieldMethodsTestClass());
+				new FieldMethodsTestFixture());
 
 			var publicInstance = BindingFlags.Instance | BindingFlags.Public;
 			var nonpublicInstance = BindingFlags.Instance | BindingFlags.NonPublic;
@@ -365,17 +365,17 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Find_TargetType_Name()
 		{
 
-			var target = typeof (FieldMethodsTestClass);
+			var target = typeof (FieldMethodsTestFixture);
 
 			var bound = _.Function.Partial<Type, string, FieldInfo>(_.Object.Field.Find, target);
 
 			//default should only show public instance fields by default
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString"), bound("ShouldShowString"));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt"), bound("ShouldShowInt"));
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowString"), bound("ShouldShowString"));
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowInt"), bound("ShouldShowInt"));
 
 			//check the non public fields are being protected
 
@@ -385,10 +385,10 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Find_TargetType_NameBindingFlags()
 		{
-			var target = typeof (FieldMethodsTestClass);
+			var target = typeof (FieldMethodsTestFixture);
 
 			var bound = _.Function.Partial<Type, string, BindingFlags, FieldInfo>(_.Object.Field.Find, target);
 
@@ -396,9 +396,9 @@ namespace Underscore.Test.Object.Reflection
 			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
 
 			//check positive cases
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowString", publicInstance),
 				bound("ShouldShowString", publicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowInt", publicInstance),
 				bound("ShouldShowInt", publicInstance));
 
 			//check that nonpublic fields aren't showing up when doing a search for public fields
@@ -406,9 +406,9 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsNull(bound("ShouldntShowInt", publicInstance));
 
 			//check that nonpublic fields show up when doing a nonpublic searched
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowString", nonpublicInstance),
 				bound("ShouldntShowString", nonpublicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowInt", nonpublicInstance),
 				bound("ShouldntShowInt", nonpublicInstance));
 
 			//check to make sure public fields aren't showing up when looking for nonpublic fields
@@ -417,10 +417,10 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Find_TargetType_NameBindingFlagsCaseSenstive()
 		{
-			var target = typeof (FieldMethodsTestClass);
+			var target = typeof (FieldMethodsTestFixture);
 
 			var bound = _.Function.Partial<Type, string, bool, BindingFlags, FieldInfo>(_.Object.Field.Find, target);
 
@@ -428,14 +428,14 @@ namespace Underscore.Test.Object.Reflection
 			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
 
 			//check positive cases
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowString", publicInstance),
 				bound("ShouldShowString", true, publicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowString", publicInstance),
 				bound("shouldshowstring", false, publicInstance));
 
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowInt", publicInstance),
 				bound("ShouldShowInt", true, publicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowInt", publicInstance),
 				bound("ShouldShowInt", false, publicInstance));
 
 			//check to make sure the case sensitive search is being done correctly
@@ -447,14 +447,14 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsNull(bound("ShouldntShowInt", true, publicInstance));
 
 
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowString", nonpublicInstance),
 				bound("ShouldntShowString", true, nonpublicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowString", nonpublicInstance),
 				bound("shouldntshowstring", false, nonpublicInstance));
 
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowInt", nonpublicInstance),
 				bound("ShouldntShowInt", true, nonpublicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowInt", nonpublicInstance),
 				bound("shouldntshowint", false, nonpublicInstance));
 
 
@@ -469,18 +469,18 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Find_TargetType_NameType()
 		{
 
-			var target = typeof (FieldMethodsTestClass);
+			var target = typeof (FieldMethodsTestFixture);
 
 			var bound = _.Function.Partial<object, string, Type, FieldInfo>(_.Object.Field.Find, target);
 
 			//default should only show public instance fields by default
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetProperty("ShouldShowString"),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetProperty("ShouldShowString"),
 				bound("ShouldShowString", typeof (string)));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetProperty("ShouldShowInt"),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetProperty("ShouldShowInt"),
 				bound("ShouldShowInt", typeof (int)));
 
 			//check mismatching types
@@ -495,10 +495,10 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Find_TargetType_NameTypeBindingFlags()
 		{
-			var target = typeof (FieldMethodsTestClass);
+			var target = typeof (FieldMethodsTestFixture);
 
 			var bound = _.Function.Partial<Type, string, Type, BindingFlags, FieldInfo>(_.Object.Field.Find, target);
 
@@ -506,9 +506,9 @@ namespace Underscore.Test.Object.Reflection
 			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
 
 			//check positive cases
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowString", publicInstance),
 				bound("ShouldShowString", typeof (string), publicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowInt", publicInstance),
 				bound("ShouldShowInt", typeof (int), publicInstance));
 
 			//check mismatching types
@@ -520,9 +520,9 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsNull(bound("ShouldntShowInt", typeof (int), publicInstance));
 
 
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowString", nonpublicInstance),
 				bound("ShouldntShowString", typeof (string), nonpublicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowInt", nonpublicInstance),
 				bound("ShouldntShowInt", typeof (int), nonpublicInstance));
 
 			//check to make sure public fields aren't showing up when looking for nonpublic fields
@@ -531,10 +531,10 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Find_TargetType_NameTypeBindingFlagsCaseSenstive()
 		{
-			var target = typeof (FieldMethodsTestClass);
+			var target = typeof (FieldMethodsTestFixture);
 
 			var bound = _.Function.Partial<Type, string, Type, bool, BindingFlags, FieldInfo>(_.Object.Field.Find,
 				target);
@@ -543,14 +543,14 @@ namespace Underscore.Test.Object.Reflection
 			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
 
 			//check positive cases
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowString", publicInstance),
 				bound("ShouldShowString", typeof (string), true, publicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowString", publicInstance),
 				bound("shouldshowstring", typeof (string), false, publicInstance));
 
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowInt", publicInstance),
 				bound("ShouldShowInt", typeof (int), true, publicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowInt", publicInstance),
 				bound("ShouldShowInt", typeof (int), false, publicInstance));
 
 			//check to make sure the case sensitive search is being done correctly
@@ -562,14 +562,14 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsNull(bound("ShouldntShowInt", typeof (int), true, publicInstance));
 
 
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowString", nonpublicInstance),
 				bound("ShouldntShowString", typeof (string), true, nonpublicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowString", nonpublicInstance),
 				bound("shouldntshowstring", typeof (string), false, nonpublicInstance));
 
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowInt", nonpublicInstance),
 				bound("ShouldntShowInt", typeof (int), true, nonpublicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowInt", nonpublicInstance),
 				bound("shouldntshowint", typeof (int), false, nonpublicInstance));
 
 
@@ -584,28 +584,28 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_OfType_TargetType()
 
 		{
-			var target = typeof (FieldMethodsTestClass);
+			var target = typeof (FieldMethodsTestFixture);
 
 
 			var result = _.Object.Field.OfType(target, typeof (int));
-			Assert.IsTrue(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowInt")));
-			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowString")));
+			Assert.IsTrue(result.Any(a => a == typeof (FieldMethodsTestFixture).GetField("ShouldShowInt")));
+			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestFixture).GetField("ShouldShowString")));
 			Assert.AreEqual(1, result.Count());
 
 			result = _.Object.Field.OfType(target, typeof (string));
-			Assert.IsTrue(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowString")));
-			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowInt")));
+			Assert.IsTrue(result.Any(a => a == typeof (FieldMethodsTestFixture).GetField("ShouldShowString")));
+			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestFixture).GetField("ShouldShowInt")));
 			Assert.AreEqual(1, result.Count());
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Field_OfType_TargetType_BindingFlags()
 		{
-			var target = typeof(FieldMethodsTestClass);
+			var target = typeof(FieldMethodsTestFixture);
 
 			var publicInstance = BindingFlags.Public | BindingFlags.Instance;
 			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
@@ -613,13 +613,13 @@ namespace Underscore.Test.Object.Reflection
 
 			var result = _.Object.Field.OfType(target, typeof(int), publicInstance);
 
-			Assert.IsTrue(result.Any(a => a == typeof(FieldMethodsTestClass).GetField("ShouldShowInt")));
+			Assert.IsTrue(result.Any(a => a == typeof(FieldMethodsTestFixture).GetField("ShouldShowInt")));
 
 			//check it doesn't pick up the wrong type
-			Assert.IsFalse(result.Any(a => a == typeof(FieldMethodsTestClass).GetField("ShouldShowString")));
+			Assert.IsFalse(result.Any(a => a == typeof(FieldMethodsTestFixture).GetField("ShouldShowString")));
 
 			//and that it doesn't pick up the wrong accesiblity
-			Assert.IsFalse(result.Any(a => a == typeof(FieldMethodsTestClass).GetField("ShouldntShowInt")));
+			Assert.IsFalse(result.Any(a => a == typeof(FieldMethodsTestFixture).GetField("ShouldntShowInt")));
 
 			//check that the only field it did pick up was the right one
 			Assert.AreEqual(1, result.Count());
@@ -629,23 +629,23 @@ namespace Underscore.Test.Object.Reflection
 			result = _.Object.Field.OfType(target, typeof(int), nonpublicInstance);
 
 			//check the right one was found
-			Assert.IsTrue(result.Any(a => a == typeof(FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance)));
+			Assert.IsTrue(result.Any(a => a == typeof(FieldMethodsTestFixture).GetField("ShouldntShowInt", nonpublicInstance)));
 
 			//check wrong type didn't happen
-			Assert.IsFalse(result.Any(a => a == typeof(FieldMethodsTestClass).GetField("ShouldntShowString")));
+			Assert.IsFalse(result.Any(a => a == typeof(FieldMethodsTestFixture).GetField("ShouldntShowString")));
 
 			//check that the wrong accesiblity wasn't picked up
-			Assert.IsFalse(result.Any(a => a == typeof(FieldMethodsTestClass).GetField("ShouldShowInt")));
+			Assert.IsFalse(result.Any(a => a == typeof(FieldMethodsTestFixture).GetField("ShouldShowInt")));
 
 			//check that was the only field picked up
 			Assert.AreEqual(1, result.Count());
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Values_Generic()
 		{
-			var target = new FieldMethodsTestClass();
+			var target = new FieldMethodsTestFixture();
 
 			target.ShouldShowInt = 1;
 			target.ShouldShowString = "A String";
@@ -667,12 +667,12 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Values_GenericBindingFlags()
 		{
 			int privateInt = -1;
 			string privateString = "private string";
-			var target = new FieldMethodsTestClass(privateInt, privateString);
+			var target = new FieldMethodsTestFixture(privateInt, privateString);
 
 			target.ShouldShowInt = 1;
 			target.ShouldShowString = "A String";
@@ -708,10 +708,10 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsTrue(!allDecimals.Any());
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Values_NonGeneric()
 		{
-			var target = new FieldMethodsTestClass();
+			var target = new FieldMethodsTestFixture();
 
 			target.ShouldShowInt = 1;
 			target.ShouldShowString = "A String";
@@ -724,13 +724,13 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Values_NonGenericBindingFlags()
 		{
 			int privateInt = 1;
 			string privateString = "private string";
 
-			var target = new FieldMethodsTestClass(privateInt, privateString);
+			var target = new FieldMethodsTestFixture(privateInt, privateString);
 
 			target.ShouldShowInt = 1;
 			target.ShouldShowString = "A String";
@@ -752,17 +752,17 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Find_TargetObject_Name()
 		{
 
-			var target = new FieldMethodsTestClass();
+			var target = new FieldMethodsTestFixture();
 
 			var bound = _.Function.Partial<object, string, FieldInfo>(_.Object.Field.Find, target);
 
 			//default should only show public instance fields by default
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString"), bound("ShouldShowString"));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt"), bound("ShouldShowInt"));
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowString"), bound("ShouldShowString"));
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowInt"), bound("ShouldShowInt"));
 
 			//check the non public fields are being protected
 
@@ -772,10 +772,10 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Find_TargetObject_NameBindingFlags()
 		{
-			var target = new FieldMethodsTestClass();
+			var target = new FieldMethodsTestFixture();
 
 			var bound = _.Function.Partial<object, string, BindingFlags, FieldInfo>(_.Object.Field.Find, target);
 
@@ -783,9 +783,9 @@ namespace Underscore.Test.Object.Reflection
 			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
 
 			//check positive cases
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowString", publicInstance),
 				bound("ShouldShowString", publicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowInt", publicInstance),
 				bound("ShouldShowInt", publicInstance));
 
 			//check that nonpublic fields aren't showing up when doing a search for public fields
@@ -793,9 +793,9 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsNull(bound("ShouldntShowInt", publicInstance));
 
 			//check that they do show up when doing a check against nonpublic fields
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowString", nonpublicInstance),
 				bound("ShouldntShowString", nonpublicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowInt", nonpublicInstance),
 				bound("ShouldntShowInt", nonpublicInstance));
 
 			//check to make sure public fields aren't showing up when looking for nonpublic fields
@@ -804,10 +804,10 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Find_TargetObject_NameBindingFlagsCaseSenstive()
 		{
-			var target = new FieldMethodsTestClass();
+			var target = new FieldMethodsTestFixture();
 
 			var bound = _.Function.Partial<object, string, bool, BindingFlags, FieldInfo>(_.Object.Field.Find, target);
 
@@ -815,14 +815,14 @@ namespace Underscore.Test.Object.Reflection
 			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
 
 			//check positive cases
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowString", publicInstance),
 				bound("ShouldShowString", true, publicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowString", publicInstance),
 				bound("shouldshowstring", false, publicInstance));
 
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowInt", publicInstance),
 				bound("ShouldShowInt", true, publicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowInt", publicInstance),
 				bound("ShouldShowInt", false, publicInstance));
 
 			//check to make sure the case sensitive search is being done correctly
@@ -834,14 +834,14 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsNull(bound("ShouldntShowInt", true, publicInstance));
 
 
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowString", nonpublicInstance),
 				bound("ShouldntShowString", true, nonpublicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowString", nonpublicInstance),
 				bound("shouldntshowstring", false, nonpublicInstance));
 
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowInt", nonpublicInstance),
 				bound("ShouldntShowInt", true, nonpublicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowInt", nonpublicInstance),
 				bound("ShouldntShowInt", false, nonpublicInstance));
 
 
@@ -855,18 +855,18 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Find_TargetObject_NameType()
 		{
 
-			var target = new FieldMethodsTestClass();
+			var target = new FieldMethodsTestFixture();
 
 			var bound = _.Function.Partial<object, string, Type, FieldInfo>(_.Object.Field.Find, target);
 
 			//default should only show public instance fields by default
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString"),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowString"),
 				bound("ShouldShowString", typeof (string)));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt"),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowInt"),
 				bound("ShouldShowInt", typeof (int)));
 
 			//check mismatching types
@@ -881,10 +881,10 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Find_TargetObject_NameTypeBindingFlags()
 		{
-			var target = new FieldMethodsTestClass();
+			var target = new FieldMethodsTestFixture();
 
 			var bound = _.Function.Partial<object, string, Type, BindingFlags, FieldInfo>(_.Object.Field.Find, target);
 
@@ -892,9 +892,9 @@ namespace Underscore.Test.Object.Reflection
 			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
 
 			//check positive cases
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowString", publicInstance),
 				bound("ShouldShowString", typeof (string), publicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowInt", publicInstance),
 				bound("ShouldShowInt", typeof (int), publicInstance));
 
 			//check mismatching types
@@ -906,9 +906,9 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsNull(bound("ShouldntShowInt", typeof (int), publicInstance));
 
 
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowString", nonpublicInstance),
 				bound("ShouldntShowString", typeof (string), nonpublicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowInt", nonpublicInstance),
 				bound("ShouldntShowInt", typeof (int), nonpublicInstance));
 
 			//check to make sure public fields aren't showing up when looking for nonpublic fields
@@ -917,10 +917,10 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_Find_TargetObject_NameTypeBindingFlagsCaseSenstive()
 		{
-			var target = new FieldMethodsTestClass();
+			var target = new FieldMethodsTestFixture();
 
 			var bound = _.Function.Partial<object, string, Type, bool, BindingFlags, FieldInfo>(_.Object.Field.Find,
 				target);
@@ -929,14 +929,14 @@ namespace Underscore.Test.Object.Reflection
 			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
 
 			//check positive cases
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowString", publicInstance),
 				bound("ShouldShowString", typeof (string), true, publicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowString", publicInstance),
 				bound("shouldshowstring", typeof (string), false, publicInstance));
 
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowInt", publicInstance),
 				bound("ShouldShowInt", typeof (int), true, publicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldShowInt", publicInstance),
 				bound("ShouldShowInt", typeof (int), false, publicInstance));
 
 			//check to make sure the case sensitive search is being done correctly
@@ -948,14 +948,14 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsNull(bound("ShouldntShowInt", typeof (int), true, publicInstance));
 
 			//check nonpublic can be accessed
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowString", nonpublicInstance),
 				bound("ShouldntShowString", typeof (string), true, nonpublicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowString", nonpublicInstance),
 				bound("shouldntshowstring", typeof (string), false, nonpublicInstance));
 
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowInt", nonpublicInstance),
 				bound("ShouldntShowInt", typeof (int), true, nonpublicInstance));
-			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+			Assert.AreEqual(typeof (FieldMethodsTestFixture).GetField("ShouldntShowInt", nonpublicInstance),
 				bound("shouldntshowint", typeof (int), false, nonpublicInstance));
 
 
@@ -970,29 +970,29 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Fields_OfType_TargetObject()
 
 		{
-			var target = new FieldMethodsTestClass();
+			var target = new FieldMethodsTestFixture();
 
 
 			var result = _.Object.Field.OfType(target, typeof (int));
-			Assert.IsTrue(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowInt")));
-			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowString")));
+			Assert.IsTrue(result.Any(a => a == typeof (FieldMethodsTestFixture).GetField("ShouldShowInt")));
+			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestFixture).GetField("ShouldShowString")));
 			Assert.AreEqual(1, result.Count());
 
 			result = _.Object.Field.OfType(target, typeof (string));
-			Assert.IsTrue(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowString")));
-			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowInt")));
+			Assert.IsTrue(result.Any(a => a == typeof (FieldMethodsTestFixture).GetField("ShouldShowString")));
+			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestFixture).GetField("ShouldShowInt")));
 			Assert.AreEqual(1, result.Count());
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Field_OfType_TargetObject_BindingFlags()
 		{
-			var target = new FieldMethodsTestClass();
+			var target = new FieldMethodsTestFixture();
 
 			var publicInstance = BindingFlags.Public | BindingFlags.Instance;
 			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
@@ -1000,13 +1000,13 @@ namespace Underscore.Test.Object.Reflection
 
 			var result = _.Object.Field.OfType(target, typeof (int), publicInstance);
 
-			Assert.IsTrue(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowInt")));
+			Assert.IsTrue(result.Any(a => a == typeof (FieldMethodsTestFixture).GetField("ShouldShowInt")));
 
 			//check it doesn't pick up the wrong type
-			Assert.IsFalse(result.Any(a=>a == typeof(FieldMethodsTestClass).GetField("ShouldShowString")));
+			Assert.IsFalse(result.Any(a=>a == typeof(FieldMethodsTestFixture).GetField("ShouldShowString")));
 
 			//and that it doesn't pick up the wrong accesiblity
-			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldntShowInt")));
+			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestFixture).GetField("ShouldntShowInt")));
 
 			//check that the only field it did pick up was the right one
 			Assert.AreEqual(1,result.Count());
@@ -1016,13 +1016,13 @@ namespace Underscore.Test.Object.Reflection
 			result = _.Object.Field.OfType(target, typeof (int), nonpublicInstance);
 
 			//check the right one was found
-			Assert.IsTrue(result.Any(a=>a == typeof(FieldMethodsTestClass).GetField("ShouldntShowInt",nonpublicInstance)));
+			Assert.IsTrue(result.Any(a=>a == typeof(FieldMethodsTestFixture).GetField("ShouldntShowInt",nonpublicInstance)));
 
 			//check wrong type didn't happen
-			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldntShowString")));
+			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestFixture).GetField("ShouldntShowString")));
 
 			//check that the wrong accesiblity wasn't picked up
-			Assert.IsFalse(result.Any(a=>a == typeof(FieldMethodsTestClass).GetField("ShouldShowInt")));
+			Assert.IsFalse(result.Any(a=>a == typeof(FieldMethodsTestFixture).GetField("ShouldShowInt")));
 
 			//check that was the only field picked up
 			Assert.AreEqual(1,result.Count());
@@ -1030,10 +1030,10 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 
-	[TestMethod]
+	[Test]
 		public async Task ObjectField()
 		{
-			var target = new FieldMethodsTestClass();
+			var target = new FieldMethodsTestFixture();
 
 			var testing = new FieldComponent();
 
@@ -1091,10 +1091,10 @@ namespace Underscore.Test.Object.Reflection
 			});
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task TypeField()
 		{
-			var target = typeof(FieldMethodsTestClass);
+			var target = typeof(FieldMethodsTestFixture);
 
 			var testing = new FieldComponent();
 
@@ -1173,7 +1173,7 @@ namespace Underscore.Test.Object.Reflection
 
 #pragma warning restore 0414
 
-		[TestMethod]
+		[Test]
 		public void FieldValuesPublicStr()
 		{
 			var testing = new FieldComponent();
@@ -1206,7 +1206,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void FieldValuesPrivateStr()
 		{
 			var testing = new FieldComponent();
@@ -1228,7 +1228,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void FieldValuesPublicInt()
 		{
 			var testing = new FieldComponent();
@@ -1242,7 +1242,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void FieldValuesPrivateInt()
 		{
 			var testing = new FieldComponent();
@@ -1256,7 +1256,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void FieldValuesStaticInt()
 		{
 			var testing = new FieldComponent();
@@ -1270,7 +1270,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void FieldValuesPrivateStaticInt()
 		{
 			var testing = new FieldComponent();

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Function;
 using Underscore.Object.Reflection;
 using System.Collections.Generic;
@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Underscore.Test.Object.Reflection
 {
-	[TestClass]
+	[TestFixture]
 	public class ConstructorTest
 	{
 
-		[TestMethod]
+		[Test]
 		public void FunctionalCtorTest5()
 		{
 			var strBuilder = new StringBuilder();
@@ -40,7 +40,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void FunctionalCtorTest4()
 		{
 
@@ -64,7 +64,7 @@ namespace Underscore.Test.Object.Reflection
 			}, paramQueryArgs, flags);
 		}
 
-		[TestMethod]
+		[Test]
 		public void FunctionalCtorTest3()
 		{
 			var strBuilder = new StringBuilder();
@@ -87,7 +87,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void FunctionalCtorTest2()
 		{
 
@@ -167,7 +167,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void FunctionalCtorTestParameterless()
 		{
 
@@ -220,37 +220,37 @@ namespace Underscore.Test.Object.Reflection
 			return new ConstructorComponent(cacher, props);
 		}
 
-		public class CtorParamlessTestClass
+		public class CtorParamlessTestFixture
 		{
-			public CtorParamlessTestClass()
+			public CtorParamlessTestFixture()
 			{
 
 			}
 
 		}
 
-		public class CtorStaticParamlessTestClass
+		public class CtorStaticParamlessTestFixture
 		{
 			private static readonly string s;
-			public CtorStaticParamlessTestClass(string arg)
+			public CtorStaticParamlessTestFixture(string arg)
 			{
 
 			}
 
-			static CtorStaticParamlessTestClass()
+			static CtorStaticParamlessTestFixture()
 			{
 				s = string.Empty;
 			}
 		}
 
-		public class CtorPrivateParamlessTestClass
+		public class CtorPrivateParamlessTestFixture
 		{
-			public CtorPrivateParamlessTestClass(string arg)
+			public CtorPrivateParamlessTestFixture(string arg)
 			{
 
 			}
 
-			private CtorPrivateParamlessTestClass()
+			private CtorPrivateParamlessTestFixture()
 			{
 
 			}
@@ -332,12 +332,12 @@ namespace Underscore.Test.Object.Reflection
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void HasParameterlessPositive( )
 		{
 			var testing = CreateTestTarget( );
 
-			var ctorParamlessTestTarget1 = new CtorParamlessTestClass();
+			var ctorParamlessTestTarget1 = new CtorParamlessTestFixture();
 			var ctorParamlessTestTarget2 = new CtorSingleAndParamless();
 			var ctorParamlessTestTarget3 = new CtorDoubleAndParamless();
 			var ctorParamlessTestTarget4 = new CtorDoubleAndSingleAndParamless();
@@ -355,7 +355,7 @@ namespace Underscore.Test.Object.Reflection
 
 			Type[] testTypeArgs =
 			{
-				typeof (CtorParamlessTestClass), 
+				typeof (CtorParamlessTestFixture), 
 				typeof (CtorSingleAndParamless),
 				typeof (CtorDoubleAndParamless), 
 				typeof (CtorDoubleAndSingleAndParamless)
@@ -366,8 +366,8 @@ namespace Underscore.Test.Object.Reflection
 				Assert.IsTrue(testing.HasParameterless(testTypeArg));
 			}
 
-			var privateParamless = new CtorPrivateParamlessTestClass(null);
-			var staticParamless = new CtorStaticParamlessTestClass(null);
+			var privateParamless = new CtorPrivateParamlessTestFixture(null);
+			var staticParamless = new CtorStaticParamlessTestFixture(null);
 
 			bool[] testBindingFlagsObjectResults =
 			{
@@ -380,7 +380,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void HasParameterlessNegative()
 		{
 			var testing = CreateTestTarget( );
@@ -396,7 +396,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Parameterless1( )
 		{
 			var testing = CreateTestTarget( );
@@ -477,21 +477,21 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void CtorFindSingleParameterPostiveEq( )
 		{
 			TestFind(new CtorSingleParamOnly(null), new {arg = typeof (string)},
 				BindingFlags.Public | BindingFlags.Instance, true);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CtorFindSingleParameterNegativeEq()
 		{
 			TestFind(new CtorSingleParamOnly(null), new { arg1 = typeof(string) },
 				BindingFlags.Public | BindingFlags.Instance, false);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CtorFindSingleParameterPostiveLike()
 		{
 			var target = new CtorSingleParamOnly(null);
@@ -507,7 +507,7 @@ namespace Underscore.Test.Object.Reflection
 			TestFind(target, new[] {"arg"}, bflags, true);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CtorFindSingleParameterNegativeLike()
 		{
 			var target = new CtorSingleParamOnly(null);
@@ -523,7 +523,7 @@ namespace Underscore.Test.Object.Reflection
 			TestFind(target, new[] { "arg1" }, bflags, false);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CtorFindDoubleParameterPostiveEq()
 		{
 
@@ -534,7 +534,7 @@ namespace Underscore.Test.Object.Reflection
 			TestFind(target, new { arg1 = typeof(string), arg2=typeof(string) },bflags, true);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CtorFindDoubleParameterNegativeEq()
 		{
 			var target = new CtorDoubleParamOnly(null, null);
@@ -546,7 +546,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void CtorFindDoubleParameterNegativeLike()
 		{
 			var target = new CtorDoubleParamOnly(null, null);
@@ -575,7 +575,7 @@ namespace Underscore.Test.Object.Reflection
 			TestFind(target, new[] { "narg1", "narg2" }, bflags, true);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CtorFindDoubleParameterPositiveLike()
 		{
 			var target = new CtorDoubleParamOnly(null, null);
@@ -595,7 +595,7 @@ namespace Underscore.Test.Object.Reflection
 			TestFind(target, new[] { "arg1", "arg2" }, bflags, true);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CtorFindDoubleAndSingleAndParameterlessPositiveEq()
 		{
 
@@ -611,7 +611,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void CtorFindDoubleAndSingleAndParameterlessNegativeEq()
 		{
 			var target = new CtorDoubleAndSingleAndParamless(null, null);
@@ -626,7 +626,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void CtorFindDoubleAndSingleAndParameterlessNegativeLike()
 		{
 			var target = new CtorDoubleAndSingleAndParamless(null, null);
@@ -657,7 +657,7 @@ namespace Underscore.Test.Object.Reflection
 			TestFind(target, new[] { "narg1", "narg2" }, bflags, true);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CtorFindDoubleAndSingleAndParameterlessPositiveLike()
 		{
 			var target = new CtorDoubleAndSingleAndParamless(null, null);
@@ -693,11 +693,11 @@ namespace Underscore.Test.Object.Reflection
 			TestFind(target, new string[] { }, bflags, true);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CtorFindPrivateParameterPositiveEq()
 		{
 
-			var target = new CtorPrivateParamlessTestClass(null);
+			var target = new CtorPrivateParamlessTestFixture(null);
 			const BindingFlags bflags = BindingFlags.NonPublic | BindingFlags.Instance;
 
 			//should match when exists parameterless ctor
@@ -705,10 +705,10 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void CtorFindPrivateParameterNegativeEq()
 		{
-			var target = new CtorPrivateParamlessTestClass(null);
+			var target = new CtorPrivateParamlessTestFixture(null);
 			const BindingFlags bflags = BindingFlags.NonPublic | BindingFlags.Instance;
 
 			// should not match when binding strings do not match
@@ -724,10 +724,10 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void CtorFindPrivateParameterNegativeLike()
 		{
-			var target = new CtorPrivateParamlessTestClass(null);
+			var target = new CtorPrivateParamlessTestFixture(null);
 			const BindingFlags bflags = BindingFlags.NonPublic | BindingFlags.Instance;
 
 			// when given an other than a string[] or a type[]
@@ -755,10 +755,10 @@ namespace Underscore.Test.Object.Reflection
 			TestFind(target, new[] { "narg1", "narg2" }, bflags, true);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CtorFindPrivateParameterPositiveLike()
 		{
-			var target = new CtorPrivateParamlessTestClass(null);
+			var target = new CtorPrivateParamlessTestFixture(null);
 			const BindingFlags bflags = BindingFlags.NonPublic | BindingFlags.Instance;
 
 			//should match all ctor where at least one param name and type matching query obj
@@ -779,7 +779,7 @@ namespace Underscore.Test.Object.Reflection
 			TestFind(target, new string[] { }, bflags, true);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CtorAll()
 		{
 			var testing = CreateTestTarget( );
@@ -790,23 +790,23 @@ namespace Underscore.Test.Object.Reflection
 
 			var expecting = new[]
 			{
-				typeof (CtorParamlessTestClass).GetConstructors(publicFlag),
-				typeof (CtorPrivateParamlessTestClass).GetConstructors(privateFlag),
+				typeof (CtorParamlessTestFixture).GetConstructors(publicFlag),
+				typeof (CtorPrivateParamlessTestFixture).GetConstructors(privateFlag),
 				typeof (CtorDoubleAndSingle).GetConstructors(publicFlag),
 				typeof (CtorDoubleAndSingleAndParamless).GetConstructors(publicFlag),
-				typeof(CtorStaticParamlessTestClass).GetConstructors(staticFlag)
+				typeof(CtorStaticParamlessTestFixture).GetConstructors(staticFlag)
 			};
 
 			var results = new[]
 			{
 				Tuple.Create(
-					typeof (CtorParamlessTestClass),
-					new CtorParamlessTestClass() as object,
+					typeof (CtorParamlessTestFixture),
+					new CtorParamlessTestFixture() as object,
 					publicFlag
 					),
 				Tuple.Create(
-					typeof (CtorPrivateParamlessTestClass),
-					new CtorPrivateParamlessTestClass(null) as object,
+					typeof (CtorPrivateParamlessTestFixture),
+					new CtorPrivateParamlessTestFixture(null) as object,
 					privateFlag
 					),
 				Tuple.Create(
@@ -820,8 +820,8 @@ namespace Underscore.Test.Object.Reflection
 					publicFlag
 					),
 				Tuple.Create(
-					typeof (CtorStaticParamlessTestClass),
-					new CtorStaticParamlessTestClass(null) as object,
+					typeof (CtorStaticParamlessTestFixture),
+					new CtorStaticParamlessTestFixture(null) as object,
 					publicFlag
 					),
 			}.Zip(expecting, Tuple.Create)
@@ -863,7 +863,7 @@ namespace Underscore.Test.Object.Reflection
 			Assert.AreEqual( expecting , actual );
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task CtorTestSimplestMultiConstructorsFromInstance( ) 
 		{
 			var testing = CreateTestTarget( );
@@ -906,7 +906,7 @@ namespace Underscore.Test.Object.Reflection
 			Assert.AreEqual( expecting , actual, string.Format("Failed on {0} , {1}", t.Name, flags.ToString() ));
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task CtorTestSimplestMultiConstructorsFromType( )
 		{
 			var testing = CreateTestTarget( );

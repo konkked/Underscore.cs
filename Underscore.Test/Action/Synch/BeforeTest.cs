@@ -2,11 +2,11 @@
 using ComposeComponent = Underscore.Action.ComposeComponent;
 using ISynchComponent = Underscore.Action.ISynchComponent;
 using SynchComponent = Underscore.Action.SynchComponent;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Underscore.Test.Action.Synch
 {
-	[TestClass]
+	[TestFixture]
 	public class BeforeTest
 	{
 		private readonly string[] arguments = Util.LowercaseCharArray;
@@ -17,7 +17,7 @@ namespace Underscore.Test.Action.Synch
 		private string result;
 		private bool invoked;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			funcCompose = new ComposeComponent();
@@ -28,7 +28,7 @@ namespace Underscore.Test.Action.Synch
 			invoked = false;
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Before_NoArguments()
 		{
 			var befored = component.Before(() => result = (counter++).ToString(), 2);
@@ -38,7 +38,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("1", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Before_2Arguments()
 		{
 			var beforing = new Action<string, string>((a, b) =>
@@ -58,7 +58,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Before_3Arguments()
 		{
 			var beforing = new Action<string, string, string>((a, b, c) =>
@@ -77,7 +77,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Before_4Arguments()
 		{
 			var beforing = new Action<string, string, string, string>((a, b, c, d) =>
@@ -96,7 +96,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Before_5Arguments()
 		{
 			var beforing = new Action<string, string, string, string, string>((a, b, c, d, e) =>
@@ -115,7 +115,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Before_6Arguments()
 		{
 			var beforing = new Action<string, string, string, string, string, string>((a, b, c, d, e, f) =>
@@ -134,7 +134,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Before_7Arguments()
 		{
 			var beforing = new Action<string, string, string, string, string, string, string>((a, b, c, d, e, f, g) =>
@@ -153,7 +153,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Before_8Arguments()
 		{
 			var beforing = new Action<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) =>
@@ -172,7 +172,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Before_9Arguments()
 		{
 			var beforing = new Action<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) =>
@@ -191,7 +191,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Before_10Arguments()
 		{
 			var beforing = new Action<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) =>
@@ -210,7 +210,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Before_11Arguments()
 		{
 			var beforing = new Action<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) =>
@@ -229,7 +229,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Before_12Arguments()
 		{
 			var beforing = new Action<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) =>
@@ -248,7 +248,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Before_13Arguments()
 		{
 			var beforing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) =>
@@ -267,7 +267,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Before_14Arguments()
 		{
 			var beforing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) =>
@@ -286,7 +286,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Before_15Arguments()
 		{
 			var beforing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) =>
@@ -305,7 +305,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Before_16Arguments()
 		{
 			var beforing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) =>

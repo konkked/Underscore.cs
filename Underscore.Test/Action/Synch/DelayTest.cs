@@ -2,14 +2,14 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Function;
 using ISynchComponent = Underscore.Action.ISynchComponent;
 using SynchComponent = Underscore.Action.SynchComponent;
 
 namespace Underscore.Test.Action.Synch
 {
-	[TestClass]
+	[TestFixture]
 	public class DelayTest
 	{
 		private ComposeComponent compose;
@@ -28,7 +28,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waitTime - 25);
 		}
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			compose = new ComposeComponent();
@@ -51,7 +51,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Delay_1Argument()
 		{
 			var invoked = false;
@@ -73,7 +73,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Delay_2Arguments()
 		{
 			var invoked = false;
@@ -94,7 +94,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Delay_3Arguments()
 		{
 			var invoked = false;
@@ -116,7 +116,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Delay_4Arguments()
 		{
 			var invoked = false;
@@ -139,7 +139,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Delay_5Arguments()
 		{
 			var invoked = false;
@@ -161,7 +161,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Delay_6Arguments()
 		{
 			var invoked = false;
@@ -184,7 +184,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Delay_7Arguments()
 		{
 			var invoked = false;
@@ -208,7 +208,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Delay_8Arguments()
 		{
 			var invoked = false;
@@ -233,7 +233,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Delay_9Arguments()
 		{
 			var invoked = false;
@@ -259,7 +259,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Delay_10Arguments()
 		{
 			var invoked = false;
@@ -286,7 +286,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Delay_11Arguments()
 		{
 			var invoked = false;
@@ -314,7 +314,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Delay_12Arguments()
 		{
 			var invoked = false;
@@ -343,7 +343,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Delay_13Arguments()
 		{
 			var invoked = false;
@@ -373,7 +373,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Delay_14Arguments()
 		{
 			var invoked = false;
@@ -404,7 +404,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Delay_15Arguments()
 		{
 			var invoked = false;
@@ -436,7 +436,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Delay_16Arguments()
 		{
 			var invoked = false;

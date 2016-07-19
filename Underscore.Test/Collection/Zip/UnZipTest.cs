@@ -1,21 +1,21 @@
 ﻿using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Collection;
 
 namespace Underscore.Test.Collection.Zip
 {
-	[TestClass]
+	[TestFixture]
 	public class UnZipTest
 	{
 		private ZipComponent component;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new ZipComponent();
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_UnZip_2Arguments()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -27,7 +27,7 @@ namespace Underscore.Test.Collection.Zip
 			Assert.IsTrue(result.Item2.SequenceEqual(toZipB));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_UnZip_3Arguments()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -41,7 +41,7 @@ namespace Underscore.Test.Collection.Zip
 			Assert.IsTrue(result.Item3.SequenceEqual(toZipC));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_UnZip_4Arguments()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -57,7 +57,7 @@ namespace Underscore.Test.Collection.Zip
 			Assert.IsTrue(result.Item4.SequenceEqual(toZipD));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_UnZip_5Arguments()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -75,7 +75,7 @@ namespace Underscore.Test.Collection.Zip
 			Assert.IsTrue(result.Item5.SequenceEqual(toZipE));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_UnZip_6Arguments()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };
@@ -95,7 +95,7 @@ namespace Underscore.Test.Collection.Zip
 			Assert.IsTrue(result.Item6.SequenceEqual(toZipF));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Zip_UnZip_7Arguments()
 		{
 			int[] toZipA = { 1, 2, 3, 4, 5, 6 };

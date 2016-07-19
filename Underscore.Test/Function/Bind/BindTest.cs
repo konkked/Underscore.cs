@@ -1,21 +1,21 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Function;
 
 namespace Underscore.Test.Function
 {
-	[TestClass]
+	[TestFixture]
 	public class BindTest
 	{
 		private BindComponent component;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new BindComponent();
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Bind_1Argument()
 		{
 			const string expected = "a";
@@ -27,7 +27,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Bind_2Argument()
 		{
 			const string expected = "ab";
@@ -39,7 +39,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Bind_3Argument()
 		{
 			const string expected = "abc";
@@ -51,7 +51,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Bind_4Argument()
 		{
 			const string expected = "abcd";
@@ -63,7 +63,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Bind_5Argument()
 		{
 			const string expected = "abcde";
@@ -75,7 +75,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Bind_6Argument()
 		{
 			const string expected = "abcdef";
@@ -87,7 +87,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Bind_7Argument()
 		{
 			const string expected = "abcdefg";
@@ -99,7 +99,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Bind_8Argument()
 		{
 			const string expected = "abcdefgh";
@@ -111,7 +111,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Bind_9Argument()
 		{
 			const string expected = "abcdefghi";
@@ -123,7 +123,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Bind_10Argument()
 		{
 			const string expected = "abcdefghij";
@@ -135,7 +135,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Bind_11Argument()
 		{
 			const string expected = "abcdefghijk";
@@ -147,7 +147,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Bind_12Argument()
 		{
 			const string expected = "abcdefghijkl";
@@ -159,7 +159,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Bind_13Argument()
 		{
 			const string expected = "abcdefghijklm";
@@ -171,7 +171,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Bind_14Argument()
 		{
 			const string expected = "abcdefghijklmn";
@@ -183,7 +183,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Bind_15Argument()
 		{
 			const string expected = "abcdefghijklmno";
@@ -195,7 +195,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Bind_16Argument()
 		{
 			const string expected = "abcdefghijklmnop";

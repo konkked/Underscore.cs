@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Linq;
@@ -8,7 +8,7 @@ using Underscore.Object.Reflection;
 
 namespace Underscore.Test.Object.Reflection
 {
-	[TestClass]
+	[TestFixture]
 	public class PropertyTest
 	{
 		public class Person
@@ -30,7 +30,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_Has()
 		{
 
@@ -44,7 +44,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_Find()
 		{
 			var properties = typeof(Person).GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -72,7 +72,7 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_GetValue_Generic()
 		{
 			var person = new Person
@@ -116,7 +116,7 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_GetValue_NonGeneric()
 		{
 			var person = new Person
@@ -161,7 +161,7 @@ namespace Underscore.Test.Object.Reflection
 
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_SetValue_Generic()
 		{
 			var person = new Person
@@ -220,7 +220,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_SetValue_NonGeneric()
 		{
 
@@ -279,7 +279,7 @@ namespace Underscore.Test.Object.Reflection
 		}
 		
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_Has_ForTypeTarget()
 		{
 			var testing = _.Object.Property;
@@ -293,7 +293,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_Get_ForTypeTarget()
 		{
 			var testing = _.Object.Property;
@@ -307,7 +307,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_Get_ForTypeTargetCaseInsensitive()
 		{
 			var testing = _.Object.Property;
@@ -321,7 +321,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_OfType_ForType()
 		{
 			var testing = _.Object.Property;
@@ -335,7 +335,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_GetValues()
 		{
 			var testing = _.Object.Property;
@@ -356,7 +356,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_All_TargetInstance()
 		{
 			var example1 = new { A = 'A', B = "B", C = 1 };
@@ -383,7 +383,7 @@ namespace Underscore.Test.Object.Reflection
 			}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_OfType_TargetInstance()
 		{
 			var example2 = new Person
@@ -455,7 +455,7 @@ namespace Underscore.Test.Object.Reflection
 			public int NumberOfKids { get; set; }
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Object_Property_Foreach_NonGeneric_JustValues()
 		{
 			var person = new OtherPerson2(25)
@@ -509,7 +509,7 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 		
-		[TestMethod]
+		[Test]
 		public void Object_Property_Foreach_NonGeneric_ValueAndName()
 		{
 			var person = new OtherPerson2(25)
@@ -568,7 +568,7 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 		
-		[TestMethod]
+		[Test]
 		public void Object_Property_Foreach_NonGeneric_ValueAndNameAndSetter()
 		{
 			var person = new OtherPerson2(25)
@@ -684,7 +684,7 @@ namespace Underscore.Test.Object.Reflection
 
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_Foreach_Generic_JustValues()
 		{
 			var person = new OtherPerson2(25)
@@ -762,7 +762,7 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_Foreach_Generic_ValueAndName()
 		{
 			var person = new OtherPerson2(25)
@@ -840,7 +840,7 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_Foreach_Generic_ValueAndNameAndSetter()
 		{
 			var person = new OtherPerson2(25)
@@ -960,7 +960,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_Pairs_NonGeneric()
 		{
 			var person = new OtherPerson2(25)
@@ -991,7 +991,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Property_Pairs_Generic()
 		{
 			var person = new OtherPerson2(25)

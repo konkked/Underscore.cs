@@ -2,11 +2,11 @@
 using ComposeComponent = Underscore.Action.ComposeComponent;
 using ISynchComponent = Underscore.Action.ISynchComponent;
 using SynchComponent = Underscore.Action.SynchComponent;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Underscore.Test.Action.Synch
 {
-	[TestClass]
+	[TestFixture]
 	public class OnceTest
 	{
 		private ComposeComponent compose;
@@ -16,14 +16,14 @@ namespace Underscore.Test.Action.Synch
 
 		private string result = "";
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			compose = new ComposeComponent();
 			component = new SynchComponent();
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Once_NoArguments()
 		{
 			var result = 0;
@@ -34,7 +34,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual(1, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Once_1Argument()
 		{
 			var oncing = new Action<string>((a) =>
@@ -50,7 +50,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("a", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Once_2Arguments()
 		{
 			var oncing = new Action<string, string>((a, b) =>
@@ -66,7 +66,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("ab", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Once_3Arguments()
 		{
 			var oncing = new Action<string, string, string>((a, b, c) =>
@@ -82,7 +82,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("abc", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Once_4Arguments()
 		{
 			var oncing = new Action<string, string, string, string>((a, b, c, d) =>
@@ -98,7 +98,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("abcd", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Once_5Arguments()
 		{
 			var oncing = new Action<string, string, string, string, string>((a, b, c, d, e) =>
@@ -114,7 +114,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("abcde", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Once_6Arguments()
 		{
 			var oncing = new Action<string, string, string, string, string, string>((a, b, c, d, e, f) =>
@@ -130,7 +130,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("abcdef", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Once_7Arguments()
 		{
 			var oncing = new Action<string, string, string, string, string, string, string>((a, b, c, d, e, f, g) =>
@@ -146,7 +146,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("abcdefg", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Once_8Arguments()
 		{
 			var oncing = new Action<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) =>
@@ -162,7 +162,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("abcdefgh", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Once_9Arguments()
 		{
 			var oncing = new Action<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) =>
@@ -178,7 +178,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("abcdefghi", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Once_10Arguments()
 		{
 			var oncing = new Action<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) =>
@@ -194,7 +194,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("abcdefghij", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Once_11Arguments()
 		{
 			var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) =>
@@ -210,7 +210,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("abcdefghijk", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Once_12Arguments()
 		{
 			var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) =>
@@ -226,7 +226,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("abcdefghijkl", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Once_13Arguments()
 		{
 			var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) =>
@@ -242,7 +242,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("abcdefghijklm", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Once_14Arguments()
 		{
 			var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) =>
@@ -258,7 +258,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("abcdefghijklmn", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Once_15Arguments()
 		{
 			var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) =>
@@ -274,7 +274,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("abcdefghijklmno", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Synch_Once_16Arguments()
 		{
 			var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) =>

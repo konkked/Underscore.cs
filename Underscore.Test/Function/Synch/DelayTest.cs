@@ -2,12 +2,12 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Function;
 
 namespace Underscore.Test.Function.Synch
 {
-	[TestClass]
+	[TestFixture]
 	public class DelayTest
 	{
 		private ISynchComponent component;
@@ -15,7 +15,7 @@ namespace Underscore.Test.Function.Synch
 
 		private readonly string[] arguments = Util.LowercaseCharArray;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new SynchComponent();
@@ -34,7 +34,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.AreEqual(expecting, delayed.Result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_Delay_NoArguments()
 		{
 			var timer = new Stopwatch();
@@ -54,7 +54,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= 100 - 10, string.Format("Expecting at least {0} got {1}", 100, timer.ElapsedMilliseconds));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_Delay_1Argument()
 		{
 			var invoked = false;
@@ -74,7 +74,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_Delay_2Arguments()
 		{
 			var invoked = false;
@@ -94,7 +94,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_Delay_3Arguments()
 		{
 			var invoked = false;
@@ -114,7 +114,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_Delay_4Arguments()
 		{
 			var invoked = false;
@@ -134,7 +134,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_Delay_5Arguments()
 		{
 			var invoked = false;
@@ -160,7 +160,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= 100, "Not {0} >= {1} ", timer.Elapsed, 100);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_Delay_6Arguments()
 		{
 			var invoked = false;
@@ -180,7 +180,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_Delay_7Arguments()
 		{
 			var invoked = false;
@@ -200,7 +200,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_Delay_8Arguments()
 		{
 			var invoked = false;
@@ -220,7 +220,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_Delay_9Arguments()
 		{
 			var invoked = false;
@@ -240,7 +240,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_Delay_10Arguments()
 		{
 			var invoked = false;
@@ -260,7 +260,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_Delay_11Arguments()
 		{
 			var invoked = false;
@@ -280,7 +280,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_Delay_12Arguments()
 		{
 			var invoked = false;
@@ -300,7 +300,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_Delay_13Arguments()
 		{
 			var invoked = false;
@@ -320,7 +320,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_Delay_14Arguments()
 		{
 			var invoked = false;
@@ -340,7 +340,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_Delay_15Arguments()
 		{
 			var invoked = false;
@@ -360,7 +360,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_Delay_16Arguments()
 		{
 			var invoked = false;

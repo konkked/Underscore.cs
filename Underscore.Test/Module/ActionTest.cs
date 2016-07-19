@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using BindComponent = Underscore.Action.BindComponent;
 using ComposeComponent = Underscore.Action.ComposeComponent;
 using ConvertComponent = Underscore.Action.ConvertComponent;
@@ -7,10 +7,10 @@ using SynchComponent = Underscore.Action.SynchComponent;
 
 namespace Underscore.Test.Module
 {
-	[TestClass]
+	[TestFixture]
 	public class ActionTest
 	{
-		[TestMethod]
+		[Test]
 		public void ActionCreate()
 		{
 			var action = new Underscore.Module.Action( 

@@ -1,21 +1,21 @@
 ﻿using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Collection;
 
 namespace Underscore.Test.Collection
 {
-	[TestClass]
+	[TestFixture]
 	public class FilterTest
 	{
 		private FilterComponent component;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new FilterComponent();
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Filter_Drop()
 		{
 			int[] target = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -26,7 +26,7 @@ namespace Underscore.Test.Collection
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Filter_DropWhile()
 		{
 			int[] target = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -37,7 +37,7 @@ namespace Underscore.Test.Collection
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Filter_Pull()
 		{
 			int[] target = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -48,7 +48,7 @@ namespace Underscore.Test.Collection
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Filter_TakeRight()
 		{
 			int[] target = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -59,7 +59,7 @@ namespace Underscore.Test.Collection
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Collection_Filter_TakeRightWhile()
 		{
 			int[] target = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };

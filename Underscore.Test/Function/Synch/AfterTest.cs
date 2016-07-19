@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Function;
 
 namespace Underscore.Test.Function.Synch
 {
-	[TestClass]
+	[TestFixture]
 	public class AfterTest
 	{
 		private ISynchComponent component;
@@ -20,14 +20,14 @@ namespace Underscore.Test.Function.Synch
 
 		private readonly Func<Task<string>[]> mkArr = () => new Task<string>[repeatCount];
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new SynchComponent();
 			compose = new ComposeComponent();
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_After_NoArguments()
 		{
 			var expected = new [] { "2", "2", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -52,7 +52,7 @@ namespace Underscore.Test.Function.Synch
 				Assert.AreEqual(expected[i], results[i]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_After_1Argument()
 		{
 			var invoked = false;
@@ -92,7 +92,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_After_2Arguments()
 		{
 			var invoked = false;
@@ -134,7 +134,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_After_3Arguments()
 		{
 			var invoked = false;
@@ -176,7 +176,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_After_4Arguments()
 		{
 			var invoked = false;
@@ -218,7 +218,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_After_5Arguments()
 		{
 			var invoked = false;
@@ -260,7 +260,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_After_6Arguments()
 		{
 			var invoked = false;
@@ -302,7 +302,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_After_7Arguments()
 		{
 			var invoked = false;
@@ -344,7 +344,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_After_8Arguments()
 		{
 			var invoked = false;
@@ -388,7 +388,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_After_9Arguments()
 		{
 			var invoked = false;
@@ -430,7 +430,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_After_10Arguments()
 		{
 			var invoked = false;
@@ -472,7 +472,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_After_11Arguments()
 		{
 			var invoked = false;
@@ -514,7 +514,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_After_12Arguments()
 		{
 			var invoked = false;
@@ -556,7 +556,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_After_13Arguments()
 		{
 			var invoked = false;
@@ -598,7 +598,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_After_14Arguments()
 		{
 			var invoked = false;
@@ -640,7 +640,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_After_15Arguments()
 		{
 			var invoked = false;
@@ -682,7 +682,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(invoked);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Synch_After_16Arguments()
 		{
 			var invoked = false;

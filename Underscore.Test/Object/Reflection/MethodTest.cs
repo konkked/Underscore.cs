@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Threading.Tasks;
 using Moq;
 using System.Reflection;
@@ -12,7 +12,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Underscore.Test.Object.Reflection
 {
-	[TestClass]
+	[TestFixture]
 	public class MethodTest
 	{
 
@@ -68,7 +68,7 @@ namespace Underscore.Test.Object.Reflection
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Invoke_WithoutParameterAndWithoutReturnValue()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
@@ -81,7 +81,7 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsNull(result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Invoke_WithoutParameterWithReturnValue()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
@@ -97,7 +97,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Invoke_WithoutParameterWithReturnValueGeneric()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
@@ -112,7 +112,7 @@ namespace Underscore.Test.Object.Reflection
 			Assert.AreEqual("2", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Invoke_WithParameterWithoutReturnValue()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
@@ -126,7 +126,7 @@ namespace Underscore.Test.Object.Reflection
 			Assert.AreEqual("b", testingTarget.InvokeWithParameterWithoutReturnValueParameter2);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Invoke_WithParameterWithReturnValueNonGeneric()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
@@ -140,7 +140,7 @@ namespace Underscore.Test.Object.Reflection
 			Assert.AreEqual("b", testingTarget.InvokeWithParametersAndReturnValueParameter2);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Invoke_WithParameterWithReturnValueGeneric()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
@@ -154,7 +154,7 @@ namespace Underscore.Test.Object.Reflection
 			Assert.AreEqual("b", testingTarget.InvokeWithParametersAndReturnValueParameter2);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Invoke_ForAllWithParameterWithoutReturnValueLazy()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
@@ -186,7 +186,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Invoke_ForAllWithParameterWithoutReturnValueGreedy()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
@@ -215,7 +215,7 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Invoke_ForAllWithParameterWithReturnValueLazy()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
@@ -246,7 +246,7 @@ namespace Underscore.Test.Object.Reflection
 			Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter2History.Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Invoke_ForAllWithParameterWithReturnValueGreedy()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
@@ -276,7 +276,7 @@ namespace Underscore.Test.Object.Reflection
 			Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter2History.Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_InvokeForAllWithParameterWithReturnValueGenericLazy()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
@@ -309,7 +309,7 @@ namespace Underscore.Test.Object.Reflection
 			Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter2History.Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Invoke_ForAllWithParameterWithReturnGenericGreedy()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
@@ -340,12 +340,12 @@ namespace Underscore.Test.Object.Reflection
 			Assert.AreEqual(3, testingTarget.InvokeWithParameterWithReturnValueParameter2History.Count);
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Object_Method_Query_TargetInstanceNoArgs()
 		{
 
 			var testing = _.Object.Method;
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 			
 
 			//all methods with no params
@@ -374,11 +374,11 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Query_TargetInstanceReturnType()
 		{
 
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 			
 			//all void methods
 			var methods = _.Object.Method.Query(target, new { @return=typeof(void) });
@@ -393,11 +393,11 @@ namespace Underscore.Test.Object.Reflection
 			Assert.AreEqual(1, infos.Count(a => a.Name == "ReturnAsAParameter"));
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Object_Method_Query_TargetInstanceReturnOverride()
 		{
 
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 
 			//all void methods
 			var methods = _.Object.Method.Query(target, new { @return = new { parameterType= typeof(string) } });
@@ -408,12 +408,12 @@ namespace Underscore.Test.Object.Reflection
 			Assert.AreEqual(1, infos.Count(a => a.Name == "ReturnAsAParameter"));
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Object_Method_Query_TargetInstanceOneArgNames()
 		{
 
 			var testing = _.Object.Method;
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 			
 			var singleParamName1 = testing.Query(target, "arg");
 			var singleParamName2 = testing.Query(target, new[] { "arg" });
@@ -432,12 +432,12 @@ namespace Underscore.Test.Object.Reflection
 			Assert.AreEqual(singParamName1Arr.FirstOrDefault(), sngParamName2Arr.FirstOrDefault());
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Query_TargetInstanceOneArgType()
 		{
 
 			var testing = _.Object.Method;
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 
 
 			//gets the methods where the number of args with a single string parameter using just a type as an arg
@@ -445,7 +445,7 @@ namespace Underscore.Test.Object.Reflection
 
 			//is logically equivelant to this linq expression
 			Assert.IsTrue(
-				typeof(MethodMethodsTestClass).GetMethods()
+				typeof(MethodMethodsTestFixture).GetMethods()
 					.Where(
 						a => a.GetParameters().Length == 1 
 							&& a.GetParameters().First().ParameterType == typeof(string)
@@ -461,12 +461,12 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Object_Method_Query_TargetInstanceOneArgAnonObj()
 		{
 
 			var testing = _.Object.Method;
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 
 
 			//gets the methods where the number of args with a single string parameter using just a type as an arg
@@ -474,7 +474,7 @@ namespace Underscore.Test.Object.Reflection
 
 			//is logically equivelant to this linq expression
 			Assert.IsTrue(
-				typeof(MethodMethodsTestClass).GetMethods()
+				typeof(MethodMethodsTestFixture).GetMethods()
 					.Where(
 						a => a.GetParameters().Length == 1
 							&& a.GetParameters().Count(b=>b.ParameterType == typeof(string) && b.Name=="arg")==1
@@ -485,12 +485,12 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Methods_Query_InstanceTwoArgNames()
 		{
 
 			var testing = _.Object.Method;
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 
 
 			//gets the methods with parameters named "arg1" and "arg2"
@@ -499,7 +499,7 @@ namespace Underscore.Test.Object.Reflection
 
 			Assert.IsTrue(
 				//logicall equivelant to 
-				typeof (MethodMethodsTestClass).GetMethods()
+				typeof (MethodMethodsTestFixture).GetMethods()
 					.Where(
 						a =>
 							a.GetParameters().Length == 2 &&
@@ -511,12 +511,12 @@ namespace Underscore.Test.Object.Reflection
 			
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Object_Methods_Query_InstanceTwoArgTypes()
 		{
 
 			var testing = _.Object.Method;
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 
 
 			var doubleTypeParams = testing.Query(target, new[] { typeof(string), typeof(string)});
@@ -524,7 +524,7 @@ namespace Underscore.Test.Object.Reflection
 
 			Assert.IsTrue(
 				//is logically equivalent to the following
-				typeof (MethodMethodsTestClass).GetMethods()
+				typeof (MethodMethodsTestFixture).GetMethods()
 					.Where(
 						a =>
 							a.GetParameters().Length == 2 &&
@@ -536,18 +536,18 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Object_Methods_Query_InstanceTwoArgAnonymousObject()
 		{
 
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 
 
 			var dblAnonParam = _.Object.Method.Query(target, new{  arg1=typeof(string), arg2=typeof(string) });
 
 			Assert.IsTrue(
 				//is logically equivalent to the following
-				typeof(MethodMethodsTestClass).GetMethods()
+				typeof(MethodMethodsTestFixture).GetMethods()
 					.Where(
 						a =>
 							a.GetParameters().Length == 2 &&
@@ -559,12 +559,12 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Object_Method_Query_TargetTypeNoArgs()
 		{
 
 			var testing = _.Object.Method;
-			var target = typeof(MethodMethodsTestClass);
+			var target = typeof(MethodMethodsTestFixture);
 
 			var methods = testing.Query(target, new {});
 
@@ -589,11 +589,11 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsTrue(methods.All(a => a.GetParameters().Length == 0));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Query_TargetTypeReturnType()
 		{
 
-			var target = typeof(MethodMethodsTestClass);
+			var target = typeof(MethodMethodsTestFixture);
 
 			//all void methods
 			var methods = _.Object.Method.Query(target, new { @return = typeof(void) });
@@ -608,11 +608,11 @@ namespace Underscore.Test.Object.Reflection
 			Assert.AreEqual(1, infos.Count(a => a.Name == "ReturnAsAParameter"));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Query_TargetTypeReturnOverride()
 		{
 
-			var target = typeof(MethodMethodsTestClass);
+			var target = typeof(MethodMethodsTestFixture);
 
 			//all void methods
 			var methods = _.Object.Method.Query(target, new { @return = new { parameterType = typeof(string) } });
@@ -623,12 +623,12 @@ namespace Underscore.Test.Object.Reflection
 			Assert.AreEqual(1, infos.Count(a => a.Name == "ReturnAsAParameter"));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Query_TargetTypeOneArgNames()
 		{
 
 			var testing = _.Object.Method;
-			var target = typeof(MethodMethodsTestClass);
+			var target = typeof(MethodMethodsTestFixture);
 
 			var singleParamName1 = testing.Query(target, "arg");
 			var singleParamName2 = testing.Query(target, new[] { "arg" });
@@ -647,12 +647,12 @@ namespace Underscore.Test.Object.Reflection
 			Assert.AreEqual(singParamName1Arr.FirstOrDefault(), sngParamName2Arr.FirstOrDefault());
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Query_TargetTypeOneArgType()
 		{
 
 			var testing = _.Object.Method;
-			var target = typeof(MethodMethodsTestClass);
+			var target = typeof(MethodMethodsTestFixture);
 
 
 			//gets the methods where the number of args with a single string parameter using just a type as an arg
@@ -660,7 +660,7 @@ namespace Underscore.Test.Object.Reflection
 
 			//is logically equivelant to this linq expression
 			Assert.IsTrue(
-				typeof(MethodMethodsTestClass).GetMethods()
+				typeof(MethodMethodsTestFixture).GetMethods()
 					.Where(
 						a => a.GetParameters().Length == 1
 							&& a.GetParameters().First().ParameterType == typeof(string)
@@ -676,12 +676,12 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Query_TargetTypeOneArgAnonObj()
 		{
 
 			var testing = _.Object.Method;
-			var target = typeof(MethodMethodsTestClass);
+			var target = typeof(MethodMethodsTestFixture);
 
 
 			//gets the methods where the number of args with a single string parameter using just a type as an arg
@@ -689,7 +689,7 @@ namespace Underscore.Test.Object.Reflection
 
 			//is logically equivelant to this linq expression
 			Assert.IsTrue(
-				typeof(MethodMethodsTestClass).GetMethods()
+				typeof(MethodMethodsTestFixture).GetMethods()
 					.Where(
 						a => a.GetParameters().Length == 1
 							&& a.GetParameters().Count(b => b.ParameterType == typeof(string) && b.Name == "arg") == 1
@@ -700,12 +700,12 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Methods_Query_TypeTwoArgNames()
 		{
 
 			var testing = _.Object.Method;
-			var target = typeof(MethodMethodsTestClass);
+			var target = typeof(MethodMethodsTestFixture);
 
 
 			//gets the methods with parameters named "arg1" and "arg2"
@@ -714,7 +714,7 @@ namespace Underscore.Test.Object.Reflection
 
 			Assert.IsTrue(
 				//logicall equivelant to 
-				typeof(MethodMethodsTestClass).GetMethods()
+				typeof(MethodMethodsTestFixture).GetMethods()
 					.Where(
 						a =>
 							a.GetParameters().Length == 2 &&
@@ -726,12 +726,12 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Methods_Query_TypeTwoArgTypes()
 		{
 
 			var testing = _.Object.Method;
-			var target = typeof(MethodMethodsTestClass);
+			var target = typeof(MethodMethodsTestFixture);
 
 
 			var doubleTypeParams = testing.Query(target, new[] { typeof(string), typeof(string) });
@@ -739,7 +739,7 @@ namespace Underscore.Test.Object.Reflection
 
 			Assert.IsTrue(
 				//is logically equivalent to the following
-				typeof(MethodMethodsTestClass).GetMethods()
+				typeof(MethodMethodsTestFixture).GetMethods()
 					.Where(
 						a =>
 							a.GetParameters().Length == 2 &&
@@ -751,18 +751,18 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Methods_Query_TypeTwoArgAnonymousObject()
 		{
 
-			var target = typeof(MethodMethodsTestClass);
+			var target = typeof(MethodMethodsTestFixture);
 
 
 			var dblAnonParam = _.Object.Method.Query(target, new { arg1 = typeof(string), arg2 = typeof(string) });
 
 			Assert.IsTrue(
 				//is logically equivalent to the following
-				typeof(MethodMethodsTestClass).GetMethods()
+				typeof(MethodMethodsTestFixture).GetMethods()
 					.Where(
 						a =>
 							a.GetParameters().Length == 2 &&
@@ -774,34 +774,34 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Object_Methods_All_InstanceArg()
 		{
 
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 			var result = _.Object.Method.All(target);
 
 			Assert.IsTrue(
 				//should be logically equal to this
-				typeof (MethodMethodsTestClass).GetMethods()
-				.Where(a => !a.IsSpecialName && a.DeclaringType==typeof(MethodMethodsTestClass))
+				typeof (MethodMethodsTestFixture).GetMethods()
+				.Where(a => !a.IsSpecialName && a.DeclaringType==typeof(MethodMethodsTestFixture))
 				.SequenceEqual(result));
 
 
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_All_TypeArg()
 		{
 
-			var target = typeof(MethodMethodsTestClass);
+			var target = typeof(MethodMethodsTestFixture);
 			var result = _.Object.Method.All(target);
 
 			Assert.IsTrue(
 				//should be logically equal to this
-				typeof(MethodMethodsTestClass).GetMethods()
-				.Where(a => !a.IsSpecialName && a.DeclaringType == typeof(MethodMethodsTestClass))
+				typeof(MethodMethodsTestFixture).GetMethods()
+				.Where(a => !a.IsSpecialName && a.DeclaringType == typeof(MethodMethodsTestFixture))
 				.SequenceEqual(result));
 
 
@@ -821,7 +821,7 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 
-		private class MethodMethodsTestClass
+		private class MethodMethodsTestFixture
 		{
 			public void ShouldShowNoReturnValue( ) { }
 			private void ShouldntShowNoReturnValue( ) { }
@@ -843,14 +843,14 @@ namespace Underscore.Test.Object.Reflection
 
 		private static IEnumerable<MethodInfo> AllMethodsInfo( ) 
 		{
-			return typeof( MethodMethodsTestClass ).GetMethods( BindingFlags.Public | BindingFlags.Instance ).Where(a=>!a.IsSpecialName && !a.IsConstructor);
+			return typeof( MethodMethodsTestFixture ).GetMethods( BindingFlags.Public | BindingFlags.Instance ).Where(a=>!a.IsSpecialName && !a.IsConstructor);
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Object_Method_Find_TargetInstanceFindWithSingleItemNoParameters()
 		{
 
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 
 			var results = new[]
 			{
@@ -862,18 +862,18 @@ namespace Underscore.Test.Object.Reflection
 
 			//equivelant to
 			var expecting =
-				typeof (MethodMethodsTestClass)
+				typeof (MethodMethodsTestFixture)
 					.GetMethods()
 					.First(a => a.Name == "ShouldShowNoReturnValue" && a.GetParameters().Length == 0);
 
 			Assert.IsTrue(results.All(a=>a==expecting));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Find_TargetInstanceFindWithSingleItemOneParameter()
 		{
 
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 
 			var results = new[]
 			{
@@ -886,7 +886,7 @@ namespace Underscore.Test.Object.Reflection
 
 			//equivelant to
 			var expecting =
-				typeof (MethodMethodsTestClass)
+				typeof (MethodMethodsTestFixture)
 					.GetMethods()
 					.First(
 						a =>
@@ -896,11 +896,11 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsTrue(results.All(a => a == expecting));
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Object_Method_Find_TargetInstanceFindWithSingleItemTwoParameter()
 		{
 
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 
 			var results = new[]
 			{
@@ -911,7 +911,7 @@ namespace Underscore.Test.Object.Reflection
 
 			//equivelant to
 			var expecting =
-				typeof(MethodMethodsTestClass)
+				typeof(MethodMethodsTestFixture)
 					.GetMethods()
 					.First(
 						a =>
@@ -923,11 +923,11 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Find_TargetInstanceFindFailsForPrivateByDefault()
 		{
 
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 
 			var results = new[]
 			{
@@ -940,11 +940,11 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsTrue(results.All(a => a == null));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Find_TargetInstanceFindWorksForPrivateUsingBindingFlag()
 		{
 
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 
 			var results = new[]
 			{
@@ -955,17 +955,17 @@ namespace Underscore.Test.Object.Reflection
 			};
 
 			var expecting =
-				typeof(MethodMethodsTestClass).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
+				typeof(MethodMethodsTestFixture).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
 					.FirstOrDefault(a => a.Name == "ShouldntShowNoReturnValue");
 
 			Assert.IsTrue(results.All(a => a == expecting));
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Find_TargetInstanceFindFailsForPropertyMethods()
 		{
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 
 			Assert.IsNull(_.Object.Method.Find(target, "get_PublicPropertyShouldNotShow"));
 			Assert.IsNull(_.Object.Method.Find(target, "get_PrivatePropertyShouldNotShow"));
@@ -985,11 +985,11 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Find_TargetTypeFindWithSingleItemNoParameters()
 		{
 
-			var target = typeof(MethodMethodsTestClass);
+			var target = typeof(MethodMethodsTestFixture);
 
 			var results = new[]
 			{
@@ -1001,18 +1001,18 @@ namespace Underscore.Test.Object.Reflection
 
 			//equivelant to
 			var expecting =
-				typeof(MethodMethodsTestClass)
+				typeof(MethodMethodsTestFixture)
 					.GetMethods()
 					.First(a => a.Name == "ShouldShowNoReturnValue" && a.GetParameters().Length == 0);
 
 			Assert.IsTrue(results.All(a => a == expecting));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Find_TargetTypeFindWithSingleItemOneParameter()
 		{
 
-			var target = typeof(MethodMethodsTestClass);
+			var target = typeof(MethodMethodsTestFixture);
 
 			var results = new[]
 			{
@@ -1025,7 +1025,7 @@ namespace Underscore.Test.Object.Reflection
 
 			//equivelant to
 			var expecting =
-				typeof(MethodMethodsTestClass)
+				typeof(MethodMethodsTestFixture)
 					.GetMethods()
 					.First(
 						a =>
@@ -1035,11 +1035,11 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsTrue(results.All(a => a == expecting));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Find_TargetTypeFindWithSingleItemTwoParameter()
 		{
 
-			var target =  typeof(MethodMethodsTestClass);
+			var target =  typeof(MethodMethodsTestFixture);
 
 			var results = new[]
 			{
@@ -1050,7 +1050,7 @@ namespace Underscore.Test.Object.Reflection
 
 			//equivelant to
 			var expecting =
-				typeof(MethodMethodsTestClass)
+				typeof(MethodMethodsTestFixture)
 					.GetMethods()
 					.First(
 						a =>
@@ -1061,11 +1061,11 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsTrue(results.All(a => a == expecting));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Find_TargetTypeFindFailsForPrivateByDefault()
 		{
 
-			var target = typeof(MethodMethodsTestClass);
+			var target = typeof(MethodMethodsTestFixture);
 
 			var results = new[]
 			{
@@ -1078,11 +1078,11 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsTrue(results.All(a=>a==null));
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Find_TargetTypeFindWorksForPrivateUsingBindingFlag()
 		{
 
-			var target = typeof(MethodMethodsTestClass);
+			var target = typeof(MethodMethodsTestFixture);
 
 			var results = new[]
 			{
@@ -1093,16 +1093,16 @@ namespace Underscore.Test.Object.Reflection
 			};
 
 			var expecting =
-				typeof (MethodMethodsTestClass).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
+				typeof (MethodMethodsTestFixture).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
 					.FirstOrDefault(a => a.Name == "ShouldntShowNoReturnValue");
 
 			Assert.IsTrue(results.All(a => a == expecting));
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Object_Method_Find_TargetTypeFindFailsForPropertyMethods()
 		{
-			var target = typeof (MethodMethodsTestClass);
+			var target = typeof (MethodMethodsTestFixture);
 
 			Assert.IsNull(_.Object.Method.Find(target, "get_PublicPropertyShouldNotShow"));
 			Assert.IsNull(_.Object.Method.Find(target, "get_PrivatePropertyShouldNotShow"));
@@ -1121,10 +1121,10 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsNull(_.Object.Method.Find(target, "set_PrivatePropertyShouldNotShow", "value"));
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Object_Method_Find_TargetInstanceReturnParameterOverride()
 		{
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 
 			var result = _.Object.Method.Find(target, new { @return = new { parameterType=typeof(string) } });
 
@@ -1134,10 +1134,10 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Find_TargetTypeReturnParameterOverride()
 		{
-			var target = typeof(MethodMethodsTestClass);
+			var target = typeof(MethodMethodsTestFixture);
 
 			var result = _.Object.Method.Find(target, new { @return = new { parameterType = typeof(string) } });
 
@@ -1146,12 +1146,12 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Find_TargetInstanceSkippingArguments()
 		{
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 
-			var expecting = typeof (MethodMethodsTestClass).GetMethods().FirstOrDefault(a=> a.Name == "ShouldShowNoReturnValue" &&  a.GetParameters().Length == 2);
+			var expecting = typeof (MethodMethodsTestFixture).GetMethods().FirstOrDefault(a=> a.Name == "ShouldShowNoReturnValue" &&  a.GetParameters().Length == 2);
 
 			var result = _.Object.Method.Find(target, new [] {null, typeof(string)});
 
@@ -1160,12 +1160,12 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Find_TargetTypeSkippingArguments()
 		{
-			var target = typeof(MethodMethodsTestClass);
+			var target = typeof(MethodMethodsTestFixture);
 
-			var expecting = typeof(MethodMethodsTestClass).GetMethods().FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue" && a.GetParameters().Length == 2);
+			var expecting = typeof(MethodMethodsTestFixture).GetMethods().FirstOrDefault(a => a.Name == "ShouldShowNoReturnValue" && a.GetParameters().Length == 2);
 
 			var result = _.Object.Method.Find(target, new[] { null, typeof(string) });
 
@@ -1173,10 +1173,10 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Has_TargetHasNoArgs()
 		{
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 
 			Assert.IsTrue(_.Object.Method.Has(target, "ShouldShowNoReturnValue"));
 			Assert.IsTrue(_.Object.Method.Has(target, "ShouldShowNoReturnValue", new {}));
@@ -1213,7 +1213,7 @@ namespace Underscore.Test.Object.Reflection
 
 		public void Object_Method_Has_TargetHasOneArg()
 		{
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 			var testing = _.Object.Method;
 
 			Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue", new {arg = typeof (string)}));
@@ -1250,10 +1250,10 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Has_TargetHasTwoArgs()
 		{
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 			var testing = _.Object.Method;
 
 			Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue",
@@ -1288,10 +1288,10 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void Object_Method_Has_DoesNotMatchPropertyMethods()
 		{
-			var target = new MethodMethodsTestClass();
+			var target = new MethodMethodsTestFixture();
 			var testing = _.Object.Method;
 
 			Assert.IsFalse(testing.Has(target, "get_PublicPropertyShouldNotShow"));

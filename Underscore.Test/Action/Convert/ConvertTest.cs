@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Action;
 
 namespace Underscore.Test.Action
 {
-	[TestClass]
+	[TestFixture]
 	public class ConvertTest
 	{
 		private ConvertComponent component;
@@ -16,7 +16,7 @@ namespace Underscore.Test.Action
 			return args.Aggregate(0, (total, next) => total + next);
 		} 
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new ConvertComponent();
@@ -28,7 +28,7 @@ namespace Underscore.Test.Action
 		// arithmetic progression from 1..n, 
 		// where n is the number of arguments
 
-		[TestMethod]
+		[Test]
 		public void Action_Convert_ToFunction_NoArguments()
 		{
 			const int expected = 0;
@@ -39,7 +39,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Convert_ToFunction_1Argument()
 		{
 			const int expected = 1;
@@ -50,7 +50,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Convert_ToFunction_2Arguments()
 		{
 			const int expected = 3;
@@ -61,7 +61,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Convert_ToFunction_3Arguments()
 		{
 			const int expected = 6;
@@ -72,7 +72,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Convert_ToFunction_4Arguments()
 		{
 			const int expected = 10;
@@ -83,7 +83,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Convert_ToFunction_5Arguments()
 		{
 			const int expected = 15;
@@ -94,7 +94,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Convert_ToFunction_6Arguments()
 		{
 			const int expected = 21;
@@ -105,7 +105,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Convert_ToFunction_7Arguments()
 		{
 			const int expected = 28;
@@ -116,7 +116,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Convert_ToFunction_8Arguments()
 		{
 			const int expected = 36;
@@ -127,7 +127,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Convert_ToFunction_9Arguments()
 		{
 			const int expected = 45;
@@ -138,7 +138,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Convert_ToFunction_10Arguments()
 		{
 			const int expected = 55;
@@ -149,7 +149,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Convert_ToFunction_11Arguments()
 		{
 			const int expected = 66;
@@ -160,7 +160,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Convert_ToFunction_12Arguments()
 		{
 			const int expected = 78;
@@ -171,7 +171,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Convert_ToFunction_13Arguments()
 		{
 			const int expected = 91;
@@ -182,7 +182,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Convert_ToFunction_14Arguments()
 		{
 			const int expected = 105;
@@ -193,7 +193,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Convert_ToFunction_15Arguments()
 		{
 			const int expected = 120;
@@ -204,7 +204,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Convert_ToFunction_16Arguments()
 		{
 			const int expected = 136;

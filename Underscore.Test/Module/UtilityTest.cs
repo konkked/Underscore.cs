@@ -1,12 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Underscore.Utility;
 
 namespace Underscore.Test.Module
 {
-	[TestClass]
+	[TestFixture]
 	public class UtilityTest
 	{
-		[TestMethod]
+		[Test]
 		public void CreateUtilityModuleTest( )
 		{
 			var result = new global::Underscore.Module.Utility(

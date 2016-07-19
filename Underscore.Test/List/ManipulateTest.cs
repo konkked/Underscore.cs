@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.List;
 
 namespace Underscore.Test.List
 {
-	[TestClass]
+	[TestFixture]
 	public class Manipulate
 	{
 
-		[TestMethod]
+		[Test]
 		public void List_Manipulate_Swap()
 		{
 			var testing = new ManipulateComponent();
@@ -27,7 +27,7 @@ namespace Underscore.Test.List
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public void List_Manipulate_Shuffle()
 		{
 			List<int> arr = Enumerable.Range(0, 100).ToList();
@@ -82,7 +82,7 @@ namespace Underscore.Test.List
 			Assert.IsTrue(comparisionCount < 15);
 		}
 
-		[TestMethod]
+		[Test]
 		public void List_Manipulate_Rotate()
 		{
 			var testing = new ManipulateComponent();
@@ -125,7 +125,7 @@ namespace Underscore.Test.List
 
 		}
 
-		[TestMethod]
+		[Test]
 		public void List_Manipulate_Sample()
 		{
 			var target = Enumerable.Range(0, 100).ToList();
@@ -162,7 +162,7 @@ namespace Underscore.Test.List
 
 
 
-		[TestMethod]
+		[Test]
 		public void List_Manipulate_Extend()
 		{
 			var target = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -180,7 +180,7 @@ namespace Underscore.Test.List
 
 
 
-		[TestMethod]
+		[Test]
 		public void List_Manipulate_Cycle()
 		{
 			var target = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };

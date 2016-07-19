@@ -1,16 +1,16 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Threading.Tasks;
 using Underscore.Function;
 
 namespace Underscore.Test.Function
 {
-	[TestClass]
+	[TestFixture]
 	public class ComposeTest 
 	{
 		private ComposeComponent component;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new ComposeComponent();
@@ -27,7 +27,7 @@ namespace Underscore.Test.Function
 		}
 
 
-		[TestMethod]
+		[Test]
 		public void Function_Compose_Compose_2Arguments()
 		{
 			var composeResult = component.Compose(
@@ -40,7 +40,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual("210", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Compose_Compose_3Arguments()
 		{
 			var composeResult = component.Compose(
@@ -54,7 +54,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual("3210", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Compose_Compose_4Arguments()
 		{
 			var component = new ComposeComponent();
@@ -71,7 +71,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual("43210", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Compose_Compose_5Arguments()
 		{   
 			var component = new ComposeComponent();
@@ -89,7 +89,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual("543210", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Compose_Compose_6Arguments()
 		{
 			var composeResult = component.Compose(
@@ -106,7 +106,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual("6543210", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Compose_Compose_7Arguments()
 		{
 			var composeResult = component.Compose(
@@ -124,7 +124,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual("76543210", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Compose_Compose_8Arguments()
 		{
 			var composeResult = component.Compose(
@@ -144,7 +144,7 @@ namespace Underscore.Test.Function
 			
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Compose_Compose_9Arguments()
 		{   
 			var composeResult = component.Compose(
@@ -164,7 +164,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual("9876543210", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Compose_Compose_10Arguments()
 		{
 			var composeResult = component.Compose(
@@ -185,7 +185,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual("109876543210", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Compose_Compose_11Arguments()
 		{
 			var composeResult = component.Compose(
@@ -207,7 +207,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual("11109876543210", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Compose_Compose_12Arguments()
 		{
 			var composeResult = component.Compose(
@@ -230,7 +230,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual("1211109876543210", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Compose_Compose_13Arguments()
 		{
 			var composeResult = component.Compose(
@@ -254,7 +254,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual("131211109876543210", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Compose_Compose_14Arguments()
 		{
 			var composeResult = component.Compose(
@@ -279,7 +279,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual("14131211109876543210", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Compose_Compose_15Arguments()
 		{
 			var composeResult = component.Compose(
@@ -305,7 +305,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual("1514131211109876543210", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Compose_Compose_16Arguments()
 		{
 			var composeResult = component.Compose(
@@ -332,7 +332,7 @@ namespace Underscore.Test.Function
 			Assert.AreEqual("161514131211109876543210", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Function_Compose_Compose_17Arguments()
 		{
 			var composeResult = component.Compose(
