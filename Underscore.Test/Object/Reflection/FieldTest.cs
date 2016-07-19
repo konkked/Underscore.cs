@@ -1,10 +1,12 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 using Moq;
 using System.Reflection;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Underscore.Function;
 using Underscore.Object.Reflection;
 
@@ -16,6 +18,16 @@ namespace Underscore.Test.Object.Reflection
 #pragma warning disable 0649, 0169
 		private class FieldMethodsTestClass
 		{
+			public FieldMethodsTestClass(int privateInt, string privateString)
+			{
+				ShouldntShowInt = privateInt;
+				ShouldntShowString = privateString;
+			}
+
+			public FieldMethodsTestClass()
+			{
+			}
+
 			public string ShouldShowString;
 			private string ShouldntShowString;
 
@@ -25,92 +37,1000 @@ namespace Underscore.Test.Object.Reflection
 			public string ShouldNotShowProperty { get; set; }
 			private string ShouldNotShowPrivateProperty { get; set; }
 
-			public void ShouldNotShow() { }
+			public void ShouldNotShow()
+			{
+			}
 		}
 
 #pragma warning restore 0649, 0169
 
 		[TestMethod]
-		public async Task ObjectFields()
-		{
-			var target = new FieldMethodsTestClass();
-
-			var mkUtil = new Mock<ICacheComponent>();
-
-			var fields = typeof(FieldMethodsTestClass).GetFields(BindingFlags.Public | BindingFlags.Instance);
-
-			mkUtil.Setup(a => a.Memoize(It.IsAny<Func<Type, BindingFlags, IEnumerable<FieldInfo>>>()))
-				.Returns((a, b) => fields.AsEnumerable());
-
-			var testing = new FieldComponent();
-
-			var allPublicFields = testing.All(typeof(FieldMethodsTestClass));
-			var allFieldsThatAreInts = testing.OfType(typeof(FieldMethodsTestClass), typeof(int));
-			var allFieldsThatAreStrings = testing.OfType(typeof(FieldMethodsTestClass), typeof(string));
-
-			await Util.Tasks.Start(() =>
-			{
-
-				Assert.AreEqual(2, allPublicFields.Count());
-				Assert.AreEqual(1, allFieldsThatAreInts.Count());
-				Assert.AreEqual(1, allFieldsThatAreStrings.Count());
-
-				Assert.AreEqual(0, allPublicFields.Count(a => a.Name.StartsWith("Shouldnt")));
-				Assert.AreEqual(0, allPublicFields.Count(a => a.FieldType == typeof(decimal)));
-				Assert.AreEqual(0, allPublicFields.Count(a => a.FieldType == typeof (float)));
-			});
-		}
-
-		[TestMethod]
-		public async Task ObjectFieldHasField()
+		public void Object_Fields_All_TargetType()
 		{
 
-			var target = new FieldMethodsTestClass();
+			var testing = _.Object.Field;
 
-			var testing = new FieldComponent();
+			var allPublicFields = testing.All(typeof (FieldMethodsTestClass));
 
-			await Util.Tasks.Start(() =>
-			{
-				//test true one public string field
-				//test no type
-				//test with type
-				//test not with wrong type
-				//test not private method
 
-				Assert.IsTrue(testing.Has(target, "ShouldShowString"));
-				Assert.IsTrue(testing.Has(target, "ShouldShowString", typeof(string)));
-				Assert.IsFalse(testing.Has(target, "ShouldShowString", typeof(int)));
-				Assert.IsFalse(testing.Has(target, "ShouldntShowString"));
-				Assert.IsFalse(testing.Has(target, "ShouldntShowString", typeof(string)));
-
-			}, () =>
-			{
-
-				//test true one public int field
-				//test no type
-				//test with type
-				//test not with wrong type
-				//test not private method
-
-				Assert.IsTrue(testing.Has(target, "ShouldShowInt"));
-				Assert.IsTrue(testing.Has(target, "ShouldShowInt", typeof(int)));
-				Assert.IsFalse(testing.Has(target, "ShouldShowInt", typeof(string)));
-				Assert.IsFalse(testing.Has(target, "ShouldntShowInt"));
-				Assert.IsFalse(testing.Has(target, "ShouldntShowInt", typeof(int)));
-
-			}, () =>
-			{
-
-				//shouldnt show properties
-				Assert.IsFalse(testing.Has(target, "ShouldNotShowProperty"));
-				Assert.IsFalse(testing.Has(target, "ShouldNotShowProperty", typeof(int)));
-				Assert.IsFalse(testing.Has(target, "ShouldNotShowProperty", typeof(string)));
-
-			});
+			Assert.AreEqual(2, allPublicFields.Count());
+			Assert.AreEqual(0, allPublicFields.Count(a => a.Name.StartsWith("Shouldnt")));
+			Assert.AreEqual(0, allPublicFields.Count(a => a.FieldType == typeof (decimal)));
+			Assert.AreEqual(0, allPublicFields.Count(a => a.FieldType == typeof (float)));
+			Assert.AreEqual(1,
+				allPublicFields.Count(a => a.Name == "ShouldShowString" && a.FieldType == typeof (string)));
+			Assert.AreEqual(1, allPublicFields.Count(a => a.Name == "ShouldShowInt" && a.FieldType == typeof (int)));
 
 		}
 
+
 		[TestMethod]
+		public void Object_Fields_Has_TargetType_Name()
+		{
+
+
+			var boundTesting = _.Function.Partial<Type, string, bool>(_.Object.Field.Has, typeof (FieldMethodsTestClass));
+
+			//check the pub fields exist
+			Assert.IsTrue(boundTesting("ShouldShowString"));
+			//make sure it is not using the wrong default capitalization check
+			Assert.IsFalse(boundTesting("shouldshowstring"));
+
+			//check the private fields do not exist
+			Assert.IsTrue(boundTesting("ShouldShowInt"));
+			//check again the spelling match is working right
+			Assert.IsFalse(boundTesting("shouldshowint"));
+
+			//check the private fields
+			Assert.IsFalse(boundTesting("ShouldntShowString"));
+			Assert.IsFalse(boundTesting("ShouldntShowInt"));
+		}
+
+
+		[TestMethod]
+		public void Object_Fields_Has_TargetType_NameBindingFlags()
+		{
+
+
+			var boundTesting = _.Function.Partial<Type, string, BindingFlags, bool>(_.Object.Field.Has,
+				typeof (FieldMethodsTestClass));
+
+			var publicInstance = BindingFlags.Instance | BindingFlags.Public;
+			var protectedInstance = BindingFlags.Instance | BindingFlags.NonPublic;
+
+			//check the pub fields exist when the flags are public default
+			Assert.IsTrue(boundTesting("ShouldShowString", publicInstance));
+
+			//make sure it is not using the wrong default capitalization check
+			Assert.IsFalse(boundTesting("shouldshowstring", publicInstance));
+
+			//make sure it is not showing when the flags do not match
+			Assert.IsFalse(boundTesting("ShouldShowString", protectedInstance));
+
+
+			//check the private fields do not exist
+			Assert.IsTrue(boundTesting("ShouldShowInt", publicInstance));
+
+			//check again the spelling match is working right
+			Assert.IsFalse(boundTesting("shouldshowint", publicInstance));
+
+			//again check to make sure is filtered when flags don't match
+			Assert.IsFalse(boundTesting("ShoudShowInt", protectedInstance));
+
+			//check the private fields
+			Assert.IsTrue(boundTesting("ShouldntShowString", protectedInstance));
+			Assert.IsTrue(boundTesting("ShouldntShowInt", protectedInstance));
+		}
+
+		[TestMethod]
+		public void Object_Fields_Has_TargetType_NameAndCaseSenstive()
+		{
+
+			var boundTesting = _.Function.Partial<Type, string, bool, bool>(_.Object.Field.Has,
+				typeof (FieldMethodsTestClass));
+
+			//check the pub fields exist
+			Assert.IsTrue(boundTesting("ShouldShowString", true));
+			Assert.IsTrue(boundTesting("shouldshowstring", false));
+
+			//check that case sensitive flag is actual working
+			Assert.IsFalse(boundTesting("shouldshowstring", true));
+
+
+
+			//check on the int property as well
+			Assert.IsTrue(boundTesting("ShouldShowInt", true));
+			Assert.IsTrue(boundTesting("shouldshowint", false));
+
+			//check that case sensitive flag is actual working
+			Assert.IsFalse(boundTesting("shouldshowsint", true));
+
+			//check the private fields are not accessible
+			Assert.IsFalse(boundTesting("ShouldntShowString", true));
+			Assert.IsFalse(boundTesting("shouldntshowstring", false));
+
+			Assert.IsFalse(boundTesting("ShouldntShowInt", true));
+			Assert.IsFalse(boundTesting("shouldntshowint", false));
+
+		}
+
+		[TestMethod]
+		public void Object_Fields_Has_TargetType_NameAndCaseSenstiveBindingFlags()
+		{
+
+			var boundTesting = _.Function.Partial<Type, string, bool, BindingFlags, bool>(_.Object.Field.Has,
+				typeof (FieldMethodsTestClass));
+
+			var publicInstance = BindingFlags.Instance | BindingFlags.Public;
+			var nonpublicInstance = BindingFlags.Instance | BindingFlags.NonPublic;
+
+
+			//check the pub fields exist
+			Assert.IsTrue(boundTesting("ShouldShowString", true, publicInstance));
+			Assert.IsTrue(boundTesting("shouldshowstring", false, publicInstance));
+
+			//check that case sensitive flag is actual working
+			Assert.IsFalse(boundTesting("shouldshowstring", true, publicInstance));
+
+			//check that the binding flags are no showing public on non public lookup
+			Assert.IsFalse(boundTesting("shouldshowstring", false, nonpublicInstance));
+
+
+			//check on the int property as well
+			Assert.IsTrue(boundTesting("ShouldShowInt", true, publicInstance));
+			Assert.IsTrue(boundTesting("shouldshowint", false, publicInstance));
+
+			//check that case sensitive flag is actual working
+			Assert.IsFalse(boundTesting("shouldshowsint", true, publicInstance));
+
+			//check the binding flags are not showing public on nonpublic lookup
+			Assert.IsFalse(boundTesting("shouldshowint", false, nonpublicInstance));
+
+			//check the private fields are not accessible when accessing public 
+			Assert.IsFalse(boundTesting("ShouldntShowString", true, publicInstance));
+			Assert.IsFalse(boundTesting("shouldntshowstring", false, publicInstance));
+
+			//but are when accessing non-public
+			Assert.IsTrue(boundTesting("ShouldntShowString", true, nonpublicInstance));
+			Assert.IsTrue(boundTesting("shouldntshowstring", false, nonpublicInstance));
+
+			//now do the same thing for the int fields
+			//first make sure nothing shows on public lookup
+			Assert.IsFalse(boundTesting("ShouldntShowInt", true, publicInstance));
+			Assert.IsFalse(boundTesting("shouldntshowint", false, publicInstance));
+
+			//then check if lookup works when checking protected fields
+			Assert.IsTrue(boundTesting("ShouldntShowInt", true, nonpublicInstance));
+			Assert.IsTrue(boundTesting("shouldntshowint", false, nonpublicInstance));
+
+		}
+
+		[TestMethod]
+		public void Object_Fields_All_Object()
+		{
+
+			var testing = _.Object.Field;
+
+			var allPublicFields = testing.All(new FieldMethodsTestClass());
+
+
+			Assert.AreEqual(2, allPublicFields.Count());
+			Assert.AreEqual(0, allPublicFields.Count(a => a.Name.StartsWith("Shouldnt")));
+			Assert.AreEqual(0, allPublicFields.Count(a => a.FieldType == typeof (decimal)));
+			Assert.AreEqual(0, allPublicFields.Count(a => a.FieldType == typeof (float)));
+			Assert.AreEqual(1,
+				allPublicFields.Count(a => a.Name == "ShouldShowString" && a.FieldType == typeof (string)));
+			Assert.AreEqual(1, allPublicFields.Count(a => a.Name == "ShouldShowInt" && a.FieldType == typeof (int)));
+
+		}
+
+		[TestMethod]
+		public void Object_Fields_Has_TargetObject_Name()
+		{
+
+
+			var boundTesting = _.Function.Partial<object, string, bool>(_.Object.Field.Has, new FieldMethodsTestClass());
+
+			//check the pub fields exist
+			Assert.IsTrue(boundTesting("ShouldShowString"));
+			//make sure it is not using the wrong default capitalization check
+			Assert.IsFalse(boundTesting("shouldshowstring"));
+
+			//check the private fields do not exist
+			Assert.IsTrue(boundTesting("ShouldShowInt"));
+			//check again the spelling match is working right
+			Assert.IsFalse(boundTesting("shouldshowint"));
+
+			//check the private fields
+			Assert.IsFalse(boundTesting("ShouldntShowString"));
+			Assert.IsFalse(boundTesting("ShouldntShowInt"));
+		}
+
+		[TestMethod]
+		public void Object_Fields_Has_TargetObject_NameBindingFlags()
+		{
+
+
+			var boundTesting = _.Function.Partial<object, string, BindingFlags, bool>(_.Object.Field.Has,
+				new FieldMethodsTestClass());
+
+			var publicInstance = BindingFlags.Instance | BindingFlags.Public;
+			var protectedInstance = BindingFlags.Instance | BindingFlags.NonPublic;
+
+			//check the pub fields exist when the flags are public default
+			Assert.IsTrue(boundTesting("ShouldShowString", publicInstance));
+
+			//make sure it is not using the wrong default capitalization check
+			Assert.IsFalse(boundTesting("shouldshowstring", publicInstance));
+
+			//make sure it is not showing when the flags do not match
+			Assert.IsFalse(boundTesting("ShouldShowString", protectedInstance));
+
+
+			//check the private fields do not exist
+			Assert.IsTrue(boundTesting("ShouldShowInt", publicInstance));
+
+			//check again the spelling match is working right
+			Assert.IsFalse(boundTesting("shouldshowint", publicInstance));
+
+			//again check to make sure is filtered when flags don't match
+			Assert.IsFalse(boundTesting("ShoudShowInt", protectedInstance));
+
+			//check the private fields
+			Assert.IsTrue(boundTesting("ShouldntShowString", protectedInstance));
+			Assert.IsTrue(boundTesting("ShouldntShowInt", protectedInstance));
+		}
+
+		[TestMethod]
+		public void Object_Fields_Has_TargetObject_NameAndCaseSenstive()
+		{
+
+			var boundTesting = _.Function.Partial<object, string, bool, bool>(_.Object.Field.Has,
+				new FieldMethodsTestClass());
+
+			//check the pub fields exist
+			Assert.IsTrue(boundTesting("ShouldShowString", true));
+			Assert.IsTrue(boundTesting("shouldshowstring", false));
+
+			//check that case sensitive flag is actual working
+			Assert.IsFalse(boundTesting("shouldshowstring", true));
+
+
+
+			//check on the int property as well
+			Assert.IsTrue(boundTesting("ShouldShowInt", true));
+			Assert.IsTrue(boundTesting("shouldshowint", false));
+
+			//check that case sensitive flag is actual working
+			Assert.IsFalse(boundTesting("shouldshowsint", true));
+
+			//check the private fields are not accessible
+			Assert.IsFalse(boundTesting("ShouldntShowString", true));
+			Assert.IsFalse(boundTesting("shouldntshowstring", false));
+
+			Assert.IsFalse(boundTesting("ShouldntShowInt", true));
+			Assert.IsFalse(boundTesting("shouldntshowint", false));
+
+		}
+
+		[TestMethod]
+		public void Object_Fields_Has_TargetObject_NameAndCaseSenstiveBindingFlags()
+		{
+
+			var boundTesting = _.Function.Partial<object, string, bool, BindingFlags, bool>(_.Object.Field.Has,
+				new FieldMethodsTestClass());
+
+			var publicInstance = BindingFlags.Instance | BindingFlags.Public;
+			var nonpublicInstance = BindingFlags.Instance | BindingFlags.NonPublic;
+
+
+			//check the pub fields exist
+			Assert.IsTrue(boundTesting("ShouldShowString", true, publicInstance));
+			Assert.IsTrue(boundTesting("shouldshowstring", false, publicInstance));
+
+			//check that case sensitive flag is actual working
+			Assert.IsFalse(boundTesting("shouldshowstring", true, publicInstance));
+
+			//check that the binding flags are no showing public on non public lookup
+			Assert.IsFalse(boundTesting("shouldshowstring", false, nonpublicInstance));
+
+
+			//check on the int property as well
+			Assert.IsTrue(boundTesting("ShouldShowInt", true, publicInstance));
+			Assert.IsTrue(boundTesting("shouldshowint", false, publicInstance));
+
+			//check that case sensitive flag is actual working
+			Assert.IsFalse(boundTesting("shouldshowsint", true, publicInstance));
+
+			//check the binding flags are not showing public on nonpublic lookup
+			Assert.IsFalse(boundTesting("shouldshowint", false, nonpublicInstance));
+
+			//check the private fields are not accessible when accessing public 
+			Assert.IsFalse(boundTesting("ShouldntShowString", true, publicInstance));
+			Assert.IsFalse(boundTesting("shouldntshowstring", false, publicInstance));
+
+			//but are when accessing non-public
+			Assert.IsTrue(boundTesting("ShouldntShowString", true, nonpublicInstance));
+			Assert.IsTrue(boundTesting("shouldntshowstring", false, nonpublicInstance));
+
+			//now do the same thing for the int fields
+			//first make sure nothing shows on public lookup
+			Assert.IsFalse(boundTesting("ShouldntShowInt", true, publicInstance));
+			Assert.IsFalse(boundTesting("shouldntshowint", false, publicInstance));
+
+			//then check if lookup works when checking protected fields
+			Assert.IsTrue(boundTesting("ShouldntShowInt", true, nonpublicInstance));
+			Assert.IsTrue(boundTesting("shouldntshowint", false, nonpublicInstance));
+
+		}
+
+
+		[TestMethod]
+		public void Object_Fields_Find_TargetType_Name()
+		{
+
+			var target = typeof (FieldMethodsTestClass);
+
+			var bound = _.Function.Partial<Type, string, FieldInfo>(_.Object.Field.Find, target);
+
+			//default should only show public instance fields by default
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString"), bound("ShouldShowString"));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt"), bound("ShouldShowInt"));
+
+			//check the non public fields are being protected
+
+			Assert.IsNull(bound("ShouldntShowString"));
+			Assert.IsNull(bound("ShouldntShowInt"));
+
+
+		}
+
+		[TestMethod]
+		public void Object_Fields_Find_TargetType_NameBindingFlags()
+		{
+			var target = typeof (FieldMethodsTestClass);
+
+			var bound = _.Function.Partial<Type, string, BindingFlags, FieldInfo>(_.Object.Field.Find, target);
+
+			var publicInstance = BindingFlags.Public | BindingFlags.Instance;
+			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
+
+			//check positive cases
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+				bound("ShouldShowString", publicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+				bound("ShouldShowInt", publicInstance));
+
+			//check that nonpublic fields aren't showing up when doing a search for public fields
+			Assert.IsNull(bound("ShouldntShowString", publicInstance));
+			Assert.IsNull(bound("ShouldntShowInt", publicInstance));
+
+			//check that nonpublic fields show up when doing a nonpublic searched
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+				bound("ShouldntShowString", nonpublicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+				bound("ShouldntShowInt", nonpublicInstance));
+
+			//check to make sure public fields aren't showing up when looking for nonpublic fields
+			Assert.IsNull(bound("ShouldShowString", nonpublicInstance));
+			Assert.IsNull(bound("ShouldShowInt", nonpublicInstance));
+
+		}
+
+		[TestMethod]
+		public void Object_Fields_Find_TargetType_NameBindingFlagsCaseSenstive()
+		{
+			var target = typeof (FieldMethodsTestClass);
+
+			var bound = _.Function.Partial<Type, string, bool, BindingFlags, FieldInfo>(_.Object.Field.Find, target);
+
+			var publicInstance = BindingFlags.Public | BindingFlags.Instance;
+			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
+
+			//check positive cases
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+				bound("ShouldShowString", true, publicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+				bound("shouldshowstring", false, publicInstance));
+
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+				bound("ShouldShowInt", true, publicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+				bound("ShouldShowInt", false, publicInstance));
+
+			//check to make sure the case sensitive search is being done correctly
+			Assert.IsNull(bound("shouldshowstring", true, publicInstance));
+			Assert.IsNull(bound("shouldntshowint", true, publicInstance));
+
+			//check that nonpublic fields aren't showing up when doing a search for public fields
+			Assert.IsNull(bound("ShouldntShowString", true, publicInstance));
+			Assert.IsNull(bound("ShouldntShowInt", true, publicInstance));
+
+
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+				bound("ShouldntShowString", true, nonpublicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+				bound("shouldntshowstring", false, nonpublicInstance));
+
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+				bound("ShouldntShowInt", true, nonpublicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+				bound("shouldntshowint", false, nonpublicInstance));
+
+
+			//check to make sure the case sensitive search is being done correctly
+			Assert.IsNull(bound("shouldntshowstring", true, nonpublicInstance));
+			Assert.IsNull(bound("shouldntshowint", true, nonpublicInstance));
+
+			//check that public fields aren't showing up when doing a search for nonpublic fields
+			Assert.IsNull(bound("ShoudShowString", true, nonpublicInstance));
+			Assert.IsNull(bound("ShouldShowInt", true, nonpublicInstance));
+
+		}
+
+
+		[TestMethod]
+		public void Object_Fields_Find_TargetType_NameType()
+		{
+
+			var target = typeof (FieldMethodsTestClass);
+
+			var bound = _.Function.Partial<object, string, Type, FieldInfo>(_.Object.Field.Find, target);
+
+			//default should only show public instance fields by default
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetProperty("ShouldShowString"),
+				bound("ShouldShowString", typeof (string)));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetProperty("ShouldShowInt"),
+				bound("ShouldShowInt", typeof (int)));
+
+			//check mismatching types
+			Assert.IsNull(bound("ShouldShowString", typeof (int)));
+			Assert.IsNull(bound("ShouldShowInt", typeof (string)));
+
+			//check the non public fields are being protected
+
+			Assert.IsNull(bound("ShouldntShowString", typeof (string)));
+			Assert.IsNull(bound("ShouldntShowInt", typeof (int)));
+
+
+		}
+
+		[TestMethod]
+		public void Object_Fields_Find_TargetType_NameTypeBindingFlags()
+		{
+			var target = typeof (FieldMethodsTestClass);
+
+			var bound = _.Function.Partial<Type, string, Type, BindingFlags, FieldInfo>(_.Object.Field.Find, target);
+
+			var publicInstance = BindingFlags.Public | BindingFlags.Instance;
+			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
+
+			//check positive cases
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+				bound("ShouldShowString", typeof (string), publicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+				bound("ShouldShowInt", typeof (int), publicInstance));
+
+			//check mismatching types
+			Assert.IsNull(bound("ShouldShowString", typeof (int), publicInstance));
+			Assert.IsNull(bound("ShouldShowInt", typeof (string), nonpublicInstance));
+
+			//check that nonpublic fields aren't showing up when doing a search for public fields
+			Assert.IsNull(bound("ShouldntShowString", typeof (string), publicInstance));
+			Assert.IsNull(bound("ShouldntShowInt", typeof (int), publicInstance));
+
+
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+				bound("ShouldntShowString", typeof (string), nonpublicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+				bound("ShouldntShowInt", typeof (int), nonpublicInstance));
+
+			//check to make sure public fields aren't showing up when looking for nonpublic fields
+			Assert.IsNull(bound("ShouldShowString", typeof (string), nonpublicInstance));
+			Assert.IsNull(bound("ShouldShowInt", typeof (int), nonpublicInstance));
+
+		}
+
+		[TestMethod]
+		public void Object_Fields_Find_TargetType_NameTypeBindingFlagsCaseSenstive()
+		{
+			var target = typeof (FieldMethodsTestClass);
+
+			var bound = _.Function.Partial<Type, string, Type, bool, BindingFlags, FieldInfo>(_.Object.Field.Find,
+				target);
+
+			var publicInstance = BindingFlags.Public | BindingFlags.Instance;
+			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
+
+			//check positive cases
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+				bound("ShouldShowString", typeof (string), true, publicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+				bound("shouldshowstring", typeof (string), false, publicInstance));
+
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+				bound("ShouldShowInt", typeof (int), true, publicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+				bound("ShouldShowInt", typeof (int), false, publicInstance));
+
+			//check to make sure the case sensitive search is being done correctly
+			Assert.IsNull(bound("shouldshowstring", typeof (string), true, publicInstance));
+			Assert.IsNull(bound("shouldntshowint", typeof (int), true, publicInstance));
+
+			//check that nonpublic fields aren't showing up when doing a search for public fields
+			Assert.IsNull(bound("ShouldntShowString", typeof (string), true, publicInstance));
+			Assert.IsNull(bound("ShouldntShowInt", typeof (int), true, publicInstance));
+
+
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+				bound("ShouldntShowString", typeof (string), true, nonpublicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+				bound("shouldntshowstring", typeof (string), false, nonpublicInstance));
+
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+				bound("ShouldntShowInt", typeof (int), true, nonpublicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+				bound("shouldntshowint", typeof (int), false, nonpublicInstance));
+
+
+			//check to make sure the case sensitive search is being done correctly
+			Assert.IsNull(bound("shouldntshowstring", typeof (string), true, nonpublicInstance));
+			Assert.IsNull(bound("shouldntshowint", typeof (int), true, nonpublicInstance));
+
+			//check that public fields aren't showing up when doing a search for nonpublic fields
+			Assert.IsNull(bound("ShoudShowString", typeof (string), true, nonpublicInstance));
+			Assert.IsNull(bound("ShouldShowInt", typeof (string), true, nonpublicInstance));
+
+		}
+
+
+		[TestMethod]
+		public void Object_Fields_OfType_TargetType()
+
+		{
+			var target = typeof (FieldMethodsTestClass);
+
+
+			var result = _.Object.Field.OfType(target, typeof (int));
+			Assert.IsTrue(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowInt")));
+			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowString")));
+			Assert.AreEqual(1, result.Count());
+
+			result = _.Object.Field.OfType(target, typeof (string));
+			Assert.IsTrue(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowString")));
+			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowInt")));
+			Assert.AreEqual(1, result.Count());
+		}
+
+		[TestMethod]
+		public void Object_Field_OfType_TargetType_BindingFlags()
+		{
+			var target = typeof(FieldMethodsTestClass);
+
+			var publicInstance = BindingFlags.Public | BindingFlags.Instance;
+			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
+
+
+			var result = _.Object.Field.OfType(target, typeof(int), publicInstance);
+
+			Assert.IsTrue(result.Any(a => a == typeof(FieldMethodsTestClass).GetField("ShouldShowInt")));
+
+			//check it doesn't pick up the wrong type
+			Assert.IsFalse(result.Any(a => a == typeof(FieldMethodsTestClass).GetField("ShouldShowString")));
+
+			//and that it doesn't pick up the wrong accesiblity
+			Assert.IsFalse(result.Any(a => a == typeof(FieldMethodsTestClass).GetField("ShouldntShowInt")));
+
+			//check that the only field it did pick up was the right one
+			Assert.AreEqual(1, result.Count());
+
+
+			//check less accessible string 
+			result = _.Object.Field.OfType(target, typeof(int), nonpublicInstance);
+
+			//check the right one was found
+			Assert.IsTrue(result.Any(a => a == typeof(FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance)));
+
+			//check wrong type didn't happen
+			Assert.IsFalse(result.Any(a => a == typeof(FieldMethodsTestClass).GetField("ShouldntShowString")));
+
+			//check that the wrong accesiblity wasn't picked up
+			Assert.IsFalse(result.Any(a => a == typeof(FieldMethodsTestClass).GetField("ShouldShowInt")));
+
+			//check that was the only field picked up
+			Assert.AreEqual(1, result.Count());
+
+		}
+
+		[TestMethod]
+		public void Object_Fields_Values_Generic()
+		{
+			var target = new FieldMethodsTestClass();
+
+			target.ShouldShowInt = 1;
+			target.ShouldShowString = "A String";
+
+			var allInts = _.Object.Field.Values<int>(target);
+
+			Assert.IsTrue(allInts.Any(a => a == target.ShouldShowInt));
+			Assert.AreEqual(1, allInts.Count());
+
+			var allStrings = _.Object.Field.Values<string>(target);
+
+			Assert.IsTrue(allStrings.Any(a => a == target.ShouldShowString));
+			Assert.AreEqual(1, allStrings.Count());
+
+			//check that a field with no matching properties does not magically produce one
+
+			var allDecimals = _.Object.Field.Values<decimal>(target);
+			Assert.IsTrue(!allDecimals.Any());
+		}
+
+
+		[TestMethod]
+		public void Object_Fields_Values_GenericBindingFlags()
+		{
+			int privateInt = -1;
+			string privateString = "private string";
+			var target = new FieldMethodsTestClass(privateInt, privateString);
+
+			target.ShouldShowInt = 1;
+			target.ShouldShowString = "A String";
+
+			var publicInstance = BindingFlags.Public | BindingFlags.Instance;
+			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
+
+			var publicInts = _.Object.Field.Values<int>(target, publicInstance);
+
+			Assert.IsTrue(publicInts.Any(a => a == target.ShouldShowInt));
+			Assert.AreEqual(1, publicInts.Count());
+
+			var privateInts = _.Object.Field.Values<int>(target, nonpublicInstance);
+
+
+			Assert.IsTrue(privateInts.Any(a => a == privateInt));
+			Assert.AreEqual(1, privateInts.Count());
+
+
+			var publicStrings = _.Object.Field.Values<string>(target, publicInstance);
+
+			Assert.IsTrue(publicStrings.Any(a => a == target.ShouldShowString));
+			Assert.AreEqual(1, publicStrings.Count());
+
+			var privateStrings = _.Object.Field.Values<string>(target, nonpublicInstance);
+
+			Assert.IsTrue(privateStrings.Any(a => a == privateString));
+			Assert.AreEqual(1, privateStrings.Count());
+
+			//check that a field with no matching fields does not magically produce one
+
+			var allDecimals = _.Object.Field.Values<decimal>(target, publicInstance);
+			Assert.IsTrue(!allDecimals.Any());
+		}
+
+		[TestMethod]
+		public void Object_Fields_Values_NonGeneric()
+		{
+			var target = new FieldMethodsTestClass();
+
+			target.ShouldShowInt = 1;
+			target.ShouldShowString = "A String";
+
+			var allValues = _.Object.Field.Values(target);
+
+			Assert.IsTrue(allValues.Any(a => a.Equals(target.ShouldShowInt)));
+			Assert.IsTrue(allValues.Any(a => a.Equals(target.ShouldShowString)));
+			Assert.AreEqual(2, allValues.Count());
+
+		}
+
+		[TestMethod]
+		public void Object_Fields_Values_NonGenericBindingFlags()
+		{
+			int privateInt = 1;
+			string privateString = "private string";
+
+			var target = new FieldMethodsTestClass(privateInt, privateString);
+
+			target.ShouldShowInt = 1;
+			target.ShouldShowString = "A String";
+
+			var publicInstance = BindingFlags.Instance | BindingFlags.Public;
+			var nonpublicInstance = BindingFlags.Instance | BindingFlags.NonPublic;
+
+			var allValues = _.Object.Field.Values(target, publicInstance);
+
+			Assert.IsTrue(allValues.Any(a => a.Equals(target.ShouldShowInt)));
+			Assert.IsTrue(allValues.Any(a => a.Equals(target.ShouldShowString)));
+			Assert.AreEqual(2, allValues.Count());
+
+
+			var allNonPublicValues = _.Object.Field.Values(target, nonpublicInstance);
+			Assert.IsTrue(allNonPublicValues.Any(a => a.Equals(privateInt)));
+			Assert.IsTrue(allNonPublicValues.Any(a => a.Equals(privateString)));
+			Assert.AreEqual(2, allNonPublicValues.Count());
+
+		}
+
+		[TestMethod]
+		public void Object_Fields_Find_TargetObject_Name()
+		{
+
+			var target = new FieldMethodsTestClass();
+
+			var bound = _.Function.Partial<object, string, FieldInfo>(_.Object.Field.Find, target);
+
+			//default should only show public instance fields by default
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString"), bound("ShouldShowString"));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt"), bound("ShouldShowInt"));
+
+			//check the non public fields are being protected
+
+			Assert.IsNull(bound("ShouldntShowString"));
+			Assert.IsNull(bound("ShouldntShowInt"));
+
+
+		}
+
+		[TestMethod]
+		public void Object_Fields_Find_TargetObject_NameBindingFlags()
+		{
+			var target = new FieldMethodsTestClass();
+
+			var bound = _.Function.Partial<object, string, BindingFlags, FieldInfo>(_.Object.Field.Find, target);
+
+			var publicInstance = BindingFlags.Public | BindingFlags.Instance;
+			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
+
+			//check positive cases
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+				bound("ShouldShowString", publicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+				bound("ShouldShowInt", publicInstance));
+
+			//check that nonpublic fields aren't showing up when doing a search for public fields
+			Assert.IsNull(bound("ShouldntShowString", publicInstance));
+			Assert.IsNull(bound("ShouldntShowInt", publicInstance));
+
+			//check that they do show up when doing a check against nonpublic fields
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+				bound("ShouldntShowString", nonpublicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+				bound("ShouldntShowInt", nonpublicInstance));
+
+			//check to make sure public fields aren't showing up when looking for nonpublic fields
+			Assert.IsNull(bound("ShouldShowString", nonpublicInstance));
+			Assert.IsNull(bound("ShouldShowInt", nonpublicInstance));
+
+		}
+
+		[TestMethod]
+		public void Object_Fields_Find_TargetObject_NameBindingFlagsCaseSenstive()
+		{
+			var target = new FieldMethodsTestClass();
+
+			var bound = _.Function.Partial<object, string, bool, BindingFlags, FieldInfo>(_.Object.Field.Find, target);
+
+			var publicInstance = BindingFlags.Public | BindingFlags.Instance;
+			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
+
+			//check positive cases
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+				bound("ShouldShowString", true, publicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+				bound("shouldshowstring", false, publicInstance));
+
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+				bound("ShouldShowInt", true, publicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+				bound("ShouldShowInt", false, publicInstance));
+
+			//check to make sure the case sensitive search is being done correctly
+			Assert.IsNull(bound("shouldshowstring", true, publicInstance));
+			Assert.IsNull(bound("shouldntshowint", true, publicInstance));
+
+			//check that nonpublic fields aren't showing up when doing a search for nonpublic fields
+			Assert.IsNull(bound("ShouldntShowString", true, publicInstance));
+			Assert.IsNull(bound("ShouldntShowInt", true, publicInstance));
+
+
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+				bound("ShouldntShowString", true, nonpublicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+				bound("shouldntshowstring", false, nonpublicInstance));
+
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+				bound("ShouldntShowInt", true, nonpublicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+				bound("ShouldntShowInt", false, nonpublicInstance));
+
+
+			//check to make sure the case sensitive search is being done correctly
+			Assert.IsNull(bound("shouldntshowstring", true, nonpublicInstance));
+			Assert.IsNull(bound("shouldntshowint", true, nonpublicInstance));
+
+			//check that public fields aren't showing up when doing a search for public fields
+			Assert.IsNull(bound("ShoudShowString", true, nonpublicInstance));
+			Assert.IsNull(bound("ShouldShowInt", true, nonpublicInstance));
+
+		}
+
+		[TestMethod]
+		public void Object_Fields_Find_TargetObject_NameType()
+		{
+
+			var target = new FieldMethodsTestClass();
+
+			var bound = _.Function.Partial<object, string, Type, FieldInfo>(_.Object.Field.Find, target);
+
+			//default should only show public instance fields by default
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString"),
+				bound("ShouldShowString", typeof (string)));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt"),
+				bound("ShouldShowInt", typeof (int)));
+
+			//check mismatching types
+			Assert.IsNull(bound("ShouldShowString", typeof (int)));
+			Assert.IsNull(bound("ShouldShowInt", typeof (string)));
+
+			//check the non public fields are being protected
+
+			Assert.IsNull(bound("ShouldntShowString", typeof (string)));
+			Assert.IsNull(bound("ShouldntShowInt", typeof (int)));
+
+
+		}
+
+		[TestMethod]
+		public void Object_Fields_Find_TargetObject_NameTypeBindingFlags()
+		{
+			var target = new FieldMethodsTestClass();
+
+			var bound = _.Function.Partial<object, string, Type, BindingFlags, FieldInfo>(_.Object.Field.Find, target);
+
+			var publicInstance = BindingFlags.Public | BindingFlags.Instance;
+			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
+
+			//check positive cases
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+				bound("ShouldShowString", typeof (string), publicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+				bound("ShouldShowInt", typeof (int), publicInstance));
+
+			//check mismatching types
+			Assert.IsNull(bound("ShouldShowString", typeof (int), publicInstance));
+			Assert.IsNull(bound("ShouldShowInt", typeof (string), nonpublicInstance));
+
+			//check that nonpublic fields aren't showing up when doing a search for public fields
+			Assert.IsNull(bound("ShouldntShowString", typeof (string), publicInstance));
+			Assert.IsNull(bound("ShouldntShowInt", typeof (int), publicInstance));
+
+
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+				bound("ShouldntShowString", typeof (string), nonpublicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+				bound("ShouldntShowInt", typeof (int), nonpublicInstance));
+
+			//check to make sure public fields aren't showing up when looking for nonpublic fields
+			Assert.IsNull(bound("ShouldShowString", typeof (string), nonpublicInstance));
+			Assert.IsNull(bound("ShouldShowInt", typeof (int), nonpublicInstance));
+
+		}
+
+		[TestMethod]
+		public void Object_Fields_Find_TargetObject_NameTypeBindingFlagsCaseSenstive()
+		{
+			var target = new FieldMethodsTestClass();
+
+			var bound = _.Function.Partial<object, string, Type, bool, BindingFlags, FieldInfo>(_.Object.Field.Find,
+				target);
+
+			var publicInstance = BindingFlags.Public | BindingFlags.Instance;
+			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
+
+			//check positive cases
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+				bound("ShouldShowString", typeof (string), true, publicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowString", publicInstance),
+				bound("shouldshowstring", typeof (string), false, publicInstance));
+
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+				bound("ShouldShowInt", typeof (int), true, publicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldShowInt", publicInstance),
+				bound("ShouldShowInt", typeof (int), false, publicInstance));
+
+			//check to make sure the case sensitive search is being done correctly
+			Assert.IsNull(bound("shouldshowstring", typeof (string), true, publicInstance));
+			Assert.IsNull(bound("shouldntshowint", typeof (int), true, publicInstance));
+
+			//check that nonpublic fields aren't showing up when doing a search for public fields
+			Assert.IsNull(bound("ShouldntShowString", typeof (string), true, publicInstance));
+			Assert.IsNull(bound("ShouldntShowInt", typeof (int), true, publicInstance));
+
+			//check nonpublic can be accessed
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+				bound("ShouldntShowString", typeof (string), true, nonpublicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowString", nonpublicInstance),
+				bound("shouldntshowstring", typeof (string), false, nonpublicInstance));
+
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+				bound("ShouldntShowInt", typeof (int), true, nonpublicInstance));
+			Assert.AreEqual(typeof (FieldMethodsTestClass).GetField("ShouldntShowInt", nonpublicInstance),
+				bound("shouldntshowint", typeof (int), false, nonpublicInstance));
+
+
+			//check to make sure the case sensitive search is being done correctly
+			Assert.IsNull(bound("shouldntshowstring", typeof (string), true, nonpublicInstance));
+			Assert.IsNull(bound("shouldntshowint", typeof (int), true, nonpublicInstance));
+
+			//check that public fields aren't showing up when doing a search for public fields
+			Assert.IsNull(bound("ShoudShowString", typeof (string), true, nonpublicInstance));
+			Assert.IsNull(bound("ShouldShowInt", typeof (string), true, nonpublicInstance));
+
+		}
+
+
+		[TestMethod]
+		public void Object_Fields_OfType_TargetObject()
+
+		{
+			var target = new FieldMethodsTestClass();
+
+
+			var result = _.Object.Field.OfType(target, typeof (int));
+			Assert.IsTrue(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowInt")));
+			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowString")));
+			Assert.AreEqual(1, result.Count());
+
+			result = _.Object.Field.OfType(target, typeof (string));
+			Assert.IsTrue(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowString")));
+			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowInt")));
+			Assert.AreEqual(1, result.Count());
+		}
+
+
+		[TestMethod]
+		public void Object_Field_OfType_TargetObject_BindingFlags()
+		{
+			var target = new FieldMethodsTestClass();
+
+			var publicInstance = BindingFlags.Public | BindingFlags.Instance;
+			var nonpublicInstance = BindingFlags.NonPublic | BindingFlags.Instance;
+
+
+			var result = _.Object.Field.OfType(target, typeof (int), publicInstance);
+
+			Assert.IsTrue(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldShowInt")));
+
+			//check it doesn't pick up the wrong type
+			Assert.IsFalse(result.Any(a=>a == typeof(FieldMethodsTestClass).GetField("ShouldShowString")));
+
+			//and that it doesn't pick up the wrong accesiblity
+			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldntShowInt")));
+
+			//check that the only field it did pick up was the right one
+			Assert.AreEqual(1,result.Count());
+
+
+			//check less accessible string 
+			result = _.Object.Field.OfType(target, typeof (int), nonpublicInstance);
+
+			//check the right one was found
+			Assert.IsTrue(result.Any(a=>a == typeof(FieldMethodsTestClass).GetField("ShouldntShowInt",nonpublicInstance)));
+
+			//check wrong type didn't happen
+			Assert.IsFalse(result.Any(a => a == typeof (FieldMethodsTestClass).GetField("ShouldntShowString")));
+
+			//check that the wrong accesiblity wasn't picked up
+			Assert.IsFalse(result.Any(a=>a == typeof(FieldMethodsTestClass).GetField("ShouldShowInt")));
+
+			//check that was the only field picked up
+			Assert.AreEqual(1,result.Count());
+
+		}
+
+
+	[TestMethod]
 		public async Task ObjectField()
 		{
 			var target = new FieldMethodsTestClass();

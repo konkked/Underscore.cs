@@ -12,7 +12,7 @@ namespace Underscore.Object.Reflection
 		public FieldComponent()
 		{
 			_fields = new Members<FieldInfo>(
-				null,
+				a=>!a.IsSpecialName&& !a.Name.EndsWith(">k__BackingField"),
 				BindingFlags.Public | BindingFlags.Instance
 			);
 		}
@@ -25,7 +25,6 @@ namespace Underscore.Object.Reflection
 		{
 			return All(target.GetType());
 		}
-
 
 		/// <summary>
 		/// Retrieves all fields from the targeted object
@@ -435,26 +434,48 @@ namespace Underscore.Object.Reflection
 		}
 
 		/// <summary>
-		/// Finds a public field by name
+		/// Finds a public instance field by name
 		/// </summary>
+		/// <param name="target">The object whose class is searched for the field</param>
+		/// <param name="name">The name of the field that is being searched for</param>
+		/// <param name="caseSensitive">Is true when exact match is needed</param>
+		/// <returns>A FieldInfo of the field who's name matches or null</returns>
 		public FieldInfo Find(object target, string name, bool caseSensitive)
 		{
 			return Find(target.GetType(), name, caseSensitive);
 		}
 
 		/// <summary>
-		/// Finds a public field by name
+		/// Finds a public instance field by name
 		/// </summary>
+		/// <param name="target">The object whose class is searched for the field</param>
+		/// <param name="name">The name of the field that is being searched for</param>
+		/// <returns>A FieldInfo of the field who's name matches or null</returns>
 		public FieldInfo Find(object target, string field)
 		{
 			return Find(target, field, true);
 		}
 
+
+		/// <summary>
+		/// Finds a public instance field by name
+		/// </summary>
+		/// <param name="target">The Type  that is searched for the field</param>
+		/// <param name="name">The name of the field that is being searched for</param>
+		/// <returns>A FieldInfo of the field who's name matches or null</returns>
 		public FieldInfo Find(Type target, string name)
 		{
 			return Find(target, name, true);
 		}
 
+
+		/// <summary>
+		/// Finds a public instance field by name
+		/// </summary>
+		/// <param name="target">The Type  that is searched for the field</param>
+		/// <param name="name">The name of the field that is being searched for</param>
+		/// <param name="caseSensitive">Specifies if the search should match only on exact case match</param>
+		/// <returns>A FieldInfo of the field who's name matches or null</returns>
 		public FieldInfo Find(Type target, string name, bool caseSensitive)
 		{
 			var lcname = name.ToLower();
@@ -464,23 +485,55 @@ namespace Underscore.Object.Reflection
 		}
 
 		/// <summary>
-		/// Finds a public field by name
+		/// Finds a public instance field by name and type
 		/// </summary>
+		/// <param name="target">The object that is searched for the field</param>
+		/// <param name="name">The name of the field that is being searched for</param>
+		/// <param name="type">The type of the field that is being searched for</param>
+		/// <returns>A FieldInfo of the field who's name matches or null</returns>
 		public FieldInfo Find(object target, string name, Type type)
 		{
 			return OfType(target, type).FirstOrDefault(a => a.Name == name);
 		}
 
+
+
+		/// <summary>
+		/// Finds a public instance field by name and type
+		/// </summary>
+		/// <param name="target">The object that is searched for the field</param>
+		/// <param name="name">The name of the field that is being searched for</param>
+		/// <param name="type">The type of the field that is being searched for</param>
+		/// <param name="caseSensitive">Specifies if the search should match only on exact case match</param>
+		/// <returns>A FieldInfo of the field who's name matches or null</returns>
 		public FieldInfo Find(object target, string name, Type type, bool caseSensitive)
 		{
 			return Find(target.GetType(), name, type, caseSensitive);
 		}
 
+
+		/// <summary>
+		/// Finds a public instance field by name and type
+		/// </summary>
+		/// <param name="target">The Type that is searched for the field</param>
+		/// <param name="name">The name of the field that is being searched for</param>
+		/// <param name="type">The type of the field that is being searched for</param>
+		/// <returns>A FieldInfo of the field who's name matches or null</returns>
 		public FieldInfo Find(Type target, string name, Type type)
 		{
 			return Find(target, name, type, true);
 		}
 
+
+
+		/// <summary>
+		/// Finds a public instance field by name and type
+		/// </summary>
+		/// <param name="target">The object that is searched for the field</param>
+		/// <param name="name">The name of the field that is being searched for</param>
+		/// <param name="type">The type of the field that is being searched for</param>
+		/// <param name="caseSensitive">Specifies if the search should match only on exact case match</param>
+		/// <returns>A FieldInfo of the field who's name matches or null</returns>
 		public FieldInfo Find(Type target, string name, Type type, bool caseSensitive)
 		{
 			var lcname = name.ToLower();
@@ -491,50 +544,95 @@ namespace Underscore.Object.Reflection
 		}
 
 		/// <summary>
-		/// Returns true if the field searching for exists in item
+		/// Returns true if a public field exists for the specified criteria
 		/// </summary>
+		/// <param name="target">The object whose fields are being search</param>
+		/// <param name="name">The name of the field being searched for</param>
 		public bool Has(object target, string name)
 		{
 			return Has(target, name, true);
 		}
 
+
 		/// <summary>
-		/// Returns true if the field searching for exists in item
+		/// Returns true if a public field exists for the specified criteria
 		/// </summary>
+		/// <param name="target">The object whose fields are being search</param>
+		/// <param name="caseSensitive">Specifies if the search should match only on exact case match</param>
+		/// <param name="name">The name of the field being searched for</param>
 		public bool Has(object target, string name, bool caseSensitive)
 		{
 
 			return Find(target, name, caseSensitive) != null;
 		}
 
+
+		/// <summary>
+		/// Returns true if a public field exists for the specified criteria
+		/// </summary>
+		/// <param name="target">The Type whose fields are being search</param>
+		/// <param name="name">The name of the field being searched for</param>
+		/// <param name="type">The type of the field being searched for</param>
+		/// <param name="caseSensitive">Specifies if the search should match only on exact case match</param>
 		public bool Has(Type target, string name, Type type, bool caseSensitive)
 		{
 			return Find(target, name, type, caseSensitive) != null;
 		}
 
+
+
+		/// <summary>
+		/// Returns true if a public field exists for the specified criteria
+		/// </summary>
+		/// <param name="target">The Type whose fields are being search</param>
+		/// <param name="name">The name of the field being searched for</param>
 		public bool Has(Type target, string name)
 		{
 			return Find(target, name) != null;
 		}
 
+
+		/// <summary>
+		/// Returns true if a public field exists for the specified criteria
+		/// </summary>
+		/// <param name="target">The Type whose fields are being search</param>
+		/// <param name="name">The name of the field being searched for</param>
+		/// <param name="caseSensitive">Specifies if the search should match only on exact case match</param>
 		public bool Has(Type target, string name, bool caseSensitive)
 		{
 			return Find(target, name, caseSensitive) != null;
 		}
 
 		/// <summary>
-		/// Returns true if the field searching for exists in item
+		/// Returns true if a public field exists for the specified criteria
 		/// </summary>
+		/// <param name="target">The object whose fields are being search</param>
+		/// <param name="name">The name of the field being searched for</param>
+		/// <param name="type">The type of field being searched for</param>
 		public bool Has(object target, string name, Type type)
 		{
 			return Find(target, name, type) != null;
 		}
 
+
+		/// <summary>
+		/// Returns true if a public field exists for the specified criteria
+		/// </summary>
+		/// <param name="target">The object whose fields are being search</param>
+		/// <param name="name">The name of the field being searched for</param>
+		/// <param name="type">The type of the field being searched for</param>
+		/// <param name="caseSensitive">Specifies if the search should match only on exact case match</param>
 		public bool Has(object target, string name, Type type, bool caseSensitive)
 		{
 			return Find(target, name, type, caseSensitive) != null;
 		}
 
+		/// <summary>
+		/// Returns true if a public field exists for the specified criteria
+		/// </summary>
+		/// <param name="target">The Type whose fields are being search</param>
+		/// <param name="name">The name of the field being searched for</param>
+		/// <param name="type">The type of the field being searched for</param>
 		public bool Has(Type target, string name, Type type)
 		{
 			return Find(target, name, type) != null;

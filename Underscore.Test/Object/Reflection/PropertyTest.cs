@@ -365,7 +365,7 @@ namespace Underscore.Test.Object.Reflection
 			var propA = props.FirstOrDefault(a =>
 				a.Name == "A"
 				&& a.PropertyType == typeof(char)
-				&& ((char)a.GetValue(example1) == 'A');
+				&& ((char)a.GetValue(example1) == 'A'));
 
 			var propB = props.FirstOrDefault(a =>
 				a.Name == "B"
@@ -472,7 +472,7 @@ namespace Underscore.Test.Object.Reflection
 			//25 added for the age property
 			var allPropertyValues = new List<object> {"FirstName", "LastName", "MiddleName", "NickName", "Suffix", "Title", 3, 25};
 			var allPropertyNames = new List<string> { "FirstName", "LastName", "MiddleName", "NickName", "Suffix", "Title", "NumberOfKids", "Age" };
-			var allPropertiesTouched = new List<bool>(8);
+			var allPropertiesTouched = Enumerable.Repeat(false, 8).ToList();
 
 			_.Object.Property.Each(person, (value) =>
 			{
@@ -525,9 +525,9 @@ namespace Underscore.Test.Object.Reflection
 
 			//25 added for the age property
 			var allPropertyNames = new List<string> {"FirstName", "LastName", "MiddleName", "NickName", "Suffix", "Title", "NumberOfKids", "Age"};
-			var allPropertiesTouched = new List<bool>(8);
+			var allPropertiesTouched = Enumerable.Repeat(false, 8).ToList();
 
-			
+
 			_.Object.Property.Each(person, (value, name) =>
 			{
 				var indexOf = allPropertyNames.IndexOf(name);
@@ -541,7 +541,7 @@ namespace Underscore.Test.Object.Reflection
 					allPropertiesTouched[indexOf] = true;
 				}
 
-				var actualValue = typeof (Person).GetProperty(name).GetValue(person);
+				var actualValue = typeof (OtherPerson2).GetProperty(name).GetValue(person);
 
 				Assert.IsTrue(actualValue.Equals(value));
 
@@ -587,13 +587,13 @@ namespace Underscore.Test.Object.Reflection
 
 			var strProperties =
 				new HashSet<string>(new[]
-				{"FirstName", "LastName", "MiddleName", "NickName", "Suffix", "Title", "NumberOfKids"});
+				{"FirstName", "LastName", "MiddleName", "NickName", "Suffix", "Title"});
 
 			var intProperties = new HashSet<string>(new[]
 			{
 				"NumberOfKids", "Age"
 			});
-			var allPropertiesTouched = new List<bool>(8);
+			var allPropertiesTouched = Enumerable.Repeat(false, 8).ToList();
 
 			int increment = 0;
 			_.Object.Property.Each(person, (value, name,setter) =>
@@ -609,7 +609,7 @@ namespace Underscore.Test.Object.Reflection
 					allPropertiesTouched[indexOf] = true;
 				}
 
-				var actualValue = typeof(Person).GetProperty(name).GetValue(person);
+				var actualValue = typeof(OtherPerson2).GetProperty(name).GetValue(person);
 
 				Assert.IsTrue(actualValue.Equals(value));
 
@@ -631,7 +631,7 @@ namespace Underscore.Test.Object.Reflection
 						setter(newValue);
 						increment++;
 						//now get the new value see if it matches
-						var newActualValue = typeof(Person).GetProperty(name).GetValue(person);
+						var newActualValue = typeof(OtherPerson2).GetProperty(name).GetValue(person);
 
 						Assert.IsTrue(newActualValue.Equals(newValue));
 					}
@@ -644,7 +644,7 @@ namespace Underscore.Test.Object.Reflection
 						setter(newValue);
 						increment++;
 
-						var newActualValue = typeof (Person).GetProperty(name).GetValue(person);
+						var newActualValue = typeof (OtherPerson2).GetProperty(name).GetValue(person);
 						Assert.IsTrue(newActualValue.Equals(newValue));
 
 					}
@@ -778,7 +778,7 @@ namespace Underscore.Test.Object.Reflection
 
 			//25 added for the age property
 			var allPropertyNames = new List<string> { "FirstName", "LastName", "MiddleName", "NickName", "Suffix", "Title", "NumberOfKids", "Age" };
-			var allPropertiesTouched = new List<bool>(8);
+			var allPropertiesTouched = Enumerable.Repeat(false, 8).ToList();
 
 
 			_.Object.Property.Each<string>(person, (value, name) =>
@@ -794,7 +794,7 @@ namespace Underscore.Test.Object.Reflection
 					allPropertiesTouched[indexOf] = true;
 				}
 
-				var actualValue = (string)typeof(Person).GetProperty(name).GetValue(person);
+				var actualValue = (string)typeof(OtherPerson2).GetProperty(name).GetValue(person);
 
 				Assert.AreEqual(actualValue, value);
 
@@ -813,7 +813,7 @@ namespace Underscore.Test.Object.Reflection
 					allPropertiesTouched[indexOf] = true;
 				}
 
-				var actualValue = (int)typeof(Person).GetProperty(name).GetValue(person);
+				var actualValue = (int)typeof(OtherPerson2).GetProperty(name).GetValue(person);
 
 				Assert.AreEqual(actualValue, value);
 
@@ -865,7 +865,7 @@ namespace Underscore.Test.Object.Reflection
 			{
 				"NumberOfKids", "Age"
 			});
-			var allPropertiesTouched = new List<bool>(8);
+			var allPropertiesTouched = Enumerable.Repeat(false, 8).ToList();
 
 			int increment = 0;
 			_.Object.Property.Each<string>(person, (value, name, setter) =>
@@ -881,7 +881,7 @@ namespace Underscore.Test.Object.Reflection
 					allPropertiesTouched[indexOf] = true;
 				}
 
-				var actualValue = typeof(Person).GetProperty(name).GetValue(person);
+				var actualValue = typeof(OtherPerson2).GetProperty(name).GetValue(person);
 
 				Assert.IsTrue(actualValue.Equals(value));
 				
@@ -892,7 +892,7 @@ namespace Underscore.Test.Object.Reflection
 				increment++;
 
 				//now get the new value see if it matches
-				var newActualValue = typeof(Person).GetProperty(name).GetValue(person);
+				var newActualValue = typeof(OtherPerson2).GetProperty(name).GetValue(person);
 
 				Assert.IsTrue(newActualValue.Equals(newValue));
 
@@ -913,7 +913,7 @@ namespace Underscore.Test.Object.Reflection
 					allPropertiesTouched[indexOf] = true;
 				}
 
-				var actualValue = typeof(Person).GetProperty(name).GetValue(person);
+				var actualValue = typeof(OtherPerson2).GetProperty(name).GetValue(person);
 
 				Assert.IsTrue(actualValue.Equals(value));
 
@@ -933,7 +933,7 @@ namespace Underscore.Test.Object.Reflection
 					increment++;
 
 					//now get the new value see if it matches
-					var newActualValue = typeof(Person).GetProperty(name).GetValue(person);
+					var newActualValue = typeof(OtherPerson2).GetProperty(name).GetValue(person);
 
 					Assert.IsTrue(newActualValue.Equals(newValue));
 				}

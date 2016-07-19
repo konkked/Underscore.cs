@@ -94,6 +94,7 @@ namespace Underscore.Object.Reflection
 		/// Returns true if a public field exists for the specified criteria
 		/// </summary>
 		/// <param name="target">The object whose fields are being search</param>
+		/// <param name="caseSensitive">Specifies if the search should match only on exact case match</param>
 		/// <param name="name">The name of the field being searched for</param>
 		bool Has(object target, string name, bool caseSensitive);
 
