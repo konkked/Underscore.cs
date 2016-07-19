@@ -82,8 +82,8 @@
     <Compile Include="Collection\CreationTest.cs" />
     <Compile Include="Collection\DelegationTest.cs" />
     <Compile Include="Collection\FilterTest.cs" />
-    <Compile Include="Collection\Partition\CombinationsTest.cs" />
     <Compile Include="Collection\Partition\ChunkTest.cs" />
+    <Compile Include="Collection\Partition\CombinationsTest.cs" />
     <Compile Include="Collection\Partition\PartitionTest.cs" />
     <Compile Include="Collection\SetTest.cs" />
     <Compile Include="Collection\Zip\UnZipTest.cs" />

@@ -36,12 +36,8 @@ namespace Underscore.Test.Action.Synch
         {
             var aftered = _.Action.After(() => result = (counter++).ToString(), 3);
 
-            var tasks = new Task[10];
             for (var i = 0; i < 10; i++)
-                tasks[i] = aftered();
-
-            for (var i = 0; i < 10; i++)
-                tasks[i].Wait();
+                aftered();
 
             Thread.MemoryBarrier();
             Assert.AreEqual("7", result);

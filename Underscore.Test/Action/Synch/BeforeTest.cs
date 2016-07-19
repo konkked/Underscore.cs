@@ -35,7 +35,7 @@ namespace Underscore.Test.Action.Synch
             for (var i = 0; i < 10; i++)
                 befored();
 
-            Assert.AreEqual("1", result);
+            Assert.AreEqual("2", result);
         }
 
         [Test]
