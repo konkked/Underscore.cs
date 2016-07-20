@@ -1,23 +1,23 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Action;
 
 namespace Underscore.Test.Action.Split
 {
-	[TestClass]
+	[TestFixture]
 	public class SplitTest
 	{
 		private SplitComponent component;
 		private string[] output;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new SplitComponent();
 			output = new string[1];
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Action_Split_Split_2Arguments()
 		{
 			const string expected = "ab";
@@ -28,7 +28,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Split_4Arguments()
 		{
 			const string expected = "abcd";
@@ -39,7 +39,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Split_6Arguments()
 		{
 			const string expected = "abcdef";
@@ -50,7 +50,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Split_8Arguments()
 		{
 			const string expected = "abcdefgh";
@@ -61,7 +61,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Split_10Arguments()
 		{
 			const string expected = "abcdefghij";
@@ -72,7 +72,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Split_12Arguments()
 		{
 			const string expected = "abcdefghijkl";
@@ -83,7 +83,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Split_14Arguments()
 		{
 			const string expected = "abcdefghijklmn";
@@ -94,7 +94,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Split_16Arguments()
 		{
 			const string expected = "abcdefghijklmnop";

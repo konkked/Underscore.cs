@@ -3,25 +3,25 @@ using Underscore.Setup.Liteioc;
 
 namespace Underscore
 {
-    public static class Bootstrapper
-    {
-        private static readonly Kernel s_kernel;
+	public static class Bootstrapper
+	{
+		private static readonly Kernel s_kernel;
 
-        static Bootstrapper()
-        {
-            s_kernel = new Kernel(
-                new ActionModule(),
-                new CollectionModule(),
-                new FunctionModule(),
-                new ListModule(),
-                new UtilityModule(),
-                new ObjectModule()
-            );
-        }
+		static Bootstrapper()
+		{
+			s_kernel = new Kernel(
+				new ActionModule(),
+				new CollectionModule(),
+				new FunctionModule(),
+				new ListModule(),
+				new UtilityModule(),
+				new ObjectModule()
+			);
+		}
 
-        public static Kernel Kernel
-        {
-            get { return s_kernel; }
-        }
-    }
+		public static Kernel Kernel
+		{
+			get { return s_kernel; }
+		}
+	}
 }

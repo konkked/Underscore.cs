@@ -1,23 +1,23 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Underscore.Collection;
 
 namespace Underscore.Test.Module
 {
-    [TestClass]
-    public class CollectionTest
-    {
-        [TestMethod]
-        public void CreateCollectionModuleTest()
-        {
-            var result = new Underscore.Module.Collection(
+	[TestFixture]
+	public class CollectionTest
+	{
+		[Test]
+		public void CreateCollectionModuleTest()
+		{
+			var result = new Underscore.Module.Collection(
 				new CompareComponent(),
 				new CreationComponent(),
 				new DelegationComponent(),
-                new PartitionComponent(),
+				new PartitionComponent(),
 				new ZipComponent()
 			);
 
-            Assert.IsNotNull(result);
-        }
-    }
+			Assert.IsNotNull(result);
+		}
+	}
 }

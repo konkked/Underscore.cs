@@ -1,21 +1,21 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Function;
 
 namespace Underscore.Test.Function.Split
 {
-	[TestClass]
+	[TestFixture]
 	public class UncurryTest
 	{
 		private SplitComponent component;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new SplitComponent();
 		}
 
-		[TestMethod]
+		[Test]
 		public void Func_Split_Uncurry_2Arguments()
 		{
 			const string expected = "ab";
@@ -29,7 +29,7 @@ namespace Underscore.Test.Function.Split
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Func_Split_Uncurry_3Arguments()
 		{
 			const string expected = "abc";
@@ -43,7 +43,7 @@ namespace Underscore.Test.Function.Split
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Func_Split_Uncurry_4Arguments()
 		{
 			const string expected = "abcd";
@@ -57,7 +57,7 @@ namespace Underscore.Test.Function.Split
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Func_Split_Uncurry_5Arguments()
 		{
 			const string expected = "abcde";
@@ -71,7 +71,7 @@ namespace Underscore.Test.Function.Split
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Func_Split_Uncurry_6Arguments()
 		{
 			const string expected = "abcdef";
@@ -85,7 +85,7 @@ namespace Underscore.Test.Function.Split
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Func_Split_Uncurry_7Arguments()
 		{
 			const string expected = "abcdefg";
@@ -99,7 +99,7 @@ namespace Underscore.Test.Function.Split
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Func_Split_Uncurry_8Arguments()
 		{
 			const string expected = "abcdefgh";
@@ -113,7 +113,7 @@ namespace Underscore.Test.Function.Split
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Func_Split_Uncurry_9Arguments()
 		{
 			const string expected = "abcdefghi";
@@ -127,7 +127,7 @@ namespace Underscore.Test.Function.Split
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Func_Split_Uncurry_10Arguments()
 		{
 			const string expected = "abcdefghij";
@@ -141,7 +141,7 @@ namespace Underscore.Test.Function.Split
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Func_Split_Uncurry_11Arguments()
 		{
 			const string expected = "abcdefghijk";
@@ -155,7 +155,7 @@ namespace Underscore.Test.Function.Split
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Func_Split_Uncurry_12Arguments()
 		{
 			const string expected = "abcdefghijkl";
@@ -169,7 +169,7 @@ namespace Underscore.Test.Function.Split
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Func_Split_Uncurry_13Arguments()
 		{
 			const string expected = "abcdefghijklm";
@@ -183,7 +183,7 @@ namespace Underscore.Test.Function.Split
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Func_Split_Uncurry_14Arguments()
 		{
 			const string expected = "abcdefghijklmn";
@@ -197,7 +197,7 @@ namespace Underscore.Test.Function.Split
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Func_Split_Uncurry_15Arguments()
 		{
 			const string expected = "abcdefghijklmno";
@@ -211,7 +211,7 @@ namespace Underscore.Test.Function.Split
 			Assert.AreEqual(expected, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Func_Split_Uncurry_16Arguments()
 		{
 			const string expected = "abcdefghijklmnop";

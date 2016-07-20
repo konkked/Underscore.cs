@@ -1,23 +1,23 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Action;
 
 namespace Underscore.Test.Action.Split
 {
-	[TestClass]
+	[TestFixture]
 	public class CurryTest
 	{
 		private SplitComponent component;
 		private string[] output;
 
-		[TestInitialize]
+		[SetUp]
 		public void Initialize()
 		{
 			component = new SplitComponent();
 			output = new string[1];
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Curry_2Arguments()
 		{
 			const string expected = "ab";
@@ -30,7 +30,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Curry_3Arguments()
 		{
 			const string expected = "abc";
@@ -43,7 +43,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Curry_4Arguments()
 		{
 			const string expected = "abcd";
@@ -56,7 +56,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Curry_5Arguments()
 		{
 			const string expected = "abcde";
@@ -69,7 +69,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Curry_6Arguments()
 		{
 			const string expected = "abcdef";
@@ -82,7 +82,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Curry_7Arguments()
 		{
 			const string expected = "abcdefg";
@@ -95,7 +95,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Curry_8Arguments()
 		{
 			const string expected = "abcdefgh";
@@ -108,7 +108,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Curry_9Arguments()
 		{
 			const string expected = "abcdefghi";
@@ -121,7 +121,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Curry_10Arguments()
 		{
 			const string expected = "abcdefghij";
@@ -134,7 +134,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Curry_11Arguments()
 		{
 			const string expected = "abcdefghijk";
@@ -147,7 +147,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Curry_12Arguments()
 		{
 			const string expected = "abcdefghijkl";
@@ -160,7 +160,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Curry_13Arguments()
 		{
 			const string expected = "abcdefghijklm";
@@ -173,7 +173,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Curry_14Arguments()
 		{
 			const string expected = "abcdefghijklmn";
@@ -186,7 +186,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Curry_15Arguments()
 		{
 			const string expected = "abcdefghijklmno";
@@ -199,7 +199,7 @@ namespace Underscore.Test.Action.Split
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Split_Curry_16Arguments()
 		{
 			const string expected = "abcdefghijklmnop";

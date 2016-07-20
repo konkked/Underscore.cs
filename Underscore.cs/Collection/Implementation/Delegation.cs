@@ -5,46 +5,46 @@ using Underscore.Object.Reflection;
 
 namespace Underscore.Collection
 {
-    public class DelegationComponent : IDelegationComponent
-    {
-        private readonly IMethodComponent _methodComponent;
+	public class DelegationComponent : IDelegationComponent
+	{
+		private readonly IMethodComponent _methodComponent;
 
-	    public DelegationComponent()
-	    {
-		    _methodComponent = new MethodComponent();
-	    }
+		public DelegationComponent()
+		{
+			_methodComponent = new MethodComponent();
+		}
 
-        public DelegationComponent(IMethodComponent methodComponent)
-        {
-            _methodComponent = methodComponent;
-        }
+		public DelegationComponent(IMethodComponent methodComponent)
+		{
+			_methodComponent = methodComponent;
+		}
 
 		/// <summary>
 		/// returns an IEnumerable consisting of the results of 
 		/// each item after having the method with
 		/// name methodName being called
 		/// </summary>
-        public IEnumerable<object> Invoke<T>(IEnumerable<T> items, string methodName)
+		public IEnumerable<object> Invoke<T>(IEnumerable<T> items, string methodName)
 		{
-		    return items.Select(item => _methodComponent.Invoke(item, methodName));
+			return items.Select(item => _methodComponent.Invoke(item, methodName));
 		}
 
-        /// <summary>
+		/// <summary>
 		/// returns an IEnumerable consisting of the results of 
 		/// each item after having the method with
 		/// name methodName being called with arguments
 		/// </summary>
-        public IEnumerable<object> Invoke<T>(IEnumerable<T> items, string methodName, params object[] arguments)
+		public IEnumerable<object> Invoke<T>(IEnumerable<T> items, string methodName, params object[] arguments)
 		{
-		    return items.Select(item => _methodComponent.Invoke(item, methodName, arguments));
+			return items.Select(item => _methodComponent.Invoke(item, methodName, arguments));
 		}
 
-        /// <summary>
-        /// Resolves a list of functions into a list
-        /// </summary>
-        public IEnumerable<T> Resolve<T>(IEnumerable<Func<T>> items)
-        {
-            return items.Select(a => a());
-        }
-    }
+		/// <summary>
+		/// Resolves a list of functions into a list
+		/// </summary>
+		public IEnumerable<T> Resolve<T>(IEnumerable<Func<T>> items)
+		{
+			return items.Select(a => a());
+		}
+	}
 }

@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Action;
 
 namespace Underscore.Test.Action
 {
-    [TestClass]
-    public class BindTest
-    {
-	    private BindComponent component;
+	[TestFixture]
+	public class BindTest
+	{
+		private BindComponent component;
 		private string[] output;
-	    private string expected;
+		private string expected;
 
-	    [TestInitialize]
-	    public void Initialize()
-	    {
-		    component = new BindComponent();
-		    output = new[] { "" };
-	    }
+		[SetUp]
+		public void Initialize()
+		{
+			component = new BindComponent();
+			output = new[] { "" };
+		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_OneParameter()
 		{
 			expected = "a";
@@ -32,7 +32,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_2Parameters()
 		{
 			expected = "ab";
@@ -46,11 +46,11 @@ namespace Underscore.Test.Action
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
-        }
+		}
 
-		[TestMethod]
-        public void Action_Bind_3Parameters()
-        {
+		[Test]
+		public void Action_Bind_3Parameters()
+		{
 			expected = "abc";
 			Action<string, string, string> action = (a, b, c) =>
 			{
@@ -62,11 +62,11 @@ namespace Underscore.Test.Action
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
-        }
+		}
 
-        [TestMethod]
-        public void Action_Bind_4Parameters()
-        {
+		[Test]
+		public void Action_Bind_4Parameters()
+		{
 			expected = "abcd";
 			Action<string, string, string, string> action = (a, b, c, d) =>
 			{
@@ -78,9 +78,9 @@ namespace Underscore.Test.Action
 			bound();
 
 			Assert.AreEqual(expected, output[0]);
-        }
+		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_5Parameters()
 		{
 			expected = "abcde";
@@ -96,7 +96,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_6Parameters()
 		{
 			expected = "abcdef";
@@ -112,7 +112,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_7Parameters()
 		{
 			expected = "abcdefg";
@@ -128,7 +128,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_8Parameters()
 		{
 			expected = "abcdefgh";
@@ -144,7 +144,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_9Parameters()
 		{
 			expected = "abcdefghi";
@@ -160,7 +160,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_10Parameters()
 		{
 			expected = "abcdefghij";
@@ -176,7 +176,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_11Parameters()
 		{
 			expected = "abcdefghijk";
@@ -192,7 +192,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_12Parameters()
 		{
 			expected = "abcdefghijkl";
@@ -208,7 +208,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_13Parameters()
 		{
 			expected = "abcdefghijklm";
@@ -224,7 +224,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_14Parameters()
 		{
 			expected = "abcdefghijklmn";
@@ -240,7 +240,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_15Parameters()
 		{
 			expected = "abcdefghijklmno";
@@ -256,7 +256,7 @@ namespace Underscore.Test.Action
 			Assert.AreEqual(expected, output[0]);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Action_Bind_16Parameters()
 		{
 			expected = "abcdefghijklmnop";
@@ -271,5 +271,5 @@ namespace Underscore.Test.Action
 
 			Assert.AreEqual(expected, output[0]);
 		}
-    }
+	}
 }

@@ -3,97 +3,97 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Underscore.Function;
 
 namespace Underscore.Test.Function.Synch
 {
-	[TestClass]
+	[TestFixture]
 	public class ThrottleTest
 	{
-        [TestMethod]
-        public async Task Function_Synch_Throttle_1Argument()
-        {
-            var testing = new SynchComponent();
-            var timer = new Stopwatch();
-            const int waiting = 25;
+		[Test]
+		public async Task Function_Synch_Throttle_1Argument()
+		{
+			var testing = new SynchComponent();
+			var timer = new Stopwatch();
+			const int waiting = 25;
 
-            int count = 1;
+			int count = 1;
 
-            var targeting = new Func<string, string>((i) =>
-            {
-                Interlocked.Increment(ref count);
-                return i + i;
-            });
+			var targeting = new Func<string, string>((i) =>
+			{
+				Interlocked.Increment(ref count);
+				return i + i;
+			});
 
-            var target = testing.Throttle(targeting, waiting);
+			var target = testing.Throttle(targeting, waiting);
 
-            var continuing = new List<Task<string>>();
+			var continuing = new List<Task<string>>();
 
-            timer.Start();
+			timer.Start();
 
-            var first = target("0");
-            var firstResult = await first;
+			var first = target("0");
+			var firstResult = await first;
 
-            Thread.MemoryBarrier();
+			Thread.MemoryBarrier();
 
-            Assert.AreEqual(2, count);
-            Assert.AreEqual("00", firstResult);
-
-
-            for (int i = 0; i < 100; i++)
-            {
-                Assert.AreEqual(2, count);
-
-                continuing.Add(target((i + 1).ToString()));
-            }
-
-            foreach (var i in continuing)
-            {
-                var result = await i;
-                Assert.AreEqual("100100", result);
-            }
-
-            timer.Stop();
-            Thread.MemoryBarrier();
-            Assert.AreEqual(3, count);
-
-            Assert.IsTrue(Math.Abs(timer.ElapsedMilliseconds - waiting) < 20, "Elapsed time ({0}) differs too largely from designated waiting time ({1})", timer.ElapsedMilliseconds, waiting);
-            Thread.MemoryBarrier();
-
-            continuing.Clear();
-            timer.Reset();
-            timer.Start();
-
-            await Task.Delay(2);
-
-            Thread.MemoryBarrier();
-
-            first = target("101");
-            firstResult = await first;
-            Assert.AreEqual(4, count);
-            Assert.AreEqual("101101", firstResult);
+			Assert.AreEqual(2, count);
+			Assert.AreEqual("00", firstResult);
 
 
-            for (int i = 0; i < 100; i++)
-            {
-                Assert.AreEqual(4, count);
-                continuing.Add(target((101 + i).ToString()));
-            }
-            foreach (var t in continuing)
-            {
-                var result = await t;
-                Assert.AreEqual("200200", result);
-            }
+			for (int i = 0; i < 100; i++)
+			{
+				Assert.AreEqual(2, count);
 
-            timer.Stop();
-            Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
+				continuing.Add(target((i + 1).ToString()));
+			}
+
+			foreach (var i in continuing)
+			{
+				var result = await i;
+				Assert.AreEqual("100100", result);
+			}
+
+			timer.Stop();
+			Thread.MemoryBarrier();
+			Assert.AreEqual(3, count);
+
+			Assert.IsTrue(Math.Abs(timer.ElapsedMilliseconds - waiting) < 20, "Elapsed time ({0}) differs too largely from designated waiting time ({1})", timer.ElapsedMilliseconds, waiting);
+			Thread.MemoryBarrier();
+
+			continuing.Clear();
+			timer.Reset();
+			timer.Start();
+
+			await Task.Delay(2);
+
+			Thread.MemoryBarrier();
+
+			first = target("101");
+			firstResult = await first;
+			Assert.AreEqual(4, count);
+			Assert.AreEqual("101101", firstResult);
 
 
-            Assert.AreEqual(5, count);
-        }
+			for (int i = 0; i < 100; i++)
+			{
+				Assert.AreEqual(4, count);
+				continuing.Add(target((101 + i).ToString()));
+			}
+			foreach (var t in continuing)
+			{
+				var result = await t;
+				Assert.AreEqual("200200", result);
+			}
 
-		[TestMethod]
+			timer.Stop();
+			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
+
+
+			Assert.AreEqual(5, count);
+		}
+
+		[Test]
 		public async Task Function_Synch_Throttle_2Arguments()
 		{
 			var testing = new SynchComponent();
@@ -160,7 +160,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Throttle_3Arguments()
 		{
 			var testing = new SynchComponent();
@@ -229,7 +229,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Throttle_4Arguments()
 		{
 			var testing = new SynchComponent();
@@ -300,7 +300,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Throttle_5Arguments()
 		{
 			var testing = new SynchComponent();
@@ -373,9 +373,9 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-        [TestMethod]
-        public async Task Function_Synch_Throttle_6Arguments()
-        {
+		[Test]
+		public async Task Function_Synch_Throttle_6Arguments()
+		{
 			var testing = new SynchComponent();
 			var timer = new Stopwatch();
 			int waiting = 25;
@@ -446,9 +446,9 @@ namespace Underscore.Test.Function.Synch
 			Assert.AreEqual(2, count);
 
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
-        }
+		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Throttle_7Arguments()
 		{
 			var testing = new SynchComponent();
@@ -525,7 +525,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Throttle_8Arguments()
 		{
 			var testing = new SynchComponent();
@@ -604,7 +604,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Throttle_9Arguments()
 		{
 			var testing = new SynchComponent();
@@ -685,7 +685,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Throttle_10Arguments()
 		{
 			var testing = new SynchComponent();
@@ -768,7 +768,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Throttle_11Arguments()
 		{
 			var testing = new SynchComponent();
@@ -853,7 +853,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Throttle_12Arguments()
 		{
 			var testing = new SynchComponent();
@@ -940,7 +940,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Throttle_13Arguments()
 		{
 			var testing = new SynchComponent();
@@ -1029,7 +1029,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Throttle_14Arguments()
 		{
 			var testing = new SynchComponent();
@@ -1120,7 +1120,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Throttle_15Arguments()
 		{
 			var testing = new SynchComponent();
@@ -1213,7 +1213,7 @@ namespace Underscore.Test.Function.Synch
 			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Function_Synch_Throttle_16Arguments()
 		{
 			var testing = new SynchComponent();

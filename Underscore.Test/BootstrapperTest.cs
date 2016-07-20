@@ -1,14 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 
 namespace Underscore.Test
 {
-    [TestClass]
-    public class BootstrapperTest
-    {
-        [TestMethod]
-        public void GetKernel()
-        {
-            var kernel = Bootstrapper.Kernel;
-        }
-    }
+	[TestFixture]
+	public class BootstrapperTest
+	{
+		[Test]
+		public void GetKernel()
+		{
+			var kernel = Bootstrapper.Kernel;
+		}
+	}
 }

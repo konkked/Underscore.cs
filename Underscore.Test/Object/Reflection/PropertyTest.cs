@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Linq;
@@ -8,7 +8,7 @@ using Underscore.Object.Reflection;
 
 namespace Underscore.Test.Object.Reflection
 {
-	[TestClass]
+	[TestFixture]
 	public class PropertyTest
 	{
 		public class Person
@@ -30,23 +30,22 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
-		public void ObjectPropertyHas()
+		[Test]
+		public void Object_Property_Has()
 		{
 
 			var person = new Person();
+			
 
-			var _prop = new PropertyComponent();
-
-			Assert.IsTrue(_prop.Has(person, "FirstName"));
-			Assert.IsFalse(_prop.Has(person, "DoesNotHave"));
-			Assert.IsTrue(_prop.Has(person, "firstname", false));
-			Assert.IsFalse(_prop.Has(person, "firstname", true));
+			Assert.IsTrue(_.Object.Property.Has(person, "FirstName"));
+			Assert.IsFalse(_.Object.Property.Has(person, "DoesNotHave"));
+			Assert.IsTrue(_.Object.Property.Has(person, "firstname", false));
+			Assert.IsFalse(_.Object.Property.Has(person, "firstname", true));
 
 		}
 
-		[TestMethod]
-		public void ObjectPropertyFind()
+		[Test]
+		public void Object_Property_Find()
 		{
 			var properties = typeof(Person).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 			var person = new Person();
@@ -54,13 +53,13 @@ namespace Underscore.Test.Object.Reflection
 			var _prop = new PropertyComponent();
 
 			var expecting = properties.First(a => a.Name == "FirstName");
-			var result = _prop.Find(person, "FirstName");
+			var result = _.Object.Property.Find(person, "FirstName");
 			Assert.AreEqual(expecting, result);
 
-			result = _prop.Find(person, "firstname", false);
+			result = _.Object.Property.Find(person, "firstname", false);
 			Assert.AreEqual(expecting, result);
 
-			result = _prop.Find(person, "DoesNotHave");
+			result = _.Object.Property.Find(person, "DoesNotHave");
 
 			Assert.IsNull(result);
 
@@ -72,209 +71,218 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
-		public async Task ObjectPropertyGetSet()
+
+		[Test]
+		public void Object_Property_GetValue_Generic()
 		{
-
-			var _prop = new PropertyComponent();
-
-			await Util.Tasks.Start(() =>
+			var person = new Person
 			{
-				var person = new Person
-				{
-					FirstName = "FirstName",
-					LastName = "LastName",
-					MiddleName = "MiddleName",
-					NickName = "NickName",
-					Suffix = "Suffix",
-					Title = "Title",
-					Age = 24
-				};
+				FirstName = "FirstName",
+				LastName = "LastName",
+				MiddleName = "MiddleName",
+				NickName = "NickName",
+				Suffix = "Suffix",
+				Title = "Title",
+				Age = 24
+			};
 
-				int intExpecting = person.Age;
-				int intResult = _prop.GetValue<int>(person, "Age");
-				Assert.AreEqual(intExpecting, intResult);
+			int intExpecting = person.Age;
+			int intResult = _.Object.Property.GetValue<int>(person, "Age");
+			Assert.AreEqual(intExpecting, intResult);
 
-				string expecting = person.FirstName;
-				string result = _prop.GetValue<string>(person, "FirstName");
-				Assert.AreEqual(expecting, result);
+			string expecting = person.FirstName;
+			string result = _.Object.Property.GetValue<string>(person, "FirstName");
+			Assert.AreEqual(expecting, result);
 
-				expecting = person.MiddleName;
-				result = _prop.GetValue<string>(person, "MiddleName");
-				Assert.AreEqual(expecting, result);
+			expecting = person.MiddleName;
+			result = _.Object.Property.GetValue<string>(person, "MiddleName");
+			Assert.AreEqual(expecting, result);
 
-				expecting = person.LastName;
-				result = _prop.GetValue<string>(person, "LastName");
-				Assert.AreEqual(expecting, result);
+			expecting = person.LastName;
+			result = _.Object.Property.GetValue<string>(person, "LastName");
+			Assert.AreEqual(expecting, result);
 
-				expecting = person.NickName;
-				result = _prop.GetValue<string>(person, "NickName");
-				Assert.AreEqual(expecting, result);
+			expecting = person.NickName;
+			result = _.Object.Property.GetValue<string>(person, "NickName");
+			Assert.AreEqual(expecting, result);
 
-				expecting = person.Suffix;
-				result = _prop.GetValue<string>(person, "Suffix");
-				Assert.AreEqual(expecting, result);
+			expecting = person.Suffix;
+			result = _.Object.Property.GetValue<string>(person, "Suffix");
+			Assert.AreEqual(expecting, result);
 
-				expecting = person.Title;
-				result = _prop.GetValue<string>(person, "Title");
-				Assert.AreEqual(expecting, result);
-
-			}, () =>
-			{
-				var person = new Person
-				{
-					FirstName = "FirstName",
-					LastName = "LastName",
-					MiddleName = "MiddleName",
-					NickName = "NickName",
-					Suffix = "Suffix",
-					Title = "Title",
-					Age = 24
-				};
-
-				object intExpecting = person.Age;
-				object intResult = _prop.GetValue(person, "Age");
-				Assert.AreEqual(intExpecting, intResult);
-
-				object expecting = person.FirstName;
-				object result = _prop.GetValue(person, "FirstName");
-				Assert.AreEqual(expecting, result);
-
-				expecting = person.MiddleName;
-				result = _prop.GetValue(person, "MiddleName");
-				Assert.AreEqual(expecting, result);
-
-				expecting = person.LastName;
-				result = _prop.GetValue(person, "LastName");
-				Assert.AreEqual(expecting, result);
-
-				expecting = person.NickName;
-				result = _prop.GetValue(person, "NickName");
-				Assert.AreEqual(expecting, result);
-
-				expecting = person.Suffix;
-				result = _prop.GetValue(person, "Suffix");
-				Assert.AreEqual(expecting, result);
-
-				expecting = person.Title;
-				result = _prop.GetValue(person, "Title");
-				Assert.AreEqual(expecting, result);
-
-			}, () =>
-			{
-				var person = new Person
-				{
-					FirstName = "FirstName",
-					LastName = "LastName",
-					MiddleName = "MiddleName",
-					NickName = "NickName",
-					Suffix = "Suffix",
-					Title = "Title",
-					Age = 24
-				};
-
-				int intExpecting = 12;
-				_prop.SetValue<int>(person, "Age", intExpecting);
-				int intResult = person.Age;
-
-				Assert.AreEqual(intExpecting, intResult);
-
-				string expecting = "Jon";
-				_prop.SetValue<string>(person, "FirstName", expecting);
-				string result = person.FirstName;
-
-				Assert.AreEqual(expecting, result);
-
-				expecting = "Midding";
-				_prop.SetValue<string>(person, "MiddleName", expecting);
-				result = person.MiddleName;
-
-				Assert.AreEqual(expecting, result);
-
-				expecting = "DurpDurp";
-				_prop.SetValue<string>(person, "LastName", expecting);
-				result = person.LastName;
-
-				Assert.AreEqual(expecting, result);
-
-				expecting = "NewNickName";
-				_prop.SetValue<string>(person, "NickName", expecting);
-				result = person.NickName;
-
-				Assert.AreEqual(expecting, result);
-
-				expecting = "NewSuffix";
-				_prop.SetValue<string>(person, "Suffix", expecting);
-				result = person.Suffix;
-
-				Assert.AreEqual(expecting, result);
-
-				expecting = "NewTitle";
-				_prop.SetValue<string>(person, "Title", expecting);
-				result = person.Title;
-
-				Assert.AreEqual(expecting, result);
-			}, () =>
-			{
-				var person = new Person
-				{
-					FirstName = "FirstName",
-					LastName = "LastName",
-					MiddleName = "MiddleName",
-					NickName = "NickName",
-					Suffix = "Suffix",
-					Title = "Title",
-					Age = 24
-				};
-
-				object intExpecting = 12;
-				_prop.SetValue(person, "Age", intExpecting);
-				object intResult = person.Age;
-
-				Assert.AreEqual(intExpecting, intResult);
-
-				object expecting = "Jon";
-				_prop.SetValue(person, "FirstName", expecting);
-				object result = person.FirstName;
-
-				Assert.AreEqual(expecting, result);
-
-				expecting = "Midding";
-				_prop.SetValue(person, "MiddleName", expecting);
-				result = person.MiddleName;
-
-				Assert.AreEqual(expecting, result);
-
-				expecting = "DurpDurp";
-				_prop.SetValue(person, "LastName", expecting);
-				result = person.LastName;
-
-				Assert.AreEqual(expecting, result);
-
-				expecting = "NewNickName";
-				_prop.SetValue(person, "NickName", expecting);
-				result = person.NickName;
-
-				Assert.AreEqual(expecting, result);
-
-				expecting = "NewSuffix";
-				_prop.SetValue(person, "Suffix", expecting);
-				result = person.Suffix;
-
-				Assert.AreEqual(expecting, result);
-
-				expecting = "NewTitle";
-				_prop.SetValue(person, "Title", expecting);
-				result = person.Title;
-
-				Assert.AreEqual(expecting, result);
-			});
+			expecting = person.Title;
+			result = _.Object.Property.GetValue<string>(person, "Title");
+			Assert.AreEqual(expecting, result);
 		}
 
-		[TestMethod]
-		public void PropertyHasForTypeTarget()
+
+		[Test]
+		public void Object_Property_GetValue_NonGeneric()
 		{
-			var testing = new PropertyComponent();
+			var person = new Person
+			{
+				FirstName = "FirstName",
+				LastName = "LastName",
+				MiddleName = "MiddleName",
+				NickName = "NickName",
+				Suffix = "Suffix",
+				Title = "Title",
+				Age = 24
+			};
+
+			object intExpecting = person.Age;
+			object intResult = _.Object.Property.GetValue(person, "Age");
+			Assert.AreEqual(intExpecting, intResult);
+
+			object expecting = person.FirstName;
+			object result = _.Object.Property.GetValue(person, "FirstName");
+			Assert.AreEqual(expecting, result);
+
+			expecting = person.MiddleName;
+			result = _.Object.Property.GetValue(person, "MiddleName");
+			Assert.AreEqual(expecting, result);
+
+			expecting = person.LastName;
+			result = _.Object.Property.GetValue(person, "LastName");
+			Assert.AreEqual(expecting, result);
+
+			expecting = person.NickName;
+			result = _.Object.Property.GetValue(person, "NickName");
+			Assert.AreEqual(expecting, result);
+
+			expecting = person.Suffix;
+			result = _.Object.Property.GetValue(person, "Suffix");
+			Assert.AreEqual(expecting, result);
+
+			expecting = person.Title;
+			result = _.Object.Property.GetValue(person, "Title");
+			Assert.AreEqual(expecting, result);
+		}
+
+
+
+		[Test]
+		public void Object_Property_SetValue_Generic()
+		{
+			var person = new Person
+			{
+				FirstName = "FirstName",
+				LastName = "LastName",
+				MiddleName = "MiddleName",
+				NickName = "NickName",
+				Suffix = "Suffix",
+				Title = "Title",
+				Age = 24
+			};
+
+			int intExpecting = 12;
+			_.Object.Property.SetValue<int>(person, "Age", intExpecting);
+			int intResult = person.Age;
+
+			Assert.AreEqual(intExpecting, intResult);
+
+			string expecting = "Jon";
+			_.Object.Property.SetValue<string>(person, "FirstName", expecting);
+			string result = person.FirstName;
+
+			Assert.AreEqual(expecting, result);
+
+			expecting = "Midding";
+			_.Object.Property.SetValue<string>(person, "MiddleName", expecting);
+			result = person.MiddleName;
+
+			Assert.AreEqual(expecting, result);
+
+			expecting = "DurpDurp";
+			_.Object.Property.SetValue<string>(person, "LastName", expecting);
+			result = person.LastName;
+
+			Assert.AreEqual(expecting, result);
+
+			expecting = "NewNickName";
+			_.Object.Property.SetValue<string>(person, "NickName", expecting);
+			result = person.NickName;
+
+			Assert.AreEqual(expecting, result);
+
+			expecting = "NewSuffix";
+			_.Object.Property.SetValue<string>(person, "Suffix", expecting);
+			result = person.Suffix;
+
+			Assert.AreEqual(expecting, result);
+
+			expecting = "NewTitle";
+			_.Object.Property.SetValue<string>(person, "Title", expecting);
+			result = person.Title;
+
+
+			Assert.AreEqual(expecting, result);
+
+		}
+
+		[Test]
+		public void Object_Property_SetValue_NonGeneric()
+		{
+
+			var person = new Person
+			{
+				FirstName = "FirstName",
+				LastName = "LastName",
+				MiddleName = "MiddleName",
+				NickName = "NickName",
+				Suffix = "Suffix",
+				Title = "Title",
+				Age = 24
+			};
+
+			object intExpecting = 12;
+			_.Object.Property.SetValue(person, "Age", intExpecting);
+			object intResult = person.Age;
+
+			Assert.AreEqual(intExpecting, intResult);
+
+			object expecting = "Jon";
+			_.Object.Property.SetValue(person, "FirstName", expecting);
+			object result = person.FirstName;
+
+			Assert.AreEqual(expecting, result);
+
+			expecting = "Midding";
+			_.Object.Property.SetValue(person, "MiddleName", expecting);
+			result = person.MiddleName;
+
+			Assert.AreEqual(expecting, result);
+
+			expecting = "DurpDurp";
+			_.Object.Property.SetValue(person, "LastName", expecting);
+			result = person.LastName;
+
+			Assert.AreEqual(expecting, result);
+
+			expecting = "NewNickName";
+			_.Object.Property.SetValue(person, "NickName", expecting);
+			result = person.NickName;
+
+			Assert.AreEqual(expecting, result);
+
+			expecting = "NewSuffix";
+			_.Object.Property.SetValue(person, "Suffix", expecting);
+			result = person.Suffix;
+
+			Assert.AreEqual(expecting, result);
+
+			expecting = "NewTitle";
+			_.Object.Property.SetValue(person, "Title", expecting);
+			result = person.Title;
+
+			Assert.AreEqual(expecting, result);
+		}
+		
+
+		[Test]
+		public void Object_Property_Has_ForTypeTarget()
+		{
+			var testing = _.Object.Property;
 
 			Assert.IsTrue(testing.Has(typeof(Person), "FirstName"));
 			Assert.IsTrue(testing.Has(typeof(Person), "LastName"));
@@ -285,10 +293,10 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
-		public void PropertGetForTypeTarget()
+		[Test]
+		public void Object_Property_Get_ForTypeTarget()
 		{
-			var testing = new PropertyComponent();
+			var testing = _.Object.Property;
 
 			Assert.AreEqual(typeof(Person).GetProperty("FirstName"), testing.Find(typeof(Person), "FirstName"));
 			Assert.AreEqual(typeof(Person).GetProperty("LastName"), testing.Find(typeof(Person), "LastName"));
@@ -299,10 +307,10 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
-		public void PropertGetForTypeTargetCaseInsensitive()
+		[Test]
+		public void Object_Property_Get_ForTypeTargetCaseInsensitive()
 		{
-			var testing = new PropertyComponent();
+			var testing = _.Object.Property;
 
 			Assert.AreEqual(typeof(Person).GetProperty("FirstName"), testing.Find(typeof(Person), "firstname", false));
 			Assert.AreEqual(typeof(Person).GetProperty("LastName"), testing.Find(typeof(Person), "lastname", false));
@@ -313,10 +321,10 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
-		public void PropertyOfTypeForType()
+		[Test]
+		public void Object_Property_OfType_ForType()
 		{
-			var testing = new PropertyComponent();
+			var testing = _.Object.Property;
 
 			Assert.IsTrue(testing.OfType(typeof(Person), typeof(string)).Any(a => a.Name == "FirstName"));
 			Assert.IsTrue(testing.OfType(typeof(Person), typeof(string)).Any(a => a.Name == "LastName"));
@@ -327,10 +335,10 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
-		public void PropertyGetValues()
+		[Test]
+		public void Object_Property_GetValues()
 		{
-			var testing = new PropertyComponent();
+			var testing = _.Object.Property;
 			var testTarget = new Person
 			{
 				FirstName = "FirstName",
@@ -348,12 +356,36 @@ namespace Underscore.Test.Object.Reflection
 
 		}
 
-		[TestMethod]
-		public async Task ObjectProperties()
+		[Test]
+		public void Object_Property_All_TargetInstance()
 		{
-			var testing = SetupPropertiesTarget();
-
 			var example1 = new { A = 'A', B = "B", C = 1 };
+			var props = _.Object.Property.All(example1);
+
+			var propA = props.FirstOrDefault(a =>
+				a.Name == "A"
+				&& a.PropertyType == typeof(char)
+				&& ((char)a.GetValue(example1) == 'A'));
+
+			var propB = props.FirstOrDefault(a =>
+				a.Name == "B"
+				&& a.PropertyType == typeof(string)
+				&& ((string)a.GetValue(example1)) == "B");
+
+			var propC = props.FirstOrDefault(a =>
+				a.Name == "C"
+				&& a.PropertyType == typeof(int)
+				&& ((int)a.GetValue(example1)) == 1);
+
+				Assert.IsNotNull(propA);
+				Assert.IsNotNull(propB);
+				Assert.IsNotNull(propC);
+			}
+
+
+		[Test]
+		public void Object_Property_OfType_TargetInstance()
+		{
 			var example2 = new Person
 			{
 				Title = "Mr.",
@@ -364,59 +396,31 @@ namespace Underscore.Test.Object.Reflection
 				NickName = "Chip",
 				Age = 24,
 			};
+			var props = _.Object.Property.OfType(example2, typeof(string));
 
-			await Util.Tasks.Start(() =>
-			{
+			Func<string, string, PropertyInfo, bool> strvaluematchfilter =
+				(n, v, a) =>
+					a.PropertyType == typeof(string) &&
+					a.Name == n &&
+					((string)a.GetGetMethod().Invoke(example2, new object[0])) == v
+				;
 
-				var props = testing.All(example1);
+			Func<string, string, Func<PropertyInfo, bool>> createStrTest = (n, v) => (a) => strvaluematchfilter(n, v, a);
 
-				var propA = props.FirstOrDefault(a =>
-					a.Name == "A"
-					&& a.PropertyType == typeof(char)
-					&& ((char)a.GetGetMethod().Invoke(example1, new object[0])) == 'A');
+			var propertyInfos = props as PropertyInfo[] ?? props.ToArray();
+			var title = propertyInfos.FirstOrDefault(createStrTest("Title", "Mr."));
+			var firstName = propertyInfos.FirstOrDefault(createStrTest("FirstName", "Charles"));
+			var lastName = propertyInfos.FirstOrDefault(createStrTest("LastName", "Keyser"));
+			var nickName = propertyInfos.FirstOrDefault(createStrTest("NickName", "Chip"));
+			var middleName = propertyInfos.FirstOrDefault(createStrTest("MiddleName", "Henry"));
+			var suffix = propertyInfos.FirstOrDefault(createStrTest("Suffix", "IV"));
 
-				var propB = props.FirstOrDefault(a =>
-					a.Name == "B"
-					&& a.PropertyType == typeof(string)
-					&& ((string)a.GetGetMethod().Invoke(example1, new object[0])) == "B");
+			var shouldBe0 = propertyInfos.Count(a => a.PropertyType != typeof(string));
 
-				var propC = props.FirstOrDefault(a =>
-					a.Name == "C"
-					&& a.PropertyType == typeof(int)
-					&& ((int)a.GetGetMethod().Invoke(example1, new object[0])) == 1);
+			foreach (var item in new[] { title, firstName, lastName, nickName, middleName, suffix })
+				Assert.IsNotNull(item);
 
-				Assert.IsNotNull(propA);
-				Assert.IsNotNull(propB);
-				Assert.IsNotNull(propC);
-			}, () =>
-			{
-
-				var props = testing.OfType(example2, typeof(string));
-
-				Func<string, string, PropertyInfo, bool> strvaluematchfilter =
-					(n, v, a) =>
-						a.PropertyType == typeof(string) &&
-						a.Name == n &&
-						((string)a.GetGetMethod().Invoke(example2, new object[0])) == v
-					;
-
-				Func<string, string, Func<PropertyInfo, bool>> createStrTest = (n, v) => (a) => strvaluematchfilter(n, v, a);
-
-				var propertyInfos = props as PropertyInfo[] ?? props.ToArray();
-				var title = propertyInfos.FirstOrDefault(createStrTest("Title", "Mr."));
-				var firstName = propertyInfos.FirstOrDefault(createStrTest("FirstName", "Charles"));
-				var lastName = propertyInfos.FirstOrDefault(createStrTest("LastName", "Keyser"));
-				var nickName = propertyInfos.FirstOrDefault(createStrTest("NickName", "Chip"));
-				var middleName = propertyInfos.FirstOrDefault(createStrTest("MiddleName", "Henry"));
-				var suffix = propertyInfos.FirstOrDefault(createStrTest("Suffix", "IV"));
-
-				var shouldBe0 = propertyInfos.Count(a => a.PropertyType != typeof(string));
-
-				foreach (var item in new[] { title, firstName, lastName, nickName, middleName, suffix })
-					Assert.IsNotNull(item);
-
-				Assert.AreEqual(0, shouldBe0);
-			});
+			Assert.AreEqual(0, shouldBe0);
 		}
 
 		private static PropertyComponent SetupPropertiesTarget()
@@ -450,23 +454,11 @@ namespace Underscore.Test.Object.Reflection
 
 			public int NumberOfKids { get; set; }
 		}
-
-		//TODO: Rewrite this test
-		[TestMethod]
-		public void ObjectPropertyForeach()
+		
+		[Test]
+		public void Object_Property_Foreach_NonGeneric_JustValues()
 		{
 			var person = new OtherPerson2(25)
-			{
-				FirstName = "FirstName",
-				LastName = "LastName",
-				MiddleName = "MiddleName",
-				NickName = "NickName",
-				Suffix = "Suffix",
-				Title = "Title",
-				NumberOfKids = 0
-			};
-
-			var person2 = new OtherPerson2(25)
 			{
 				FirstName = "FirstName",
 				LastName = "LastName",
@@ -477,132 +469,499 @@ namespace Underscore.Test.Object.Reflection
 				NumberOfKids = 3
 			};
 
-			//for single action param
-			HashSet<object> propertiesContent = new HashSet<object>();
+			//25 added for the age property
+			var allPropertyValues = new List<object> {"FirstName", "LastName", "MiddleName", "NickName", "Suffix", "Title", 3, 25};
+			var allPropertyNames = new List<string> { "FirstName", "LastName", "MiddleName", "NickName", "Suffix", "Title", "NumberOfKids", "Age" };
+			var allPropertiesTouched = Enumerable.Repeat(false, 8).ToList();
 
-			person.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
-				.Where(
-					a => !a.GetIndexParameters().Any() && a.CanRead && a.GetGetMethod() != null)
-				.ToList().ForEach(a => propertiesContent.Add(a.GetGetMethod().Invoke(person, null)));
-
-			Action<object> oneParamAction = (o) => Assert.IsTrue(propertiesContent.Contains(o), "Did not have property of value {0}", o);
-
-			Dictionary<string, object> propertiesDict =
-				person.GetType()
-					.GetProperties(BindingFlags.Instance | BindingFlags.Public)
-					.Where(a => !a.GetIndexParameters().Any() && a.GetGetMethod() != null)
-					.ToDictionary(
-						a => a.Name,
-						v => v.GetGetMethod().Invoke(person, null)
-					);
-
-			Action<object, string> twoParamAction = (value, name) =>
-					Assert.IsTrue(
-						propertiesDict.ContainsKey(name) && (
-
-							(propertiesDict[name] == null && value == null) ||
-							(
-								(propertiesDict[name] != null && value != null)
-								&& propertiesDict[name].Equals(value)
-							)
-						),
-						"Does not have expected property of with name {0} and value {1}",
-						value,
-						name
-					);
-
-			Dictionary<string, Tuple<Func<object>, Action<object>>> propertiesSettableDict =
-				person2.GetType()
-					.GetProperties(BindingFlags.Instance | BindingFlags.Public)
-					.Where(a => !a.GetIndexParameters().Any() && a.GetGetMethod() != null)
-					.ToDictionary(
-						a => a.Name,
-						v => Tuple.Create(
-								new Func<object>(() => v.GetGetMethod().Invoke(person2, null)),
-								v.GetSetMethod() != null ?
-									((o) => v.GetSetMethod().Invoke(person2, new[] { o })) :
-									null as Action<object>)
-								);
-
-			Action<object, string, Action<object>> threeParamAction = (value, name, assigner) =>
+			_.Object.Property.Each(person, (value) =>
 			{
-				var orig = value;
+				var indexOf = allPropertyValues.IndexOf(value);
 
-				Assert.IsTrue(
-					propertiesSettableDict.ContainsKey(name) &&
-					(
-						(propertiesDict[name] == null && orig == null)
-						||
-						(
-							(
-								orig != null && propertiesDict[name] != null
-							)
-							&& propertiesSettableDict[name].Item1().Equals(orig)
-						)
-					), "Expected property of name {0} and value {1} not found", name, orig
-				);
-
-				if (assigner != null)
+				if (indexOf == -1)
 				{
-					var assiging =
-						(value != null && value.GetType() == typeof(string)) ?
-							string.Empty as object :
-						//otherwise value is int in this case
-							((int)value) + 1
-						;
-
-					if (assiging is string && ((string)assiging) == ((string)value))
-					{
-						assiging = "AltDefault";
-					}
-
-					if (assiging is int && ((int)assiging) == ((int)value))
-					{
-						assiging = ((int)assiging) + 1;
-					}
-
-					//type in this instance is string or int
-					assigner(assiging);
-
-					Assert.AreNotEqual(orig,
-							propertiesSettableDict[name].Item1(),
-							"expected value change from {0} to {1}", orig, value
-					);
-
-					//should be equivelant to included method
-					propertiesSettableDict[name].Item2(orig);
-
-					Assert.AreEqual(orig,
-						propertiesSettableDict[name].Item1(),
-						"expected value change from {0} to {1}", value, orig
-					);
-
-					//should not break the assigner method
-					assigner(assiging);
-
-					Assert.AreNotEqual(orig,
-							propertiesSettableDict[name].Item1(),
-							"expected value change from {0} to {1}", orig, value
-					);
-
+					Assert.Fail("Could not find property with value " + value);
 				}
-			};
+				else
+				{
+					allPropertiesTouched[indexOf] = true;
+				}
 
-			//var mkutil = new _ForeachPropertyUtilMock();
-			//var mkprops = new
+			});
 
-			//mkutil.Setup(a=>a.Memoize(It.Is<Func<Type,IEnumerable<).
+			//then check all expected properties were called
+			var propertiesMissed = new List<string>();
 
-			//var target = 
-			var testing = SetupPropertiesTarget();
-			testing.Each(person, oneParamAction);
-			testing.Each(person, twoParamAction);
-			testing.Each(person2, threeParamAction);
+			for (int i = 0; i < allPropertiesTouched.Count; i++)
+			{
+				if (!allPropertiesTouched[i])
+				{
+					propertiesMissed.Add(allPropertyNames[i]);
+				}
+			}
+
+
+			if (propertiesMissed.Any())
+			{
+				Assert.Fail("Could not match values to the following properties " + string.Join(", ", propertiesMissed));
+			}
 
 		}
 
-		[TestMethod]
-		public void PropertyPairsGeneral()
+		
+		[Test]
+		public void Object_Property_Foreach_NonGeneric_ValueAndName()
+		{
+			var person = new OtherPerson2(25)
+			{
+				FirstName = "FirstName",
+				LastName = "LastName",
+				MiddleName = "MiddleName",
+				NickName = "NickName",
+				Suffix = "Suffix",
+				Title = "Title",
+				NumberOfKids = 3
+			};
+
+			//25 added for the age property
+			var allPropertyNames = new List<string> {"FirstName", "LastName", "MiddleName", "NickName", "Suffix", "Title", "NumberOfKids", "Age"};
+			var allPropertiesTouched = Enumerable.Repeat(false, 8).ToList();
+
+
+			_.Object.Property.Each(person, (value, name) =>
+			{
+				var indexOf = allPropertyNames.IndexOf(name);
+
+				if (indexOf == -1)
+				{
+					Assert.Fail("Could not find property " + name);
+				}
+				else
+				{
+					allPropertiesTouched[indexOf] = true;
+				}
+
+				var actualValue = typeof (OtherPerson2).GetProperty(name).GetValue(person);
+
+				Assert.IsTrue(actualValue.Equals(value));
+
+			});
+
+			//then check all expected properties were called
+			var propertiesMissed = new List<string>();
+
+			for (int i = 0; i < allPropertiesTouched.Count; i++)
+			{
+				if (!allPropertiesTouched[i])
+				{
+					propertiesMissed.Add(allPropertyNames[i]);
+				}
+			}
+
+
+			if (propertiesMissed.Any())
+			{
+				Assert.Fail("Missed the following properties " + string.Join(", ", propertiesMissed));
+			}
+
+
+		}
+
+		
+		[Test]
+		public void Object_Property_Foreach_NonGeneric_ValueAndNameAndSetter()
+		{
+			var person = new OtherPerson2(25)
+			{
+				FirstName = "FirstName",
+				LastName = "LastName",
+				MiddleName = "MiddleName",
+				NickName = "NickName",
+				Suffix = "Suffix",
+				Title = "Title",
+				NumberOfKids = 3
+			};
+
+			//25 added for the age property
+			var allPropertyNames = new List<string> { "FirstName", "LastName", "MiddleName", "NickName", "Suffix", "Title", "NumberOfKids", "Age" };
+
+			var strProperties =
+				new HashSet<string>(new[]
+				{"FirstName", "LastName", "MiddleName", "NickName", "Suffix", "Title"});
+
+			var intProperties = new HashSet<string>(new[]
+			{
+				"NumberOfKids", "Age"
+			});
+			var allPropertiesTouched = Enumerable.Repeat(false, 8).ToList();
+
+			int increment = 0;
+			_.Object.Property.Each(person, (value, name,setter) =>
+			{
+				var indexOf = allPropertyNames.IndexOf(name);
+
+				if (indexOf == -1)
+				{
+					Assert.Fail("Could not find property " + name);
+				}
+				else
+				{
+					allPropertiesTouched[indexOf] = true;
+				}
+
+				var actualValue = typeof(OtherPerson2).GetProperty(name).GetValue(person);
+
+				Assert.IsTrue(actualValue.Equals(value));
+
+				//if the property is NOT a settable property then the set method will be null
+				if (name == "Age")
+				{
+
+					Assert.IsNull(setter,
+						"Setter should be null for the 'Age' property because it does not have a setter");
+				}
+				else
+				{
+					//testing to see if the property setting works
+					if (strProperties.Contains(name))
+					{
+						// doing this in case an error happens where multiple values are assigned or
+						// all of them are assigned a value (using the same value for everything would give false positive result then)
+						var newValue = "Some value " + increment;
+						setter(newValue);
+						increment++;
+						//now get the new value see if it matches
+						var newActualValue = typeof(OtherPerson2).GetProperty(name).GetValue(person);
+
+						Assert.IsTrue(newActualValue.Equals(newValue));
+					}
+					else if (intProperties.Contains(name))
+					{
+						//incrementing for the same reason as before, don't want to test with the same value if something is wrong
+						//might give false pass result
+						var newValue = 100 + increment;
+
+						setter(newValue);
+						increment++;
+
+						var newActualValue = typeof (OtherPerson2).GetProperty(name).GetValue(person);
+						Assert.IsTrue(newActualValue.Equals(newValue));
+
+					}
+					else
+					{
+						//test was possibly updated but forgot to add property to one of the fields
+						//or new hashset needs to be made etc
+
+						Assert.Fail("Property " + name +
+									" is not included in any of the possible test cases, add property to either set or handle it explicitly ");
+					}
+				}
+
+
+			});
+
+			//then check all expected properties were called
+			var propertiesMissed = new List<string>();
+
+			for (int i = 0; i < allPropertiesTouched.Count; i++)
+			{
+				if (!allPropertiesTouched[i])
+				{
+					propertiesMissed.Add(allPropertyNames[i]);
+				}
+			}
+
+
+			if (propertiesMissed.Any())
+			{
+				Assert.Fail("Missed the following properties " + string.Join(", ", propertiesMissed));
+			}
+
+
+		}
+
+
+
+
+		[Test]
+		public void Object_Property_Foreach_Generic_JustValues()
+		{
+			var person = new OtherPerson2(25)
+			{
+				FirstName = "FirstName",
+				LastName = "LastName",
+				MiddleName = "MiddleName",
+				NickName = "NickName",
+				Suffix = "Suffix",
+				Title = "Title",
+				NumberOfKids = 3
+			};
+
+			//have to get the property based off of the value, so use two arrays
+			//seperating values by types because the tests are going to iterate over the properties based off of their type
+			var allStrValues = new List<string> {"FirstName", "LastName", "MiddleName", "NickName", "Suffix", "Title"};
+			var strPropNames = new List<string> { "FirstName", "LastName", "MiddleName", "NickName", "Suffix", "Title"};
+
+
+
+			//25 added for the age property
+			var intPropNames = new List<string> { "NumberOfKids", "Age" };
+			var allIntValues = new List<int> { 3, 25 };
+
+			var allPropertiesTouched = new Dictionary<string,bool>();
+
+			//initialize the dictionary to have all properties as not touched
+			foreach (var prop in strPropNames)
+				allPropertiesTouched[prop] = false;
+
+			foreach (var prop in intPropNames)
+				allPropertiesTouched[prop] = true;
+
+			_.Object.Property.Each<string>(person, (value) =>
+			{
+				var indexOf = allStrValues.IndexOf(value);
+
+				if (indexOf == -1)
+				{
+					Assert.Fail("Could not find property with value " + value);
+				}
+				else
+				{
+					allPropertiesTouched[strPropNames[indexOf]] = true;
+				}
+
+			});
+
+
+
+			_.Object.Property.Each<int>(person, (value) =>
+			{
+				var indexOf = allIntValues.IndexOf(value);
+
+				if (indexOf == -1)
+				{
+					Assert.Fail("Could not find property with value " + value);
+				}
+				else
+				{
+					allPropertiesTouched[intPropNames[indexOf]] = true;
+				}
+
+			});
+
+			//get all of the properties that were missed
+			var propertiesMissed = allPropertiesTouched.Where(a => !a.Value).Select(a => a.Key);
+
+			//if any were miseed print out an error message with the names of the missed properties
+			if (propertiesMissed.Any())
+			{
+				Assert.Fail("Could not match values to the following properties " + string.Join(", ", propertiesMissed));
+			}
+
+		}
+
+
+		[Test]
+		public void Object_Property_Foreach_Generic_ValueAndName()
+		{
+			var person = new OtherPerson2(25)
+			{
+				FirstName = "FirstName",
+				LastName = "LastName",
+				MiddleName = "MiddleName",
+				NickName = "NickName",
+				Suffix = "Suffix",
+				Title = "Title",
+				NumberOfKids = 3
+			};
+
+			//25 added for the age property
+			var allPropertyNames = new List<string> { "FirstName", "LastName", "MiddleName", "NickName", "Suffix", "Title", "NumberOfKids", "Age" };
+			var allPropertiesTouched = Enumerable.Repeat(false, 8).ToList();
+
+
+			_.Object.Property.Each<string>(person, (value, name) =>
+			{
+				var indexOf = allPropertyNames.IndexOf(name);
+
+				if (indexOf == -1)
+				{
+					Assert.Fail("Could not find property " + name);
+				}
+				else
+				{
+					allPropertiesTouched[indexOf] = true;
+				}
+
+				var actualValue = (string)typeof(OtherPerson2).GetProperty(name).GetValue(person);
+
+				Assert.AreEqual(actualValue, value);
+
+			});
+
+			_.Object.Property.Each<int>(person, (value, name) =>
+			{
+				var indexOf = allPropertyNames.IndexOf(name);
+
+				if (indexOf == -1)
+				{
+					Assert.Fail("Could not find property " + name);
+				}
+				else
+				{
+					allPropertiesTouched[indexOf] = true;
+				}
+
+				var actualValue = (int)typeof(OtherPerson2).GetProperty(name).GetValue(person);
+
+				Assert.AreEqual(actualValue, value);
+
+			});
+
+			//then check all expected properties were called
+			var propertiesMissed = new List<string>();
+
+			for (int i = 0; i < allPropertiesTouched.Count; i++)
+			{
+				if (!allPropertiesTouched[i])
+				{
+					propertiesMissed.Add(allPropertyNames[i]);
+				}
+			}
+
+
+			if (propertiesMissed.Any())
+			{
+				Assert.Fail("Missed the following properties " + string.Join(", ", propertiesMissed));
+			}
+
+
+		}
+
+
+		[Test]
+		public void Object_Property_Foreach_Generic_ValueAndNameAndSetter()
+		{
+			var person = new OtherPerson2(25)
+			{
+				FirstName = "FirstName",
+				LastName = "LastName",
+				MiddleName = "MiddleName",
+				NickName = "NickName",
+				Suffix = "Suffix",
+				Title = "Title",
+				NumberOfKids = 3
+			};
+
+			//25 added for the age property
+			var allPropertyNames = new List<string> { "FirstName", "LastName", "MiddleName", "NickName", "Suffix", "Title", "NumberOfKids", "Age" };
+
+			var strProperties =
+				new HashSet<string>(new[]
+				{"FirstName", "LastName", "MiddleName", "NickName", "Suffix", "Title", "NumberOfKids"});
+
+			var intProperties = new HashSet<string>(new[]
+			{
+				"NumberOfKids", "Age"
+			});
+			var allPropertiesTouched = Enumerable.Repeat(false, 8).ToList();
+
+			int increment = 0;
+			_.Object.Property.Each<string>(person, (value, name, setter) =>
+			{
+				var indexOf = allPropertyNames.IndexOf(name);
+
+				if (indexOf == -1)
+				{
+					Assert.Fail("Could not find property " + name);
+				}
+				else
+				{
+					allPropertiesTouched[indexOf] = true;
+				}
+
+				var actualValue = typeof(OtherPerson2).GetProperty(name).GetValue(person);
+
+				Assert.IsTrue(actualValue.Equals(value));
+				
+				// doing this in case an error happens where multiple values are assigned or
+				// all of them are assigned a value (using the same value for everything would give false positive result then)
+				var newValue = "Some value " + increment;
+				setter(newValue);
+				increment++;
+
+				//now get the new value see if it matches
+				var newActualValue = typeof(OtherPerson2).GetProperty(name).GetValue(person);
+
+				Assert.IsTrue(newActualValue.Equals(newValue));
+
+			});
+
+
+			_.Object.Property.Each<int>(person, (value, name, setter) =>
+			{
+
+				var indexOf = allPropertyNames.IndexOf(name);
+
+				if (indexOf == -1)
+				{
+					Assert.Fail("Could not find property " + name);
+				}
+				else
+				{
+					allPropertiesTouched[indexOf] = true;
+				}
+
+				var actualValue = typeof(OtherPerson2).GetProperty(name).GetValue(person);
+
+				Assert.IsTrue(actualValue.Equals(value));
+
+				
+				if (name == "Age")
+				{
+
+					Assert.IsNull(setter,
+						"Setter should be null for the 'Age' property because it does not have a setter");
+				}
+				else
+				{
+					// doing this in case an error happens where multiple values are assigned or
+					// all of them are assigned a value (using the same value for everything would give false positive result then)
+					var newValue = 100 + increment;
+					setter(newValue);
+					increment++;
+
+					//now get the new value see if it matches
+					var newActualValue = typeof(OtherPerson2).GetProperty(name).GetValue(person);
+
+					Assert.IsTrue(newActualValue.Equals(newValue));
+				}
+
+			});
+
+			//then check all expected properties were called
+			var propertiesMissed = new List<string>();
+
+			for (int i = 0; i < allPropertiesTouched.Count; i++)
+			{
+				if (!allPropertiesTouched[i])
+				{
+					propertiesMissed.Add(allPropertyNames[i]);
+				}
+			}
+
+
+			if (propertiesMissed.Any())
+			{
+				Assert.Fail("Missed the following properties " + string.Join(", ", propertiesMissed));
+			}
+
+
+		}
+
+		[Test]
+		public void Object_Property_Pairs_NonGeneric()
 		{
 			var person = new OtherPerson2(25)
 			{
@@ -614,10 +973,9 @@ namespace Underscore.Test.Object.Reflection
 				Title = "TitleValue",
 				NumberOfKids = 3
 			};
+			
 
-			var testing = SetupPropertiesTarget();
-
-			var pairs = testing.Pairs(person);
+			var pairs = _.Object.Property.Pairs(person);
 
 			Assert.IsTrue(pairs.Any(a => a.Name == "FirstName" && ((string)a.Value) == "FirstNameValue"));
 			Assert.IsTrue(pairs.Any(a => a.Name == "LastName" && ((string)a.Value) == "LastNameValue"));
@@ -628,10 +986,13 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsTrue(pairs.Any(a => a.Name == "NumberOfKids" && ((int)a.Value) == 3));
 			Assert.IsTrue(pairs.Any(a => a.Name == "Age" && ((int)a.Value) == 25));
 
+			//testing that there are no more than the expected properties
+			Assert.AreEqual(8,pairs.Count());
+
 		}
 
-		[TestMethod]
-		public void PropertyPairsGeneric()
+		[Test]
+		public void Object_Property_Pairs_Generic()
 		{
 			var person = new OtherPerson2(25)
 			{
@@ -646,7 +1007,7 @@ namespace Underscore.Test.Object.Reflection
 
 			var testing = SetupPropertiesTarget();
 
-			var pairs = testing.Pairs<string>(person);
+			var pairs = _.Object.Property.Pairs<string>(person);
 
 			Assert.IsTrue(pairs.Any(a => a.Name == "FirstName" && a.Value == "FirstNameValue"));
 			Assert.IsTrue(pairs.Any(a => a.Name == "LastName" && a.Value == "LastNameValue"));
@@ -655,173 +1016,20 @@ namespace Underscore.Test.Object.Reflection
 			Assert.IsTrue(pairs.Any(a => a.Name == "Suffix" && a.Value == "SuffixValue"));
 			Assert.IsTrue(pairs.Any(a => a.Name == "Title" && a.Value == "TitleValue"));
 
+
+			//testing that there are no more than the expected properties
+			Assert.AreEqual(6, pairs.Count());
+
 			var pairs2 = testing.Pairs<int>(person);
 
 			Assert.IsTrue(pairs2.Any(a => a.Name == "NumberOfKids" && a.Value == 3));
 			Assert.IsTrue(pairs2.Any(a => a.Name == "Age" && a.Value == 25));
 
-		}
 
-		[TestMethod]
-		public void PropertyForeachGeneric()
-		{
-			var person = new OtherPerson2(25)
-			{
-				FirstName = "FirstName",
-				LastName = "LastName",
-				MiddleName = "MiddleName",
-				NickName = "NickName",
-				Suffix = "Suffix",
-				Title = "Title",
-				NumberOfKids = 3
-			};
-
-			var personprime = new OtherPerson2(25)
-			{
-				FirstName = "FirstName",
-				LastName = "LastName",
-				MiddleName = "MiddleName",
-				NickName = "NickName",
-				Suffix = "Suffix",
-				Title = "Title",
-				NumberOfKids = 3
-			};
-
-			var person2 = new OtherPerson2(30)
-			{
-				FirstName = "FirstName",
-				LastName = "LastName",
-				MiddleName = "MiddleName",
-				NickName = "NickName",
-				Suffix = "Suffix",
-				Title = "Title",
-				NumberOfKids = 3
-			};
-
-			/*
-			 * General Notes:
-			 *  Because there is no implicit conversion between int and string
-			 *  methods should blow up if one of the int props is passed
-			 */
-
-			//for single action param
-			var propertiesContent = new HashSet<string>();
-
-			person.GetType()
-				.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-				.Where(
-					a =>
-							!a.GetIndexParameters().Any()
-							&& a.CanRead
-							&& a.GetGetMethod() != null
-							&& a.PropertyType == typeof(string)
-				).ToList()
-				.ForEach(
-					a => propertiesContent.Add(
-							(string)a.GetGetMethod().Invoke(person, null)
-					)
-				);
-
-			Action<string> oneParamAction =
-				o =>
-					Assert.IsTrue(
-						propertiesContent.Contains(o),
-						"Did not have property of value {0}",
-						o
-					);
-
-			Dictionary<string, string> propertiesDict =
-				person.GetType()
-					.GetProperties(BindingFlags.Instance | BindingFlags.Public)
-					.Where(
-						a => !a.GetIndexParameters().Any()
-							&& a.CanRead
-							&& a.GetGetMethod() != null
-							&& a.PropertyType == typeof(string)
-					).ToDictionary(
-						a => a.Name,
-						v => (string)v.GetGetMethod().Invoke(person, null)
-					);
-
-			Action<string, string> twoParamAction = (value, name) =>
-					Assert.IsTrue(
-						propertiesDict.ContainsKey(name) &&
-						(
-							(propertiesDict[name] == null && value == null) ||
-							(
-								(propertiesDict[name] != null && value != null)
-								&& propertiesDict[name] == value
-							)
-						),
-						"Does not have expected property of with name {0} and value {1}",
-						value,
-						name
-					);
-
-			Dictionary<string, Tuple<Func<string>, Action<string>>> propertiesSettableDict =
-				person2
-					.GetType()
-					.GetProperties(BindingFlags.Instance | BindingFlags.Public)
-					.Where(a => !a.GetIndexParameters().Any()
-										&& a.CanRead && a.GetGetMethod() != null
-										&& a.PropertyType == typeof(string)
-					).ToDictionary(
-						a => a.Name,
-						v => Tuple.Create(
-								new Func<string>(
-									() => (string)v.GetGetMethod().Invoke(person2, null)
-								),
-
-								v.GetSetMethod() == null ? null as Action<string> :
-									((o) => v.GetSetMethod().Invoke(person2, new object[] { o }))
-							)
-					);
-
-			Action<string, string, Action<string>> threeParamAction = (value, name, assigner) =>
-			{
-				var orig = value;
-
-				Assert.IsTrue(propertiesSettableDict.ContainsKey(name) && propertiesSettableDict[name].Item1() == orig,
-					"Expected property of name {0} and value {1} not found", name, orig
-				);
-
-				//only string so should all be assigneable
-				Assert.IsNotNull(assigner);
-
-				//type in this instance is always string, so just set to empty string
-				assigner(string.Empty);
-
-				Assert.AreEqual(
-						string.Empty,
-						propertiesSettableDict[name].Item1(),
-						"expected value change from {0} to {1}", orig, "[ string.Empty ]"
-					);
-
-				//should be equivelant to included method
-				propertiesSettableDict[name].Item2(orig);
-
-				Assert.AreEqual(orig, propertiesSettableDict[name].Item1(),
-					"expected value change from {0} to {1}", "[ string.Empty ]", orig);
-
-				//should not break the assigner method
-				assigner(string.Empty);
-
-				Assert.AreEqual(
-						string.Empty,
-						propertiesSettableDict[name].Item1(),
-						"expected value change from {0} to {1}", orig, "[ string.Empty ]"
-					);
-
-			};
-			var testing = SetupPropertiesTarget();
-			var test1 = oneParamAction;
-			var test2 = twoParamAction;
-			var test3 = threeParamAction;
-
-			testing.Each(person, test1);
-			testing.Each(personprime, test2);
-			testing.Each(person2, test3);
+			//testing that there are no more than the expected properties
+			Assert.AreEqual(2, pairs2.Count());
 
 		}
+		
 	}
 }

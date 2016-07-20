@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using SynchComponent = Underscore.Action.SynchComponent;
 
 namespace Underscore.Test.Action.Synch
 {
-	[TestClass]
+	[TestFixture]
 	public class ThrottleTest
 	{
-        private static async Task SafeAwait(Task t, int timeout)
+		private static async Task SafeAwait(Task t, int timeout)
 		{
 			var to = Task.Delay(timeout * 1000);
 			while (true)
@@ -22,7 +22,7 @@ namespace Underscore.Test.Action.Synch
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Action_Synch_Throttle_NoArguments()
 		{
 			var testing = new SynchComponent();
@@ -46,7 +46,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual(2, result);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Action_Synch_Throttle_1Argument()
 		{
 			var testing = new SynchComponent();
@@ -77,7 +77,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual("100", results);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Action_Synch_Throttle_2Arguments()
 		{
 			var testing = new SynchComponent();
@@ -141,7 +141,7 @@ namespace Underscore.Test.Action.Synch
 			}
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Action_Synch_Throttle_3Arguments()
 		{
 			var testing = new SynchComponent();
@@ -206,7 +206,7 @@ namespace Underscore.Test.Action.Synch
 		}
 
 
-		[TestMethod]
+		[Test]
 		public async Task Action_Synch_Throttle_4Arguments()
 		{
 			var testing = new SynchComponent();
@@ -268,7 +268,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual(4, callCount);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Action_Synch_Throttle_5Arguments()
 		{
 			var testing = new SynchComponent();
@@ -311,7 +311,7 @@ namespace Underscore.Test.Action.Synch
 			Assert.AreEqual(2, callCount);
 		}
 
-		[TestMethod]
+		[Test]
 		public async Task Action_Synch_Throttle_6Arguments()
 		{
 			var testing = new SynchComponent();
