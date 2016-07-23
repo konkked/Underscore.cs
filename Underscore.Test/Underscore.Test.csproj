@@ -154,6 +154,9 @@
     <Compile Include="Utility\FunctionTest.cs" />
     <Compile Include="Utility\MathTest.cs" />
     <Compile Include="Utility\ObjectTest.cs" />
+    <Compile Include="Utility\String\CaseChangingTest.cs" />
+    <Compile Include="Utility\String\CaseMatchingTest.cs" />
+    <Compile Include="Utility\String\OtherStringTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

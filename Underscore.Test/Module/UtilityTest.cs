@@ -7,12 +7,14 @@ namespace Underscore.Test.Module
 	public class UtilityTest
 	{
 		[Test]
-		public void CreateUtilityModuleTest( )
+		public void CreateUtilityModuleTest()
 		{
-			var result = new global::Underscore.Module.Utility(
+			var result = new Underscore.Module.Utility(
+                new CompactComponent(),
 				new FunctionComponent(),
 				new MathComponent(),
-				new ObjectComponent()
+				new ObjectComponent(),
+                new StringComponent()
 			);
 		}
 	}
