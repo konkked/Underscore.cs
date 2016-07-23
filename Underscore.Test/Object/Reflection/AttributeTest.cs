@@ -64,39 +64,36 @@ namespace Underscore.Test.Object.Reflection
 		[Test]
 		public void AttributeHasCustomAttribute()
 		{
-
-			var testing = new Underscore.Object.Reflection.AttributeComponent(new MockUtilFunctionComponent());
-
 			Assert.IsFalse(
-				testing.Has<TestMultipleAttribute>(typeof(Person)) 
+				_.Object.Attribute.Has<TestMultipleAttribute>(typeof(Person)) 
 		   );
 
 			Assert.IsFalse(
-				testing.Has<TestMultipleAttribute>(new Person())
+				_.Object.Attribute.Has<TestMultipleAttribute>(new Person())
 		   );
 
 			Assert.IsFalse(
-				testing.Has<TestMultipleAttribute>(null)
+				_.Object.Attribute.Has<TestMultipleAttribute>(null)
 		   );
 
 			var fnProp = typeof(Person).GetMember("FirstName").FirstOrDefault();
 
 			Assert.IsFalse(
-			   testing.Has<TestMultipleAttribute>(fnProp)
+			   _.Object.Attribute.Has<TestMultipleAttribute>(fnProp)
 		   );
 
 			Assert.IsTrue(
-				testing.Has<TestSingleAttribute>(fnProp)
+				_.Object.Attribute.Has<TestSingleAttribute>(fnProp)
 		   );
 
 			var mp = typeof(MixedAttributesExample).GetMember("A").First();
 
 			Assert.IsTrue(
-				testing.Has<TestSingleAttribute>(mp)
+				_.Object.Attribute.Has<TestSingleAttribute>(mp)
 		   );
 
 			Assert.IsTrue(
-				testing.Has<TestMultipleAttribute>(mp)
+				_.Object.Attribute.Has<TestMultipleAttribute>(mp)
 		   );
 
 		}
@@ -104,38 +101,35 @@ namespace Underscore.Test.Object.Reflection
 		[Test]
 		public void AttributeGetCustomAttribute()
 		{
-
-			var testing = new AttributeComponent(new MockUtilFunctionComponent());
-
-			var multiAttr = testing.Find<TestMultipleAttribute>(typeof(Person));
+			var multiAttr = _.Object.Attribute.Find<TestMultipleAttribute>(typeof(Person));
 
 			Assert.IsNull(multiAttr);
 
-			multiAttr = testing.Find<TestMultipleAttribute>(new Person());
+			multiAttr = _.Object.Attribute.Find<TestMultipleAttribute>(new Person());
 
 			Assert.IsNull(multiAttr);
 
-			multiAttr = testing.Find<TestMultipleAttribute>(null);
+			multiAttr = _.Object.Attribute.Find<TestMultipleAttribute>(null);
 
 			var fnProp = typeof(Person).GetMember("FirstName").FirstOrDefault();
 
-			multiAttr = testing.Find<TestMultipleAttribute>(fnProp);
+			multiAttr = _.Object.Attribute.Find<TestMultipleAttribute>(fnProp);
 
 			Assert.IsNull(multiAttr);
 
-			var sattr = testing.Find<TestSingleAttribute>(fnProp);
+			var sattr = _.Object.Attribute.Find<TestSingleAttribute>(fnProp);
 
 			Assert.IsNotNull(sattr);
 			Assert.AreEqual("OnProperty" , sattr.Info);
 
 			var mp = typeof(MixedAttributesExample).GetMember("A").First();
 
-			sattr = testing.Find<TestSingleAttribute>(mp);
+			sattr = _.Object.Attribute.Find<TestSingleAttribute>(mp);
 
 			Assert.IsNotNull(sattr);
 			Assert.AreEqual("Single" , sattr.Info);
 
-			multiAttr = testing.Find<TestMultipleAttribute>(mp);
+			multiAttr = _.Object.Attribute.Find<TestMultipleAttribute>(mp);
 
 			Assert.IsNotNull(multiAttr);
 			Assert.IsTrue("First" ==  multiAttr.Info  || "Second" == multiAttr.Info);
@@ -144,30 +138,30 @@ namespace Underscore.Test.Object.Reflection
 		[Test]
 		public void AttributeGetCustomAttributes()
 		{
-			var testing = new AttributeComponent(new MockUtilFunctionComponent());
+			
 
-			var multiAttr = testing.All<TestMultipleAttribute>(typeof(Person));
-
-			Assert.IsNotNull(multiAttr);
-			Assert.AreEqual(0 , multiAttr.Count());
-
-			multiAttr = testing.All<TestMultipleAttribute>(new Person());
+			var multiAttr = _.Object.Attribute.All<TestMultipleAttribute>(typeof(Person));
 
 			Assert.IsNotNull(multiAttr);
 			Assert.AreEqual(0 , multiAttr.Count());
 
-			multiAttr = testing.All<TestMultipleAttribute>(null);
+			multiAttr = _.Object.Attribute.All<TestMultipleAttribute>(new Person());
+
+			Assert.IsNotNull(multiAttr);
+			Assert.AreEqual(0 , multiAttr.Count());
+
+			multiAttr = _.Object.Attribute.All<TestMultipleAttribute>(null);
 
 			Assert.IsNotNull(multiAttr);
 			Assert.AreEqual(0 , multiAttr.Count());
 
 			var fnProp = typeof(Person).GetMember("FirstName").FirstOrDefault();
-			multiAttr = testing.All<TestMultipleAttribute>(fnProp);
+			multiAttr = _.Object.Attribute.All<TestMultipleAttribute>(fnProp);
 
 			Assert.IsNotNull(multiAttr);
 			Assert.AreEqual(0 , multiAttr.Count());
 
-			var sattr = testing.All<TestSingleAttribute>(fnProp);
+			var sattr = _.Object.Attribute.All<TestSingleAttribute>(fnProp);
 
 			Assert.IsNotNull(sattr);
 			Assert.AreEqual(1 , sattr.Count());
@@ -175,13 +169,13 @@ namespace Underscore.Test.Object.Reflection
 
 			var mp = typeof(MixedAttributesExample).GetMember("A").First();
 
-			sattr = testing.All<TestSingleAttribute>(mp);
+			sattr = _.Object.Attribute.All<TestSingleAttribute>(mp);
 
 			Assert.IsNotNull(sattr);
 			Assert.AreEqual(1 , sattr.Count());
 			Assert.AreEqual("Single" , sattr.First().Info);
 
-			multiAttr = testing.All<TestMultipleAttribute>(mp);
+			multiAttr = _.Object.Attribute.All<TestMultipleAttribute>(mp);
 
 			Assert.IsNotNull(multiAttr);
 			Assert.AreEqual(2 , multiAttr.Count());

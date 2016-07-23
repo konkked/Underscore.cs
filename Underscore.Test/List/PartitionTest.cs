@@ -19,7 +19,7 @@ namespace Underscore.Test.List
 		[Test]
 		public void List_Partition_Split()
 		{
-			var result = _testing.Split(_target);
+			var result = _.List.Split(_target);
 
 			Assert.AreEqual(5, result.Item1.Count);
 			Assert.AreEqual(5, result.Item2.Count);
@@ -37,7 +37,7 @@ namespace Underscore.Test.List
 				ct++;
 			}
 
-			result = _testing.Split(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+			result = _.List.Split(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
 
 			Assert.AreEqual(6, result.Item1.Count);
 			Assert.AreEqual(5, result.Item2.Count);
@@ -62,7 +62,7 @@ namespace Underscore.Test.List
 		public void List_Partition_Chunk_IntArg()
 		{
 
-			var result = _testing.Chunk(_target, 2);
+			var result = _.List.Chunk(_target, 2);
 
 			//testing even distribution
 
@@ -70,7 +70,7 @@ namespace Underscore.Test.List
 				Assert.IsTrue(coll.Item1.SequenceEqual(coll.Item2));
 
 			//test overlapped
-			result = _testing.Chunk(_target, 11);
+			result = _.List.Chunk(_target, 11);
 
 			Assert.IsTrue(result.First().SequenceEqual(_target));
 
@@ -80,8 +80,8 @@ namespace Underscore.Test.List
 		public void List_Partition_Chunk_FuncArg()
 		{
 			var target = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-			var testing = new PartitionComponent(new MathComponent());
-			var result = testing.Chunk(target, a => a > 0 && a % 3 == 0);
+			
+			var result = _.List.Chunk(target, a => a > 0 && a % 3 == 0);
 
 			foreach (var chunk in result)
 			{
@@ -99,7 +99,7 @@ namespace Underscore.Test.List
 
 			for (int i = 0; i < _target.Count(); i++)
 			{
-				var result = _testing.Partition(_target, i);
+				var result = _.List.Partition(_target, i);
 				int j = 0;
 				for (; j < i; j++)
 				{
@@ -116,7 +116,7 @@ namespace Underscore.Test.List
 		[Test]
 		public void List_Partition_Partition_FuncArg()
 		{
-			var result = _testing.Partition(_target, a => a > 0 && a % 3 == 0);
+			var result = _.List.Partition(_target, a => a > 0 && a % 3 == 0);
 
 			Assert.AreEqual(3, result.Item1.Count());
 
@@ -132,8 +132,8 @@ namespace Underscore.Test.List
 		public void List_Partition_PartitionMatches()
 		{
 			var target = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-			var testing = new PartitionComponent(new MathComponent());
-			var result = testing.PartitionMatches(target, n => n % 2 == 0);
+			
+			var result = _.List.PartitionMatches(target, n => n % 2 == 0);
 
 			var leftExpected = new[] { 0, 2, 4, 6, 8 };
 			var rightExpected = new[] { 1, 3, 5, 7, 9 };
@@ -177,7 +177,6 @@ namespace Underscore.Test.List
 			var partitioner = new PartitionComponent(new MathComponent());
 
 			var ls = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-
 
 			// slice length < list length 
 			// positive 
@@ -558,7 +557,7 @@ namespace Underscore.Test.List
 		[Test]
 		public void List_Paritition_Combinations_Unit()
 		{
-			var testing = new PartitionComponent(new MathComponent());
+			
 
 			int[] stuff = { 1, 2, 3, 4 };
 
@@ -582,7 +581,7 @@ namespace Underscore.Test.List
 				new[] {4}
 			};
 
-			var permutation = testing.Combinations(stuff).Select(a => a.ToList()).ToList();
+			var permutation = _.List.Combinations(stuff).Select(a => a.ToList()).ToList();
 
 			Assert.IsTrue(
 				expecting.Select(i => permutation.Any(a => a.Count == i.Length && a.All(i.Contains))).All(b => b));

@@ -126,7 +126,12 @@ namespace Underscore.Module
 		public System.Action After(System.Action function, int count)
 		{
 			var ncount = count;
-			return () => { if (ncount-- == 0) function(); };
+			return () => {
+				if (ncount == 0)
+					function();
+				else
+					ncount--;
+			};
 		}
 
 		/// <summary>

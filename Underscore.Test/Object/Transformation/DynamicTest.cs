@@ -40,9 +40,9 @@ namespace Underscore.Test.Object.Transformation
 			prop.Setup(s=>s.All(It.Is<object>(r=> r == testTarget)))
 				.Returns(testTarget.GetType().GetProperties(BindingFlags.Public|BindingFlags.Instance));
 
-			var testing = new DynamicComponent(prop.Object);
+			
 
-			var result = testing.ToDynamic(testTarget);
+			var result = _.Object.ToDynamic(testTarget);
 
 			Assert.AreEqual(a , result.a);
 			Assert.AreEqual(b , result.b);

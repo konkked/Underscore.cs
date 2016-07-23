@@ -28,7 +28,7 @@ namespace Underscore.Test.Collection
 				new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
 			);
 
-			var result = component.Partition(target, 0);
+			var result = _.Collection.Partition(target, 0);
 
 			Assert.IsTrue(expected.Item1.SequenceEqual(result.Item1));
 			Assert.IsTrue(expected.Item2.SequenceEqual(result.Item2));
@@ -42,7 +42,7 @@ namespace Underscore.Test.Collection
 				new List<int> { 5, 6, 7, 8, 9 }
 			);
 
-			var result = component.Partition(target, 5);
+			var result = _.Collection.Partition(target, 5);
 
 			Assert.IsTrue(expected.Item1.SequenceEqual(result.Item1));
 			Assert.IsTrue(expected.Item2.SequenceEqual(result.Item2));
@@ -56,7 +56,7 @@ namespace Underscore.Test.Collection
 				new List<int> { 9 }
 			);
 
-			var result = component.Partition(target, 9);
+			var result = _.Collection.Partition(target, 9);
 
 			Assert.IsTrue(expected.Item1.SequenceEqual(result.Item1));
 			Assert.IsTrue(expected.Item2.SequenceEqual(result.Item2));
@@ -70,7 +70,7 @@ namespace Underscore.Test.Collection
 				new List<int>()
 			);
 
-			var result = component.Partition(target, 10);
+			var result = _.Collection.Partition(target, 10);
 
 			Assert.IsTrue(expected.Item1.SequenceEqual(result.Item1));
 			Assert.IsTrue(expected.Item2.SequenceEqual(result.Item2));
@@ -84,7 +84,7 @@ namespace Underscore.Test.Collection
 				new List<int>()
 			);
 
-			var result = component.Partition(target, n => n == 10);
+			var result = _.Collection.Partition(target, n => n == 10);
 
 			Assert.IsTrue(expected.Item1.SequenceEqual(result.Item1));
 			Assert.IsTrue(expected.Item2.SequenceEqual(result.Item2));
@@ -98,7 +98,7 @@ namespace Underscore.Test.Collection
 				new List<int> { 5, 6, 7, 8, 9 }
 			);
 
-			var result = component.Partition(target, n => n == 5);
+			var result = _.Collection.Partition(target, n => n == 5);
 
 			Assert.IsTrue(expected.Item1.SequenceEqual(result.Item1));
 			Assert.IsTrue(expected.Item2.SequenceEqual(result.Item2));
@@ -112,7 +112,7 @@ namespace Underscore.Test.Collection
 				new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
 			);
 
-			var result = component.PartitionMatches(target, n => n == 10);
+			var result = _.Collection.PartitionMatches(target, n => n == 10);
 
 			Assert.IsTrue(expected.Item1.SequenceEqual(result.Item1));
 			Assert.IsTrue(expected.Item2.SequenceEqual(result.Item2));
@@ -126,7 +126,7 @@ namespace Underscore.Test.Collection
 				new List<int> { 1, 3, 5, 7, 9 }
 			);
 
-			var result = component.PartitionMatches(target, n => n % 2 == 0);
+			var result = _.Collection.PartitionMatches(target, n => n % 2 == 0);
 
 			Assert.IsTrue(expected.Item1.SequenceEqual(result.Item1));
 			Assert.IsTrue(expected.Item2.SequenceEqual(result.Item2));
@@ -140,7 +140,7 @@ namespace Underscore.Test.Collection
 				new List<int>()
 			);
 
-			var result = component.PartitionMatches(target, n => n % 1 == 0);
+			var result = _.Collection.PartitionMatches(target, n => n % 1 == 0);
 
 			Assert.IsTrue(expected.Item1.SequenceEqual(result.Item1));
 			Assert.IsTrue(expected.Item2.SequenceEqual(result.Item2));

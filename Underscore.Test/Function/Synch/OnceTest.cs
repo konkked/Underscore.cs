@@ -24,7 +24,7 @@ namespace Underscore.Test.Function.Synch
 		{
 			string result = "";
 			int counter = 0;
-			var onced = component.Once(() => result = (counter++).ToString());
+			var onced = _.Function.Once(() => result = (counter++).ToString());
 			for (int i = 0; i < 10; i++)
 				onced();
 
@@ -45,7 +45,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, counter);
 			});
 
-			var onced = component.Once(oncing);
+			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
 				result[i] = compose.Apply(onced, arguments);
@@ -69,7 +69,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, counter);
 			});
 
-			var onced = component.Once(oncing);
+			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
 				result[i] = compose.Apply(onced, arguments);
@@ -93,7 +93,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, counter);
 			});
 
-			var onced = component.Once(oncing);
+			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
 				result[i] = compose.Apply(onced, arguments);
@@ -117,7 +117,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, counter);
 			});
 
-			var onced = component.Once(oncing);
+			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
 				result[i] = compose.Apply(onced, arguments);
@@ -141,7 +141,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, counter);
 			});
 
-			var onced = component.Once(oncing);
+			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
 				result[i] = compose.Apply(onced, arguments);
@@ -166,7 +166,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, counter);
 			});
 
-			var onced = component.Once(oncing);
+			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
 				result[i] = compose.Apply(onced, arguments);
@@ -191,7 +191,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, counter);
 			});
 
-			var onced = component.Once(oncing);
+			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
 				result[i] = compose.Apply(onced, arguments);
@@ -216,7 +216,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, counter);
 			});
 
-			var onced = component.Once(oncing);
+			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
 				result[i] = compose.Apply(onced, arguments);
@@ -241,7 +241,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, i, counter);
 			});
 
-			var onced = component.Once(oncing);
+			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
 				result[i] = compose.Apply(onced, arguments);
@@ -266,7 +266,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, i, j, counter);
 			});
 
-			var onced = component.Once(oncing);
+			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
 				result[i] = compose.Apply(onced, arguments);
@@ -291,7 +291,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, i, j, k, counter);
 			});
 
-			var onced = component.Once(oncing);
+			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
 				result[i] = compose.Apply(onced, arguments);
@@ -316,7 +316,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, counter);
 			});
 
-			var onced = component.Once(oncing);
+			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
 				result[i] = compose.Apply(onced, arguments);
@@ -341,7 +341,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, counter);
 			});
 
-			var onced = component.Once(oncing);
+			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
 				result[i] = compose.Apply(onced, arguments);
@@ -366,7 +366,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, counter);
 			});
 
-			var onced = component.Once(oncing);
+			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
 				result[i] = compose.Apply(onced, arguments);
@@ -391,7 +391,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, counter);
 			});
 
-			var onced = component.Once(oncing);
+			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
 				result[i] = compose.Apply(onced, arguments);
@@ -416,7 +416,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, counter);
 			});
 
-			var onced = component.Once(oncing);
+			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
 				result[i] = compose.Apply(onced, arguments);

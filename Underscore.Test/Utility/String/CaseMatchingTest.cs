@@ -24,7 +24,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "foo";
 
-			Assert.IsTrue(component.IsCamelCase(input));
+			Assert.IsTrue(_.Utility.IsCamelCase(input));
 		}
 
 		[TestMethod]
@@ -32,7 +32,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "fooBar";
 
-			Assert.IsTrue(component.IsCamelCase(input));
+			Assert.IsTrue(_.Utility.IsCamelCase(input));
 		}
 
 		[TestMethod]
@@ -40,7 +40,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "foo Bar";
 
-			Assert.IsFalse(component.IsCamelCase(input));
+			Assert.IsFalse(_.Utility.IsCamelCase(input));
 		}
 
 		[TestMethod]
@@ -48,7 +48,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "FooBar";
 
-			Assert.IsFalse(component.IsCamelCase(input));
+			Assert.IsFalse(_.Utility.IsCamelCase(input));
 		}
 
 		[TestMethod]
@@ -56,7 +56,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "fooBar1";
 
-			Assert.IsFalse(component.IsCamelCase(input));
+			Assert.IsFalse(_.Utility.IsCamelCase(input));
 		}
 
 		[TestMethod]
@@ -64,7 +64,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "Foo";
 
-			Assert.IsTrue(component.IsPascalCase(input));
+			Assert.IsTrue(_.Utility.IsPascalCase(input));
 		}
 
 		[TestMethod]
@@ -72,7 +72,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "FooBar";
 
-			Assert.IsTrue(component.IsPascalCase(input));
+			Assert.IsTrue(_.Utility.IsPascalCase(input));
 		}
 
 		[TestMethod]
@@ -80,7 +80,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "fooBar";
 
-			Assert.IsFalse(component.IsPascalCase(input));
+			Assert.IsFalse(_.Utility.IsPascalCase(input));
 		}
 
 		[TestMethod]
@@ -88,7 +88,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "FooBar1";
 
-			Assert.IsFalse(component.IsPascalCase(input));
+			Assert.IsFalse(_.Utility.IsPascalCase(input));
 		}
 
 		[TestMethod]
@@ -96,7 +96,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "Foo Bar";
 
-			Assert.IsFalse(component.IsPascalCase(input));
+			Assert.IsFalse(_.Utility.IsPascalCase(input));
 		}
 
 		[TestMethod]
@@ -104,7 +104,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "FooBar";
 
-			Assert.IsTrue(component.IsCapitalized(input));
+			Assert.IsTrue(_.Utility.IsCapitalized(input));
 		}
 
 		[TestMethod]
@@ -112,7 +112,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "fooBar";
 
-			Assert.IsFalse(component.IsCapitalized(input));
+			Assert.IsFalse(_.Utility.IsCapitalized(input));
 		}
 
 		[TestMethod]
@@ -120,7 +120,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "foo";
 
-			Assert.IsTrue(component.IsSnakeCase(input));
+			Assert.IsTrue(_.Utility.IsSnakeCase(input));
 		}
 
 		[TestMethod]
@@ -128,7 +128,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "foo_bar";
 
-			Assert.IsTrue(component.IsSnakeCase(input));
+			Assert.IsTrue(_.Utility.IsSnakeCase(input));
 		}
 
 		[TestMethod]
@@ -136,7 +136,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "Foo";
 		
-			Assert.IsFalse(component.IsSnakeCase(input));
+			Assert.IsFalse(_.Utility.IsSnakeCase(input));
 		}
 
 		[TestMethod]
@@ -144,7 +144,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "foo bar";
 
-			Assert.IsFalse(component.IsSnakeCase(input));
+			Assert.IsFalse(_.Utility.IsSnakeCase(input));
 		}
 
 		[TestMethod]
@@ -152,7 +152,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "foo-bar";
 
-			Assert.IsFalse(component.IsSnakeCase(input));
+			Assert.IsFalse(_.Utility.IsSnakeCase(input));
 		}
 
 		[TestMethod]
@@ -160,7 +160,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "foo";
 
-			Assert.IsTrue(component.IsKebabCase(input));
+			Assert.IsTrue(_.Utility.IsKebabCase(input));
 		}
 
 		[TestMethod]
@@ -168,7 +168,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "foo-bar";
 
-			Assert.IsTrue(component.IsKebabCase(input));
+			Assert.IsTrue(_.Utility.IsKebabCase(input));
 		}
 
 		[TestMethod]
@@ -176,7 +176,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "Foo";
 
-			Assert.IsFalse(component.IsKebabCase(input));
+			Assert.IsFalse(_.Utility.IsKebabCase(input));
 		}
 
 		[TestMethod]
@@ -184,7 +184,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "foo bar";
 
-			Assert.IsFalse(component.IsKebabCase(input));
+			Assert.IsFalse(_.Utility.IsKebabCase(input));
 		}
 
 		[TestMethod]
@@ -192,7 +192,7 @@ namespace Underscore.Test.Utility
 		{
 			const string input = "foo_bar";
 
-			Assert.IsFalse(component.IsKebabCase(input));
+			Assert.IsFalse(_.Utility.IsKebabCase(input));
 		}
 	}
 }

@@ -20,7 +20,7 @@ namespace Underscore.Test.Utility.String
             const string input = "hello, world!";
             const string expected = "Hello, world!";
 
-            var result = component.Capitalize(input);
+            var result = _.Utility.Capitalize(input);
 
             Assert.AreEqual(expected, result);
         }
@@ -31,7 +31,7 @@ namespace Underscore.Test.Utility.String
             const string input = "Hello, world!";
             const string expected = "Hello, world!";
 
-            var result = component.Capitalize(input);
+            var result = _.Utility.Capitalize(input);
 
             Assert.AreEqual(expected, result);
         }
@@ -42,7 +42,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "camel_case";
 			const string expected = "camelCase";
 
-			var result = component.ToCamelCase(input);
+			var result = _.Utility.ToCamelCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -53,7 +53,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "camel-case";
 			const string expected = "camelCase";
 
-			var result = component.ToCamelCase(input);
+			var result = _.Utility.ToCamelCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -64,7 +64,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "camelCase";
 			const string expected = "camelCase";
 
-			var result = component.ToCamelCase(input);
+			var result = _.Utility.ToCamelCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -75,7 +75,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "CamelCase";
 			const string expected = "camelCase";
 
-			var result = component.ToCamelCase(input);
+			var result = _.Utility.ToCamelCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -86,7 +86,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "Camel,Case-This.Is Not";
 			const string expected = "camelCaseThisIsNot";
 
-			var result = component.ToCamelCase(input);
+			var result = _.Utility.ToCamelCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -97,7 +97,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "pascal_case";
 			const string expected = "PascalCase";
 
-			var result = component.ToPascalCase(input);
+			var result = _.Utility.ToPascalCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -108,7 +108,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "pascal-case";
 			const string expected = "PascalCase";
 
-			var result = component.ToPascalCase(input);
+			var result = _.Utility.ToPascalCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -119,7 +119,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "camelCase";
 			const string expected = "CamelCase";
 
-			var result = component.ToPascalCase(input);
+			var result = _.Utility.ToPascalCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -130,7 +130,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "PascalCase";
 			const string expected = "PascalCase";
 
-			var result = component.ToPascalCase(input);
+			var result = _.Utility.ToPascalCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -141,7 +141,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "Pascal,Case-This.Is Not";
 			const string expected = "PascalCaseThisIsNot";
 
-			var result = component.ToPascalCase(input);
+			var result = _.Utility.ToPascalCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -152,7 +152,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "snake_case";
 			const string expected = "snake_case";
 
-			var result = component.ToSnakeCase(input);
+			var result = _.Utility.ToSnakeCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -163,7 +163,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "snake-case";
 			const string expected = "snake_case";
 
-			var result = component.ToSnakeCase(input);
+			var result = _.Utility.ToSnakeCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -174,7 +174,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "snakeCase";
 			const string expected = "snake_case";
 
-			var result = component.ToSnakeCase(input);
+			var result = _.Utility.ToSnakeCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -185,7 +185,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "SnakeCase";
 			const string expected = "snake_case";
 
-			var result = component.ToSnakeCase(input);
+			var result = _.Utility.ToSnakeCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -196,7 +196,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "Snake,Case-This.Is Not";
 			const string expected = "snake_case_this_is_not";
 
-			var result = component.ToSnakeCase(input);
+			var result = _.Utility.ToSnakeCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -207,7 +207,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "kebab_case";
 			const string expected = "kebab-case";
 
-			var result = component.ToKebabCase(input);
+			var result = _.Utility.ToKebabCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -218,7 +218,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "kebab-case";
 			const string expected = "kebab-case";
 
-			var result = component.ToKebabCase(input);
+			var result = _.Utility.ToKebabCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -229,7 +229,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "kebabCase";
 			const string expected = "kebab-case";
 
-			var result = component.ToKebabCase(input);
+			var result = _.Utility.ToKebabCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -240,7 +240,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "KebabCase";
 			const string expected = "kebab-case";
 
-			var result = component.ToKebabCase(input);
+			var result = _.Utility.ToKebabCase(input);
 
 			Assert.AreEqual(expected, result);
 		}
@@ -251,7 +251,7 @@ namespace Underscore.Test.Utility.String
 			const string input = "Kebab,Case-This.Is Not";
 			const string expected = "kebab-case-this-is-not";
 
-			var result = component.ToKebabCase(input);
+			var result = _.Utility.ToKebabCase(input);
 
 			Assert.AreEqual(expected, result);
 		}

@@ -148,7 +148,6 @@
     <Compile Include="Object\Transformation\DynamicTest.cs" />
     <Compile Include="Object\Transformation\TransposeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnderscoreTest.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Utility\CompactTest.cs" />
     <Compile Include="Utility\FunctionTest.cs" />

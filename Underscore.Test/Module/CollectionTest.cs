@@ -13,7 +13,9 @@ namespace Underscore.Test.Module
 				new CompareComponent(),
 				new CreationComponent(),
 				new DelegationComponent(),
+				new FilterComponent(),
 				new PartitionComponent(),
+				new SetComponent(),
 				new ZipComponent()
 			);
 

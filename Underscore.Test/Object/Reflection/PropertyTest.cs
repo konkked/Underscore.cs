@@ -282,63 +282,63 @@ namespace Underscore.Test.Object.Reflection
 		[Test]
 		public void Object_Property_Has_ForTypeTarget()
 		{
-			var testing = _.Object.Property;
+			
 
-			Assert.IsTrue(testing.Has(typeof(Person), "FirstName"));
-			Assert.IsTrue(testing.Has(typeof(Person), "LastName"));
-			Assert.IsTrue(testing.Has(typeof(Person), "MiddleName"));
-			Assert.IsTrue(testing.Has(typeof(Person), "Suffix"));
-			Assert.IsTrue(testing.Has(typeof(Person), "Title"));
-			Assert.IsTrue(testing.Has(typeof(Person), "Age"));
+			Assert.IsTrue(_.Object.Property.Has(typeof(Person), "FirstName"));
+			Assert.IsTrue(_.Object.Property.Has(typeof(Person), "LastName"));
+			Assert.IsTrue(_.Object.Property.Has(typeof(Person), "MiddleName"));
+			Assert.IsTrue(_.Object.Property.Has(typeof(Person), "Suffix"));
+			Assert.IsTrue(_.Object.Property.Has(typeof(Person), "Title"));
+			Assert.IsTrue(_.Object.Property.Has(typeof(Person), "Age"));
 
 		}
 
 		[Test]
 		public void Object_Property_Get_ForTypeTarget()
 		{
-			var testing = _.Object.Property;
+			
 
-			Assert.AreEqual(typeof(Person).GetProperty("FirstName"), testing.Find(typeof(Person), "FirstName"));
-			Assert.AreEqual(typeof(Person).GetProperty("LastName"), testing.Find(typeof(Person), "LastName"));
-			Assert.AreEqual(typeof(Person).GetProperty("MiddleName"), testing.Find(typeof(Person), "MiddleName"));
-			Assert.AreEqual(typeof(Person).GetProperty("Suffix"), testing.Find(typeof(Person), "Suffix"));
-			Assert.AreEqual(typeof(Person).GetProperty("Title"), testing.Find(typeof(Person), "Title"));
-			Assert.AreEqual(typeof(Person).GetProperty("Age"), testing.Find(typeof(Person), "Age"));
+			Assert.AreEqual(typeof(Person).GetProperty("FirstName"), _.Object.Property.Find(typeof(Person), "FirstName"));
+			Assert.AreEqual(typeof(Person).GetProperty("LastName"), _.Object.Property.Find(typeof(Person), "LastName"));
+			Assert.AreEqual(typeof(Person).GetProperty("MiddleName"), _.Object.Property.Find(typeof(Person), "MiddleName"));
+			Assert.AreEqual(typeof(Person).GetProperty("Suffix"), _.Object.Property.Find(typeof(Person), "Suffix"));
+			Assert.AreEqual(typeof(Person).GetProperty("Title"), _.Object.Property.Find(typeof(Person), "Title"));
+			Assert.AreEqual(typeof(Person).GetProperty("Age"), _.Object.Property.Find(typeof(Person), "Age"));
 
 		}
 
 		[Test]
 		public void Object_Property_Get_ForTypeTargetCaseInsensitive()
 		{
-			var testing = _.Object.Property;
+			
 
-			Assert.AreEqual(typeof(Person).GetProperty("FirstName"), testing.Find(typeof(Person), "firstname", false));
-			Assert.AreEqual(typeof(Person).GetProperty("LastName"), testing.Find(typeof(Person), "lastname", false));
-			Assert.AreEqual(typeof(Person).GetProperty("MiddleName"), testing.Find(typeof(Person), "middlename", false));
-			Assert.AreEqual(typeof(Person).GetProperty("Suffix"), testing.Find(typeof(Person), "suffix", false));
-			Assert.AreEqual(typeof(Person).GetProperty("Title"), testing.Find(typeof(Person), "title", false));
-			Assert.AreEqual(typeof(Person).GetProperty("Age"), testing.Find(typeof(Person), "age", false));
+			Assert.AreEqual(typeof(Person).GetProperty("FirstName"), _.Object.Property.Find(typeof(Person), "firstname", false));
+			Assert.AreEqual(typeof(Person).GetProperty("LastName"), _.Object.Property.Find(typeof(Person), "lastname", false));
+			Assert.AreEqual(typeof(Person).GetProperty("MiddleName"), _.Object.Property.Find(typeof(Person), "middlename", false));
+			Assert.AreEqual(typeof(Person).GetProperty("Suffix"), _.Object.Property.Find(typeof(Person), "suffix", false));
+			Assert.AreEqual(typeof(Person).GetProperty("Title"), _.Object.Property.Find(typeof(Person), "title", false));
+			Assert.AreEqual(typeof(Person).GetProperty("Age"), _.Object.Property.Find(typeof(Person), "age", false));
 
 		}
 
 		[Test]
 		public void Object_Property_OfType_ForType()
 		{
-			var testing = _.Object.Property;
+			
 
-			Assert.IsTrue(testing.OfType(typeof(Person), typeof(string)).Any(a => a.Name == "FirstName"));
-			Assert.IsTrue(testing.OfType(typeof(Person), typeof(string)).Any(a => a.Name == "LastName"));
-			Assert.IsTrue(testing.OfType(typeof(Person), typeof(string)).Any(a => a.Name == "MiddleName"));
-			Assert.IsTrue(testing.OfType(typeof(Person), typeof(string)).Any(a => a.Name == "Suffix"));
-			Assert.IsTrue(testing.OfType(typeof(Person), typeof(string)).Any(a => a.Name == "Title"));
-			Assert.IsTrue(testing.OfType(typeof(Person), typeof(int)).Any(a => a.Name == "Age"));
+			Assert.IsTrue(_.Object.Property.OfType(typeof(Person), typeof(string)).Any(a => a.Name == "FirstName"));
+			Assert.IsTrue(_.Object.Property.OfType(typeof(Person), typeof(string)).Any(a => a.Name == "LastName"));
+			Assert.IsTrue(_.Object.Property.OfType(typeof(Person), typeof(string)).Any(a => a.Name == "MiddleName"));
+			Assert.IsTrue(_.Object.Property.OfType(typeof(Person), typeof(string)).Any(a => a.Name == "Suffix"));
+			Assert.IsTrue(_.Object.Property.OfType(typeof(Person), typeof(string)).Any(a => a.Name == "Title"));
+			Assert.IsTrue(_.Object.Property.OfType(typeof(Person), typeof(int)).Any(a => a.Name == "Age"));
 
 		}
 
 		[Test]
 		public void Object_Property_GetValues()
 		{
-			var testing = _.Object.Property;
+			
 			var testTarget = new Person
 			{
 				FirstName = "FirstName",
@@ -351,8 +351,8 @@ namespace Underscore.Test.Object.Reflection
 			};
 
 			Assert.AreEqual(                                            //order of decl
-				string.Join("", testing.Values<string>(testTarget)), "FirstNameLastNameNickNameMiddleNameTitleSuffix");
-			Assert.AreEqual(24, testing.Values<int>(testTarget).FirstOrDefault());
+				string.Join("", _.Object.Property.Values<string>(testTarget)), "FirstNameLastNameNickNameMiddleNameTitleSuffix");
+			Assert.AreEqual(24, _.Object.Property.Values<int>(testTarget).FirstOrDefault());
 
 		}
 
@@ -423,10 +423,9 @@ namespace Underscore.Test.Object.Reflection
 			Assert.AreEqual(0, shouldBe0);
 		}
 
-		private static PropertyComponent SetupPropertiesTarget()
+		private static IPropertyComponent SetupPropertiesTarget()
 		{
-			var testing = new PropertyComponent();
-			return testing;
+			return _.Object.Property;
 		}
 
 		class OtherPerson2
@@ -1005,7 +1004,7 @@ namespace Underscore.Test.Object.Reflection
 				NumberOfKids = 3
 			};
 
-			var testing = SetupPropertiesTarget();
+			
 
 			var pairs = _.Object.Property.Pairs<string>(person);
 
@@ -1020,7 +1019,7 @@ namespace Underscore.Test.Object.Reflection
 			//testing that there are no more than the expected properties
 			Assert.AreEqual(6, pairs.Count());
 
-			var pairs2 = testing.Pairs<int>(person);
+			var pairs2 = _.Object.Property.Pairs<int>(person);
 
 			Assert.IsTrue(pairs2.Any(a => a.Name == "NumberOfKids" && a.Value == 3));
 			Assert.IsTrue(pairs2.Any(a => a.Name == "Age" && a.Value == 25));

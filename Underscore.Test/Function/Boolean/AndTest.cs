@@ -30,7 +30,7 @@ namespace Underscore.Test.Boolean
 				() => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsTrue(combined());
 			Assert.IsTrue(wasCalled[0]);
@@ -50,7 +50,7 @@ namespace Underscore.Test.Boolean
 				() => (wasCalled[3] = true) && false,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined());
 			Assert.IsTrue(wasCalled[0]);
@@ -70,7 +70,7 @@ namespace Underscore.Test.Boolean
 				() => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined());
 			Assert.IsTrue(wasCalled[0]);
@@ -92,7 +92,7 @@ namespace Underscore.Test.Boolean
 				(a) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsTrue(combined(obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -114,7 +114,7 @@ namespace Underscore.Test.Boolean
 				(a) => (wasCalled[3] = true) && false,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -136,7 +136,7 @@ namespace Underscore.Test.Boolean
 				(a) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -158,7 +158,7 @@ namespace Underscore.Test.Boolean
 				(a, b) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsTrue(combined(obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -180,7 +180,7 @@ namespace Underscore.Test.Boolean
 				(a, b) => (wasCalled[3] = true) && false,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -202,7 +202,7 @@ namespace Underscore.Test.Boolean
 				(a, b) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -224,7 +224,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsTrue(combined(obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -246,7 +246,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c) => (wasCalled[3] = true) && false,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -268,7 +268,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -290,7 +290,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsTrue(combined(obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -312,7 +312,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d) => (wasCalled[3] = true) && false,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -334,7 +334,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -356,7 +356,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsTrue(combined(obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -378,7 +378,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e) => (wasCalled[3] = true) && false,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -400,7 +400,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -422,7 +422,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsTrue(combined(obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -444,7 +444,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f) => (wasCalled[3] = true) && false,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -466,7 +466,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -488,7 +488,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsTrue(combined(obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -510,7 +510,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g) => (wasCalled[3] = true) && false,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -532,7 +532,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -554,7 +554,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsTrue(combined(obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -576,7 +576,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h) => (wasCalled[3] = true) && false,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -598,7 +598,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -620,7 +620,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsTrue(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -642,7 +642,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i) => (wasCalled[3] = true) && false,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -664,7 +664,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -686,7 +686,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsTrue(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -708,7 +708,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j) => (wasCalled[3] = true) && false,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -730,7 +730,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -752,7 +752,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsTrue(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -774,7 +774,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k) => (wasCalled[3] = true) && false,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -796,7 +796,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -818,7 +818,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k, l) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsTrue(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -840,7 +840,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k, l) => (wasCalled[3] = true) && false,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -862,7 +862,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k, l) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -884,7 +884,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k, l, m) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsTrue(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -906,7 +906,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k, l, m) => (wasCalled[3] = true) && false,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -928,7 +928,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k, l, m) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -950,7 +950,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k, l, m, n) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsTrue(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -972,7 +972,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k, l, m, n) => (wasCalled[3] = true) && false,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -994,7 +994,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k, l, m, n) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -1016,7 +1016,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsTrue(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -1038,7 +1038,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => (wasCalled[3] = true) && false,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -1060,7 +1060,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -1082,7 +1082,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsTrue(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -1104,7 +1104,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => (wasCalled[3] = true) && false,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
@@ -1126,7 +1126,7 @@ namespace Underscore.Test.Boolean
 				(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => (wasCalled[3] = true) && true,
 			};
 
-			var combined = component.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
+			var combined = _.Function.And(funcsToCombine[0], funcsToCombine[1], funcsToCombine[2], funcsToCombine[3]);
 
 			Assert.IsFalse(combined(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 			Assert.IsTrue(wasCalled[0]);
