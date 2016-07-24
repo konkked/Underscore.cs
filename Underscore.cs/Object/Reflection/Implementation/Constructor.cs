@@ -9,7 +9,7 @@ namespace Underscore.Object.Reflection
 	public class ConstructorComponent : MethodsBaseComponent<ConstructorInfo>, IConstructorComponent
 	{
 		public ConstructorComponent()
-			: base(new CacheComponent(), new PropertyComponent(), new Members<ConstructorInfo>(null, BindingFlags.Instance | BindingFlags.Public))
+			: base(new CacheComponent(new CompactComponent(), new Underscore.Utility.CompactComponent()), new PropertyComponent(), new Members<ConstructorInfo>(null, BindingFlags.Instance | BindingFlags.Public))
 		{
 		}
 

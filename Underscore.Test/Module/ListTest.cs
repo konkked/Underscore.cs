@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using Underscore.List;
+using Underscore.Utility;
 
 namespace Underscore.Test.Module
 {
@@ -10,17 +11,19 @@ namespace Underscore.Test.Module
         [Test]
         public void List_CreateModule()
         {
-            var result = new global::Underscore.Module.List(
+            var result = new Underscore.Module.List(
                 new ManipulateComponent(),
-                new Underscore.List.PartitionComponent()
-                );
+                new PartitionComponent(
+					new MathComponent()
+				)
+            );
         }
 
         [Test]
         public void List_CreateModule_MissingManipulateComponent()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new Underscore.Module.List(null, new Underscore.List.PartitionComponent()),
+                () => new Underscore.Module.List(null, new PartitionComponent(new MathComponent())),
                 "Value cannot be null.\r\nParameter name: manipulator");
         }
 

@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Underscore.Utility;
 
 namespace Underscore.Collection
 {
-
-
 	public class PartitionComponent : IPartitionComponent
 	{
 		private readonly List.IPartitionComponent _partitionComponent;
 
 		public PartitionComponent()
 		{
-			_partitionComponent = new List.PartitionComponent();
+			_partitionComponent = new List.PartitionComponent(new MathComponent());
 		}
 
 		public PartitionComponent(List.IPartitionComponent partitionComponent)

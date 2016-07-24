@@ -11,7 +11,6 @@ namespace Underscore.Test.Action.Synch
 	{
 		private readonly string[] arguments = Util.LowercaseCharArray;
 		private ComposeComponent funcCompose;
-		private ISynchComponent component;
 
 		private int counter;
 		private string result;
@@ -21,7 +20,6 @@ namespace Underscore.Test.Action.Synch
 		public void Initialize()
 		{
 			funcCompose = new ComposeComponent();
-			component = new SynchComponent();
 
 			counter = 0;
 			result = "";

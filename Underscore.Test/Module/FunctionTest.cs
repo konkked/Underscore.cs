@@ -14,8 +14,15 @@ namespace Underscore.Test.Module
 				 new SplitComponent(),
 				 new ComposeComponent(),
 				 new ConvertComponent(),
-				 new SynchComponent(),
-				 new CacheComponent(),
+				 new SynchComponent(
+					 new CompactComponent(),
+					 new Underscore.Utility.CompactComponent(),
+					 new Underscore.Utility.MathComponent()
+				 ),
+				 new CacheComponent(
+					new CompactComponent(),
+					new Underscore.Utility.CompactComponent()	 
+				 ),
 				 new BooleanComponent()
 			);
 		}

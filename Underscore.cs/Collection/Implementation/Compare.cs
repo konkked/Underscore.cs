@@ -1,23 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Underscore.Object.Comparison;
 
 namespace Underscore.Collection
 {
 	public class CompareComponent : ICompareComponent
 	{
-		private readonly IEqualityComponent equalityComponent;
-
-		public CompareComponent()
-		{
-			equalityComponent = new EqualityComponent();
-		}
-
-		public CompareComponent(IEqualityComponent equalityComponent)
-		{
-			this.equalityComponent = equalityComponent;
-		}
-
 		/// <summary>
 		/// Determines whether the given array is sorted,
 		/// can check for either ascending or descending

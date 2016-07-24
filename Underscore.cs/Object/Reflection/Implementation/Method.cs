@@ -23,7 +23,7 @@ namespace Underscore.Object.Reflection
 		}
 
 		public MethodComponent()
-			: base(new CacheComponent(), new PropertyComponent(), Members)
+			: base(new CacheComponent(new CompactComponent(), new Utility.CompactComponent()), new PropertyComponent(), Members)
 		{
 			if (s_specialRules == null)
 				InitSpecialRules();

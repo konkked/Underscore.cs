@@ -2,8 +2,6 @@
 
 namespace Underscore.Action
 {
-
-
 	public class ConvertComponent : IConvertComponent
 	{
 		/// <summary>

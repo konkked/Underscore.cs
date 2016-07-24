@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Underscore.Function;
 using Underscore.Object;
 using Underscore.Object.Comparison;
 using Underscore.Object.Reflection;
@@ -12,17 +13,21 @@ namespace Underscore.Test.Module
 		[Test]
 		public void ObjectCreate()
 		{
-			var property = new PropertyComponent();
 			var example = new Underscore.Module.Object(
 				new PropertyComponent(),
 				new MethodComponent(),
 				new FieldComponent(),
 				new ConstructorComponent(),
 				new TransposeComponent(),
-				new AttributeComponent(),
+				new AttributeComponent(
+					new CacheComponent(
+						new CompactComponent(),
+						new Underscore.Utility.CompactComponent()	
+					)
+				),
 				new DynamicComponent(),
-				new EqualityComponent(property)
-			) ;
+				new EqualityComponent(new PropertyComponent())
+			);
 		}
 
 
@@ -77,16 +82,20 @@ namespace Underscore.Test.Module
 		[Test]
 		public void ObjectModule_NewGenericFromDefinition_OneTypeParameter()
 		{
-			var property = new PropertyComponent();
 			var example = new Underscore.Module.Object(
 				new PropertyComponent(),
 				new MethodComponent(),
 				new FieldComponent(),
 				new ConstructorComponent(),
 				new TransposeComponent(),
-				new AttributeComponent(),
+				new AttributeComponent(
+					new CacheComponent(
+						new CompactComponent(),
+						new Underscore.Utility.CompactComponent()
+					)
+				),
 				new DynamicComponent(),
-				new EqualityComponent(property)
+				new EqualityComponent(new PropertyComponent())
 			);
 
 			var targeting = typeof (GenericConstructorTestObject<>);
@@ -135,17 +144,20 @@ namespace Underscore.Test.Module
 		[Test]
 		public void ObjectModule_NewGenericFromDefinition_MatchingConstructorsWithObjects()
 		{
-			var property = new PropertyComponent();
-
 			var example = new Underscore.Module.Object(
 				new PropertyComponent(),
 				new MethodComponent(),
 				new FieldComponent(),
 				new ConstructorComponent(),
 				new TransposeComponent(),
-				new AttributeComponent(),
+				new AttributeComponent(
+					new CacheComponent(
+						new CompactComponent(),
+						new Underscore.Utility.CompactComponent()
+					)
+				),
 				new DynamicComponent(),
-				new EqualityComponent(property)
+				new EqualityComponent(new PropertyComponent())
 			);
 
 			var targeting = typeof(GenericConstructorTestObjectTwo<,>);
