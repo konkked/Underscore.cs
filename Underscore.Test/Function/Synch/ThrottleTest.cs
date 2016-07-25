@@ -14,7 +14,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Throttle_1Argument()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			const int waiting = 25;
 
@@ -26,7 +26,7 @@ namespace Underscore.Test.Function.Synch
 				return i + i;
 			});
 
-			var target = testing.Throttle(targeting, waiting);
+			var target = _.Function.Throttle(targeting, waiting);
 
 			var continuing = new List<Task<string>>();
 
@@ -96,7 +96,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Throttle_2Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			int waiting = 25;
 
@@ -111,7 +111,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Throttle(targeting, waiting);
+			var target = _.Function.Throttle(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -163,7 +163,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Throttle_3Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			int waiting = 25;
 
@@ -178,7 +178,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Throttle(targeting, waiting);
+			var target = _.Function.Throttle(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -232,7 +232,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Throttle_4Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			int waiting = 25;
 
@@ -247,7 +247,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Throttle(targeting, waiting);
+			var target = _.Function.Throttle(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -303,7 +303,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Throttle_5Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			int waiting = 25;
 
@@ -318,7 +318,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Throttle(targeting, waiting);
+			var target = _.Function.Throttle(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -376,7 +376,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Throttle_6Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			int waiting = 25;
 
@@ -391,7 +391,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Throttle(targeting, waiting);
+			var target = _.Function.Throttle(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -451,7 +451,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Throttle_7Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			int waiting = 25;
 
@@ -466,7 +466,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Throttle(targeting, waiting);
+			var target = _.Function.Throttle(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -528,7 +528,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Throttle_8Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			int waiting = 25;
 
@@ -543,7 +543,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Throttle(targeting, waiting);
+			var target = _.Function.Throttle(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -607,7 +607,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Throttle_9Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			int waiting = 25;
 
@@ -622,7 +622,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Throttle(targeting, waiting);
+			var target = _.Function.Throttle(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -688,7 +688,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Throttle_10Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			int waiting = 25;
 
@@ -703,7 +703,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Throttle(targeting, waiting);
+			var target = _.Function.Throttle(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -771,7 +771,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Throttle_11Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			int waiting = 25;
 
@@ -786,7 +786,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Throttle(targeting, waiting);
+			var target = _.Function.Throttle(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -856,7 +856,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Throttle_12Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			int waiting = 25;
 
@@ -871,7 +871,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Throttle(targeting, waiting);
+			var target = _.Function.Throttle(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -943,7 +943,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Throttle_13Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			int waiting = 25;
 
@@ -958,7 +958,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Throttle(targeting, waiting);
+			var target = _.Function.Throttle(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -1032,7 +1032,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Throttle_14Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			int waiting = 25;
 
@@ -1047,7 +1047,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Throttle(targeting, waiting);
+			var target = _.Function.Throttle(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -1123,7 +1123,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Throttle_15Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			int waiting = 25;
 
@@ -1138,7 +1138,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Throttle(targeting, waiting);
+			var target = _.Function.Throttle(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -1216,7 +1216,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Throttle_16Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			int waiting = 25;
 
@@ -1231,7 +1231,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Throttle(targeting, waiting);
+			var target = _.Function.Throttle(targeting, waiting);
 
 			var continuing = new List<Task>();
 

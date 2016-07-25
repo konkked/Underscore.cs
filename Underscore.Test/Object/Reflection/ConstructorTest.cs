@@ -48,7 +48,7 @@ namespace Underscore.Test.Object.Reflection
 
 			object[] paramQueryArgs =
 			{
-				new[] {typeof (string), typeof (int)}, 
+				new[] {typeof (string), typeof (int)},
 				new[] {"value", "capacity"},
 				new {capacity = typeof (int), value = typeof (string)}
 			};
@@ -70,7 +70,7 @@ namespace Underscore.Test.Object.Reflection
 			var strBuilder = new StringBuilder();
 			object[] paramQueryArgs =
 			{
-				new[] {typeof (int), typeof (int)}, 
+				new[] {typeof (int), typeof (int)},
 				new[] {"capacity", "maxCapacity"},
 				new {capacity = typeof (int), maxCapacity = typeof (int)}
 			};
@@ -97,55 +97,55 @@ namespace Underscore.Test.Object.Reflection
 
 			object[] paramQueryArgs =
 			{
-				typeof(string), 
-				new[] { typeof(string) }, 
-				"value", 
-				new[]{"value"}, 
+				typeof(string),
+				new[] { typeof(string) },
+				"value",
+				new[]{"value"},
 				new { value= typeof(string) }
 			};
 
 			Func<ConstructorInfo, bool> filter = a =>
 			{
 				var ls = a.GetParameters().ToArray();
-				return ls.Length >= 1 && ls.Any(b => b.Name == "value" && b.ParameterType == typeof (string));
+				return ls.Length >= 1 && ls.Any(b => b.Name == "value" && b.ParameterType == typeof(string));
 			};
 
-			DoFunctionalConstructorTest(strBuilder, filter, paramQueryArgs,flags);
+			DoFunctionalConstructorTest(strBuilder, filter, paramQueryArgs, flags);
 		}
 
-		private static void DoFunctionalConstructorTest<T>(T instance, Func<ConstructorInfo, bool> filter, object[] paramQueryArgs,BindingFlags flags)
+		private static void DoFunctionalConstructorTest<T>(T instance, Func<ConstructorInfo, bool> filter, object[] paramQueryArgs, BindingFlags flags)
 		{
 			var cacheComponent = new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
 			var propComponent = new PropertyComponent();
 			var ctorComponent = new ConstructorComponent(cacheComponent, propComponent);
 
-			var expectedToHave = new HashSet<ConstructorInfo>(typeof (T).GetConstructors(flags).Where(filter));
+			var expectedToHave = new HashSet<ConstructorInfo>(typeof(T).GetConstructors(flags).Where(filter));
 
 			var testingqtypenf = _.Function.Partial<Type, object, IEnumerable<ConstructorInfo>>(
 				ctorComponent.Query,
-				typeof (T)
+				typeof(T)
 				);
 
 			var testingqtypewf =
 				_.Function.Partial<Type, object, BindingFlags, IEnumerable<ConstructorInfo>>(
 					ctorComponent.Query,
-					typeof (T)
+					typeof(T)
 					);
 
-			var testingqobjnf = _.Function.Partial<object, object, IEnumerable<ConstructorInfo>>(ctorComponent.Query, instance);
+
 			var testingqobjwf =
 				_.Function.Partial<object, object, BindingFlags, IEnumerable<ConstructorInfo>>(ctorComponent.Query, instance);
 
 			var resultSet =
 				paramQueryArgs.Select(testingqtypenf)
 					.Concat(paramQueryArgs.Select(a => testingqtypewf(a, flags)))
-					.Concat(paramQueryArgs.Select(testingqobjnf))
+					.Concat(paramQueryArgs.Select(a => testingqobjwf(a, flags)))
 					.Concat(paramQueryArgs.Select(a => testingqobjwf(a, flags)));
 
 			int i = 0;
 			foreach (var result in resultSet)
 			{
-				Assert.IsTrue(result.All(expectedToHave.Contains), string.Join(", ", result.Select(a=>"("+string.Join(" , ",a.GetParameters().Select(b=>b.Name+":"+b.ParameterType.Name))+")")) + " Invocation "+i);
+				Assert.IsTrue(result.All(expectedToHave.Contains), string.Join(", ", result.Select(a => "(" + string.Join(" , ", a.GetParameters().Select(b => b.Name + ":" + b.ParameterType.Name)) + ")")) + " Invocation " + i);
 				i++;
 			}
 		}
@@ -157,7 +157,7 @@ namespace Underscore.Test.Object.Reflection
 			Func<ConstructorInfo, bool> filter = a =>
 			{
 				var ls = a.GetParameters().ToArray();
-				return ls.Length >= 1 && ls.Any(b => b.Name == "capacity" && b.ParameterType == typeof (int));
+				return ls.Length >= 1 && ls.Any(b => b.Name == "capacity" && b.ParameterType == typeof(int));
 			};
 
 			const BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
@@ -171,7 +171,7 @@ namespace Underscore.Test.Object.Reflection
 		public void FunctionalCtorTestParameterless()
 		{
 
-			var cacheComponent = new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent()); 
+			var cacheComponent = new CacheComponent(new Underscore.Function.CompactComponent(), new Underscore.Utility.CompactComponent());
 			var propComponent = new PropertyComponent();
 			var ctorComponent = new ConstructorComponent(cacheComponent, propComponent);
 
@@ -182,7 +182,7 @@ namespace Underscore.Test.Object.Reflection
 
 			const BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;
 
-			var expecting = from i in typeof(StringBuilder).GetConstructors(flags) 
+			var expecting = from i in typeof(StringBuilder).GetConstructors(flags)
 							where !i.GetParameters().Any()
 							select i;
 
@@ -208,7 +208,7 @@ namespace Underscore.Test.Object.Reflection
 			}
 
 			Assert.IsTrue(ctorComponent.HasParameterless(strBuilder));
-			Assert.IsTrue(ctorComponent.HasParameterless(strBuilder,flags));
+			Assert.IsTrue(ctorComponent.HasParameterless(strBuilder, flags));
 
 		}
 
@@ -333,9 +333,9 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 		[Test]
-		public void HasParameterlessPositive( )
+		public void HasParameterlessPositive()
 		{
-			var testing = CreateTestTarget( );
+
 
 			var ctorParamlessTestTarget1 = new CtorParamlessTestFixture();
 			var ctorParamlessTestTarget2 = new CtorSingleAndParamless();
@@ -344,26 +344,26 @@ namespace Underscore.Test.Object.Reflection
 
 			object[] testArgs =
 			{
-				ctorParamlessTestTarget1, 
+				ctorParamlessTestTarget1,
 				ctorParamlessTestTarget2,
-				ctorParamlessTestTarget3, 
+				ctorParamlessTestTarget3,
 				ctorParamlessTestTarget4
 			};
 
 			foreach (var testArg in testArgs)
-				Assert.IsTrue(testing.HasParameterless(testArg));
+				Assert.IsTrue(_.Object.Constructor.HasParameterless(testArg));
 
 			Type[] testTypeArgs =
 			{
-				typeof (CtorParamlessTestFixture), 
+				typeof (CtorParamlessTestFixture),
 				typeof (CtorSingleAndParamless),
-				typeof (CtorDoubleAndParamless), 
+				typeof (CtorDoubleAndParamless),
 				typeof (CtorDoubleAndSingleAndParamless)
 			};
 
 			foreach (var testTypeArg in testTypeArgs)
 			{
-				Assert.IsTrue(testing.HasParameterless(testTypeArg));
+				Assert.IsTrue(_.Object.Constructor.HasParameterless(testTypeArg));
 			}
 
 			var privateParamless = new CtorPrivateParamlessTestFixture(null);
@@ -371,8 +371,8 @@ namespace Underscore.Test.Object.Reflection
 
 			bool[] testBindingFlagsObjectResults =
 			{
-				testing.HasParameterless(privateParamless, BindingFlags.NonPublic | BindingFlags.Instance),
-				testing.HasParameterless(staticParamless,  BindingFlags.NonPublic |BindingFlags.Static)
+				_.Object.Constructor.HasParameterless(privateParamless, BindingFlags.NonPublic | BindingFlags.Instance),
+				_.Object.Constructor.HasParameterless(staticParamless,  BindingFlags.NonPublic |BindingFlags.Static)
 			};
 
 			foreach (bool result in testBindingFlagsObjectResults)
@@ -383,12 +383,12 @@ namespace Underscore.Test.Object.Reflection
 		[Test]
 		public void HasParameterlessNegative()
 		{
-			var testing = CreateTestTarget( );
+
 
 			bool[] testResults =
 			{
-				testing.HasParameterless(new CtorSingleParamOnly(null)),
-				testing.HasParameterless(new CtorDoubleParamOnly(null,null))
+				_.Object.Constructor.HasParameterless(new CtorSingleParamOnly(null)),
+				_.Object.Constructor.HasParameterless(new CtorDoubleParamOnly(null,null))
 			};
 
 			foreach (bool result in testResults)
@@ -397,15 +397,15 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 		[Test]
-		public void Parameterless1( )
+		public void Parameterless1()
 		{
-			var testing = CreateTestTarget( );
+
 		}
 
-		private static void TestFind<TTesting,TQuery>(TTesting obj, TQuery query, BindingFlags bindingFlags, bool positive)
+		private static void TestFind<TTesting, TQuery>(TTesting obj, TQuery query, BindingFlags bindingFlags, bool positive)
 		{
 
-			var testing = CreateTestTarget();
+
 
 			var type = typeof(TTesting);
 
@@ -413,22 +413,22 @@ namespace Underscore.Test.Object.Reflection
 				resultType,
 				resultTypeBindFlags;
 
-			var resultObj = resultObjBindFlags 
+			var resultObj = resultObjBindFlags
 				= resultType = resultTypeBindFlags = null;
 
 			if ((bindingFlags & BindingFlags.NonPublic) != BindingFlags.NonPublic)
 			{
-				resultObj = testing.Query(obj, query);
+				resultObj = _.Object.Constructor.Query(obj, query);
 			}
 
-			resultObjBindFlags = testing.Query(obj, query, bindingFlags);
+			resultObjBindFlags = _.Object.Constructor.Query(obj, query, bindingFlags);
 
 			if ((bindingFlags & BindingFlags.NonPublic) != BindingFlags.NonPublic)
 			{
-				resultType = testing.Query(type, query);
+				resultType = _.Object.Constructor.Query(type, query);
 			}
 
-			resultTypeBindFlags = testing.Query(type, query, bindingFlags);
+			resultTypeBindFlags = _.Object.Constructor.Query(type, query, bindingFlags);
 
 			var testResults = (new[]
 				{
@@ -437,7 +437,7 @@ namespace Underscore.Test.Object.Reflection
 					resultType,
 					resultTypeBindFlags,
 				})
-				.Where(a=>a!=null)
+				.Where(a => a != null)
 				.Select(a => new HashSet<ConstructorInfo>(a))
 				.ToArray();
 
@@ -478,9 +478,9 @@ namespace Underscore.Test.Object.Reflection
 		}
 
 		[Test]
-		public void CtorFindSingleParameterPostiveEq( )
+		public void CtorFindSingleParameterPostiveEq()
 		{
-			TestFind(new CtorSingleParamOnly(null), new {arg = typeof (string)},
+			TestFind(new CtorSingleParamOnly(null), new { arg = typeof(string) },
 				BindingFlags.Public | BindingFlags.Instance, true);
 		}
 
@@ -498,13 +498,13 @@ namespace Underscore.Test.Object.Reflection
 			const BindingFlags bflags = BindingFlags.Public | BindingFlags.Instance;
 
 			//should match all ctor where at least one param name and type matching query obj
-			TestFind( target , new{ arg=typeof(string)}, bflags, true);
+			TestFind(target, new { arg = typeof(string) }, bflags, true);
 
 			//should match all ctor where at least one param type matches a type in query obj
-			TestFind(target, new[] {typeof (string)}, bflags, true);
+			TestFind(target, new[] { typeof(string) }, bflags, true);
 
 			//when given an array of strings should match ctors with parameters that contain matching names
-			TestFind(target, new[] {"arg"}, bflags, true);
+			TestFind(target, new[] { "arg" }, bflags, true);
 		}
 
 		[Test]
@@ -531,7 +531,7 @@ namespace Underscore.Test.Object.Reflection
 			const BindingFlags bflags = BindingFlags.Public | BindingFlags.Instance;
 
 			//should match when exist ctor exact match between arg name and arg type in query object
-			TestFind(target, new { arg1 = typeof(string), arg2=typeof(string) },bflags, true);
+			TestFind(target, new { arg1 = typeof(string), arg2 = typeof(string) }, bflags, true);
 		}
 
 		[Test]
@@ -556,8 +556,8 @@ namespace Underscore.Test.Object.Reflection
 			// should not match any ctor where 
 			// all arg name type pairs cannot be mapped 
 			// to a specific parameter uniquely in the type ctor
-			TestFind(target, new { arg1 = typeof(string) , nothere=typeof(string) }, bflags, true);
-			TestFind(target, new { arg2 = typeof(string), nothere=typeof(string) }, bflags, true);
+			TestFind(target, new { arg1 = typeof(string), nothere = typeof(string) }, bflags, true);
+			TestFind(target, new { arg2 = typeof(string), nothere = typeof(string) }, bflags, true);
 
 			//when given a type[ ]
 			// should not match any ctor where 
@@ -590,7 +590,7 @@ namespace Underscore.Test.Object.Reflection
 			TestFind(target, new[] { typeof(string), typeof(string) }, bflags, true);
 
 			//when given an array of strings should match ctors with parameters that contain matching names
-			TestFind(target, new[] { "arg1"}, bflags, true);
+			TestFind(target, new[] { "arg1" }, bflags, true);
 			TestFind(target, new[] { "arg2" }, bflags, true);
 			TestFind(target, new[] { "arg1", "arg2" }, bflags, true);
 		}
@@ -604,7 +604,7 @@ namespace Underscore.Test.Object.Reflection
 
 			//should match when exist ctor exact match between arg name and arg type in query object
 			TestFind(target, new { arg1 = typeof(string), arg2 = typeof(string) }, bflags, true);
-			TestFind(target, new { arg = typeof(int) }, bflags, true); 
+			TestFind(target, new { arg = typeof(int) }, bflags, true);
 
 			//should match when exists parameterless ctor
 			TestFind(target, new { }, bflags, true);
@@ -621,7 +621,7 @@ namespace Underscore.Test.Object.Reflection
 			TestFind(target, new { arg = typeof(string), arg2 = typeof(string) }, bflags, false);
 			TestFind(target, new { arg = typeof(int), arg2 = typeof(string) }, bflags, false);
 			TestFind(target, new { arg1 = typeof(int), arg2 = typeof(int) }, bflags, false);
-			TestFind(target, new { arg = typeof(int), arg1 = typeof(string), arg2=typeof(string) }, bflags, false);
+			TestFind(target, new { arg = typeof(int), arg1 = typeof(string), arg2 = typeof(string) }, bflags, false);
 			TestFind(target, new { shouldnotfind1 = typeof(string), shouldnotfind2 = typeof(string) }, bflags, false);
 
 		}
@@ -639,7 +639,7 @@ namespace Underscore.Test.Object.Reflection
 			//or null is passed
 			TestFind(target, new { arg1 = typeof(string), nothere = typeof(string) }, bflags, true);
 			TestFind(target, new { arg2 = typeof(string), nothere = typeof(string) }, bflags, true);
-			TestFind(target, null as object , bflags, true);
+			TestFind(target, null as object, bflags, true);
 
 			// when given a type[ ]
 			// should not match any ctor where 
@@ -674,7 +674,7 @@ namespace Underscore.Test.Object.Reflection
 
 			//matches double string param
 			TestFind(target, new[] { typeof(string), typeof(string) }, bflags, true);
-			TestFind(target, new [] { typeof(string)}, bflags, true);
+			TestFind(target, new[] { typeof(string) }, bflags, true);
 
 			//matches parameterless
 			TestFind(target, new Type[] { }, bflags, true);
@@ -687,7 +687,7 @@ namespace Underscore.Test.Object.Reflection
 			TestFind(target, new[] { "arg2", "arg1" }, bflags, true);
 
 			//matches single int param
-			TestFind(target, new[] { "arg"}, bflags, true);
+			TestFind(target, new[] { "arg" }, bflags, true);
 
 			//matches empty param
 			TestFind(target, new string[] { }, bflags, true);
@@ -715,12 +715,12 @@ namespace Underscore.Test.Object.Reflection
 			TestFind(target, new { arg = typeof(string) }, bflags, true);
 
 			// should not match unless exist ctor exact match between arg name and arg type in query object
-			TestFind(target, new { arg1 = typeof( string ), arg = typeof( string ) }, bflags, false);
-			TestFind(target, new { arg = typeof ( string ), arg2 = typeof( string ) }, bflags, false);
-			TestFind(target, new { arg = typeof ( int ), arg2 = typeof( string ) }, bflags, false);
-			TestFind(target, new { arg1 = typeof( int ), arg2 = typeof( int ) }, bflags, false);
-			TestFind(target, new { arg = typeof ( int ), arg1 = typeof( string ), arg2 = typeof( string ) }, bflags, false);
-			TestFind(target, new { shouldnotfind1 = typeof( string ), shouldnotfind2 = typeof( string ) }, bflags, false);
+			TestFind(target, new { arg1 = typeof(string), arg = typeof(string) }, bflags, false);
+			TestFind(target, new { arg = typeof(string), arg2 = typeof(string) }, bflags, false);
+			TestFind(target, new { arg = typeof(int), arg2 = typeof(string) }, bflags, false);
+			TestFind(target, new { arg1 = typeof(int), arg2 = typeof(int) }, bflags, false);
+			TestFind(target, new { arg = typeof(int), arg1 = typeof(string), arg2 = typeof(string) }, bflags, false);
+			TestFind(target, new { shouldnotfind1 = typeof(string), shouldnotfind2 = typeof(string) }, bflags, false);
 
 		}
 
@@ -782,7 +782,7 @@ namespace Underscore.Test.Object.Reflection
 		[Test]
 		public void CtorAll()
 		{
-			var testing = CreateTestTarget( );
+
 
 			const BindingFlags publicFlag = BindingFlags.Public | BindingFlags.Instance;
 			const BindingFlags privateFlag = BindingFlags.NonPublic | BindingFlags.Instance;
@@ -828,10 +828,10 @@ namespace Underscore.Test.Object.Reflection
 				.Select(a =>
 					Tuple.Create(
 						new HashSet<ConstructorInfo>(a.Item2),
-						new HashSet<ConstructorInfo>(testing.All(a.Item1.Item2)),
-						new HashSet<ConstructorInfo>(testing.All(a.Item1.Item1)),
-						new HashSet<ConstructorInfo>(testing.All(a.Item1.Item1, a.Item1.Item3)),
-						new HashSet<ConstructorInfo>(testing.All(a.Item1.Item2, a.Item1.Item3))
+						new HashSet<ConstructorInfo>(_.Object.Constructor.All(a.Item1.Item2)),
+						new HashSet<ConstructorInfo>(_.Object.Constructor.All(a.Item1.Item1)),
+						new HashSet<ConstructorInfo>(_.Object.Constructor.All(a.Item1.Item1, a.Item1.Item3)),
+						new HashSet<ConstructorInfo>(_.Object.Constructor.All(a.Item1.Item2, a.Item1.Item3))
 						)
 				);
 
@@ -854,87 +854,87 @@ namespace Underscore.Test.Object.Reflection
 			}
 		}
 
-		private void CtorSimplestTestInstanceBase( IConstructorComponent testing, object instance, BindingFlags flags ) 
+		private void CtorSimplestTestInstanceBase(IConstructorComponent testing, object instance, BindingFlags flags)
 		{
-			var expecting = instance.GetType().GetConstructors( flags ).OrderBy( a => a.GetParameters( ).Count( ) ).FirstOrDefault( );
+			var expecting = instance.GetType().GetConstructors(flags).OrderBy(a => a.GetParameters().Count()).FirstOrDefault();
 
-			var actual = testing.Simplest( instance , flags );
+			var actual = _.Object.Constructor.Simplest(instance, flags);
 
-			Assert.AreEqual( expecting , actual );
+			Assert.AreEqual(expecting, actual);
 		}
 
 		[Test]
-		public async Task CtorTestSimplestMultiConstructorsFromInstance( ) 
+		public async Task CtorTestSimplestMultiConstructorsFromInstance()
 		{
-			var testing = CreateTestTarget( );
 
-			var instances = new object[ ]{ 
+
+			var instances = new object[]{
 								new CtorDoubleAndSingle("a","a"),
 								new CtorDoubleAndParamless(),
 								new CtorDoubleAndSingleAndParamless(),
 								new CtorDoubleParamOnly("a","a"),
 								new CtorSingleParamOnly("a") };
-			var bindingFlags = new BindingFlags[ ]{
+			var bindingFlags = new BindingFlags[]{
 									BindingFlags.Instance | BindingFlags.Public,
 									BindingFlags.Instance | BindingFlags.NonPublic,
 									BindingFlags.Static | BindingFlags.Public
 								};
 
 			var arguments = from x in instances
-						  from y in bindingFlags
-						  select new { x , y };
+							from y in bindingFlags
+							select new { x, y };
 
-			List<Task> tasks = new List<Task>( );
+			List<Task> tasks = new List<Task>();
 
-			foreach ( var argumentSet in arguments ) 
+			foreach (var argumentSet in arguments)
 			{
-				tasks.Add( Task.Run( ( ) =>CtorSimplestTestInstanceBase(testing, argumentSet.x , argumentSet.y ) ) );
+				tasks.Add(Task.Run(() => CtorSimplestTestInstanceBase(_.Object.Constructor, argumentSet.x, argumentSet.y)));
 			}
 
-			foreach ( var testTask in tasks )
+			foreach (var testTask in tasks)
 				await testTask;
 
 		}
 
-		private void CtorSimplestTestTypeBase( IConstructorComponent testing, Type t , BindingFlags flags) 
+		private void CtorSimplestTestTypeBase(IConstructorComponent testing, Type t, BindingFlags flags)
 		{
 
-			var expecting = t.GetConstructors(flags).OrderBy( a => a.GetParameters( ).Count( ) ).FirstOrDefault( );
+			var expecting = t.GetConstructors(flags).OrderBy(a => a.GetParameters().Count()).FirstOrDefault();
 
-			var actual = testing.Simplest( t, flags );
+			var actual = _.Object.Constructor.Simplest(t, flags);
 
-			Assert.AreEqual( expecting , actual, string.Format("Failed on {0} , {1}", t.Name, flags.ToString() ));
+			Assert.AreEqual(expecting, actual, string.Format("Failed on {0} , {1}", t.Name, flags.ToString()));
 		}
 
 		[Test]
-		public async Task CtorTestSimplestMultiConstructorsFromType( )
+		public async Task CtorTestSimplestMultiConstructorsFromType()
 		{
-			var testing = CreateTestTarget( );
 
-			var instances = new [ ]{ 
+
+			var instances = new[]{
 								typeof(CtorDoubleAndSingle),
 								typeof(CtorDoubleAndParamless),
 								typeof(CtorDoubleAndSingleAndParamless),
 								typeof(CtorDoubleParamOnly),
 								typeof(CtorSingleParamOnly) };
-			var bindingFlags = new BindingFlags[ ]{
+			var bindingFlags = new BindingFlags[]{
 									BindingFlags.Instance | BindingFlags.Public,
 									BindingFlags.Instance | BindingFlags.NonPublic,
 									BindingFlags.Static   | BindingFlags.Public
 								};
 
 			var arguments = from x in instances
-						  from y in bindingFlags
-						  select new { x , y };
+							from y in bindingFlags
+							select new { x, y };
 
-			List<Task> tasks = new List<Task>( );
+			List<Task> tasks = new List<Task>();
 
-			foreach ( var argumentSet in arguments ) 
+			foreach (var argumentSet in arguments)
 			{
-				tasks.Add( Task.Run( ( ) =>CtorSimplestTestTypeBase(testing, argumentSet.x , argumentSet.y ) ) );
+				tasks.Add(Task.Run(() => CtorSimplestTestTypeBase(_.Object.Constructor, argumentSet.x, argumentSet.y)));
 			}
 
-			foreach ( var testTask in tasks )
+			foreach (var testTask in tasks)
 				await testTask;
 		}
 	}

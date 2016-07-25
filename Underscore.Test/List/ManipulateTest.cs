@@ -12,13 +12,13 @@ namespace Underscore.Test.List
 		[Test]
 		public void List_Manipulate_Swap()
 		{
-			var testing = new ManipulateComponent();
+			
 			var arr = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
 			//reverse list in place
 			for (int i = 0; i < 5; i++)
 			{
-				testing.Swap(arr, i, 9 - i);
+				_.List.Swap(arr, i, 9 - i);
 			}
 
 			for (int i = 0; i <= 9; i++)
@@ -31,7 +31,7 @@ namespace Underscore.Test.List
 		public void List_Manipulate_Shuffle()
 		{
 			List<int> arr = Enumerable.Range(0, 100).ToList();
-			var testing = new ManipulateComponent();
+			
 			//test shuffle 5 times, see how random is
 
 			int comparisionCount = 0;
@@ -41,7 +41,7 @@ namespace Underscore.Test.List
 				var container = new List<IList<int>>();
 
 				for (int i = 0; i < 5; i++)
-					container.Add(testing.Shuffle(arr));
+					container.Add(_.List.Shuffle(arr));
 
 				comparisionCount = 0;
 				// 
@@ -67,7 +67,7 @@ namespace Underscore.Test.List
 			{
 				List<int> cmp = Enumerable.Range(0, 100).ToList();
 
-				testing.Shuffle(arr, true);
+				_.List.Shuffle(arr, true);
 
 				comparisionCount = 0;
 
@@ -85,26 +85,26 @@ namespace Underscore.Test.List
 		[Test]
 		public void List_Manipulate_Rotate()
 		{
-			var testing = new ManipulateComponent();
+			
 			var arr = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
 			int shiftl = -3;
 
 			//left shift
-			testing.Rotate(arr, shiftl);
+			_.List.Rotate(arr, shiftl);
 
 			Assert.IsTrue(arr.SequenceEqual(new[] { 3, 4, 5, 6, 7, 8, 9, 0, 1, 2 }));
 
 
 			//right shift back to normal
-			testing.Rotate(arr, -shiftl);
+			_.List.Rotate(arr, -shiftl);
 
 			Assert.IsTrue(arr.SequenceEqual(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }));
 
 
 			var shiftr = 5;
 			//right shift again
-			testing.Rotate(arr, shiftr);
+			_.List.Rotate(arr, shiftr);
 
 			Assert.IsTrue(arr.SequenceEqual(new[] { 5, 6, 7, 8, 9, 0, 1, 2, 3, 4 }));
 
@@ -113,12 +113,12 @@ namespace Underscore.Test.List
 			shiftl = -12;
 			//testing overflow shift
 			//should be equiv to shift two left
-			testing.Rotate(arr, shiftl);
+			_.List.Rotate(arr, shiftl);
 			Assert.IsTrue(arr.SequenceEqual(new[] { 7, 8, 9, 0, 1, 2, 3, 4, 5, 6 }));
 
 			shiftr = 15;
 			//should be equiv to shift two right
-			testing.Rotate(arr, shiftr);
+			_.List.Rotate(arr, shiftr);
 			Assert.IsTrue(arr.SequenceEqual(new[] { 2, 3, 4, 5, 6, 7, 8, 9, 0, 1 }));
 
 
@@ -129,21 +129,21 @@ namespace Underscore.Test.List
 		public void List_Manipulate_Sample()
 		{
 			var target = Enumerable.Range(0, 100).ToList();
-			var testing = new ManipulateComponent();
+			
 
-			IList<int> result = testing.Sample(target);
+			IList<int> result = _.List.Sample(target);
 
 			foreach (var i in result)
 				Assert.IsTrue(i >= 0 && i < 100);
 
-			result = testing.Sample(target, 25);
+			result = _.List.Sample(target, 25);
 
 			Assert.AreEqual(25, result.Count);
 
 			foreach (var i in result)
 				Assert.IsTrue(i >= 0 && i < 100);
 
-			result = testing.Sample(target, 25, true);
+			result = _.List.Sample(target, 25, true);
 
 			var set = new HashSet<int>();
 
@@ -152,7 +152,7 @@ namespace Underscore.Test.List
 			foreach (var i in result)
 				Assert.IsTrue(set.Add(i));
 
-			result = testing.Sample(target, 200, false);
+			result = _.List.Sample(target, 200, false);
 			Assert.AreEqual(200, result.Count);
 
 			foreach (var i in result)
@@ -166,8 +166,8 @@ namespace Underscore.Test.List
 		public void List_Manipulate_Extend()
 		{
 			var target = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-			var testing = new ManipulateComponent();
-			var result = testing.Extend(target, 20).ToList();
+			
+			var result = _.List.Extend(target, 20).ToList();
 
 			Assert.AreEqual(20, result.Count);
 
@@ -184,8 +184,8 @@ namespace Underscore.Test.List
 		public void List_Manipulate_Cycle()
 		{
 			var target = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-			var testing = new ManipulateComponent();
-			var result = testing.Cycle(target);
+			
+			var result = _.List.Cycle(target);
 
 			for (int i = 0; i < 1000; i++)
 			{

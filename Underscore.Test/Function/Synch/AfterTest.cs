@@ -33,7 +33,7 @@ namespace Underscore.Test.Function.Synch
 			var expected = new [] { "2", "2", "2", "3", "4", "5", "6", "7", "8", "9" };
 			Func<string, string> function = (a) => a;
 
-			var aftered = component.After(function, 3);
+			var aftered = _.Function.After(function, 3);
 
 			List<Task<string>> tasks = new List<Task<string>>();
 
@@ -66,7 +66,7 @@ namespace Underscore.Test.Function.Synch
 				return a;
 			});
 
-			var aftered = component.After(aftering, paramValue);
+			var aftered = _.Function.After(aftering, paramValue);
 
 			for (int i = 0; i < repeatCount; i++)
 			{
@@ -108,7 +108,7 @@ namespace Underscore.Test.Function.Synch
 
 			});
 
-			var aftered = component.After(aftering, paramValue);
+			var aftered = _.Function.After(aftering, paramValue);
 
 			for (int i = 0; i < repeatCount; i++)
 			{
@@ -150,7 +150,7 @@ namespace Underscore.Test.Function.Synch
 
 			});
 
-			var aftered = component.After(aftering, paramValue);
+			var aftered = _.Function.After(aftering, paramValue);
 
 			for (int i = 0; i < repeatCount; i++)
 			{
@@ -192,7 +192,7 @@ namespace Underscore.Test.Function.Synch
 
 			});
 
-			var aftered = component.After(aftering, paramValue);
+			var aftered = _.Function.After(aftering, paramValue);
 
 			for (int i = 0; i < repeatCount; i++)
 			{
@@ -234,7 +234,7 @@ namespace Underscore.Test.Function.Synch
 
 			});
 
-			var aftered = component.After(aftering, paramValue);
+			var aftered = _.Function.After(aftering, paramValue);
 
 			for (int i = 0; i < repeatCount; i++)
 			{
@@ -276,7 +276,7 @@ namespace Underscore.Test.Function.Synch
 
 			});
 
-			var aftered = component.After(aftering, paramValue);
+			var aftered = _.Function.After(aftering, paramValue);
 
 			for (int i = 0; i < repeatCount; i++)
 			{
@@ -318,7 +318,7 @@ namespace Underscore.Test.Function.Synch
 
 			});
 
-			var aftered = component.After(aftering, paramValue);
+			var aftered = _.Function.After(aftering, paramValue);
 
 			for (int i = 0; i < repeatCount; i++)
 			{
@@ -360,7 +360,7 @@ namespace Underscore.Test.Function.Synch
 
 			});
 
-			var aftered = component.After(aftering, paramValue);
+			var aftered = _.Function.After(aftering, paramValue);
 
 			for (int i = 0; i < repeatCount; i++)
 			{
@@ -404,7 +404,7 @@ namespace Underscore.Test.Function.Synch
 
 			});
 
-			var aftered = component.After(aftering, paramValue);
+			var aftered = _.Function.After(aftering, paramValue);
 
 			for (int i = 0; i < repeatCount; i++)
 			{
@@ -446,7 +446,7 @@ namespace Underscore.Test.Function.Synch
 
 			});
 
-			var aftered = component.After(aftering, paramValue);
+			var aftered = _.Function.After(aftering, paramValue);
 
 			for (int i = 0; i < repeatCount; i++)
 			{
@@ -488,7 +488,7 @@ namespace Underscore.Test.Function.Synch
 
 			});
 
-			var aftered = component.After(aftering, paramValue);
+			var aftered = _.Function.After(aftering, paramValue);
 
 			for (int i = 0; i < repeatCount; i++)
 			{
@@ -530,7 +530,7 @@ namespace Underscore.Test.Function.Synch
 
 			});
 
-			var aftered = component.After(aftering, paramValue);
+			var aftered = _.Function.After(aftering, paramValue);
 
 			for (int i = 0; i < repeatCount; i++)
 			{
@@ -572,7 +572,7 @@ namespace Underscore.Test.Function.Synch
 
 			});
 
-			var aftered = component.After(aftering, paramValue);
+			var aftered = _.Function.After(aftering, paramValue);
 
 			for (int i = 0; i < repeatCount; i++)
 			{
@@ -614,7 +614,7 @@ namespace Underscore.Test.Function.Synch
 
 			});
 
-			var aftered = component.After(aftering, paramValue);
+			var aftered = _.Function.After(aftering, paramValue);
 
 			for (int i = 0; i < repeatCount; i++)
 			{
@@ -656,7 +656,7 @@ namespace Underscore.Test.Function.Synch
 
 			});
 
-			var aftered = component.After(aftering, paramValue);
+			var aftered = _.Function.After(aftering, paramValue);
 
 			for (int i = 0; i < repeatCount; i++)
 			{
@@ -698,7 +698,7 @@ namespace Underscore.Test.Function.Synch
 
 			});
 
-			var aftered = component.After(aftering, paramValue);
+			var aftered = _.Function.After(aftering, paramValue);
 
 			for (int i = 0; i < repeatCount; i++)
 			{

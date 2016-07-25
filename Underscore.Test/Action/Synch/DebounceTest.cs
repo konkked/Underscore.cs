@@ -13,13 +13,13 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Debounce_NoArguments()
 		{
-			var testing = new SynchComponent();
+			
 			var flag = false;
 
 			var callcount = 0;
 
 			var debounced =
-				testing.Debounce(() =>
+				_.Action.Debounce(() =>
 				{
 					flag = true;
 					callcount++;
@@ -60,11 +60,11 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Debounce_1Argument()
 		{
-			var testing = new SynchComponent();
+			
 			string result = null;
 			var callCount = 0;
 
-			var debounced = testing.Debounce(new Action<string>((i) =>
+			var debounced = _.Action.Debounce(new Action<string>((i) =>
 			{
 				result = i;
 				callCount++;
@@ -86,7 +86,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Debounce_2Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -103,7 +103,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var debounced =
-				testing.Debounce(debouncing, waitingFor);
+				_.Action.Debounce(debouncing, waitingFor);
 
 			var tasksRunning = new List<Task>();
 			
@@ -151,7 +151,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Debounce_3Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -169,7 +169,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var debounced =
-				testing.Debounce(debouncing, waitingFor);
+				_.Action.Debounce(debouncing, waitingFor);
 
 			var tasksRunning = new List<Task>();
 			
@@ -219,7 +219,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Debounce_4Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -239,7 +239,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var debounced =
-				testing.Debounce(debouncing, waitingFor);
+				_.Action.Debounce(debouncing, waitingFor);
 
 			var tasksRunning = new List<Task>();
 			
@@ -294,7 +294,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Debounce_5Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -314,7 +314,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var debounced =
-				testing.Debounce(debouncing, waitingFor);
+				_.Action.Debounce(debouncing, waitingFor);
 
 			var tasksRunning = new List<Task>();
 			
@@ -369,7 +369,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Debounce_6Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -390,7 +390,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var debounced =
-				testing.Debounce(debouncing, waitingFor);
+				_.Action.Debounce(debouncing, waitingFor);
 
 			var tasksRunning = new List<Task>();
 			
@@ -447,7 +447,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Debounce_7Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -469,7 +469,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var debounced =
-				testing.Debounce(debouncing, waitingFor);
+				_.Action.Debounce(debouncing, waitingFor);
 
 			var tasksRunning = new List<Task>();
 		   
@@ -528,7 +528,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Debounce_8Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -551,7 +551,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var debounced =
-				testing.Debounce(debouncing, waitingFor);
+				_.Action.Debounce(debouncing, waitingFor);
 
 			var tasksRunning = new List<Task>();
 
@@ -612,7 +612,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Debounce_9Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -636,7 +636,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var debounced =
-				testing.Debounce(debouncing, waitingFor);
+				_.Action.Debounce(debouncing, waitingFor);
 
 			var tasksRunning = new List<Task>();
 
@@ -699,7 +699,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Debounce_10Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -724,7 +724,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var debounced =
-				testing.Debounce(debouncing, waitingFor);
+				_.Action.Debounce(debouncing, waitingFor);
 
 			var tasksRunning = new List<Task>();
 
@@ -789,7 +789,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Debounce_11Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -815,7 +815,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var debounced =
-				testing.Debounce(debouncing, waitingFor);
+				_.Action.Debounce(debouncing, waitingFor);
 
 			var tasksRunning = new List<Task>();
 
@@ -882,7 +882,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Debounce_12Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -909,7 +909,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var debounced =
-				testing.Debounce(debouncing, waitingFor);
+				_.Action.Debounce(debouncing, waitingFor);
 
 			var tasksRunning = new List<Task>();
 
@@ -978,7 +978,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Debounce_13Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -1006,7 +1006,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var debounced =
-				testing.Debounce(debouncing, waitingFor);
+				_.Action.Debounce(debouncing, waitingFor);
 
 			var tasksRunning = new List<Task>();
 
@@ -1077,7 +1077,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Debounce_14Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -1106,7 +1106,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var debounced =
-				testing.Debounce(debouncing, waitingFor);
+				_.Action.Debounce(debouncing, waitingFor);
 
 			var tasksRunning = new List<Task>();
 
@@ -1179,7 +1179,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Debounce_15Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -1209,7 +1209,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var debounced =
-				testing.Debounce(debouncing, waitingFor);
+				_.Action.Debounce(debouncing, waitingFor);
 
 			var tasksRunning = new List<Task>();
 
@@ -1284,7 +1284,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Debounce_16Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var flag = false;
 			const int waitingFor = 50;
 			var timer = new Stopwatch();
@@ -1315,7 +1315,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var debounced =
-				testing.Debounce(debouncing, waitingFor);
+				_.Action.Debounce(debouncing, waitingFor);
 
 			var tasksRunning = new List<Task>();
 

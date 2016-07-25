@@ -34,6 +34,9 @@ namespace Underscore.Function
 			var fn = function;
 			return (a) =>
 			{
+				if (a == null)
+					return fn(a);
+
 				if (!localStore.ContainsKey(a))
 					lock (locking)
 					{

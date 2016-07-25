@@ -1,14 +1,10 @@
 ﻿using System;
 using NUnit.Framework;
-using System.Threading.Tasks;
 using Moq;
 using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
-using Underscore.Function;
 using Underscore.Object.Reflection;
-using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Underscore.Test.Object.Reflection
 {
@@ -72,9 +68,8 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Invoke_WithoutParameterAndWithoutReturnValue()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
-			var testing = _.Object.Method;
 
-			var result = testing.Invoke(testingTarget, "InvokeWithoutParameterAndWithoutReturnValue");
+			var result = _.Object.Method.Invoke(testingTarget, "InvokeWithoutParameterAndWithoutReturnValue");
 
 			Assert.IsTrue(testingTarget.InvokeWithoutParameterAndWithoutReturnValueWasCalled);
 			// when the method is a void just returns null;
@@ -85,14 +80,13 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Invoke_WithoutParameterWithReturnValue()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
-			var testing = _.Object.Method;
 
-			string result  = (string)testing.Invoke(testingTarget, "InvokeWithoutParameterAndWithReturnValue");
+			string result  = (string)_.Object.Method.Invoke(testingTarget, "InvokeWithoutParameterAndWithReturnValue");
 
 			Assert.IsTrue(testingTarget.InvokeWithoutParameterAndWithReturnValueWasCalled);
 			Assert.AreEqual("1",result);
 
-			result = (string)testing.Invoke(testingTarget, "InvokeWithoutParameterAndWithReturnValue");
+			result = (string)_.Object.Method.Invoke(testingTarget, "InvokeWithoutParameterAndWithReturnValue");
 			Assert.AreEqual("2", result);
 
 		}
@@ -101,14 +95,13 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Invoke_WithoutParameterWithReturnValueGeneric()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
-			var testing = _.Object.Method;
 
-			string result = testing.Invoke<string>(testingTarget, "InvokeWithoutParameterAndWithReturnValue");
+			string result = _.Object.Method.Invoke<string>(testingTarget, "InvokeWithoutParameterAndWithReturnValue");
 
 			Assert.IsTrue(testingTarget.InvokeWithoutParameterAndWithReturnValueWasCalled);
 			Assert.AreEqual("1", result);
 
-			result = testing.Invoke<string>(testingTarget, "InvokeWithoutParameterAndWithReturnValue");
+			result = _.Object.Method.Invoke<string>(testingTarget, "InvokeWithoutParameterAndWithReturnValue");
 			Assert.AreEqual("2", result);
 		}
 
@@ -116,9 +109,8 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Invoke_WithParameterWithoutReturnValue()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
-			var testing = _.Object.Method;
 
-			object result = testing.Invoke(testingTarget, "InvokeWithParameterWithoutReturnValue","a","b");
+			object result = _.Object.Method.Invoke(testingTarget, "InvokeWithParameterWithoutReturnValue","a","b");
 
 			Assert.IsTrue(testingTarget.InvokeWithParameterWithoutReturnValueWasCalled);
 			Assert.IsNull(result);
@@ -130,9 +122,8 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Invoke_WithParameterWithReturnValueNonGeneric()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
-			var testing = _.Object.Method;
 
-			string result = (string)testing.Invoke(testingTarget, "InvokeWithParametersAndReturnValue", "a", "b");
+			string result = (string)_.Object.Method.Invoke(testingTarget, "InvokeWithParametersAndReturnValue", "a", "b");
 
 			Assert.IsTrue(testingTarget.InvokeWithParametersAndReturnValueWasCalled);
 			Assert.AreEqual("a b" , result);
@@ -144,9 +135,8 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Invoke_WithParameterWithReturnValueGeneric()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
-			var testing = _.Object.Method;
 
-			string result = testing.Invoke<string>(testingTarget, "InvokeWithParametersAndReturnValue", "a", "b");
+			string result = _.Object.Method.Invoke<string>(testingTarget, "InvokeWithParametersAndReturnValue", "a", "b");
 
 			Assert.IsTrue(testingTarget.InvokeWithParametersAndReturnValueWasCalled);
 			Assert.AreEqual("a b", result);
@@ -158,9 +148,8 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Invoke_ForAllWithParameterWithoutReturnValueLazy()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
-			var testing = _.Object.Method;
 
-			var result = testing.InvokeForAll(testingTarget, "InvokeWithParameterWithoutReturnValue",
+			var result = _.Object.Method.InvokeForAll(testingTarget, "InvokeWithParameterWithoutReturnValue",
 				new[] {new object[] {"a", "b"}, new object[] {"c", "d"}, new object[] {"e", "f"}});
 
 			//At first is false because no methods have actually been called yet
@@ -190,9 +179,8 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Invoke_ForAllWithParameterWithoutReturnValueGreedy()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
-			var testing = _.Object.Method;
 
-			var result = testing.InvokeForAll(testingTarget, "InvokeWithParameterWithoutReturnValue",
+			var result = _.Object.Method.InvokeForAll(testingTarget, "InvokeWithParameterWithoutReturnValue",
 				new[] { new object[] { "a", "b" }, new object[] { "c", "d" }, new object[] { "e", "f" } },true);
 
 			//Should be invoked right away, so in this test case the first pull will be true
@@ -219,10 +207,9 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Invoke_ForAllWithParameterWithReturnValueLazy()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
-			var testing = _.Object.Method;
 
 			var tresult =
-				testing.InvokeForAll(testingTarget, "InvokeWithParametersAndReturnValue",
+				_.Object.Method.InvokeForAll(testingTarget, "InvokeWithParametersAndReturnValue",
 					new[] {new object[] {"a", "b"}, new object[] {"c", "d"}, new object[] {"e", "f"}});
 
 			Assert.IsFalse(testingTarget.InvokeWithParametersAndReturnValueWasCalled);
@@ -250,10 +237,9 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Invoke_ForAllWithParameterWithReturnValueGreedy()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
-			var testing = _.Object.Method;
 
 			var tresult =
-				testing.InvokeForAll(testingTarget, "InvokeWithParametersAndReturnValue",
+				_.Object.Method.InvokeForAll(testingTarget, "InvokeWithParametersAndReturnValue",
 					new[] { new object[] { "a", "b" }, new object[] { "c", "d" }, new object[] { "e", "f" } },true);
 
 			Assert.IsTrue(testingTarget.InvokeWithParametersAndReturnValueWasCalled);
@@ -280,10 +266,9 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_InvokeForAllWithParameterWithReturnValueGenericLazy()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
-			var testing = _.Object.Method;
 
 			var tresult =
-				testing.InvokeForAll<string>(testingTarget, "InvokeWithParametersAndReturnValue",
+				_.Object.Method.InvokeForAll<string>(testingTarget, "InvokeWithParametersAndReturnValue",
 					new[] { new object[] { "a", "b" }, new object[] { "c", "d" }, new object[] { "e", "f" } });
 
 			Assert.IsFalse(testingTarget.InvokeWithParametersAndReturnValueWasCalled);
@@ -313,10 +298,9 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Invoke_ForAllWithParameterWithReturnGenericGreedy()
 		{
 			var testingTarget = new MethodInvokeTestTargetObject();
-			var testing = _.Object.Method;
 
 			var tresult =
-				testing.InvokeForAll<string>(testingTarget, "InvokeWithParametersAndReturnValue",
+				_.Object.Method.InvokeForAll<string>(testingTarget, "InvokeWithParametersAndReturnValue",
 					new[] { new object[] { "a", "b" }, new object[] { "c", "d" }, new object[] { "e", "f" } },true);
 
 			Assert.IsTrue(testingTarget.InvokeWithParametersAndReturnValueWasCalled);
@@ -343,13 +327,13 @@ namespace Underscore.Test.Object.Reflection
 		[Test]
 		public void Object_Method_Query_TargetInstanceNoArgs()
 		{
+			var testingTarget = new MethodInvokeTestTargetObject();
 
-			var testing = _.Object.Method;
 			var target = new MethodMethodsTestFixture();
 			
 
 			//all methods with no params
-			var methods = testing.Query(target, new { });
+			var methods = _.Object.Method.Query(target, new { });
 			var infos = methods as MethodInfo[] ?? methods.ToArray();
 
 			//query does a deep search unlike all which will only give all from declaring type
@@ -377,6 +361,7 @@ namespace Underscore.Test.Object.Reflection
 		[Test]
 		public void Object_Method_Query_TargetInstanceReturnType()
 		{
+			var testingTarget = new MethodInvokeTestTargetObject();
 
 			var target = new MethodMethodsTestFixture();
 			
@@ -396,6 +381,7 @@ namespace Underscore.Test.Object.Reflection
 		[Test]
 		public void Object_Method_Query_TargetInstanceReturnOverride()
 		{
+			var testingTarget = new MethodInvokeTestTargetObject();
 
 			var target = new MethodMethodsTestFixture();
 
@@ -411,12 +397,12 @@ namespace Underscore.Test.Object.Reflection
 		[Test]
 		public void Object_Method_Query_TargetInstanceOneArgNames()
 		{
+			var testingTarget = new MethodInvokeTestTargetObject();
 
-			var testing = _.Object.Method;
 			var target = new MethodMethodsTestFixture();
 			
-			var singleParamName1 = testing.Query(target, "arg");
-			var singleParamName2 = testing.Query(target, new[] { "arg" });
+			var singleParamName1 = _.Object.Method.Query(target, "arg");
+			var singleParamName2 = _.Object.Method.Query(target, new[] { "arg" });
 
 			var singParamName1Arr = singleParamName1 as MethodInfo[] ?? singleParamName1.ToArray();
 			Assert.IsTrue(singParamName1Arr.Count() == 1);
@@ -436,12 +422,12 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Query_TargetInstanceOneArgType()
 		{
 
-			var testing = _.Object.Method;
+			
 			var target = new MethodMethodsTestFixture();
 
 
 			//gets the methods where the number of args with a single string parameter using just a type as an arg
-			var byOneType = testing.Query(target, typeof(string));
+			var byOneType = _.Object.Method.Query(target, typeof(string));
 
 			//is logically equivelant to this linq expression
 			Assert.IsTrue(
@@ -454,7 +440,7 @@ namespace Underscore.Test.Object.Reflection
 					.SequenceEqual(byOneType));
 
 			//This should produce the same results
-			var byOneTypeInArray = testing.Query(target, new[] { typeof(string) });
+			var byOneTypeInArray = _.Object.Method.Query(target, new[] { typeof(string) });
 
 			Assert.IsTrue(byOneType.SequenceEqual(byOneTypeInArray));
 			
@@ -465,12 +451,12 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Query_TargetInstanceOneArgAnonObj()
 		{
 
-			var testing = _.Object.Method;
+			
 			var target = new MethodMethodsTestFixture();
 
 
 			//gets the methods where the number of args with a single string parameter using just a type as an arg
-			var byAnonObj = testing.Query(target, new {arg= typeof(string)});
+			var byAnonObj = _.Object.Method.Query(target, new {arg= typeof(string)});
 
 			//is logically equivelant to this linq expression
 			Assert.IsTrue(
@@ -489,12 +475,12 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Methods_Query_InstanceTwoArgNames()
 		{
 
-			var testing = _.Object.Method;
+			
 			var target = new MethodMethodsTestFixture();
 
 
 			//gets the methods with parameters named "arg1" and "arg2"
-			var doubleParamNames = testing.Query(target, new[] { "arg1","arg2" });
+			var doubleParamNames = _.Object.Method.Query(target, new[] { "arg1","arg2" });
 
 
 			Assert.IsTrue(
@@ -515,11 +501,11 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Methods_Query_InstanceTwoArgTypes()
 		{
 
-			var testing = _.Object.Method;
+			
 			var target = new MethodMethodsTestFixture();
 
 
-			var doubleTypeParams = testing.Query(target, new[] { typeof(string), typeof(string)});
+			var doubleTypeParams = _.Object.Method.Query(target, new[] { typeof(string), typeof(string)});
 
 
 			Assert.IsTrue(
@@ -539,9 +525,7 @@ namespace Underscore.Test.Object.Reflection
 		[Test]
 		public void Object_Methods_Query_InstanceTwoArgAnonymousObject()
 		{
-
 			var target = new MethodMethodsTestFixture();
-
 
 			var dblAnonParam = _.Object.Method.Query(target, new{  arg1=typeof(string), arg2=typeof(string) });
 
@@ -562,11 +546,9 @@ namespace Underscore.Test.Object.Reflection
 		[Test]
 		public void Object_Method_Query_TargetTypeNoArgs()
 		{
-
-			var testing = _.Object.Method;
 			var target = typeof(MethodMethodsTestFixture);
 
-			var methods = testing.Query(target, new {});
+			var methods = _.Object.Method.Query(target, new {});
 
 			//query does a deep search unlike all which will only give all from declaring type
 			Assert.AreEqual(5, methods.Count());
@@ -627,11 +609,11 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Query_TargetTypeOneArgNames()
 		{
 
-			var testing = _.Object.Method;
+			
 			var target = typeof(MethodMethodsTestFixture);
 
-			var singleParamName1 = testing.Query(target, "arg");
-			var singleParamName2 = testing.Query(target, new[] { "arg" });
+			var singleParamName1 = _.Object.Method.Query(target, "arg");
+			var singleParamName2 = _.Object.Method.Query(target, new[] { "arg" });
 
 			var singParamName1Arr = singleParamName1 as MethodInfo[] ?? singleParamName1.ToArray();
 			Assert.IsTrue(singParamName1Arr.Count() == 1);
@@ -651,12 +633,12 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Query_TargetTypeOneArgType()
 		{
 
-			var testing = _.Object.Method;
+			
 			var target = typeof(MethodMethodsTestFixture);
 
 
 			//gets the methods where the number of args with a single string parameter using just a type as an arg
-			var byOneType = testing.Query(target, typeof(string));
+			var byOneType = _.Object.Method.Query(target, typeof(string));
 
 			//is logically equivelant to this linq expression
 			Assert.IsTrue(
@@ -669,7 +651,7 @@ namespace Underscore.Test.Object.Reflection
 					.SequenceEqual(byOneType));
 
 			//This should produce the same results
-			var byOneTypeInArray = testing.Query(target, new[] { typeof(string) });
+			var byOneTypeInArray = _.Object.Method.Query(target, new[] { typeof(string) });
 
 			Assert.IsTrue(byOneType.SequenceEqual(byOneTypeInArray));
 
@@ -680,12 +662,12 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Query_TargetTypeOneArgAnonObj()
 		{
 
-			var testing = _.Object.Method;
+			
 			var target = typeof(MethodMethodsTestFixture);
 
 
 			//gets the methods where the number of args with a single string parameter using just a type as an arg
-			var byAnonObj = testing.Query(target, new { arg = typeof(string) });
+			var byAnonObj = _.Object.Method.Query(target, new { arg = typeof(string) });
 
 			//is logically equivelant to this linq expression
 			Assert.IsTrue(
@@ -704,12 +686,12 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Methods_Query_TypeTwoArgNames()
 		{
 
-			var testing = _.Object.Method;
+			
 			var target = typeof(MethodMethodsTestFixture);
 
 
 			//gets the methods with parameters named "arg1" and "arg2"
-			var doubleParamNames = testing.Query(target, new[] { "arg1", "arg2" });
+			var doubleParamNames = _.Object.Method.Query(target, new[] { "arg1", "arg2" });
 
 
 			Assert.IsTrue(
@@ -730,11 +712,11 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Methods_Query_TypeTwoArgTypes()
 		{
 
-			var testing = _.Object.Method;
+			
 			var target = typeof(MethodMethodsTestFixture);
 
 
-			var doubleTypeParams = testing.Query(target, new[] { typeof(string), typeof(string) });
+			var doubleTypeParams = _.Object.Method.Query(target, new[] { typeof(string), typeof(string) });
 
 
 			Assert.IsTrue(
@@ -1214,25 +1196,25 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Has_TargetHasOneArg()
 		{
 			var target = new MethodMethodsTestFixture();
-			var testing = _.Object.Method;
+			
 
-			Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue", new {arg = typeof (string)}));
-			Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue", new[] {typeof (string)}));
-			Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue", typeof (string)));
-			Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue", new[] {"arg"}));
-			Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue", "arg"));
+			Assert.IsTrue(_.Object.Method.Has(target, "ShouldShowNoReturnValue", new {arg = typeof (string)}));
+			Assert.IsTrue(_.Object.Method.Has(target, "ShouldShowNoReturnValue", new[] {typeof (string)}));
+			Assert.IsTrue(_.Object.Method.Has(target, "ShouldShowNoReturnValue", typeof (string)));
+			Assert.IsTrue(_.Object.Method.Has(target, "ShouldShowNoReturnValue", new[] {"arg"}));
+			Assert.IsTrue(_.Object.Method.Has(target, "ShouldShowNoReturnValue", "arg"));
 
-			Assert.IsFalse(testing.Has(target, "ShouldntShowNoReturnValue", new {arg = typeof (string)}));
-			Assert.IsFalse(testing.Has(target, "ShouldntShowNoReturnValue", new[] {typeof (string)}));
-			Assert.IsFalse(testing.Has(target, "ShouldntShowNoReturnValue", typeof (string)));
-			Assert.IsFalse(testing.Has(target, "ShouldntShowNoReturnValue", new[] {"arg"}));
-			Assert.IsFalse(testing.Has(target, "ShouldntShowNoReturnValue", "arg"));
+			Assert.IsFalse(_.Object.Method.Has(target, "ShouldntShowNoReturnValue", new {arg = typeof (string)}));
+			Assert.IsFalse(_.Object.Method.Has(target, "ShouldntShowNoReturnValue", new[] {typeof (string)}));
+			Assert.IsFalse(_.Object.Method.Has(target, "ShouldntShowNoReturnValue", typeof (string)));
+			Assert.IsFalse(_.Object.Method.Has(target, "ShouldntShowNoReturnValue", new[] {"arg"}));
+			Assert.IsFalse(_.Object.Method.Has(target, "ShouldntShowNoReturnValue", "arg"));
 
 			var shouldShowMethods = new[]
 			{
-				testing.Has(target, "ShouldShowNoReturnValue", new {arg = typeof (string)}),
-				testing.Has(target, "ShouldShowNoReturnValue", new[] {typeof (string)}),
-				testing.Has(target, "ShouldShowNoReturnValue", new[] {"arg"})
+				_.Object.Method.Has(target, "ShouldShowNoReturnValue", new {arg = typeof (string)}),
+				_.Object.Method.Has(target, "ShouldShowNoReturnValue", new[] {typeof (string)}),
+				_.Object.Method.Has(target, "ShouldShowNoReturnValue", new[] {"arg"})
 			};
 
 			foreach (var result in shouldShowMethods)
@@ -1240,9 +1222,9 @@ namespace Underscore.Test.Object.Reflection
 
 			var shouldntShowMethods = new[]
 			{
-				testing.Has(target, "ShouldntShowNoReturnValue", new {arg = typeof (string)}),
-				testing.Has(target, "ShouldntShowNoReturnValue", new[] {typeof (string)}),
-				testing.Has(target, "ShouldntShowNoReturnValue", new[] {"arg"})
+				_.Object.Method.Has(target, "ShouldntShowNoReturnValue", new {arg = typeof (string)}),
+				_.Object.Method.Has(target, "ShouldntShowNoReturnValue", new[] {typeof (string)}),
+				_.Object.Method.Has(target, "ShouldntShowNoReturnValue", new[] {"arg"})
 			};
 
 			foreach (var result in shouldntShowMethods)
@@ -1254,23 +1236,23 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Has_TargetHasTwoArgs()
 		{
 			var target = new MethodMethodsTestFixture();
-			var testing = _.Object.Method;
+			
 
-			Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue",
+			Assert.IsTrue(_.Object.Method.Has(target, "ShouldShowNoReturnValue",
 				new {arg1 = typeof (string), arg2 = typeof (string)}));
-			Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue", new[] {typeof (string), typeof (string)}));
-			Assert.IsTrue(testing.Has(target, "ShouldShowNoReturnValue", new[] {"arg1", "arg2"}));
+			Assert.IsTrue(_.Object.Method.Has(target, "ShouldShowNoReturnValue", new[] {typeof (string), typeof (string)}));
+			Assert.IsTrue(_.Object.Method.Has(target, "ShouldShowNoReturnValue", new[] {"arg1", "arg2"}));
 
-			Assert.IsFalse(testing.Has(target, "ShouldntShowNoReturnValue",
+			Assert.IsFalse(_.Object.Method.Has(target, "ShouldntShowNoReturnValue",
 				new {arg1 = typeof (string), arg2 = typeof (string)}));
-			Assert.IsFalse(testing.Has(target, "ShouldntShowNoReturnValue", new[] {typeof (string), typeof (string)}));
-			Assert.IsFalse(testing.Has(target, "ShouldntShowNoReturnValue", new[] {"arg1", "arg2"}));
+			Assert.IsFalse(_.Object.Method.Has(target, "ShouldntShowNoReturnValue", new[] {typeof (string), typeof (string)}));
+			Assert.IsFalse(_.Object.Method.Has(target, "ShouldntShowNoReturnValue", new[] {"arg1", "arg2"}));
 
 			var shouldShowMethods = new[]
 			{
-				testing.Has(target, "ShouldShowNoReturnValue", new {arg1 = typeof (string), arg2 = typeof (string)}),
-				testing.Has(target, "ShouldShowNoReturnValue", new[] {typeof (string), typeof (string)}),
-				testing.Has(target, "ShouldShowNoReturnValue", new[] {"arg1", "arg2"})
+				_.Object.Method.Has(target, "ShouldShowNoReturnValue", new {arg1 = typeof (string), arg2 = typeof (string)}),
+				_.Object.Method.Has(target, "ShouldShowNoReturnValue", new[] {typeof (string), typeof (string)}),
+				_.Object.Method.Has(target, "ShouldShowNoReturnValue", new[] {"arg1", "arg2"})
 			};
 
 			foreach (var result in shouldShowMethods)
@@ -1278,9 +1260,9 @@ namespace Underscore.Test.Object.Reflection
 
 			var shouldntShowMethods = new[]
 			{
-				testing.Has(target, "ShouldntShowNoReturnValue", new {arg1 = typeof (string), arg2 = typeof (string)}),
-				testing.Has(target, "ShouldntShowNoReturnValue", new[] {typeof (string), typeof (string)}),
-				testing.Has(target, "ShouldntShowNoReturnValue", new[] {"arg1", "arg2"})
+				_.Object.Method.Has(target, "ShouldntShowNoReturnValue", new {arg1 = typeof (string), arg2 = typeof (string)}),
+				_.Object.Method.Has(target, "ShouldntShowNoReturnValue", new[] {typeof (string), typeof (string)}),
+				_.Object.Method.Has(target, "ShouldntShowNoReturnValue", new[] {"arg1", "arg2"})
 			};
 
 			foreach (var result in shouldntShowMethods)
@@ -1292,23 +1274,23 @@ namespace Underscore.Test.Object.Reflection
 		public void Object_Method_Has_DoesNotMatchPropertyMethods()
 		{
 			var target = new MethodMethodsTestFixture();
-			var testing = _.Object.Method;
+			
 
-			Assert.IsFalse(testing.Has(target, "get_PublicPropertyShouldNotShow"));
-			Assert.IsFalse(testing.Has(target, "get_PrivatePropertyShouldNotShow"));
+			Assert.IsFalse(_.Object.Method.Has(target, "get_PublicPropertyShouldNotShow"));
+			Assert.IsFalse(_.Object.Method.Has(target, "get_PrivatePropertyShouldNotShow"));
 
-			Assert.IsFalse(testing.Has(target, "set_PublicPropertyShouldNotShow", new {value = typeof (string)}));
-			Assert.IsFalse(testing.Has(target, "set_PublicPropertyShouldNotShow", new[] {typeof (string)}));
-			Assert.IsFalse(testing.Has(target, "set_PublicPropertyShouldNotShow", typeof (string)));
-			Assert.IsFalse(testing.Has(target, "set_PublicPropertyShouldNotShow", new[] {"value"}));
-			Assert.IsFalse(testing.Has(target, "set_PublicPropertyShouldNotShow", "value"));
+			Assert.IsFalse(_.Object.Method.Has(target, "set_PublicPropertyShouldNotShow", new {value = typeof (string)}));
+			Assert.IsFalse(_.Object.Method.Has(target, "set_PublicPropertyShouldNotShow", new[] {typeof (string)}));
+			Assert.IsFalse(_.Object.Method.Has(target, "set_PublicPropertyShouldNotShow", typeof (string)));
+			Assert.IsFalse(_.Object.Method.Has(target, "set_PublicPropertyShouldNotShow", new[] {"value"}));
+			Assert.IsFalse(_.Object.Method.Has(target, "set_PublicPropertyShouldNotShow", "value"));
 
-			Assert.IsFalse(testing.Has(target, "set_PrivatePropertyShouldNotShow"));
-			Assert.IsFalse(testing.Has(target, "set_PrivatePropertyShouldNotShow", new {value = typeof (string)}));
-			Assert.IsFalse(testing.Has(target, "set_PrivatePropertyShouldNotShow", new[] {typeof (string)}));
-			Assert.IsFalse(testing.Has(target, "set_PrivatePropertyShouldNotShow", typeof (string)));
-			Assert.IsFalse(testing.Has(target, "set_PrivatePropertyShouldNotShow", new[] {"value"}));
-			Assert.IsFalse(testing.Has(target, "set_PrivatePropertyShouldNotShow", "value"));
+			Assert.IsFalse(_.Object.Method.Has(target, "set_PrivatePropertyShouldNotShow"));
+			Assert.IsFalse(_.Object.Method.Has(target, "set_PrivatePropertyShouldNotShow", new {value = typeof (string)}));
+			Assert.IsFalse(_.Object.Method.Has(target, "set_PrivatePropertyShouldNotShow", new[] {typeof (string)}));
+			Assert.IsFalse(_.Object.Method.Has(target, "set_PrivatePropertyShouldNotShow", typeof (string)));
+			Assert.IsFalse(_.Object.Method.Has(target, "set_PrivatePropertyShouldNotShow", new[] {"value"}));
+			Assert.IsFalse(_.Object.Method.Has(target, "set_PrivatePropertyShouldNotShow", "value"));
 
 		}
 		

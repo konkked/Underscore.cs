@@ -60,8 +60,8 @@ namespace Underscore.Test.Object.Comparison
 					}
 				};
 
-			Assert.IsTrue(testing.AreEquatable(item2, item1));
-			Assert.IsTrue(testing.AreEquatable(item1, item2));
+			Assert.IsTrue(_.Object.AreEquatable(item2, item1));
+			Assert.IsTrue(_.Object.AreEquatable(item1, item2));
 		}
 
 		[Test]
@@ -92,8 +92,8 @@ namespace Underscore.Test.Object.Comparison
 					}
 				};
 
-			Assert.IsTrue(testing.AreEquatable(item2, item1));
-			Assert.IsTrue(testing.AreEquatable(item1, item2));
+			Assert.IsTrue(_.Object.AreEquatable(item2, item1));
+			Assert.IsTrue(_.Object.AreEquatable(item1, item2));
 		}
 
 		[Test]
@@ -131,8 +131,8 @@ namespace Underscore.Test.Object.Comparison
 					}
 				};
 
-			Assert.IsTrue(testing.AreEquatable(item2, item1, true));
-			Assert.IsTrue(testing.AreEquatable(item1, item2, true));
+			Assert.IsTrue(_.Object.AreEquatable(item2, item1, true));
+			Assert.IsTrue(_.Object.AreEquatable(item1, item2, true));
 		}
 
 		[Test]
@@ -163,8 +163,8 @@ namespace Underscore.Test.Object.Comparison
 					}
 				};
 
-			Assert.IsFalse(testing.AreEquatable(item2, item1, true));
-			Assert.IsFalse(testing.AreEquatable(item1, item2, true));
+			Assert.IsFalse(_.Object.AreEquatable(item2, item1, true));
+			Assert.IsFalse(_.Object.AreEquatable(item1, item2, true));
 		}
 
 		[Test]
@@ -202,8 +202,8 @@ namespace Underscore.Test.Object.Comparison
 					}
 				};
 
-			Assert.IsTrue(testing.AreEquatable(item2, item1));
-			Assert.IsTrue(testing.AreEquatable(item1, item2));
+			Assert.IsTrue(_.Object.AreEquatable(item2, item1));
+			Assert.IsTrue(_.Object.AreEquatable(item1, item2));
 		}
 	}
 }

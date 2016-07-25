@@ -20,7 +20,7 @@ namespace Underscore.Test.Boolean
 		{
 			Func<bool> toNegate = () => true;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsFalse(negated());
 		}
@@ -30,7 +30,7 @@ namespace Underscore.Test.Boolean
 		{
 			Func<bool> toNegate = () => false;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsTrue(negated());
 		}
@@ -42,7 +42,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, bool> toNegate = (a) => true;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsFalse(negated(obj));
 		}
@@ -54,7 +54,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, bool> toNegate = (a) => false;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsTrue(negated(obj));
 		}
@@ -66,7 +66,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, bool> toNegate = (a, b) => true;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsFalse(negated(obj, obj));
 		}
@@ -78,7 +78,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, bool> toNegate = (a, b) => false;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsTrue(negated(obj, obj));
 		}
@@ -90,7 +90,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, bool> toNegate = (a, b, c) => true;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsFalse(negated(obj, obj, obj));
 		}
@@ -102,7 +102,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, bool> toNegate = (a, b, c) => false;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsTrue(negated(obj, obj, obj));
 		}
@@ -114,7 +114,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, bool> toNegate = (a, b, c, d) => true;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsFalse(negated(obj, obj, obj, obj));
 		}
@@ -126,7 +126,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, bool> toNegate = (a, b, c, d) => false;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsTrue(negated(obj, obj, obj, obj));
 		}
@@ -138,7 +138,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, bool> toNegate = (a, b, c, d, e) => true;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj));
 		}
@@ -150,7 +150,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, bool> toNegate = (a, b, c, d, e) => false;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj));
 		}
@@ -162,7 +162,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f) => true;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj));
 		}
@@ -174,7 +174,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f) => false;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj));
 		}
@@ -186,7 +186,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g) => true;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -198,7 +198,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g) => false;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -210,7 +210,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h) => true;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -222,7 +222,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h) => false;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -234,7 +234,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h, i) => true;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -246,7 +246,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h, i) => false;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -258,7 +258,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h, i, j) => true;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -270,7 +270,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h, i, j) => false;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -282,7 +282,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h, i, j, k) => true;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -294,7 +294,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h, i, j, k) => false;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -306,7 +306,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h, i, j, k, l) => true;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -318,7 +318,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h, i, j, k, l) => false;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -330,7 +330,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h, i, j, k, l, m) => true;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -342,7 +342,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h, i, j, k, l, m) => false;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -354,7 +354,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => true;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -366,7 +366,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) => false;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -378,7 +378,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => true;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -390,7 +390,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) => false;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -402,7 +402,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => true;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsFalse(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}
@@ -414,7 +414,7 @@ namespace Underscore.Test.Boolean
 			var obj = new object();
 			Func<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, bool> toNegate = (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) => false;
 
-			var negated = component.Negate(toNegate);
+			var negated = _.Function.Negate(toNegate);
 
 			Assert.IsTrue(negated(obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj, obj));
 		}

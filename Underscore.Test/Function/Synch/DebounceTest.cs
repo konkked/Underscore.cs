@@ -14,7 +14,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Debounce_NoArguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			var waiting = 25;
 
@@ -27,7 +27,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Debounce(targeting, waiting);
+			var target = _.Function.Debounce(targeting, waiting);
 
 			var continuing = new List<Task<string>>();
 
@@ -69,7 +69,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Debounce_1Argument()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			var waiting = 25;
 
@@ -82,7 +82,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Debounce(targeting, waiting);
+			var target = _.Function.Debounce(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -113,7 +113,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Debounce_2Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			var waiting = 25;
 
@@ -128,7 +128,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Debounce(targeting, waiting);
+			var target = _.Function.Debounce(targeting, waiting);
 
 			var continuing = new List<Task<string>>();
 
@@ -156,7 +156,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Debounce_3Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			var waiting = 25;
 
@@ -169,7 +169,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Debounce(targeting, waiting);
+			var target = _.Function.Debounce(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -198,7 +198,7 @@ namespace Underscore.Test.Function.Synch
 		public async Task Function_Synch_Debounce_4Arguments()
 		{
 
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			var waiting = 25;
 
@@ -211,7 +211,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Debounce(targeting, waiting);
+			var target = _.Function.Debounce(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -242,7 +242,7 @@ namespace Underscore.Test.Function.Synch
 		public async Task Function_Synch_Debounce_5Arguments()
 		{
 
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			var waiting = 25;
 
@@ -255,7 +255,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Debounce(targeting, waiting);
+			var target = _.Function.Debounce(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -284,7 +284,7 @@ namespace Underscore.Test.Function.Synch
 		public async Task Function_Synch_Debounce_6Arguments()
 		{
 
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			var waiting = 25;
 
@@ -297,7 +297,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Debounce(targeting, waiting);
+			var target = _.Function.Debounce(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -333,7 +333,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Debounce_7Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			var waiting = 25;
 
@@ -346,7 +346,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Debounce(targeting, waiting);
+			var target = _.Function.Debounce(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -384,7 +384,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Debounce_8Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			var waiting = 25;
 
@@ -397,7 +397,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Debounce(targeting, waiting);
+			var target = _.Function.Debounce(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -436,7 +436,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Debounce_9Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			var waiting = 25;
 
@@ -449,7 +449,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Debounce(targeting, waiting);
+			var target = _.Function.Debounce(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -489,7 +489,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Debounce_10Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			var waiting = 25;
 
@@ -502,7 +502,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Debounce(targeting, waiting);
+			var target = _.Function.Debounce(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -543,7 +543,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Debounce_11Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			var waiting = 25;
 
@@ -556,7 +556,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Debounce(targeting, waiting);
+			var target = _.Function.Debounce(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -598,7 +598,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Debounce_12Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			var waiting = 25;
 
@@ -611,7 +611,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Debounce(targeting, waiting);
+			var target = _.Function.Debounce(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -654,7 +654,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Debounce_13Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			var waiting = 25;
 
@@ -667,7 +667,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Debounce(targeting, waiting);
+			var target = _.Function.Debounce(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -711,7 +711,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Debounce_14Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			var waiting = 25;
 
@@ -724,7 +724,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Debounce(targeting, waiting);
+			var target = _.Function.Debounce(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -769,7 +769,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Debounce_15Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			var waiting = 25;
 
@@ -782,7 +782,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Debounce(targeting, waiting);
+			var target = _.Function.Debounce(targeting, waiting);
 
 			var continuing = new List<Task>();
 
@@ -828,7 +828,7 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Debounce_16Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var timer = new Stopwatch();
 			var waiting = 25;
 
@@ -841,7 +841,7 @@ namespace Underscore.Test.Function.Synch
 				return returning;
 			});
 
-			var target = testing.Debounce(targeting, waiting);
+			var target = _.Function.Debounce(targeting, waiting);
 
 			var continuing = new List<Task>();
 

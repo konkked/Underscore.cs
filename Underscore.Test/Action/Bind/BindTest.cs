@@ -25,7 +25,7 @@ namespace Underscore.Test.Action
 			expected = "a";
 			Action<string> action = (a) => output[0] = Util.Join(a);
 
-			var bound = component.Bind(action, "a");
+			var bound = _.Action.Bind(action, "a");
 
 			bound();
 
@@ -41,7 +41,7 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b);
 			};
 
-			var bound = component.Bind(action, "a", "b");
+			var bound = _.Action.Bind(action, "a", "b");
 
 			bound();
 
@@ -57,7 +57,7 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c");
+			var bound = _.Action.Bind(action, "a", "b", "c");
 
 			bound();
 
@@ -73,7 +73,7 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d");
 
 			bound();
 
@@ -89,7 +89,7 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e");
 
 			bound();
 
@@ -105,7 +105,7 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f");
 
 			bound();
 
@@ -121,7 +121,7 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g");
 
 			bound();
 
@@ -137,7 +137,7 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h");
 
 			bound();
 
@@ -153,7 +153,7 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h, i);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i");
 
 			bound();
 
@@ -169,7 +169,7 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j");
 
 			bound();
 
@@ -185,7 +185,7 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k");
 
 			bound();
 
@@ -201,7 +201,7 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l");
 
 			bound();
 
@@ -217,7 +217,7 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m");
 
 			bound();
 
@@ -233,7 +233,7 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n");
 
 			bound();
 
@@ -249,7 +249,7 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o");
 
 			bound();
 
@@ -265,7 +265,7 @@ namespace Underscore.Test.Action
 				output[0] = Util.Join(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 			};
 
-			var bound = component.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p");
+			var bound = _.Action.Bind(action, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p");
 
 			bound();
 

@@ -23,7 +23,7 @@ namespace Underscore.Test.Function.Synch
 		public void Function_Synch_Before_NoArguments()
 		{
 			var counter = 0;
-			var befored = component.Before(() => (counter++), 2);
+			var befored = _.Function.Before(() => (counter++), 2);
 			for (var i = 0; i < 2; i++)
 				Assert.AreEqual(i, befored());
 
@@ -44,7 +44,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, counter++);
 			});
 
-			var befored = component.Before(beforing, 2);
+			var befored = _.Function.Before(beforing, 2);
 
 			for (var i = 0; i < 2; i++)
 				Assert.AreEqual("a" + i, compose.Apply(befored, arguments));
@@ -68,7 +68,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, counter++);
 			});
 
-			var befored = component.Before(beforing, 2);
+			var befored = _.Function.Before(beforing, 2);
 
 			for (var i = 0; i < 2; i++)
 				Assert.AreEqual("ab" + i, compose.Apply(befored, arguments));
@@ -92,7 +92,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, counter++);
 			});
 
-			var befored = component.Before(beforing, 2);
+			var befored = _.Function.Before(beforing, 2);
 
 			for (var i = 0; i < 2; i++)
 				Assert.AreEqual("abc" + i, compose.Apply(befored, arguments));
@@ -117,7 +117,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, counter++);
 			});
 
-			var befored = component.Before(beforing, 2);
+			var befored = _.Function.Before(beforing, 2);
 
 			for (var i = 0; i < 2; i++)
 				Assert.AreEqual("abcd" + i, compose.Apply(befored, arguments));
@@ -142,7 +142,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, counter++);
 			});
 
-			var befored = component.Before(beforing, 2);
+			var befored = _.Function.Before(beforing, 2);
 
 			for (var i = 0; i < 2; i++)
 				Assert.AreEqual("abcde" + i, compose.Apply(befored, arguments));
@@ -167,7 +167,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, counter++);
 			});
 
-			var befored = component.Before(beforing, 2);
+			var befored = _.Function.Before(beforing, 2);
 
 			for (var i = 0; i < 2; i++)
 				Assert.AreEqual("abcdef" + i, compose.Apply(befored, arguments));
@@ -192,7 +192,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, counter++);
 			});
 
-			var befored = component.Before(beforing, 2);
+			var befored = _.Function.Before(beforing, 2);
 
 			for (var i = 0; i < 2; i++)
 				Assert.AreEqual("abcdefg" + i, compose.Apply(befored, arguments));
@@ -216,7 +216,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, counter++);
 			});
 
-			var befored = component.Before(beforing, 2);
+			var befored = _.Function.Before(beforing, 2);
 
 			for (var i = 0; i < 2; i++)
 				Assert.AreEqual("abcdefgh" + i, compose.Apply(befored, arguments));
@@ -241,7 +241,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, i, counter++);
 			});
 
-			var befored = component.Before(beforing, 2);
+			var befored = _.Function.Before(beforing, 2);
 
 			for (var i = 0; i < 2; i++)
 				Assert.AreEqual("abcdefghi" + i, compose.Apply(befored, arguments));
@@ -265,7 +265,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, i, j, counter++);
 			});
 
-			var befored = component.Before(beforing, 2);
+			var befored = _.Function.Before(beforing, 2);
 
 			for (var i = 0; i < 2; i++)
 				Assert.AreEqual("abcdefghij" + i, compose.Apply(befored, arguments));
@@ -289,7 +289,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, i, j, k, counter++);
 			});
 
-			var befored = component.Before(beforing, 2);
+			var befored = _.Function.Before(beforing, 2);
 
 			for (var i = 0; i < 2; i++)
 				Assert.AreEqual("abcdefghijk" + i, compose.Apply(befored, arguments));
@@ -313,7 +313,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, counter++);
 			});
 
-			var befored = component.Before(beforing, 2);
+			var befored = _.Function.Before(beforing, 2);
 
 			for (var i = 0; i < 2; i++)
 				Assert.AreEqual("abcdefghijkl" + i, compose.Apply(befored, arguments));
@@ -338,7 +338,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, counter++);
 			});
 
-			var befored = component.Before(beforing, 2);
+			var befored = _.Function.Before(beforing, 2);
 
 			for (var i = 0; i < 2; i++)
 				Assert.AreEqual("abcdefghijklm" + i, compose.Apply(befored, arguments));
@@ -363,7 +363,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, counter++);
 			});
 
-			var befored = component.Before(beforing, 2);
+			var befored = _.Function.Before(beforing, 2);
 
 			for (var i = 0; i < 2; i++)
 				Assert.AreEqual("abcdefghijklmn" + i, compose.Apply(befored, arguments));
@@ -388,7 +388,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, counter++);
 			});
 
-			var befored = component.Before(beforing, 2);
+			var befored = _.Function.Before(beforing, 2);
 
 			for (var i = 0; i < 2; i++)
 				Assert.AreEqual("abcdefghijklmno" + i, compose.Apply(befored, arguments));
@@ -412,7 +412,7 @@ namespace Underscore.Test.Function.Synch
 				return string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, counter++);
 			});
 
-			var befored = component.Before(beforing, 2);
+			var befored = _.Function.Before(beforing, 2);
 
 			for (var i = 0; i < 2; i++)
 				Assert.AreEqual("abcdefghijklmnop" + i, compose.Apply(befored, arguments));

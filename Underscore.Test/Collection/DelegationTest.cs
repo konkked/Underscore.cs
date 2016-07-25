@@ -45,7 +45,7 @@ namespace Underscore.Test.Collection
 		[Test]
 		public void Collection_Delegation_Invoke_WithoutArguments()
 		{
-			foreach (var item in component.Invoke(testingItems, "MethodWithoutParameters"))
+			foreach (var item in _.Collection.Invoke(testingItems, "MethodWithoutParameters"))
 			{
 				Assert.IsNull(item);
 			}
@@ -58,7 +58,7 @@ namespace Underscore.Test.Collection
 
 		public void Collection_Delegation_Invoke_WithArguments()
 		{
-			foreach (var item in component.Invoke(testingItems, "MethodWithParameters", "str"))
+			foreach (var item in _.Collection.Invoke(testingItems, "MethodWithParameters", "str"))
 			{
 				Assert.IsNull(item);
 			}
@@ -74,7 +74,7 @@ namespace Underscore.Test.Collection
 		public void Collection_Delegation_Resolve()
 		{
 			var targetArr = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-			var testing = new DelegationComponent(new MethodComponent(new MockUtilFunctionComponent(), new PropertyComponent()));
+			
 			var target = new Func<int>[10];
 
 			for (int i = 0; i < 10; i++)
@@ -83,7 +83,7 @@ namespace Underscore.Test.Collection
 				target[i] = () => targetArr[idx];
 			}
 
-			var result = testing.Resolve(target);
+			var result = _.Collection.Resolve(target);
 
 
 			for (int i = 0; i < 10; i++)
@@ -91,7 +91,7 @@ namespace Underscore.Test.Collection
 				targetArr[i] *= 2;
 			}
 
-			result = testing.Resolve(target);
+			result = _.Collection.Resolve(target);
 
 			foreach (var items in Enumerable.Range(0, 10).Zip(result, Tuple.Create))
 				Assert.AreEqual(items.Item1*2, items.Item2);

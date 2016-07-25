@@ -25,13 +25,13 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Throttle_NoArguments()
 		{
-			var testing = new SynchComponent();
+			
 
 			var result = 0;
 
 			var throttling = new System.Action(() => result++);
 			var tasks = new Stack<Task>();
-			var throttled = testing.Throttle(throttling, 100);
+			var throttled = _.Action.Throttle(throttling, 100);
 
 			Assert.AreEqual(0, result);
 
@@ -49,7 +49,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Throttle_1Argument()
 		{
-			var testing = new SynchComponent();
+			
 
 			var results = "";
 
@@ -62,7 +62,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var tasks = new Stack<Task>();
-			var throttled = testing.Throttle(throttling, 20);
+			var throttled = _.Action.Throttle(throttling, 20);
 
 			for (var i = 0; i < 100; i++)
 				tasks.Push(throttled(i));
@@ -80,7 +80,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Throttle_2Arguments()
 		{
-			var testing = new SynchComponent();
+			
 			var failOnSignificantDelay = Task.Delay(1000);
 
 			var results = new string[2];
@@ -94,7 +94,7 @@ namespace Underscore.Test.Action.Synch
 				callCount++;
 			});
 			var tasks = new Stack<Task>();
-			var throttled = testing.Throttle(throttling, 100);
+			var throttled = _.Action.Throttle(throttling, 100);
 
 
 			var firstResult = throttled(1, -1);
@@ -144,7 +144,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Throttle_3Arguments()
 		{
-			var testing = new SynchComponent();
+			
 
 			var results = new string[3];
 
@@ -158,7 +158,7 @@ namespace Underscore.Test.Action.Synch
 				callCount++;
 			});
 			var tasks = new Stack<Task>();
-			var throttled = testing.Throttle(throttling, 500);
+			var throttled = _.Action.Throttle(throttling, 500);
 
 			for (var i = 1; i <= 100; i++)
 				tasks.Push(throttled(i, -i, i));
@@ -209,7 +209,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Throttle_4Arguments()
 		{
-			var testing = new SynchComponent();
+			
 
 			var results = new string[4];
 
@@ -224,7 +224,7 @@ namespace Underscore.Test.Action.Synch
 				callCount++;
 			});
 			var tasks = new Stack<Task>();
-			var throttled = testing.Throttle(throttling, 500);
+			var throttled = _.Action.Throttle(throttling, 500);
 
 			for (var i = 1; i <= 100; i++)
 				tasks.Push(throttled(i, -i, i, -i));
@@ -271,7 +271,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Throttle_5Arguments()
 		{
-			var testing = new SynchComponent();
+			
 
 			var results = new string[5];
 
@@ -288,7 +288,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var tasks = new Stack<Task>();
-			var throttled = testing.Throttle(throttling, 500);
+			var throttled = _.Action.Throttle(throttling, 500);
 
 			for (var i = 1; i <= 100; i++)
 				tasks.Push(throttled(i, -i, i, -i, i));
@@ -314,7 +314,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public async Task Action_Synch_Throttle_6Arguments()
 		{
-			var testing = new SynchComponent();
+			
 
 			var results = new string[6];
 
@@ -332,7 +332,7 @@ namespace Underscore.Test.Action.Synch
 			});
 
 			var tasks = new Stack<Task>();
-			var throttled = testing.Throttle(throttling, 500);
+			var throttled = _.Action.Throttle(throttling, 500);
 
 			var first = throttled(1, -1, 1, -1, 1, -1);
 
