@@ -9,19 +9,12 @@ namespace Underscore.Collection
 	{
 		private readonly List.IPartitionComponent _partitionComponent;
 
-		public PartitionComponent()
-		{
-			_partitionComponent = new List.PartitionComponent(new MathComponent());
-		}
-
 		public PartitionComponent(List.IPartitionComponent partitionComponent)
 		{
 			_partitionComponent = partitionComponent;
 		}
 
-		/// <summary>
-		/// segment
-		/// </summary>
+
 		private IEnumerable<T> Segment<T>(IEnumerator<T> iter, int size, out bool cont)
 		{
 			var ret = new List<T>();

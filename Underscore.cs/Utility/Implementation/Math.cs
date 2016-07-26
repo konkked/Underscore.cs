@@ -6,7 +6,7 @@ namespace Underscore.Utility
 {
 	public class MathComponent : IMathComponent
 	{
-		private HashSet<string> _sharedUuidChecker;
+		private readonly HashSet<string> _sharedUuidChecker;
 		private static readonly object _randomLock = new object();
 		private static readonly Random _baseRandom = new Random();
 		[ThreadStatic] private static Random _threadInstance;

@@ -8,7 +8,7 @@ namespace Underscore.Object.Reflection
 {
 	public class MethodComponent : MethodsBaseComponent<MethodInfo>, IMethodComponent
 	{
-		private static HashSet<string> s_specialRules;
+		private readonly HashSet<string> _specialRules;
 		private readonly IPropertyComponent _property;
 
 		private static Members<MethodInfo> Members
@@ -22,26 +22,15 @@ namespace Underscore.Object.Reflection
 			}
 		}
 
-		public MethodComponent()
-			: base(new CacheComponent(new CompactComponent(), new Utility.CompactComponent()), new PropertyComponent(), Members)
-		{
-			if (s_specialRules == null)
-				InitSpecialRules();
-
-			_property = new PropertyComponent();
-		}
-
-		//Initializes special rules for the query method
-		private static void InitSpecialRules()
-		{
-			s_specialRules = new HashSet<string> { "return" };
-		}
 
 		public MethodComponent(Function.ICacheComponent cacher, IPropertyComponent property)
 			: base(cacher, property, Members)
 		{
 			_property = property;
-		}
+
+            //Initializes special rules for the query method
+            _specialRules = new HashSet<string> { "return" };
+        }
 
 
 		/// <summary>
@@ -92,7 +81,7 @@ namespace Underscore.Object.Reflection
 
 		protected override bool IsSpecialCase(string name)
 		{
-			return s_specialRules.Contains(name);
+			return _specialRules.Contains(name);
 		}
 
 		protected override IEnumerable<MethodInfo> FilterSpecialCase(string name, object value,
