@@ -8,11 +8,6 @@ namespace Underscore.Object
 	{
 		private readonly IPropertyComponent _property;
 
-		public DynamicComponent()
-		{
-			_property = new PropertyComponent();
-		}
-
 		public DynamicComponent(IPropertyComponent property)
 		{
 			_property = property;

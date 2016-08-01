@@ -9,14 +9,7 @@ namespace Underscore.Function
 		private readonly ICompactComponent _fnCompact;
 		private readonly Utility.ICompactComponent _utilCompact;
 		private readonly Utility.IMathComponent _math;
-
-		public SynchComponent()
-		{
-			_fnCompact = new CompactComponent();
-			_utilCompact = new Utility.CompactComponent();
-			_math = new Utility.MathComponent();
-		}
-
+		
 		public SynchComponent(ICompactComponent fnCompact , Utility.ICompactComponent utilCompact , Utility.IMathComponent mathComponent)
 		{
 			_fnCompact = fnCompact;

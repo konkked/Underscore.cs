@@ -20,12 +20,7 @@ namespace Underscore.Object.Reflection
 
 		private readonly Func<Type, object, IEnumerable<T>> _queryStore;
 		private readonly Func<Type, object, BindingFlags, IEnumerable<T>> _flaggedQueryStore;
-
-		protected MethodsBaseComponent()
-		{
-			_properties = new PropertyComponent();
-		} 
-
+		
 		protected MethodsBaseComponent(ICacheComponent cacher, IPropertyComponent properties, Members<T> collection)
 		{
 			_properties = properties;

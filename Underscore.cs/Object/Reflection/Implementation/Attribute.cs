@@ -9,12 +9,7 @@ namespace Underscore.Object.Reflection
 	public class AttributeComponent : IAttributeComponent
 	{
 		private readonly Func<object, IEnumerable<Attribute>> _getAttributes;
-
-		public AttributeComponent()
-		{
-			_getAttributes = new CacheComponent().Memoize<object, IEnumerable<Attribute>>(GetCustomAttributesImpl);
-		}
-
+		
 		public AttributeComponent(ICacheComponent cacheComponent)
 		{
 			_getAttributes = cacheComponent.Memoize<object, IEnumerable<Attribute>>(GetCustomAttributesImpl);

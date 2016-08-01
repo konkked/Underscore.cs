@@ -7,13 +7,11 @@ namespace Underscore.Test.Function
 	[TestFixture]
 	public class CacheTest
 	{
-		private CacheComponent component;
 		private ComposeComponent compose;
 
 		[SetUp]
 		public void Initialize()
 		{
-			component = new CacheComponent();
 			compose = new ComposeComponent();
 		}
 

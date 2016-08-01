@@ -4,16 +4,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Underscore.Function;
-using ISynchComponent = Underscore.Action.ISynchComponent;
-using SynchComponent = Underscore.Action.SynchComponent;
-
 namespace Underscore.Test.Action.Synch
 {
 	[TestFixture]
 	public class DelayTest
 	{
 		private ComposeComponent compose;
-		private ISynchComponent component;
 
 		private readonly string[] arguments = Util.LowercaseCharArray;
 
@@ -32,7 +28,6 @@ namespace Underscore.Test.Action.Synch
 		public void Initialize()
 		{
 			compose = new ComposeComponent();
-			component = new SynchComponent();
 		}
 
 		public void Action_Synch_Delay_NoArguments()

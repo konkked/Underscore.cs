@@ -11,7 +11,6 @@ namespace Underscore.Test.Function.Synch
 	[TestFixture]
 	public class AfterTest
 	{
-		private ISynchComponent component;
 		private ComposeComponent compose;
 
 		private readonly string[] arguments = Util.LowercaseCharArray;
@@ -23,7 +22,6 @@ namespace Underscore.Test.Function.Synch
 		[SetUp]
 		public void Initialize()
 		{
-			component = new SynchComponent();
 			compose = new ComposeComponent();
 		}
 

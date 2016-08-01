@@ -8,12 +8,6 @@ namespace Underscore.Function
 		private readonly ICompactComponent _fnCompactor;
 		private readonly Utility.ICompactComponent _paramCompactor;
 
-		public CacheComponent()
-		{
-			_fnCompactor = new CompactComponent();
-			_paramCompactor = new Utility.CompactComponent();
-		}
-
 		public CacheComponent(ICompactComponent fnCompactor, Utility.ICompactComponent paramCompactor)
 		{
 			_fnCompactor = fnCompactor;

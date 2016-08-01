@@ -6,13 +6,6 @@
 		private readonly IConvertComponent _actionConvert;
 		private readonly Function.IConvertComponent _funcConvert;
 
-		public SynchComponent()
-		{
-			_fnSynch = new Function.SynchComponent();
-			_actionConvert = new ConvertComponent();
-			_funcConvert = new Function.ConvertComponent();
-		}
-
 		public SynchComponent(Function.ISynchComponent fnSynch, IConvertComponent actionConvert, Function.IConvertComponent funcConvert)
 		{
 			_fnSynch = fnSynch;

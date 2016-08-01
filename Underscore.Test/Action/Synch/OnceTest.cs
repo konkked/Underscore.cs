@@ -1,7 +1,5 @@
 ﻿using System;
 using ComposeComponent = Underscore.Action.ComposeComponent;
-using ISynchComponent = Underscore.Action.ISynchComponent;
-using SynchComponent = Underscore.Action.SynchComponent;
 using NUnit.Framework;
 
 namespace Underscore.Test.Action.Synch
@@ -10,7 +8,6 @@ namespace Underscore.Test.Action.Synch
 	public class OnceTest
 	{
 		private ComposeComponent compose;
-		private ISynchComponent component;
 
 		private readonly string[] arguments = Util.LowercaseCharArray;
 
@@ -18,7 +15,6 @@ namespace Underscore.Test.Action.Synch
 		public void Initialize()
 		{
 			compose = new ComposeComponent();
-			component = new SynchComponent();
 		}
 
 		[Test]

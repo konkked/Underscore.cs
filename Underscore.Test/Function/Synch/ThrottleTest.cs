@@ -376,7 +376,6 @@ namespace Underscore.Test.Function.Synch
 		[Test]
 		public async Task Function_Synch_Throttle_6Arguments()
 		{
-			
 			var timer = new Stopwatch();
 			int waiting = 25;
 

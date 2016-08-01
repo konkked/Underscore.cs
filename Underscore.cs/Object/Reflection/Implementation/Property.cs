@@ -9,7 +9,6 @@ namespace Underscore.Object.Reflection
 	{
 		private const BindingFlags defaultFlags = BindingFlags.Public | BindingFlags.Instance;
 
-
 		/// <summary>
 		///     Searches for the properties of <paramref name="target"></paramref>, using binding constraints provided
 		/// </summary>

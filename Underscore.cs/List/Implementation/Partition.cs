@@ -10,12 +10,7 @@ namespace Underscore.List
 	{
 		private readonly IMathComponent _math;
 
-		public PartitionComponent()
-		{
-			_math = new MathComponent();
-		}
-
-		public PartitionComponent( IMathComponent math ) 
+		public PartitionComponent(IMathComponent math)
 		{
 			_math = math;
 		}
@@ -23,37 +18,37 @@ namespace Underscore.List
 		/// <summary>
 		/// Breaks the list into smaller chunks
 		/// </summary>
-		public IEnumerable<IEnumerable<T>> Chunk<T>( IList<T> list, int size )
+		public IEnumerable<IEnumerable<T>> Chunk<T>(IList<T> list, int size)
 		{
 			int len = list.Count;
 
-			if ( len < size ) 
+			if (len < size)
 			{
-				var copy = new T[ list.Count ];
-				list.CopyTo( copy, 0 );
+				var copy = new T[list.Count];
+				list.CopyTo(copy, 0);
 
-				return new[]{ copy };
+				return new[] { copy };
 			}
 
 			var partCount = list.Count / size;
-			
-			if ( list.Count % size != 0 )
+
+			if (list.Count % size != 0)
 				partCount++;
 
-			return Enumerable.Range( 0, partCount )
+			return Enumerable.Range(0, partCount)
 				.Select(
-					chunkIndex =>{
-						
-						var chunkSize = size ;
-						var chunkEndLen = (chunkIndex+1)*size ;
+					chunkIndex => {
 
-						if( chunkEndLen > len )
+						var chunkSize = size;
+						var chunkEndLen = (chunkIndex + 1) * size;
+
+						if (chunkEndLen > len)
 						{
-							chunkSize =  len - ( chunkEndLen - size ) ;
+							chunkSize = len - (chunkEndLen - size);
 						}
 
-						return Enumerable.Range( 0, chunkSize )
-							.Select( b => list[ ( chunkIndex * size ) + b ] );
+						return Enumerable.Range(0, chunkSize)
+							.Select(b => list[(chunkIndex * size) + b]);
 					}
 				);
 		}
@@ -61,29 +56,29 @@ namespace Underscore.List
 		/// <summary>
 		/// Breaks the list into smaller chunks
 		/// </summary>
-		public IEnumerable<IEnumerable<T>> Chunk<T>( IList<T> list, Func<T, bool> on )
+		public IEnumerable<IEnumerable<T>> Chunk<T>(IList<T> list, Func<T, bool> on)
 		{
-			var curr = new List<T>( );
+			var curr = new List<T>();
 
-			for ( int i=0 ; i < list.Count ; i++ )
+			for (int i = 0; i < list.Count; i++)
 			{
-				for ( ; i < list.Count && !on( list[ i ] ) ; i++ )
+				for (; i < list.Count && !on(list[i]); i++)
 				{
-					curr.Add( list[ i ] );
+					curr.Add(list[i]);
 				}
 
-				if ( i >= list.Count )
+				if (i >= list.Count)
 					break;
 
 				yield return curr;
 
-				curr = new List<T>( );
+				curr = new List<T>();
 				//the instance that was broken on
 				//
-				curr.Add( list[ i ] );
+				curr.Add(list[i]);
 			}
 
-			if ( curr.Count != 0 )
+			if (curr.Count != 0)
 				yield return curr;
 		}
 
@@ -93,11 +88,11 @@ namespace Underscore.List
 		/// <typeparam name="T">Type of items elements in list</typeparam>
 		/// <param name="index">the index to partition on</param>
 		/// <returns>a Tuple containing the first partition in the first item, second partition in the second</returns>
-		public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IList<T> list, int index )
+		public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>(IList<T> list, int index)
 		{
 			return Tuple.Create(
-				   Enumerable.Range( 0, index ).Select( a => list[ a ] ),
-				   Enumerable.Range( index, list.Count - ( index ) ).Select( a => list[ a ] )
+				   Enumerable.Range(0, index).Select(a => list[a]),
+				   Enumerable.Range(index, list.Count - (index)).Select(a => list[a])
 			);
 		}
 
@@ -107,13 +102,13 @@ namespace Underscore.List
 		/// <typeparam name="T">Type of items in collection</typeparam>
 		/// <param name="on">the condition to partition</param>
 		/// <returns>a Tuple containing the first partition in the first item, second partition in the second, the element partitioned will be the first element of the second partition </returns>
-		public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>( IList<T> list, Func<T, bool> on ) 
+		public Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>(IList<T> list, Func<T, bool> on)
 		{
-			for ( int i=0 ; i < list.Count ; i++ )
-				if ( on( list[ i ] ) )
-					return Partition( list, i );
+			for (int i = 0; i < list.Count; i++)
+				if (on(list[i]))
+					return Partition(list, i);
 
-			return Tuple.Create( new T[ ] { } as IEnumerable<T>, new List<T>( list ) as IEnumerable<T>);
+			return Tuple.Create(new T[] { } as IEnumerable<T>, new List<T>(list) as IEnumerable<T>);
 		}
 
 		/// <summary>
@@ -130,15 +125,15 @@ namespace Underscore.List
 
 			for (var i = 0; i < list.Count; i++)
 			{
-				if(on(list[i]))
+				if (on(list[i]))
 					left.Add(list[i]);
 				else
 					right.Add(list[i]);
 			}
 
 			return Tuple.Create(
-				(IEnumerable<T>) left,
-				(IEnumerable<T>) right
+				(IEnumerable<T>)left,
+				(IEnumerable<T>)right
 			);
 		}
 
@@ -169,7 +164,7 @@ namespace Underscore.List
 		/// <returns>slice of the list</returns>
 		public IList<T> Slice<T>(IList<T> list, int start, int end, int step)
 		{
-			return Slice(list, start, end, step,false);
+			return Slice(list, start, end, step, false);
 		}
 
 		/// <summary>
@@ -202,12 +197,12 @@ namespace Underscore.List
 		/// <returns>slice of the list</returns>
 		public IList<T> Slice<T>(IList<T> list, int start, int end, int step, bool allowOverflow)
 		{
-		   
-			return SliceImpl(list, start, end,allowOverflow,step);
+
+			return SliceImpl(list, start, end, allowOverflow, step);
 		}
 
 
-		private IList<T> SliceImpl<T>( IList<T> list, int start, int end, bool allowOverflow, int? pstep )
+		private IList<T> SliceImpl<T>(IList<T> list, int start, int end, bool allowOverflow, int? pstep)
 		{
 
 
@@ -252,19 +247,19 @@ namespace Underscore.List
 			}
 
 			int count = list.Count;
-			var len = ( end - start );
-			
-			T[] returning;
-			
-			//creates an offset for handling negative indexes
-			int offset = ( ( _math.Max( _math.Abs( start ), _math.Abs( end )  )   / count ) + 1 ) * count;
+			var len = (end - start);
 
-			if(pstep.HasValue && pstep.Value == 0)
+			T[] returning;
+
+			//creates an offset for handling negative indexes
+			int offset = ((_math.Max(_math.Abs(start), _math.Abs(end)) / count) + 1) * count;
+
+			if (pstep.HasValue && pstep.Value == 0)
 				throw new InvalidOperationException("Cannot have a zero value step");
 
 			int step = 1;
 			//when the len is negative we are going backwards
-			if ( len < 0 )
+			if (len < 0)
 			{
 
 				if (pstep.HasValue)
@@ -272,7 +267,7 @@ namespace Underscore.List
 					//if we are going backwards and a value was passed
 					//the value has to be negative or we're going to 
 					//throw an invalid operation exception
-					if(pstep.Value>=0)
+					if (pstep.Value >= 0)
 						throw new InvalidOperationException("Cannot have a backwards slice with a forward (postive) step, value passed " + pstep.Value);
 
 					step = -pstep.Value;
@@ -282,16 +277,16 @@ namespace Underscore.List
 					len /= step;
 				else
 					len = (len / step) - 1;
-				
+
 				len = -len;
 
-				returning = new T[ len ];
-				
+				returning = new T[len];
 
-				int j =0;
-				for ( int i=start ; i > end ; i-=step )
+
+				int j = 0;
+				for (int i = start; i > end; i -= step)
 				{
-					returning[j] = list[ ( i + offset ) % count ];
+					returning[j] = list[(i + offset) % count];
 					j++;
 				}
 
@@ -315,7 +310,7 @@ namespace Underscore.List
 					len = (len / step) + 1;
 
 				returning = new T[len];
-				
+
 				if (step < 0)
 				{
 					var t = start;
@@ -325,35 +320,35 @@ namespace Underscore.List
 				}
 
 				int j = 0;
-				for (int i = start; i < end; i+=step)
+				for (int i = start; i < end; i += step)
 				{
-					returning[j] = list[ (i + offset ) % count ];
+					returning[j] = list[(i + offset) % count];
 					j++;
 				}
 
 			}
 			else
 			{
-				returning = new T[] {};
+				returning = new T[] { };
 			}
 
 			return returning;
 
 		}
-		 
+
 		/// <summary>
 		/// Splits the list in half
 		/// </summary>
 		/// <typeparam name="T">The elements of the list</typeparam>
 		/// <param name="list">the list to be split</param>
 		/// <returns>Tuple containing the two halves of the list</returns>
-		public Tuple<IList<T>, IList<T>> Split<T>( IList<T> list )
+		public Tuple<IList<T>, IList<T>> Split<T>(IList<T> list)
 		{
 			var til = list.Count / 2;
-			if ( list.Count % 2 == 0 )
+			if (list.Count % 2 == 0)
 				til--;
-			return Tuple.Create( new List<T>( Enumerable.Range( 0, til + 1 ).Select( a => list[ a ] ) ) as IList<T>,
-				new List<T>( Enumerable.Range( til + 1, list.Count - ( til + 1 ) ).Select( a => list[ a ] ) ) as IList<T>
+			return Tuple.Create(new List<T>(Enumerable.Range(0, til + 1).Select(a => list[a])) as IList<T>,
+				new List<T>(Enumerable.Range(til + 1, list.Count - (til + 1)).Select(a => list[a])) as IList<T>
 			);
 		}
 
@@ -362,9 +357,9 @@ namespace Underscore.List
 		/// </summary>
 		public IEnumerable<IEnumerable<T>> Combinations<T>(IList<T> list)
 		{
-			if(list== null) throw new ArgumentNullException("list");
+			if (list == null) throw new ArgumentNullException("list");
 
-			yield return new T[] {};
+			yield return new T[] { };
 
 			foreach (var value in CombinationsImpl(list))
 				yield return value;
@@ -384,7 +379,7 @@ namespace Underscore.List
 			//get all of the items after this item
 			// ( Recursive call )
 			var permutations = CombinationsImpl(collection, index - 1).ToList();
-			
+
 			//return a collection of items with and without the item at the current index
 			return permutations.Concat(permutations.Select(a => a.Concat(new[] { collection[index] })).Concat(new[] { new[] { collection[index] } }));
 		}
