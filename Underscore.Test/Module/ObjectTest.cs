@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using Underscore.Function;
 using Underscore.Object;
 using Underscore.Object.Comparison;
@@ -107,21 +107,21 @@ namespace Underscore.Test.Module
 		[Test]
 		public void ObjectModule_NewGenericFromDefinition_MatchingConstructorsWithObjects()
 		{
-            var targeting = typeof(GenericConstructorTestObjectTwo<,>);
+			var targeting = typeof(GenericConstructorTestObjectTwo<,>);
 
 			var defaultResult = (GenericConstructorTestObjectTwo<string, object>)_.Object.NewGenericFromDefinition(targeting, typeof(string), typeof(object));
 			Assert.AreEqual("default", GenericConstructorTestObjectTwo<string,object>.LastCalledMethod);
 
 			var oneArgumentResult =
 				(GenericConstructorTestObjectTwo<string,object>)
-                    _.Object.NewGenericFromDefinition(targeting, new[] { typeof(string), typeof(object) }, "arg1");
+					_.Object.NewGenericFromDefinition(targeting, new[] { typeof(string), typeof(object) }, "arg1");
 
 			Assert.AreEqual("one parameter", GenericConstructorTestObjectTwo<string,object>.LastCalledMethod);
 			Assert.AreEqual("arg1", GenericConstructorTestObjectTwo<string,object>.ArgumentsCalledWith[0]);
 
 			var twoArgumentResult =
 				(GenericConstructorTestObjectTwo<string,object>)
-                    _.Object.NewGenericFromDefinition(typeof(GenericConstructorTestObjectTwo<,>), new[] { typeof(string), typeof(object) },
+					_.Object.NewGenericFromDefinition(typeof(GenericConstructorTestObjectTwo<,>), new[] { typeof(string), typeof(object) },
 						"arg1", "arg2");
 
 			Assert.AreEqual("two parameters", GenericConstructorTestObjectTwo<string,object>.LastCalledMethod);
@@ -131,7 +131,7 @@ namespace Underscore.Test.Module
 
 			var twoArgumentResultSkipFirst =
 					(GenericConstructorTestObjectTwo<string,object>)
-                        _.Object.NewGenericFromDefinition(typeof(GenericConstructorTestObjectTwo<,>), new[] { typeof(string) , typeof(object)},
+						_.Object.NewGenericFromDefinition(typeof(GenericConstructorTestObjectTwo<,>), new[] { typeof(string) , typeof(object)},
 						   null, "arg2");
 
 			Assert.AreEqual("two parameters", GenericConstructorTestObjectTwo<string,object>.LastCalledMethod);
@@ -141,7 +141,7 @@ namespace Underscore.Test.Module
 
 			var twoArgumentResultSkipSecond =
 					(GenericConstructorTestObjectTwo<string,object>)
-                        _.Object.NewGenericFromDefinition(typeof(GenericConstructorTestObjectTwo<,>), new[] { typeof(string), typeof(object) },
+						_.Object.NewGenericFromDefinition(typeof(GenericConstructorTestObjectTwo<,>), new[] { typeof(string), typeof(object) },
 						   "arg1", null);
 
 			Assert.AreEqual("two parameters", GenericConstructorTestObjectTwo<string,object>.LastCalledMethod);

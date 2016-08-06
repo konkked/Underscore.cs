@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using System.Threading.Tasks;
@@ -579,24 +579,24 @@ namespace Underscore.Test.Object.Reflection
 	    [Test]
 	    public void Object_Property_Foreach_NonGeneric_IndexPropertiesNotIncluded()
 	    {
-            _.Object.Property.Each(new ObjectPropertyForeachTestIndexProperty(), value =>
-            {
-                Assert.Fail("Index Properties should not be iterated over");
-            });
+			_.Object.Property.Each(new ObjectPropertyForeachTestIndexProperty(), value =>
+			{
+				Assert.Fail("Index Properties should not be iterated over");
+			});
 	    }
 
 
-        [Test]
-        public void Object_Property_Foreach_Generic_IndexPropertiesNotIncluded()
-        {
-            _.Object.Property.Each<string>(new ObjectPropertyForeachTestIndexProperty(), value =>
-            {
-                Assert.Fail("Index Properties should not be iterated over");
-            });
-        }
+		[Test]
+		public void Object_Property_Foreach_Generic_IndexPropertiesNotIncluded()
+		{
+			_.Object.Property.Each<string>(new ObjectPropertyForeachTestIndexProperty(), value =>
+			{
+				Assert.Fail("Index Properties should not be iterated over");
+			});
+		}
 
 
-        [Test]
+		[Test]
 		public void Object_Property_Foreach_NonGeneric_ValueAndNameAndSetter()
 		{
 			var person = new OtherPerson2(25)

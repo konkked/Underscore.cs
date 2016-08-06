@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Configuration;
 using System.Linq;
 using NUnit.Framework;
@@ -193,15 +193,15 @@ namespace Underscore.Test.List
 		{
 			var partitioner = new PartitionComponent(new MathComponent());
 
-            
+			
 		    var ls = new[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-                
+				
 		    // slice length < list length 
 		    // positive 
 		    // forward 
 		    // this should throw an exception
 		   
-            Assert.Throws<InvalidOperationException>(()=> partitioner.Slice(ls, 0, 8, -2));
+			Assert.Throws<InvalidOperationException>(()=> partitioner.Slice(ls, 0, 8, -2));
 
 		}
 
@@ -251,13 +251,13 @@ namespace Underscore.Test.List
 			var partitioner = new PartitionComponent(new MathComponent());
 
 
-            var ls = new[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+			var ls = new[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
-            
-            Assert.Throws<InvalidOperationException>(() => partitioner.Slice(ls, -1, -9, 2));
+			
+			Assert.Throws<InvalidOperationException>(() => partitioner.Slice(ls, -1, -9, 2));
 
-            
-        }
+			
+		}
 
 		[Test]
 		public void List_Partition_Slice_NegativeForwards()
@@ -306,10 +306,10 @@ namespace Underscore.Test.List
 		{
 			var partitioner = new PartitionComponent(new MathComponent());
 
-            var ls = new[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+			var ls = new[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 		    
 		    Assert.Throws<InvalidOperationException>(() => partitioner.Slice(ls, 3, 16, -2, true));
-            
+			
 		}
 
 		[Test]
@@ -363,10 +363,10 @@ namespace Underscore.Test.List
 
 			var partitioner = new PartitionComponent(new MathComponent());
 
-            var ls = new[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+			var ls = new[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
-            Assert.Throws<InvalidOperationException>(() => partitioner.Slice(ls, 16, 3, 2, true));
-            
+			Assert.Throws<InvalidOperationException>(() => partitioner.Slice(ls, 16, 3, 2, true));
+			
 		}
 
 		[Test]
@@ -410,14 +410,14 @@ namespace Underscore.Test.List
 		public void List_Partition_NegativeForwardOverflowWithNegativeStep()
 		{
 			var partitioner = new PartitionComponent(new MathComponent());
-            
+			
 		    var ls = new[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-            
+			
 		    // slice length > list length
 		    // negative 
 		    // forward
 		    // backwards step
-                
+				
 		    Assert.Throws<InvalidOperationException>(() => partitioner.Slice(ls, -12, 3, -2, true));
 		    
 		}
@@ -444,13 +444,13 @@ namespace Underscore.Test.List
 	    {
 
 	        var partitioner = new PartitionComponent(new MathComponent());
-            
+			
 	        var ls = new[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 	        
-            // slice length > list length
+			// slice length > list length
 	        // negative backwards
 	        Assert.Throws<InvalidOperationException>(() => partitioner.Slice(ls, 2, -13, 2, true));
-        }
+		}
 
 
 
@@ -499,7 +499,7 @@ namespace Underscore.Test.List
 
 			var ls = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            //no overflow means that this should throw an exception
+			//no overflow means that this should throw an exception
 		    Assert.Throws<IndexOutOfRangeException>(() => partitioner.Slice(ls, 10000, 0));
 
 		}
@@ -512,7 +512,7 @@ namespace Underscore.Test.List
 			var partitioner = new PartitionComponent(new MathComponent());
 
 			var ls = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            
+			
 		    Assert.Throws<IndexOutOfRangeException>(() => partitioner.Slice(ls, -10000, 0));
 		}
 
@@ -525,8 +525,8 @@ namespace Underscore.Test.List
 			var partitioner = new PartitionComponent(new MathComponent());
 
 			var ls = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            
-            Assert.Throws<IndexOutOfRangeException>(() => partitioner.Slice(ls, 0, 100000));
+			
+			Assert.Throws<IndexOutOfRangeException>(() => partitioner.Slice(ls, 0, 100000));
 
 		}
 
@@ -538,8 +538,8 @@ namespace Underscore.Test.List
 			var ls = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
 
-            Assert.Throws<IndexOutOfRangeException>(() => partitioner.Slice(ls, 0, -100000));
-            
+			Assert.Throws<IndexOutOfRangeException>(() => partitioner.Slice(ls, 0, -100000));
+			
 		}
 
 
@@ -550,7 +550,7 @@ namespace Underscore.Test.List
 
 			var ls = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            Assert.Throws<InvalidOperationException>(() => partitioner.Slice(ls, 0, -1));
+			Assert.Throws<InvalidOperationException>(() => partitioner.Slice(ls, 0, -1));
 		}
 
 
