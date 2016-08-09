@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Underscore.Utility;
 
 namespace Underscore.Test.Utility.String
@@ -14,29 +14,29 @@ namespace Underscore.Test.Utility.String
 			component = new StringComponent();
 		}
 
-        [TestMethod]
-        public void Capitalize_UncapitalizedString()
-        {
-            const string input = "hello, world!";
-            const string expected = "Hello, world!";
+		[TestMethod]
+		public void Capitalize_UncapitalizedString()
+		{
+			const string input = "hello, world!";
+			const string expected = "Hello, world!";
 
-            var result = _.Utility.Capitalize(input);
+			var result = _.Utility.Capitalize(input);
 
-            Assert.AreEqual(expected, result);
-        }
+			Assert.AreEqual(expected, result);
+		}
 
-        [TestMethod]
-        public void Capitalize_CapitalizedString()
-        {
-            const string input = "Hello, world!";
-            const string expected = "Hello, world!";
+		[TestMethod]
+		public void Capitalize_CapitalizedString()
+		{
+			const string input = "Hello, world!";
+			const string expected = "Hello, world!";
 
-            var result = _.Utility.Capitalize(input);
+			var result = _.Utility.Capitalize(input);
 
-            Assert.AreEqual(expected, result);
-        }
+			Assert.AreEqual(expected, result);
+		}
 
-        [TestMethod]
+		[TestMethod]
 		public void Utility_String_ToCamelCase_FromSnakeCase()
 		{
 			const string input = "camel_case";

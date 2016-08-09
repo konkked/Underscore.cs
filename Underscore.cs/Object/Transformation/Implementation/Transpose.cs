@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Underscore.Object.Reflection;
@@ -8,7 +8,7 @@ namespace Underscore.Object
 	public class TransposeComponent : ITransposeComponent
 	{
 		private readonly IPropertyComponent _property;
-        
+		
 		public TransposeComponent(IPropertyComponent property) 
 		{
 			_property = property;

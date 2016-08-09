@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using Underscore.Utility;
 
 namespace Underscore.Test.Module
@@ -10,11 +10,11 @@ namespace Underscore.Test.Module
 		public void CreateUtilityModuleTest()
 		{
 			var result = new Underscore.Module.Utility(
-                new CompactComponent(),
+				new CompactComponent(),
 				new FunctionComponent(),
 				new MathComponent(),
 				new ObjectComponent(),
-                new StringComponent()
+				new StringComponent()
 			);
 		}
 	}

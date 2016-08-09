@@ -28,9 +28,9 @@ namespace Underscore.Object.Reflection
 		{
 			_property = property;
 
-            //Initializes special rules for the query method
-            _specialRules = new HashSet<string> { "return" };
-        }
+			//Initializes special rules for the query method
+			_specialRules = new HashSet<string> { "return" };
+		}
 
 
 		/// <summary>

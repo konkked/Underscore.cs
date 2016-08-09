@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ComposeComponent = Underscore.Action.ComposeComponent;
 using NUnit.Framework;
 
@@ -31,7 +31,7 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public void Action_Synch_Once_1Argument()
 		{
-            string result = "";
+			string result = "";
 
 			var oncing = new Action<string>((a) =>
 			{
@@ -49,9 +49,9 @@ namespace Underscore.Test.Action.Synch
 		[Test]
 		public void Action_Synch_Once_2Arguments()
 		{
-            string result = "";
+			string result = "";
 
-            var oncing = new Action<string, string>((a, b) =>
+			var oncing = new Action<string, string>((a, b) =>
 			{
 				result += string.Join("", a, b);
 			});
@@ -66,10 +66,10 @@ namespace Underscore.Test.Action.Synch
 
 		[Test]
 		public void Action_Synch_Once_3Arguments()
-        {
-            string result = "";
+		{
+			string result = "";
 
-            var oncing = new Action<string, string, string>((a, b, c) =>
+			var oncing = new Action<string, string, string>((a, b, c) =>
 			{
 				result += string.Join("", a, b, c);
 			});
@@ -84,10 +84,10 @@ namespace Underscore.Test.Action.Synch
 
 		[Test]
 		public void Action_Synch_Once_4Arguments()
-        {
-            string result = "";
+		{
+			string result = "";
 
-            var oncing = new Action<string, string, string, string>((a, b, c, d) =>
+			var oncing = new Action<string, string, string, string>((a, b, c, d) =>
 			{
 				result += string.Join("", a, b, c, d);
 			});
@@ -102,10 +102,10 @@ namespace Underscore.Test.Action.Synch
 
 		[Test]
 		public void Action_Synch_Once_5Arguments()
-        {
-            string result = "";
+		{
+			string result = "";
 
-            var oncing = new Action<string, string, string, string, string>((a, b, c, d, e) =>
+			var oncing = new Action<string, string, string, string, string>((a, b, c, d, e) =>
 			{
 				result += string.Join("", a, b, c, d, e);
 			});
@@ -120,10 +120,10 @@ namespace Underscore.Test.Action.Synch
 
 		[Test]
 		public void Action_Synch_Once_6Arguments()
-        {
-            string result = "";
+		{
+			string result = "";
 
-            var oncing = new Action<string, string, string, string, string, string>((a, b, c, d, e, f) =>
+			var oncing = new Action<string, string, string, string, string, string>((a, b, c, d, e, f) =>
 			{
 				result += string.Join("", a, b, c, d, e, f);
 			});
@@ -138,10 +138,10 @@ namespace Underscore.Test.Action.Synch
 
 		[Test]
 		public void Action_Synch_Once_7Arguments()
-        {
-            string result = "";
+		{
+			string result = "";
 
-            var oncing = new Action<string, string, string, string, string, string, string>((a, b, c, d, e, f, g) =>
+			var oncing = new Action<string, string, string, string, string, string, string>((a, b, c, d, e, f, g) =>
 			{
 				result += string.Join("", a, b, c, d, e, f, g);
 			});
@@ -156,10 +156,10 @@ namespace Underscore.Test.Action.Synch
 
 		[Test]
 		public void Action_Synch_Once_8Arguments()
-        {
-            string result = "";
+		{
+			string result = "";
 
-            var oncing = new Action<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) =>
+			var oncing = new Action<string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h) =>
 			{
 				result += string.Join("", a, b, c, d, e, f, g, h);
 			});
@@ -174,10 +174,10 @@ namespace Underscore.Test.Action.Synch
 
 		[Test]
 		public void Action_Synch_Once_9Arguments()
-        {
-            string result = "";
+		{
+			string result = "";
 
-            var oncing = new Action<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) =>
+			var oncing = new Action<string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i) =>
 			{
 				result += string.Join("", a, b, c, d, e, f, g, h, i);
 			});
@@ -192,10 +192,10 @@ namespace Underscore.Test.Action.Synch
 
 		[Test]
 		public void Action_Synch_Once_10Arguments()
-        {
-            string result = "";
+		{
+			string result = "";
 
-            var oncing = new Action<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) =>
+			var oncing = new Action<string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j) =>
 			{
 				result += string.Join("", a, b, c, d, e, f, g, h, i, j);
 			});
@@ -210,10 +210,10 @@ namespace Underscore.Test.Action.Synch
 
 		[Test]
 		public void Action_Synch_Once_11Arguments()
-        {
-            string result = "";
+		{
+			string result = "";
 
-            var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) =>
+			var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k) =>
 			{
 				result += string.Join("", a, b, c, d, e, f, g, h, i, j, k);
 			});
@@ -228,10 +228,10 @@ namespace Underscore.Test.Action.Synch
 
 		[Test]
 		public void Action_Synch_Once_12Arguments()
-        {
-            string result = "";
+		{
+			string result = "";
 
-            var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) =>
+			var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l) =>
 			{
 				result += string.Join("", a, b, c, d, e, f, g, h, i, j, k, l);
 			});
@@ -246,10 +246,10 @@ namespace Underscore.Test.Action.Synch
 
 		[Test]
 		public void Action_Synch_Once_13Arguments()
-        {
-            string result = "";
+		{
+			string result = "";
 
-            var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) =>
+			var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m) =>
 			{
 				result += string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m);
 			});
@@ -264,10 +264,10 @@ namespace Underscore.Test.Action.Synch
 
 		[Test]
 		public void Action_Synch_Once_14Arguments()
-        {
-            string result = "";
+		{
+			string result = "";
 
-            var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) =>
+			var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n) =>
 			{
 				result += string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 			});
@@ -282,10 +282,10 @@ namespace Underscore.Test.Action.Synch
 
 		[Test]
 		public void Action_Synch_Once_15Arguments()
-        {
-            string result = "";
+		{
+			string result = "";
 
-            var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) =>
+			var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o) =>
 			{
 				result += string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 			});
@@ -300,10 +300,10 @@ namespace Underscore.Test.Action.Synch
 
 		[Test]
 		public void Action_Synch_Once_16Arguments()
-        {
-            string result = "";
+		{
+			string result = "";
 
-            var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) =>
+			var oncing = new Action<string, string, string, string, string, string, string, string, string, string, string, string, string, string, string, string>((a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p) =>
 			{
 				result += string.Join("", a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p);
 			});
@@ -315,5 +315,5 @@ namespace Underscore.Test.Action.Synch
 
 			Assert.AreEqual("abcdefghijklmnop", result);
 		}
-    }	
+	}	
 }
