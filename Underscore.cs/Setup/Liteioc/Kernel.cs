@@ -22,7 +22,6 @@ namespace Underscore.Setup.Liteioc
 
 			foreach (var module in modules)
 				module.Load(this);
-
 		}
 
 		public void Register<TInterface, TImplementation>()
@@ -56,7 +55,6 @@ namespace Underscore.Setup.Liteioc
 				{
 					return targetCtor.Invoke(null);
 				}
-
 			}
 
 			if (targetCtor == null)

@@ -7,11 +7,11 @@ namespace Underscore.Function
 {
 	public class ThrottleComponent : IThrottleComponent
 	{
-        private Utility.MathComponent _math;
-        private Function.CompactComponent _fnCompact;
-        private Utility.CompactComponent _utilCompact;
+        private Utility.IMathComponent _math;
+        private Function.ICompactComponent _fnCompact;
+        private Utility.ICompactComponent _utilCompact;
 
-        public ThrottleComponent(Utility.MathComponent math, Function.CompactComponent fnCompact, Utility.CompactComponent utilCompact)
+        public ThrottleComponent(Utility.IMathComponent math, Function.ICompactComponent fnCompact, Utility.ICompactComponent utilCompact)
         {
             _fnCompact = fnCompact;
             _utilCompact = utilCompact;

@@ -5,10 +5,10 @@ namespace Underscore.Action
 {
 	public class ThrottleComponent : IThrottleComponent
 	{
-        private Function.ThrottleComponent _fnThrottle;
-        private ConvertComponent _actionConvert;
+        private Function.IThrottleComponent _fnThrottle;
+        private IConvertComponent _actionConvert;
 
-        public ThrottleComponent(Function.ThrottleComponent fnThrottle, ConvertComponent actionConvert)
+        public ThrottleComponent(Function.IThrottleComponent fnThrottle, IConvertComponent actionConvert)
         {
             _fnThrottle = fnThrottle;
             _actionConvert = actionConvert;

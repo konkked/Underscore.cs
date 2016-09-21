@@ -4,11 +4,11 @@ namespace Underscore.Action
 {
 	public class BeforeComponent : IBeforeComponent
 	{
-        private Function.ConvertComponent _fnConvert;
-        private Action.ConvertComponent _actionConvert;
-        private Function.BeforeComponent _fnBefore;
+        private Function.IConvertComponent _fnConvert;
+        private Action.IConvertComponent _actionConvert;
+        private Function.IBeforeComponent _fnBefore;
         
-        public BeforeComponent(Function.ConvertComponent fnConvert, Action.ConvertComponent actionConvert, Function.BeforeComponent fnBefore)
+        public BeforeComponent(Function.IConvertComponent fnConvert, Action.IConvertComponent actionConvert, Function.IBeforeComponent fnBefore)
         {
             _fnConvert = fnConvert;
             _actionConvert = actionConvert;

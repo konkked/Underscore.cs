@@ -5,10 +5,10 @@ namespace Underscore.Action
 {
 	public class DelayComponent : IDelayComponent
 	{
-        private readonly Function.DelayComponent _fnDelay;
-        private readonly ConvertComponent _actionConvert;
+        private readonly Function.IDelayComponent _fnDelay;
+        private readonly IConvertComponent _actionConvert;
 
-        public DelayComponent(Function.DelayComponent fnDelay, ConvertComponent actionConvert)
+        public DelayComponent(Function.IDelayComponent fnDelay, IConvertComponent actionConvert)
         {
             _fnDelay = fnDelay;
             _actionConvert = actionConvert;

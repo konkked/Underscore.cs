@@ -6,9 +6,9 @@ namespace Underscore.Action
 	public class DebounceComponent : IDebounceComponent
 	{
         private Function.IDebounceComponent _fnDebounce;
-        private ConvertComponent _actionConvert;
+        private IConvertComponent _actionConvert;
 
-        public DebounceComponent(Function.IDebounceComponent fnDebounce, ConvertComponent actionConvert)
+        public DebounceComponent(Function.IDebounceComponent fnDebounce, IConvertComponent actionConvert)
         {
             _fnDebounce = fnDebounce;
             _actionConvert = actionConvert;

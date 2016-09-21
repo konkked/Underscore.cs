@@ -16,6 +16,7 @@ namespace Underscore.Setup
             kernel.Register<IDebounceComponent, DebounceComponent>();
             kernel.Register<IDelayComponent, DelayComponent>();
             kernel.Register<IOnceComponent, OnceComponent>();
+            kernel.Register<IThrottleComponent, ThrottleComponent>();
             kernel.Register<IAfterComponent, AfterComponent>();
             kernel.Register<ICacheComponent, CacheComponent>();
 			kernel.Register<ICompactComponent, CompactComponent>();
