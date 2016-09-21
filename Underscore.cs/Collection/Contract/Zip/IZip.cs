@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Underscore.Collection
 {
-	public partial interface IZipComponent
+	public interface IZipComponent
 	{
 		/// <summary>
 		/// zips collections together into tuples

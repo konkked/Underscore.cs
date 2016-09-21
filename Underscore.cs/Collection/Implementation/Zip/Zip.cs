@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Underscore.Collection
 {
-	public partial class ZipComponent
+	public class ZipComponent : IZipComponent
 	{
 		private bool IterateAll(IEnumerable<IEnumerator> iterators)
 		{

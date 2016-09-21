@@ -20,7 +20,8 @@ namespace Underscore.Test.Module
 				new FilterComponent(),
 				new PartitionComponent( new Underscore.List.PartitionComponent(new MathComponent())),
 				new SetComponent(),
-				new ZipComponent()
+				new ZipComponent(),
+                new UnZipComponent()
 			);
 
 			Assert.IsNotNull(result);

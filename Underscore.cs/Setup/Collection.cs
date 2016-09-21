@@ -13,7 +13,8 @@ namespace Underscore.Setup
 			kernel.Register<IFilterComponent, FilterComponent>();
 			kernel.Register<ISetComponent, SetComponent>();
 			kernel.Register<IZipComponent, ZipComponent>();
-			kernel.Register<IPartitionComponent, PartitionComponent>();
+            kernel.Register<IUnZipComponent, UnZipComponent>();
+            kernel.Register<IPartitionComponent, PartitionComponent>();
 			kernel.Register<List.IPartitionComponent, List.PartitionComponent>();
 			kernel.Register<Module.Collection>();
 		}

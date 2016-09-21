@@ -11,7 +11,8 @@ namespace Underscore.Module
 		IFilterComponent,
 		IPartitionComponent,
 		ISetComponent,
-		IZipComponent
+		IZipComponent,
+        IUnZipComponent
 	{
 		private readonly ICompareComponent _compare;
 		private readonly ICreationComponent _creator;
@@ -20,6 +21,7 @@ namespace Underscore.Module
 		private readonly IPartitionComponent _partitioner;
 		private readonly ISetComponent _set;
 		private readonly IZipComponent _zip;
+        private readonly IUnZipComponent _unzip;
 
 		public Collection(
 			ICompareComponent compare,
@@ -28,7 +30,8 @@ namespace Underscore.Module
 			IFilterComponent filter,
 			IPartitionComponent partitioner,
 			ISetComponent set,
-			IZipComponent zip
+			IZipComponent zip,
+            IUnZipComponent unzip
 	   )
 		{
 
@@ -53,6 +56,9 @@ namespace Underscore.Module
 			if (zip == null)
 				throw new ArgumentNullException("zip");
 
+            if (unzip == null)
+                throw new ArgumentNullException("unzip");
+
 			_compare = compare;
 			_creator = creator;
 			_delegation = delegation;
@@ -60,6 +66,7 @@ namespace Underscore.Module
 			_partitioner = partitioner;
 			_set = set;
 			_zip = zip;
+            _unzip = unzip;
 		}
 
 		/// <summary>
@@ -182,32 +189,32 @@ namespace Underscore.Module
 
 		public Tuple<IEnumerable<T1>, IEnumerable<T2>> UnZip<T1, T2>(IEnumerable<Tuple<T1, T2>> zipped)
 		{
-			return _zip.UnZip(zipped);
+			return _unzip.UnZip(zipped);
 		}
 
 		public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>> UnZip<T1, T2, T3>(IEnumerable<Tuple<T1, T2, T3>> zipped)
 		{
-			return _zip.UnZip(zipped);
+			return _unzip.UnZip(zipped);
 		}
 
 		public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>> UnZip<T1, T2, T3, T4>(IEnumerable<Tuple<T1, T2, T3, T4>> zipped)
 		{
-			return _zip.UnZip(zipped);
+			return _unzip.UnZip(zipped);
 		}
 
 		public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>> UnZip<T1, T2, T3, T4, T5>(IEnumerable<Tuple<T1, T2, T3, T4, T5>> zipped)
 		{
-			return _zip.UnZip(zipped);
+			return _unzip.UnZip(zipped);
 		}
 
 		public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>> UnZip<T1, T2, T3, T4, T5, T6>(IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> zipped)
 		{
-			return _zip.UnZip(zipped);
+			return _unzip.UnZip(zipped);
 		}
 
 		public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>> UnZip<T1, T2, T3, T4, T5, T6, T7>(IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> zipped)
 		{
-			return _zip.UnZip(zipped);
+			return _unzip.UnZip(zipped);
 		}
 
 		public Boolean IsSorted<T>(IEnumerable<T> collection, bool descending = false) where T : IComparable

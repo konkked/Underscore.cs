@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Underscore.Collection
 {
-	public partial class ZipComponent : IZipComponent
+	public class UnZipComponent : IUnZipComponent
 	{
 		public Tuple<IEnumerable<T1>, IEnumerable<T2>> UnZip<T1, T2>(IEnumerable<Tuple<T1, T2>> zipped)
 		{

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Underscore.Collection
 {
-	public partial interface IZipComponent
+	public interface IUnZipComponent
 	{
 		/// <summary>
 		/// Unzip an enumerable of tuples into a single 
