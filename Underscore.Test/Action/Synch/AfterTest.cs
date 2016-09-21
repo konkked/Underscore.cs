@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using System.Threading;
 using ComposeComponent = Underscore.Function.ComposeComponent;
-using ISynchComponent = Underscore.Action.ISynchComponent;
-using SynchComponent = Underscore.Action.SynchComponent;
 using NUnit.Framework;
 
 namespace Underscore.Test.Action.Synch

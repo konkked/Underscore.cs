@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using SynchComponent = Underscore.Action.SynchComponent;
 
 namespace Underscore.Test.Action.Synch
 {

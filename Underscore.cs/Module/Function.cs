@@ -9,7 +9,12 @@ namespace Underscore.Module
 		ISplitComponent,
 		IBindComponent,
 		IComposeComponent,
-		ISynchComponent,
+		IAfterComponent,
+        IBeforeComponent,
+        IDebounceComponent,
+        IDelayComponent,
+        IOnceComponent,
+        IThrottleComponent,
 		IConvertComponent,
 		ICacheComponent,
 		IBooleanComponent
@@ -19,7 +24,12 @@ namespace Underscore.Module
 		private readonly IBindComponent _bind;
 		private readonly ISplitComponent _split;
 		private readonly IConvertComponent _convert;
-		private readonly ISynchComponent _synch;
+		private readonly IAfterComponent _after;
+        private readonly IBeforeComponent _before;
+        private readonly IDebounceComponent _debounce;
+        private readonly IDelayComponent _delay;
+        private readonly IOnceComponent _once;
+        private readonly IThrottleComponent _throttle;
 		private readonly ICacheComponent _cache;
 		private readonly IBooleanComponent _booleanComponent;
 
@@ -28,7 +38,12 @@ namespace Underscore.Module
 			ISplitComponent split,
 			IComposeComponent compose,
 			IConvertComponent convert,
-			ISynchComponent synch,
+			IAfterComponent after,
+            IBeforeComponent before,
+            IDebounceComponent debounce,
+            IDelayComponent delay,
+            IOnceComponent once,
+            IThrottleComponent throttle,
 			ICacheComponent cache,
 			IBooleanComponent boolComponent)
 		{
@@ -44,8 +59,23 @@ namespace Underscore.Module
 			if (convert == null)
 				throw new ArgumentNullException("convert");
 
-			if (synch == null)
-				throw new ArgumentNullException("synch");
+			if (after == null)
+				throw new ArgumentNullException("after");
+
+            if (before == null)
+                throw new ArgumentNullException("before");
+
+            if (debounce == null)
+                throw new ArgumentNullException("debounce");
+
+            if (delay == null)
+                throw new ArgumentNullException("delay");
+
+            if (once == null)
+                throw new ArgumentNullException("once");
+
+            if (throttle == null)
+                throw new ArgumentNullException("throttle");
 
 			if (cache == null)
 				throw new ArgumentNullException("cache");
@@ -56,7 +86,12 @@ namespace Underscore.Module
 			_bind = bind;
 			_split = split;
 			_compose = compose;
-			_synch = synch;
+            _after = after;
+            _before = before;
+            _debounce = debounce;
+            _delay = delay;
+            _once = once;
+            _throttle = throttle;
 			_convert = convert;
 			_cache = cache;
 			_booleanComponent = boolComponent;
@@ -2092,7 +2127,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<Task<TResult>> After<TResult>(Func<TResult> function, int count)
 		{
-			return _synch.After(function, count);
+			return _after.After(function, count);
 		}
 
 		/// <summary>
@@ -2105,7 +2140,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, Task<TResult>> After<T1, TResult>(Func<T1, TResult> function, int count)
 		{
-			return _synch.After(function, count);
+			return _after.After(function, count);
 		}
 
 		/// <summary>
@@ -2118,7 +2153,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, Task<TResult>> After<T1, T2, TResult>(Func<T1, T2, TResult> function, int count)
 		{
-			return _synch.After(function, count);
+			return _after.After(function, count);
 		}
 
 		/// <summary>
@@ -2131,7 +2166,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, Task<TResult>> After<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> function, int count)
 		{
-			return _synch.After(function, count);
+			return _after.After(function, count);
 		}
 
 		/// <summary>
@@ -2144,7 +2179,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, Task<TResult>> After<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function, int count)
 		{
-			return _synch.After(function, count);
+			return _after.After(function, count);
 		}
 
 		/// <summary>
@@ -2157,7 +2192,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, Task<TResult>> After<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, int count)
 		{
-			return _synch.After(function, count);
+			return _after.After(function, count);
 		}
 
 		/// <summary>
@@ -2170,7 +2205,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, Task<TResult>> After<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, int count)
 		{
-			return _synch.After(function, count);
+			return _after.After(function, count);
 		}
 
 		/// <summary>
@@ -2183,7 +2218,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, Task<TResult>> After<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, int count)
 		{
-			return _synch.After(function, count);
+			return _after.After(function, count);
 		}
 
 		/// <summary>
@@ -2196,7 +2231,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task<TResult>> After<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, int count)
 		{
-			return _synch.After(function, count);
+			return _after.After(function, count);
 		}
 
 		/// <summary>
@@ -2209,7 +2244,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task<TResult>> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, int count)
 		{
-			return _synch.After(function, count);
+			return _after.After(function, count);
 		}
 
 		/// <summary>
@@ -2222,7 +2257,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task<TResult>> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, int count)
 		{
-			return _synch.After(function, count);
+			return _after.After(function, count);
 		}
 
 		/// <summary>
@@ -2235,7 +2270,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task<TResult>> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, int count)
 		{
-			return _synch.After(function, count);
+			return _after.After(function, count);
 		}
 
 		/// <summary>
@@ -2248,7 +2283,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task<TResult>> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, int count)
 		{
-			return _synch.After(function, count);
+			return _after.After(function, count);
 		}
 
 		/// <summary>
@@ -2261,7 +2296,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task<TResult>> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, int count)
 		{
-			return _synch.After(function, count);
+			return _after.After(function, count);
 		}
 
 		/// <summary>
@@ -2274,7 +2309,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task<TResult>> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, int count)
 		{
-			return _synch.After(function, count);
+			return _after.After(function, count);
 		}
 
 		/// <summary>
@@ -2287,7 +2322,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task<TResult>> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, int count)
 		{
-			return _synch.After(function, count);
+			return _after.After(function, count);
 		}
 
 		/// <summary>
@@ -2300,7 +2335,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task<TResult>> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, int count)
 		{
-			return _synch.After(function, count);
+			return _after.After(function, count);
 		}
 
 		/// <summary>
@@ -2311,7 +2346,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<TResult> Before<TResult>(Func<TResult> function, int count)
 		{
-			return _synch.Before(function, count);
+			return _before.Before(function, count);
 		}
 
 		/// <summary>
@@ -2322,7 +2357,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, TResult> Before<T1, TResult>(Func<T1, TResult> function, int count)
 		{
-			return _synch.Before(function, count);
+			return _before.Before(function, count);
 		}
 
 		/// <summary>
@@ -2333,7 +2368,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, TResult> Before<T1, T2, TResult>(Func<T1, T2, TResult> function, int count)
 		{
-			return _synch.Before(function, count);
+			return _before.Before(function, count);
 		}
 
 		/// <summary>
@@ -2344,7 +2379,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, TResult> Before<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> function, int count)
 		{
-			return _synch.Before(function, count);
+			return _before.Before(function, count);
 		}
 
 		/// <summary>
@@ -2355,7 +2390,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, TResult> Before<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function, int count)
 		{
-			return _synch.Before(function, count);
+			return _before.Before(function, count);
 		}
 
 		/// <summary>
@@ -2366,7 +2401,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, TResult> Before<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, int count)
 		{
-			return _synch.Before(function, count);
+			return _before.Before(function, count);
 		}
 
 		/// <summary>
@@ -2377,7 +2412,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, TResult> Before<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, int count)
 		{
-			return _synch.Before(function, count);
+			return _before.Before(function, count);
 		}
 
 		/// <summary>
@@ -2388,7 +2423,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, TResult> Before<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, int count)
 		{
-			return _synch.Before(function, count);
+			return _before.Before(function, count);
 		}
 
 		/// <summary>
@@ -2399,7 +2434,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Before<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, int count)
 		{
-			return _synch.Before(function, count);
+			return _before.Before(function, count);
 		}
 
 		/// <summary>
@@ -2410,7 +2445,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, int count)
 		{
-			return _synch.Before(function, count);
+			return _before.Before(function, count);
 		}
 
 		/// <summary>
@@ -2421,7 +2456,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, int count)
 		{
-			return _synch.Before(function, count);
+			return _before.Before(function, count);
 		}
 
 		/// <summary>
@@ -2432,7 +2467,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, int count)
 		{
-			return _synch.Before(function, count);
+			return _before.Before(function, count);
 		}
 
 		/// <summary>
@@ -2443,7 +2478,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, int count)
 		{
-			return _synch.Before(function, count);
+			return _before.Before(function, count);
 		}
 
 		/// <summary>
@@ -2454,7 +2489,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, int count)
 		{
-			return _synch.Before(function, count);
+			return _before.Before(function, count);
 		}
 
 		/// <summary>
@@ -2465,7 +2500,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, int count)
 		{
-			return _synch.Before(function, count);
+			return _before.Before(function, count);
 		}
 
 		/// <summary>
@@ -2476,7 +2511,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, int count)
 		{
-			return _synch.Before(function, count);
+			return _before.Before(function, count);
 		}
 
 		/// <summary>
@@ -2487,7 +2522,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, int count)
 		{
-			return _synch.Before(function, count);
+			return _before.Before(function, count);
 		}
 
 		/// <summary>
@@ -2495,7 +2530,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<Task<TResult>> Debounce<TResult>(Func<TResult> function, int milliseconds)
 		{
-			return _synch.Debounce(function, milliseconds);
+			return _debounce.Debounce(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2503,7 +2538,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T, Task<TResult>> Debounce<T, TResult>(Func<T, TResult> function, int milliseconds)
 		{
-			return _synch.Debounce(function, milliseconds);
+			return _debounce.Debounce(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2511,7 +2546,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, Task<TResult>> Debounce<T1, T2, TResult>(Func<T1, T2, TResult> function, int milliseconds)
 		{
-			return _synch.Debounce(function, milliseconds);
+			return _debounce.Debounce(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2519,7 +2554,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, Task<TResult>> Debounce<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> function, int milliseconds)
 		{
-			return _synch.Debounce(function, milliseconds);
+			return _debounce.Debounce(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2527,7 +2562,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, Task<TResult>> Debounce<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function, int milliseconds)
 		{
-			return _synch.Debounce(function, milliseconds);
+			return _debounce.Debounce(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2535,7 +2570,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, Task<TResult>> Debounce<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, int milliseconds)
 		{
-			return _synch.Debounce(function, milliseconds);
+			return _debounce.Debounce(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2543,7 +2578,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, int milliseconds)
 		{
-			return _synch.Debounce(function, milliseconds);
+			return _debounce.Debounce(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2551,7 +2586,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, int milliseconds)
 		{
-			return _synch.Debounce(function, milliseconds);
+			return _debounce.Debounce(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2559,7 +2594,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, int milliseconds)
 		{
-			return _synch.Debounce(function, milliseconds);
+			return _debounce.Debounce(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2567,7 +2602,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, int milliseconds)
 		{
-			return _synch.Debounce(function, milliseconds);
+			return _debounce.Debounce(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2575,7 +2610,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, int milliseconds)
 		{
-			return _synch.Debounce(function, milliseconds);
+			return _debounce.Debounce(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2583,7 +2618,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, int milliseconds)
 		{
-			return _synch.Debounce(function, milliseconds);
+			return _debounce.Debounce(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2591,7 +2626,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, int milliseconds)
 		{
-			return _synch.Debounce(function, milliseconds);
+			return _debounce.Debounce(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2599,7 +2634,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, int milliseconds)
 		{
-			return _synch.Debounce(function, milliseconds);
+			return _debounce.Debounce(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2607,14 +2642,14 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, int milliseconds)
 		{
-			return _synch.Debounce(function, milliseconds);
+			return _debounce.Debounce(function, milliseconds);
 		}
 		/// <summary>
 		/// Returns a debounced version of the passed function
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, int milliseconds)
 		{
-			return _synch.Debounce(function, milliseconds);
+			return _debounce.Debounce(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2623,7 +2658,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task<TResult>> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function,
 			int milliseconds)
 		{
-			return _synch.Debounce(function, milliseconds);
+			return _debounce.Debounce(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2631,7 +2666,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<Task<TResult>> Throttle<TResult>(Func<TResult> function, int milliseconds)
 		{
-			return _synch.Throttle(function, milliseconds);
+			return _throttle.Throttle(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2639,7 +2674,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<Task<TResult>> Throttle<TResult>(Func<TResult> function, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(function, milliseconds, leading);
+			return _throttle.Throttle(function, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -2647,7 +2682,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T, Task<TResult>> Throttle<T, TResult>(Func<T, TResult> function, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(function, milliseconds, leading);
+			return _throttle.Throttle(function, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -2655,7 +2690,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T, Task<TResult>> Throttle<T, TResult>(Func<T, TResult> function, int milliseconds)
 		{
-			return _synch.Throttle(function, milliseconds);
+			return _throttle.Throttle(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2663,7 +2698,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, Task<TResult>> Throttle<T1, T2, TResult>(Func<T1, T2, TResult> function, int milliseconds)
 		{
-			return _synch.Throttle(function, milliseconds);
+			return _throttle.Throttle(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2671,7 +2706,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, Task<TResult>> Throttle<T1, T2, TResult>(Func<T1, T2, TResult> function, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(function, milliseconds, leading);
+			return _throttle.Throttle(function, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -2679,7 +2714,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, Task<TResult>> Throttle<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> function, int milliseconds)
 		{
-			return _synch.Throttle(function, milliseconds);
+			return _throttle.Throttle(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2687,7 +2722,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, Task<TResult>> Throttle<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> function, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(function, milliseconds, leading);
+			return _throttle.Throttle(function, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -2695,7 +2730,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, Task<TResult>> Throttle<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function, int milliseconds)
 		{
-			return _synch.Throttle(function, milliseconds);
+			return _throttle.Throttle(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2703,7 +2738,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, Task<TResult>> Throttle<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(function, milliseconds, leading);
+			return _throttle.Throttle(function, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -2711,7 +2746,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, Task<TResult>> Throttle<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, int milliseconds)
 		{
-			return _synch.Throttle(function, milliseconds);
+			return _throttle.Throttle(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2719,7 +2754,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, Task<TResult>> Throttle<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(function, milliseconds, leading);
+			return _throttle.Throttle(function, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -2727,7 +2762,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, int milliseconds)
 		{
-			return _synch.Throttle(function, milliseconds);
+			return _throttle.Throttle(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2735,7 +2770,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(function, milliseconds, leading);
+			return _throttle.Throttle(function, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -2743,7 +2778,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, int milliseconds)
 		{
-			return _synch.Throttle(function, milliseconds);
+			return _throttle.Throttle(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2751,7 +2786,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(function, milliseconds, leading);
+			return _throttle.Throttle(function, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -2759,7 +2794,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, int milliseconds)
 		{
-			return _synch.Throttle(function, milliseconds);
+			return _throttle.Throttle(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2767,7 +2802,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(function, milliseconds, leading);
+			return _throttle.Throttle(function, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -2775,7 +2810,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, int milliseconds)
 		{
-			return _synch.Throttle(function, milliseconds);
+			return _throttle.Throttle(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2783,7 +2818,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(function, milliseconds, leading);
+			return _throttle.Throttle(function, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -2791,7 +2826,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, int milliseconds)
 		{
-			return _synch.Throttle(function, milliseconds);
+			return _throttle.Throttle(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2799,7 +2834,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(function, milliseconds, leading);
+			return _throttle.Throttle(function, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -2807,7 +2842,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, int milliseconds)
 		{
-			return _synch.Throttle(function, milliseconds);
+			return _throttle.Throttle(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2815,7 +2850,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(function, milliseconds, leading);
+			return _throttle.Throttle(function, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -2823,7 +2858,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, int milliseconds)
 		{
-			return _synch.Throttle(function, milliseconds);
+			return _throttle.Throttle(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2831,7 +2866,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(function, milliseconds, leading);
+			return _throttle.Throttle(function, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -2839,7 +2874,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, int milliseconds)
 		{
-			return _synch.Throttle(function, milliseconds);
+			return _throttle.Throttle(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2848,7 +2883,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, int milliseconds,
 			bool leading)
 		{
-			return _synch.Throttle(function, milliseconds, leading);
+			return _throttle.Throttle(function, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -2856,7 +2891,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, int milliseconds)
 		{
-			return _synch.Throttle(function, milliseconds);
+			return _throttle.Throttle(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2865,7 +2900,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, int milliseconds,
 			bool leading)
 		{
-			return _synch.Throttle(function, milliseconds, leading);
+			return _throttle.Throttle(function, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -2873,7 +2908,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, int milliseconds)
 		{
-			return _synch.Throttle(function, milliseconds);
+			return _throttle.Throttle(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2882,7 +2917,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, int milliseconds,
 			bool leading)
 		{
-			return _synch.Throttle(function, milliseconds, leading);
+			return _throttle.Throttle(function, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -2891,7 +2926,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function,
 			int milliseconds)
 		{
-			return _synch.Throttle(function, milliseconds);
+			return _throttle.Throttle(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2900,7 +2935,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task<TResult>> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function,
 			int milliseconds, bool leading)
 		{
-			return _synch.Throttle(function, milliseconds, leading);
+			return _throttle.Throttle(function, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -2908,7 +2943,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<Task<TResult>> Delay<TResult>(Func<TResult> function, int milliseconds)
 		{
-			return _synch.Delay(function, milliseconds);
+			return _delay.Delay(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2916,21 +2951,21 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T, Task<TResult>> Delay<T, TResult>(Func<T, TResult> function, int milliseconds)
 		{
-			return _synch.Delay(function, milliseconds);
+			return _delay.Delay(function, milliseconds);
 		}
 		/// <summary>
 		/// Creates a function that after a delay time
 		/// </summary>
 		public Func<T1, T2, Task<TResult>> Delay<T1, T2, TResult>(Func<T1, T2, TResult> function, int milliseconds)
 		{
-			return _synch.Delay(function, milliseconds);
+			return _delay.Delay(function, milliseconds);
 		}
 		/// <summary>
 		/// Creates a function that after a delay time
 		/// </summary>
 		public Func<T1, T2, T3, Task<TResult>> Delay<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> function, int milliseconds)
 		{
-			return _synch.Delay(function, milliseconds);
+			return _delay.Delay(function, milliseconds);
 		}
 
 		/// <summary>
@@ -2938,84 +2973,84 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, Task<TResult>> Delay<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function, int milliseconds)
 		{
-			return _synch.Delay(function, milliseconds);
+			return _delay.Delay(function, milliseconds);
 		}
 		/// <summary>
 		/// Creates a function that after a delay time
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, Task<TResult>> Delay<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, int milliseconds)
 		{
-			return _synch.Delay(function, milliseconds);
+			return _delay.Delay(function, milliseconds);
 		}
 		/// <summary>
 		/// Creates a function that after a delay time
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, int milliseconds)
 		{
-			return _synch.Delay(function, milliseconds);
+			return _delay.Delay(function, milliseconds);
 		}
 		/// <summary>
 		/// Creates a function that after a delay time
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, int milliseconds)
 		{
-			return _synch.Delay(function, milliseconds);
+			return _delay.Delay(function, milliseconds);
 		}
 		/// <summary>
 		/// Creates a function that after a delay time
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, int milliseconds)
 		{
-			return _synch.Delay(function, milliseconds);
+			return _delay.Delay(function, milliseconds);
 		}
 		/// <summary>
 		/// Creates a function that after a delay time
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, int milliseconds)
 		{
-			return _synch.Delay(function, milliseconds);
+			return _delay.Delay(function, milliseconds);
 		}
 		/// <summary>
 		/// Creates a function that after a delay time
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, int milliseconds)
 		{
-			return _synch.Delay(function, milliseconds);
+			return _delay.Delay(function, milliseconds);
 		}
 		/// <summary>
 		/// Creates a function that after a delay time
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, int milliseconds)
 		{
-			return _synch.Delay(function, milliseconds);
+			return _delay.Delay(function, milliseconds);
 		}
 		/// <summary>
 		/// Creates a function that after a delay time
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, int milliseconds)
 		{
-			return _synch.Delay(function, milliseconds);
+			return _delay.Delay(function, milliseconds);
 		}
 		/// <summary>
 		/// Creates a function that after a delay time
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, int milliseconds)
 		{
-			return _synch.Delay(function, milliseconds);
+			return _delay.Delay(function, milliseconds);
 		}
 		/// <summary>
 		/// Creates a function that after a delay time
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, int milliseconds)
 		{
-			return _synch.Delay(function, milliseconds);
+			return _delay.Delay(function, milliseconds);
 		}
 		/// <summary>
 		/// Creates a function that after a delay time
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, int milliseconds)
 		{
-			return _synch.Delay(function, milliseconds);
+			return _delay.Delay(function, milliseconds);
 		}
 
 		/// <summary>
@@ -3024,7 +3059,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task<TResult>> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function,
 			int milliseconds)
 		{
-			return _synch.Delay(function, milliseconds);
+			return _delay.Delay(function, milliseconds);
 		}
 
 		/// <summary>
@@ -3032,7 +3067,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<TResult> Once<TResult>(Func<TResult> function)
 		{
-			return _synch.Once(function);
+			return _once.Once(function);
 		}
 
 		/// <summary>
@@ -3040,7 +3075,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T, TResult> Once<T, TResult>(Func<T, TResult> function)
 		{
-			return _synch.Once(function);
+			return _once.Once(function);
 		}
 
 		/// <summary>
@@ -3048,7 +3083,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, TResult> Once<T1, T2, TResult>(Func<T1, T2, TResult> function)
 		{
-			return _synch.Once(function);
+			return _once.Once(function);
 		}
 
 		/// <summary>
@@ -3056,7 +3091,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, TResult> Once<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> function)
 		{
-			return _synch.Once(function);
+			return _once.Once(function);
 		}
 
 		/// <summary>
@@ -3064,7 +3099,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, TResult> Once<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function)
 		{
-			return _synch.Once(function);
+			return _once.Once(function);
 		}
 
 		/// <summary>
@@ -3072,7 +3107,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, TResult> Once<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function)
 		{
-			return _synch.Once(function);
+			return _once.Once(function);
 		}
 
 		/// <summary>
@@ -3080,7 +3115,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, TResult> Once<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function)
 		{
-			return _synch.Once(function);
+			return _once.Once(function);
 		}
 
 		/// <summary>
@@ -3088,7 +3123,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, TResult> Once<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function)
 		{
-			return _synch.Once(function);
+			return _once.Once(function);
 		}
 
 		/// <summary>
@@ -3096,7 +3131,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function)
 		{
-			return _synch.Once(function);
+			return _once.Once(function);
 		}
 
 		/// <summary>
@@ -3104,7 +3139,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function)
 		{
-			return _synch.Once(function);
+			return _once.Once(function);
 		}
 
 		/// <summary>
@@ -3112,7 +3147,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function)
 		{
-			return _synch.Once(function);
+			return _once.Once(function);
 		}
 
 		/// <summary>
@@ -3120,7 +3155,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function)
 		{
-			return _synch.Once(function);
+			return _once.Once(function);
 		}
 
 		/// <summary>
@@ -3128,7 +3163,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function)
 		{
-			return _synch.Once(function);
+			return _once.Once(function);
 		}
 
 		/// <summary>
@@ -3136,7 +3171,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function)
 		{
-			return _synch.Once(function);
+			return _once.Once(function);
 		}
 
 		/// <summary>
@@ -3144,7 +3179,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function)
 		{
-			return _synch.Once(function);
+			return _once.Once(function);
 		}
 
 		/// <summary>
@@ -3152,7 +3187,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function)
 		{
-			return _synch.Once(function);
+			return _once.Once(function);
 		}
 
 		/// <summary>
@@ -3160,7 +3195,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function)
 		{
-			return _synch.Once(function);
+			return _once.Once(function);
 		}
 
 		/// <summary>

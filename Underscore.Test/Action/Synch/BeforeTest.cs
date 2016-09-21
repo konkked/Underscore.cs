@@ -1,7 +1,5 @@
 ﻿using System;
 using ComposeComponent = Underscore.Action.ComposeComponent;
-using ISynchComponent = Underscore.Action.ISynchComponent;
-using SynchComponent = Underscore.Action.SynchComponent;
 using NUnit.Framework;
 
 namespace Underscore.Test.Action.Synch

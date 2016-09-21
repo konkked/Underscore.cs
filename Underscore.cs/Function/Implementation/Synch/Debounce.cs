@@ -6,11 +6,13 @@ namespace Underscore.Function
 {
 	public class DebounceComponent : IDebounceComponent
 	{
-        private Function.CompactComponent _fnCompact;
+        private Function.ICompactComponent _fnCompact;
+        private Utility.ICompactComponent _utilCompact;
 
-        public DebounceComponent(Function.CompactComponent fnCompact)
+        public DebounceComponent(Function.ICompactComponent fnCompact, Utility.ICompactComponent utilCompact)
         {
             _fnCompact = fnCompact;
+            _utilCompact = utilCompact;
         }
 
 		/// <summary>

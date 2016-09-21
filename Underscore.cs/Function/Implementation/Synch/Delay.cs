@@ -6,10 +6,10 @@ namespace Underscore.Function
 {
 	public class DelayComponent : IDelayComponent
 	{
-        private Function.CompactComponent _fnCompact;
-        private Utility.CompactComponent _utilCompact;
+        private Function.ICompactComponent _fnCompact;
+        private Utility.ICompactComponent _utilCompact;
 
-        public DelayComponent(Function.CompactComponent fnCompact, Utility.CompactComponent utilCompact)
+        public DelayComponent(Function.ICompactComponent fnCompact, Utility.ICompactComponent utilCompact)
         {
             _fnCompact = fnCompact;
             _utilCompact = utilCompact;

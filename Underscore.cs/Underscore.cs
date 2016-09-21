@@ -20,9 +20,9 @@ namespace Underscore
 			s_instance = new _();
 		}
 
-		//don't want to expose public empty ctor, 
+		// don't want to expose public empty ctor, 
 		// so will hookup dependencies manually in this case
-		//(Normally do not do this)
+		// (Normally do not do this)
 		private _()
 		{
 			var kernel = Bootstrapper.Kernel;

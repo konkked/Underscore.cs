@@ -11,8 +11,13 @@ namespace Underscore.Setup
 			kernel.Register<IBindComponent, BindComponent>();
 			kernel.Register<ISplitComponent, SplitComponent>();
 			kernel.Register<IConvertComponent, ConvertComponent>();
-			kernel.Register<ISynchComponent, SynchComponent>();
-			kernel.Register<ICacheComponent, CacheComponent>();
+			kernel.Register<IAfterComponent, AfterComponent>();
+            kernel.Register<IBeforeComponent, BeforeComponent>();
+            kernel.Register<IDebounceComponent, DebounceComponent>();
+            kernel.Register<IDelayComponent, DelayComponent>();
+            kernel.Register<IOnceComponent, OnceComponent>();
+            kernel.Register<IAfterComponent, AfterComponent>();
+            kernel.Register<ICacheComponent, CacheComponent>();
 			kernel.Register<ICompactComponent, CompactComponent>();
 			kernel.Register<IBooleanComponent, BooleanComponent>();
 			kernel.Register<Module.Function>();

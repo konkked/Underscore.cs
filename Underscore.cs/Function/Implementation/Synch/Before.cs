@@ -5,10 +5,10 @@ namespace Underscore.Function
 {
 	public class BeforeComponent : IBeforeComponent
 	{
-        private Function.CompactComponent _fnCompact;
-        private Utility.CompactComponent _utilCompact;
+        private Function.ICompactComponent _fnCompact;
+        private Utility.ICompactComponent _utilCompact;
 
-        public BeforeComponent(Function.CompactComponent fnCompact, Utility.CompactComponent utilCompact)
+        public BeforeComponent(Function.ICompactComponent fnCompact, Utility.ICompactComponent utilCompact)
         {
             _fnCompact = fnCompact;
             _utilCompact = utilCompact;

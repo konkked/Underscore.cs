@@ -1,10 +1,5 @@
 ﻿using NUnit.Framework;
-using BindComponent = Underscore.Action.BindComponent;
-using ComposeComponent = Underscore.Action.ComposeComponent;
-using ConvertComponent = Underscore.Action.ConvertComponent;
-using SplitComponent = Underscore.Action.SplitComponent;
-using SynchComponent = Underscore.Action.SynchComponent;
-
+using Underscore.Action;
 namespace Underscore.Test.Module
 {
 	[TestFixture]
@@ -13,20 +8,56 @@ namespace Underscore.Test.Module
 		[Test]
 		public void ActionCreate()
 		{
-			var action = new Underscore.Module.Action( 
-				new BindComponent(),
-				new SplitComponent(),
-				new ComposeComponent(),
-				new SynchComponent(
-					new Underscore.Function.SynchComponent(
-						new Underscore.Function.CompactComponent(), 
-						new Underscore.Utility.CompactComponent(), 
-						new Underscore.Utility.MathComponent()
-					),
-					new ConvertComponent(),
-					new Underscore.Function.ConvertComponent()
-				),
-				new ConvertComponent()
+            var action = new Underscore.Module.Action(
+                new BindComponent(),
+                new SplitComponent(),
+                new ComposeComponent(),
+                new ConvertComponent(),
+                new AfterComponent(
+                    new Underscore.Function.AfterComponent(
+                        new Underscore.Function.CompactComponent(),
+                        new Underscore.Utility.CompactComponent()
+                        ),
+                    new ConvertComponent()
+                ),
+                new BeforeComponent(
+                    new Underscore.Function.ConvertComponent(),
+                    new ConvertComponent(),
+                    new Underscore.Function.BeforeComponent(
+                        new Underscore.Function.CompactComponent(),
+                        new Underscore.Utility.CompactComponent()
+                    )
+                ),
+                new DebounceComponent(
+                    new Underscore.Function.DebounceComponent(
+                        new Underscore.Function.CompactComponent(),
+                        new Underscore.Utility.CompactComponent()
+                    ),
+                    new ConvertComponent()
+                ),
+                new DelayComponent(
+                    new Underscore.Function.DelayComponent(
+                        new Underscore.Function.CompactComponent(),
+                        new Underscore.Utility.CompactComponent()
+                    ),
+                    new ConvertComponent()
+                ),
+                new OnceComponent(
+                    new Underscore.Function.OnceComponent(
+                        new Underscore.Function.CompactComponent(),
+                        new Underscore.Utility.CompactComponent()
+                    ),
+                    new Underscore.Function.ConvertComponent(),
+                    new ConvertComponent()
+                ),
+                new ThrottleComponent(
+                    new Underscore.Function.ThrottleComponent(
+                        new Underscore.Utility.MathComponent(),
+                        new Underscore.Function.CompactComponent(),
+                        new Underscore.Utility.CompactComponent()
+                    ),
+                    new ConvertComponent()
+                )
 			);
 		}
 	}

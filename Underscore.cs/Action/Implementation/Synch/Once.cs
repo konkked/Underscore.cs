@@ -4,15 +4,15 @@ namespace Underscore.Action
 {
 	public class OnceComponent : IOnceComponent
 	{
-        Function.ConvertComponent _fnConvert;
-        Action.ConvertComponent _actionConvert;
-        Function.OnceComponent _fnOnce;
+        Function.IConvertComponent _fnConvert;
+        Action.IConvertComponent _actionConvert;
+        Function.IOnceComponent _fnOnce;
 
-        public OnceComponent(Function.ConvertComponent fnConvert, Action.ConvertComponent actionConvert, Function.OnceComponent fnOnce)
+        public OnceComponent(Function.IOnceComponent fnOnce, Function.IConvertComponent fnConvert, Action.IConvertComponent actionConvert)
         {
+            _fnOnce = fnOnce;
             _fnConvert = fnConvert;
             _actionConvert = actionConvert;
-            _fnOnce = fnOnce;
         }
 
 		public System.Action Once(System.Action action)
