@@ -11,7 +11,7 @@ namespace Underscore.Test.Function.Synch
 	[TestFixture]
 	public class AfterTest
 	{
-		private ComposeComponent compose;
+		private ApplyComponent apply;
 
 		private readonly string[] arguments = Util.LowercaseCharArray;
 		private const int repeatCount = 100000;
@@ -22,7 +22,7 @@ namespace Underscore.Test.Function.Synch
 		[SetUp]
 		public void Initialize()
 		{
-			compose = new ComposeComponent();
+			apply = new ApplyComponent();
 		}
 
 		[Test]
@@ -69,7 +69,7 @@ namespace Underscore.Test.Function.Synch
 			for (int i = 0; i < repeatCount; i++)
 			{
 				var curr = counter++;
-				arr[i] = compose.Apply(aftered, arguments.Take(1).Concat(new[] { curr.ToString() }).ToArray());
+				arr[i] = apply.Apply(aftered, arguments.Take(1).Concat(new[] { curr.ToString() }).ToArray());
 			}
 
 			for (int i = 0; i < repeatCount; i++)
@@ -111,7 +111,7 @@ namespace Underscore.Test.Function.Synch
 			for (int i = 0; i < repeatCount; i++)
 			{
 				var curr = counter++;
-				arr[i] = compose.Apply(aftered, arguments.Take(1).Concat(new[] { curr.ToString() }).ToArray());
+				arr[i] = apply.Apply(aftered, arguments.Take(1).Concat(new[] { curr.ToString() }).ToArray());
 			}
 
 			for (int i = 0; i < repeatCount; i++)
@@ -153,7 +153,7 @@ namespace Underscore.Test.Function.Synch
 			for (int i = 0; i < repeatCount; i++)
 			{
 				var curr = counter++;
-				arr[i] = compose.Apply(aftered, arguments.Take(2).Concat(new[] { curr.ToString() }).ToArray());
+				arr[i] = apply.Apply(aftered, arguments.Take(2).Concat(new[] { curr.ToString() }).ToArray());
 			}
 
 			for (int i = 0; i < repeatCount; i++)
@@ -195,7 +195,7 @@ namespace Underscore.Test.Function.Synch
 			for (int i = 0; i < repeatCount; i++)
 			{
 				var curr = counter++;
-				arr[i] = compose.Apply(aftered, arguments.Take(3).Concat(new[] { curr.ToString() }).ToArray());
+				arr[i] = apply.Apply(aftered, arguments.Take(3).Concat(new[] { curr.ToString() }).ToArray());
 			}
 
 			for (int i = 0; i < repeatCount; i++)
@@ -237,7 +237,7 @@ namespace Underscore.Test.Function.Synch
 			for (int i = 0; i < repeatCount; i++)
 			{
 				var curr = counter++;
-				arr[i] = compose.Apply(aftered, arguments.Take(4).Concat(new[] { curr.ToString() }).ToArray());
+				arr[i] = apply.Apply(aftered, arguments.Take(4).Concat(new[] { curr.ToString() }).ToArray());
 			}
 
 			for (int i = 0; i < repeatCount; i++)
@@ -279,7 +279,7 @@ namespace Underscore.Test.Function.Synch
 			for (int i = 0; i < repeatCount; i++)
 			{
 				var curr = counter++;
-				arr[i] = compose.Apply(aftered, arguments.Take(5).Concat(new[] { curr.ToString() }).ToArray());
+				arr[i] = apply.Apply(aftered, arguments.Take(5).Concat(new[] { curr.ToString() }).ToArray());
 			}
 
 			for (int i = 0; i < repeatCount; i++)
@@ -321,7 +321,7 @@ namespace Underscore.Test.Function.Synch
 			for (int i = 0; i < repeatCount; i++)
 			{
 				var curr = counter++;
-				arr[i] = compose.Apply(aftered, arguments.Take(6).Concat(new[] { curr.ToString() }).ToArray());
+				arr[i] = apply.Apply(aftered, arguments.Take(6).Concat(new[] { curr.ToString() }).ToArray());
 			}
 
 			for (int i = 0; i < repeatCount; i++)
@@ -364,7 +364,7 @@ namespace Underscore.Test.Function.Synch
 			{
 				var curr = counter++;
 				Thread.MemoryBarrier();
-				arr[i] = compose.Apply(aftered, arguments.Take(7).Concat(new[] { curr.ToString() }).ToArray());
+				arr[i] = apply.Apply(aftered, arguments.Take(7).Concat(new[] { curr.ToString() }).ToArray());
 				Thread.MemoryBarrier();
 			}
 
@@ -407,7 +407,7 @@ namespace Underscore.Test.Function.Synch
 			for (int i = 0; i < repeatCount; i++)
 			{
 				var curr = counter++;
-				arr[i] = compose.Apply(aftered, arguments.Take(8).Concat(new[] { curr.ToString() }).ToArray());
+				arr[i] = apply.Apply(aftered, arguments.Take(8).Concat(new[] { curr.ToString() }).ToArray());
 			}
 
 			for (int i = 0; i < repeatCount; i++)
@@ -449,7 +449,7 @@ namespace Underscore.Test.Function.Synch
 			for (int i = 0; i < repeatCount; i++)
 			{
 				int curr = counter++;
-				arr[i] = compose.Apply(aftered, arguments.Take(9).Concat(new[] { curr.ToString() }).ToArray());
+				arr[i] = apply.Apply(aftered, arguments.Take(9).Concat(new[] { curr.ToString() }).ToArray());
 			}
 
 			for (int i = 0; i < repeatCount; i++)
@@ -491,7 +491,7 @@ namespace Underscore.Test.Function.Synch
 			for (int i = 0; i < repeatCount; i++)
 			{
 				var curr = counter++;
-				arr[i] = compose.Apply(aftered, arguments.Take(10).Concat(new[] { curr.ToString() }).ToArray());
+				arr[i] = apply.Apply(aftered, arguments.Take(10).Concat(new[] { curr.ToString() }).ToArray());
 			}
 
 			for (int i = 0; i < repeatCount; i++)
@@ -533,7 +533,7 @@ namespace Underscore.Test.Function.Synch
 			for (int i = 0; i < repeatCount; i++)
 			{
 				var curr = counter++;
-				arr[i] = compose.Apply(aftered, arguments.Take(11).Concat(new[] { curr.ToString() }).ToArray());
+				arr[i] = apply.Apply(aftered, arguments.Take(11).Concat(new[] { curr.ToString() }).ToArray());
 			}
 
 			for (int i = 0; i < repeatCount; i++)
@@ -575,7 +575,7 @@ namespace Underscore.Test.Function.Synch
 			for (int i = 0; i < repeatCount; i++)
 			{
 				var curr = counter++;
-				arr[i] = compose.Apply(aftered, arguments.Take(12).Concat(new[] { curr.ToString() }).ToArray());
+				arr[i] = apply.Apply(aftered, arguments.Take(12).Concat(new[] { curr.ToString() }).ToArray());
 			}
 
 			for (int i = 0; i < repeatCount; i++)
@@ -617,7 +617,7 @@ namespace Underscore.Test.Function.Synch
 			for (int i = 0; i < repeatCount; i++)
 			{
 				var curr = counter++;
-				arr[i] = compose.Apply(aftered, arguments.Take(13).Concat(new[] { curr.ToString() }).ToArray());
+				arr[i] = apply.Apply(aftered, arguments.Take(13).Concat(new[] { curr.ToString() }).ToArray());
 			}
 
 			for (int i = 0; i < repeatCount; i++)
@@ -659,7 +659,7 @@ namespace Underscore.Test.Function.Synch
 			for (int i = 0; i < repeatCount; i++)
 			{
 				var curr = counter++;
-				arr[i] = compose.Apply(aftered, arguments.Take(14).Concat(new[] { curr.ToString() }).ToArray());
+				arr[i] = apply.Apply(aftered, arguments.Take(14).Concat(new[] { curr.ToString() }).ToArray());
 			}
 
 			for (int i = 0; i < repeatCount; i++)
@@ -701,7 +701,7 @@ namespace Underscore.Test.Function.Synch
 			for (int i = 0; i < repeatCount; i++)
 			{
 				var curr = counter++;
-				arr[i] = compose.Apply(aftered, arguments.Take(15).Concat(new[] { curr.ToString() }).ToArray());
+				arr[i] = apply.Apply(aftered, arguments.Take(15).Concat(new[] { curr.ToString() }).ToArray());
 			}
 
 			for (int i = 0; i < repeatCount; i++)

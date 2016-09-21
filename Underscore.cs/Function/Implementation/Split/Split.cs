@@ -1,7 +1,8 @@
 ﻿using System;
+
 namespace Underscore.Function
 {
-	public partial class SplitComponent : ISplitComponent
+	public class SplitComponent : ISplitComponent
 	{
 		/// <summary>
 		/// Halves the passed function

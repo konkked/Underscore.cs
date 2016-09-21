@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Underscore.Function
 {
-	public partial class SplitComponent : ISplitComponent
+	public class CurryComponent : ICurryComponent
 	{
 		/// <summary>
 		/// Splits functions into a chain of functions

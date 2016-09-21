@@ -2,7 +2,7 @@
 
 namespace Underscore.Function
 {
-	public partial interface ISplitComponent
+	public interface IUncurryComponent
 	{
 		/// <summary>
 		/// Translates a sequence of functions each taking one argument into a single action

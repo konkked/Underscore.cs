@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Underscore.Function
 {
-	public partial class ComposeComponent : IComposeComponent
+	public class ComposeComponent : IComposeComponent
 	{
 		/// <summary>
 		/// Transforms a chain of functions into a single function, 

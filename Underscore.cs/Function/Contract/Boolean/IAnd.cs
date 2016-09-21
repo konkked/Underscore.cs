@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Underscore.Function
 {
-	public partial interface IBooleanComponent
+	public interface IAndComponent
 	{
 		/// <summary>
 		/// Creates an aggregate function that is a result of the passed functions being called and being 'and'ed together

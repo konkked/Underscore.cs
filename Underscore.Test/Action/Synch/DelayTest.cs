@@ -4,12 +4,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Underscore.Function;
+
 namespace Underscore.Test.Action.Synch
 {
 	[TestFixture]
 	public class DelayTest
 	{
-		private ComposeComponent compose;
+		private ApplyComponent apply;
 
 		private readonly string[] arguments = Util.LowercaseCharArray;
 
@@ -27,7 +28,7 @@ namespace Underscore.Test.Action.Synch
 		[SetUp]
 		public void Initialize()
 		{
-			compose = new ComposeComponent();
+			apply = new ApplyComponent();
 		}
 
 		public void Action_Synch_Delay_NoArguments()
@@ -63,7 +64,7 @@ namespace Underscore.Test.Action.Synch
 
 			Assert.IsFalse(invoked);
 
-			TestDelay(100, compose.Apply(delayed, arguments));
+			TestDelay(100, apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -84,7 +85,7 @@ namespace Underscore.Test.Action.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, compose.Apply(delayed, arguments));
+			TestDelay(100, apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -106,7 +107,7 @@ namespace Underscore.Test.Action.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, compose.Apply(delayed, arguments));
+			TestDelay(100, apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -129,7 +130,7 @@ namespace Underscore.Test.Action.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, compose.Apply(delayed, arguments));
+			TestDelay(100, apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -151,7 +152,7 @@ namespace Underscore.Test.Action.Synch
 
 			var delayed = _.Action.Delay(delaying, 100);
 
-			TestDelay(100, compose.Apply(delayed, arguments));
+			TestDelay(100, apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -174,7 +175,7 @@ namespace Underscore.Test.Action.Synch
 
 			var delayed = _.Action.Delay(delaying, 100);
 
-			TestDelay(100, compose.Apply(delayed, arguments));
+			TestDelay(100, apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -198,7 +199,7 @@ namespace Underscore.Test.Action.Synch
 
 			var delayed = _.Action.Delay(delaying, 100);
 
-			TestDelay(100, compose.Apply(delayed, arguments));
+			TestDelay(100, apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -223,7 +224,7 @@ namespace Underscore.Test.Action.Synch
 
 			var delayed = _.Action.Delay(delaying, 100);
 
-			TestDelay(100, compose.Apply(delayed, arguments));
+			TestDelay(100, apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -249,7 +250,7 @@ namespace Underscore.Test.Action.Synch
 
 			var delayed = _.Action.Delay(delaying, 100);
 
-			TestDelay(100, compose.Apply(delayed, arguments));
+			TestDelay(100, apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -276,7 +277,7 @@ namespace Underscore.Test.Action.Synch
 
 			var delayed = _.Action.Delay(delaying, 100);
 
-			TestDelay(100, compose.Apply(delayed, arguments));
+			TestDelay(100, apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -304,7 +305,7 @@ namespace Underscore.Test.Action.Synch
 
 			var delayed = _.Action.Delay(delaying, 100);
 
-			TestDelay(100, compose.Apply(delayed, arguments));
+			TestDelay(100, apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -333,7 +334,7 @@ namespace Underscore.Test.Action.Synch
 
 			var delayed = _.Action.Delay(delaying, 100);
 
-			TestDelay(100, compose.Apply(delayed, arguments));
+			TestDelay(100, apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -363,7 +364,7 @@ namespace Underscore.Test.Action.Synch
 
 			var delayed = _.Action.Delay(delaying, 100);
 
-			TestDelay(100, compose.Apply(delayed, arguments));
+			TestDelay(100, apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -394,7 +395,7 @@ namespace Underscore.Test.Action.Synch
 
 			var delayed = _.Action.Delay(delaying, 100);
 
-			TestDelay(100, compose.Apply(delayed, arguments));
+			TestDelay(100, apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -426,7 +427,7 @@ namespace Underscore.Test.Action.Synch
 
 			var delayed = _.Action.Delay(delaying, 100);
 
-			TestDelay(100, compose.Apply(delayed, arguments));
+			TestDelay(100, apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -459,7 +460,7 @@ namespace Underscore.Test.Action.Synch
 
 			var delayed = _.Action.Delay(delaying, 100);
 
-			TestDelay(100, compose.Apply(delayed, arguments));
+			TestDelay(100, apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}

@@ -10,14 +10,14 @@ namespace Underscore.Test.Function.Synch
 	[TestFixture]
 	public class DelayTest
 	{
-		private ComposeComponent compose;
+		private ApplyComponent apply;
 
 		private readonly string[] arguments = Util.LowercaseCharArray;
 
 		[SetUp]
 		public void Initialize()
 		{
-			compose = new ComposeComponent();
+			apply = new ApplyComponent();
 		}
 
 		private void TestDelay(int waitTime, string expecting, Task<string> delayed) 
@@ -67,7 +67,7 @@ namespace Underscore.Test.Function.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, "a", compose.Apply(delayed, arguments));
+			TestDelay(100, "a", apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -87,7 +87,7 @@ namespace Underscore.Test.Function.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, "ab", compose.Apply(delayed, arguments));
+			TestDelay(100, "ab", apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -107,7 +107,7 @@ namespace Underscore.Test.Function.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, "abc", compose.Apply(delayed, arguments));
+			TestDelay(100, "abc", apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -127,7 +127,7 @@ namespace Underscore.Test.Function.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, "abcd", compose.Apply(delayed, arguments));
+			TestDelay(100, "abcd", apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -150,7 +150,7 @@ namespace Underscore.Test.Function.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, "abcde", compose.Apply(delayed, arguments));
+			TestDelay(100, "abcde", apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 			timer.Stop();
@@ -173,7 +173,7 @@ namespace Underscore.Test.Function.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, "abcdef", compose.Apply(delayed, arguments));
+			TestDelay(100, "abcdef", apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -193,7 +193,7 @@ namespace Underscore.Test.Function.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, "abcdefg", compose.Apply(delayed, arguments));
+			TestDelay(100, "abcdefg", apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -213,7 +213,7 @@ namespace Underscore.Test.Function.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, "abcdefgh", compose.Apply(delayed, arguments));
+			TestDelay(100, "abcdefgh", apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -233,7 +233,7 @@ namespace Underscore.Test.Function.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, "abcdefghi", compose.Apply(delayed, arguments));
+			TestDelay(100, "abcdefghi", apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -253,7 +253,7 @@ namespace Underscore.Test.Function.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, "abcdefghij", compose.Apply(delayed, arguments));
+			TestDelay(100, "abcdefghij", apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -273,7 +273,7 @@ namespace Underscore.Test.Function.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, "abcdefghijk", compose.Apply(delayed, arguments));
+			TestDelay(100, "abcdefghijk", apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -293,7 +293,7 @@ namespace Underscore.Test.Function.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, "abcdefghijkl", compose.Apply(delayed, arguments));
+			TestDelay(100, "abcdefghijkl", apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -313,7 +313,7 @@ namespace Underscore.Test.Function.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, "abcdefghijklm", compose.Apply(delayed, arguments));
+			TestDelay(100, "abcdefghijklm", apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -333,7 +333,7 @@ namespace Underscore.Test.Function.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, "abcdefghijklmn", compose.Apply(delayed, arguments));
+			TestDelay(100, "abcdefghijklmn", apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -353,7 +353,7 @@ namespace Underscore.Test.Function.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, "abcdefghijklmno", compose.Apply(delayed, arguments));
+			TestDelay(100, "abcdefghijklmno", apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}
@@ -373,7 +373,7 @@ namespace Underscore.Test.Function.Synch
 
 			Thread.MemoryBarrier();
 
-			TestDelay(100, "abcdefghijklmnop", compose.Apply(delayed, arguments));
+			TestDelay(100, "abcdefghijklmnop", apply.Apply(delayed, arguments));
 
 			Assert.IsTrue(invoked);
 		}

@@ -2,7 +2,7 @@
 
 namespace Underscore.Function
 {
-	public partial interface IComposeComponent
+	public interface IApplyComponent
 	{
 		/// <summary>
 		/// Calls a function using the passed array of arguments

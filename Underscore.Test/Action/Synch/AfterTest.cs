@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ComposeComponent = Underscore.Function.ComposeComponent;
+using ApplyComponent = Underscore.Function.ApplyComponent;
 using NUnit.Framework;
 
 namespace Underscore.Test.Action.Synch
@@ -9,7 +9,7 @@ namespace Underscore.Test.Action.Synch
 	public class AfterTest
 	{
 		private readonly string[] arguments = Util.LowercaseCharArray;
-		private ComposeComponent funcCompose;
+		private ApplyComponent apply;
 
 		private int counter;
 		private string result;
@@ -18,7 +18,7 @@ namespace Underscore.Test.Action.Synch
 		[SetUp]
 		public void Initialize()
 		{
-			funcCompose = new ComposeComponent();
+			apply = new ApplyComponent();
 			
 			counter = 0;
 			result = "";
@@ -51,7 +51,7 @@ namespace Underscore.Test.Action.Synch
 			var aftered = _.Action.After(aftering, 3);
 
 			for (var i = 0; i < arr.Length; i++)
-				arr[i] = funcCompose.Apply(aftered, arguments);
+				arr[i] = apply.Apply(aftered, arguments);
 
 			for (var i = 0; i < arr.Length; i++)
 				arr[i].Wait();
@@ -75,7 +75,7 @@ namespace Underscore.Test.Action.Synch
 			var aftered = _.Action.After(aftering, 3);
 
 			for (var i = 0; i < 4; i++)
-				arr[i] = funcCompose.Apply(aftered, arguments);
+				arr[i] = apply.Apply(aftered, arguments);
 
 			for (var i = 0; i < 4; i++)
 				arr[i].Wait();
@@ -97,7 +97,7 @@ namespace Underscore.Test.Action.Synch
 			var aftered = _.Action.After(aftering, 3);
 
 			for (var i = 0; i < 4; i++)
-				arr[i] = funcCompose.Apply(aftered, arguments);
+				arr[i] = apply.Apply(aftered, arguments);
 
 			for (var i = 0; i < 4; i++)
 				arr[i].Wait();
@@ -119,7 +119,7 @@ namespace Underscore.Test.Action.Synch
 			var aftered = _.Action.After(aftering, 3);
 
 			for (var i = 0; i < 4; i++)
-				arr[i] = funcCompose.Apply(aftered, arguments);
+				arr[i] = apply.Apply(aftered, arguments);
 
 			for (var i = 0; i < 4; i++)
 				arr[i].Wait();
@@ -142,7 +142,7 @@ namespace Underscore.Test.Action.Synch
 
 
 			for (var i = 0; i < 4; i++)
-				arr[i] = funcCompose.Apply(aftered, arguments);
+				arr[i] = apply.Apply(aftered, arguments);
 
 			for (var i = 0; i < 4; i++)
 				arr[i].Wait();
@@ -165,7 +165,7 @@ namespace Underscore.Test.Action.Synch
 
 
 			for (var i = 0; i < 4; i++)
-				arr[i] = funcCompose.Apply(aftered, arguments);
+				arr[i] = apply.Apply(aftered, arguments);
 
 			for (var i = 0; i < 4; i++)
 				arr[i].Wait();
@@ -188,7 +188,7 @@ namespace Underscore.Test.Action.Synch
 
 
 			for (var i = 0; i < 4; i++)
-				arr[i] = funcCompose.Apply(aftered, arguments);
+				arr[i] = apply.Apply(aftered, arguments);
 
 			for (var i = 0; i < 4; i++)
 				arr[i].Wait();
@@ -211,7 +211,7 @@ namespace Underscore.Test.Action.Synch
 
 
 			for (var i = 0; i < 4; i++)
-				arr[i] = funcCompose.Apply(aftered, arguments);
+				arr[i] = apply.Apply(aftered, arguments);
 
 			for (var i = 0; i < 4; i++)
 				arr[i].Wait();
@@ -234,7 +234,7 @@ namespace Underscore.Test.Action.Synch
 
 
 			for (var i = 0; i < 4; i++)
-				arr[i] = funcCompose.Apply(aftered, arguments);
+				arr[i] = apply.Apply(aftered, arguments);
 
 			for (var i = 0; i < 4; i++)
 				arr[i].Wait();
@@ -256,7 +256,7 @@ namespace Underscore.Test.Action.Synch
 			var aftered = _.Action.After(aftering, 3);
 
 			for (var i = 0; i < 4; i++)
-				arr[i] = funcCompose.Apply(aftered, arguments);
+				arr[i] = apply.Apply(aftered, arguments);
 
 			for (var i = 0; i < 4; i++)
 				arr[i].Wait();
@@ -278,7 +278,7 @@ namespace Underscore.Test.Action.Synch
 			var aftered = _.Action.After(aftering, 3);
 
 			for (var i = 0; i < 4; i++)
-				arr[i] = funcCompose.Apply(aftered, arguments);
+				arr[i] = apply.Apply(aftered, arguments);
 
 			for (var i = 0; i < 4; i++)
 				arr[i].Wait();
@@ -300,7 +300,7 @@ namespace Underscore.Test.Action.Synch
 			var aftered = _.Action.After(aftering, 3);
 
 			for (var i = 0; i < 4; i++)
-				arr[i] = funcCompose.Apply(aftered, arguments);
+				arr[i] = apply.Apply(aftered, arguments);
 
 			for (var i = 0; i < 4; i++)
 				arr[i].Wait();
@@ -322,7 +322,7 @@ namespace Underscore.Test.Action.Synch
 			var aftered = _.Action.After(aftering, 3);
 
 			for (var i = 0; i < 4; i++)
-				arr[i] = funcCompose.Apply(aftered, arguments);
+				arr[i] = apply.Apply(aftered, arguments);
 
 			for (var i = 0; i < 4; i++)
 				arr[i].Wait();
@@ -344,7 +344,7 @@ namespace Underscore.Test.Action.Synch
 			var aftered = _.Action.After(aftering, 3);
 
 			for (var i = 0; i < 4; i++)
-				arr[i] = funcCompose.Apply(aftered, arguments);
+				arr[i] = apply.Apply(aftered, arguments);
 
 			for (var i = 0; i < 4; i++)
 				arr[i].Wait();
@@ -366,7 +366,7 @@ namespace Underscore.Test.Action.Synch
 			var aftered = _.Action.After(aftering, 3);
 
 			for (var i = 0; i < 4; i++)
-				arr[i] = funcCompose.Apply(aftered, arguments);
+				arr[i] = apply.Apply(aftered, arguments);
 
 			for (var i = 0; i < 4; i++)
 				arr[i].Wait();

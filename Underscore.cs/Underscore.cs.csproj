@@ -104,7 +104,7 @@
     <Compile Include="Function\Contract\IConvert.cs" />
     <Compile Include="Function\Contract\Split\ICurry.cs" />
     <Compile Include="Function\Contract\Split\ISplit.cs" />
-    <Compile Include="Function\Contract\Split\IUnCurry.cs" />
+    <Compile Include="Function\Contract\Split\IUncurry.cs" />
     <Compile Include="Function\Contract\Synch\IAfter.cs" />
     <Compile Include="Function\Contract\Synch\IBefore.cs" />
     <Compile Include="Function\Contract\Synch\IDebounce.cs" />
@@ -113,9 +113,9 @@
     <Compile Include="Function\Contract\Synch\IThrottle.cs" />
     <Compile Include="Function\Implementation\Bind\Bind.cs" />
     <Compile Include="Function\Implementation\Bind\Partial.cs" />
-    <Compile Include="Function\Implementation\Boolean\And.cs" />
-    <Compile Include="Function\Implementation\Boolean\Negate.cs" />
     <Compile Include="Function\Implementation\Boolean\Or.cs" />
+    <Compile Include="Function\Implementation\Boolean\Negate.cs" />
+    <Compile Include="Function\Implementation\Boolean\And.cs" />
     <Compile Include="Function\Implementation\Cache.cs" />
     <Compile Include="Function\Implementation\Compact.cs" />
     <Compile Include="Function\Implementation\Compose\Apply.cs" />
@@ -123,7 +123,7 @@
     <Compile Include="Function\Implementation\Convert.cs" />
     <Compile Include="Function\Implementation\Split\Curry.cs" />
     <Compile Include="Function\Implementation\Split\Split.cs" />
-    <Compile Include="Function\Implementation\Split\UnCurry.cs" />
+    <Compile Include="Function\Implementation\Split\Uncurry.cs" />
     <Compile Include="Function\Implementation\Synch\After.cs" />
     <Compile Include="Function\Implementation\Synch\Before.cs" />
     <Compile Include="Function\Implementation\Synch\Debounce.cs" />

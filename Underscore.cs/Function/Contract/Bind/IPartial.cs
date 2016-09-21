@@ -2,7 +2,7 @@
 
 namespace Underscore.Function
 {
-	public partial interface IBindComponent
+	public interface IPartialComponent
 	{
 		/// <summary>
 		/// Binds the function partially, from left to right

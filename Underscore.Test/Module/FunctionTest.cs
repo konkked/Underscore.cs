@@ -11,7 +11,11 @@ namespace Underscore.Test.Module
 		{
             var testing = new Underscore.Module.Function(
                  new BindComponent(),
+                 new PartialComponent(),
                  new SplitComponent(),
+                 new CurryComponent(),
+                 new UncurryComponent(),
+                 new ApplyComponent(),
                  new ComposeComponent(),
                  new ConvertComponent(),
                  new AfterComponent(
@@ -43,7 +47,9 @@ namespace Underscore.Test.Module
 					new CompactComponent(),
 					new Underscore.Utility.CompactComponent()	 
 				 ),
-				 new BooleanComponent()
+				 new AndComponent(),
+                 new OrComponent(),
+                 new NegateComponent()
 			);
 		}
 	}

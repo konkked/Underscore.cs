@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Underscore.Function
 {
-	public partial interface ISplitComponent
+	public interface ISplitComponent
 	{
 		/// <summary>
 		/// Halves the passed action as function that returns action that can invoke the passed action

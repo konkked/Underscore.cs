@@ -7,7 +7,11 @@ namespace Underscore.Module
 
 	public class Function :
 		ISplitComponent,
+        ICurryComponent,
+        IUncurryComponent,
 		IBindComponent,
+        IPartialComponent,
+        IApplyComponent,
 		IComposeComponent,
 		IAfterComponent,
         IBeforeComponent,
@@ -17,13 +21,19 @@ namespace Underscore.Module
         IThrottleComponent,
 		IConvertComponent,
 		ICacheComponent,
-		IBooleanComponent
+		IAndComponent,
+        IOrComponent,
+        INegateComponent
 	{
 
-		private readonly IComposeComponent _compose;
 		private readonly IBindComponent _bind;
-		private readonly ISplitComponent _split;
-		private readonly IConvertComponent _convert;
+        private readonly IPartialComponent _partial;
+        private readonly ISplitComponent _split;
+        private readonly ICurryComponent _curry;
+        private readonly IUncurryComponent _uncurry;
+        private readonly IApplyComponent _apply;
+        private readonly IComposeComponent _compose;
+        private readonly IConvertComponent _convert;
 		private readonly IAfterComponent _after;
         private readonly IBeforeComponent _before;
         private readonly IDebounceComponent _debounce;
@@ -31,11 +41,17 @@ namespace Underscore.Module
         private readonly IOnceComponent _once;
         private readonly IThrottleComponent _throttle;
 		private readonly ICacheComponent _cache;
-		private readonly IBooleanComponent _booleanComponent;
+		private readonly IAndComponent _and;
+        private readonly IOrComponent _or;
+        private readonly INegateComponent _negate;
 
 		public Function(
 			IBindComponent bind,
+            IPartialComponent partial,
 			ISplitComponent split,
+            ICurryComponent curry,
+            IUncurryComponent uncurry,
+            IApplyComponent apply,
 			IComposeComponent compose,
 			IConvertComponent convert,
 			IAfterComponent after,
@@ -45,13 +61,27 @@ namespace Underscore.Module
             IOnceComponent once,
             IThrottleComponent throttle,
 			ICacheComponent cache,
-			IBooleanComponent boolComponent)
+			IAndComponent and,
+            IOrComponent or,
+            INegateComponent negate)
 		{
 			if (bind == null)
 				throw new ArgumentNullException("bind");
 
+            if (partial == null)
+                throw new ArgumentNullException("partial");
+
 			if (split == null)
 				throw new ArgumentNullException("split");
+
+            if (curry == null)
+                throw new ArgumentNullException("curry");
+
+            if (uncurry == null)
+                throw new ArgumentNullException("uncurry");
+
+            if (apply == null)
+                throw new ArgumentNullException("apply");
 
 			if (compose == null)
 				throw new ArgumentNullException("compose");
@@ -80,11 +110,21 @@ namespace Underscore.Module
 			if (cache == null)
 				throw new ArgumentNullException("cache");
 
-			if (boolComponent == null)
-				throw new ArgumentNullException("boolComponent");
+			if (and == null)
+				throw new ArgumentNullException("and");
+
+            if (or == null)
+                throw new ArgumentNullException("or");
+
+            if (negate == null)
+                throw new ArgumentNullException("negate");
 
 			_bind = bind;
+            _partial = partial;
 			_split = split;
+            _curry = curry;
+            _uncurry = uncurry;
+            _apply = apply;
 			_compose = compose;
             _after = after;
             _before = before;
@@ -94,7 +134,9 @@ namespace Underscore.Module
             _throttle = throttle;
 			_convert = convert;
 			_cache = cache;
-			_booleanComponent = boolComponent;
+            _and = and;
+            _or = or;
+            _negate = negate;
 		}
 
 		/// <summary>
@@ -102,7 +144,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T6, TResult> Partial<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return _bind.Partial(function, a, b, c, d, e);
+			return _partial.Partial(function, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -110,7 +152,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T2, T3, T4, T5, T6, T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a)
 		{
-			return _bind.Partial(function, a);
+			return _partial.Partial(function, a);
 		}
 
 		/// <summary>
@@ -118,7 +160,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T3, T4, T5, T6, T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a, T2 b)
 		{
-			return _bind.Partial(function, a, b);
+			return _partial.Partial(function, a, b);
 		}
 
 		/// <summary>
@@ -126,7 +168,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T4, T5, T6, T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(function, a, b, c);
+			return _partial.Partial(function, a, b, c);
 		}
 
 		/// <summary>
@@ -134,7 +176,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T5, T6, T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(function, a, b, c, d);
+			return _partial.Partial(function, a, b, c, d);
 		}
 
 		/// <summary>
@@ -142,7 +184,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T6, T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return _bind.Partial(function, a, b, c, d, e);
+			return _partial.Partial(function, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -150,7 +192,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T7, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f);
+			return _partial.Partial(function, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -158,7 +200,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T2, T3, T4, T5, T6, T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a)
 		{
-			return _bind.Partial(function, a);
+			return _partial.Partial(function, a);
 		}
 
 		/// <summary>
@@ -166,7 +208,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T3, T4, T5, T6, T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b)
 		{
-			return _bind.Partial(function, a, b);
+			return _partial.Partial(function, a, b);
 		}
 
 		/// <summary>
@@ -174,7 +216,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T4, T5, T6, T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(function, a, b, c);
+			return _partial.Partial(function, a, b, c);
 		}
 
 		/// <summary>
@@ -182,7 +224,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T5, T6, T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(function, a, b, c, d);
+			return _partial.Partial(function, a, b, c, d);
 		}
 
 		/// <summary>
@@ -190,7 +232,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T6, T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return _bind.Partial(function, a, b, c, d, e);
+			return _partial.Partial(function, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -198,7 +240,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T7, T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f);
+			return _partial.Partial(function, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -206,7 +248,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T8, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g);
+			return _partial.Partial(function, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -214,7 +256,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T2, T3, T4, T5, T6, T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a)
 		{
-			return _bind.Partial(function, a);
+			return _partial.Partial(function, a);
 		}
 
 		/// <summary>
@@ -222,7 +264,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T3, T4, T5, T6, T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b)
 		{
-			return _bind.Partial(function, a, b);
+			return _partial.Partial(function, a, b);
 		}
 
 		/// <summary>
@@ -230,7 +272,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T4, T5, T6, T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(function, a, b, c);
+			return _partial.Partial(function, a, b, c);
 		}
 
 		/// <summary>
@@ -238,7 +280,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T5, T6, T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(function, a, b, c, d);
+			return _partial.Partial(function, a, b, c, d);
 		}
 
 		/// <summary>
@@ -246,7 +288,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T6, T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return _bind.Partial(function, a, b, c, d, e);
+			return _partial.Partial(function, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -254,7 +296,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T7, T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f);
+			return _partial.Partial(function, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -262,7 +304,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T8, T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g);
+			return _partial.Partial(function, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -270,7 +312,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T9, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h);
 		}
 
 		/// <summary>
@@ -278,7 +320,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a)
 		{
-			return _bind.Partial(function, a);
+			return _partial.Partial(function, a);
 		}
 
 		/// <summary>
@@ -286,7 +328,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T3, T4, T5, T6, T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b)
 		{
-			return _bind.Partial(function, a, b);
+			return _partial.Partial(function, a, b);
 		}
 
 		/// <summary>
@@ -294,7 +336,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T4, T5, T6, T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(function, a, b, c);
+			return _partial.Partial(function, a, b, c);
 		}
 
 		/// <summary>
@@ -302,7 +344,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T5, T6, T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(function, a, b, c, d);
+			return _partial.Partial(function, a, b, c, d);
 		}
 
 		/// <summary>
@@ -310,7 +352,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T6, T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return _bind.Partial(function, a, b, c, d, e);
+			return _partial.Partial(function, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -318,7 +360,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T7, T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f);
+			return _partial.Partial(function, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -326,7 +368,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T8, T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g);
+			return _partial.Partial(function, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -335,7 +377,7 @@ namespace Underscore.Module
 		public Func<T9, T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g,
 			T8 h)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h);
 		}
 
 		/// <summary>
@@ -344,7 +386,7 @@ namespace Underscore.Module
 		public Func<T10, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g,
 			T8 h, T9 i)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i);
 		}
 
 		/// <summary>
@@ -352,7 +394,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a)
 		{
-			return _bind.Partial(function, a);
+			return _partial.Partial(function, a);
 		}
 
 		/// <summary>
@@ -360,7 +402,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b)
 		{
-			return _bind.Partial(function, a, b);
+			return _partial.Partial(function, a, b);
 		}
 
 		/// <summary>
@@ -368,7 +410,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T4, T5, T6, T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(function, a, b, c);
+			return _partial.Partial(function, a, b, c);
 		}
 
 		/// <summary>
@@ -376,7 +418,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T5, T6, T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(function, a, b, c, d);
+			return _partial.Partial(function, a, b, c, d);
 		}
 
 		/// <summary>
@@ -384,7 +426,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T6, T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return _bind.Partial(function, a, b, c, d, e);
+			return _partial.Partial(function, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -392,7 +434,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T7, T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f);
+			return _partial.Partial(function, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -401,7 +443,7 @@ namespace Underscore.Module
 		public Func<T8, T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f,
 			T7 g)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g);
+			return _partial.Partial(function, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -410,7 +452,7 @@ namespace Underscore.Module
 		public Func<T9, T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f,
 			T7 g, T8 h)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h);
 		}
 
 		/// <summary>
@@ -419,7 +461,7 @@ namespace Underscore.Module
 		public Func<T10, T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f,
 			T7 g, T8 h, T9 i)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i);
 		}
 
 		/// <summary>
@@ -428,7 +470,7 @@ namespace Underscore.Module
 		public Func<T11, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f,
 			T7 g, T8 h, T9 i, T10 j)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j);
 		}
 
 		/// <summary>
@@ -436,7 +478,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a)
 		{
-			return _bind.Partial(function, a);
+			return _partial.Partial(function, a);
 		}
 
 		/// <summary>
@@ -444,7 +486,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b)
 		{
-			return _bind.Partial(function, a, b);
+			return _partial.Partial(function, a, b);
 		}
 
 		/// <summary>
@@ -452,7 +494,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(function, a, b, c);
+			return _partial.Partial(function, a, b, c);
 		}
 
 		/// <summary>
@@ -460,7 +502,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T5, T6, T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(function, a, b, c, d);
+			return _partial.Partial(function, a, b, c, d);
 		}
 
 		/// <summary>
@@ -468,7 +510,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T6, T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return _bind.Partial(function, a, b, c, d, e);
+			return _partial.Partial(function, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -477,7 +519,7 @@ namespace Underscore.Module
 		public Func<T7, T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e,
 			T6 f)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f);
+			return _partial.Partial(function, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -486,7 +528,7 @@ namespace Underscore.Module
 		public Func<T8, T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e,
 			T6 f, T7 g)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g);
+			return _partial.Partial(function, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -495,7 +537,7 @@ namespace Underscore.Module
 		public Func<T9, T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e,
 			T6 f, T7 g, T8 h)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h);
 		}
 
 		/// <summary>
@@ -504,7 +546,7 @@ namespace Underscore.Module
 		public Func<T10, T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e,
 			T6 f, T7 g, T8 h, T9 i)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i);
 		}
 
 		/// <summary>
@@ -513,7 +555,7 @@ namespace Underscore.Module
 		public Func<T11, T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e,
 			T6 f, T7 g, T8 h, T9 i, T10 j)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j);
 		}
 
 		/// <summary>
@@ -522,7 +564,7 @@ namespace Underscore.Module
 		public Func<T12, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function, T1 a, T2 b, T3 c, T4 d, T5 e,
 			T6 f, T7 g, T8 h, T9 i, T10 j, T11 k)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j, k);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j, k);
 		}
 
 		/// <summary>
@@ -530,7 +572,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a)
 		{
-			return _bind.Partial(function, a);
+			return _partial.Partial(function, a);
 		}
 
 		/// <summary>
@@ -538,7 +580,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b)
 		{
-			return _bind.Partial(function, a, b);
+			return _partial.Partial(function, a, b);
 		}
 
 		/// <summary>
@@ -546,7 +588,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(function, a, b, c);
+			return _partial.Partial(function, a, b, c);
 		}
 
 		/// <summary>
@@ -554,7 +596,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(function, a, b, c, d);
+			return _partial.Partial(function, a, b, c, d);
 		}
 
 		/// <summary>
@@ -563,7 +605,7 @@ namespace Underscore.Module
 		public Func<T6, T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d,
 			T5 e)
 		{
-			return _bind.Partial(function, a, b, c, d, e);
+			return _partial.Partial(function, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -572,7 +614,7 @@ namespace Underscore.Module
 		public Func<T7, T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f);
+			return _partial.Partial(function, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -581,7 +623,7 @@ namespace Underscore.Module
 		public Func<T8, T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g);
+			return _partial.Partial(function, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -590,7 +632,7 @@ namespace Underscore.Module
 		public Func<T9, T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g, T8 h)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h);
 		}
 
 		/// <summary>
@@ -599,7 +641,7 @@ namespace Underscore.Module
 		public Func<T10, T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g, T8 h, T9 i)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i);
 		}
 
 		/// <summary>
@@ -608,7 +650,7 @@ namespace Underscore.Module
 		public Func<T11, T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g, T8 h, T9 i, T10 j)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j);
 		}
 
 		/// <summary>
@@ -617,7 +659,7 @@ namespace Underscore.Module
 		public Func<T12, T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j, k);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j, k);
 		}
 
 		/// <summary>
@@ -626,7 +668,7 @@ namespace Underscore.Module
 		public Func<T13, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l);
 		}
 
 		/// <summary>
@@ -634,7 +676,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a)
 		{
-			return _bind.Partial(function, a);
+			return _partial.Partial(function, a);
 		}
 
 		/// <summary>
@@ -642,7 +684,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b)
 		{
-			return _bind.Partial(function, a, b);
+			return _partial.Partial(function, a, b);
 		}
 
 		/// <summary>
@@ -650,7 +692,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(function, a, b, c);
+			return _partial.Partial(function, a, b, c);
 		}
 
 		/// <summary>
@@ -658,7 +700,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(function, a, b, c, d);
+			return _partial.Partial(function, a, b, c, d);
 		}
 
 		/// <summary>
@@ -667,7 +709,7 @@ namespace Underscore.Module
 		public Func<T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d,
 			T5 e)
 		{
-			return _bind.Partial(function, a, b, c, d, e);
+			return _partial.Partial(function, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -676,7 +718,7 @@ namespace Underscore.Module
 		public Func<T7, T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f);
+			return _partial.Partial(function, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -685,7 +727,7 @@ namespace Underscore.Module
 		public Func<T8, T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g);
+			return _partial.Partial(function, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -694,7 +736,7 @@ namespace Underscore.Module
 		public Func<T9, T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g, T8 h)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h);
 		}
 
 		/// <summary>
@@ -703,7 +745,7 @@ namespace Underscore.Module
 		public Func<T10, T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g, T8 h, T9 i)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i);
 		}
 
 		/// <summary>
@@ -712,7 +754,7 @@ namespace Underscore.Module
 		public Func<T11, T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g, T8 h, T9 i, T10 j)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j);
 		}
 
 		/// <summary>
@@ -721,7 +763,7 @@ namespace Underscore.Module
 		public Func<T12, T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j, k);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j, k);
 		}
 
 		/// <summary>
@@ -730,7 +772,7 @@ namespace Underscore.Module
 		public Func<T13, T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l);
 		}
 
 		/// <summary>
@@ -739,7 +781,7 @@ namespace Underscore.Module
 		public Func<T14, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l, m);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
 
 		/// <summary>
@@ -747,7 +789,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a)
 		{
-			return _bind.Partial(function, a);
+			return _partial.Partial(function, a);
 		}
 
 		/// <summary>
@@ -755,7 +797,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b)
 		{
-			return _bind.Partial(function, a, b);
+			return _partial.Partial(function, a, b);
 		}
 
 		/// <summary>
@@ -763,7 +805,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(function, a, b, c);
+			return _partial.Partial(function, a, b, c);
 		}
 
 		/// <summary>
@@ -772,7 +814,7 @@ namespace Underscore.Module
 		public Func<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c,
 			T4 d)
 		{
-			return _bind.Partial(function, a, b, c, d);
+			return _partial.Partial(function, a, b, c, d);
 		}
 
 		/// <summary>
@@ -781,7 +823,7 @@ namespace Underscore.Module
 		public Func<T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c,
 			T4 d, T5 e)
 		{
-			return _bind.Partial(function, a, b, c, d, e);
+			return _partial.Partial(function, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -790,7 +832,7 @@ namespace Underscore.Module
 		public Func<T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f);
+			return _partial.Partial(function, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -799,7 +841,7 @@ namespace Underscore.Module
 		public Func<T8, T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f, T7 g)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g);
+			return _partial.Partial(function, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -808,7 +850,7 @@ namespace Underscore.Module
 		public Func<T9, T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f, T7 g, T8 h)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h);
 		}
 
 		/// <summary>
@@ -817,7 +859,7 @@ namespace Underscore.Module
 		public Func<T10, T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f, T7 g, T8 h, T9 i)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i);
 		}
 
 		/// <summary>
@@ -826,7 +868,7 @@ namespace Underscore.Module
 		public Func<T11, T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j);
 		}
 
 		/// <summary>
@@ -835,7 +877,7 @@ namespace Underscore.Module
 		public Func<T12, T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j, k);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j, k);
 		}
 
 		/// <summary>
@@ -844,7 +886,7 @@ namespace Underscore.Module
 		public Func<T13, T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l);
 		}
 
 		/// <summary>
@@ -853,7 +895,7 @@ namespace Underscore.Module
 		public Func<T14, T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l, m);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
 
 		/// <summary>
@@ -862,7 +904,7 @@ namespace Underscore.Module
 		public Func<T15, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m, T14 n)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 		}
 
 		/// <summary>
@@ -870,7 +912,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a)
 		{
-			return _bind.Partial(function, a);
+			return _partial.Partial(function, a);
 		}
 
 		/// <summary>
@@ -878,7 +920,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b)
 		{
-			return _bind.Partial(function, a, b);
+			return _partial.Partial(function, a, b);
 		}
 
 		/// <summary>
@@ -887,7 +929,7 @@ namespace Underscore.Module
 		public Func<T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b,
 			T3 c)
 		{
-			return _bind.Partial(function, a, b, c);
+			return _partial.Partial(function, a, b, c);
 		}
 
 		/// <summary>
@@ -896,7 +938,7 @@ namespace Underscore.Module
 		public Func<T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b,
 			T3 c, T4 d)
 		{
-			return _bind.Partial(function, a, b, c, d);
+			return _partial.Partial(function, a, b, c, d);
 		}
 
 		/// <summary>
@@ -905,7 +947,7 @@ namespace Underscore.Module
 		public Func<T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b,
 			T3 c, T4 d, T5 e)
 		{
-			return _bind.Partial(function, a, b, c, d, e);
+			return _partial.Partial(function, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -914,7 +956,7 @@ namespace Underscore.Module
 		public Func<T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b,
 			T3 c, T4 d, T5 e, T6 f)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f);
+			return _partial.Partial(function, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -923,7 +965,7 @@ namespace Underscore.Module
 		public Func<T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b,
 			T3 c, T4 d, T5 e, T6 f, T7 g)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g);
+			return _partial.Partial(function, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -932,7 +974,7 @@ namespace Underscore.Module
 		public Func<T9, T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b,
 			T3 c, T4 d, T5 e, T6 f, T7 g, T8 h)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h);
 		}
 
 		/// <summary>
@@ -941,7 +983,7 @@ namespace Underscore.Module
 		public Func<T10, T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b,
 			T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i);
 		}
 
 		/// <summary>
@@ -950,7 +992,7 @@ namespace Underscore.Module
 		public Func<T11, T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b,
 			T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j);
 		}
 
 		/// <summary>
@@ -959,7 +1001,7 @@ namespace Underscore.Module
 		public Func<T12, T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b,
 			T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j, k);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j, k);
 		}
 
 		/// <summary>
@@ -968,7 +1010,7 @@ namespace Underscore.Module
 		public Func<T13, T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b,
 			T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l);
 		}
 
 		/// <summary>
@@ -977,7 +1019,7 @@ namespace Underscore.Module
 		public Func<T14, T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b,
 			T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l, m);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
 
 		/// <summary>
@@ -986,7 +1028,7 @@ namespace Underscore.Module
 		public Func<T15, T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b,
 			T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m, T14 n)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 		}
 
 		/// <summary>
@@ -995,7 +1037,7 @@ namespace Underscore.Module
 		public Func<T16, TResult> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> function, T1 a, T2 b,
 			T3 c, T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m, T14 n, T15 o)
 		{
-			return _bind.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+			return _partial.Partial(function, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 		}
 
 		/// <summary>
@@ -1003,7 +1045,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T5, TResult> Partial<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(function, a, b, c, d);
+			return _partial.Partial(function, a, b, c, d);
 		}
 
 		/// <summary>
@@ -1011,7 +1053,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T2, T3, T4, T5, T6, TResult> Partial<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, T1 a)
 		{
-			return _bind.Partial(function, a);
+			return _partial.Partial(function, a);
 		}
 
 		/// <summary>
@@ -1019,7 +1061,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T3, T4, T5, T6, TResult> Partial<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, T1 a, T2 b)
 		{
-			return _bind.Partial(function, a, b);
+			return _partial.Partial(function, a, b);
 		}
 
 		/// <summary>
@@ -1027,7 +1069,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T4, T5, T6, TResult> Partial<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(function, a, b, c);
+			return _partial.Partial(function, a, b, c);
 		}
 
 		/// <summary>
@@ -1035,7 +1077,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T5, T6, TResult> Partial<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> function, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(function, a, b, c, d);
+			return _partial.Partial(function, a, b, c, d);
 		}
 
 		/// <summary>
@@ -1043,7 +1085,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T2, TResult> Partial<T1, T2, TResult>(Func<T1, T2, TResult> function, T1 a)
 		{
-			return _bind.Partial(function, a);
+			return _partial.Partial(function, a);
 		}
 
 		/// <summary>
@@ -1051,7 +1093,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T2, T3, TResult> Partial<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> function, T1 a)
 		{
-			return _bind.Partial(function, a);
+			return _partial.Partial(function, a);
 		}
 
 		/// <summary>
@@ -1059,7 +1101,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T3, TResult> Partial<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> function, T1 a, T2 b)
 		{
-			return _bind.Partial(function, a, b);
+			return _partial.Partial(function, a, b);
 		}
 
 		/// <summary>
@@ -1067,7 +1109,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T2, T3, T4, TResult> Partial<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function, T1 a)
 		{
-			return _bind.Partial(function, a);
+			return _partial.Partial(function, a);
 		}
 
 		/// <summary>
@@ -1075,7 +1117,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T3, T4, TResult> Partial<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function, T1 a, T2 b)
 		{
-			return _bind.Partial(function, a, b);
+			return _partial.Partial(function, a, b);
 		}
 
 		/// <summary>
@@ -1083,7 +1125,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T4, TResult> Partial<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(function, a, b, c);
+			return _partial.Partial(function, a, b, c);
 		}
 
 		/// <summary>
@@ -1091,7 +1133,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T2, T3, T4, T5, TResult> Partial<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, T1 a)
 		{
-			return _bind.Partial(function, a);
+			return _partial.Partial(function, a);
 		}
 
 		/// <summary>
@@ -1099,7 +1141,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T3, T4, T5, TResult> Partial<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, T1 a, T2 b)
 		{
-			return _bind.Partial(function, a, b);
+			return _partial.Partial(function, a, b);
 		}
 
 		/// <summary>
@@ -1107,7 +1149,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T4, T5, TResult> Partial<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> function, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(function, a, b, c);
+			return _partial.Partial(function, a, b, c);
 		}
 
 		/// <summary>
@@ -1385,7 +1427,7 @@ namespace Underscore.Module
 		/// <returns>Function chain resolving back to passed action</returns>
 		public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, Func<T15, TResult>>>>>>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> function)
 		{
-			return _split.Curry(function);
+			return _curry.Curry(function);
 		}
 
 		/// <summary>
@@ -1393,7 +1435,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, Func<T15, TResult>>>>>>>>>>>>>>>> function)
 		{
-			return _split.Uncurry(function);
+			return _uncurry.Uncurry(function);
 		}
 
 		/// <summary>
@@ -1401,7 +1443,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, TResult>>>>>>>>>>>>>>> function)
 		{
-			return _split.Uncurry(function);
+			return _uncurry.Uncurry(function);
 		}
 
 		/// <summary>
@@ -1409,7 +1451,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, TResult>>>>>>>>>>>>>> function)
 		{
-			return _split.Uncurry(function);
+			return _uncurry.Uncurry(function);
 		}
 
 		/// <summary>
@@ -1417,7 +1459,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, TResult>>>>>>>>>>>>> function)
 		{
-			return _split.Uncurry(function);
+			return _uncurry.Uncurry(function);
 		}
 
 		/// <summary>
@@ -1425,7 +1467,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, TResult>>>>>>>>>>>> function)
 		{
-			return _split.Uncurry(function);
+			return _uncurry.Uncurry(function);
 		}
 
 		/// <summary>
@@ -1433,7 +1475,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, TResult>>>>>>>>>>> function)
 		{
-			return _split.Uncurry(function);
+			return _uncurry.Uncurry(function);
 		}
 
 		/// <summary>
@@ -1441,7 +1483,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, TResult>>>>>>>>>> function)
 		{
-			return _split.Uncurry(function);
+			return _uncurry.Uncurry(function);
 		}
 
 		/// <summary>
@@ -1449,7 +1491,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, TResult>>>>>>>>> function)
 		{
-			return _split.Uncurry(function);
+			return _uncurry.Uncurry(function);
 		}
 
 		/// <summary>
@@ -1457,7 +1499,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, T1, T2, T3, T4, T5, T6, T7, TResult> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, TResult>>>>>>>> function)
 		{
-			return _split.Uncurry(function);
+			return _uncurry.Uncurry(function);
 		}
 
 		/// <summary>
@@ -1465,7 +1507,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, T1, T2, T3, T4, T5, T6, TResult> Uncurry<T0, T1, T2, T3, T4, T5, T6, TResult>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, TResult>>>>>>> function)
 		{
-			return _split.Uncurry(function);
+			return _uncurry.Uncurry(function);
 		}
 
 		/// <summary>
@@ -1473,7 +1515,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, T1, T2, T3, T4, T5, TResult> Uncurry<T0, T1, T2, T3, T4, T5, TResult>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, TResult>>>>>> function)
 		{
-			return _split.Uncurry(function);
+			return _uncurry.Uncurry(function);
 		}
 
 		/// <summary>
@@ -1481,7 +1523,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, T1, T2, T3, T4, TResult> Uncurry<T0, T1, T2, T3, T4, TResult>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, TResult>>>>> function)
 		{
-			return _split.Uncurry(function);
+			return _uncurry.Uncurry(function);
 		}
 
 		/// <summary>
@@ -1489,7 +1531,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, T1, T2, T3, TResult> Uncurry<T0, T1, T2, T3, TResult>(Func<T0, Func<T1, Func<T2, Func<T3, TResult>>>> function)
 		{
-			return _split.Uncurry(function);
+			return _uncurry.Uncurry(function);
 		}
 
 		/// <summary>
@@ -1497,7 +1539,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, T1, T2, TResult> Uncurry<T0, T1, T2, TResult>(Func<T0, Func<T1, Func<T2, TResult>>> function)
 		{
-			return _split.Uncurry(function);
+			return _uncurry.Uncurry(function);
 		}
 
 		/// <summary>
@@ -1505,7 +1547,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, T1, TResult> Uncurry<T0, T1, TResult>(Func<T0, Func<T1, TResult>> function)
 		{
-			return _split.Uncurry(function);
+			return _uncurry.Uncurry(function);
 		}
 
 		/// <summary>
@@ -1518,7 +1560,7 @@ namespace Underscore.Module
 		/// <returns>Function chain resolving back to passed action</returns>
 		public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, TResult>>>>>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> function)
 		{
-			return _split.Curry(function);
+			return _curry.Curry(function);
 		}
 
 		/// <summary>
@@ -1531,7 +1573,7 @@ namespace Underscore.Module
 		/// <returns>Function chain resolving back to passed action</returns>
 		public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, TResult>>>>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> function)
 		{
-			return _split.Curry(function);
+			return _curry.Curry(function);
 		}
 
 		/// <summary>
@@ -1544,7 +1586,7 @@ namespace Underscore.Module
 		/// <returns>Function chain resolving back to passed action</returns>
 		public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, TResult>>>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> function)
 		{
-			return _split.Curry(function);
+			return _curry.Curry(function);
 		}
 
 		/// <summary>
@@ -1557,7 +1599,7 @@ namespace Underscore.Module
 		/// <returns>Function chain resolving back to passed action</returns>
 		public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, TResult>>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> function)
 		{
-			return _split.Curry(function);
+			return _curry.Curry(function);
 		}
 
 		/// <summary>
@@ -1570,7 +1612,7 @@ namespace Underscore.Module
 		/// <returns>Function chain resolving back to passed action</returns>
 		public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, TResult>>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> function)
 		{
-			return _split.Curry(function);
+			return _curry.Curry(function);
 		}
 
 		/// <summary>
@@ -1583,7 +1625,7 @@ namespace Underscore.Module
 		/// <returns>Function chain resolving back to passed action</returns>
 		public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, TResult>>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> function)
 		{
-			return _split.Curry(function);
+			return _curry.Curry(function);
 		}
 
 		/// <summary>
@@ -1596,7 +1638,7 @@ namespace Underscore.Module
 		/// <returns>Function chain resolving back to passed action</returns>
 		public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, TResult>>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, T8, TResult> function)
 		{
-			return _split.Curry(function);
+			return _curry.Curry(function);
 		}
 
 		/// <summary>
@@ -1609,7 +1651,7 @@ namespace Underscore.Module
 		/// <returns>Function chain resolving back to passed action</returns>
 		public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, TResult>>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, T7, TResult> function)
 		{
-			return _split.Curry(function);
+			return _curry.Curry(function);
 		}
 
 		/// <summary>
@@ -1623,7 +1665,7 @@ namespace Underscore.Module
 		/// <returns>Function chain resolving back to passed action</returns>
 		public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, TResult>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6, TResult>(Func<T0, T1, T2, T3, T4, T5, T6, TResult> function)
 		{
-			return _split.Curry(function);
+			return _curry.Curry(function);
 		}
 
 		/// <summary>
@@ -1637,7 +1679,7 @@ namespace Underscore.Module
 		/// <returns>Function chain resolving back to passed action</returns>
 		public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, TResult>>>>>> Curry<T0, T1, T2, T3, T4, T5, TResult>(Func<T0, T1, T2, T3, T4, T5, TResult> function)
 		{
-			return _split.Curry(function);
+			return _curry.Curry(function);
 		}
 
 		/// <summary>
@@ -1651,7 +1693,7 @@ namespace Underscore.Module
 		/// <returns>Function chain resolving back to passed action</returns>
 		public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, TResult>>>>> Curry<T0, T1, T2, T3, T4, TResult>(Func<T0, T1, T2, T3, T4, TResult> function)
 		{
-			return _split.Curry(function);
+			return _curry.Curry(function);
 		}
 
 		/// <summary>
@@ -1665,7 +1707,7 @@ namespace Underscore.Module
 		/// <returns>Function chain resolving back to passed action</returns>
 		public Func<T0, Func<T1, Func<T2, Func<T3, TResult>>>> Curry<T0, T1, T2, T3, TResult>(Func<T0, T1, T2, T3, TResult> function)
 		{
-			return _split.Curry(function);
+			return _curry.Curry(function);
 		}
 
 		/// <summary>
@@ -1679,7 +1721,7 @@ namespace Underscore.Module
 		/// <returns>Function chain resolving back to passed action</returns>
 		public Func<T0, Func<T1, Func<T2, TResult>>> Curry<T0, T1, T2, TResult>(Func<T0, T1, T2, TResult> function)
 		{
-			return _split.Curry(function);
+			return _curry.Curry(function);
 		}
 
 		/// <summary>
@@ -1693,7 +1735,7 @@ namespace Underscore.Module
 		/// <returns>Function chain resolving back to passed action</returns>
 		public Func<T0, Func<T1, TResult>> Curry<T0, T1, TResult>(Func<T0, T1, TResult> function)
 		{
-			return _split.Curry(function);
+			return _curry.Curry(function);
 		}
 
 		/// <summary>
@@ -1817,7 +1859,7 @@ namespace Underscore.Module
 		/// </summary>
 		public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
 		{
-			return _compose.Apply(fn, arguments);
+			return _apply.Apply(fn, arguments);
 		}
 
 		/// <summary>
@@ -1825,7 +1867,7 @@ namespace Underscore.Module
 		/// </summary>
 		public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
 		{
-			return _compose.Apply(fn, arguments);
+			return _apply.Apply(fn, arguments);
 		}
 
 		/// <summary>
@@ -1833,7 +1875,7 @@ namespace Underscore.Module
 		/// </summary>
 		public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
 		{
-			return _compose.Apply(fn, arguments);
+			return _apply.Apply(fn, arguments);
 		}
 
 		/// <summary>
@@ -1841,7 +1883,7 @@ namespace Underscore.Module
 		/// </summary>
 		public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
 		{
-			return _compose.Apply(fn, arguments);
+			return _apply.Apply(fn, arguments);
 		}
 
 		/// <summary>
@@ -1849,7 +1891,7 @@ namespace Underscore.Module
 		/// </summary>
 		public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
 		{
-			return _compose.Apply(fn, arguments);
+			return _apply.Apply(fn, arguments);
 		}
 
 		/// <summary>
@@ -1857,7 +1899,7 @@ namespace Underscore.Module
 		/// </summary>
 		public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
 		{
-			return _compose.Apply(fn, arguments);
+			return _apply.Apply(fn, arguments);
 		}
 
 		/// <summary>
@@ -1865,7 +1907,7 @@ namespace Underscore.Module
 		/// </summary>
 		public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
 		{
-			return _compose.Apply(fn, arguments);
+			return _apply.Apply(fn, arguments);
 		}
 
 		/// <summary>
@@ -1873,7 +1915,7 @@ namespace Underscore.Module
 		/// </summary>
 		public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
 		{
-			return _compose.Apply(fn, arguments);
+			return _apply.Apply(fn, arguments);
 		}
 
 		/// <summary>
@@ -1881,7 +1923,7 @@ namespace Underscore.Module
 		/// </summary>
 		public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, T, TResult> fn, T[] arguments)
 		{
-			return _compose.Apply(fn, arguments);
+			return _apply.Apply(fn, arguments);
 		}
 
 		/// <summary>
@@ -1889,7 +1931,7 @@ namespace Underscore.Module
 		/// </summary>
 		public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, T, TResult> fn, T[] arguments)
 		{
-			return _compose.Apply(fn, arguments);
+			return _apply.Apply(fn, arguments);
 		}
 
 		/// <summary>
@@ -1897,7 +1939,7 @@ namespace Underscore.Module
 		/// </summary>
 		public TResult Apply<T, TResult>(Func<T, T, T, T, T, T, TResult> fn, T[] arguments)
 		{
-			return _compose.Apply(fn, arguments);
+			return _apply.Apply(fn, arguments);
 		}
 
 		/// <summary>
@@ -1905,7 +1947,7 @@ namespace Underscore.Module
 		/// </summary>
 		public TResult Apply<T, TResult>(Func<T, T, T, T, T, TResult> fn, T[] arguments)
 		{
-			return _compose.Apply(fn, arguments);
+			return _apply.Apply(fn, arguments);
 		}
 
 		/// <summary>
@@ -1913,7 +1955,7 @@ namespace Underscore.Module
 		/// </summary>
 		public TResult Apply<T, TResult>(Func<T, T, T, T, TResult> fn, T[] arguments)
 		{
-			return _compose.Apply(fn, arguments);
+			return _apply.Apply(fn, arguments);
 		}
 
 		/// <summary>
@@ -1921,7 +1963,7 @@ namespace Underscore.Module
 		/// </summary>
 		public TResult Apply<T, TResult>(Func<T, T, T, TResult> fn, T[] arguments)
 		{
-			return _compose.Apply(fn, arguments);
+			return _apply.Apply(fn, arguments);
 		}
 
 		/// <summary>
@@ -1929,7 +1971,7 @@ namespace Underscore.Module
 		/// </summary>
 		public TResult Apply<T, TResult>(Func<T, T, TResult> fn, T[] arguments)
 		{
-			return _compose.Apply(fn, arguments);
+			return _apply.Apply(fn, arguments);
 		}
 
 		/// <summary>
@@ -1937,7 +1979,7 @@ namespace Underscore.Module
 		/// </summary>
 		public TResult Apply<T, TResult>(Func<T, TResult> fn, T[] arguments)
 		{
-			return _compose.Apply(fn, arguments);
+			return _apply.Apply(fn, arguments);
 		}
 
 		/// <summary>
@@ -3339,7 +3381,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<bool> Negate(Func<bool> fn)
 		{
-			return _booleanComponent.Negate(fn);
+			return _negate.Negate(fn);
 		}
 
 		/// <summary>
@@ -3347,7 +3389,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, bool> Negate<T1>(Func<T1, bool> fn)
 		{
-			return _booleanComponent.Negate(fn);
+			return _negate.Negate(fn);
 		}
 
 		/// <summary>
@@ -3355,7 +3397,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, bool> Negate<T1, T2>(Func<T1, T2, bool> fn)
 		{
-			return _booleanComponent.Negate(fn);
+			return _negate.Negate(fn);
 		}
 
 		/// <summary>
@@ -3363,7 +3405,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, bool> Negate<T1, T2, T3>(Func<T1, T2, T3, bool> fn)
 		{
-			return _booleanComponent.Negate(fn);
+			return _negate.Negate(fn);
 		}
 
 		/// <summary>
@@ -3371,7 +3413,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, bool> Negate<T1, T2, T3, T4>(Func<T1, T2, T3, T4, bool> fn)
 		{
-			return _booleanComponent.Negate(fn);
+			return _negate.Negate(fn);
 		}
 
 		/// <summary>
@@ -3379,7 +3421,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, bool> Negate<T1, T2, T3, T4, T5>(Func<T1, T2, T3, T4, T5, bool> fn)
 		{
-			return _booleanComponent.Negate(fn);
+			return _negate.Negate(fn);
 		}
 
 		/// <summary>
@@ -3387,7 +3429,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, bool> Negate<T1, T2, T3, T4, T5, T6>(Func<T1, T2, T3, T4, T5, T6, bool> fn)
 		{
-			return _booleanComponent.Negate(fn);
+			return _negate.Negate(fn);
 		}
 
 		/// <summary>
@@ -3395,7 +3437,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, bool> Negate<T1, T2, T3, T4, T5, T6, T7>(Func<T1, T2, T3, T4, T5, T6, T7, bool> fn)
 		{
-			return _booleanComponent.Negate(fn);
+			return _negate.Negate(fn);
 		}
 
 		/// <summary>
@@ -3403,7 +3445,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8>(Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> fn)
 		{
-			return _booleanComponent.Negate(fn);
+			return _negate.Negate(fn);
 		}
 
 		/// <summary>
@@ -3411,7 +3453,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> fn)
 		{
-			return _booleanComponent.Negate(fn);
+			return _negate.Negate(fn);
 		}
 
 		/// <summary>
@@ -3419,7 +3461,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> fn)
 		{
-			return _booleanComponent.Negate(fn);
+			return _negate.Negate(fn);
 		}
 
 		/// <summary>
@@ -3427,7 +3469,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> fn)
 		{
-			return _booleanComponent.Negate(fn);
+			return _negate.Negate(fn);
 		}
 
 		/// <summary>
@@ -3435,7 +3477,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> fn)
 		{
-			return _booleanComponent.Negate(fn);
+			return _negate.Negate(fn);
 		}
 
 		/// <summary>
@@ -3443,7 +3485,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> fn)
 		{
-			return _booleanComponent.Negate(fn);
+			return _negate.Negate(fn);
 		}
 
 		/// <summary>
@@ -3451,7 +3493,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> fn)
 		{
-			return _booleanComponent.Negate(fn);
+			return _negate.Negate(fn);
 		}
 
 		/// <summary>
@@ -3459,126 +3501,126 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> fn)
 		{
-			return _booleanComponent.Negate(fn);
+			return _negate.Negate(fn);
 		}
 		/// <summary>
 		/// Creates a function that is the negation of the passed function
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> Negate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> fn)
 		{
-			return _booleanComponent.Negate(fn);
+			return _negate.Negate(fn);
 		}
 		/// <summary>
 		/// Creates a composite of all the functions by oring the results together
 		/// </summary>
 		public Func<bool> Or(params Func<bool>[] fns)
 		{
-			return _booleanComponent.Or(fns);
+			return _or.Or(fns);
 		}
 		/// <summary>
 		/// Creates a composite of all the functions by oring the results together
 		/// </summary>
 		public Func<T1, bool> Or<T1>(params Func<T1, bool>[] fns)
 		{
-			return _booleanComponent.Or(fns);
+			return _or.Or(fns);
 		}
 		/// <summary>
 		/// Creates a composite of all the functions by oring the results together
 		/// </summary>
 		public Func<T1, T2, bool> Or<T1, T2>(params Func<T1, T2, bool>[] fns)
 		{
-			return _booleanComponent.Or(fns);
+			return _or.Or(fns);
 		}
 		/// <summary>
 		/// Creates a composite of all the functions by oring the results together
 		/// </summary>
 		public Func<T1, T2, T3, bool> Or<T1, T2, T3>(params Func<T1, T2, T3, bool>[] fns)
 		{
-			return _booleanComponent.Or(fns);
+			return _or.Or(fns);
 		}
 		/// <summary>
 		/// Creates a composite of all the functions by oring the results together
 		/// </summary>
 		public Func<T1, T2, T3, T4, bool> Or<T1, T2, T3, T4>(params Func<T1, T2, T3, T4, bool>[] fns)
 		{
-			return _booleanComponent.Or(fns);
+			return _or.Or(fns);
 		}
 		/// <summary>
 		/// Creates a composite of all the functions by oring the results together
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, bool> Or<T1, T2, T3, T4, T5>(params Func<T1, T2, T3, T4, T5, bool>[] fns)
 		{
-			return _booleanComponent.Or(fns);
+			return _or.Or(fns);
 		}
 		/// <summary>
 		/// Creates a composite of all the functions by oring the results together
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, bool> Or<T1, T2, T3, T4, T5, T6>(params Func<T1, T2, T3, T4, T5, T6, bool>[] fns)
 		{
-			return _booleanComponent.Or(fns);
+			return _or.Or(fns);
 		}
 		/// <summary>
 		/// Creates a composite of all the functions by oring the results together
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, bool> Or<T1, T2, T3, T4, T5, T6, T7>(params Func<T1, T2, T3, T4, T5, T6, T7, bool>[] fns)
 		{
-			return _booleanComponent.Or(fns);
+			return _or.Or(fns);
 		}
 		/// <summary>
 		/// Creates a composite of all the functions by oring the results together
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, bool>[] fns)
 		{
-			return _booleanComponent.Or(fns);
+			return _or.Or(fns);
 		}
 		/// <summary>
 		/// Creates a composite of all the functions by oring the results together
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8, T9>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool>[] fns)
 		{
-			return _booleanComponent.Or(fns);
+			return _or.Or(fns);
 		}
 		/// <summary>
 		/// Creates a composite of all the functions by oring the results together
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool>[] fns)
 		{
-			return _booleanComponent.Or(fns);
+			return _or.Or(fns);
 		}
 		/// <summary>
 		/// Creates a composite of all the functions by oring the results together
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool>[] fns)
 		{
-			return _booleanComponent.Or(fns);
+			return _or.Or(fns);
 		}
 		/// <summary>
 		/// Creates a composite of all the functions by oring the results together
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool>[] fns)
 		{
-			return _booleanComponent.Or(fns);
+			return _or.Or(fns);
 		}
 		/// <summary>
 		/// Creates a composite of all the functions by oring the results together
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool>[] fns)
 		{
-			return _booleanComponent.Or(fns);
+			return _or.Or(fns);
 		}
 		/// <summary>
 		/// Creates a composite of all the functions by oring the results together
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool>[] fns)
 		{
-			return _booleanComponent.Or(fns);
+			return _or.Or(fns);
 		}
 		/// <summary>
 		/// Creates a composite of all the functions by oring the results together
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool>[] fns)
 		{
-			return _booleanComponent.Or(fns);
+			return _or.Or(fns);
 		}
 
 		/// <summary>
@@ -3586,7 +3628,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> Or<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool>[] fns)
 		{
-			return _booleanComponent.Or(fns);
+			return _or.Or(fns);
 		}
 
 		/// <summary>
@@ -3594,7 +3636,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<bool> And(params Func<bool>[] fns)
 		{
-			return _booleanComponent.And(fns);
+			return _and.And(fns);
 		}
 
 		/// <summary>
@@ -3602,7 +3644,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, bool> And<T1>(params Func<T1, bool>[] fns)
 		{
-			return _booleanComponent.And(fns);
+			return _and.And(fns);
 		}
 
 		/// <summary>
@@ -3610,7 +3652,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, bool> And<T1, T2>(params Func<T1, T2, bool>[] fns)
 		{
-			return _booleanComponent.And(fns);
+			return _and.And(fns);
 		}
 
 		/// <summary>
@@ -3618,7 +3660,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, bool> And<T1, T2, T3>(params Func<T1, T2, T3, bool>[] fns)
 		{
-			return _booleanComponent.And(fns);
+			return _and.And(fns);
 		}
 
 		/// <summary>
@@ -3626,7 +3668,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, bool> And<T1, T2, T3, T4>(params Func<T1, T2, T3, T4, bool>[] fns)
 		{
-			return _booleanComponent.And(fns);
+			return _and.And(fns);
 		}
 
 		/// <summary>
@@ -3634,7 +3676,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, bool> And<T1, T2, T3, T4, T5>(params Func<T1, T2, T3, T4, T5, bool>[] fns)
 		{
-			return _booleanComponent.And(fns);
+			return _and.And(fns);
 		}
 
 		/// <summary>
@@ -3642,7 +3684,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, bool> And<T1, T2, T3, T4, T5, T6>(params Func<T1, T2, T3, T4, T5, T6, bool>[] fns)
 		{
-			return _booleanComponent.And(fns);
+			return _and.And(fns);
 		}
 
 		/// <summary>
@@ -3650,7 +3692,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, bool> And<T1, T2, T3, T4, T5, T6, T7>(params Func<T1, T2, T3, T4, T5, T6, T7, bool>[] fns)
 		{
-			return _booleanComponent.And(fns);
+			return _and.And(fns);
 		}
 
 		/// <summary>
@@ -3658,7 +3700,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, bool> And<T1, T2, T3, T4, T5, T6, T7, T8>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, bool>[] fns)
 		{
-			return _booleanComponent.And(fns);
+			return _and.And(fns);
 		}
 
 		/// <summary>
@@ -3666,7 +3708,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool> And<T1, T2, T3, T4, T5, T6, T7, T8, T9>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool>[] fns)
 		{
-			return _booleanComponent.And(fns);
+			return _and.And(fns);
 		}
 
 		/// <summary>
@@ -3674,7 +3716,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool> And<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool>[] fns)
 		{
-			return _booleanComponent.And(fns);
+			return _and.And(fns);
 		}
 
 		/// <summary>
@@ -3682,7 +3724,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool> And<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool>[] fns)
 		{
-			return _booleanComponent.And(fns);
+			return _and.And(fns);
 		}
 
 		/// <summary>
@@ -3690,7 +3732,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool> And<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool>[] fns)
 		{
-			return _booleanComponent.And(fns);
+			return _and.And(fns);
 		}
 
 		/// <summary>
@@ -3698,7 +3740,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool> And<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool>[] fns)
 		{
-			return _booleanComponent.And(fns);
+			return _and.And(fns);
 		}
 
 		/// <summary>
@@ -3706,7 +3748,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool> And<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool>[] fns)
 		{
-			return _booleanComponent.And(fns);
+			return _and.And(fns);
 		}
 
 		/// <summary>
@@ -3714,7 +3756,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool> And<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool>[] fns)
 		{
-			return _booleanComponent.And(fns);
+			return _and.And(fns);
 		}
 
 		/// <summary>
@@ -3722,7 +3764,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool> And<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(params Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool>[] fns)
 		{
-			return _booleanComponent.And(fns);
+			return _and.And(fns);
 		}
 	}
 }

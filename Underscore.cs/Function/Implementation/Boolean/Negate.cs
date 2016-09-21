@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Underscore.Function
 {
-	public partial class BooleanComponent : IBooleanComponent
+	public class NegateComponent : INegateComponent
 	{
 		/// <summary>
 		/// Negates the logic of the passed function

@@ -7,9 +7,13 @@ namespace Underscore.Setup
 	{
 		public void Load(Kernel kernel)
 		{
+            kernel.Register<IApplyComponent, ApplyComponent>();
 			kernel.Register<IComposeComponent, ComposeComponent>();
 			kernel.Register<IBindComponent, BindComponent>();
-			kernel.Register<ISplitComponent, SplitComponent>();
+            kernel.Register<IPartialComponent, PartialComponent>();
+            kernel.Register<ISplitComponent, SplitComponent>();
+            kernel.Register<ICurryComponent, CurryComponent>();
+            kernel.Register<IUncurryComponent, UncurryComponent>();
 			kernel.Register<IConvertComponent, ConvertComponent>();
 			kernel.Register<IAfterComponent, AfterComponent>();
             kernel.Register<IBeforeComponent, BeforeComponent>();
@@ -20,7 +24,9 @@ namespace Underscore.Setup
             kernel.Register<IAfterComponent, AfterComponent>();
             kernel.Register<ICacheComponent, CacheComponent>();
 			kernel.Register<ICompactComponent, CompactComponent>();
-			kernel.Register<IBooleanComponent, BooleanComponent>();
+			kernel.Register<IAndComponent, AndComponent>();
+            kernel.Register<IOrComponent, OrComponent>();
+            kernel.Register<INegateComponent, NegateComponent>();
 			kernel.Register<Module.Function>();
 		}
 	}

@@ -9,13 +9,13 @@ namespace Underscore.Test.Boolean
 	[TestFixture]
 	public class AndTest
 	{
-		private BooleanComponent component;
+		private AndComponent component;
 		private bool[] wasCalled;
 
 		[SetUp]
 		public void Initialize()
 		{
-			component = new BooleanComponent();
+			component = new AndComponent();
 			wasCalled = new[] {false, false, false, false};
 		}
 

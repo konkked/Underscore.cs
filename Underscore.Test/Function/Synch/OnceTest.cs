@@ -7,14 +7,14 @@ namespace Underscore.Test.Function.Synch
 	[TestFixture]
 	public class OnceTest
 	{
-		private ComposeComponent compose;
+		private ApplyComponent apply;
 
 		private readonly string[] arguments = Util.LowercaseCharArray;
 
 		[SetUp]
 		public void Initialize()
 		{
-			compose = new ComposeComponent();
+            apply = new ApplyComponent();
 		}
 
 		[Test]
@@ -46,7 +46,7 @@ namespace Underscore.Test.Function.Synch
 			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
-				result[i] = compose.Apply(onced, arguments);
+				result[i] = apply.Apply(onced, arguments);
 
 			foreach (var v in result)
 				Assert.AreEqual("a1", v);
@@ -70,7 +70,7 @@ namespace Underscore.Test.Function.Synch
 			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
-				result[i] = compose.Apply(onced, arguments);
+				result[i] = apply.Apply(onced, arguments);
 
 			foreach (var v in result)
 				Assert.AreEqual("ab1", v);
@@ -94,7 +94,7 @@ namespace Underscore.Test.Function.Synch
 			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
-				result[i] = compose.Apply(onced, arguments);
+				result[i] = apply.Apply(onced, arguments);
 
 			foreach (var v in result)
 				Assert.AreEqual("abc1", v);
@@ -118,7 +118,7 @@ namespace Underscore.Test.Function.Synch
 			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
-				result[i] = compose.Apply(onced, arguments);
+				result[i] = apply.Apply(onced, arguments);
 
 			foreach (var v in result)
 				Assert.AreEqual("abcd1", v);
@@ -142,7 +142,7 @@ namespace Underscore.Test.Function.Synch
 			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
-				result[i] = compose.Apply(onced, arguments);
+				result[i] = apply.Apply(onced, arguments);
 
 			foreach (var v in result)
 				Assert.AreEqual("abcde1", v);
@@ -167,7 +167,7 @@ namespace Underscore.Test.Function.Synch
 			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
-				result[i] = compose.Apply(onced, arguments);
+				result[i] = apply.Apply(onced, arguments);
 
 			foreach (var v in result)
 				Assert.AreEqual("abcdef1", v);
@@ -192,7 +192,7 @@ namespace Underscore.Test.Function.Synch
 			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
-				result[i] = compose.Apply(onced, arguments);
+				result[i] = apply.Apply(onced, arguments);
 
 			foreach (var v in result)
 				Assert.AreEqual("abcdefg1", v);
@@ -217,7 +217,7 @@ namespace Underscore.Test.Function.Synch
 			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
-				result[i] = compose.Apply(onced, arguments);
+				result[i] = apply.Apply(onced, arguments);
 
 			foreach (var v in result)
 				Assert.AreEqual("abcdefgh1", v);
@@ -242,7 +242,7 @@ namespace Underscore.Test.Function.Synch
 			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
-				result[i] = compose.Apply(onced, arguments);
+				result[i] = apply.Apply(onced, arguments);
 
 			foreach (var v in result)
 				Assert.AreEqual("abcdefghi1", v);
@@ -267,7 +267,7 @@ namespace Underscore.Test.Function.Synch
 			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
-				result[i] = compose.Apply(onced, arguments);
+				result[i] = apply.Apply(onced, arguments);
 
 			foreach (var v in result)
 				Assert.AreEqual("abcdefghij1", v);
@@ -292,7 +292,7 @@ namespace Underscore.Test.Function.Synch
 			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
-				result[i] = compose.Apply(onced, arguments);
+				result[i] = apply.Apply(onced, arguments);
 
 			foreach (var v in result)
 				Assert.AreEqual("abcdefghijk1", v);
@@ -317,7 +317,7 @@ namespace Underscore.Test.Function.Synch
 			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
-				result[i] = compose.Apply(onced, arguments);
+				result[i] = apply.Apply(onced, arguments);
 
 			foreach (var v in result)
 				Assert.AreEqual("abcdefghijkl1", v);
@@ -342,7 +342,7 @@ namespace Underscore.Test.Function.Synch
 			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
-				result[i] = compose.Apply(onced, arguments);
+				result[i] = apply.Apply(onced, arguments);
 
 			foreach (var v in result)
 				Assert.AreEqual("abcdefghijklm1", v);
@@ -367,7 +367,7 @@ namespace Underscore.Test.Function.Synch
 			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
-				result[i] = compose.Apply(onced, arguments);
+				result[i] = apply.Apply(onced, arguments);
 
 			foreach (var v in result)
 				Assert.AreEqual("abcdefghijklmn1", v);
@@ -392,7 +392,7 @@ namespace Underscore.Test.Function.Synch
 			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
-				result[i] = compose.Apply(onced, arguments);
+				result[i] = apply.Apply(onced, arguments);
 
 			foreach (var v in result)
 				Assert.AreEqual("abcdefghijklmno1", v);
@@ -417,7 +417,7 @@ namespace Underscore.Test.Function.Synch
 			var onced = _.Function.Once(oncing);
 			string[] result = new string[100];
 			for (int i = 0; i < 100; i++)
-				result[i] = compose.Apply(onced, arguments);
+				result[i] = apply.Apply(onced, arguments);
 
 			foreach (var v in result)
 				Assert.AreEqual("abcdefghijklmnop1", v);

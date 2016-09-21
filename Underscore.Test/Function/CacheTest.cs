@@ -7,12 +7,12 @@ namespace Underscore.Test.Function
 	[TestFixture]
 	public class CacheTest
 	{
-		private ComposeComponent compose;
+		private ApplyComponent apply;
 
 		[SetUp]
 		public void Initialize()
 		{
-			compose = new ComposeComponent();
+            apply = new ApplyComponent();
 		}
 
 		[Test]
@@ -29,24 +29,24 @@ namespace Underscore.Test.Function
 
 			var memoized = _.Function.Memoize(testFn);
 
-			var result = compose.Apply(memoized, Util.LowercaseCharArray);
+			var result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
-			result = compose.Apply(memoized, Util.LowercaseCharArray);
+			result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
 			expected = "A";
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 			
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
@@ -66,24 +66,24 @@ namespace Underscore.Test.Function
 
 			var memoized = _.Function.Memoize(testFn);
 
-			var result = compose.Apply(memoized, Util.LowercaseCharArray);
+			var result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
-			result = compose.Apply(memoized, Util.LowercaseCharArray);
+			result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
 			expected = "AB";
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
@@ -103,24 +103,24 @@ namespace Underscore.Test.Function
 
 			var memoized = _.Function.Memoize(testFn);
 
-			var result = compose.Apply(memoized, Util.LowercaseCharArray);
+			var result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
-			result = compose.Apply(memoized, Util.LowercaseCharArray);
+			result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
 			expected = "ABC";
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
@@ -140,24 +140,24 @@ namespace Underscore.Test.Function
 
 			var memoized = _.Function.Memoize(testFn);
 
-			var result = compose.Apply(memoized, Util.LowercaseCharArray);
+			var result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
-			result = compose.Apply(memoized, Util.LowercaseCharArray);
+			result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
 			expected = "ABCD";
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
@@ -177,24 +177,24 @@ namespace Underscore.Test.Function
 
 			var memoized = _.Function.Memoize(testFn);
 
-			var result = compose.Apply(memoized, Util.LowercaseCharArray);
+			var result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
-			result = compose.Apply(memoized, Util.LowercaseCharArray);
+			result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
 			expected = "ABCDE";
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
@@ -214,24 +214,24 @@ namespace Underscore.Test.Function
 
 			var memoized = _.Function.Memoize(testFn);
 
-			var result = compose.Apply(memoized, Util.LowercaseCharArray);
+			var result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
-			result = compose.Apply(memoized, Util.LowercaseCharArray);
+			result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
 			expected = "ABCDEF";
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
@@ -251,24 +251,24 @@ namespace Underscore.Test.Function
 
 			var memoized = _.Function.Memoize(testFn);
 
-			var result = compose.Apply(memoized, Util.LowercaseCharArray);
+			var result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
-			result = compose.Apply(memoized, Util.LowercaseCharArray);
+			result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
 			expected = "ABCDEFG";
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
@@ -288,24 +288,24 @@ namespace Underscore.Test.Function
 
 			var memoized = _.Function.Memoize(testFn);
 
-			var result = compose.Apply(memoized, Util.LowercaseCharArray);
+			var result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
-			result = compose.Apply(memoized, Util.LowercaseCharArray);
+			result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
 			expected = "ABCDEFGH";
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
@@ -325,24 +325,24 @@ namespace Underscore.Test.Function
 
 			var memoized = _.Function.Memoize(testFn);
 
-			var result = compose.Apply(memoized, Util.LowercaseCharArray);
+			var result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
-			result = compose.Apply(memoized, Util.LowercaseCharArray);
+			result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
 			expected = "ABCDEFGHI";
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
@@ -362,24 +362,24 @@ namespace Underscore.Test.Function
 
 			var memoized = _.Function.Memoize(testFn);
 
-			var result = compose.Apply(memoized, Util.LowercaseCharArray);
+			var result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
-			result = compose.Apply(memoized, Util.LowercaseCharArray);
+			result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
 			expected = "ABCDEFGHIJ";
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
@@ -399,24 +399,24 @@ namespace Underscore.Test.Function
 
 			var memoized = _.Function.Memoize(testFn);
 
-			var result = compose.Apply(memoized, Util.LowercaseCharArray);
+			var result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
-			result = compose.Apply(memoized, Util.LowercaseCharArray);
+			result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
 			expected = "ABCDEFGHIJK";
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
@@ -436,24 +436,24 @@ namespace Underscore.Test.Function
 
 			var memoized = _.Function.Memoize(testFn);
 
-			var result = compose.Apply(memoized, Util.LowercaseCharArray);
+			var result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
-			result = compose.Apply(memoized, Util.LowercaseCharArray);
+			result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
 			expected = "ABCDEFGHIJKL";
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
@@ -473,24 +473,24 @@ namespace Underscore.Test.Function
 
 			var memoized = _.Function.Memoize(testFn);
 
-			var result = compose.Apply(memoized, Util.LowercaseCharArray);
+			var result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
-			result = compose.Apply(memoized, Util.LowercaseCharArray);
+			result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
 			expected = "ABCDEFGHIJKLM";
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
@@ -510,24 +510,24 @@ namespace Underscore.Test.Function
 
 			var memoized = _.Function.Memoize(testFn);
 
-			var result = compose.Apply(memoized, Util.LowercaseCharArray);
+			var result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
-			result = compose.Apply(memoized, Util.LowercaseCharArray);
+			result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
 			expected = "ABCDEFGHIJKLMN";
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
@@ -547,24 +547,24 @@ namespace Underscore.Test.Function
 
 			var memoized = _.Function.Memoize(testFn);
 
-			var result = compose.Apply(memoized, Util.LowercaseCharArray);
+			var result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
-			result = compose.Apply(memoized, Util.LowercaseCharArray);
+			result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
 			expected = "ABCDEFGHIJKLMNO";
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
@@ -584,24 +584,24 @@ namespace Underscore.Test.Function
 
 			var memoized = _.Function.Memoize(testFn);
 
-			var result = compose.Apply(memoized, Util.LowercaseCharArray);
+			var result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
-			result = compose.Apply(memoized, Util.LowercaseCharArray);
+			result = apply.Apply(memoized, Util.LowercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(1, callcount);
 
 			expected = "ABCDEFGHIJKLMNOP";
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 
-			result = compose.Apply(memoized, Util.UppercaseCharArray);
+			result = apply.Apply(memoized, Util.UppercaseCharArray);
 
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);

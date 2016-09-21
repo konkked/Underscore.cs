@@ -7,12 +7,12 @@ namespace Underscore.Test.Boolean
 	[TestFixture]
 	public class NegateTest
 	{
-		private BooleanComponent component;
+		private NegateComponent component;
 
 		[SetUp]
 		public void Initialize()
 		{
-			component = new BooleanComponent();
+			component = new NegateComponent();
 		}
 
 		[Test]

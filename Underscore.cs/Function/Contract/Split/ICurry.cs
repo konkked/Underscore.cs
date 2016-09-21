@@ -2,7 +2,7 @@
 
 namespace Underscore.Function
 {
-	public partial interface ISplitComponent
+	public interface ICurryComponent
 	{
 		/// <summary>
 		/// Translates a function taking multiple arguments into a sequence of functions each taking a single argument

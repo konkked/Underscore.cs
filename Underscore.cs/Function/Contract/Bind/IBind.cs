@@ -2,7 +2,7 @@
 
 namespace Underscore.Function
 {
-	public partial interface IBindComponent
+	public interface IBindComponent
 	{
 		/// <summary>
 		///  Creates a new Function bound to the passed parameter
