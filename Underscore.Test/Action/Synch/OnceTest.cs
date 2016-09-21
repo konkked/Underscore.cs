@@ -1,5 +1,5 @@
 using System;
-using ComposeComponent = Underscore.Action.ComposeComponent;
+using ApplyComponent = Underscore.Action.ApplyComponent;
 using NUnit.Framework;
 
 namespace Underscore.Test.Action.Synch
@@ -7,14 +7,14 @@ namespace Underscore.Test.Action.Synch
 	[TestFixture]
 	public class OnceTest
 	{
-		private ComposeComponent compose;
+		private ApplyComponent apply;
 
 		private readonly string[] arguments = Util.LowercaseCharArray;
 
 		[SetUp]
 		public void Initialize()
 		{
-			compose = new ComposeComponent();
+			apply = new ApplyComponent();
 		}
 
 		[Test]
@@ -41,7 +41,7 @@ namespace Underscore.Test.Action.Synch
 			var onced = _.Action.Once(oncing);
 
 			for (var i = 0; i < 100; i++)
-				compose.Apply(onced, arguments);
+				apply.Apply(onced, arguments);
 
 			Assert.AreEqual("a", result);
 		}
@@ -59,7 +59,7 @@ namespace Underscore.Test.Action.Synch
 			var onced = _.Action.Once(oncing);
 
 			for (var i = 0; i < 100; i++)
-				compose.Apply(onced, arguments);
+				apply.Apply(onced, arguments);
 
 			Assert.AreEqual("ab", result);
 		}
@@ -77,7 +77,7 @@ namespace Underscore.Test.Action.Synch
 			var onced = _.Action.Once(oncing);
 
 			for (var i = 0; i < 100; i++)
-				compose.Apply(onced, arguments);
+				apply.Apply(onced, arguments);
 
 			Assert.AreEqual("abc", result);
 		}
@@ -95,7 +95,7 @@ namespace Underscore.Test.Action.Synch
 			var onced = _.Action.Once(oncing);
 
 			for (var i = 0; i < 100; i++)
-				compose.Apply(onced, arguments);
+				apply.Apply(onced, arguments);
 
 			Assert.AreEqual("abcd", result);
 		}
@@ -113,7 +113,7 @@ namespace Underscore.Test.Action.Synch
 			var onced = _.Action.Once(oncing);
 
 			for (var i = 0; i < 100; i++)
-				compose.Apply(onced, arguments);
+				apply.Apply(onced, arguments);
 
 			Assert.AreEqual("abcde", result);
 		}
@@ -131,7 +131,7 @@ namespace Underscore.Test.Action.Synch
 			var onced = _.Action.Once(oncing);
 
 			for (var i = 0; i < 100; i++)
-				compose.Apply(onced, arguments);
+				apply.Apply(onced, arguments);
 
 			Assert.AreEqual("abcdef", result);
 		}
@@ -149,7 +149,7 @@ namespace Underscore.Test.Action.Synch
 			var onced = _.Action.Once(oncing);
 
 			for (var i = 0; i < 100; i++)
-				compose.Apply(onced, arguments);
+				apply.Apply(onced, arguments);
 
 			Assert.AreEqual("abcdefg", result);
 		}
@@ -167,7 +167,7 @@ namespace Underscore.Test.Action.Synch
 			var onced = _.Action.Once(oncing);
 
 			for (var i = 0; i < 100; i++)
-				compose.Apply(onced, arguments);
+				apply.Apply(onced, arguments);
 
 			Assert.AreEqual("abcdefgh", result);
 		}
@@ -185,7 +185,7 @@ namespace Underscore.Test.Action.Synch
 			var onced = _.Action.Once(oncing);
 
 			for (var i = 0; i < 100; i++)
-				compose.Apply(onced, arguments);
+				apply.Apply(onced, arguments);
 
 			Assert.AreEqual("abcdefghi", result);
 		}
@@ -203,7 +203,7 @@ namespace Underscore.Test.Action.Synch
 			var onced = _.Action.Once(oncing);
 
 			for (var i = 0; i < 100; i++)
-				compose.Apply(onced, arguments);
+				apply.Apply(onced, arguments);
 
 			Assert.AreEqual("abcdefghij", result);
 		}
@@ -221,7 +221,7 @@ namespace Underscore.Test.Action.Synch
 			var onced = _.Action.Once(oncing);
 
 			for (var i = 0; i < 100; i++)
-				compose.Apply(onced, arguments);
+				apply.Apply(onced, arguments);
 
 			Assert.AreEqual("abcdefghijk", result);
 		}
@@ -239,7 +239,7 @@ namespace Underscore.Test.Action.Synch
 			var onced = _.Action.Once(oncing);
 
 			for (var i = 0; i < 100; i++)
-				compose.Apply(onced, arguments);
+				apply.Apply(onced, arguments);
 
 			Assert.AreEqual("abcdefghijkl", result);
 		}
@@ -257,7 +257,7 @@ namespace Underscore.Test.Action.Synch
 			var onced = _.Action.Once(oncing);
 
 			for (var i = 0; i < 100; i++)
-				compose.Apply(onced, arguments);
+				apply.Apply(onced, arguments);
 
 			Assert.AreEqual("abcdefghijklm", result);
 		}
@@ -275,7 +275,7 @@ namespace Underscore.Test.Action.Synch
 			var onced = _.Action.Once(oncing);
 
 			for (var i = 0; i < 100; i++)
-				compose.Apply(onced, arguments);
+				apply.Apply(onced, arguments);
 
 			Assert.AreEqual("abcdefghijklmn", result);
 		}
@@ -293,7 +293,7 @@ namespace Underscore.Test.Action.Synch
 			var onced = _.Action.Once(oncing);
 
 			for (var i = 0; i < 100; i++)
-				compose.Apply(onced, arguments);
+				apply.Apply(onced, arguments);
 
 			Assert.AreEqual("abcdefghijklmno", result);
 		}
@@ -311,7 +311,7 @@ namespace Underscore.Test.Action.Synch
 			var onced = _.Action.Once(oncing);
 
 			for (var i = 0; i < 100; i++)
-				compose.Apply(onced, arguments);
+				apply.Apply(onced, arguments);
 
 			Assert.AreEqual("abcdefghijklmnop", result);
 		}

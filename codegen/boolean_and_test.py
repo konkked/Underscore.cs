@@ -115,13 +115,13 @@ def main():
     output += '\t{\n'
 
     # declare the initialization variables
-    output += '\t\tprivate BooleanComponent component;\n'
+    output += '\t\tprivate AndComponent component;\n'
     output += '\t\tprivate bool[] wasCalled;\n'
     output += '\n'
     output += '\t\t[TestInitialize]\n'
     output += '\t\tpublic void Initialize()\n'
     output += '\t\t{\n'
-    output += '\t\t\tcomponent = new BooleanComponent();\n'
+    output += '\t\t\tcomponent = new AndComponent();\n'
     output += '\t\t\twasCalled = new[] {false, false, false, false};\n'
     output += '\t\t}\n'
     output += '\n'

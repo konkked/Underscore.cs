@@ -2,7 +2,7 @@
 
 namespace Underscore.Action
 {
-	public partial interface IComposeComponent
+	public interface IComposeComponent
 	{
 		/// <summary>
 		/// Creates a sigle composite action from the passed functions

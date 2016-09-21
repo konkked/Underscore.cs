@@ -2,7 +2,7 @@
 
 namespace Underscore.Action
 {
-	public partial class BindComponent : IBindComponent
+	public class BindComponent : IBindComponent
 	{
 		/// <summary>
 		///  Creates a new action by binding passed action to the passed parameter

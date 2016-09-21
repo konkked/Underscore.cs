@@ -6,8 +6,12 @@ namespace Underscore.Module
 {
 	public class Action :
 		IBindComponent,
+        IPartialComponent,
 		ISplitComponent,
+        ICurryComponent,
+        IUncurryComponent,
 		IComposeComponent,
+        IApplyComponent,
 		IAfterComponent,
         IBeforeComponent,
         IDebounceComponent,
@@ -18,8 +22,12 @@ namespace Underscore.Module
 	{
 
 		private readonly IBindComponent _bind;
+        private readonly IPartialComponent _partial;
 		private readonly ISplitComponent _split;
+        private readonly ICurryComponent _curry;
+        private readonly IUncurryComponent _uncurry;
 		private readonly IComposeComponent _compose;
+        private readonly IApplyComponent _apply;
         private readonly IAfterComponent _after;
         private readonly IBeforeComponent _before;
         private readonly IDebounceComponent _debounce;
@@ -30,8 +38,12 @@ namespace Underscore.Module
 
 		public Action(
 			IBindComponent bind,
+            IPartialComponent partial,
 			ISplitComponent split,
+            ICurryComponent curry,
+            IUncurryComponent uncurry,
 			IComposeComponent compose,
+            IApplyComponent apply,
             IConvertComponent convert,
             IAfterComponent after,
             IBeforeComponent before,
@@ -41,14 +53,26 @@ namespace Underscore.Module
             IThrottleComponent throttle
 			)
 		{
-			if(bind == null)
+			if (bind == null)
 				throw new ArgumentNullException("bind");
+
+            if (partial == null)
+                throw new ArgumentNullException("partial");
 
 			if (split == null)
 				throw new ArgumentNullException("split");
 
+            if (curry == null)
+                throw new ArgumentNullException("curry");
+
+            if (uncurry == null)
+                throw new ArgumentNullException("uncurry");
+
 			if (compose == null)
 				throw new ArgumentNullException("compose");
+
+            if (apply == null)
+                throw new ArgumentNullException("apply");
 
             if (after == null)
                 throw new ArgumentNullException("after");
@@ -72,8 +96,12 @@ namespace Underscore.Module
 				throw new ArgumentNullException("convert");
 
 			_bind = bind;
+            _partial = partial;
 			_split = split;
+            _curry = curry;
+            _uncurry = uncurry;
 			_compose = compose;
+            _apply = apply;
 			_convert = convert;
             _after = after;
             _before = before;
@@ -1354,7 +1382,7 @@ namespace Underscore.Module
 		/// </summary>
 		public void Apply<T>(Action<T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T> action, T[] arguments)
 		{
-			_compose.Apply(action, arguments);
+			_apply.Apply(action, arguments);
 		}
 
 		/// <summary>
@@ -1534,7 +1562,7 @@ namespace Underscore.Module
 		/// </summary>
 		public void Apply<T>(Action<T, T, T, T, T, T, T, T, T, T, T, T, T, T, T> action, T[] arguments)
 		{
-			_compose.Apply(action, arguments);
+			_apply.Apply(action, arguments);
 		}
 
 		/// <summary>
@@ -1542,7 +1570,7 @@ namespace Underscore.Module
 		/// </summary>
 		public void Apply<T>(Action<T, T, T, T, T, T, T, T, T, T, T, T, T, T> action, T[] arguments)
 		{
-			_compose.Apply(action, arguments);
+			_apply.Apply(action, arguments);
 		}
 
 		/// <summary>
@@ -1550,7 +1578,7 @@ namespace Underscore.Module
 		/// </summary>
 		public void Apply<T>(Action<T, T, T, T, T, T, T, T, T, T, T, T, T> action, T[] arguments)
 		{
-			_compose.Apply(action, arguments);
+			_apply.Apply(action, arguments);
 		}
 
 		/// <summary>
@@ -1558,7 +1586,7 @@ namespace Underscore.Module
 		/// </summary>
 		public void Apply<T>(Action<T, T, T, T, T, T, T, T, T, T, T, T> action, T[] arguments)
 		{
-			_compose.Apply(action, arguments);
+			_apply.Apply(action, arguments);
 		}
 
 		/// <summary>
@@ -1566,7 +1594,7 @@ namespace Underscore.Module
 		/// </summary>
 		public void Apply<T>(Action<T, T, T, T, T, T, T, T, T, T, T> action, T[] arguments)
 		{
-			_compose.Apply(action, arguments);
+			_apply.Apply(action, arguments);
 		}
 
 		/// <summary>
@@ -1574,7 +1602,7 @@ namespace Underscore.Module
 		/// </summary>
 		public void Apply<T>(Action<T, T, T, T, T, T, T, T, T, T> action, T[] arguments)
 		{
-			_compose.Apply(action, arguments);
+			_apply.Apply(action, arguments);
 		}
 
 		/// <summary>
@@ -1582,7 +1610,7 @@ namespace Underscore.Module
 		/// </summary>
 		public void Apply<T>(Action<T, T, T, T, T, T, T, T, T> action, T[] arguments)
 		{
-			_compose.Apply(action, arguments);
+			_apply.Apply(action, arguments);
 		}
 
 		/// <summary>
@@ -1590,7 +1618,7 @@ namespace Underscore.Module
 		/// </summary>
 		public void Apply<T>(Action<T, T, T, T, T, T, T, T> action, T[] arguments)
 		{
-			_compose.Apply(action, arguments);
+			_apply.Apply(action, arguments);
 		}
 
 		/// <summary>
@@ -1598,7 +1626,7 @@ namespace Underscore.Module
 		/// </summary>
 		public void Apply<T>(Action<T, T, T, T, T, T, T> action, T[] arguments)
 		{
-			_compose.Apply(action, arguments);
+			_apply.Apply(action, arguments);
 		}
 
 		/// <summary>
@@ -1606,7 +1634,7 @@ namespace Underscore.Module
 		/// </summary>
 		public void Apply<T>(Action<T, T, T, T, T, T> action, T[] arguments)
 		{
-			_compose.Apply(action, arguments);
+			_apply.Apply(action, arguments);
 		}
 
 		/// <summary>
@@ -1614,7 +1642,7 @@ namespace Underscore.Module
 		/// </summary>
 		public void Apply<T>(Action<T, T, T, T, T> action, T[] arguments)
 		{
-			_compose.Apply(action, arguments);
+			_apply.Apply(action, arguments);
 		}
 
 		/// <summary>
@@ -1622,7 +1650,7 @@ namespace Underscore.Module
 		/// </summary>
 		public void Apply<T>(Action<T, T, T, T> action, T[] arguments)
 		{
-			_compose.Apply(action, arguments);
+			_apply.Apply(action, arguments);
 		}
 
 		/// <summary>
@@ -1630,7 +1658,7 @@ namespace Underscore.Module
 		/// </summary>
 		public void Apply<T>(Action<T, T, T> action, T[] arguments)
 		{
-			_compose.Apply(action, arguments);
+			_apply.Apply(action, arguments);
 		}
 
 		/// <summary>
@@ -1638,7 +1666,7 @@ namespace Underscore.Module
 		/// </summary>
 		public void Apply<T>(Action<T, T> action, T[] arguments)
 		{
-			_compose.Apply(action, arguments);
+			_apply.Apply(action, arguments);
 		}
 
 		/// <summary>
@@ -1646,7 +1674,7 @@ namespace Underscore.Module
 		/// </summary>
 		public void Apply<T>(Action<T> action, T[] arguments)
 		{
-			_compose.Apply(action, arguments);
+			_apply.Apply(action, arguments);
 		}
 
 		/// <summary>
@@ -1657,7 +1685,7 @@ namespace Underscore.Module
 				Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> target
 			)
 		{
-			return _split.Curry(target);
+			return _curry.Curry(target);
 		}
 
 		/// <summary>
@@ -1668,7 +1696,7 @@ namespace Underscore.Module
 			<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
 			Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> target)
 		{
-			return _split.Curry(target);
+			return _curry.Curry(target);
 		}
 
 		/// <summary>
@@ -1678,7 +1706,7 @@ namespace Underscore.Module
 			<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
 			Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> target)
 		{
-			return _split.Curry(target);
+			return _curry.Curry(target);
 		}
 
 		/// <summary>
@@ -1688,7 +1716,7 @@ namespace Underscore.Module
 			<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
 			Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> target)
 		{
-			return _split.Curry(target);
+			return _curry.Curry(target);
 		}
 
 		/// <summary>
@@ -1698,7 +1726,7 @@ namespace Underscore.Module
 			<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
 			Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> target)
 		{
-			return _split.Curry(target);
+			return _curry.Curry(target);
 		}
 
 		/// <summary>
@@ -1708,7 +1736,7 @@ namespace Underscore.Module
 			Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
 			Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> target)
 		{
-			return _split.Curry(target);
+			return _curry.Curry(target);
 		}
 
 		/// <summary>
@@ -1717,7 +1745,7 @@ namespace Underscore.Module
 		public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Action<T9>>>>>>>>>>
 			Curry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> target)
 		{
-			return _split.Curry(target);
+			return _curry.Curry(target);
 		}
 
 		/// <summary>
@@ -1726,7 +1754,7 @@ namespace Underscore.Module
 		public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Action<T8>>>>>>>>> Curry
 			<T0, T1, T2, T3, T4, T5, T6, T7, T8>(Action<T0, T1, T2, T3, T4, T5, T6, T7, T8> target)
 		{
-			return _split.Curry(target);
+			return _curry.Curry(target);
 		}
 
 		/// <summary>
@@ -1735,7 +1763,7 @@ namespace Underscore.Module
 		public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Action<T7>>>>>>>> Curry
 			<T0, T1, T2, T3, T4, T5, T6, T7>(Action<T0, T1, T2, T3, T4, T5, T6, T7> target)
 		{
-			return _split.Curry(target);
+			return _curry.Curry(target);
 		}
 
 		/// <summary>
@@ -1744,7 +1772,7 @@ namespace Underscore.Module
 		public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Action<T6>>>>>>> Curry<T0, T1, T2, T3, T4, T5, T6>(
 			Action<T0, T1, T2, T3, T4, T5, T6> target)
 		{
-			return _split.Curry(target);
+			return _curry.Curry(target);
 		}
 
 		/// <summary>
@@ -1753,7 +1781,7 @@ namespace Underscore.Module
 		public Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Action<T5>>>>>> Curry<T0, T1, T2, T3, T4, T5>(
 			Action<T0, T1, T2, T3, T4, T5> target)
 		{
-			return _split.Curry(target);
+			return _curry.Curry(target);
 		}
 
 		/// <summary>
@@ -1762,7 +1790,7 @@ namespace Underscore.Module
 		public Func<T0, Func<T1, Func<T2, Func<T3, Action<T4>>>>> Curry<T0, T1, T2, T3, T4>(
 			Action<T0, T1, T2, T3, T4> target)
 		{
-			return _split.Curry(target);
+			return _curry.Curry(target);
 		}
 
 		/// <summary>
@@ -1770,7 +1798,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, Func<T1, Func<T2, Action<T3>>>> Curry<T0, T1, T2, T3>(Action<T0, T1, T2, T3> target)
 		{
-			return _split.Curry(target);
+			return _curry.Curry(target);
 		}
 
 		/// <summary>
@@ -1778,7 +1806,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, Func<T1, Action<T2>>> Curry<T0, T1, T2>(Action<T0, T1, T2> target)
 		{
-			return _split.Curry(target);
+			return _curry.Curry(target);
 		}
 
 		/// <summary>
@@ -1786,7 +1814,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T0, Action<T1>> Curry<T0, T1>(Action<T0, T1> target)
 		{
-			return _split.Curry(target);
+			return _curry.Curry(target);
 		}
 
 		/// <summary>
@@ -1794,7 +1822,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Func<T14, Action<T15>>>>>>>>>>>>>>>> action)
 		{
-			return _split.Uncurry(action);
+			return _uncurry.Uncurry(action);
 		}
 
 		/// <summary>
@@ -1802,7 +1830,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Func<T13, Action<T14>>>>>>>>>>>>>>> action)
 		{
-			return _split.Uncurry(action);
+			return _uncurry.Uncurry(action);
 		}
 
 		/// <summary>
@@ -1810,7 +1838,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Func<T12, Action<T13>>>>>>>>>>>>>> action)
 		{
-			return _split.Uncurry(action);
+			return _uncurry.Uncurry(action);
 		}
 
 		/// <summary>
@@ -1818,7 +1846,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Func<T11, Action<T12>>>>>>>>>>>>> action)
 		{
-			return _split.Uncurry(action);
+			return _uncurry.Uncurry(action);
 		}
 
 		/// <summary>
@@ -1826,7 +1854,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Func<T10, Action<T11>>>>>>>>>>>> action)
 		{
-			return _split.Uncurry(action);
+			return _uncurry.Uncurry(action);
 		}
 
 		/// <summary>
@@ -1834,7 +1862,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Func<T9, Action<T10>>>>>>>>>>> action)
 		{
-			return _split.Uncurry(action);
+			return _uncurry.Uncurry(action);
 		}
 
 		/// <summary>
@@ -1842,7 +1870,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Func<T8, Action<T9>>>>>>>>>> action)
 		{
-			return _split.Uncurry(action);
+			return _uncurry.Uncurry(action);
 		}
 
 		/// <summary>
@@ -1850,7 +1878,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T0, T1, T2, T3, T4, T5, T6, T7, T8> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7, T8>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Func<T7, Action<T8>>>>>>>>> action)
 		{
-			return _split.Uncurry(action);
+			return _uncurry.Uncurry(action);
 		}
 
 		/// <summary>
@@ -1858,7 +1886,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T0, T1, T2, T3, T4, T5, T6, T7> Uncurry<T0, T1, T2, T3, T4, T5, T6, T7>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Func<T6, Action<T7>>>>>>>> action)
 		{
-			return _split.Uncurry(action);
+			return _uncurry.Uncurry(action);
 		}
 
 		/// <summary>
@@ -1866,7 +1894,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T0, T1, T2, T3, T4, T5, T6> Uncurry<T0, T1, T2, T3, T4, T5, T6>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Func<T5, Action<T6>>>>>>> action)
 		{
-			return _split.Uncurry(action);
+			return _uncurry.Uncurry(action);
 		}
 
 		/// <summary>
@@ -1874,7 +1902,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T0, T1, T2, T3, T4, T5> Uncurry<T0, T1, T2, T3, T4, T5>(Func<T0, Func<T1, Func<T2, Func<T3, Func<T4, Action<T5>>>>>> action)
 		{
-			return _split.Uncurry(action);
+			return _uncurry.Uncurry(action);
 		}
 
 		/// <summary>
@@ -1882,7 +1910,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T0, T1, T2, T3, T4> Uncurry<T0, T1, T2, T3, T4>(Func<T0, Func<T1, Func<T2, Func<T3, Action<T4>>>>> action)
 		{
-			return _split.Uncurry(action);
+			return _uncurry.Uncurry(action);
 		}
 
 		/// <summary>
@@ -1890,7 +1918,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T0, T1, T2, T3> Uncurry<T0, T1, T2, T3>(Func<T0, Func<T1, Func<T2, Action<T3>>>> action)
 		{
-			return _split.Uncurry(action);
+			return _uncurry.Uncurry(action);
 		}
 
 		/// <summary>
@@ -1898,7 +1926,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T0, T1, T2> Uncurry<T0, T1, T2>(Func<T0, Func<T1, Action<T2>>> action)
 		{
-			return _split.Uncurry(action);
+			return _uncurry.Uncurry(action);
 		}
 
 		/// <summary>
@@ -1906,7 +1934,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T0, T1> Uncurry<T0, T1>(Func<T0, Action<T1>> action)
 		{
-			return _split.Uncurry(action);
+			return _uncurry.Uncurry(action);
 		}
 
 		/// <summary>
@@ -2212,7 +2240,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T2> Partial<T1, T2>(Action<T1, T2> action, T1 a)
 		{
-			return _bind.Partial(action, a);
+			return _partial.Partial(action, a);
 		}
 
 		/// <summary>
@@ -2220,7 +2248,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T2, T3> Partial<T1, T2, T3>(Action<T1, T2, T3> action, T1 a)
 		{
-			return _bind.Partial(action, a);
+			return _partial.Partial(action, a);
 		}
 
 		/// <summary>
@@ -2228,7 +2256,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T3> Partial<T1, T2, T3>(Action<T1, T2, T3> action, T1 a, T2 b)
 		{
-			return _bind.Partial(action, a, b);
+			return _partial.Partial(action, a, b);
 		}
 
 		/// <summary>
@@ -2236,7 +2264,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T2, T3, T4> Partial<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action, T1 a)
 		{
-			return _bind.Partial(action, a);
+			return _partial.Partial(action, a);
 		}
 
 		/// <summary>
@@ -2244,7 +2272,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T3, T4> Partial<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action, T1 a, T2 b)
 		{
-			return _bind.Partial(action, a, b);
+			return _partial.Partial(action, a, b);
 		}
 
 		/// <summary>
@@ -2252,7 +2280,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T4> Partial<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(action, a, b, c);
+			return _partial.Partial(action, a, b, c);
 		}
 
 		/// <summary>
@@ -2260,7 +2288,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T2, T3, T4, T5> Partial<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> action, T1 a)
 		{
-			return _bind.Partial(action, a);
+			return _partial.Partial(action, a);
 		}
 
 		/// <summary>
@@ -2268,7 +2296,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T3, T4, T5> Partial<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> action, T1 a, T2 b)
 		{
-			return _bind.Partial(action, a, b);
+			return _partial.Partial(action, a, b);
 		}
 
 		/// <summary>
@@ -2276,7 +2304,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T4, T5> Partial<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> action, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(action, a, b, c);
+			return _partial.Partial(action, a, b, c);
 		}
 
 		/// <summary>
@@ -2284,7 +2312,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T5> Partial<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> action, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(action, a, b, c, d);
+			return _partial.Partial(action, a, b, c, d);
 		}
 
 		/// <summary>
@@ -2292,7 +2320,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T2, T3, T4, T5, T6> Partial<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> action, T1 a)
 		{
-			return _bind.Partial(action, a);
+			return _partial.Partial(action, a);
 		}
 
 		/// <summary>
@@ -2300,7 +2328,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T3, T4, T5, T6> Partial<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> action, T1 a, T2 b)
 		{
-			return _bind.Partial(action, a, b);
+			return _partial.Partial(action, a, b);
 		}
 
 		/// <summary>
@@ -2309,7 +2337,7 @@ namespace Underscore.Module
 		public Action<T4, T5, T6> Partial<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> action, T1 a, T2 b,
 			T3 c)
 		{
-			return _bind.Partial(action, a, b, c);
+			return _partial.Partial(action, a, b, c);
 		}
 
 		/// <summary>
@@ -2318,7 +2346,7 @@ namespace Underscore.Module
 		public Action<T5, T6> Partial<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> action, T1 a, T2 b, T3 c,
 			T4 d)
 		{
-			return _bind.Partial(action, a, b, c, d);
+			return _partial.Partial(action, a, b, c, d);
 		}
 
 		/// <summary>
@@ -2327,7 +2355,7 @@ namespace Underscore.Module
 		public Action<T6> Partial<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> action, T1 a, T2 b, T3 c, T4 d,
 			T5 e)
 		{
-			return _bind.Partial(action, a, b, c, d, e);
+			return _partial.Partial(action, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -2336,7 +2364,7 @@ namespace Underscore.Module
 		public Action<T2, T3, T4, T5, T6, T7> Partial<T1, T2, T3, T4, T5, T6, T7>(
 			Action<T1, T2, T3, T4, T5, T6, T7> action, T1 a)
 		{
-			return _bind.Partial(action, a);
+			return _partial.Partial(action, a);
 		}
 
 		/// <summary>
@@ -2345,7 +2373,7 @@ namespace Underscore.Module
 		public Action<T3, T4, T5, T6, T7> Partial<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action,
 			T1 a, T2 b)
 		{
-			return _bind.Partial(action, a, b);
+			return _partial.Partial(action, a, b);
 		}
 
 		/// <summary>
@@ -2354,7 +2382,7 @@ namespace Underscore.Module
 		public Action<T4, T5, T6, T7> Partial<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action,
 			T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(action, a, b, c);
+			return _partial.Partial(action, a, b, c);
 		}
 
 		/// <summary>
@@ -2363,7 +2391,7 @@ namespace Underscore.Module
 		public Action<T5, T6, T7> Partial<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action, T1 a,
 			T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(action, a, b, c, d);
+			return _partial.Partial(action, a, b, c, d);
 		}
 
 		/// <summary>
@@ -2372,7 +2400,7 @@ namespace Underscore.Module
 		public Action<T6, T7> Partial<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action, T1 a, T2 b,
 			T3 c, T4 d, T5 e)
 		{
-			return _bind.Partial(action, a, b, c, d, e);
+			return _partial.Partial(action, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -2381,7 +2409,7 @@ namespace Underscore.Module
 		public Action<T7> Partial<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action, T1 a, T2 b,
 			T3 c, T4 d, T5 e, T6 f)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f);
+			return _partial.Partial(action, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -2390,7 +2418,7 @@ namespace Underscore.Module
 		public Action<T2, T3, T4, T5, T6, T7, T8> Partial<T1, T2, T3, T4, T5, T6, T7, T8>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8> action, T1 a)
 		{
-			return _bind.Partial(action, a);
+			return _partial.Partial(action, a);
 		}
 
 		/// <summary>
@@ -2399,7 +2427,7 @@ namespace Underscore.Module
 		public Action<T3, T4, T5, T6, T7, T8> Partial<T1, T2, T3, T4, T5, T6, T7, T8>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8> action, T1 a, T2 b)
 		{
-			return _bind.Partial(action, a, b);
+			return _partial.Partial(action, a, b);
 		}
 
 		/// <summary>
@@ -2408,7 +2436,7 @@ namespace Underscore.Module
 		public Action<T4, T5, T6, T7, T8> Partial<T1, T2, T3, T4, T5, T6, T7, T8>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8> action, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(action, a, b, c);
+			return _partial.Partial(action, a, b, c);
 		}
 
 		/// <summary>
@@ -2417,7 +2445,7 @@ namespace Underscore.Module
 		public Action<T5, T6, T7, T8> Partial<T1, T2, T3, T4, T5, T6, T7, T8>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8> action, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(action, a, b, c, d);
+			return _partial.Partial(action, a, b, c, d);
 		}
 
 		/// <summary>
@@ -2426,7 +2454,7 @@ namespace Underscore.Module
 		public Action<T6, T7, T8> Partial<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> action,
 			T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return _bind.Partial(action, a, b, c, d, e);
+			return _partial.Partial(action, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -2435,7 +2463,7 @@ namespace Underscore.Module
 		public Action<T7, T8> Partial<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> action,
 			T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f);
+			return _partial.Partial(action, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -2444,7 +2472,7 @@ namespace Underscore.Module
 		public Action<T8> Partial<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> action, T1 a,
 			T2 b, T3 c, T4 d, T5 e, T6 f, T7 g)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g);
+			return _partial.Partial(action, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -2453,7 +2481,7 @@ namespace Underscore.Module
 		public Action<T2, T3, T4, T5, T6, T7, T8, T9> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, T1 a)
 		{
-			return _bind.Partial(action, a);
+			return _partial.Partial(action, a);
 		}
 
 		/// <summary>
@@ -2462,7 +2490,7 @@ namespace Underscore.Module
 		public Action<T3, T4, T5, T6, T7, T8, T9> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, T1 a, T2 b)
 		{
-			return _bind.Partial(action, a, b);
+			return _partial.Partial(action, a, b);
 		}
 
 		/// <summary>
@@ -2471,7 +2499,7 @@ namespace Underscore.Module
 		public Action<T4, T5, T6, T7, T8, T9> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(action, a, b, c);
+			return _partial.Partial(action, a, b, c);
 		}
 
 		/// <summary>
@@ -2480,7 +2508,7 @@ namespace Underscore.Module
 		public Action<T5, T6, T7, T8, T9> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(action, a, b, c, d);
+			return _partial.Partial(action, a, b, c, d);
 		}
 
 		/// <summary>
@@ -2489,7 +2517,7 @@ namespace Underscore.Module
 		public Action<T6, T7, T8, T9> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return _bind.Partial(action, a, b, c, d, e);
+			return _partial.Partial(action, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -2498,7 +2526,7 @@ namespace Underscore.Module
 		public Action<T7, T8, T9> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f);
+			return _partial.Partial(action, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -2507,7 +2535,7 @@ namespace Underscore.Module
 		public Action<T8, T9> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g);
+			return _partial.Partial(action, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -2516,7 +2544,7 @@ namespace Underscore.Module
 		public Action<T9> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action,
 			T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h);
 		}
 
 		/// <summary>
@@ -2525,7 +2553,7 @@ namespace Underscore.Module
 		public Action<T2, T3, T4, T5, T6, T7, T8, T9, T10> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, T1 a)
 		{
-			return _bind.Partial(action, a);
+			return _partial.Partial(action, a);
 		}
 
 		/// <summary>
@@ -2534,7 +2562,7 @@ namespace Underscore.Module
 		public Action<T3, T4, T5, T6, T7, T8, T9, T10> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, T1 a, T2 b)
 		{
-			return _bind.Partial(action, a, b);
+			return _partial.Partial(action, a, b);
 		}
 
 		/// <summary>
@@ -2543,7 +2571,7 @@ namespace Underscore.Module
 		public Action<T4, T5, T6, T7, T8, T9, T10> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(action, a, b, c);
+			return _partial.Partial(action, a, b, c);
 		}
 
 		/// <summary>
@@ -2552,7 +2580,7 @@ namespace Underscore.Module
 		public Action<T5, T6, T7, T8, T9, T10> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(action, a, b, c, d);
+			return _partial.Partial(action, a, b, c, d);
 		}
 
 		/// <summary>
@@ -2561,7 +2589,7 @@ namespace Underscore.Module
 		public Action<T6, T7, T8, T9, T10> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return _bind.Partial(action, a, b, c, d, e);
+			return _partial.Partial(action, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -2570,7 +2598,7 @@ namespace Underscore.Module
 		public Action<T7, T8, T9, T10> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f);
+			return _partial.Partial(action, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -2579,7 +2607,7 @@ namespace Underscore.Module
 		public Action<T8, T9, T10> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g);
+			return _partial.Partial(action, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -2588,7 +2616,7 @@ namespace Underscore.Module
 		public Action<T9, T10> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h);
 		}
 
 		/// <summary>
@@ -2598,7 +2626,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g, T8 h,
 			T9 i)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i);
 		}
 
 		/// <summary>
@@ -2607,7 +2635,7 @@ namespace Underscore.Module
 		public Action<T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, T1 a)
 		{
-			return _bind.Partial(action, a);
+			return _partial.Partial(action, a);
 		}
 
 		/// <summary>
@@ -2616,7 +2644,7 @@ namespace Underscore.Module
 		public Action<T3, T4, T5, T6, T7, T8, T9, T10, T11> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, T1 a, T2 b)
 		{
-			return _bind.Partial(action, a, b);
+			return _partial.Partial(action, a, b);
 		}
 
 		/// <summary>
@@ -2625,7 +2653,7 @@ namespace Underscore.Module
 		public Action<T4, T5, T6, T7, T8, T9, T10, T11> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(action, a, b, c);
+			return _partial.Partial(action, a, b, c);
 		}
 
 		/// <summary>
@@ -2634,7 +2662,7 @@ namespace Underscore.Module
 		public Action<T5, T6, T7, T8, T9, T10, T11> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(action, a, b, c, d);
+			return _partial.Partial(action, a, b, c, d);
 		}
 
 		/// <summary>
@@ -2643,7 +2671,7 @@ namespace Underscore.Module
 		public Action<T6, T7, T8, T9, T10, T11> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return _bind.Partial(action, a, b, c, d, e);
+			return _partial.Partial(action, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -2652,7 +2680,7 @@ namespace Underscore.Module
 		public Action<T7, T8, T9, T10, T11> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f);
+			return _partial.Partial(action, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -2661,7 +2689,7 @@ namespace Underscore.Module
 		public Action<T8, T9, T10, T11> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g);
+			return _partial.Partial(action, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -2671,7 +2699,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g,
 			T8 h)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h);
 		}
 
 		/// <summary>
@@ -2681,7 +2709,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g,
 			T8 h, T9 i)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i);
 		}
 
 		/// <summary>
@@ -2691,7 +2719,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f, T7 g,
 			T8 h, T9 i, T10 j)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j);
 		}
 
 		/// <summary>
@@ -2701,7 +2729,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, T1 a)
 		{
-			return _bind.Partial(action, a);
+			return _partial.Partial(action, a);
 		}
 
 		/// <summary>
@@ -2711,7 +2739,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, T1 a, T2 b)
 		{
-			return _bind.Partial(action, a, b);
+			return _partial.Partial(action, a, b);
 		}
 
 		/// <summary>
@@ -2720,7 +2748,7 @@ namespace Underscore.Module
 		public Action<T4, T5, T6, T7, T8, T9, T10, T11, T12> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(action, a, b, c);
+			return _partial.Partial(action, a, b, c);
 		}
 
 		/// <summary>
@@ -2729,7 +2757,7 @@ namespace Underscore.Module
 		public Action<T5, T6, T7, T8, T9, T10, T11, T12> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(action, a, b, c, d);
+			return _partial.Partial(action, a, b, c, d);
 		}
 
 		/// <summary>
@@ -2738,7 +2766,7 @@ namespace Underscore.Module
 		public Action<T6, T7, T8, T9, T10, T11, T12> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return _bind.Partial(action, a, b, c, d, e);
+			return _partial.Partial(action, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -2747,7 +2775,7 @@ namespace Underscore.Module
 		public Action<T7, T8, T9, T10, T11, T12> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f);
+			return _partial.Partial(action, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -2757,7 +2785,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f,
 			T7 g)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g);
+			return _partial.Partial(action, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -2767,7 +2795,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f,
 			T7 g, T8 h)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h);
 		}
 
 		/// <summary>
@@ -2777,7 +2805,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f,
 			T7 g, T8 h, T9 i)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i);
 		}
 
 		/// <summary>
@@ -2787,7 +2815,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f,
 			T7 g, T8 h, T9 i, T10 j)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j);
 		}
 
 		/// <summary>
@@ -2797,7 +2825,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f,
 			T7 g, T8 h, T9 i, T10 j, T11 k)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j, k);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j, k);
 		}
 
 		/// <summary>
@@ -2807,7 +2835,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, T1 a)
 		{
-			return _bind.Partial(action, a);
+			return _partial.Partial(action, a);
 		}
 
 		/// <summary>
@@ -2817,7 +2845,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, T1 a, T2 b)
 		{
-			return _bind.Partial(action, a, b);
+			return _partial.Partial(action, a, b);
 		}
 
 		/// <summary>
@@ -2827,7 +2855,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(action, a, b, c);
+			return _partial.Partial(action, a, b, c);
 		}
 
 		/// <summary>
@@ -2837,7 +2865,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(action, a, b, c, d);
+			return _partial.Partial(action, a, b, c, d);
 		}
 
 		/// <summary>
@@ -2847,7 +2875,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return _bind.Partial(action, a, b, c, d, e);
+			return _partial.Partial(action, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -2856,7 +2884,7 @@ namespace Underscore.Module
 		public Action<T7, T8, T9, T10, T11, T12, T13> Partial<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f);
+			return _partial.Partial(action, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -2866,7 +2894,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f,
 			T7 g)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g);
+			return _partial.Partial(action, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -2876,7 +2904,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f,
 			T7 g, T8 h)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h);
 		}
 
 		/// <summary>
@@ -2886,7 +2914,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f,
 			T7 g, T8 h, T9 i)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i);
 		}
 
 		/// <summary>
@@ -2896,7 +2924,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f,
 			T7 g, T8 h, T9 i, T10 j)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j);
 		}
 
 		/// <summary>
@@ -2906,7 +2934,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f,
 			T7 g, T8 h, T9 i, T10 j, T11 k)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j, k);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j, k);
 		}
 
 		/// <summary>
@@ -2916,7 +2944,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, T1 a, T2 b, T3 c, T4 d, T5 e, T6 f,
 			T7 g, T8 h, T9 i, T10 j, T11 k, T12 l)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l);
 		}
 
 		/// <summary>
@@ -2926,7 +2954,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, T1 a)
 		{
-			return _bind.Partial(action, a);
+			return _partial.Partial(action, a);
 		}
 
 		/// <summary>
@@ -2936,7 +2964,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, T1 a, T2 b)
 		{
-			return _bind.Partial(action, a, b);
+			return _partial.Partial(action, a, b);
 		}
 
 		/// <summary>
@@ -2946,7 +2974,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(action, a, b, c);
+			return _partial.Partial(action, a, b, c);
 		}
 
 		/// <summary>
@@ -2956,7 +2984,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(action, a, b, c, d);
+			return _partial.Partial(action, a, b, c, d);
 		}
 
 		/// <summary>
@@ -2966,7 +2994,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, T1 a, T2 b, T3 c, T4 d, T5 e)
 		{
-			return _bind.Partial(action, a, b, c, d, e);
+			return _partial.Partial(action, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -2977,7 +3005,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, T1 a, T2 b, T3 c, T4 d, T5 e,
 			T6 f)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f);
+			return _partial.Partial(action, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -2988,7 +3016,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, T1 a, T2 b, T3 c, T4 d, T5 e,
 			T6 f, T7 g)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g);
+			return _partial.Partial(action, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -2998,7 +3026,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, T1 a, T2 b, T3 c, T4 d, T5 e,
 			T6 f, T7 g, T8 h)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h);
 		}
 
 		/// <summary>
@@ -3008,7 +3036,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, T1 a, T2 b, T3 c, T4 d, T5 e,
 			T6 f, T7 g, T8 h, T9 i)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i);
 		}
 
 		/// <summary>
@@ -3018,7 +3046,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, T1 a, T2 b, T3 c, T4 d, T5 e,
 			T6 f, T7 g, T8 h, T9 i, T10 j)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j);
 		}
 
 		/// <summary>
@@ -3028,7 +3056,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, T1 a, T2 b, T3 c, T4 d, T5 e,
 			T6 f, T7 g, T8 h, T9 i, T10 j, T11 k)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j, k);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j, k);
 		}
 
 		/// <summary>
@@ -3038,7 +3066,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, T1 a, T2 b, T3 c, T4 d, T5 e,
 			T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l);
 		}
 
 		/// <summary>
@@ -3048,7 +3076,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, T1 a, T2 b, T3 c, T4 d, T5 e,
 			T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l, m);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
 
 		/// <summary>
@@ -3058,7 +3086,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, T1 a)
 		{
-			return _bind.Partial(action, a);
+			return _partial.Partial(action, a);
 		}
 
 		/// <summary>
@@ -3068,7 +3096,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, T1 a, T2 b)
 		{
-			return _bind.Partial(action, a, b);
+			return _partial.Partial(action, a, b);
 		}
 
 		/// <summary>
@@ -3078,7 +3106,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(action, a, b, c);
+			return _partial.Partial(action, a, b, c);
 		}
 
 		/// <summary>
@@ -3088,7 +3116,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, T1 a, T2 b, T3 c, T4 d)
 		{
-			return _bind.Partial(action, a, b, c, d);
+			return _partial.Partial(action, a, b, c, d);
 		}
 
 		/// <summary>
@@ -3099,7 +3127,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, T1 a, T2 b, T3 c, T4 d,
 			T5 e)
 		{
-			return _bind.Partial(action, a, b, c, d, e);
+			return _partial.Partial(action, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -3110,7 +3138,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f);
+			return _partial.Partial(action, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -3121,7 +3149,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g);
+			return _partial.Partial(action, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -3132,7 +3160,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g, T8 h)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h);
 		}
 
 		/// <summary>
@@ -3143,7 +3171,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g, T8 h, T9 i)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i);
 		}
 
 		/// <summary>
@@ -3153,7 +3181,7 @@ namespace Underscore.Module
 			(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, T1 a, T2 b, T3 c, T4 d,
 				T5 e, T6 f, T7 g, T8 h, T9 i, T10 j)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j);
 		}
 
 		/// <summary>
@@ -3163,7 +3191,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j, k);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j, k);
 		}
 
 		/// <summary>
@@ -3173,7 +3201,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l);
 		}
 
 		/// <summary>
@@ -3183,7 +3211,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l, m);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
 
 		/// <summary>
@@ -3193,7 +3221,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, T1 a, T2 b, T3 c, T4 d,
 			T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m, T14 n)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 		}
 
 		/// <summary>
@@ -3203,7 +3231,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, T1 a)
 		{
-			return _bind.Partial(action, a);
+			return _partial.Partial(action, a);
 		}
 
 		/// <summary>
@@ -3213,7 +3241,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, T1 a, T2 b)
 		{
-			return _bind.Partial(action, a, b);
+			return _partial.Partial(action, a, b);
 		}
 
 		/// <summary>
@@ -3223,7 +3251,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, T1 a, T2 b, T3 c)
 		{
-			return _bind.Partial(action, a, b, c);
+			return _partial.Partial(action, a, b, c);
 		}
 
 		/// <summary>
@@ -3234,7 +3262,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, T1 a, T2 b, T3 c,
 			T4 d)
 		{
-			return _bind.Partial(action, a, b, c, d);
+			return _partial.Partial(action, a, b, c, d);
 		}
 
 		/// <summary>
@@ -3245,7 +3273,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, T1 a, T2 b, T3 c,
 			T4 d, T5 e)
 		{
-			return _bind.Partial(action, a, b, c, d, e);
+			return _partial.Partial(action, a, b, c, d, e);
 		}
 
 		/// <summary>
@@ -3256,7 +3284,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f);
+			return _partial.Partial(action, a, b, c, d, e, f);
 		}
 
 		/// <summary>
@@ -3267,7 +3295,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f, T7 g)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g);
+			return _partial.Partial(action, a, b, c, d, e, f, g);
 		}
 
 		/// <summary>
@@ -3278,7 +3306,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f, T7 g, T8 h)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h);
 		}
 
 		/// <summary>
@@ -3289,7 +3317,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f, T7 g, T8 h, T9 i)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i);
 		}
 
 		/// <summary>
@@ -3300,7 +3328,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j);
 		}
 
 		/// <summary>
@@ -3311,7 +3339,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j, k);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j, k);
 		}
 
 		/// <summary>
@@ -3321,7 +3349,7 @@ namespace Underscore.Module
 			(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, T1 a, T2 b, T3 c,
 				T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l);
 		}
 
 		/// <summary>
@@ -3331,7 +3359,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l, m);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l, m);
 		}
 
 		/// <summary>
@@ -3341,7 +3369,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m, T14 n)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l, m, n);
 		}
 
 		/// <summary>
@@ -3351,7 +3379,7 @@ namespace Underscore.Module
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, T1 a, T2 b, T3 c,
 			T4 d, T5 e, T6 f, T7 g, T8 h, T9 i, T10 j, T11 k, T12 l, T13 m, T14 n, T15 o)
 		{
-			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
+			return _partial.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 		}
     }
 }

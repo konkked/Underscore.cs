@@ -2,7 +2,7 @@
 
 namespace Underscore.Action
 {
-	public partial class SplitComponent : ISplitComponent
+	public class CurryComponent : ICurryComponent
 	{
 		/// <summary>
 		/// Translates a function taking multiple arguments into a sequence of functions 

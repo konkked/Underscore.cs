@@ -2,7 +2,7 @@
 
 namespace Underscore.Action
 {
-	public partial interface IBindComponent
+	public interface IBindComponent
 	{
 		/// <summary>
 		///  Creates a new action from the passed action being bound to the passed parameters

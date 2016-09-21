@@ -2,7 +2,7 @@
 
 namespace Underscore.Action
 {
-	public partial interface IComposeComponent
+	public interface IApplyComponent
 	{
 		/// <summary>
 		/// Calls the passed action using the passed array of elements as it's parameters

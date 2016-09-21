@@ -2,7 +2,7 @@
 
 namespace Underscore.Action
 {
-	public partial class ComposeComponent : IComposeComponent
+	public class ApplyComponent : IApplyComponent
 	{
 		/// <summary>
 		/// Calls a function using the passed array of arguments

@@ -10,8 +10,12 @@ namespace Underscore.Test.Module
 		{
             var action = new Underscore.Module.Action(
                 new BindComponent(),
+                new PartialComponent(),
                 new SplitComponent(),
+                new CurryComponent(),
+                new UncurryComponent(),
                 new ComposeComponent(),
+                new ApplyComponent(),
                 new ConvertComponent(),
                 new AfterComponent(
                     new Underscore.Function.AfterComponent(

@@ -94,11 +94,11 @@ def main():
     output += '\t{\n'
 
     # declare the initialization variables
-    output += '\t\tprivate BooleanComponent component;\n\n'
+    output += '\t\tprivate NegateComponent component;\n\n'
     output += '\t\t[TestInitialize]\n'
     output += '\t\tpublic void Initialize()\n'
     output += '\t\t{\n'
-    output += '\t\t\tcomponent = new BooleanComponent();\n'
+    output += '\t\t\tcomponent = new NegateComponent();\n'
     output += '\t\t}\n\n'
 
     # generate the actual test cases

@@ -2,7 +2,7 @@
 
 namespace Underscore.Action
 {
-	public partial interface ISplitComponent 
+	public interface ISplitComponent 
 	{
 		/// <summary>
 		/// Halves the passed action

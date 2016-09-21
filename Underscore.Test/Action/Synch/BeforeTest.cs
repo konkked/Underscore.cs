@@ -1,5 +1,5 @@
 ﻿using System;
-using ComposeComponent = Underscore.Action.ComposeComponent;
+using ApplyComponent = Underscore.Action.ApplyComponent;
 using NUnit.Framework;
 
 namespace Underscore.Test.Action.Synch
@@ -8,7 +8,7 @@ namespace Underscore.Test.Action.Synch
 	public class BeforeTest
 	{
 		private readonly string[] arguments = Util.LowercaseCharArray;
-		private ComposeComponent funcCompose;
+		private ApplyComponent apply;
 
 		private int counter;
 		private string result;
@@ -17,7 +17,7 @@ namespace Underscore.Test.Action.Synch
 		[SetUp]
 		public void Initialize()
 		{
-			funcCompose = new ComposeComponent();
+            apply = new ApplyComponent();
 
 			counter = 0;
 			result = "";
@@ -47,7 +47,7 @@ namespace Underscore.Test.Action.Synch
 			var befored = _.Action.Before(beforing, 2);
 
 			for (var i = 0; i < 4; i++)
-				funcCompose.Apply(befored, arguments);
+				apply.Apply(befored, arguments);
 
 			Assert.AreEqual("ab1ab2", result);
 
@@ -67,7 +67,7 @@ namespace Underscore.Test.Action.Synch
 			var befored = _.Action.Before(beforing, 2);
 
 			for (var i = 0; i < 4; i++)
-				funcCompose.Apply(befored, arguments);
+				apply.Apply(befored, arguments);
 
 			Assert.AreEqual("abc1abc2", result);
 			Assert.IsTrue(invoked);
@@ -86,7 +86,7 @@ namespace Underscore.Test.Action.Synch
 			var befored = _.Action.Before(beforing, 2);
 
 			for (var i = 0; i < 4; i++)
-				funcCompose.Apply(befored, arguments);
+				apply.Apply(befored, arguments);
 
 			Assert.AreEqual("abcd1abcd2", result);
 			Assert.IsTrue(invoked);
@@ -105,7 +105,7 @@ namespace Underscore.Test.Action.Synch
 			var befored = _.Action.Before(beforing, 2);
 
 			for (var i = 0; i < 4; i++)
-				funcCompose.Apply(befored, arguments);
+				apply.Apply(befored, arguments);
 
 			Assert.AreEqual("abcde1abcde2", result);
 			Assert.IsTrue(invoked);
@@ -124,7 +124,7 @@ namespace Underscore.Test.Action.Synch
 			var befored = _.Action.Before(beforing, 2);
 
 			for (var i = 0; i < 4; i++)
-				funcCompose.Apply(befored, arguments);
+				apply.Apply(befored, arguments);
 
 			Assert.AreEqual("abcdef1abcdef2", result);
 			Assert.IsTrue(invoked);
@@ -143,7 +143,7 @@ namespace Underscore.Test.Action.Synch
 			var befored = _.Action.Before(beforing, 2);
 
 			for (var i = 0; i < 4; i++)
-				funcCompose.Apply(befored, arguments);
+				apply.Apply(befored, arguments);
 
 			Assert.AreEqual("abcdefg1abcdefg2", result);
 			Assert.IsTrue(invoked);
@@ -162,7 +162,7 @@ namespace Underscore.Test.Action.Synch
 			var befored = _.Action.Before(beforing, 2);
 
 			for (var i = 0; i < 4; i++)
-				funcCompose.Apply(befored, arguments);
+				apply.Apply(befored, arguments);
 
 			Assert.AreEqual("abcdefgh1abcdefgh2", result);
 			Assert.IsTrue(invoked);
@@ -181,7 +181,7 @@ namespace Underscore.Test.Action.Synch
 			var befored = _.Action.Before(beforing, 2);
 
 			for (var i = 0; i < 4; i++)
-				funcCompose.Apply(befored, arguments);
+				apply.Apply(befored, arguments);
 
 			Assert.AreEqual("abcdefghi1abcdefghi2", result);
 			Assert.IsTrue(invoked);
@@ -200,7 +200,7 @@ namespace Underscore.Test.Action.Synch
 			var befored = _.Action.Before(beforing, 2);
 
 			for (var i = 0; i < 4; i++)
-				funcCompose.Apply(befored, arguments);
+				apply.Apply(befored, arguments);
 
 			Assert.AreEqual("abcdefghij1abcdefghij2", result);
 			Assert.IsTrue(invoked);
@@ -219,7 +219,7 @@ namespace Underscore.Test.Action.Synch
 			var befored = _.Action.Before(beforing, 2);
 
 			for (var i = 0; i < 4; i++)
-				funcCompose.Apply(befored, arguments);
+				apply.Apply(befored, arguments);
 
 			Assert.AreEqual("abcdefghijk1abcdefghijk2", result);
 			Assert.IsTrue(invoked);
@@ -238,7 +238,7 @@ namespace Underscore.Test.Action.Synch
 			var befored = _.Action.Before(beforing, 2);
 
 			for (var i = 0; i < 4; i++)
-				funcCompose.Apply(befored, arguments);
+				apply.Apply(befored, arguments);
 			
 			Assert.AreEqual("abcdefghijkl1abcdefghijkl2", result);
 			Assert.IsTrue(invoked);
@@ -257,7 +257,7 @@ namespace Underscore.Test.Action.Synch
 			var befored = _.Action.Before(beforing, 2);
 
 			for (var i = 0; i < 4; i++)
-				funcCompose.Apply(befored, arguments);
+				apply.Apply(befored, arguments);
 
 			Assert.AreEqual("abcdefghijklm1abcdefghijklm2", result);
 			Assert.IsTrue(invoked);
@@ -276,7 +276,7 @@ namespace Underscore.Test.Action.Synch
 			var befored = _.Action.Before(beforing, 2);
 
 			for (var i = 0; i < 4; i++)
-				funcCompose.Apply(befored, arguments);
+				apply.Apply(befored, arguments);
 
 			Assert.AreEqual("abcdefghijklmn1abcdefghijklmn2", result);
 			Assert.IsTrue(invoked);
@@ -295,7 +295,7 @@ namespace Underscore.Test.Action.Synch
 			var befored = _.Action.Before(beforing, 2);
 
 			for (var i = 0; i < 4; i++)
-				funcCompose.Apply(befored, arguments);
+				apply.Apply(befored, arguments);
 
 			Assert.AreEqual("abcdefghijklmno1abcdefghijklmno2", result);
 			Assert.IsTrue(invoked);
@@ -314,7 +314,7 @@ namespace Underscore.Test.Action.Synch
 			var befored = _.Action.Before(beforing, 2);
 
 			for (var i = 0; i < 4; i++)
-				funcCompose.Apply(befored, arguments);
+				apply.Apply(befored, arguments);
 
 			Assert.AreEqual("abcdefghijklmnop1abcdefghijklmnop2", result);
 			Assert.IsTrue(invoked);

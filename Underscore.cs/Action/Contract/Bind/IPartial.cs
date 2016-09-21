@@ -2,7 +2,7 @@
 
 namespace Underscore.Action
 {
-	public partial interface IBindComponent
+	public interface IPartialComponent
 	{
 		/// <summary>
 		/// Binds the action partially, from left to right

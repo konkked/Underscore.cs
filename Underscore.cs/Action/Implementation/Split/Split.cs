@@ -2,7 +2,7 @@
 
 namespace Underscore.Action
 {
-	public partial class SplitComponent : ISplitComponent
+	public class SplitComponent : ISplitComponent
 	{
 		/// <summary>
 		/// Halves the passed action as function that returns action that can invoke the passed action
