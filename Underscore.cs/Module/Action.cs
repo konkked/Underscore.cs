@@ -8,22 +8,37 @@ namespace Underscore.Module
 		IBindComponent,
 		ISplitComponent,
 		IComposeComponent,
-		ISynchComponent,
+		IAfterComponent,
+        IBeforeComponent,
+        IDebounceComponent,
+        IDelayComponent,
+        IOnceComponent,
+        IThrottleComponent,
 		IConvertComponent
 	{
 
 		private readonly IBindComponent _bind;
 		private readonly ISplitComponent _split;
 		private readonly IComposeComponent _compose;
-		private readonly ISynchComponent _synch;
+        private readonly IAfterComponent _after;
+        private readonly IBeforeComponent _before;
+        private readonly IDebounceComponent _debounce;
+        private readonly IDelayComponent _delay;
+        private readonly IOnceComponent _once;
+        private readonly IThrottleComponent _throttle;
 		private readonly IConvertComponent _convert;
 
 		public Action(
 			IBindComponent bind,
 			ISplitComponent split,
 			IComposeComponent compose,
-			ISynchComponent synch,
-			IConvertComponent convert
+            IConvertComponent convert,
+            IAfterComponent after,
+            IBeforeComponent before,
+            IDebounceComponent debounce,
+            IDelayComponent delay,
+            IOnceComponent once,
+            IThrottleComponent throttle
 			)
 		{
 			if(bind == null)
@@ -35,8 +50,23 @@ namespace Underscore.Module
 			if (compose == null)
 				throw new ArgumentNullException("compose");
 
-			if (synch == null)
-				throw new ArgumentNullException("synch");
+            if (after == null)
+                throw new ArgumentNullException("after");
+
+            if (before == null)
+                throw new ArgumentNullException("before");
+
+            if (debounce == null)
+                throw new ArgumentNullException("debounce");
+
+            if (delay == null)
+                throw new ArgumentNullException("delay");
+
+            if (once == null)
+                throw new ArgumentNullException("once");
+
+            if (throttle == null)
+                throw new ArgumentNullException("throttle");
 
 			if (convert == null)
 				throw new ArgumentNullException("convert");
@@ -44,8 +74,13 @@ namespace Underscore.Module
 			_bind = bind;
 			_split = split;
 			_compose = compose;
-			_synch = synch;
 			_convert = convert;
+            _after = after;
+            _before = before;
+            _debounce = debounce;
+            _delay = delay;
+            _once = once;
+            _throttle = throttle;
 		}
 
 		/// <summary>
@@ -144,7 +179,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, Task> After<T1>(Action<T1> action, int count)
 		{
-			return _synch.After(action, count);
+			return _after.After(action, count);
 		}
 
 		/// <summary>
@@ -157,7 +192,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, Task> After<T1, T2>(Action<T1, T2> action, int count)
 		{
-			return _synch.After(action, count);
+			return _after.After(action, count);
 		}
 
 		/// <summary>
@@ -170,7 +205,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, Task> After<T1, T2, T3>(Action<T1, T2, T3> action, int count)
 		{
-			return _synch.After(action, count);
+			return _after.After(action, count);
 		}
 
 		/// <summary>
@@ -183,7 +218,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, Task> After<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action, int count)
 		{
-			return _synch.After(action, count);
+			return _after.After(action, count);
 		}
 
 		/// <summary>
@@ -196,7 +231,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, Task> After<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> action, int count)
 		{
-			return _synch.After(action, count);
+			return _after.After(action, count);
 		}
 
 		/// <summary>
@@ -209,7 +244,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, Task> After<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> action, int count)
 		{
-			return _synch.After(action, count);
+			return _after.After(action, count);
 		}
 
 		/// <summary>
@@ -222,7 +257,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, Task> After<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action, int count)
 		{
-			return _synch.After(action, count);
+			return _after.After(action, count);
 		}
 
 		/// <summary>
@@ -235,7 +270,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task> After<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> action, int count)
 		{
-			return _synch.After(action, count);
+			return _after.After(action, count);
 		}
 
 		/// <summary>
@@ -248,7 +283,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, int count)
 		{
-			return _synch.After(action, count);
+			return _after.After(action, count);
 		}
 
 		/// <summary>
@@ -261,7 +296,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, int count)
 		{
-			return _synch.After(action, count);
+			return _after.After(action, count);
 		}
 
 		/// <summary>
@@ -274,7 +309,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, int count)
 		{
-			return _synch.After(action, count);
+			return _after.After(action, count);
 		}
 
 		/// <summary>
@@ -287,7 +322,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, int count)
 		{
-			return _synch.After(action, count);
+			return _after.After(action, count);
 		}
 
 		/// <summary>
@@ -300,7 +335,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, int count)
 		{
-			return _synch.After(action, count);
+			return _after.After(action, count);
 		}
 
 		/// <summary>
@@ -313,7 +348,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, int count)
 		{
-			return _synch.After(action, count);
+			return _after.After(action, count);
 		}
 
 		/// <summary>
@@ -326,7 +361,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, int count)
 		{
-			return _synch.After(action, count);
+			return _after.After(action, count);
 		}
 
 		/// <summary>
@@ -339,7 +374,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task> After<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, int count)
 		{
-			return _synch.After(action, count);
+			return _after.After(action, count);
 		}
 
 		/// <summary>
@@ -350,9 +385,9 @@ namespace Underscore.Module
 		/// all previous calls will receive 
 		/// the first invocation results
 		/// </summary>
-		Func<Task> ISynchComponent.After(System.Action action, int count)
+		Func<Task> IAfterComponent.After(System.Action action, int count)
 		{
-			return _synch.After(action, count);
+			return _after.After(action, count);
 		}
 
 		/// <summary>
@@ -375,7 +410,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1> Before<T1>(Action<T1> action, int count)
 		{
-			return _synch.Before(action, count);
+			return _before.Before(action, count);
 		}
 
 		/// <summary>
@@ -386,7 +421,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2> Before<T1, T2>(Action<T1, T2> action, int count)
 		{
-			return _synch.Before(action, count);
+			return _before.Before(action, count);
 		}
 
 		/// <summary>
@@ -397,7 +432,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3> Before<T1, T2, T3>(Action<T1, T2, T3> action, int count)
 		{
-			return _synch.Before(action, count);
+			return _before.Before(action, count);
 		}
 
 		/// <summary>
@@ -408,7 +443,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3, T4> Before<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action, int count)
 		{
-			return _synch.Before(action, count);
+			return _before.Before(action, count);
 		}
 
 		/// <summary>
@@ -419,7 +454,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3, T4, T5> Before<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> action, int count)
 		{
-			return _synch.Before(action, count);
+			return _before.Before(action, count);
 		}
 
 		/// <summary>
@@ -430,7 +465,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3, T4, T5, T6> Before<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> action, int count)
 		{
-			return _synch.Before(action, count);
+			return _before.Before(action, count);
 		}
 
 		/// <summary>
@@ -441,7 +476,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3, T4, T5, T6, T7> Before<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action, int count)
 		{
-			return _synch.Before(action, count);
+			return _before.Before(action, count);
 		}
 
 		/// <summary>
@@ -452,7 +487,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3, T4, T5, T6, T7, T8> Before<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> action, int count)
 		{
-			return _synch.Before(action, count);
+			return _before.Before(action, count);
 		}
 
 		/// <summary>
@@ -463,7 +498,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, int count)
 		{
-			return _synch.Before(action, count);
+			return _before.Before(action, count);
 		}
 
 		/// <summary>
@@ -474,7 +509,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, int count)
 		{
-			return _synch.Before(action, count);
+			return _before.Before(action, count);
 		}
 
 		/// <summary>
@@ -485,7 +520,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, int count)
 		{
-			return _synch.Before(action, count);
+			return _before.Before(action, count);
 		}
 
 		/// <summary>
@@ -496,7 +531,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, int count)
 		{
-			return _synch.Before(action, count);
+			return _before.Before(action, count);
 		}
 
 		/// <summary>
@@ -507,7 +542,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, int count)
 		{
-			return _synch.Before(action, count);
+			return _before.Before(action, count);
 		}
 
 		/// <summary>
@@ -518,7 +553,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, int count)
 		{
-			return _synch.Before(action, count);
+			return _before.Before(action, count);
 		}
 
 		/// <summary>
@@ -529,7 +564,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, int count)
 		{
-			return _synch.Before(action, count);
+			return _before.Before(action, count);
 		}
 
 		/// <summary>
@@ -540,7 +575,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> Before<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, int count)
 		{
-			return _synch.Before(action, count);
+			return _before.Before(action, count);
 		}
 
 		/// <summary>
@@ -548,7 +583,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<Task> Debounce(System.Action action, int milliseconds)
 		{
-			return _synch.Debounce(action, milliseconds);
+			return _debounce.Debounce(action, milliseconds);
 		}
 
 		/// <summary>
@@ -556,7 +591,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T, Task> Debounce<T>(Action<T> action, int milliseconds)
 		{
-			return _synch.Debounce(action, milliseconds);
+			return _debounce.Debounce(action, milliseconds);
 		}
 
 		/// <summary>
@@ -564,7 +599,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, Task> Debounce<T1, T2>(Action<T1, T2> action, int milliseconds)
 		{
-			return _synch.Debounce(action, milliseconds);
+			return _debounce.Debounce(action, milliseconds);
 		}
 
 		/// <summary>
@@ -572,7 +607,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, Task> Debounce<T1, T2, T3>(Action<T1, T2, T3> action, int milliseconds)
 		{
-			return _synch.Debounce(action, milliseconds);
+			return _debounce.Debounce(action, milliseconds);
 		}
 
 		/// <summary>
@@ -580,7 +615,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, Task> Debounce<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action, int milliseconds)
 		{
-			return _synch.Debounce(action, milliseconds);
+			return _debounce.Debounce(action, milliseconds);
 		}
 
 		/// <summary>
@@ -589,7 +624,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, T5, Task> Debounce<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> action,
 			int milliseconds)
 		{
-			return _synch.Debounce(action, milliseconds);
+			return _debounce.Debounce(action, milliseconds);
 		}
 
 		/// <summary>
@@ -598,7 +633,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, T5, T6, Task> Debounce<T1, T2, T3, T4, T5, T6>(
 			Action<T1, T2, T3, T4, T5, T6> action, int milliseconds)
 		{
-			return _synch.Debounce(action, milliseconds);
+			return _debounce.Debounce(action, milliseconds);
 		}
 
 		/// <summary>
@@ -606,7 +641,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, Task> Debounce<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action, int milliseconds)
 		{
-			return _synch.Debounce(action, milliseconds);
+			return _debounce.Debounce(action, milliseconds);
 		}
 
 		/// <summary>
@@ -614,7 +649,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> action, int milliseconds)
 		{
-			return _synch.Debounce(action, milliseconds);
+			return _debounce.Debounce(action, milliseconds);
 		}
 
 		/// <summary>
@@ -622,7 +657,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, int milliseconds)
 		{
-			return _synch.Debounce(action, milliseconds);
+			return _debounce.Debounce(action, milliseconds);
 		}
 
 		/// <summary>
@@ -630,7 +665,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, int milliseconds)
 		{
-			return _synch.Debounce(action, milliseconds);
+			return _debounce.Debounce(action, milliseconds);
 		}
 
 		/// <summary>
@@ -638,7 +673,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, int milliseconds)
 		{
-			return _synch.Debounce(action, milliseconds);
+			return _debounce.Debounce(action, milliseconds);
 		}
 
 		/// <summary>
@@ -646,7 +681,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, int milliseconds)
 		{
-			return _synch.Debounce(action, milliseconds);
+			return _debounce.Debounce(action, milliseconds);
 		}
 
 		/// <summary>
@@ -654,7 +689,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, int milliseconds)
 		{
-			return _synch.Debounce(action, milliseconds);
+			return _debounce.Debounce(action, milliseconds);
 		}
 
 		/// <summary>
@@ -662,7 +697,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, int milliseconds)
 		{
-			return _synch.Debounce(action, milliseconds);
+			return _debounce.Debounce(action, milliseconds);
 		}
 
 		/// <summary>
@@ -670,7 +705,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, int milliseconds)
 		{
-			return _synch.Debounce(action, milliseconds);
+			return _debounce.Debounce(action, milliseconds);
 		}
 
 		/// <summary>
@@ -678,7 +713,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task> Debounce<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, int milliseconds)
 		{
-			return _synch.Debounce(action, milliseconds);
+			return _debounce.Debounce(action, milliseconds);
 		}
 
 		/// <summary>
@@ -686,7 +721,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<Task> Throttle(System.Action action, int milliseconds)
 		{
-			return _synch.Throttle(action, milliseconds);
+			return _throttle.Throttle(action, milliseconds);
 		}
 
 		/// <summary>
@@ -694,7 +729,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<Task> Throttle(System.Action action, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(action, milliseconds, leading);
+			return _throttle.Throttle(action, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -702,7 +737,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T, Task> Throttle<T>(Action<T> action, int milliseconds)
 		{
-			return _synch.Throttle(action, milliseconds);
+			return _throttle.Throttle(action, milliseconds);
 		}
 
 		/// <summary>
@@ -710,7 +745,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T, Task> Throttle<T>(Action<T> action, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(action, milliseconds, leading);
+			return _throttle.Throttle(action, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -718,7 +753,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, Task> Throttle<T1, T2>(Action<T1, T2> action, int milliseconds)
 		{
-			return _synch.Throttle(action, milliseconds);
+			return _throttle.Throttle(action, milliseconds);
 		}
 
 		/// <summary>
@@ -726,7 +761,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, Task> Throttle<T1, T2>(Action<T1, T2> action, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(action, milliseconds, leading);
+			return _throttle.Throttle(action, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -734,7 +769,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, Task> Throttle<T1, T2, T3>(Action<T1, T2, T3> action, int milliseconds)
 		{
-			return _synch.Throttle(action, milliseconds);
+			return _throttle.Throttle(action, milliseconds);
 		}
 
 		/// <summary>
@@ -742,7 +777,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, Task> Throttle<T1, T2, T3>(Action<T1, T2, T3> action, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(action, milliseconds, leading);
+			return _throttle.Throttle(action, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -750,7 +785,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, Task> Throttle<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action, int milliseconds)
 		{
-			return _synch.Throttle(action, milliseconds);
+			return _throttle.Throttle(action, milliseconds);
 		}
 
 		/// <summary>
@@ -759,7 +794,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, Task> Throttle<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action, int milliseconds,
 			bool leading)
 		{
-			return _synch.Throttle(action, milliseconds, leading);
+			return _throttle.Throttle(action, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -768,7 +803,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, T5, Task> Throttle<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> action,
 			int milliseconds)
 		{
-			return _synch.Throttle(action, milliseconds);
+			return _throttle.Throttle(action, milliseconds);
 		}
 
 		/// <summary>
@@ -777,7 +812,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, T5, Task> Throttle<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> action,
 			int milliseconds, bool leading)
 		{
-			return _synch.Throttle(action, milliseconds, leading);
+			return _throttle.Throttle(action, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -786,7 +821,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, T5, T6, Task> Throttle<T1, T2, T3, T4, T5, T6>(
 			Action<T1, T2, T3, T4, T5, T6> action, int milliseconds)
 		{
-			return _synch.Throttle(action, milliseconds);
+			return _throttle.Throttle(action, milliseconds);
 		}
 
 		/// <summary>
@@ -795,7 +830,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, T5, T6, Task> Throttle<T1, T2, T3, T4, T5, T6>(
 			Action<T1, T2, T3, T4, T5, T6> action, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(action, milliseconds, leading);
+			return _throttle.Throttle(action, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -803,7 +838,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, Task> Throttle<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action, int milliseconds)
 		{
-			return _synch.Throttle(action, milliseconds);
+			return _throttle.Throttle(action, milliseconds);
 		}
 
 		/// <summary>
@@ -811,7 +846,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, Task> Throttle<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(action, milliseconds, leading);
+			return _throttle.Throttle(action, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -819,7 +854,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> action, int milliseconds)
 		{
-			return _synch.Throttle(action, milliseconds);
+			return _throttle.Throttle(action, milliseconds);
 		}
 
 		/// <summary>
@@ -827,7 +862,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> action, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(action, milliseconds, leading);
+			return _throttle.Throttle(action, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -835,7 +870,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, int milliseconds)
 		{
-			return _synch.Throttle(action, milliseconds);
+			return _throttle.Throttle(action, milliseconds);
 		}
 
 		/// <summary>
@@ -843,7 +878,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(action, milliseconds, leading);
+			return _throttle.Throttle(action, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -851,7 +886,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, int milliseconds)
 		{
-			return _synch.Throttle(action, milliseconds);
+			return _throttle.Throttle(action, milliseconds);
 		}
 
 		/// <summary>
@@ -859,7 +894,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(action, milliseconds, leading);
+			return _throttle.Throttle(action, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -867,7 +902,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, int milliseconds)
 		{
-			return _synch.Throttle(action, milliseconds);
+			return _throttle.Throttle(action, milliseconds);
 		}
 
 		/// <summary>
@@ -875,7 +910,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(action, milliseconds, leading);
+			return _throttle.Throttle(action, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -883,7 +918,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, int milliseconds)
 		{
-			return _synch.Throttle(action, milliseconds);
+			return _throttle.Throttle(action, milliseconds);
 		}
 
 		/// <summary>
@@ -891,7 +926,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(action, milliseconds, leading);
+			return _throttle.Throttle(action, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -899,7 +934,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, int milliseconds)
 		{
-			return _synch.Throttle(action, milliseconds);
+			return _throttle.Throttle(action, milliseconds);
 		}
 
 		/// <summary>
@@ -907,7 +942,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(action, milliseconds, leading);
+			return _throttle.Throttle(action, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -915,7 +950,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, int milliseconds)
 		{
-			return _synch.Throttle(action, milliseconds);
+			return _throttle.Throttle(action, milliseconds);
 		}
 
 		/// <summary>
@@ -923,7 +958,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, int milliseconds, bool leading)
 		{
-			return _synch.Throttle(action, milliseconds, leading);
+			return _throttle.Throttle(action, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -931,7 +966,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, int milliseconds)
 		{
-			return _synch.Throttle(action, milliseconds);
+			return _throttle.Throttle(action, milliseconds);
 		}
 
 		/// <summary>
@@ -940,7 +975,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, int milliseconds,
 			bool leading)
 		{
-			return _synch.Throttle(action, milliseconds, leading);
+			return _throttle.Throttle(action, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -948,7 +983,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, int milliseconds)
 		{
-			return _synch.Throttle(action, milliseconds);
+			return _throttle.Throttle(action, milliseconds);
 		}
 
 		/// <summary>
@@ -957,7 +992,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task> Throttle<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, int milliseconds,
 			bool leading)
 		{
-			return _synch.Throttle(action, milliseconds, leading);
+			return _throttle.Throttle(action, milliseconds, leading);
 		}
 
 		/// <summary>
@@ -966,7 +1001,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<Task> Delay(System.Action action, int milliseconds)
 		{
-			return _synch.Delay(action, milliseconds);
+			return _delay.Delay(action, milliseconds);
 		}
 
 		/// <summary>
@@ -975,7 +1010,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T, Task> Delay<T>(Action<T> action, int milliseconds)
 		{
-			return _synch.Delay(action, milliseconds);
+			return _delay.Delay(action, milliseconds);
 		}
 
 		/// <summary>
@@ -984,7 +1019,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, Task> Delay<T1, T2>(Action<T1, T2> action, int milliseconds)
 		{
-			return _synch.Delay(action, milliseconds);
+			return _delay.Delay(action, milliseconds);
 		}
 
 		/// <summary>
@@ -993,7 +1028,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, Task> Delay<T1, T2, T3>(Action<T1, T2, T3> action, int milliseconds)
 		{
-			return _synch.Delay(action, milliseconds);
+			return _delay.Delay(action, milliseconds);
 		}
 
 		/// <summary>
@@ -1002,7 +1037,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, Task> Delay<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action, int milliseconds)
 		{
-			return _synch.Delay(action, milliseconds);
+			return _delay.Delay(action, milliseconds);
 		}
 
 		/// <summary>
@@ -1012,7 +1047,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, T5, Task> Delay<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> action,
 			int milliseconds)
 		{
-			return _synch.Delay(action, milliseconds);
+			return _delay.Delay(action, milliseconds);
 		}
 
 		/// <summary>
@@ -1022,7 +1057,7 @@ namespace Underscore.Module
 		public Func<T1, T2, T3, T4, T5, T6, Task> Delay<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> action,
 			int milliseconds)
 		{
-			return _synch.Delay(action, milliseconds);
+			return _delay.Delay(action, milliseconds);
 		}
 
 		/// <summary>
@@ -1031,7 +1066,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, Task> Delay<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action, int milliseconds)
 		{
-			return _synch.Delay(action, milliseconds);
+			return _delay.Delay(action, milliseconds);
 		}
 
 		/// <summary>
@@ -1040,7 +1075,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> action, int milliseconds)
 		{
-			return _synch.Delay(action, milliseconds);
+			return _delay.Delay(action, milliseconds);
 		}
 
 		/// <summary>
@@ -1049,7 +1084,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, int milliseconds)
 		{
-			return _synch.Delay(action, milliseconds);
+			return _delay.Delay(action, milliseconds);
 		}
 
 		/// <summary>
@@ -1058,7 +1093,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, int milliseconds)
 		{
-			return _synch.Delay(action, milliseconds);
+			return _delay.Delay(action, milliseconds);
 		}
 
 		/// <summary>
@@ -1067,7 +1102,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, int milliseconds)
 		{
-			return _synch.Delay(action, milliseconds);
+			return _delay.Delay(action, milliseconds);
 		}
 
 		/// <summary>
@@ -1076,7 +1111,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, int milliseconds)
 		{
-			return _synch.Delay(action, milliseconds);
+			return _delay.Delay(action, milliseconds);
 		}
 
 		/// <summary>
@@ -1085,7 +1120,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, int milliseconds)
 		{
-			return _synch.Delay(action, milliseconds);
+			return _delay.Delay(action, milliseconds);
 		}
 
 		/// <summary>
@@ -1094,7 +1129,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, int milliseconds)
 		{
-			return _synch.Delay(action, milliseconds);
+			return _delay.Delay(action, milliseconds);
 		}
 
 		/// <summary>
@@ -1103,7 +1138,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, int milliseconds)
 		{
-			return _synch.Delay(action, milliseconds);
+			return _delay.Delay(action, milliseconds);
 		}
 
 		/// <summary>
@@ -1112,7 +1147,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, Task> Delay<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action, int milliseconds)
 		{
-			return _synch.Delay(action, milliseconds);
+			return _delay.Delay(action, milliseconds);
 		}
 
 		/// <summary>
@@ -1138,7 +1173,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T> Once<T>(Action<T> action)
 		{
-			return _synch.Once(action);
+			return _once.Once(action);
 		}
 
 		/// <summary>
@@ -1147,7 +1182,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2> Once<T1, T2>(Action<T1, T2> action)
 		{
-			return _synch.Once(action);
+			return _once.Once(action);
 		}
 
 		/// <summary>
@@ -1156,7 +1191,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3> Once<T1, T2, T3>(Action<T1, T2, T3> action)
 		{
-			return _synch.Once(action);
+			return _once.Once(action);
 		}
 
 		/// <summary>
@@ -1165,7 +1200,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3, T4> Once<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action)
 		{
-			return _synch.Once(action);
+			return _once.Once(action);
 		}
 
 		/// <summary>
@@ -1174,7 +1209,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3, T4, T5> Once<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> action)
 		{
-			return _synch.Once(action);
+			return _once.Once(action);
 		}
 
 		/// <summary>
@@ -1183,7 +1218,7 @@ namespace Underscore.Module
 		/// </summary>
 		public Action<T1, T2, T3, T4, T5, T6> Once<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> action)
 		{
-			return _synch.Once(action);
+			return _once.Once(action);
 		}
 
 		/// <summary>
@@ -1193,7 +1228,7 @@ namespace Underscore.Module
 		public Action<T1, T2, T3, T4, T5, T6, T7> Once<T1, T2, T3, T4, T5, T6, T7>(
 			Action<T1, T2, T3, T4, T5, T6, T7> action)
 		{
-			return _synch.Once(action);
+			return _once.Once(action);
 		}
 
 		/// <summary>
@@ -1203,7 +1238,7 @@ namespace Underscore.Module
 		public Action<T1, T2, T3, T4, T5, T6, T7, T8> Once<T1, T2, T3, T4, T5, T6, T7, T8>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8> action)
 		{
-			return _synch.Once(action);
+			return _once.Once(action);
 		}
 
 		/// <summary>
@@ -1213,7 +1248,7 @@ namespace Underscore.Module
 		public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action)
 		{
-			return _synch.Once(action);
+			return _once.Once(action);
 		}
 
 		/// <summary>
@@ -1223,7 +1258,7 @@ namespace Underscore.Module
 		public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action)
 		{
-			return _synch.Once(action);
+			return _once.Once(action);
 		}
 
 		/// <summary>
@@ -1233,7 +1268,7 @@ namespace Underscore.Module
 		public Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> Once<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action)
 		{
-			return _synch.Once(action);
+			return _once.Once(action);
 		}
 
 		/// <summary>
@@ -1244,7 +1279,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action)
 		{
-			return _synch.Once(action);
+			return _once.Once(action);
 		}
 
 		/// <summary>
@@ -1255,7 +1290,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action)
 		{
-			return _synch.Once(action);
+			return _once.Once(action);
 		}
 
 		/// <summary>
@@ -1266,7 +1301,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action)
 		{
-			return _synch.Once(action);
+			return _once.Once(action);
 		}
 
 		/// <summary>
@@ -1277,7 +1312,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action)
 		{
-			return _synch.Once(action);
+			return _once.Once(action);
 		}
 
 		/// <summary>
@@ -1288,7 +1323,7 @@ namespace Underscore.Module
 			<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(
 			Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action)
 		{
-			return _synch.Once(action);
+			return _once.Once(action);
 		}
 
 		/// <summary>
@@ -3318,5 +3353,5 @@ namespace Underscore.Module
 		{
 			return _bind.Partial(action, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o);
 		}
-	}
+    }
 }

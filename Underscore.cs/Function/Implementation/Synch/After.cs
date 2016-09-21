@@ -4,8 +4,17 @@ using System.Threading.Tasks;
 
 namespace Underscore.Function
 {
-	public partial class SynchComponent
+	public class AfterComponent : IAfterComponent
 	{
+        private Function.CompactComponent _fnCompact;
+        private Utility.CompactComponent _utilCompact;
+
+        public AfterComponent(Function.CompactComponent fnCompact, Utility.CompactComponent utilCompact)
+        {
+            _fnCompact = fnCompact;
+            _utilCompact = utilCompact;
+        }
+
 		/// <summary>
 		///  Returns a version of the passed function 
 		///  that only invokes after being called 

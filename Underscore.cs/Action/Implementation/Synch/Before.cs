@@ -2,7 +2,7 @@
 
 namespace Underscore.Action
 {
-	public partial class SynchComponent : ISynchComponent
+	public class BeforeComponent : IBeforeComponent
 	{
 		public System.Action Before(System.Action action, int count)
 		{

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Underscore.Function
 {
-	public partial interface ISynchComponent
+	public interface IThrottleComponent
 	{
 		/// <summary>
 		/// Returns a throttled version of the passed function

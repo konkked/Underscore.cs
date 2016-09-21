@@ -2,7 +2,7 @@
 
 namespace Underscore.Function
 {
-	public partial interface ISynchComponent
+	public interface IOnceComponent
 	{
 		/// <summary>
 		///  Creates a version of the function that only runs once, 

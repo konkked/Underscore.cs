@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Underscore.Action
 {
-	public partial class SynchComponent : ISynchComponent
+	public class AfterComponent : IAfterComponent
 	{
 		public Func<Task> After(System.Action action, int count)
 		{

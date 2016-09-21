@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Underscore.Function
 {
-	public partial interface ISynchComponent
+	public interface IDebounceComponent
 	{
 		/// <summary>
 		/// Returns a debounced version of the passed function

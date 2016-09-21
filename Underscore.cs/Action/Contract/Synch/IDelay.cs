@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Underscore.Action
 {
-	public partial interface ISynchComponent
+	public interface IDelayComponent
 	{
 		/// <summary>
 		/// Creates a delayed version of passed function, delaying passed milliseconds value

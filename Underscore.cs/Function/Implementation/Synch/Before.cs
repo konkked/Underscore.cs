@@ -1,14 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Underscore.Function
 {
-	public partial class SynchComponent : ISynchComponent
+	public class BeforeComponent : IBeforeComponent
 	{
+        private Function.CompactComponent _fnCompact;
+        private Utility.CompactComponent _utilCompact;
+
+        public BeforeComponent(Function.CompactComponent fnCompact, Utility.CompactComponent utilCompact)
+        {
+            _fnCompact = fnCompact;
+            _utilCompact = utilCompact;
+        }
+
 		/// <summary>
 		/// Returns a version of the passed function 
 		/// that will only invoke a certain amount of times

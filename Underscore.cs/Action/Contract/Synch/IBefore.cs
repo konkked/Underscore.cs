@@ -2,7 +2,7 @@
 
 namespace Underscore.Action
 {
-	public partial interface ISynchComponent
+	public interface IBeforeComponent
 	{
 		/// <summary>
 		/// Returns a version of the passed function 

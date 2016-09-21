@@ -4,8 +4,15 @@ using System.Threading.Tasks;
 
 namespace Underscore.Function
 {
-	public partial class SynchComponent
+	public class DebounceComponent : IDebounceComponent
 	{
+        private Function.CompactComponent _fnCompact;
+
+        public DebounceComponent(Function.CompactComponent fnCompact)
+        {
+            _fnCompact = fnCompact;
+        }
+
 		/// <summary>
 		/// Returns a debounced version of the passed function
 		/// </summary>

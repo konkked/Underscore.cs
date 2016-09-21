@@ -5,24 +5,31 @@ using System.Threading.Tasks;
 
 namespace Underscore.Function
 {
-	public partial class SynchComponent : ISynchComponent
+	public class ThrottleComponent : IThrottleComponent
 	{
+        private Function.CompactComponent _fnCompact;
+        private Utility.CompactComponent _utilCompact;
+        private Utility.MathComponent _math;
+
+        public ThrottleComponent(Function.CompactComponent fnCompact, Utility.CompactComponent utilCompact, Utility.MathComponent math)
+        {
+            _fnCompact = fnCompact;
+            _utilCompact = utilCompact;
+            _math = math;
+        }
+
 		/// <summary>
 		/// Returns a throttled version of the passed function
 		/// </summary>
 		public Func<Task<TResult>> Throttle<TResult>(Func<TResult> function, int milliseconds, bool leading)
 		{
-
 			var origFn = function;
 			var fn = new Func<object, TResult>(a => origFn());
 			var target = Throttle(fn, milliseconds, leading);
 			return async () => await target(null);
 		}
 
-
 #pragma warning disable 4014
-
-
 		private interface IPicker<T>
 		{
 			void Add(T value);
@@ -102,7 +109,6 @@ namespace Underscore.Function
 			}
 
 		}
-
 		private class FirstSetter<T>
 		{
 			private bool wasSet = false;
@@ -181,7 +187,6 @@ namespace Underscore.Function
 				await Task.Delay(_math.Max(0, wtf));
 			}
 		}
-
 		private Func<T, Task<TResult>> ThrottleImpl<T, TResult>(Func<T, TResult> function, int milliseconds, bool leading = true)
 		{
 			var fn = function;

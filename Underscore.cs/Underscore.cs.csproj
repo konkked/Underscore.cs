@@ -68,7 +68,6 @@
     <Compile Include="Action\Implementation\Convert\Convert.cs" />
     <Compile Include="Action\Implementation\Split\Curry.cs" />
     <Compile Include="Action\Implementation\Split\Uncurry.cs" />
-    <Compile Include="Action\Implementation\Synch\SynchConstructor.cs" />
     <Compile Include="Action\Implementation\Split\Split.cs" />
     <Compile Include="Action\Implementation\Synch\After.cs" />
     <Compile Include="Action\Implementation\Synch\Before.cs" />
@@ -130,7 +129,6 @@
     <Compile Include="Function\Implementation\Synch\Debounce.cs" />
     <Compile Include="Function\Implementation\Synch\Delay.cs" />
     <Compile Include="Function\Implementation\Synch\Once.cs" />
-    <Compile Include="Function\Implementation\Synch\SynchConstructor.cs" />
     <Compile Include="Function\Implementation\Synch\Throttle.cs" />
     <Compile Include="Object\Comparison\Contract\IEquality.cs" />
     <Compile Include="Object\Comparison\Implementation\Equality.cs" />

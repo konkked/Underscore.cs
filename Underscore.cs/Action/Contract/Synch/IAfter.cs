@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Underscore.Action
 {
-	public partial interface ISynchComponent
+	public interface IAfterComponent
 	{
 		/// <summary>
 		///  Returns a version of the passed function 
