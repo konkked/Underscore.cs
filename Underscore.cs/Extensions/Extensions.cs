@@ -430,17 +430,9 @@ namespace Underscore.Extensions
         /// Generates a shuffled version of the passed list or, if in place,
         /// shuffles and returns the passed list
         /// </summary>
-        public static IList<T> Shuffle<T>(this IList<T> list, bool inPlace)
+        public static IList<T> Shuffle<T>(this IList<T> list, bool inPlace = false)
         {
             return _list.Shuffle(list, inPlace);
-        }
-
-        /// <summary>
-        /// Generates a shuffled copy of the passed list
-        /// </summary>
-        public static IList<T> Shuffle<T>(IList<T> list)
-        {
-            return _list.Shuffle(list);
         }
 
         /// <summary>
