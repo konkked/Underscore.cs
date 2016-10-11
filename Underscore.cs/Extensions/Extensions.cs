@@ -280,19 +280,10 @@ namespace Underscore.Extensions
 
         /// <summary>
         /// Returns an enumerable containing all 
-        /// elements from both collections
-        /// </summary>
-        public static IEnumerable<T> Union<T>(this IEnumerable<T> a, IEnumerable<T> b)
-        {
-            return _collection.Union(a, b);
-        }
-
-        /// <summary>
-        /// Returns an enumerable containing all 
         /// elements from both collections after
         /// both collections have had transform called on them
         /// </summary>
-        public static IEnumerable<TResult> UnionBy<TArg, TResult>(IEnumerable<TArg> a, IEnumerable<TArg> b,
+        public static IEnumerable<TResult> UnionBy<TArg, TResult>(this IEnumerable<TArg> a, IEnumerable<TArg> b,
             Func<TArg, TResult> transform)
         {
             return _collection.UnionBy(a, b, transform);
@@ -581,9 +572,40 @@ namespace Underscore.Extensions
         /// <param name="end">The exclusive end index</param>
         /// <param name="allowOverflow">specifies if the slice should cycle on overflow</param>
         /// <returns>slice of the list</returns>
-        public static IList<T> Slice<T>(IList<T> list, int start, int end, bool allowOverflow)
+        public static IList<T> Slice<T>(this IList<T> list, int start, int end, bool allowOverflow)
         {
             return _list.Slice(list, start, end, allowOverflow);
+        }
+
+        /// <summary>
+        /// Takes a slice from a list, if start is greater then the end index
+        /// the results are reversed, if the index is negative corresponds to the index
+        /// from the back of the list
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the list</typeparam>
+        /// <param name="start">The inclusive start index</param>
+        /// <param name="end">The exclusive end index</param>
+        /// <param name="step">step by this amount each iteration</param>
+        /// <returns>slice of the list</returns>
+        public static IList<T> Slice<T>(this IList<T> list, int start, int end, int step)
+        {
+            return _list.Slice(list, start, end, step);
+        }
+
+        /// <summary>
+        /// Takes a slice from a list, if start is greater then the end index
+        /// the results are reversed, if the index is negative corresponds to the index
+        /// from the back of the list
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the list</typeparam>
+        /// <param name="start">The inclusive start index</param>
+        /// <param name="end">The exclusive end index</param>
+        /// <param name="step">step by this amount each iteration</param>
+        /// <param name="allowOverflow">specifies if the slice should cycle on overflow</param>
+        /// <returns>slice of the list</returns>
+        public static IList<T> Slice<T>(this IList<T> list, int start, int end, int step, bool allowOverflow)
+        {
+            return _list.Slice(list, start, end, step, allowOverflow);
         }
 
         /// <summary>

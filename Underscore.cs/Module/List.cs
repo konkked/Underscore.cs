@@ -4,8 +4,6 @@ using Underscore.List;
 
 namespace Underscore.Module
 {
-
-
     public class List :
         IManipulateComponent,
         IPartitionComponent
@@ -28,7 +26,6 @@ namespace Underscore.Module
             _manipulator = manipulator;
             _partitioner = partitioner;
         }
-
 
         /// <summary>
         /// Swaps the elements at the specified indexes
@@ -125,7 +122,6 @@ namespace Underscore.Module
             return _partitioner.Slice(list, start, end);
         }
 
-
         /// <summary>
         /// Takes a slice from a list, if start is greater then the end index
         /// the results are reversed, if the index is negative corresponds to the index
@@ -141,6 +137,37 @@ namespace Underscore.Module
         public IList<T> Slice<T>(IList<T> list, int start, int end, bool allowOverflow)
         {
             return _partitioner.Slice(list, start, end, allowOverflow);
+        }
+
+        /// <summary>
+        /// Takes a slice from a list, if start is greater then the end index
+        /// the results are reversed, if the index is negative corresponds to the index
+        /// from the back of the list
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the list</typeparam>
+        /// <param name="start">The inclusive start index</param>
+        /// <param name="end">The exclusive end index</param>
+        /// <param name="step">step by this amount each iteration</param>
+        /// <returns>slice of the list</returns>
+        public IList<T> Slice<T>(IList<T> list, int start, int end, int step)
+        {
+            return _partitioner.Slice(list, start, end, step);
+        }
+
+        /// <summary>
+        /// Takes a slice from a list, if start is greater then the end index
+        /// the results are reversed, if the index is negative corresponds to the index
+        /// from the back of the list
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the list</typeparam>
+        /// <param name="start">The inclusive start index</param>
+        /// <param name="end">The exclusive end index</param>
+        /// <param name="step">step by this amount each iteration</param>
+        /// <param name="allowOverflow">specifies if the slice should cycle on overflow</param>
+        /// <returns>slice of the list</returns>
+        public IList<T> Slice<T>(IList<T> list, int start, int end, int step, bool allowOverflow)
+        {
+            return _partitioner.Slice(list, start, end, step, allowOverflow);
         }
 
         /// <summary>

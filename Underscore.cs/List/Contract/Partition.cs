@@ -25,7 +25,6 @@ namespace Underscore.List
 		/// <returns>a Tuple containing the first partition in the first item, second partition in the second</returns>
 		Tuple<IEnumerable<T>, IEnumerable<T>> Partition<T>(IList<T> list, int index);
 
-
 		/// <summary>
 		/// Breaks list into two seperate parts
 		/// </summary>
@@ -53,23 +52,48 @@ namespace Underscore.List
 		/// <returns>slice of the list</returns>
 		IList<T> Slice<T>(IList<T> list, int start, int end);
 
-		/// <summary>
+        /// <summary>
+        /// Takes a slice from a list, if start is greater then the end index
+        /// the results are reversed, if the index is negative corresponds to the index
+        /// from the back of the list, if the slice is larger than the size of the list
+        /// then the items are repeated
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the list</typeparam>
+        /// <param name="start">The inclusive start index</param>
+        /// <param name="end">The exclusive end index</param>
+        /// <param name="allowOverflow">specifies if the slice should cycle on overflow</param>
+        /// <returns>slice of the list</returns>
+        IList<T> Slice<T>(IList<T> list, int start, int end, bool allowOverflow);
+
+        /// <summary>
 		/// Takes a slice from a list, if start is greater then the end index
 		/// the results are reversed, if the index is negative corresponds to the index
-		/// from the back of the list, if the slice is larger than the size of the list
-		/// then the items are repeated
+		/// from the back of the list
 		/// </summary>
 		/// <typeparam name="T">The type of the elements in the list</typeparam>
 		/// <param name="start">The inclusive start index</param>
 		/// <param name="end">The exclusive end index</param>
+		/// <param name="step">step by this amount each iteration</param>
+		/// <returns>slice of the list</returns>
+		IList<T> Slice<T>(IList<T> list, int start, int end, int step);
+
+        /// <summary>
+		/// Takes a slice from a list, if start is greater then the end index
+		/// the results are reversed, if the index is negative corresponds to the index
+		/// from the back of the list
+		/// </summary>
+		/// <typeparam name="T">The type of the elements in the list</typeparam>
+		/// <param name="start">The inclusive start index</param>
+		/// <param name="end">The exclusive end index</param>
+		/// <param name="step">step by this amount each iteration</param>
 		/// <param name="allowOverflow">specifies if the slice should cycle on overflow</param>
 		/// <returns>slice of the list</returns>
-		IList<T> Slice<T>(IList<T> list, int start, int end, bool allowOverflow);
+		IList<T> Slice<T>(IList<T> list, int start, int end, int step, bool allowOverflow);
 
-		/// <summary>
-		/// Splits the list in half
-		/// </summary>
-		Tuple<IList<T>, IList<T>> Split<T>(IList<T> list);
+        /// <summary>
+        /// Splits the list in half
+        /// </summary>
+        Tuple<IList<T>, IList<T>> Split<T>(IList<T> list);
 
 		/// <summary>
 		/// Returns an enumerable of all the possible combinations of the passed items
