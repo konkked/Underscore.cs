@@ -92,6 +92,7 @@
     <Compile Include="Collection\Implementation\Set.cs" />
     <Compile Include="Collection\Implementation\Zip\UnZip.cs" />
     <Compile Include="Collection\Implementation\Zip\Zip.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Function\Contract\Bind\IBind.cs" />
     <Compile Include="Function\Contract\Bind\IPartial.cs" />
     <Compile Include="Function\Contract\Boolean\IAnd.cs" />
