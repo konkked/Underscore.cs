@@ -1,4 +1,4 @@
-## Equality
+# Object.Comparison
 
 ### bool AreEquatable(object a, object b, bool typeSensitive)
 Returns true if two items are equal, checking for deep equality (checking for equality of nested objects). This is done by comparing the fields on each item, not the references. If two items of the same type are passed with no typeSensitive argument, the two types are compared using the type sensitive algorithm.

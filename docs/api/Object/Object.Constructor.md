@@ -1,5 +1,7 @@
-## Constructor
+# Object.Constructor
 ***All Methods called from _.Object.Constructor property***
+
+***All Methods which take a Type target can also take an object as target***
 
 - [HasParameterless](#hasparameterless)
 - [Parameterless](#parameterless)
