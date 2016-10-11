@@ -40,7 +40,7 @@ and return the value obtained before.
 
 ## List
 
-Delegate - Contains methods relating to resolving delegates from a list
+***All methods in module can also be called as extension methods using Underscore.Extensions***
 
 Manipulate - Contains methods that manipulate the state of a list or return samples from a list's state, such as Swap, Shuffle and Rotate
 
@@ -48,6 +48,8 @@ Partition - Contains methods which split a list into multiple parts, such as Chu
 
 
 ## Collection
+
+***All methods in module can also be called as extension methods using Underscore.Extensions***
 
 Creation - Contains Snapshot method which creates a method that will always return the enumerable
 as it was at the time it was passed.

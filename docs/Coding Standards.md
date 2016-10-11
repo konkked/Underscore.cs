@@ -1,9 +1,8 @@
 # Code Quality Standards for Underscore.cs
-***This is an incomplete work. We're going to update it as we flesh out the coding standards we'd like to have as we go through the project rework/expansion***
 
 ## Writing Unit Tests
-### What do we use to write unit tests?
-Currently, the project uses Microsoft's unit testing framework that's built into Visual Studio, Microsoft.VisualStudio.TestTools.UnitTesting. Currently there's no way to run tests using the console or on OSX/Linux, which is a feature that's to be implemented Soon™.
+### What do we use to write tests?
+Currently, the project uses NUnit for its tests, which are run using the NUnit adapter for Visual Studio.
 
 ### Naming Conventions
 When naming a test, the format should be Module_SubModule_Function_Description, where SubModule is optional depending on whether it applies.
@@ -15,4 +14,4 @@ For tests where there are edge cases, such as Collection.Partition.Partition(), 
 ### How many tests do I write for a function?
 Rather than necessitating trying to write edge cases for functions that don't really have them, such as Function.Compose.Apply() and Function.Compose.Bind(), we're going to only test edge cases for functions that have them, such as Collection.Partition.Partition function.
 
-A new TestMethod should be made for every edge case, so that failure logs are more informative.
+A new Test method should be made for every edge case, so that failure logs are more informative.
