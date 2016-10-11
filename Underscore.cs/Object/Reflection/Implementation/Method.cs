@@ -361,9 +361,9 @@ namespace Underscore.Object.Reflection
 		/// <param name="target">The object whose methods are being searched</param>
 		/// <param name="query">The query pattern object used to modify the search </param>
 		/// <param name="name">The name of the methods being searched for</param>
-		/// <param name="caseSenstive">Indicates if the match should only happen if the name cases match</param>
+		/// <param name="caseSensitive">Indicates if the match should only happen if the name cases match</param>
 		/// <returns>All methods that match the query passed with the specified name</returns>
-		public IEnumerable<MethodInfo> Query(object target, object query, string name, bool caseSenstive)
+		public IEnumerable<MethodInfo> Query(object target, object query, string name, bool caseSensitive)
 		{
 			return Query(target.GetType(), query, name);
 		}
@@ -378,12 +378,12 @@ namespace Underscore.Object.Reflection
 		/// <param name="target">The type whose methods are being searched</param>
 		/// <param name="query">The query pattern object used to modify the search </param>
 		/// <param name="name">The name of the methods being searched for</param>
-		/// <param name="caseSenstive">Indicates if the match should only happen if the name cases match</param>
+		/// <param name="caseSensitive">Indicates if the match should only happen if the name cases match</param>
 		/// <returns>All methods that match the query passed with the specified name</returns>
-		public IEnumerable<MethodInfo> Query(Type target, object query, string name, bool caseSenstive)
+		public IEnumerable<MethodInfo> Query(Type target, object query, string name, bool caseSensitive)
 		{
 			var lcname = name.ToLower();
-			return caseSenstive
+			return caseSensitive
 				? base.Query(target, query).Where(a => a.Name == name)
 				: base.Query(target, query).Where(a => a.Name.ToLower() == lcname);
 		}
@@ -398,15 +398,15 @@ namespace Underscore.Object.Reflection
 		/// <param name="target">The object whose methods are being searched</param>
 		/// <param name="query">The query pattern object used to modify the search </param>
 		/// <param name="name">The name of the methods being searched for</param>
-		/// <param name="caseSenstive">Indicates if the match should only happen if the name cases match</param>
+		/// <param name="caseSensitive">Indicates if the match should only happen if the name cases match</param>
 		/// <param name="flags">
 		///     A bitmask comprised of one or more <see cref="BindingFlags"></see>
 		///     that specify how the search is conducted
 		/// </param>
 		/// <returns>All methods that match the query passed with the specified name and match the provided flags</returns>
-		public IEnumerable<MethodInfo> Query(object target, object query, string name, bool caseSenstive, BindingFlags flags)
+		public IEnumerable<MethodInfo> Query(object target, object query, string name, bool caseSensitive, BindingFlags flags)
 		{
-			return Query(target.GetType(), query, name, caseSenstive, flags);
+			return Query(target.GetType(), query, name, caseSensitive, flags);
 		}
 
 
@@ -419,16 +419,16 @@ namespace Underscore.Object.Reflection
 		/// <param name="target">The type whose methods are being searched</param>
 		/// <param name="query">The query pattern object used to modify the search </param>
 		/// <param name="name">The name of the methods being searched for</param>
-		/// <param name="caseSenstive">Indicates if the match should only happen if the name cases match</param>
+		/// <param name="caseSensitive">Indicates if the match should only happen if the name cases match</param>
 		/// <param name="flags">
 		///     A bitmask comprised of one or more <see cref="BindingFlags"></see>
 		///     that specify how the search is conducted
 		/// </param>
 		/// <returns>All methods that match the query passed with the specified name and match the provided flags</returns>
-		public IEnumerable<MethodInfo> Query(Type target, object query, string name, bool caseSenstive, BindingFlags flags)
+		public IEnumerable<MethodInfo> Query(Type target, object query, string name, bool caseSensitive, BindingFlags flags)
 		{
 			var lcname = name.ToLower();
-			return caseSenstive
+			return caseSensitive
 				? base.Query(target, query, flags).Where(a => a.Name == name)
 				: base.Query(target, query, flags).Where(a => a.Name.ToLower() == lcname);
 		}
