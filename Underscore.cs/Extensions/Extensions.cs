@@ -299,6 +299,131 @@ namespace Underscore.Extensions
         }
         #endregion
 
+        #region Zip
+
+        /// <summary>
+        /// zips collections together into tuples
+        /// of each collections' elements by index
+        /// </summary>
+        public static IEnumerable<Tuple<T1, T2>> ZipToTuples<T1, T2>(this IEnumerable<T1> a, IEnumerable<T2> b)
+        {
+            return _collection.Zip(a, b);
+        }
+
+        /// <summary>
+        /// zips collections together into tuples
+        /// of each collections' elements by index
+        /// </summary>
+        public static IEnumerable<Tuple<T1, T2, T3>> ZipToTuples<T1, T2, T3>(this IEnumerable<T1> a, IEnumerable<T2> b,
+            IEnumerable<T3> c)
+        {
+            return _collection.Zip(a, b, c);
+        }
+
+        /// <summary>
+        /// zips collections together into tuples
+        /// of each collections' elements by index
+        /// </summary>
+        public static IEnumerable<Tuple<T1, T2, T3, T4>> ZipToTuples<T1, T2, T3, T4>(this IEnumerable<T1> a,
+            IEnumerable<T2> b, IEnumerable<T3> c, IEnumerable<T4> d)
+        {
+            return _collection.Zip(a, b, c, d);
+        }
+
+        /// <summary>
+        /// zips collections together into tuples
+        /// of each collections' elements by index
+        /// </summary>
+        public static IEnumerable<Tuple<T1, T2, T3, T4, T5>> ZipToTuples<T1, T2, T3, T4, T5>(this IEnumerable<T1> a,
+            IEnumerable<T2> b, IEnumerable<T3> c, IEnumerable<T4> d, IEnumerable<T5> e)
+        {
+            return _collection.Zip(a, b, c, d, e);
+        }
+
+        /// <summary>
+        /// zips collections together into tuples
+        /// of each collections' elements by index
+        /// </summary>
+        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> ZipToTuples<T1, T2, T3, T4, T5, T6>(
+            this IEnumerable<T1> a, IEnumerable<T2> b, IEnumerable<T3> c, IEnumerable<T4> d, IEnumerable<T5> e,
+            IEnumerable<T6> f)
+        {
+            return _collection.Zip(a, b, c, d, e, f);
+        }
+
+        /// <summary>
+        /// zips collections together into tuples
+        /// of each collections' elements by index
+        /// </summary>
+        public static IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> ZipToTuples<T1, T2, T3, T4, T5, T6, T7>(
+            this IEnumerable<T1> a, IEnumerable<T2> b, IEnumerable<T3> c, IEnumerable<T4> d, IEnumerable<T5> e,
+            IEnumerable<T6> f, IEnumerable<T7> g)
+        {
+            return _collection.Zip(a, b, c, d, e, f, g);
+        }
+
+        /// <summary>
+		/// Unzip an enumerable of tuples into a single 
+		/// tuple containing separate enumerables 
+		/// for each of the values previously in the tuples
+		/// </summary>
+		public static Tuple<IEnumerable<T1>, IEnumerable<T2>> UnZipFromTuples<T1, T2>(this IEnumerable<Tuple<T1, T2>> zipped)
+        {
+            return _collection.UnZip(zipped);
+        }
+
+        /// <summary>
+        /// Unzip an enumerable of tuples into a single 
+        /// tuple containing separate enumerables 
+        /// for each of the values previously in the tuples
+        /// </summary>
+        public static Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>> UnZipFromTuples<T1, T2, T3>(
+            this IEnumerable<Tuple<T1, T2, T3>> zipped)
+        {
+            return _collection.UnZip(zipped);
+        }
+
+        /// <summary>
+        /// Unzip an enumerable of tuples into a single 
+        /// tuple containing separate enumerables 
+        /// for each of the values previously in the tuples
+        /// </summary>
+        public static Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>> UnZipFromTuples<T1, T2, T3, T4>(this IEnumerable<Tuple<T1, T2, T3, T4>> zipped)
+        {
+            return _collection.UnZip(zipped);
+        }
+
+        /// <summary>
+        /// Unzip an enumerable of tuples into a single 
+        /// tuple containing separate enumerables 
+        /// for each of the values previously in the tuples
+        /// </summary>
+        public static Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>> UnZipFromTuples<T1, T2, T3, T4, T5>(this IEnumerable<Tuple<T1, T2, T3, T4, T5>> zipped)
+        {
+            return _collection.UnZip(zipped);
+        }
+
+        /// <summary>
+        /// Unzip an enumerable of tuples into a single 
+        /// tuple containing separate enumerables 
+        /// for each of the values previously in the tuples
+        /// </summary>
+        public static Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>> UnZipFromTuples<T1, T2, T3, T4, T5, T6>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6>> zipped)
+        {
+            return _collection.UnZip(zipped);
+        }
+
+        /// <summary>
+        /// Unzip an enumerable of tuples into a single 
+        /// tuple containing separate enumerables 
+        /// for each of the values previously in the tuples
+        /// </summary>
+        public static Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>> UnZipFromTuples<T1, T2, T3, T4, T5, T6, T7>(this IEnumerable<Tuple<T1, T2, T3, T4, T5, T6, T7>> zipped)
+        {
+            return _collection.UnZip(zipped);
+        }
+        #endregion
+
         #region List
         #region Manipulate
 
