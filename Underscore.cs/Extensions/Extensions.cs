@@ -24,7 +24,8 @@ namespace Underscore.Extensions
                 new PropertyComponent()
                 )
             ), 
-            new FilterComponent(), 
+            new FilterComponent(),
+            new MapReduceComponent(),
             new PartitionComponent(
                 new List.PartitionComponent(
                     new MathComponent()
@@ -162,6 +163,23 @@ namespace Underscore.Extensions
         public static IEnumerable<T> TakeRightWhile<T>(this IEnumerable<T> collection, Func<T, bool> predicate)
         {
             return _collection.TakeRightWhile(collection, predicate);
+        }
+        #endregion
+
+        #region MapReduce
+        public static IEnumerable<U> Map<T, U>(this IEnumerable<T> collection, Func<T, U> transform)
+        {
+            return _collection.Map(collection, transform);
+        }
+
+        public static U Reduce<T, U>(this IEnumerable<T> collection, Func<U, T, U> reducer)
+        {
+            return _collection.Reduce(collection, reducer);
+        }
+
+        public static U Reduce<T, U>(this IEnumerable<T> collection, U seed, Func<U, T, U> reducer)
+        {
+            return _collection.Reduce(collection, seed, reducer);
         }
         #endregion
 

@@ -11,6 +11,7 @@ namespace Underscore.Setup
 			kernel.Register<ICreationComponent, CreationComponent>();
 			kernel.Register<IDelegationComponent, DelegationComponent>();
 			kernel.Register<IFilterComponent, FilterComponent>();
+            kernel.Register<IMapReduceComponent, MapReduceComponent>();
 			kernel.Register<ISetComponent, SetComponent>();
 			kernel.Register<IZipComponent, ZipComponent>();
             kernel.Register<IUnZipComponent, UnZipComponent>();

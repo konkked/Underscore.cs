@@ -1,6 +1,4 @@
 ﻿using NUnit.Framework;
-using Underscore.Object.Comparison;
-using Underscore.Object.Reflection;
 
 namespace Underscore.Test.Object.Comparison
 {
@@ -28,8 +26,6 @@ namespace Underscore.Test.Object.Comparison
 		[Test]
 		public void Object_Comparison_Equality_TypeInsensitiveSameType()
 		{
-			IEqualityComponent testing = new EqualityComponent();
-
 			var item1 =
 				new EqualityTestObject
 				{
@@ -60,15 +56,13 @@ namespace Underscore.Test.Object.Comparison
 					}
 				};
 
-			Assert.IsTrue(_.Object.AreEquatable(item2, item1));
-			Assert.IsTrue(_.Object.AreEquatable(item1, item2));
+			Assert.IsTrue(_.Object.AreEquivalent(item2, item1));
+			Assert.IsTrue(_.Object.AreEquivalent(item1, item2));
 		}
 
 		[Test]
 		public void Object_Comparison_Equality_TypeInsensitiveDifferentTypes()
 		{
-			IEqualityComponent testing = new EqualityComponent(new PropertyComponent());
-
 			var item1 =
 				new
 				{
@@ -92,15 +86,13 @@ namespace Underscore.Test.Object.Comparison
 					}
 				};
 
-			Assert.IsTrue(_.Object.AreEquatable(item2, item1));
-			Assert.IsTrue(_.Object.AreEquatable(item1, item2));
+			Assert.IsTrue(_.Object.AreEquivalent(item2, item1));
+			Assert.IsTrue(_.Object.AreEquivalent(item1, item2));
 		}
 
 		[Test]
 		public void Object_Comparison_Equality_TypeSensitiveSameType()
 		{
-			IEqualityComponent testing = new EqualityComponent(new PropertyComponent());
-
 			var item1 =
 				new EqualityTestObject
 				{
@@ -131,15 +123,13 @@ namespace Underscore.Test.Object.Comparison
 					}
 				};
 
-			Assert.IsTrue(_.Object.AreEquatable(item2, item1, true));
-			Assert.IsTrue(_.Object.AreEquatable(item1, item2, true));
+			Assert.IsTrue(_.Object.AreEquivalent(item2, item1, true));
+			Assert.IsTrue(_.Object.AreEquivalent(item1, item2, true));
 		}
 
 		[Test]
 		public void Object_Comparison_Equality_TypeSensitiveDifferentTypes()
 		{
-			IEqualityComponent testing = new EqualityComponent(new PropertyComponent());
-
 			var item1 =
 				new
 				{
@@ -163,15 +153,13 @@ namespace Underscore.Test.Object.Comparison
 					}
 				};
 
-			Assert.IsFalse(_.Object.AreEquatable(item2, item1, true));
-			Assert.IsFalse(_.Object.AreEquatable(item1, item2, true));
+			Assert.IsFalse(_.Object.AreEquivalent(item2, item1, true));
+			Assert.IsFalse(_.Object.AreEquivalent(item1, item2, true));
 		}
 
 		[Test]
 		public void Object_Comparison_Equality_IsCommunicative()
 		{
-			IEqualityComponent testing = new EqualityComponent(new PropertyComponent());
-
 			var item1 =
 				new EqualityTestObject
 				{
@@ -202,8 +190,8 @@ namespace Underscore.Test.Object.Comparison
 					}
 				};
 
-			Assert.IsTrue(_.Object.AreEquatable(item2, item1));
-			Assert.IsTrue(_.Object.AreEquatable(item1, item2));
+			Assert.IsTrue(_.Object.AreEquivalent(item2, item1));
+			Assert.IsTrue(_.Object.AreEquivalent(item1, item2));
 		}
 	}
 }

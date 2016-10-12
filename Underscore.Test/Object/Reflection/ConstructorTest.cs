@@ -90,7 +90,6 @@ namespace Underscore.Test.Object.Reflection
 		[Test]
 		public void FunctionalCtorTest2()
 		{
-
 			var strBuilder = new StringBuilder();
 
 			const BindingFlags flags = BindingFlags.Public | BindingFlags.Instance;

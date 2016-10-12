@@ -18,6 +18,7 @@ namespace Underscore.Test.Module
 				new CreationComponent(),
 				new DelegationComponent( new MethodComponent( new CacheComponent(new CompactComponent(), new Underscore.Utility.CompactComponent()),new PropertyComponent() )),
 				new FilterComponent(),
+                new MapReduceComponent(), 
 				new PartitionComponent( new Underscore.List.PartitionComponent(new MathComponent())),
 				new SetComponent(),
 				new ZipComponent(),

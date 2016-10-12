@@ -6,7 +6,6 @@ namespace Underscore.Object.Reflection
 {
 	public interface IFieldComponent
 	{
-
 		/// <summary>
 		/// Finds a public instance field by name
 		/// </summary>
@@ -14,8 +13,7 @@ namespace Underscore.Object.Reflection
 		/// <param name="name">The name of the field that is being searched for</param>
 		/// <param name="caseSensitive">Is true when exact match is needed</param>
 		/// <returns>A FieldInfo of the field who's name matches or null</returns>
-		FieldInfo Find( object target, string name, bool caseSensitive );
-
+		FieldInfo Find(object target, string name, bool caseSensitive);
 
 		/// <summary>
 		/// Finds a public instance field by name
@@ -23,7 +21,7 @@ namespace Underscore.Object.Reflection
 		/// <param name="target">The object whose class is searched for the field</param>
 		/// <param name="name">The name of the field that is being searched for</param>
 		/// <returns>A FieldInfo of the field who's name matches or null</returns>
-		FieldInfo Find( object target, string name );
+		FieldInfo Find(object target, string name);
 
 		/// <summary>
 		/// Finds a public instance field by name
@@ -42,7 +40,6 @@ namespace Underscore.Object.Reflection
 		/// <returns>A FieldInfo of the field who's name matches or null</returns>
 		FieldInfo Find(Type target, string name, bool caseSensitive);
 
-
 		/// <summary>
 		/// Finds a public instance field by name and type
 		/// </summary>
@@ -50,8 +47,7 @@ namespace Underscore.Object.Reflection
 		/// <param name="name">The name of the field that is being searched for</param>
 		/// <param name="type">The type of the field that is being searched for</param>
 		/// <returns>A FieldInfo of the field who's name matches or null</returns>
-		FieldInfo Find( object target, string name, Type type );
-
+		FieldInfo Find(object target, string name, Type type);
 
 		/// <summary>
 		/// Finds a public instance field by name and type
@@ -82,7 +78,6 @@ namespace Underscore.Object.Reflection
 		/// <returns>A FieldInfo of the field who's name matches or null</returns>
 		FieldInfo Find(Type target, string name, Type type, bool caseSensitive);
 
-
 		/// <summary>
 		/// Returns true if a public field exists for the specified criteria
 		/// </summary>
@@ -97,8 +92,6 @@ namespace Underscore.Object.Reflection
 		/// <param name="caseSensitive">Specifies if the search should match only on exact case match</param>
 		/// <param name="name">The name of the field being searched for</param>
 		bool Has(object target, string name, bool caseSensitive);
-
-
 
 		/// <summary>
 		/// Returns true if a public field exists for the specified criteria
@@ -115,14 +108,13 @@ namespace Underscore.Object.Reflection
 		/// <param name="caseSensitive">Specifies if the search should match only on exact case match</param>
 		bool Has(Type target, string name, bool caseSensitive);
 
-
 		/// <summary>
 		/// Returns true if a public field exists for the specified criteria
 		/// </summary>
 		/// <param name="target">The object whose fields are being search</param>
 		/// <param name="name">The name of the field being searched for</param>
 		/// <param name="type">The type of field being searched for</param>
-		bool Has( object target, string name, Type type );
+		bool Has(object target, string name, Type type);
 
 		/// <summary>
 		/// Returns true if a public field exists for the specified criteria
@@ -133,7 +125,6 @@ namespace Underscore.Object.Reflection
 		/// <param name="caseSensitive">Specifies if the search should match only on exact case match</param>
 		bool Has(object target, string name, Type type, bool caseSensitive);
 
-
 		/// <summary>
 		/// Returns true if a public field exists for the specified criteria
 		/// </summary>
@@ -141,7 +132,6 @@ namespace Underscore.Object.Reflection
 		/// <param name="name">The name of the field being searched for</param>
 		/// <param name="type">The type of the field being searched for</param>
 		bool Has(Type target, string name, Type type);
-
 
 		/// <summary>
 		/// Returns true if a public field exists for the specified criteria
@@ -152,13 +142,11 @@ namespace Underscore.Object.Reflection
 		/// <param name="caseSensitive">Specifies if the search should match only on exact case match</param>
 		bool Has(Type target, string name, Type type, bool caseSensitive);
 
-
 		/// <summary>
 		/// Retrieves all fields from the targeted object
 		/// </summary>
 		/// <param name="target">The object whose properties are being returned</param>
 		IEnumerable<FieldInfo> All(object target);
-
 
 		/// <summary>
 		/// Retrieves all fields from the targeted object
@@ -173,14 +161,12 @@ namespace Underscore.Object.Reflection
 		/// <param name="type">The type of the fields are being filtered on</param>
 		IEnumerable<FieldInfo> OfType(object target, Type type);
 
-
 		/// <summary>
 		/// Finds all fields of a specific type from the targeted object
 		/// </summary>
 		/// <param name="target">The Type whose fields are being searched</param>
 		/// <param name="type">The type of the fields are being filtered on</param>
 		IEnumerable<FieldInfo> OfType(Type target, Type type);
-
 
 		/// <summary>
 		/// Returns all of the values of public instance fields
@@ -194,8 +180,6 @@ namespace Underscore.Object.Reflection
 		/// <typeparam name="T">The type that the values are being filtered on</typeparam>
 		/// <param name="target">The object whose fields' values are being returned</param>
 		IEnumerable<T> Values<T>(object target);
-
-
 
 		/// <summary>
 		/// Finds a public instance field by name 
@@ -246,7 +230,6 @@ namespace Underscore.Object.Reflection
 		/// <param name="caseSensitive">Specifies if the search should match only on exact case match</param>
 		/// <returns>A FieldInfo of the field who's name matches or null</returns>
 		FieldInfo Find(Type target, string name, bool caseSensitive, BindingFlags flags);
-
 
 		/// <summary>
 		/// Finds a public instance field by name and type
@@ -302,8 +285,6 @@ namespace Underscore.Object.Reflection
 		/// <returns>A FieldInfo of the field who's name matches or null</returns>
 		FieldInfo Find(Type target, string name, Type type, bool caseSensitive, BindingFlags flags);
 
-
-
 		/// <summary>
 		/// Returns true if a public field exists for the specified criteria
 		/// </summary>
@@ -314,7 +295,6 @@ namespace Underscore.Object.Reflection
 		///     that specify how the search is conducted
 		/// </param>
 		bool Has(object target, string name, BindingFlags flags);
-
 
 		/// <summary>
 		/// Returns true if a public field exists for the specified criteria
@@ -350,7 +330,6 @@ namespace Underscore.Object.Reflection
 		///     that specify how the search is conducted
 		/// </param>
 		bool Has(Type target, string name, bool caseSensitive, BindingFlags flags);
-
 
 		/// <summary>
 		/// Returns true if a public field exists for the specified criteria
@@ -389,7 +368,6 @@ namespace Underscore.Object.Reflection
 		/// </param>
 		bool Has(Type target, string name, Type type, BindingFlags flags);
 
-
 		/// <summary>
 		/// Returns true if a public field exists for the specified criteria
 		/// </summary>
@@ -412,7 +390,7 @@ namespace Underscore.Object.Reflection
 		///     that specify how the search is conducted
 		/// </param>
 		IEnumerable<FieldInfo> All(object target, BindingFlags flags);
-	   
+
 		/// <summary>
 		/// Retrieves all fields from the targeted object
 		/// </summary>
@@ -434,7 +412,6 @@ namespace Underscore.Object.Reflection
 		/// </param>
 		IEnumerable<FieldInfo> OfType(object target, Type type, BindingFlags flags);
 
-
 		/// <summary>
 		/// Finds all fields of a specific type from the targeted object
 		/// </summary>
@@ -445,7 +422,6 @@ namespace Underscore.Object.Reflection
 		///     that specify how the search is conducted
 		/// </param>
 		IEnumerable<FieldInfo> OfType(Type target, Type type, BindingFlags flags);
-
 
 		/// <summary>
 		/// Returns all of the values of public instance fields
@@ -467,6 +443,5 @@ namespace Underscore.Object.Reflection
 		///     that specify how the search is conducted
 		/// </param>
 		IEnumerable<T> Values<T>(object target, BindingFlags flags);
-
 	}
 }
