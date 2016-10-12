@@ -37,7 +37,6 @@ It contains memoize which will take a function call and if the passed
 parameters have already been called then it will not execute the function
 and return the value obtained before.
 
-
 ## List
 
 Delegate - Contains methods relating to resolving delegates from a list
@@ -45,7 +44,6 @@ Delegate - Contains methods relating to resolving delegates from a list
 Manipulate - Contains methods that manipulate the state of a list or return samples from a list's state, such as Swap, Shuffle and Rotate
 
 Partition - Contains methods which split a list into multiple parts, such as Chunk, Split and Partition.
-
 
 ## Collection
 
