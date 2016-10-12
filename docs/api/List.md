@@ -1,6 +1,8 @@
 # List Module
 ***Note that while these are separated into categories here based on behavior, they are all called from _.List***
 
+***All methods in this section can also be called as an extension method from any IList using Underscore.Extensions***
+
 # Manipulate
 
 ### bool Swap\<T\>(IList\<T\> collection, int i,int j)

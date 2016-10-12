@@ -1,6 +1,8 @@
 # Collection Module
 ***Note that while these are separated into categories here based on behavior, they are all called from _.Collection***
 
+***All methods in this section can also be called as an extension method from any IEnumerable using Underscore.Extensions***
+
 ## Compare
 ### bool IsSorted\<T\>(IEnumerable\<T\> collection, bool descending = false) where T : IComparable
 Checks whether an enumerable of IComparable items is sorted. Can check either ascending or descending, defaults to checking for ascending sort.
