@@ -14,8 +14,8 @@
 
 ## All
 
-### IEnumerable<ConstructorInfo> All(Type target, BindingFlags flags)
-Returns an IEnumerable containing the [ConstructorInfo](https://msdn.microsoft.com/en-us/library/system.reflection.constructorinfo(v=vs.110) of all of the given type/object's constructors.
+### IEnumerable<ConstructorInfo> All(Type target[, BindingFlags flags])
+Returns an IEnumerable containing the [ConstructorInfo](https://msdn.microsoft.com/en-us/library/system.reflection.constructorinfo.aspx) of all of the given type/object's constructors.
 ```csharp
 class Foo
 {
@@ -30,12 +30,12 @@ _.Object.Constructor.All(typeof(Foo)); // [{public Foo(string bar)}, {public Foo
 
 ## Find
 
-### ConstructorInfo Find(Type target, object query, BindingFlags flags)
-Find the first constructor on the given type matching the given [query](./Query.md) and return its [ConstructorInfo](https://msdn.microsoft.com/en-us/library/system.reflection.constructorinfo(v=vs.110).
+### ConstructorInfo Find(Type target, object query[, BindingFlags flags])
+Find the first constructor on the given type matching the given [query](./Query.md) and return its [ConstructorInfo](https://msdn.microsoft.com/en-us/library/system.reflection.constructorinfo.aspx).
 
 ## HasParameterless
 
-### bool HasParameterless(Type target, BindingFlags flags)
+### bool HasParameterless(Type target[, BindingFlags flags])
 Checks for a parameterless constructor on the given object/type which matches the given flags.
 ```csharp
 class Foo
@@ -56,12 +56,12 @@ _.Object.Constructor.HasParameterless(new Bar("foo")); // false
 
 ## Parameterless
 
-### ConstructorInfo Parameterless(Type target, BindingFlags flags)
-Returns the [ConstructorInfo](https://msdn.microsoft.com/en-us/library/system.reflection.constructorinfo(v=vs.110).aspx) of the given type's parameterless constructor, if it has one. If not, returns null.
+### ConstructorInfo Parameterless(Type target[, BindingFlags flags])
+Returns the [ConstructorInfo](https://msdn.microsoft.com/en-us/library/system.reflection.constructorinfo.aspx) of the given type's parameterless constructor, if it has one. If not, returns null.
 
 ## Simplest
 
-### ConstructorInfo Simplest(Type target, BindingFlags flags)
+### ConstructorInfo Simplest(Type target[, BindingFlags flags])
 Gets the info of the constructor with the least parameters on the given type/object.
 ```csharp
 class Foo
@@ -76,4 +76,5 @@ _.Object.Constructor.Simplest(typeof(Foo)); // {public Foo(string bar)}
 
 ## Query
 
-### IEnumerable<ConstructorInfo> Query(Type target, object query, BindingFlags flags)
+### IEnumerable<ConstructorInfo> Query(Type target, object query[, BindingFlags flags])
+Queries the given type using a [Query Object](./Query.md) to find any constructors which match the given query.

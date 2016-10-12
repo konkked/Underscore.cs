@@ -1,6 +1,6 @@
 # Using the "Query" Object
 
-The Object module has a commonly used concept of a "query" object (such as in `_.Object.Constructor.Find(Type target, object query)`) which can be somewhat confusing, since the object itself isn't strongly typed (it accepts an `object` as a parameter) and can take a variety of forms. Following is a description of the different ways you can use the query object to filter your results from various `Object` methods.
+The Object module has a commonly used concept of a "query" object (such as in `_.Object.Constructor.Find(Type target, object query)`) which can be somewhat confusing, since the object itself isn't strongly typed (it accepts an `object` as a parameter) and can take a variety of forms. Following is a description of the different ways you can use the query object to filter your results from various `Object` methods. In addition, all of the submodules of `Object` have a `Query()` function to find things of their type (e.g. `MethodInfo` for `Object.Method`, `ConstructorInfo` for `Object.Constructor`).
 
 - [Object Array](#object-array)
 - [String](#string)
