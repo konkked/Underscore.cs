@@ -356,6 +356,20 @@ namespace Underscore.Object.Reflection
 			return target.GetProperties(flags).Where(a => a.PropertyType == propertyTypeTarget);
 		}
 
+        /// <summary>
+		///     Gets all of the properties of the specified type
+		/// </summary>
+		/// <param name="target">The Type whose properties are being searched</param>
+		/// <param name="flags">
+		///     A bitmask comprised of one or more <see cref="BindingFlags"></see>
+		///     that specify which properties should be returned
+		/// </param>
+	    public IEnumerable<PropertyInfo> OfType<T>(Type target,
+	        BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
+	    {
+	        return OfType(target, typeof(T), flags);
+	    }
+
 		/// <summary>
 		///     Gets all of the values for publicly accessible properties of specified object
 		/// </summary>
