@@ -1,5 +1,7 @@
 # Collection.Set
 
+***All methods in this section can also be called as extension methods from any IEnumerable using Underscore.Extensions***
+
 ***All of these functions return an IEnumerable with no duplicate items.***
 
 - [Difference](#difference)

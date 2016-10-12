@@ -1,5 +1,7 @@
 # List.Creation
 
+***All methods in this section can also be called as extension methods from any IList using Underscore.Extensions***
+
 - [Extend](#extend)
 - [Cycle](#cycle)
 

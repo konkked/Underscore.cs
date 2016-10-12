@@ -80,6 +80,7 @@
     <Compile Include="Collection\Contract\ICreation.cs" />
     <Compile Include="Collection\Contract\IDelegation.cs" />
     <Compile Include="Collection\Contract\IFilter.cs" />
+    <Compile Include="Collection\Contract\IMapReduceComponent.cs" />
     <Compile Include="Collection\Contract\IPartition.cs" />
     <Compile Include="Collection\Contract\ISet.cs" />
     <Compile Include="Collection\Contract\Zip\IZip.cs" />
@@ -88,10 +89,12 @@
     <Compile Include="Collection\Implementation\Creation.cs" />
     <Compile Include="Collection\Implementation\Delegation.cs" />
     <Compile Include="Collection\Implementation\Filter.cs" />
+    <Compile Include="Collection\Implementation\MapReduceComponent.cs" />
     <Compile Include="Collection\Implementation\Partition.cs" />
     <Compile Include="Collection\Implementation\Set.cs" />
     <Compile Include="Collection\Implementation\Zip\UnZip.cs" />
     <Compile Include="Collection\Implementation\Zip\Zip.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Function\Contract\Bind\IBind.cs" />
     <Compile Include="Function\Contract\Bind\IPartial.cs" />
     <Compile Include="Function\Contract\Boolean\IAnd.cs" />

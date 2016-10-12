@@ -1,5 +1,7 @@
 # Collection.Partition
 
+***All methods in this section can also be called as extension methods from any IEnumerable using Underscore.Extensions***
+
 - [Chunk](#chunk)
 - [Partition](#partition)
 - [PartitionMatches](#partitionmatches)

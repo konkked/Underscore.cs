@@ -1,5 +1,7 @@
 # Collection.Filter
 
+***All methods in this section can also be called as extension methods from any IEnumerable using Underscore.Extensions***
+
 - [Drop](#drop)
 - [DropWhile](#dropwhile)
 - [Pull](#pull)

@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
-using Underscore.Collection;
+using Underscore.Extensions;
 
 namespace Underscore.Test.Collection
 {
 	[TestFixture]
 	public class SetTest
 	{
-		private SetComponent component;
-
-		[SetUp]
-		public void Initialize()
-		{
-			component = new SetComponent();
-		}
-
 		[Test]
 		public void Collection_Set_Difference()
 		{
@@ -94,5 +86,72 @@ namespace Underscore.Test.Collection
 
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
-	}
+
+        [Test]
+        public void CollectionExtensions_Set_Difference()
+        {
+            var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
+            var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
+            var expected = new[] { 1, 2, 3, 8, 9, 10 };
+
+            var result = a.Difference(b);
+
+            Assert.IsTrue(expected.SequenceEqual(result));
+        }
+
+        [Test]
+        public void CollectionExtensions_Set_DifferenceBy()
+        {
+            var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
+            var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
+
+            Func<int, string> transform = i => i.ToString();
+
+            var expected = new[] { "1", "2", "3", "8", "9", "10" };
+
+            var result = a.DifferenceBy(b, transform);
+
+            Assert.IsTrue(expected.SequenceEqual(result));
+        }
+
+        [Test]
+        public void CollectionExtensions_Set_Intersection()
+        {
+            var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
+            var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
+            var expected = new[] { 4, 5, 6, 7 };
+
+            var result = a.Intersection(b);
+
+            Assert.IsTrue(expected.SequenceEqual(result));
+        }
+
+        [Test]
+        public void CollectionExtensions_Set_IntersectionBy()
+        {
+            var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
+            var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
+            Func<int, string> transform = i => i.ToString();
+
+            var expected = new[] { "4", "5", "6", "7" };
+
+            var result = a.IntersectionBy(b, transform);
+
+            Assert.IsTrue(expected.SequenceEqual(result));
+        }
+
+        [Test]
+        public void CollectionExtensions_Set_UnionBy()
+        {
+            var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
+            var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
+            Func<int, string> transform = i => i.ToString();
+
+            var expected = new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+
+            var result = a.UnionBy(b, transform);
+
+            Assert.IsTrue(expected.SequenceEqual(result));
+        }
+    }
 }

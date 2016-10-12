@@ -1,5 +1,7 @@
 # Collection.Compare
 
+***All methods in this section can also be called as extension methods from any IEnumerable using Underscore.Extensions***
+
 ## Compare
 
 ### bool IsSorted\<T\>(IEnumerable\<T\> collection, bool descending = false) where T : IComparable

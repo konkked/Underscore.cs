@@ -1,11 +1,15 @@
 # List.Partition
 
+***All methods in this section can also be called as extension methods from any IList using Underscore.Extensions***
+
 - [Chunk](#chunk)
 - [Combinations](#combinations)
 - [Partition](#partition)
 - [PartitionMatches](#partitionmatches)
 - [Slice](#slice)
 - [Split](#split)
+
+# Manipulate
 
 ## Chunk
 
