@@ -379,12 +379,12 @@ namespace Underscore.Object.Reflection
 		/// </summary>
 		/// <typeparam name="T">The type to filter the properties being iterated over based on the property's type</typeparam>
 		/// <param name="target">The object whose properties are being iterated over</param>
-		/// <param name="iter">
+		/// <param name="onEach">
 		///     The action to be executed at every step.
 		///     The first parameter being passed is the current property's value, second is the property's name,
 		///     third is an action that allows setting the properties value if the property cannot be set the action is null
 		/// </param>
-		void Each<T>(object target, Action<T> iter);
+		void Each<T>(object target, Action<T> onEach);
 
 		/// <summary>
 		///     Iterates over each of the properties of the target item
@@ -412,12 +412,12 @@ namespace Underscore.Object.Reflection
 		///     Iterates over each of the properties of the target item
 		/// </summary>
 		/// <param name="target">The object whose properties are being iterated over</param>
-		/// <param name="iter">
+		/// <param name="onEach">
 		///     The action to be executed at every step.
 		///     The first parameter being passed is the current property's value, second is the property's name,
 		///     third is an action that allows setting the properties value if the property cannot be set the action is null
 		/// </param>
-		void Each(object target, Action<object, string, Action<object>> iter);
+		void Each(object target, Action<object, string, Action<object>> onEach);
 
 		/// <summary>
 		///     Iterates over each of the properties of the target item, filtering passed on specified type
@@ -497,7 +497,7 @@ namespace Underscore.Object.Reflection
 		///     Iterates over each of the properties of the target item
 		/// </summary>
 		/// <param name="target">The object whose properties are being iterated over</param>
-		/// <param name="iter">
+		/// <param name="onEach">
 		///     The action to be executed at every step.
 		///     The first parameter being passed is the current property's value, second is the property's name,
 		///     third is an action that allows setting the properties value if the property cannot be set the action is null
@@ -506,7 +506,7 @@ namespace Underscore.Object.Reflection
 		///     A bitmask comprised of one or more <see cref="BindingFlags"></see>
 		///     that specify which properties to iterate over
 		/// </param>
-		void Each(object target, Action<object, string, Action<object>> iter, BindingFlags flags);
+		void Each(object target, Action<object, string, Action<object>> onEach, BindingFlags flags);
 
 		/// <summary>
 		///     Iterates over each of the properties of the target item
