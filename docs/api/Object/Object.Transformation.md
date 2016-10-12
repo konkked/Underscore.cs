@@ -54,3 +54,26 @@ foo.I == anonymous.I;
 ## Coalesce
 
 ### TFirst Coalesce<TFirst>(TFirst first, object second[, bool newObject])
+
+Coalesce all properties from `second` onto `first`. If newObject is passed as `true`, a new object is returned. Otherwise, `first` is changed and then returned.
+```cs
+var otherFoo = new Foo();
+var anonymous = new {
+    S = "",
+    I = 0
+};
+
+// coalesce to same type with newObject = true
+var result = _.Object.Coalesce(otherFoo, foo, true); // otherFoo is still empty
+result == {S = "foobar", I = 1}
+
+// coalesce to same type without newObject being passed
+result = _.Object.Coalesce(otherFoo, foo);
+result == {S = "foobar", I = 1}
+otherFoo == {S = "foobar", I = 1}
+
+// coalesce from anonymous object
+result = _.Object.Coalesce(otherFoo, anonymous);
+result == {S = "", I = 0};
+otherFoo == {S = "", I = 0};
+```
