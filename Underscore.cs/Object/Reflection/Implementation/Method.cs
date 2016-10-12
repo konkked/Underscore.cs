@@ -28,7 +28,7 @@ namespace Underscore.Object.Reflection
 		{
 			_property = property;
 
-			//Initializes special rules for the query method
+			// Initializes special rules for the query method
 			_specialRules = new HashSet<string> { "return" };
 		}
 
@@ -129,8 +129,6 @@ namespace Underscore.Object.Reflection
 			return All(target).FirstOrDefault(a => a.Name.ToLowerInvariant() == lname);
 		}
 
-
-
 		/// <summary>
 		/// Returns first method info of the specfied target that has the specified name
 		/// </summary>
@@ -141,7 +139,6 @@ namespace Underscore.Object.Reflection
 		{
 			return Find(target, name, true);
 		}
-
 
 		/// <summary>
 		/// Returns first method info of the specfied target that has the specified name
@@ -158,7 +155,6 @@ namespace Underscore.Object.Reflection
 			return CaseInsensitiveGetMethod(target, name);
 		}
 
-
 		/// <summary>
 		/// Returns first method info of the specfied target that matches query request pattern and matches specified name.
 		/// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
@@ -171,14 +167,12 @@ namespace Underscore.Object.Reflection
 		/// <returns><see cref="MethodInfo"></see> of the matching method or null if no method is found</returns>
 		public MethodInfo Find(object target, string name, object query)
 		{
-
 			if (query == null)
 				query = new { };
 
 			return Query(target, query)
 				.FirstOrDefault(a => a.Name == name);
 		}
-
 
 		/// <summary>
 		/// Returns true if the specfied target has a method with the specified name.
@@ -189,8 +183,6 @@ namespace Underscore.Object.Reflection
 		{
 			return Find(target, name, true) != null;
 		}
-
-
 
 		/// <summary>
 		/// Returns true if the specfied target has a method that matches query request pattern and has the specified name.
@@ -206,7 +198,6 @@ namespace Underscore.Object.Reflection
 			return Find(target, name, query) != null;
 		}
 
-
 		/// <summary>
 		/// Returns true if the specfied target has a method that matches query request pattern.
 		/// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
@@ -219,8 +210,7 @@ namespace Underscore.Object.Reflection
 		{
 			return Find(target, query) != null;
 		}
-
-
+        
 		/// <summary>
 		/// Returns true if the specfied target has a method with the specified name.
 		/// </summary>
@@ -230,8 +220,7 @@ namespace Underscore.Object.Reflection
 		{
 			return Find(target, name) != null;
 		}
-
-
+        
 		/// <summary>
 		/// Returns true if the specfied target has a method that matches query request pattern and has the specified name.
 		/// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
@@ -249,8 +238,7 @@ namespace Underscore.Object.Reflection
 		{
 			return Find(target, name, query, flags) != null;
 		}
-
-
+        
 		/// <summary>
 		/// Returns true if the specfied target has a method that matches query request pattern.
 		/// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
@@ -267,8 +255,7 @@ namespace Underscore.Object.Reflection
 		{
 			return Find(target, query, flags) != null;
 		}
-
-
+        
 		/// <summary>
 		/// Returns true if the specfied target has a method that matches the specified name.
 		/// </summary>
@@ -282,8 +269,7 @@ namespace Underscore.Object.Reflection
 		{
 			return Find(target, name, flags) != null;
 		}
-
-
+        
 		/// <summary>
 		/// Returns true if the specfied target has a method that matches query request pattern and has the specified name.
 		/// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
@@ -350,8 +336,7 @@ namespace Underscore.Object.Reflection
 		{
 			return base.Query(target, query);
 		}
-
-
+        
 		/// <summary>
 		/// Returns all methods of the specified target that match the specified query pattern object and name.
 		/// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
@@ -367,8 +352,7 @@ namespace Underscore.Object.Reflection
 		{
 			return Query(target.GetType(), query, name);
 		}
-
-
+        
 		/// <summary>
 		/// Returns all methods of the specified target that match the specified query pattern object and name.
 		/// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
@@ -387,8 +371,7 @@ namespace Underscore.Object.Reflection
 				? base.Query(target, query).Where(a => a.Name == name)
 				: base.Query(target, query).Where(a => a.Name.ToLower() == lcname);
 		}
-
-
+        
 		/// <summary>
 		/// Returns all methods of the specified target that match the specified query pattern object and name.
 		/// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
@@ -408,8 +391,7 @@ namespace Underscore.Object.Reflection
 		{
 			return Query(target.GetType(), query, name, caseSensitive, flags);
 		}
-
-
+        
 		/// <summary>
 		/// Returns all methods of the specified target that match the specified query pattern object and name.
 		/// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
@@ -432,8 +414,7 @@ namespace Underscore.Object.Reflection
 				? base.Query(target, query, flags).Where(a => a.Name == name)
 				: base.Query(target, query, flags).Where(a => a.Name.ToLower() == lcname);
 		}
-
-
+        
 		/// <summary>
 		/// Returns all methods of the specified target that match the specified query pattern object and name.
 		/// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
@@ -448,8 +429,7 @@ namespace Underscore.Object.Reflection
 		{
 			return Query(target.GetType(), query, name);
 		}
-
-
+        
 		/// <summary>
 		/// Returns all methods of the specified target that match the specified query pattern object and name.
 		/// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
@@ -464,8 +444,7 @@ namespace Underscore.Object.Reflection
 		{
 			return base.Query(target, query).Where(a => a.Name == name);
 		}
-
-
+        
 		/// <summary>
 		/// Returns all methods of the specified target that match the specified query pattern object and name.
 		/// Pattern is in this form {argname = typeof(ArgumentType),...} or [ "argname" ]  or [ typeof(ArgumentType) ]
@@ -504,19 +483,18 @@ namespace Underscore.Object.Reflection
 			return base.Query(target, query, flags).Where(a => a.Name == name);
 		}
 
-
-		/// <summary>
-		/// Invokes a method of specified name and returns the results of the invocation
-		/// </summary>
-		/// <param name="target">The object whose method is being invoked</param>
-		/// <param name="name">The name of the method being invoked</param>
-		/// <param name="flags">
-		///     A bitmask comprised of one or more <see cref="BindingFlags"></see>
-		///     that specify which methods to invoke
-		/// </param>
-		/// <returns>The result of the invocations</returns>
-		public object Invoke(object target, string name, BindingFlags flags)
-		{
+        /// <summary>
+        /// Invokes a method of specified name and returns the results of the invocation
+        /// </summary>
+        /// <param name="target">The object whose method is being invoked</param>
+        /// <param name="name">The name of the method being invoked</param>
+        /// <param name="flags">
+        ///     A bitmask comprised of one or more <see cref="BindingFlags"></see>
+        ///     that specify which methods to invoke
+        /// </param>
+        /// <returns>The result of the invocations</returns>
+        public object Invoke(object target, string name, BindingFlags flags)
+        {
 			var method = Find(target, name, new { }, flags);
 
 			if (method != null)
@@ -524,8 +502,7 @@ namespace Underscore.Object.Reflection
 
 			return null;
 		}
-
-
+        
 		/// <summary>
 		/// Invokes a method of specified name and returns the results of the invocation
 		/// </summary>
@@ -541,8 +518,7 @@ namespace Underscore.Object.Reflection
 
 			return null;
 		}
-
-
+        
 		/// <summary>
 		/// Invokes a method of specified name and returns the results of the invocation
 		/// </summary>
@@ -563,8 +539,7 @@ namespace Underscore.Object.Reflection
 
 			return default(T);
 		}
-
-
+        
 		/// <summary>
 		/// Invokes a method of specified name and returns the results of the invocation
 		/// </summary>
@@ -581,7 +556,6 @@ namespace Underscore.Object.Reflection
 
 			return default(T);
 		}
-
 
 		/// <summary>
 		/// Invokes a method of specified name and returns the results of the invocation
@@ -604,8 +578,7 @@ namespace Underscore.Object.Reflection
 
 			return null;
 		}
-
-
+        
 		/// <summary>
 		/// Invokes a method of specified name and returns the results of the invocation
 		/// </summary>
@@ -757,8 +730,7 @@ namespace Underscore.Object.Reflection
 
 			return greedy ? returning.ToList() : returning;
 		}
-
-
+        
 		/// <summary>
 		/// Invokes a method of specified name once for each passed array of arguments and returns the results of the invocation
 		/// </summary>
