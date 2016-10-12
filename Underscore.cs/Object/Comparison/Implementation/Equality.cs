@@ -17,7 +17,7 @@ namespace Underscore.Object.Comparison
 			_property = property;
 		}
 
-		public bool AreEquatable(object a, object b)
+		public bool AreEquivalent(object a, object b)
 		{
 			return AreEquatableTypeInsensitive(a, b);
 		}
@@ -80,7 +80,7 @@ namespace Underscore.Object.Comparison
 
 		}
 
-		public bool AreEquatable(object a, object b, bool typeSensitive)
+		public bool AreEquivalent(object a, object b, bool typeSensitive)
 		{
 			if (typeSensitive)
 			{
@@ -91,7 +91,7 @@ namespace Underscore.Object.Comparison
 			return AreEquatableTypeInsensitive(a, b);
 		}
 
-		public bool AreEquatable<T>(T a, T b)
+		public bool AreEquivalent<T>(T a, T b)
 		{
 			// here we know the first types match, but we don't know if the 
 			// caller wants to have this effect cascade all the way down the comparisions
