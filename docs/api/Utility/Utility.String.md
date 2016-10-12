@@ -1,5 +1,7 @@
 # Utility.String
 
+***All functions in this submodule can also be called as extension methods using Underscore.Extensions***
+
 - [ToCamelCase](#tocamelcase)
 - [IsCamelCase](#iscamelcase)
 - [ToPascalCase](#topascalcase)

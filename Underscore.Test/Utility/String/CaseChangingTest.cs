@@ -1,19 +1,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Underscore.Utility;
+using Underscore.Extensions;
 
 namespace Underscore.Test.Utility.String
 {
 	[TestClass]
 	public class CaseChangingTest
 	{
-		private StringComponent component;
-
-		[TestInitialize]
-		public void Initialize()
-		{
-			component = new StringComponent();
-		}
-
 		[TestMethod]
 		public void Capitalize_UncapitalizedString()
 		{
@@ -255,5 +247,247 @@ namespace Underscore.Test.Utility.String
 
 			Assert.AreEqual(expected, result);
 		}
-	}
+
+        [TestMethod]
+        public void UtilityExtensions_String_Capitalize_UncapitalizedString()
+        {
+            const string input = "hello, world!";
+            const string expected = "Hello, world!";
+
+            var result = input.Capitalize();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_Capitalize_CapitalizedString()
+        {
+            const string input = "Hello, world!";
+            const string expected = "Hello, world!";
+
+            var result = input.Capitalize();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToCamelCase_FromSnakeCase()
+        {
+            const string input = "camel_case";
+            const string expected = "camelCase";
+
+            var result = input.ToCamelCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToCamelCase_FromKebabCase()
+        {
+            const string input = "camel-case";
+            const string expected = "camelCase";
+
+            var result = input.ToCamelCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToCamelCase_FromCamelCase()
+        {
+            const string input = "camelCase";
+            const string expected = "camelCase";
+
+            var result = input.ToCamelCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToCamelCase_FromPascalCase()
+        {
+            const string input = "CamelCase";
+            const string expected = "camelCase";
+
+            var result = input.ToCamelCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToCamelCase_FromOther()
+        {
+            const string input = "Camel,Case-This.Is Not";
+            const string expected = "camelCaseThisIsNot";
+
+            var result = input.ToCamelCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToPascalCase_FromSnakeCase()
+        {
+            const string input = "pascal_case";
+            const string expected = "PascalCase";
+
+            var result = input.ToPascalCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToPascalCase_FromKebabCase()
+        {
+            const string input = "pascal-case";
+            const string expected = "PascalCase";
+
+            var result = input.ToPascalCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToPascalCase_FromCamelCase()
+        {
+            const string input = "camelCase";
+            const string expected = "CamelCase";
+
+            var result = input.ToPascalCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToPascalCase_FromPascalCase()
+        {
+            const string input = "PascalCase";
+            const string expected = "PascalCase";
+
+            var result = input.ToPascalCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToPascalCase_FromOther()
+        {
+            const string input = "Pascal,Case-This.Is Not";
+            const string expected = "PascalCaseThisIsNot";
+
+            var result = input.ToPascalCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToSnakeCase_FromSnakeCase()
+        {
+            const string input = "snake_case";
+            const string expected = "snake_case";
+
+            var result = input.ToSnakeCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToSnakeCase_FromKebabCase()
+        {
+            const string input = "snake-case";
+            const string expected = "snake_case";
+
+            var result = input.ToSnakeCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToSnakeCase_FromCamelCase()
+        {
+            const string input = "snakeCase";
+            const string expected = "snake_case";
+
+            var result = input.ToSnakeCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToSnakeCase_FromPascalCase()
+        {
+            const string input = "SnakeCase";
+            const string expected = "snake_case";
+
+            var result = input.ToSnakeCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToSnakeCase_FromOther()
+        {
+            const string input = "Snake,Case-This.Is Not";
+            const string expected = "snake_case_this_is_not";
+
+            var result = input.ToSnakeCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToKebabCase_FromSnakeCase()
+        {
+            const string input = "kebab_case";
+            const string expected = "kebab-case";
+
+            var result = input.ToKebabCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToKebabCase_FromKebabCase()
+        {
+            const string input = "kebab-case";
+            const string expected = "kebab-case";
+
+            var result = input.ToKebabCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToKebabCase_FromCamelCase()
+        {
+            const string input = "kebabCase";
+            const string expected = "kebab-case";
+
+            var result = input.ToKebabCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToKebabCase_FromPascalCase()
+        {
+            const string input = "KebabCase";
+            const string expected = "kebab-case";
+
+            var result = input.ToKebabCase();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void UtilityExtensions_String_ToKebabCase_FromOther()
+        {
+            const string input = "Kebab,Case-This.Is Not";
+            const string expected = "kebab-case-this-is-not";
+
+            var result = input.ToKebabCase();
+
+            Assert.AreEqual(expected, result);
+        }
+    }
 }

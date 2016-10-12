@@ -43,6 +43,8 @@ namespace Underscore.Extensions
             )
         );
 
+        private static readonly StringComponent _string = new StringComponent();
+
         #region Compare
         /// <summary>
         /// checks if a collection is sorted
@@ -634,6 +636,99 @@ namespace Underscore.Extensions
             return _list.Combinations(list);
         }
         #endregion
+        #endregion
+
+        #region String
+        /// <summary>
+		/// Converts the given string to camelCase
+		/// </summary>
+		public static string ToCamelCase(this string s)
+        {
+            return _string.ToCamelCase(s);
+        }
+
+        /// <summary>
+        /// Checks if the given string is camelCase
+        /// </summary>
+        public static bool IsCamelCase(this string s)
+        {
+            return _string.IsCamelCase(s);
+        }
+
+        /// <summary>
+        /// Converts the given string to PascalCase
+        /// </summary>
+        public static string ToPascalCase(this string s)
+        {
+            return _string.ToPascalCase(s);
+        }
+
+        /// <summary>
+        /// Checks if a string is PascalCase
+        /// </summary>
+        public static bool IsPascalCase(this string s)
+        {
+            return _string.IsPascalCase(s);
+        }
+
+        /// <summary>
+        /// Capitalizes the first character of a string
+        /// </summary>
+        public static string Capitalize(this string s)
+        {
+            return _string.Capitalize(s);
+        }
+
+        /// <summary>
+        /// Checks if the first character of a string is capitalized
+        /// </summary>
+        public static bool IsCapitalized(this string s)
+        {
+            return _string.IsCapitalized(s);
+        }
+
+        /// <summary>
+        /// Converts a string to snake_case
+        /// </summary>
+        public static string ToSnakeCase(this string s)
+        {
+            return _string.ToSnakeCase(s);
+        }
+
+        /// <summary>
+        /// Checks if a string is snake_case
+        /// </summary>
+        public static bool IsSnakeCase(this string s)
+        {
+            return _string.IsSnakeCase(s);
+        }
+
+        /// <summary>
+        /// Converts a string to kebab-case
+        /// </summary>
+        public static string ToKebabCase(this string s)
+        {
+            return _string.ToKebabCase(s);
+        }
+
+        /// <summary>
+        /// Checks if a string is kebab-case
+        /// </summary>
+        public static bool IsKebabCase(this string s)
+        {
+            return _string.IsKebabCase(s);
+        }
+
+        /// <summary>
+        /// Converts a string into an enumerable of words,
+        /// delimited via spaces. "words" that don't contain letters
+        /// are removed, and non-letter characters are removed from
+        /// each word
+        /// </summary>
+        public static IEnumerable<string> Words(this string s)
+        {
+            return _string.Words(s);
+        }
         #endregion
     }
 }
