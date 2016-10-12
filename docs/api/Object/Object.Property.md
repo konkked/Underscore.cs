@@ -1,5 +1,5 @@
 # Object.Property
-***All Methods called from _.Object.Method property***
+***All Methods called from _.Object.Property property***
 
 ***All Methods which take a Type target can also take an object as target***
 
