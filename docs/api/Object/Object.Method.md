@@ -12,6 +12,10 @@
 ## All
 
 ### IEnumerable\<MethodInfo> All(Type target[, BindingFlags flags])
+Gets the [MethodInfo](https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo.aspx) of all methods on `target`.
+```cs
+
+```
 
 ## Find
 

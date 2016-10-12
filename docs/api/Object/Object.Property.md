@@ -33,6 +33,10 @@ var foo = new Foo
 ## All
 
 ### IEnumerable\<PropertyInfo> All(Type target)
+Get the [PropertyInfo](https://msdn.microsoft.com/en-us/library/system.reflection.propertyinfo.aspx) of all properties on `target`.
+```cs
+_.Object.Property.All(typeof(Foo)); // [{public string S}, {public int I}, {public int J}]
+```
 
 ## Each
 Performs the given action on each property of `target`.
