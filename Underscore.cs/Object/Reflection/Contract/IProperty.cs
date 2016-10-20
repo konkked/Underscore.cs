@@ -12,13 +12,11 @@ namespace Underscore.Object.Reflection
 		/// <param name="target">The object whose properties are being searched</param>
 		IEnumerable<PropertyInfo> All(object target);
 
-
 		/// <summary>
 		///     Searches for the properties of <paramref name="type"></paramref>, using binding constraints provided
 		/// </summary>
 		/// <param name="type">The Type whose properties are being searched</param>
 		IEnumerable<PropertyInfo> All(Type type);
-
 
 		/// <summary>
 		///     Searches for the properties of <paramref name="target"></paramref>'s <see cref="Type"></see>, using binding
@@ -40,7 +38,6 @@ namespace Underscore.Object.Reflection
 		/// </param>
 		IEnumerable<PropertyInfo> All(Type type, BindingFlags flags);
 
-
 		/// <summary>
 		///     Returns a property info from specfied object who matches the specified search criteria
 		/// </summary>
@@ -49,7 +46,6 @@ namespace Underscore.Object.Reflection
 		/// <returns></returns>
 		PropertyInfo Find(object target, string name);
 
-
 		/// <summary>
 		///     Returns a property info from specfied object who matches the specified search criteria
 		/// </summary>
@@ -57,7 +53,6 @@ namespace Underscore.Object.Reflection
 		/// <param name="name">The name that the serarch is using to find the property</param>
 		/// <param name="caseSensitive">Indicates if the match should be successful only if name casing matches</param>
 		PropertyInfo Find(object target, string name, bool caseSensitive);
-
 
 		/// <summary>
 		///     Returns a property info from specfied object who matches the specified search criteria
@@ -84,7 +79,6 @@ namespace Underscore.Object.Reflection
 		/// <returns></returns>
 		PropertyInfo Find(object target, string name, bool caseSensitive, BindingFlags flags);
 
-
 		/// <summary>
 		///     Returns a property info from specfied object who matches the specified search criteria
 		/// </summary>
@@ -102,7 +96,6 @@ namespace Underscore.Object.Reflection
 		/// <returns></returns>
 		PropertyInfo Find(Type target, string name, bool caseSensitive);
 
-
 		/// <summary>
 		///     Returns a property info from specfied object who matches the specified search criteria
 		/// </summary>
@@ -114,7 +107,6 @@ namespace Underscore.Object.Reflection
 		/// </param>
 		/// <returns></returns>
 		PropertyInfo Find(Type target, string name, BindingFlags flags);
-
 
 		/// <summary>
 		///     Returns a property info from specfied object who matches the specified search criteria
@@ -128,7 +120,6 @@ namespace Underscore.Object.Reflection
 		/// </param>
 		/// <returns></returns>
 		PropertyInfo Find(Type target, string name, bool caseSensitive, BindingFlags flags);
-
 
 		/// <summary>
 		///     Returns the value of the property of specified name from the specified object
@@ -147,7 +138,6 @@ namespace Underscore.Object.Reflection
 		/// <returns>The property value of the specified object</returns>
 		object GetValue(object target, string name, bool caseSensitive);
 
-
 		/// <summary>
 		///     Returns the value of the property of specified name from the specified object
 		/// </summary>
@@ -159,7 +149,6 @@ namespace Underscore.Object.Reflection
 		/// </param>
 		/// <returns>The property value of the specified object</returns>
 		object GetValue(object target, string name, BindingFlags flags);
-
 
 		/// <summary>
 		///     Returns the value of the property of specified name from the specified object
@@ -173,7 +162,6 @@ namespace Underscore.Object.Reflection
 		/// </param>
 		/// <returns>The property value of the specified object</returns>
 		object GetValue(object target, string name, bool caseSensitive, BindingFlags flags);
-
 
 		/// <summary>
 		///     Returns the value of the property of specified name from the specified object
@@ -219,14 +207,12 @@ namespace Underscore.Object.Reflection
 		/// <returns>The property value of the specified object</returns>
 		T GetValue<T>(object target, string name, bool caseSensitive, BindingFlags flags);
 
-
 		/// <summary>
 		///     Determines if an object has a property
 		/// </summary>
 		/// <param name="target">the object whose properties are being searched</param>
 		/// <param name="name">The name of the property being searched for</param>
 		bool Has(object target, string name);
-
 
 		/// <summary>
 		///     Determines if an object has a property
@@ -235,7 +221,6 @@ namespace Underscore.Object.Reflection
 		/// <param name="name">The name of the property being searched for</param>
 		/// <param name="caseSensitive">Indicates if match should only happen if cases match perfectly</param>
 		bool Has(object target, string name, bool caseSensitive);
-
 
 		/// <summary>
 		///     Determines if an object has a property
@@ -260,14 +245,12 @@ namespace Underscore.Object.Reflection
 		/// <param name="caseSensitive">Indicates if match should only happen if cases match perfectly</param>
 		bool Has(object target, string name, bool caseSensitive, BindingFlags flags);
 
-
 		/// <summary>
 		///     Determines if a type has a property
 		/// </summary>
 		/// <param name="target">The Type to do the search on</param>
 		/// <param name="name">The name of the property being searched for</param>
 		bool Has(Type target, string name);
-
 
 		/// <summary>
 		///     Determines if a type has a property
@@ -276,7 +259,6 @@ namespace Underscore.Object.Reflection
 		/// <param name="name">The name of the property being searched for</param>
 		/// <param name="caseSensitive">Indicates if match should only happen if cases match perfectly</param>
 		bool Has(Type target, string name, bool caseSensitive);
-
 
 		/// <summary>
 		///     Determines if a type has a property
@@ -301,7 +283,6 @@ namespace Underscore.Object.Reflection
 		/// <param name="caseSensitive">Indicates if match should only happen if cases match perfectly</param>
 		bool Has(Type target, string name, bool caseSensitive, BindingFlags flags);
 
-
 		/// <summary>
 		///     Sets the value of property in the specified target
 		/// </summary>
@@ -309,7 +290,6 @@ namespace Underscore.Object.Reflection
 		/// <param name="name">The name of the property who's value is going to change</param>
 		/// <param name="value">Value that is going to be assigned to the property</param>
 		void SetValue(object target, string name, object value);
-
 
 		/// <summary>
 		///     Sets the value of property in the specified target
@@ -319,7 +299,6 @@ namespace Underscore.Object.Reflection
 		/// <param name="value">Value that is going to be assigned to the property</param>
 		/// <param name="caseSensitive">Determines if the name match is case sensitive</param>
 		void SetValue(object target, string name, object value, bool caseSensitive);
-
 
 		/// <summary>
 		///     Sets the value of property in the specified target
@@ -333,7 +312,6 @@ namespace Underscore.Object.Reflection
 		/// </param>
 		void SetValue(object target, string name, object value, BindingFlags flags);
 
-
 		/// <summary>
 		///     Sets the value of property in the specified target
 		/// </summary>
@@ -346,7 +324,6 @@ namespace Underscore.Object.Reflection
 		///     that specify how the property match is to be conducted.
 		/// </param>
 		void SetValue(object target, string name, object value, bool caseSensitive, BindingFlags flags);
-
 
 		/// <summary>
 		///     Sets the value of property in the specified target
@@ -364,7 +341,6 @@ namespace Underscore.Object.Reflection
 		/// <param name="value">Value that is going to be assigned to the property</param>
 		/// <param name="caseSensitive">Determines if the name match is case sensitive</param>
 		void SetValue<T>(object target, string name, T value, bool caseSensitive);
-
 
 		/// <summary>
 		///     Sets the value of property in the specified target
@@ -391,7 +367,6 @@ namespace Underscore.Object.Reflection
 		/// </param>
 		void SetValue<T>(object target, string name, T value, bool caseSensitive, BindingFlags flags);
 
-
 		/// <summary>
 		///     Iterates over each of the properties of the target item
 		/// </summary>
@@ -399,18 +374,17 @@ namespace Underscore.Object.Reflection
 		/// <param name="iter">The action to be executed at every step, parameter being passed is the current property's value</param>
 		void Each(object target, Action<object> iter);
 
-
 		/// <summary>
 		///     Iterates over each of the properties of the target item, filtering passed on specified type
 		/// </summary>
 		/// <typeparam name="T">The type to filter the properties being iterated over based on the property's type</typeparam>
 		/// <param name="target">The object whose properties are being iterated over</param>
-		/// <param name="iter">
+		/// <param name="onEach">
 		///     The action to be executed at every step.
 		///     The first parameter being passed is the current property's value, second is the property's name,
 		///     third is an action that allows setting the properties value if the property cannot be set the action is null
 		/// </param>
-		void Each<T>(object target, Action<T> iter);
+		void Each<T>(object target, Action<T> onEach);
 
 		/// <summary>
 		///     Iterates over each of the properties of the target item
@@ -421,7 +395,6 @@ namespace Underscore.Object.Reflection
 		///     second is the property's name
 		/// </param>
 		void Each(object target, Action<object, string> iter);
-
 
 		/// <summary>
 		///     Iterates over each of the properties of the target item, filtering passed on specified type
@@ -439,13 +412,12 @@ namespace Underscore.Object.Reflection
 		///     Iterates over each of the properties of the target item
 		/// </summary>
 		/// <param name="target">The object whose properties are being iterated over</param>
-		/// <param name="iter">
+		/// <param name="onEach">
 		///     The action to be executed at every step.
 		///     The first parameter being passed is the current property's value, second is the property's name,
 		///     third is an action that allows setting the properties value if the property cannot be set the action is null
 		/// </param>
-		void Each(object target, Action<object, string, Action<object>> iter);
-
+		void Each(object target, Action<object, string, Action<object>> onEach);
 
 		/// <summary>
 		///     Iterates over each of the properties of the target item, filtering passed on specified type
@@ -505,7 +477,6 @@ namespace Underscore.Object.Reflection
 		/// </param>
 		void Each(object target, Action<object, string> iter, BindingFlags flags);
 
-
 		/// <summary>
 		///     Iterates over each of the properties of the target item
 		/// </summary>
@@ -526,7 +497,7 @@ namespace Underscore.Object.Reflection
 		///     Iterates over each of the properties of the target item
 		/// </summary>
 		/// <param name="target">The object whose properties are being iterated over</param>
-		/// <param name="iter">
+		/// <param name="onEach">
 		///     The action to be executed at every step.
 		///     The first parameter being passed is the current property's value, second is the property's name,
 		///     third is an action that allows setting the properties value if the property cannot be set the action is null
@@ -535,7 +506,7 @@ namespace Underscore.Object.Reflection
 		///     A bitmask comprised of one or more <see cref="BindingFlags"></see>
 		///     that specify which properties to iterate over
 		/// </param>
-		void Each(object target, Action<object, string, Action<object>> iter, BindingFlags flags);
+		void Each(object target, Action<object, string, Action<object>> onEach, BindingFlags flags);
 
 		/// <summary>
 		///     Iterates over each of the properties of the target item
@@ -593,14 +564,23 @@ namespace Underscore.Object.Reflection
 		/// </param>
 		IEnumerable<PropertyInfo> OfType(Type target, Type propertyTypeTarget, BindingFlags flags);
 
+	    /// <summary>
+	    ///     Gets all of the properties of the specified type
+	    /// </summary>
+	    /// <param name="target">The Type whose properties are being searched</param>
+	    /// <param name="flags">
+	    ///     A bitmask comprised of one or more <see cref="BindingFlags"></see>
+	    ///     that specify which properties should be returned
+	    /// </param>
+	    IEnumerable<PropertyInfo> OfType<T>(Type target,
+	        BindingFlags flags = BindingFlags.Public | BindingFlags.Instance);
 
-		/// <summary>
-		///     Gets all of the values for publicly accessible properties of specified object
-		/// </summary>
-		/// <param name="target">The object whose properties values are being returned</param>
-		/// <returns>Enumerable containing all of the properties values form passed object</returns>
-		IEnumerable<object> Values(object target);
-
+        /// <summary>
+        ///     Gets all of the values for publicly accessible properties of specified object
+        /// </summary>
+        /// <param name="target">The object whose properties values are being returned</param>
+        /// <returns>Enumerable containing all of the properties values form passed object</returns>
+        IEnumerable<object> Values(object target);
 
 		/// <summary>
 		///     Gets all of the values for publicly accessible properties of specified object
@@ -613,7 +593,6 @@ namespace Underscore.Object.Reflection
 		/// </param>
 		IEnumerable<object> Values(object target, BindingFlags flags);
 
-
 		/// <summary>
 		///     Get all of the values from properties of specified object
 		/// </summary>
@@ -621,7 +600,6 @@ namespace Underscore.Object.Reflection
 		/// <param name="target">The object whose properties' values are being returned</param>
 		/// <returns>The values from the properties of specfied object of specified type</returns>
 		IEnumerable<TPropertyValue> Values<TPropertyValue>(object target);
-
 
 		/// <summary>
 		///     Get all of the values from properties of specified object
@@ -635,7 +613,6 @@ namespace Underscore.Object.Reflection
 		/// <returns>The values from the properties of specfied object of specified type</returns>
 		IEnumerable<TPropertyValue> Values<TPropertyValue>(object target, BindingFlags flags);
 
-
 		/// <summary>
 		///     Gets all of the public instance properties of specified object returning them as MemberPair objects, with
 		///     properties Name and Value
@@ -644,7 +621,6 @@ namespace Underscore.Object.Reflection
 		/// <returns></returns>
 		IEnumerable<MemberPair<object>> Pairs(object target);
 
-
 		/// <summary>
 		///     Gets all of the public instance properties of specified object returning them as MemberPair objects, with
 		///     properties Name and Value
@@ -652,7 +628,6 @@ namespace Underscore.Object.Reflection
 		/// <param name="target">The object whose properties are being targetted</param>
 		/// <returns></returns>
 		IEnumerable<MemberPair<object>> Pairs(object target, BindingFlags flags);
-
 
 		/// <summary>
 		///     Gets all of the public instance properties of specified object returning them as MemberPair objects, with

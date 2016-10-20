@@ -185,19 +185,19 @@ namespace Underscore.Module
 			return constructor.Invoke(constructorParameter);
 		}
 
-		public bool AreEquatable(object a, object b)
+		public bool AreEquivalent(object a, object b)
 		{
-			return _equality.AreEquatable(a, b);
+			return _equality.AreEquivalent(a, b);
 		}
 
-		public bool AreEquatable(object a, object b, bool typeSensitive)
+		public bool AreEquivalent(object a, object b, bool typeSensitive)
 		{
-			return _equality.AreEquatable(a, b, typeSensitive);
+			return _equality.AreEquivalent(a, b, typeSensitive);
 		}
 
-		public bool AreEquatable<T>(T a, T b)
+		public bool AreEquivalent<T>(T a, T b)
 		{
-			return _equality.AreEquatable(a, b);
+			return _equality.AreEquivalent(a, b);
 		}
 	}
 }

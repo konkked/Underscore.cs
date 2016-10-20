@@ -31,14 +31,17 @@ namespace Underscore.Object.Reflection
 
 		private static IEnumerable<T> Query(MethodsBaseComponent<T> me, Type target, object query, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
 		{
-			var currMethods = me.All(target,flags).Select(a => new { Method = a, Params = a.GetParameters().ToList() });
+            // get method/params for the type so we can check them against the query
+			var currMethods = me.All(target, flags).Select(method => new { Method = method, Params = method.GetParameters().ToList() });
 
+            // null query accepts everything
 			if (query == null)
 				return me.All(target);
 
 			if (query is object[])
 			{
 				var argsArr = (object[])query;
+                // don't bother checking methods that don't have the right arg count
 				currMethods = currMethods.Where(a => a.Params.Count == argsArr.Length);
 
 				for (int i = 0; i < argsArr.Length; i++)
@@ -46,36 +49,47 @@ namespace Underscore.Object.Reflection
 					var instance = argsArr[i];
 					var index = i;
 
+                    // don't filter against null
 					if (instance == null) continue;
 
 					if (instance is string)
 					{
-						var matchName = (string)instance;
-						currMethods = currMethods.Where(a => a.Params[index].Name == matchName);
+                        // if it's a string, filter against the name of the argument at this index
+						var matchName = (string) instance;
+
+						currMethods = currMethods.Where(method => method.Params[index].Name == matchName);
 					}
 					else if (instance is Type)
 					{
-						var matchType = (Type)instance;
+                        // if it's a type, filter against the type of the argument at this index
+					    var matchType = (Type) instance;
 
-						currMethods = currMethods.Where(a => matchType.IsAssignableFrom(a.Params[index].ParameterType)
-							&& a.Params[index].ParameterType.IsAssignableFrom(matchType)
-						);
+					    currMethods = currMethods.Where(method => matchType.IsAssignableFrom(method.Params[index].ParameterType)
+					                                         && method.Params[index].ParameterType.IsAssignableFrom(matchType));
 					}
+                    
+                    // if it's neither, do nothing -- treat as a wildcard
 				}
 			}
 			else if (query is string)
 			{
+                // if the query is a single string, 
+                // filter for single param methods whose only param's name matches the string
 				var argName = (string)query;
 				currMethods = currMethods.Where(a => a.Params.Count == 1 && a.Params[0].Name == argName);
 			}
-
 			else if (query is Type)
 			{
-				var argType = (Type)query;
+                // if the query is a single string, 
+                // filter for single param methods whose only param's name matches the string
+                var argType = (Type)query;
 				currMethods = currMethods.Where(a => a.Params.Count == 1 && a.Params[0].ParameterType == argType);
 			}
 			else
 			{
+                // if the query is an anonymous object, filter based on name/type pairs
+
+                // get the values of all the properties
 				var properties = me._properties.All(query).Select(a => new
 				{
 					Value = a.GetGetMethod().Invoke(query, null), a.Name
@@ -97,27 +111,31 @@ namespace Underscore.Object.Reflection
 
 						var argName = prop.Name;
 
+                        // check for any special cases
 						if (me.IsSpecialCase(argName))
 						{
+                            // filter out special cases
 							currMethods = me
 								.FilterSpecialCase(argName, prop.Value, currMethods.Select(a => a.Method))
 								.Select(a => new { Method = a, Params = a.GetParameters().ToList() });
 						}
 						else
 						{
-
+                            // user didn't pass in a type for a value
 							if (!(prop.Value is Type))
 								throw new ArgumentException("for anonymous object query pattern is { [paramname] = [paramtype] }");
 
 							var argType = (Type)prop.Value;
 
-							currMethods = currMethods.Where(a =>
-								a.Params.FirstOrDefault(b => b.Name == argName && b.ParameterType == argType) != null);
+                            // filter out any methods that don't have a matching parameter
+							currMethods = currMethods.Where(method =>
+								method.Params.FirstOrDefault(arg => arg.Name == argName && arg.ParameterType == argType) != null);
 						}
 					}
 				}
 			}
 
+            // return the methods if there are any, or an empty array if there aren't
 			return !currMethods.Any() ? (new T[] { }) : currMethods.Select(a => a.Method);
 		}
 

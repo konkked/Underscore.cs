@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Underscore.Object.Reflection
 {
@@ -19,17 +16,17 @@ namespace Underscore.Object.Reflection
 	public interface IConstructorComponent
 	{
 		/// <summary>
-		/// Retunrns true if the passed object's type has a public instance parameterless constructor
+		/// Returns true if the passed object's type has a public instance parameterless constructor
 		/// </summary>
 		/// <param name="target">The object whose constructors are going to be searched</param>
 		bool HasParameterless(object target);
 
-	    /// <summary>
-	    /// Retunrns true if the passed object's type has a parameterless constructor
-	    /// </summary>
-	    /// <param name="target">The object whose constructors are going to be searched</param>
-	    /// <param name="flags">flags of the parameterless constructor </param>
-	    bool HasParameterless(object target, BindingFlags flags);
+		/// <summary>
+		/// Retunrns true if the passed object's type has a parameterless constructor
+		/// </summary>
+		/// <param name="target">The object whose constructors are going to be searched</param>
+		/// <param name="flags">flags of the parameterless constructor </param>
+		bool HasParameterless(object target, BindingFlags flags);
 
 		/// <summary>
 		/// Retunrns true if the passed type has a public instance parameterless constructor
@@ -75,27 +72,27 @@ namespace Underscore.Object.Reflection
 		/// Returns the type's public instance constructor with the least amount of parameters
 		/// </summary>
 		/// <param name="target">The Type whose constructors are going to be searched</param>
-		ConstructorInfo Simplest( Type target );
+		ConstructorInfo Simplest(Type target);
 
 		/// <summary>
 		/// Returns the object's type's public instance constructor with the least amount of parameters
 		/// </summary>
 		/// <param name="target">The object whose Type's constructors are going to be searched</param>
-		ConstructorInfo Simplest( object target );
+		ConstructorInfo Simplest(object target);
 
 		/// <summary>
 		/// Returns the type's constructor with the least amount of parameters
 		/// </summary>
 		/// <param name="flags">flags for the constructor</param>
 		/// <param name="target">The Type whose constructors are going to be searched</param>
-		ConstructorInfo Simplest( Type target , BindingFlags flags );
+		ConstructorInfo Simplest(Type target, BindingFlags flags);
 
 		/// <summary>
 		/// Returns the object's type's constructor with the least amount of parameters
 		/// </summary>
 		/// <param name="flags"></param>
 		/// <param name="target">The object whose constructors are going to be searched</param>
-		ConstructorInfo Simplest( object target , BindingFlags flags );
+		ConstructorInfo Simplest(object target, BindingFlags flags);
 
 		/// <summary>
 		/// Returns a public constructor based off of the query object passed
@@ -174,19 +171,16 @@ namespace Underscore.Object.Reflection
 
 		IEnumerable<ConstructorInfo> Query(Type target, object query, BindingFlags flags);
 
-
 		IEnumerable<ConstructorInfo> Query(object target, object query);
 
 		IEnumerable<ConstructorInfo> Query(object target, object query, BindingFlags flags);
 
-
-
-
 		IEnumerable<ConstructorInfo> All(Type target);
+
 		IEnumerable<ConstructorInfo> All(Type target, BindingFlags flags);
 
-
 		IEnumerable<ConstructorInfo> All(object target);
+
 		IEnumerable<ConstructorInfo> All(object target, BindingFlags flags);
 
 	}
