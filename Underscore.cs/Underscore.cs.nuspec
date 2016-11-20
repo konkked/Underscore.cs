@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Chip Keyser, Chris Keyser</authors>
+    <owners>Chip Keyser, Chris Keyser</owners>
+    <licenseUrl>https://github.com/konkked/Underscore.cs/blob/master/Underscore.cs/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/konkked/Underscore.c://github.com/konkked/Underscore.cst</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Fixed AssemblyInfo inconsistencies</releaseNotes>
+    <copyright>Copyright 2014-2016</copyright>
+    <tags>utility underscore library port async functional string reflection collection list</tags>
+  </metadata>
+</package>
