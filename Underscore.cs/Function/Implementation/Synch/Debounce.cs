@@ -38,27 +38,37 @@ namespace Underscore.Function
 	    private Func<T, Task<TResult>> LockDebounce<T, TResult>(Func<T, TResult> function, int milliseconds)
         {
 	        var mutex = new object();
-	        bool canExecute = true;
-            var retv = default(TResult);
+
+	        var retv = default(TResult);
+	        bool isReady;
+
+            // used to handle "resetting" the timer
+            int waiting = 0;
 
 	        return async (targ) =>
 	        {
-	            if (!canExecute)
-	                return default(TResult);
+	            lock (mutex)
+	            {
+	                isReady = false;
+                    waiting++;
+                }
+
+	            await Task.Delay(milliseconds);
 
 	            lock (mutex)
 	            {
-	                if (!canExecute)
-	                    return default(TResult);
+	                waiting--;
 
-	                canExecute = false;
-	                retv = function(targ);
+	                if (waiting == 0)
+	                {
+                        retv = function(targ);
+	                    isReady = true;
+	                }
 	            }
 
-                await Task.Delay(milliseconds);
-	            canExecute = true;
+	            while (!isReady) await Task.Delay(1);
 
-                return default(TResult);
+	            return retv;
 	        };
         }
 

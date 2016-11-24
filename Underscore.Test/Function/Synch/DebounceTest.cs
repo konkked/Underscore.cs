@@ -16,18 +16,18 @@ namespace Underscore.Test.Function.Synch
 		{
 			
 			var timer = new Stopwatch();
-			var waiting = 25;
+			var waitMilliseconds = 25;
 
 			var count = 1;
 
-			var targeting = new Func<string>(() =>
+			var target = new Func<string>(() =>
 			{
 				count++;
 				var returning = count.ToString();
 				return returning;
 			});
 
-			var target = _.Function.Debounce(targeting, waiting);
+			var debounced = _.Function.Debounce(target, waitMilliseconds);
 
 			var continuing = new List<Task<string>>();
 
@@ -36,7 +36,7 @@ namespace Underscore.Test.Function.Synch
 			for (var i = 0; i < 100; i++)
 			{
 				Assert.AreEqual(1, count);
-				continuing.Add(target());
+				continuing.Add(debounced());
 			}
 
 			foreach (var i in continuing)
@@ -45,7 +45,7 @@ namespace Underscore.Test.Function.Synch
 			timer.Stop();
 
 			Assert.AreEqual(2, count);
-			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting);
+			Assert.IsTrue(timer.ElapsedMilliseconds >= waitMilliseconds);
 
 			continuing.Clear();
 			timer.Reset();
@@ -54,7 +54,7 @@ namespace Underscore.Test.Function.Synch
 			for (var i = 0; i < 100; i++)
 			{
 				Assert.AreEqual(2, count);
-				continuing.Add(target());
+				continuing.Add(debounced());
 			}
 
 			foreach (var t in continuing)
@@ -63,7 +63,7 @@ namespace Underscore.Test.Function.Synch
 			timer.Stop();
 
 			Assert.AreEqual(3, count);
-			Assert.IsTrue(timer.ElapsedMilliseconds >= waiting, "Waiting({0}) was less then expected ({1})", timer.ElapsedMilliseconds, waiting);
+			Assert.IsTrue(timer.ElapsedMilliseconds >= waitMilliseconds, "Waiting({0}) was less then expected ({1})", timer.ElapsedMilliseconds, waitMilliseconds);
 		}
 
 		[Test]
