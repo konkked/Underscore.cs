@@ -3,7 +3,6 @@ The following is a list of overarching tasks we're looking to take on (roughly i
 
 - [x] Clean Up Existing Code (comments + revisiting algorithms)
 - [x] Update Tests
-- [ ] Update Documentation
+- [x] Update Documentation
 - [ ] Convert to .NET Core Application
-- [ ] Change Module Architecture to Use Partial Classes
 - [ ] Begin Adding Functionality
