@@ -47,7 +47,7 @@ namespace Underscore.Function
 			var first = default(TResult);
 			int doneChanging = 0;
 
-			return (a) =>
+			return a =>
 			{
 				try
 				{

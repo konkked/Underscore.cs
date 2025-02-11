@@ -11,9 +11,9 @@ namespace Underscore.Test.Collection
 		[Test]
 		public void Collection_Set_Difference()
 		{
-			var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
-			var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
-			var expected = new[] { 1, 2, 3, 8, 9, 10 };
+			int[] a = [1, 2, 3, 4, 5, 6, 7];
+			int[] b = [4, 5, 6, 7, 8, 9, 10];
+			int[] expected = [1, 2, 3, 8, 9, 10];
 
 			var result = _.Collection.Difference(a, b);
 
@@ -23,14 +23,12 @@ namespace Underscore.Test.Collection
 		[Test]
 		public void Collection_Set_DifferenceBy()
 		{
-			var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
-			var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
+			int[] a = [1, 2, 3, 4, 5, 6, 7];
+			int[] b = [4, 5, 6, 7, 8, 9, 10];
 
-			Func<int, string> transform = i => i.ToString();
+			string[] expected = ["1", "2", "3", "8", "9", "10"];
 
-			var expected = new[] { "1", "2", "3", "8", "9", "10" };
-
-			var result = _.Collection.DifferenceBy(a, b, transform);
+			var result = _.Collection.DifferenceBy(a, b, i => i.ToString());
 
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
@@ -38,9 +36,9 @@ namespace Underscore.Test.Collection
 		[Test]
 		public void Collection_Set_Intersection()
 		{
-			var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
-			var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
-			var expected = new[] { 4, 5, 6, 7 };
+			int[] a = [1, 2, 3, 4, 5, 6, 7];
+			int[] b = [4, 5, 6, 7, 8, 9, 10];
+			int[] expected = [4, 5, 6, 7];
 
 			var result = _.Collection.Intersection(a, b);
 
@@ -50,13 +48,12 @@ namespace Underscore.Test.Collection
 		[Test]
 		public void Collection_Set_IntersectionBy()
 		{
-			var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
-			var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
-			Func<int, string> transform = i => i.ToString();
+			int[] a = [1, 2, 3, 4, 5, 6, 7];
+			int[] b = [4, 5, 6, 7, 8, 9, 10];
 
-			var expected = new[] { "4", "5", "6", "7" };
+			string[] expected = ["4", "5", "6", "7"];
 
-			var result = _.Collection.IntersectionBy(a, b, transform);
+			var result = _.Collection.IntersectionBy(a, b, i => i.ToString());
 
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
@@ -64,9 +61,9 @@ namespace Underscore.Test.Collection
 		[Test]
 		public void Collection_Set_Union()
 		{
-			var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
-			var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
-			var expected = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+			int[] a = [1, 2, 3, 4, 5, 6, 7];
+			int[] b = [4, 5, 6, 7, 8, 9, 10];
+			int[] expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 			var result = _.Collection.Union(a, b);
 
@@ -76,13 +73,12 @@ namespace Underscore.Test.Collection
 		[Test]
 		public void Collection_Set_UnionBy()
 		{
-			var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
-			var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
-			Func<int, string> transform = i => i.ToString();
+			int[] a = [1, 2, 3, 4, 5, 6, 7];
+			int[] b = [4, 5, 6, 7, 8, 9, 10];
 
-			var expected = new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+			string[] expected = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
-			var result = _.Collection.UnionBy(a, b, transform);
+			var result = _.Collection.UnionBy(a, b, i => i.ToString());
 
 			Assert.IsTrue(expected.SequenceEqual(result));
 		}
@@ -90,9 +86,9 @@ namespace Underscore.Test.Collection
         [Test]
         public void CollectionExtensions_Set_Difference()
         {
-            var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
-            var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
-            var expected = new[] { 1, 2, 3, 8, 9, 10 };
+            int[] a = [1, 2, 3, 4, 5, 6, 7];
+            int[] b = [4, 5, 6, 7, 8, 9, 10];
+            int[] expected = [1, 2, 3, 8, 9, 10];
 
             var result = a.Difference(b);
 
@@ -102,12 +98,12 @@ namespace Underscore.Test.Collection
         [Test]
         public void CollectionExtensions_Set_DifferenceBy()
         {
-            var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
-            var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
+            int[] a = [1, 2, 3, 4, 5, 6, 7];
+            int[] b = [4, 5, 6, 7, 8, 9, 10];
 
             Func<int, string> transform = i => i.ToString();
 
-            var expected = new[] { "1", "2", "3", "8", "9", "10" };
+            string[] expected = ["1", "2", "3", "8", "9", "10"];
 
             var result = a.DifferenceBy(b, transform);
 
@@ -117,9 +113,9 @@ namespace Underscore.Test.Collection
         [Test]
         public void CollectionExtensions_Set_Intersection()
         {
-            var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
-            var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
-            var expected = new[] { 4, 5, 6, 7 };
+            int[] a = [1, 2, 3, 4, 5, 6, 7];
+            int[] b = [4, 5, 6, 7, 8, 9, 10];
+            int[] expected = [4, 5, 6, 7];
 
             var result = a.Intersection(b);
 
@@ -129,13 +125,12 @@ namespace Underscore.Test.Collection
         [Test]
         public void CollectionExtensions_Set_IntersectionBy()
         {
-            var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
-            var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
-            Func<int, string> transform = i => i.ToString();
+            int[] a = [1, 2, 3, 4, 5, 6, 7];
+            int[] b = [4, 5, 6, 7, 8, 9, 10];
 
-            var expected = new[] { "4", "5", "6", "7" };
+            string[] expected = ["4", "5", "6", "7"];
 
-            var result = a.IntersectionBy(b, transform);
+            var result = a.IntersectionBy(b, i => i.ToString());
 
             Assert.IsTrue(expected.SequenceEqual(result));
         }
@@ -143,13 +138,12 @@ namespace Underscore.Test.Collection
         [Test]
         public void CollectionExtensions_Set_UnionBy()
         {
-            var a = new[] { 1, 2, 3, 4, 5, 6, 7 };
-            var b = new[] { 4, 5, 6, 7, 8, 9, 10 };
-            Func<int, string> transform = i => i.ToString();
+            int[] a = [1, 2, 3, 4, 5, 6, 7];
+            int[] b = [4, 5, 6, 7, 8, 9, 10];
 
-            var expected = new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+            string[] expected = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
-            var result = a.UnionBy(b, transform);
+            var result = ExtensionsImpl.UnionBy(a, b, i=>i.ToString());
 
             Assert.IsTrue(expected.SequenceEqual(result));
         }

@@ -1,9 +1,12 @@
-﻿using System;
+﻿
 
 // This code has been automatically generated
 // if you want to make changes make them on 
 // the corresponding the text template file
 // Cache.tt
+
+using System;
+
 namespace Underscore.Function
 {
 

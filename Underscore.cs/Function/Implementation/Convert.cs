@@ -12,7 +12,7 @@ namespace Underscore.Function
 		public Action<T1> ToAction<T1>(Func<T1,object> function)
 		{
 
-			return (a) => function(a);
+			return a => function(a);
 		}
 
 		public Action<T1, T2> ToAction<T1, T2>(Func<T1, T2,object> function)

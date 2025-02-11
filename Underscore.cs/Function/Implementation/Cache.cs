@@ -26,7 +26,7 @@ namespace Underscore.Function
 			var localStore = new Dictionary<TArg, TResult>();
 			var locking = new object();
 			var fn = function;
-			return (a) =>
+			return a =>
 			{
 				if (a == null)
 					return fn(a);

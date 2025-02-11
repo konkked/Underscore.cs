@@ -170,3 +170,6 @@ obj/
 #ignore project build and test dirs
 test/
 build/
+
+.vs/
+.idea/

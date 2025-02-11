@@ -10,8 +10,8 @@ namespace Underscore.Action
 		public Func<T0, Action<T1>> Split<T0, T1>(Action<T0, T1> action)
 		{
 			return
-				(a) =>
-					(b) =>
+				a =>
+					b =>
 						action(a, b);
 		}
 

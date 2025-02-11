@@ -178,7 +178,7 @@ namespace Underscore.Function
 			if (targs.Skip(1).FirstOrDefault() == null)
 				return t => targs[0](t);
 
-			return (t) => targs.Aggregate(t, (curr, next) => next(curr));
+			return t => targs.Aggregate(t, (curr, next) => next(curr));
 		}
 	}
 }

@@ -606,5 +606,11 @@ namespace Underscore.Test.Function
 			Assert.AreEqual(expected, result);
 			Assert.AreEqual(2, callcount);
 		}
+
+		[Test]
+		public void Function_Cache_Memo_17Arguments()
+		{
+			
+		}
 	}
 }

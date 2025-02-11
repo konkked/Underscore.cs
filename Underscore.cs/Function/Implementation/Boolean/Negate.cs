@@ -17,7 +17,7 @@ namespace Underscore.Function
 		/// </summary>
 		public Func<T1, bool> Negate<T1>(Func<T1, bool> fn)
 		{
-			return (a) => !fn(a);
+			return a => !fn(a);
 		}
 
 		/// <summary>
