@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -132,17 +131,18 @@ namespace Underscore.Test
 
 	public static class Util
 	{
-		public static string[] LowercaseCharArray
-		{
+		public static string[] LowercaseCharArray =>
 			// we could do this programmatically
 			// but this is simpler and faster
-			get { return new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" }; }
-		}
+			["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
+		];
 
-		public static string[] UppercaseCharArray
-		{
-			get { return new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }; }
-		}
+		public static string[] UppercaseCharArray =>
+			[
+				"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U",
+				"V", "W", "X", "Y", "Z"
+			];
+		
 
 		public static string Join(params string[] args)
 		{
@@ -151,24 +151,22 @@ namespace Underscore.Test
 
 		public static class Compare
 		{
-			public static void All(params Tuple<object, object>[] tuples)
+			public static bool All(params Tuple<object, object>[] tuples)
 			{
 				foreach (var tuple in tuples)
 				{
-					if (tuple.Item1 == null)
-						Assert.IsNull(tuple.Item2);
-					else
-					{
-						Assert.AreEqual(tuple.Item1, tuple.Item2);
-					}
+					if (tuple.Item1 == null ^ tuple.Item2 == null)
+						throw new ArgumentException(nameof(tuples));
+					if (!_.Object.AreEquivalent(tuple.Item1, tuple.Item2))
+						return false;
 				}
+
+				return true;
 			}
 
-			public static void All(object[] expected, object[] actual)
-			{
-				Assert.AreEqual(expected.Length, actual.Length);
-				All(expected.Zip(actual, Tuple.Create).ToArray());
-			}
+			public static bool All(object[] expected, object[] actual)
+				=> All(expected.Zip(actual, Tuple.Create).ToArray());
+			
 		}
 
 		public static class Tasks

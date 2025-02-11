@@ -18,7 +18,7 @@ namespace Underscore.Function
 		/// </summary>
 		public Func<T1, bool> And<T1>(params Func<T1, bool>[] fns)
 		{
-			return (a) => fns.Aggregate(true, (prev, current) => prev && current(a));
+			return a => fns.Aggregate(true, (prev, current) => prev && current(a));
 		}
 
 		/// <summary>

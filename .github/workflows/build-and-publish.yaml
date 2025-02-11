@@ -1,0 +1,85 @@
+name: CI/CD for Underscore.cs
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  test:
+    name: Run Unit Tests & Enforce Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Run Tests with Coverage
+        run: dotnet test --collect:"XPlat Code Coverage" --settings coverlet.runsettings
+
+      - name: Check Code Coverage
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.1.24
+        with:
+          reports: "**/coverage.cobertura.xml"
+          targetdir: "coverage-results"
+          reporttypes: "Badges"
+
+      - name: Enforce 90% Code Coverage
+        run: |
+          COVERAGE=$(grep -Po '(?<=<line-rate>)[0-9.]+' coverage-results/Cobertura.xml | awk '{sum+=$1} END {print sum/NR}')
+          echo "Code Coverage: $COVERAGE"
+          if (( $(echo "$COVERAGE < 0.90" | bc -l) )); then
+            echo "Coverage is below 90% - Failing"
+            exit 1
+          fi
+
+  check-version:
+    name: Check Version Bump
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Check Version Update
+        run: |
+          VERSION_CHANGED=$(git diff --name-only ${{ github.event.pull_request.base.sha }} | grep -E "Underscore\.csproj|.nuspec")
+          if [ -z "$VERSION_CHANGED" ]; then
+            echo "NuGet package version was not updated. Please bump the version before merging."
+            exit 1
+          fi
+
+  publish:
+    name: Publish NuGet Package
+    needs: [test, check-version]
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Build and Pack
+        run: dotnet pack --configuration Release --output nupkgs
+
+      - name: Publish to NuGet
+        run: |
+          for file in nupkgs/*.nupkg; do
+            dotnet nuget push "$file" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+          done

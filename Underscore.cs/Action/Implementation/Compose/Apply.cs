@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Underscore.Action
+﻿namespace Underscore.Action
 {
 	public class ApplyComponent : IApplyComponent
 	{

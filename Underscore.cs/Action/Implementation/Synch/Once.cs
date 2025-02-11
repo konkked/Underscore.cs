@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Underscore.Action.Contract.Synch;
 
 namespace Underscore.Action
 {

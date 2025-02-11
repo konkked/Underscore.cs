@@ -35,7 +35,7 @@ namespace Underscore.Function
 			int ran = 0;
 			TResult result = default(TResult);
 
-			return (targ) =>
+			return targ =>
 			{
 				if (Interlocked.CompareExchange(ref ran, 1, 0) == 0)
 					result = function(targ);

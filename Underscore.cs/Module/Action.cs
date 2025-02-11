@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Underscore.Action;
+using Underscore.Action.Contract.Bind;
+using Underscore.Action.Contract.Synch;
 
 namespace Underscore.Module
 {
@@ -1386,7 +1388,7 @@ namespace Underscore.Module
 		}
 
 		/// <summary>
-		/// Creates a sigle composite action from the passed functions
+		/// Creates a single composite action from the passed functions
 		/// </summary>
 		public Action<TStart> Compose<TStart, TEnd>(Func<TStart, TEnd> start, Action<TEnd> end)
 		{
@@ -1394,7 +1396,7 @@ namespace Underscore.Module
 		}
 
 		/// <summary>
-		/// Creates a sigle composite action from the passed functions
+		/// Creates a single composite action from the passed functions
 		/// </summary>
 		public Action<TStart> Compose<TStart, TMid, TEnd>(Func<TStart, TMid> start, Func<TMid, TEnd> mid,
 			Action<TEnd> end)
@@ -1403,7 +1405,7 @@ namespace Underscore.Module
 		}
 
 		/// <summary>
-		/// Creates a sigle composite action from the passed functions
+		/// Creates a single composite action from the passed functions
 		/// </summary>
 		public Action<TStart> Compose<TStart, TLink1, TLink2, TEnd>(Func<TStart, TLink1> start, Func<TLink1, TLink2> a,
 			Func<TLink2, TEnd> b, Action<TEnd> end)
@@ -1412,7 +1414,7 @@ namespace Underscore.Module
 		}
 
 		/// <summary>
-		/// Creates a sigle composite action from the passed functions
+		/// Creates a single composite action from the passed functions
 		/// </summary>
 		public Action<TStart> Compose<TStart, TLink1, TLink2, TLink3, TEnd>(Func<TStart, TLink1> start,
 			Func<TLink1, TLink2> a, Func<TLink2, TLink3> b, Func<TLink3, TEnd> c, Action<TEnd> end)
@@ -1421,7 +1423,7 @@ namespace Underscore.Module
 		}
 
 		/// <summary>
-		/// Creates a sigle composite action from the passed functions
+		/// Creates a single composite action from the passed functions
 		/// </summary>
 		public Action<TStart> Compose<TStart, TLink1, TLink2, TLink3, TLink4, TEnd>(Func<TStart, TLink1> start,
 			Func<TLink1, TLink2> a, Func<TLink2, TLink3> b, Func<TLink3, TLink4> c, Func<TLink4, TEnd> d,
@@ -1431,7 +1433,7 @@ namespace Underscore.Module
 		}
 
 		/// <summary>
-		/// Creates a sigle composite action from the passed functions
+		/// Creates a single composite action from the passed functions
 		/// </summary>
 		public Action<TStart> Compose<TStart, TLink1, TLink2, TLink3, TLink4, TLink5, TEnd>(Func<TStart, TLink1> start,
 			Func<TLink1, TLink2> a, Func<TLink2, TLink3> b, Func<TLink3, TLink4> c, Func<TLink4, TLink5> d,
@@ -1442,7 +1444,7 @@ namespace Underscore.Module
 		}
 
 		/// <summary>
-		/// Creates a sigle composite action from the passed functions
+		/// Creates a single composite action from the passed functions
 		/// </summary>
 		public Action<TStart> Compose<TStart, TLink1, TLink2, TLink3, TLink4, TLink5, TLink6, TEnd>(
 			Func<TStart, TLink1> start, Func<TLink1, TLink2> a, Func<TLink2, TLink3> b, Func<TLink3, TLink4> c,
@@ -1453,7 +1455,7 @@ namespace Underscore.Module
 		}
 
 		/// <summary>
-		/// Creates a sigle composite action from the passed functions
+		/// Creates a single composite action from the passed functions
 		/// </summary>
 		public Action<TStart> Compose<TStart, TLink1, TLink2, TLink3, TLink4, TLink5, TLink6, TLink7, TEnd>(
 			Func<TStart, TLink1> start, Func<TLink1, TLink2> a, Func<TLink2, TLink3> b, Func<TLink3, TLink4> c,
@@ -1464,7 +1466,7 @@ namespace Underscore.Module
 		}
 
 		/// <summary>
-		/// Creates a sigle composite action from the passed functions
+		/// Creates a single composite action from the passed functions
 		/// </summary>
 		public Action<TStart> Compose<TStart, TLink1, TLink2, TLink3, TLink4, TLink5, TLink6, TLink7, TLink8, TEnd>(
 			Func<TStart, TLink1> start, Func<TLink1, TLink2> a, Func<TLink2, TLink3> b,
@@ -1475,7 +1477,7 @@ namespace Underscore.Module
 		}
 
 		/// <summary>
-		/// Creates a sigle composite action from the passed functions
+		/// Creates a single composite action from the passed functions
 		/// </summary>
 		public Action<TStart> Compose
 			<TStart, TLink1, TLink2, TLink3, TLink4, TLink5, TLink6, TLink7, TLink8, TLink9, TEnd>(
@@ -1488,7 +1490,7 @@ namespace Underscore.Module
 		}
 
 		/// <summary>
-		/// Creates a sigle composite action from the passed functions
+		/// Creates a single composite action from the passed functions
 		/// </summary>
 		public Action<TStart> Compose
 			<TStart, TLink1, TLink2, TLink3, TLink4, TLink5, TLink6, TLink7, TLink8, TLink9, TLink10, TEnd>(
@@ -1500,7 +1502,7 @@ namespace Underscore.Module
 		}
 
 		/// <summary>
-		/// Creates a sigle composite action from the passed functions
+		/// Creates a single composite action from the passed functions
 		/// </summary>
 		public Action<TStart> Compose
 			<TStart, TLink1, TLink2, TLink3, TLink4, TLink5, TLink6, TLink7, TLink8, TLink9, TLink10, TLink11, TEnd>(
@@ -1513,7 +1515,7 @@ namespace Underscore.Module
 		}
 
 		/// <summary>
-		/// Creates a sigle composite action from the passed functions
+		/// Creates a single composite action from the passed functions
 		/// </summary>
 		public Action<TStart> Compose
 			<TStart, TLink1, TLink2, TLink3, TLink4, TLink5, TLink6, TLink7, TLink8, TLink9, TLink10, TLink11, TLink12,
@@ -1528,7 +1530,7 @@ namespace Underscore.Module
 		}
 
 		/// <summary>
-		/// Creates a sigle composite action from the passed functions
+		/// Creates a single composite action from the passed functions
 		/// </summary>
 		public Action<TStart> Compose
 			<TStart, TLink1, TLink2, TLink3, TLink4, TLink5, TLink6, TLink7, TLink8, TLink9, TLink10, TLink11, TLink12,
@@ -1543,7 +1545,7 @@ namespace Underscore.Module
 		}
 
 		/// <summary>
-		/// Creates a sigle composite action from the passed functions
+		/// Creates a single composite action from the passed functions
 		/// </summary>
 		public Action<TStart> Compose
 			<TStart, TLink1, TLink2, TLink3, TLink4, TLink5, TLink6, TLink7, TLink8, TLink9, TLink10, TLink11, TLink12,

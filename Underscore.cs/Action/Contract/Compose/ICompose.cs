@@ -5,12 +5,12 @@ namespace Underscore.Action
 	public interface IComposeComponent
 	{
 		/// <summary>
-		/// Creates a sigle composite action from the passed functions
+		/// Creates a single composite action from the passed functions
 		/// </summary>
 		Action<TStart> Compose<TStart, TEnd>(Func<TStart, TEnd> start, Action<TEnd> end);
 
 		/// <summary>
-		/// Creates a sigle composite action from the passed functions
+		/// Creates a single composite action from the passed functions
 		/// </summary>
 		Action<TStart> Compose<TStart, TMid, TEnd>(Func<TStart, TMid> start, Func<TMid, TEnd> mid, Action<TEnd> end);
 

@@ -41,7 +41,7 @@ namespace Underscore.Function
 			int isready = 0;
 			var retv = new { result = default(TResult) };
 			var fn = function;
-			return async (targ) =>
+			return async targ =>
 			{
 				var curr = Task.Delay(milliseconds);
 

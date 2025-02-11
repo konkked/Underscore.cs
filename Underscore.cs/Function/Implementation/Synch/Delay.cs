@@ -33,7 +33,7 @@ namespace Underscore.Function
 		/// </summary>
 		public Func<T, Task<TResult>> Delay<T, TResult>(Func<T, TResult> function, int milliseconds)
 		{
-			return async (t) =>
+			return async t =>
 			{
 				await Task.Delay(milliseconds);
 				Thread.MemoryBarrier();

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Underscore.Action
+namespace Underscore.Action.Contract.Bind
 {
 	public interface IBindComponent
 	{

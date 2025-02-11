@@ -29,27 +29,27 @@ namespace Underscore.Test.Collection
 
 		private static void CollectionCombinationsImpl(Func<IEnumerable<int>, IEnumerable<IEnumerable<int>>> testing)
 		{
-			int[] stuff = { 1, 2, 3, 4 };
+			int[] stuff = [1, 2, 3, 4];
 
-			int[][] expecting = new[]
-			{
-				new int[] {},
-				new[] {1},
-				new[] {1, 2},
-				new[] {2},
-				new[] {1, 2, 3},
-				new[] {2, 3},
-				new[] {1, 3},
-				new[] {3},
-				new[] {1, 2, 3, 4},
-				new[] {1, 2, 4},
-				new[] {1, 3, 4},
-				new[] {2, 3, 4},
-				new[] {3, 4},
-				new[] {2, 4},
-				new[] {1, 4},
-				new[] {4}
-			};
+			int[][] expecting =
+			[
+				[],
+				[1],
+				[1, 2],
+				[2],
+				[1, 2, 3],
+				[2, 3],
+				[1, 3],
+				[3],
+				[1, 2, 3, 4],
+				[1, 2, 4],
+				[1, 3, 4],
+				[2, 3, 4],
+				[3, 4],
+				[2, 4],
+				[1, 4],
+				[4]
+			];
 
 			var permutation = testing(stuff).Select(a => a.ToList()).ToList();
 
@@ -63,24 +63,24 @@ namespace Underscore.Test.Collection
             var stuff = new [] { 1, 2, 3, 4 }.Select(x => x); // to convert to IEnumerable
 
             int[][] expecting =
-            {
-                new int[] {},
-                new[] {1},
-                new[] {1, 2},
-                new[] {2},
-                new[] {1, 2, 3},
-                new[] {2, 3},
-                new[] {1, 3},
-                new[] {3},
-                new[] {1, 2, 3, 4},
-                new[] {1, 2, 4},
-                new[] {1, 3, 4},
-                new[] {2, 3, 4},
-                new[] {3, 4},
-                new[] {2, 4},
-                new[] {1, 4},
-                new[] {4}
-            };
+            [
+	            [],
+	            [1],
+	            [1, 2],
+	            [2],
+	            [1, 2, 3],
+	            [2, 3],
+	            [1, 3],
+	            [3],
+	            [1, 2, 3, 4],
+	            [1, 2, 4],
+	            [1, 3, 4],
+	            [2, 3, 4],
+	            [3, 4],
+	            [2, 4],
+	            [1, 4],
+	            [4]
+            ];
 
             var permutation = stuff.Combinations().Select(a => a.ToList()).ToList();
 

@@ -23,63 +23,14 @@ namespace Underscore.Collection
 		/// </summary>
 		public IEnumerable<T> Extend<T>(IEnumerable<T> collection, int length)
 		{
-			using (var iter = collection.GetEnumerator())
-			{
-			    bool hasReset = true;
-
-			    try
-			    {
-                    // some IEnumerables (such as those returned by LINQ)
-                    // don't have a reset method, so instead we need
-                    // to default to using an array made from the enumerable
-			        iter.Reset();
-			    }
-			    catch(NotImplementedException)
-			    {
-			        hasReset = false;
-			    }
-
-			    if (hasReset)
-			    {
-			        // make sure there's something to extend
-			        if (!iter.MoveNext()) throw new ApplicationException("Cannot extend an empty collection");
-			        // return the first value
-			        yield return iter.Current;
-
-			        //make i = 1 instead of zero to account for the first return.
-			        for (int i = 1; i < length; i++)
-			        {
-			            // this check also moves to the next item 
-			            // if we haven't hit the end,
-			            // so we can just yield right after
-			            if (!iter.MoveNext())
-			            {
-			                // restart the cycle if we hit the end of collection
-			                iter.Reset();
-			                iter.MoveNext();
-			            }
-
-			            yield return iter.Current;
-			        }
-			    }
-			    else
-			    {
-			        var arr = collection.ToArray();
-			        var count = 0;
-			        var i = 0;
-
-			        while (count < length)
-			        {
-                        // reset index if necessary
-			            if (i == arr.Length) i = 0;
-
-			            yield return arr[i];
-
-			            i++;
-			            count++;
-			        }
-			    }
-			}
+			var list = collection.ToList();
+			while(length > 0)
+				foreach (var item in list)
+					if (length > 0)
+					{
+						length--;
+						yield return item;
+					}
 		}
 
 		/// <summary>
@@ -87,60 +38,10 @@ namespace Underscore.Collection
 		/// </summary>
 		public IEnumerable<T> Cycle<T>(IEnumerable<T> collection)
 		{
-			using (var iter = collection.GetEnumerator())
-			{
-                bool hasReset = true;
-
-                try
-                {
-                    // some IEnumerables (such as those returned by LINQ)
-                    // don't have a reset method, so instead we need
-                    // to default to using an array made from the enumerable
-                    iter.Reset();
-                }
-                catch (NotImplementedException)
-                {
-                    hasReset = false;
-                }
-
-                if (hasReset)
-                {
-                    // make sure there's something to extend
-                    if (!iter.MoveNext()) throw new ApplicationException("Cannot extend an empty collection");
-                    // return the first value
-                    yield return iter.Current;
-                    
-                    while(true)
-                    {
-                        // this check also moves to the next item 
-                        // if we haven't hit the end,
-                        // so we can just yield right after
-                        if (!iter.MoveNext())
-                        {
-                            // restart the cycle if we hit the end of collection
-                            iter.Reset();
-                            iter.MoveNext();
-                        }
-
-                        yield return iter.Current;
-                    }
-                }
-                else
-                {
-                    var arr = collection.ToArray();
-                    var i = 0;
-
-                    while (true)
-                    {
-                        // reset index if necessary
-                        if (i == arr.Length) i = 0;
-
-                        yield return arr[i];
-
-                        i++;
-                    }
-                }
-            }
+			var list = collection.ToList();
+			while (true)
+				foreach (var item in list)
+					yield return item;
 		}
 	}
 }

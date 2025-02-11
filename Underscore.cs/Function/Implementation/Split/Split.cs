@@ -87,8 +87,8 @@ namespace Underscore.Function
 		public Func<T0, Func<T1, TResult>> Split<T0, T1, TResult>(Func<T0, T1, TResult> function)
 		{
 			return
-				(a) =>
-					(b) =>
+				a =>
+					b =>
 						function(a, b);
 		}
 	}

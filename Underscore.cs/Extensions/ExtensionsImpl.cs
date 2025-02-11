@@ -10,7 +10,7 @@ using PartitionComponent = Underscore.Collection.PartitionComponent;
 
 namespace Underscore.Extensions
 {
-    public static class Extensions
+    public static class ExtensionsImpl
     {
         private static readonly Module.Collection _collection = new Module.Collection(
             new CompareComponent(), 

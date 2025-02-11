@@ -40,7 +40,7 @@ namespace Underscore.Function
 			int counter = count;
 			TResult tresult = default(TResult);
 
-			return (a) =>
+			return a =>
 			{
 				if (Interlocked.Decrement(ref counter) >= 0)
 					return tresult = function(a);

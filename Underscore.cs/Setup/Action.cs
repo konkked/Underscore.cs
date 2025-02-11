@@ -1,4 +1,6 @@
 ﻿using Underscore.Action;
+using Underscore.Action.Contract.Bind;
+using Underscore.Action.Contract.Synch;
 using Underscore.Setup.Liteioc;
 
 namespace Underscore.Setup
